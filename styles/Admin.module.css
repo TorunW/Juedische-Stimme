@@ -1,0 +1,21 @@
+.adminHeader {
+    width: 100%;
+    background-color: black;
+    color: white;
+}
+
+.adminSidebar {
+    width: 10%;
+    float: left;
+    background-color: aquamarine;
+}
+
+.adminMain {
+    width: 90%;
+    float: left;
+    background-color: #cecece;
+}
+
+.adminTable {
+    background-color: #ccc;
+}

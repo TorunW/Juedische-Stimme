@@ -1,0 +1,24 @@
+#footer {
+  background-color: black;
+  color: white;
+  margin-top: 50px;
+  padding: 30px 100px;
+  overflow: auto;
+}
+#footer .contactFormContainer {
+  width: 50%;
+  float: left;
+}
+#footer ul.footerSideMenu {
+  width: 50%;
+  float: left;
+}
+#footer .footerBottomMenu {
+  width: 100%;
+  float: left;
+  text-align: center;
+  color: blue;
+  font-size: 10px;
+  padding: 2em 0;
+  border-top: 1px solid white;
+}
