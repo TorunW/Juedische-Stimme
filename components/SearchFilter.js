@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
-const SearchFilter = ({categoryName, categories}) => {
-    const [ searchPhrase, setSearchPhrase ] = useState('')
+const SearchFilter = ({categoryName, categories, phrase}) => {
+
+    const [ searchPhrase, setSearchPhrase ] = useState(phrase ? phrase : '')
     function onCategorySelectChange(val){
         window.location.href = `/category/${val}`
     }
