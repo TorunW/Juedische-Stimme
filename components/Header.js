@@ -5,7 +5,7 @@ const Header = () => {
     const { headerGallery } = useSelector(state => state.galleries)
 
     return (
-        <div id="main-header">
+        <div id="main-header" role="main-header">
             <h1>HEADER BANNER THING</h1>
             {headerGallery && headerGallery.imageSrcs ?
                 headerGallery.imageSrcs.split(',').map((imageSrc,index)=>(
