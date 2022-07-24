@@ -30,7 +30,7 @@ const FacebookEvents = (props) => {
     }
 
     async function fetchFacebookEvents(){
-        const res  = await fetch(`https://graph.facebook.com/1297004353776035/events?limit=3&access_token=${token}`)
+        const res  = await fetch(`https://graph.facebook.com/998665673528998/events?limit=3&access_token=${token}`)
         const fetchedEvents = await res.json()
         // remove all the weird characters from the content to avoid mySql errors
         if (fetchedEvents.data && fetchedEvents.data.length > 0){
@@ -59,10 +59,12 @@ const FacebookEvents = (props) => {
     let eventsDisplay;
     if (events && events.content && events.content.length > 0){
         const eventsArray = JSON.parse(events.content);
+        console.log(eventsArray, " EVENTS ARRAY ")
         eventsDisplay = eventsArray.map((fbEvent, index) => {
             if (index <= 2){
                 return (
                     <div key={index} style={{width: "33%", float: "left",padding:"5px"}}>
+                        <h2>{fbEvent.name}</h2>
                         <p>{fbEvent.description}</p>
                     </div>
                 )

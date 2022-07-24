@@ -16,6 +16,7 @@ const FacebookFeed = (props) => {
     useEffect(() => {
             if (token){
                 initFacebookFeed()
+                // fetchFacebookFeed()
             }
     }, [token])
     
@@ -34,12 +35,16 @@ const FacebookFeed = (props) => {
 
     async function fetchFacebookFeed(){
         
+        console.log('FETCH FB FEED')
+
         // const pageTokenRes = await fetch(`https://graph.facebook.com/PAGE-ID?fields=access_token&access_token=${token}`)
         // const pageToken = await pageTokenRes.json()
 
-        const res  = await fetch(`https://graph.facebook.com/1297004353776035/feed?limit=3&fields=full_picture,story,message&access_token=${token}`)
+        const res  = await fetch(`https://graph.facebook.com/998665673528998/feed?limit=3&fields=likes,attachments,full_picture,message&access_token=${token}`)
         const fetchedFeed = await res.json()
 
+        console.log(fetchedFeed, " FETCHED FEED")
+        
         // remove all the weird characters from the content to avoid mySql errors
         if (fetchedFeed.data && fetchedFeed.data.length > 0){
             const renderedFeed = renderToString(fetchedFeed.data);
@@ -66,6 +71,7 @@ const FacebookFeed = (props) => {
     let feedDisplay;
     if (feed && feed.content && feed.content.length > 0){
         const feedArray = JSON.parse(feed.content)
+        console.log(feedArray, " FEED ARRAY")
         feedDisplay = feedArray.map((fbPost, index) => {
             if (index <= 2){
                 return (
