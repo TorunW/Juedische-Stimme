@@ -6,4 +6,5 @@ export type LayoutPageProps = {
     fbFeed?: string;
     fbEvents?: string;
     fbToken?: string;
+    aboutInfo?: string;
 }

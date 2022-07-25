@@ -16,6 +16,7 @@ import Posts from 'components/Posts';
 import FacebookFeed from 'components/FacebookFeed';
 import FacebookEvents from 'components/FacebookEvents';
 import Header from 'components/Header';
+import AboutInfo from 'components/AboutInfo';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
     if (props.fbEvents) dispatch(setEvents(JSON.parse(props.fbEvents)[0]));
     if (props.fbFeed) dispatch(setFeed(JSON.parse(props.fbFeed)[0]));
   }, []);
-
+  
   return (
     <div>
       <Header />
@@ -54,8 +55,9 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <hr />
       <FacebookFeed />
       <hr />
-      <h1>ABOUT US GALLERY</h1>
-      <div>SHOW A GALERY HERE!</div>
+      <AboutInfo 
+        aboutInfo={JSON.parse(props.aboutInfo)[0]}
+      />
     </div>
   );
 };
@@ -92,6 +94,11 @@ export const getServerSideProps = async () => {
   });
   const posts = JSON.stringify(postsResponse);
 
+  const aboutInfoResponse = await excuteQuery({
+    query: `SELECT * FROM js_about_info LIMIT 1`,
+  });
+  const aboutInfo = JSON.stringify(aboutInfoResponse)
+
   const fbTokenResponse = await excuteQuery({
     query: `SELECT * FROM fb_token LIMIT 1`,
   });
@@ -115,6 +122,7 @@ export const getServerSideProps = async () => {
       fbFeed,
       fbEvents,
       fbToken,
+      aboutInfo
     },
   };
 };
