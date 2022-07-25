@@ -1,4 +1,4 @@
-import React, {Suspense } from 'react';
+import React, { useState, Suspense } from 'react';
 import dynamic from 'next/dynamic'
 import { useFormik } from 'formik';
 import axios from 'axios';
@@ -14,6 +14,9 @@ const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
 import PostTagForm from './PostTagForm';
 
 const PostForm = ({post,nextPostId,categories}) => {
+
+  const tabs = ['post','gallery','translations']
+  const [ currentTab, setCurrentTab ] = useState('post')
 
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
@@ -81,54 +84,81 @@ const PostForm = ({post,nextPostId,categories}) => {
     translation will be a record in the wp_post_meta table in the db
   */
 
+
+  let formDisplay;
+  if (currentTab === 'post'){
+    formDisplay = (
+      <React.Fragment>
+        {post ? <p><a target={"_blank"} rel="noreferrer" href={"/"+post.post_name}>view post on live site</a></p> : ""}
+        <form onSubmit={formik.handleSubmit}>
+          <div className={styles['form-row']}>
+            <label htmlFor="post_title">POST TITLE</label>
+            <input
+              id="post_title"
+              name="post_title"
+              type="post_title"
+              onChange={formik.handleChange}
+              value={formik.values.post_title}
+            />
+          </div>
+          <div className={styles['form-row']}>
+            <label htmlFor="categoryId">CATEGORY</label>
+            <select 
+              id="categoryId"
+              name="categoryId"
+              type="categoryId"
+              value={formik.values.categoryId} 
+              onChange={formik.handleChange}>
+              {selectCategoriesDisplay}
+            </select>
+          </div>
+          <div className={styles['form-row']}>
+            <label htmlFor='post_content'>Post Content</label>
+            <Suspense fallback={`Loading...`}>
+              <TipTapEditor
+                  id="post_content"
+                  name="post_content"
+                  type="post_content"
+                  onChange={val => formik.setFieldValue('post_content',val,true)}
+                  value={formik.values.post_content}
+                  itemType={'post'}
+                  itemId={post ? post.postId : nextPostId}   
+              />
+            </Suspense>
+          </div>
+          <div className={styles['form-row']}>
+            <PostTagForm 
+              postId={post ? post.postId : nextPostId}
+            />          
+          </div>
+          <div className={styles['form-row']}>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      </React.Fragment>
+    )
+  } else if (currentTab === 'gallery'){
+    formDisplay = (
+      <React.Fragment>
+        <h2>GALLERY FORM</h2>
+      </React.Fragment>
+    )
+  } else if (currentTab === 'translations'){
+    formDisplay = (
+      <React.Fragment>
+       <h2> TRANSLATIONS FORM</h2>
+      </React.Fragment>
+    )
+  }
+
+  const tabMenuDisplay = tabs.map((tab,index)=>(
+    <li><a onClick={() => setCurrentTab(tab)}>{tab}</a></li>
+  ))
+
   return (
     <div className={styles.container}>
-      {post ? <p><a target={"_blank"} rel="noreferrer" href={"/"+post.post_name}>view post on live site</a></p> : ""}
-      <form onSubmit={formik.handleSubmit}>
-        <div className={styles['form-row']}>
-          <label htmlFor="post_title">POST TITLE</label>
-          <input
-            id="post_title"
-            name="post_title"
-            type="post_title"
-            onChange={formik.handleChange}
-            value={formik.values.post_title}
-          />
-        </div>
-        <div className={styles['form-row']}>
-          <label htmlFor="categoryId">CATEGORY</label>
-          <select 
-            id="categoryId"
-            name="categoryId"
-            type="categoryId"
-            value={formik.values.categoryId} 
-            onChange={formik.handleChange}>
-            {selectCategoriesDisplay}
-          </select>
-        </div>
-        <div className={styles['form-row']}>
-          <label htmlFor='post_content'>Post Content</label>
-          <Suspense fallback={`Loading...`}>
-            <TipTapEditor
-                id="post_content"
-                name="post_content"
-                type="post_content"
-                onChange={val => formik.setFieldValue('post_content',val,true)}
-                value={formik.values.post_content}
-                itemType={'post'}
-                itemId={post ? post.postId : nextPostId}   
-            />
-          </Suspense>
-        </div>
-        <div className={styles['form-row']}>
-          <PostTagForm 
-            postId={post ? post.postId : nextPostId}
-          />          
-        </div>
-        <div className={styles['form-row']}>
-          <button type="submit">Submit</button>
-        </div>
-      </form>
+      <ul>{tabMenuDisplay}</ul>
+      {formDisplay}
     </div>
   );
 };
