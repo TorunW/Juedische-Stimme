@@ -5,7 +5,7 @@ import styles from 'styles/Home.module.css'
 import excuteQuery from 'lib/db'
 
 import AdminPosts from 'components/admin/Posts'
-import { selectPosts } from 'lib/queries'
+import { selectPosts } from 'lib/queries/posts';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setPosts } from 'store/posts/postsSlice';

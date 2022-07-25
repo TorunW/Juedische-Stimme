@@ -4,7 +4,8 @@ import excuteQuery from 'lib/db'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Post from 'components/Post'
-import { selectNavItems, selectPostByName } from 'lib/queries'
+import { selectPostByName } from 'lib/queries/posts'
+import { selectNavItems } from 'lib/queries'
 import { setMenuItems } from 'store/nav/navSlice'
 
 export default function ContentPage(props) {
@@ -29,7 +30,7 @@ export const getServerSideProps = async (context) => {
   });
   const navItems = JSON.stringify(navItemsResponse)
   const pageResponse = await excuteQuery({
-    query: selectPostByName(context.query.name)
+    query: selectPostByName({name:context.query.name})
   });
   const page = JSON.stringify(pageResponse);
 

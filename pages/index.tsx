@@ -3,7 +3,8 @@ import { LayoutPageProps } from 'types/LayoutPageProps.type';
 
 import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
-import { selectGalleryById, selectNavItems, selectPosts } from 'lib/queries';
+import { selectPosts } from 'lib/queries/posts'
+import { selectGalleryById, selectNavItems } from 'lib/queries';
 
 import { useDispatch, useSelector } from 'store/hooks';
 import { setToken, setEvents, setFeed } from 'store/fbdata/fbDataSlice';

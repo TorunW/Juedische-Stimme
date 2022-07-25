@@ -1,5 +1,6 @@
 import excuteQuery from 'lib/db'
-import { incrementTermTaxonomyCount, insertPost, insertTermRelationship } from 'lib/queries';
+import { insertPost } from 'lib/queries/posts'
+import { incrementTermTaxonomyCount, insertTermRelationship } from 'lib/queries';
 
 export default async (req, res) => {
     try {

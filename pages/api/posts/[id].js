@@ -1,5 +1,6 @@
-import { decreaseTermTaxonomyCount, deletePost, deleteTermRelationship, incrementTermTaxonomyCount, updatePost, updateTermRelationship } from 'lib/queries';
 import excuteQuery from 'lib/db'
+import { updatePost, deletePost } from 'lib/queries/posts'
+import { decreaseTermTaxonomyCount, deleteTermRelationship, incrementTermTaxonomyCount, updateTermRelationship } from 'lib/queries';
 
 export default async (req, res) => {
     try {
@@ -9,7 +10,7 @@ export default async (req, res) => {
             console.log(req.body.categoryId, " CATEGORY ID")
 
             const result = await excuteQuery({
-                query: updatePost(req.body,req.query.id)
+                query: updatePost({...req.body,postId:req.query.id})
             });
 
             if (req.body.previousCategoryId !== null && req.body.previousCategoryId !== req.body.categoryId){

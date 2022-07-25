@@ -2,6 +2,8 @@ import React from 'react'
 
 function Post({ post }) {
 
+    console.log(post)
+
     /* TO DO'S
      - DISPLAY TAGS IN A BETTER WAY
      - MAKE A BETTER NO POST FOUND PAGE! maybe even split to a different compoent -> show suggested posts? show helpful links?

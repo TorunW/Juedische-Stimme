@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import excuteQuery from 'lib/db'
-import { selectNavItems, selectPostsByTag } from 'lib/queries'
+import { selectPostsByTag } from 'lib/queries/posts'
+import { selectNavItems } from 'lib/queries'
 import Posts from 'components/Posts'
 import styles from 'styles/Home.module.css'
 
@@ -38,7 +39,11 @@ export const getServerSideProps = async (context) => {
     });
     const navItems = JSON.stringify(navItemsResponse) 
     const postsResponse = await excuteQuery({
-      query: selectPostsByTag(context.query.slug,10,context.query.number)
+      query: selectPostsByTag({
+          slug:context.query.slug,
+          numberOfPosts:10,
+          pageNum:context.query.number
+      })
     });
     const posts = JSON.stringify(postsResponse);
     return {

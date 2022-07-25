@@ -1,10 +1,10 @@
 import excuteQuery from 'lib/db'
-import { selectPostNamesBySearchPhrase } from 'lib/queries';
+import { selectPostNamesBySearchPhrase } from 'lib/queries/posts';
 
 export default async (req, res) => {
     try {
         const result = await excuteQuery({
-            query: selectPostNamesBySearchPhrase(req.query.phrase)
+            query: selectPostNamesBySearchPhrase({phrase:req.query.phrase})
         });
         res.json(result)        
     } catch ( error ) {

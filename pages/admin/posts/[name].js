@@ -2,7 +2,8 @@ import { useEffect } from 'react'
 import styles from 'styles/Home.module.css'
 import excuteQuery from 'lib/db'
 import PostForm from 'components/admin/PostForm'
-import { selectCategories, selectPostByName } from 'lib/queries'
+import { selectPostByName } from 'lib/queries/posts'
+import { selectCategories } from 'lib/queries'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setPost } from 'store/posts/postsSlice'
@@ -31,7 +32,7 @@ EditPostPage.layout = "admin";
 
 export const getServerSideProps = async (context) => {
   const postsResponse = await excuteQuery({
-    query: selectPostByName(context.query.name)
+    query: selectPostByName({name:context.query.name,showUnpublished:true})
   });
   const post = JSON.stringify(postsResponse);
   const categoriesResponse = await excuteQuery({
