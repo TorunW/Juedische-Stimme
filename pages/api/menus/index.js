@@ -1,5 +1,5 @@
 import excuteQuery from 'lib/db'
-import { insertTerm, insertTermRelationship, insertTermTaxonomy } from 'lib/queries';
+import { insertTerm, insertTermRelationship, insertTermTaxonomy, insertTermMeta } from 'lib/queries';
 
 export default async (req, res) => {
     try {
@@ -8,25 +8,32 @@ export default async (req, res) => {
             const insertTermResult = await excuteQuery({
                 query: insertTerm({name:'menu_item',slug:''})
             });
-            console.log(insertTermResult, " INSERT TERM RESULT ")
+            // console.log(insertTermResult, " INSERT TERM RESULT ")
 
             const termId = insertTermResult.insertId
             const body = {
                 term_id:termId,
                 taxonomy:req.body.taxonomy,
-                description:'',
+                description:req.body.title,
                 parent:'0',
                 count:'0'
             }
             const insertTermTaxonomyResult = await excuteQuery({
                 query: insertTermTaxonomy(body)
             });
-            console.log(insertTermTaxonomyResult , " insertTermTaxonomyResult ")
+            // console.log(insertTermTaxonomyResult , " insertTermTaxonomyResult ")
 
-            const insertTermRelationshipResult = await excuteQuery({
-                query: insertTermRelationship(termId,req.body.post_id)
+            const insertTermMetaResult = await excuteQuery({
+                query: insertTermMeta({term_id:termId, meta_key:'_menuitem_link', meta_value:req.body.link})
             })
-            console.log(insertTermRelationshipResult, " INSERT TERM RELATIONSHIP RESULT")
+            console.log(insertTermMetaResult, " INSERT TERM META RESULT")
+
+            // if (req.body.post_id  && req.body.post_id !== null){
+                const insertTermRelationshipResult = await excuteQuery({
+                    query: insertTermRelationship(termId,req.body.post_id,req.body.term_order)
+                })
+                console.log(insertTermRelationshipResult, " INSERT TERM RELATIONSHIP RESULT")
+            // }
             
             // console.log(result,"result")
             res.json(insertTermTaxonomyResult)

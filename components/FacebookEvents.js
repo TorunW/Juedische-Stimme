@@ -73,7 +73,7 @@ const FacebookEvents = (props) => {
     }
 
     return (
-        <div style={{overflow:"auto", backgroundColor: "#efefef"}}>
+        <div id="events" style={{overflow:"auto", backgroundColor: "#efefef"}}>
             <h1>FACEBOOK EVENTS</h1>
             <div>{eventsDisplay}</div>
         </div>

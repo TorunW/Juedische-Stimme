@@ -25,8 +25,10 @@ const MenuItems = ({menuItems}) => {
     if (menuItems){
         menuItemsDisplay = menuItems.map((menuItem, index)=>(
             <li key={index}>
-                title: <a href={`/admin/menus/${menuItem.term_id}`}>{menuItem.post_title}</a> <br/> 
-                id: {menuItem.ID} <br/>
+                title ( post title if no title): <a href={`/admin/menus/${menuItem.term_id}`}>{menuItem.title && menuItem.title !== null ? menuItem.title : menuItem.post_title}</a> <br/>
+                order: {menuItem.term_order} <br/>
+                post id: {menuItem.ID} <br/>
+                link: {menuItem.link} <br/> 
                 menu: {menuItem.taxonomy} <br/>
                 <button onClick={() => deleteMenuItem(menuItem)}>delete menu item</button>
             </li>

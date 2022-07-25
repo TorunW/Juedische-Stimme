@@ -4,7 +4,6 @@ import MenuItems from 'components/admin/MenuItems';
 import { selectMenuItems } from 'lib/queries';
 
 export default function AdminMenuItemsPage(props) {
-  
     return (
         <div className={styles.container}>
             <h2>MENU ITEMS</h2>

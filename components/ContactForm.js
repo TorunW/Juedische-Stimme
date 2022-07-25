@@ -38,7 +38,7 @@ const ContactForm = ({category}) => {
     // console.log(formik.errors)
 
     return (
-        <div className={styles.container}>
+        <div id="contact" className={styles.container}>
             <form onSubmit={formik.handleSubmit}>
                 <div className={styles['form-row']}>
                     <label htmlFor="name">Name</label>
