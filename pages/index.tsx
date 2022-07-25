@@ -3,14 +3,14 @@ import { LayoutPageProps } from 'types/LayoutPageProps.type';
 
 import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
-import { selectPosts } from 'lib/queries/posts'
+import { selectPosts } from 'lib/queries/posts';
 import { selectGalleryById, selectNavItems } from 'lib/queries';
 
 import { useDispatch, useSelector } from 'store/hooks';
 import { setToken, setEvents, setFeed } from 'store/fbdata/fbDataSlice';
 import { setHeaderGallery } from 'store/galleries/galleriesSlice';
 import { setPosts } from 'store/posts/postsSlice';
-import { setMenuItems } from 'store/nav/navSlice';
+import { setMenuItems, displayMenutItems } from 'store/nav/navSlice';
 
 import Posts from 'components/Posts';
 import styles from 'styles/Home.module.css';
@@ -25,6 +25,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 
   useEffect(() => {
     if (props.navItems) dispatch(setMenuItems(JSON.parse(props.navItems)));
+    if (props.navItems) dispatch(displayMenutItems(JSON.parse(props.navItems)));
     if (props.headerGallery)
       dispatch(setHeaderGallery(JSON.parse(props.headerGallery)[0]));
     if (props.posts) dispatch(setPosts(JSON.parse(props.posts)));
