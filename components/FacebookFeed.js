@@ -40,7 +40,7 @@ const FacebookFeed = (props) => {
         // const pageTokenRes = await fetch(`https://graph.facebook.com/PAGE-ID?fields=access_token&access_token=${token}`)
         // const pageToken = await pageTokenRes.json()
 
-        const res  = await fetch(`https://graph.facebook.com/998665673528998/feed?limit=3&fields=likes,attachments,full_picture,message&access_token=${token}`)
+        const res  = await fetch(`https://graph.facebook.com/998665673528998/feed?limit=6&fields=likes,attachments,full_picture,message&access_token=${token}`)
         const fetchedFeed = await res.json()
 
         console.log(fetchedFeed, " FETCHED FEED")
@@ -73,15 +73,15 @@ const FacebookFeed = (props) => {
         const feedArray = JSON.parse(feed.content)
         console.log(feedArray, " FEED ARRAY")
         feedDisplay = feedArray.map((fbPost, index) => {
-            if (index <= 2){
+            // if (index <= 2){
                 return (
-                    <div key={index} style={{width: "33%", float: "left",padding:"5px"}}>
+                    <div key={index} style={{width: "33%", height:700, float: "left",padding:"5px"}}>
                         <h2>{fbPost.story}</h2>
                         <img src={fbPost.full_picture} width={"100%"}/>
                         <p>{fbPost.message}</p>
                     </div>
                 )
-            }
+            // }
         })
     }
 
