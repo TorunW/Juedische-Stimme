@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'store/hooks';
 import { setToken, setEvents, setFeed } from 'store/fbdata/fbDataSlice';
 import { setHeaderGallery } from 'store/galleries/galleriesSlice';
 import { setPosts } from 'store/posts/postsSlice';
-import { setMenuItems, displayMenutItems } from 'store/nav/navSlice';
+import { setMenuItems } from 'store/nav/navSlice';
 
 import Posts from 'components/Posts';
 import FacebookFeed from 'components/FacebookFeed';
