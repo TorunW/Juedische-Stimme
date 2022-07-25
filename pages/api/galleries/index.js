@@ -1,5 +1,5 @@
 import excuteQuery from 'lib/db'
-import { insertGallery } from 'lib/queries';
+import { insertGallery, selectGalleries } from 'lib/queries';
 
 export default async (req, res) => {
     try {
@@ -11,9 +11,10 @@ export default async (req, res) => {
             res.json(result)
         }
         else {
-            // Handle any other HTTP method
-            console.log('not post request')
-            res.json({message:'no GET here!'})
+            const result = await excuteQuery({
+                query:selectGalleries(50,1)
+            })
+            res.json(result)
         }
     } catch ( error ) {
         console.log(error );

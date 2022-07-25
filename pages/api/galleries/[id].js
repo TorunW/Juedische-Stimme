@@ -1,4 +1,4 @@
-import { updateGallery, deleteGallery } from 'lib/queries';
+import { selectGalleryById, updateGallery, deleteGallery, selectGalleryImagesByGalleryId } from 'lib/queries';
 import excuteQuery from 'lib/db'
 
 export default async (req, res) => {
@@ -18,8 +18,16 @@ export default async (req, res) => {
             res.json(result)
         }
         else {
+            const result = await excuteQuery({
+                query:selectGalleryById(req.query.id)
+            })
+            const galleryImagesResponse = await excuteQuery({
+                query: selectGalleryImagesByGalleryId(req.query.id)
+            });  
+            res.json({
+                gallery:result[0],images:galleryImagesResponse
+            })
             // Handle any other HTTP method
-                res.json({message:'no GET on this route (/api/galleries/[id])!'})
         }
     } catch ( error ) {
         console.log(error );

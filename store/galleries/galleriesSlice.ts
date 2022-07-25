@@ -29,6 +29,9 @@ const galleriesSlice = createSlice({
       state.galleries = action.payload
     },
     setGallery: (state , action) => {
+
+      console.log(action.payload, " ACTION PAYLOAD ")
+
         state.gallery = { 
             ...action.payload.gallery, 
             images: action.payload.images

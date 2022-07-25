@@ -7,8 +7,11 @@ import Post from 'components/Post'
 import { selectPostByName } from 'lib/queries/posts'
 import { selectNavItems } from 'lib/queries'
 import { setMenuItems } from 'store/nav/navSlice'
+import { LayoutPage } from 'types/LayoutPage.type'
+import { LayoutPageProps } from 'types/LayoutPageProps.type'
+import { NextPageContext } from 'next'
 
-export default function ContentPage(props) {
+const ContentPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();  
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)))
@@ -24,11 +27,13 @@ export default function ContentPage(props) {
 
 ContentPage.layout = "main";
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (context: NextPageContext) => {
+  
   const navItemsResponse = await excuteQuery({
       query: selectNavItems()
   });
   const navItems = JSON.stringify(navItemsResponse)
+
   const pageResponse = await excuteQuery({
     query: selectPostByName({name:context.query.name})
   });
@@ -41,3 +46,5 @@ export const getServerSideProps = async (context) => {
     }
   }
 }
+
+export default ContentPage;

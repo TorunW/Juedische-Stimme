@@ -3,11 +3,12 @@ import styles from 'styles/Home.module.css'
 import excuteQuery from 'lib/db'
 import PostForm from 'components/admin/PostForm'
 import { selectPostByName } from 'lib/queries/posts'
-import { selectCategories } from 'lib/queries'
+import { selectCategories, selectGalleries } from 'lib/queries'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setPost } from 'store/posts/postsSlice'
 import { setCatgories } from 'store/categories/categoriesSlice'
+import { setGalleries } from 'store/galleries/galleriesSlice';
 
 export default function EditPostPage(props) {
 
@@ -18,6 +19,7 @@ export default function EditPostPage(props) {
   useEffect(() => {
     dispatch(setPost(JSON.parse(props.post)[0]))
     dispatch(setCatgories(JSON.parse(props.categories)))
+    dispatch(setGalleries(JSON.parse(props.galleries)))
   },[])
   
   return (
@@ -39,10 +41,15 @@ export const getServerSideProps = async (context) => {
     query: selectCategories(50,context.query.number)
   });
   const categories = JSON.stringify(categoriesResponse);
+  const galleriesResponse = await excuteQuery({
+    query: selectGalleries(50,context.query.number)
+  });
+  const galleries = JSON.stringify(galleriesResponse);
   return {
     props:{
-      post:post,
-      categories
+      post,
+      categories,
+      galleries
     }
   }
 }

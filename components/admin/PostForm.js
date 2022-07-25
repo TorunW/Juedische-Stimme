@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import axios from 'axios';
 import dateTimeHelper from 'helpers/dateTimeHelper';
 import styles from 'styles/Form.module.css';
-// import TipTapEditor from '../tiptap/TipTapEditor';
+import { useDispatch, useSelector } from 'react-redux'
 
 const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
   suspense:true,
@@ -12,11 +12,14 @@ const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
 })
 
 import PostTagForm from './PostTagForm';
+import PostGalleryForm from './PostGalleryForm';
 
-const PostForm = ({post,nextPostId,categories}) => {
+const PostForm = ({post,nextPostId,galleries}) => {
 
   const tabs = ['post','gallery','translations']
   const [ currentTab, setCurrentTab ] = useState('post')
+
+  const { categories } = useSelector(state => state.categories)
 
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
@@ -139,9 +142,11 @@ const PostForm = ({post,nextPostId,categories}) => {
     )
   } else if (currentTab === 'gallery'){
     formDisplay = (
-      <React.Fragment>
-        <h2>GALLERY FORM</h2>
-      </React.Fragment>
+      <PostGalleryForm 
+        postId={post.postId}
+        postName={post.post_name}
+        galleryId={post.galleryId}
+      />
     )
   } else if (currentTab === 'translations'){
     formDisplay = (
@@ -151,9 +156,12 @@ const PostForm = ({post,nextPostId,categories}) => {
     )
   }
 
-  const tabMenuDisplay = tabs.map((tab,index)=>(
-    <li><a onClick={() => setCurrentTab(tab)}>{tab}</a></li>
-  ))
+  let tabMenuDisplay;
+  if (post){
+    tabMenuDisplay = tabs.map((tab,index)=>(
+      <li><a onClick={() => setCurrentTab(tab)}>{tab}</a></li>
+    ))
+  }
 
   return (
     <div className={styles.container}>
