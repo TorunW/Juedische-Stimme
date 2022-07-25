@@ -13,7 +13,6 @@ import { setPosts } from 'store/posts/postsSlice';
 import { setMenuItems, displayMenutItems } from 'store/nav/navSlice';
 
 import Posts from 'components/Posts';
-import styles from 'styles/Home.module.css';
 import FacebookFeed from 'components/FacebookFeed';
 import FacebookEvents from 'components/FacebookEvents';
 import Header from 'components/Header';
@@ -25,7 +24,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 
   useEffect(() => {
     if (props.navItems) dispatch(setMenuItems(JSON.parse(props.navItems)));
-    if (props.navItems) dispatch(displayMenutItems(JSON.parse(props.navItems)));
     if (props.headerGallery)
       dispatch(setHeaderGallery(JSON.parse(props.headerGallery)[0]));
     if (props.posts) dispatch(setPosts(JSON.parse(props.posts)));
@@ -42,10 +40,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div>
       <Header />
-      <hr />
-      <h1> LATEST POSTS:</h1>
       {posts ? <Posts posts={posts} /> : ''}
       <hr />
       <FacebookEvents />

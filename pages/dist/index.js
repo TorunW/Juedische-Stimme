@@ -47,7 +47,6 @@ var galleriesSlice_1 = require("store/galleries/galleriesSlice");
 var postsSlice_1 = require("store/posts/postsSlice");
 var navSlice_1 = require("store/nav/navSlice");
 var Posts_1 = require("components/Posts");
-var Home_module_css_1 = require("styles/Home.module.css");
 var FacebookFeed_1 = require("components/FacebookFeed");
 var FacebookEvents_1 = require("components/FacebookEvents");
 var Header_1 = require("components/Header");
@@ -57,8 +56,6 @@ var Home = function (props) {
     react_1.useEffect(function () {
         if (props.navItems)
             dispatch(navSlice_1.setMenuItems(JSON.parse(props.navItems)));
-        if (props.navItems)
-            dispatch(navSlice_1.displayMenutItems(JSON.parse(props.navItems)));
         if (props.headerGallery)
             dispatch(galleriesSlice_1.setHeaderGallery(JSON.parse(props.headerGallery)[0]));
         if (props.posts)
@@ -72,10 +69,8 @@ var Home = function (props) {
         if (props.fbFeed)
             dispatch(fbDataSlice_1.setFeed(JSON.parse(props.fbFeed)[0]));
     }, []);
-    return (React.createElement("div", { className: Home_module_css_1["default"].container },
+    return (React.createElement("div", null,
         React.createElement(Header_1["default"], null),
-        React.createElement("hr", null),
-        React.createElement("h1", null, " LATEST POSTS:"),
         posts ? React.createElement(Posts_1["default"], { posts: posts }) : '',
         React.createElement("hr", null),
         React.createElement(FacebookEvents_1["default"], null),
