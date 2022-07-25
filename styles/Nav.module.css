@@ -1,0 +1,13 @@
+.nav {
+  position: fixed;
+  width: 100%;
+  background-color: #d1cedf;
+}
+.nav .topContainer {
+  display: flex;
+  padding: 16px 0 8px;
+}
+.nav .bottomContainer {
+  display: flex;
+  padding: 8px 0 16px;
+}
