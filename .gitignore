@@ -14,6 +14,7 @@
 
 # production
 /build
+/dist
 
 # misc
 .DS_Store
@@ -36,3 +37,6 @@ yarn-error.log*
 
 # CA
 /CA
+
+# dev files
+*.dev.js
