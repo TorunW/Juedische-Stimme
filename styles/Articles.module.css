@@ -16,4 +16,20 @@
 }
 .articlesPage .articleContainer .article {
   width: calc(50% - 15px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 64px;
+}
+.articlesPage .articleContainer .article h2 {
+  margin: 0;
+}
+.articlesPage .articleContainer .article h4 {
+  margin: 0;
+}
+.articlesPage .articleContainer .article a {
+  margin: 0;
+}
+.articlesPage .articleContainer .article .articlePreview p {
+  margin: 0;
 }

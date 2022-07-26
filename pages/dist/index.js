@@ -43,23 +43,24 @@ var posts_1 = require("lib/queries/posts");
 var queries_1 = require("lib/queries");
 var hooks_1 = require("store/hooks");
 var fbDataSlice_1 = require("store/fbdata/fbDataSlice");
-var galleriesSlice_1 = require("store/galleries/galleriesSlice");
 var postsSlice_1 = require("store/posts/postsSlice");
 var navSlice_1 = require("store/nav/navSlice");
 var Posts_1 = require("components/Posts");
 var FacebookFeed_1 = require("components/FacebookFeed");
 var FacebookEvents_1 = require("components/FacebookEvents");
 var Header_1 = require("components/Header");
+var AboutInfo_1 = require("components/AboutInfo");
+var aboutinfoSlice_1 = require("store/aboutinfo/aboutinfoSlice");
 var Home = function (props) {
     var dispatch = hooks_1.useDispatch();
-    var posts = hooks_1.useSelector(function (state) { return state.posts; }).posts;
+    var _a = hooks_1.useSelector(function (state) { return state.posts; }), posts = _a.posts, newsletter = _a.newsletter;
     react_1.useEffect(function () {
         if (props.navItems)
             dispatch(navSlice_1.setMenuItems(JSON.parse(props.navItems)));
-        if (props.headerGallery)
-            dispatch(galleriesSlice_1.setHeaderGallery(JSON.parse(props.headerGallery)[0]));
         if (props.posts)
             dispatch(postsSlice_1.setPosts(JSON.parse(props.posts)));
+        if (props.newsletter)
+            dispatch(postsSlice_1.setNewsletter(JSON.parse(props.newsletter)));
         if (props.fbToken)
             dispatch(fbDataSlice_1.setToken(JSON.parse(props.fbToken).length > 0
                 ? JSON.parse(props.fbToken)[0].token
@@ -68,13 +69,21 @@ var Home = function (props) {
             dispatch(fbDataSlice_1.setEvents(JSON.parse(props.fbEvents)[0]));
         if (props.fbFeed)
             dispatch(fbDataSlice_1.setFeed(JSON.parse(props.fbFeed)[0]));
+        if (props.aboutInfo && props.gallery) {
+            dispatch(aboutinfoSlice_1.setAboutInfo({
+                aboutInfo: JSON.parse(props.aboutInfo)[0],
+                gallery: JSON.parse(props.gallery)[0]
+            }));
+        }
     }, []);
     return (React.createElement("div", null,
         React.createElement(Header_1["default"], null),
-        posts ? React.createElement(Posts_1["default"], { posts: posts }) : '',
+        posts ? React.createElement(Posts_1["default"], { posts: posts, title: 'Aktuelles' }) : '',
         React.createElement("hr", null),
         React.createElement(FacebookEvents_1["default"], null),
         React.createElement("hr", null),
+        React.createElement(AboutInfo_1["default"], null),
+        newsletter ? React.createElement(Posts_1["default"], { posts: newsletter, title: 'Newsletter' }) : '',
         React.createElement("h1", null, "BUTTONS AND CALL TO ACTION"),
         React.createElement("blockquote", null, "BUTTONS AND CALL TO ACTION"),
         React.createElement("hr", null),
@@ -82,13 +91,11 @@ var Home = function (props) {
         React.createElement("div", null, "SIGN UP TO NEWSLETTER COMPONENET!"),
         React.createElement("hr", null),
         React.createElement(FacebookFeed_1["default"], null),
-        React.createElement("hr", null),
-        React.createElement("h1", null, "ABOUT US GALLERY"),
-        React.createElement("div", null, "SHOW A GALERY HERE!")));
+        React.createElement("hr", null)));
 };
 Home.layout = 'main';
 exports.getServerSideProps = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var navItemsResponse, navItems, headerGalleryResponse, headerGallery, postsResponse, posts, fbTokenResponse, fbToken, fbFeedResponse, fbFeed, fbEventsReponse, fbEvents;
+    var navItemsResponse, navItems, postsResponse, posts, newsletterResponse, newsletter, aboutInfoResponse, aboutInfo, galleryId, galleryResponse, gallery, fbTokenResponse, fbToken, fbFeedResponse, fbFeed, fbEventsReponse, fbEvents;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0: return [4 /*yield*/, db_1["default"]({
@@ -97,12 +104,6 @@ exports.getServerSideProps = function () { return __awaiter(void 0, void 0, void
             case 1:
                 navItemsResponse = _a.sent();
                 navItems = JSON.stringify(navItemsResponse);
-                return [4 /*yield*/, db_1["default"]({
-                        query: queries_1.selectGalleryById(1)
-                    })];
-            case 2:
-                headerGalleryResponse = _a.sent();
-                headerGallery = JSON.stringify(headerGalleryResponse);
                 return [4 /*yield*/, db_1["default"]({
                         query: posts_1.selectPosts({
                             numberOfPosts: 6,
@@ -117,38 +118,69 @@ exports.getServerSideProps = function () { return __awaiter(void 0, void 0, void
                                 'post_content',
                                 'post_title',
                                 'post_name',
-                            ]
+                            ],
+                            exclude: {
+                                category: 66
+                            }
                         })
                     })];
-            case 3:
+            case 2:
                 postsResponse = _a.sent();
                 posts = JSON.stringify(postsResponse);
                 return [4 /*yield*/, db_1["default"]({
-                        query: "SELECT * FROM fb_token LIMIT 1"
+                        query: posts_1.selectPostsByTag({
+                            slug: 'newsletter',
+                            numberOfPosts: 6,
+                            pageNum: 1,
+                            isCategory: true
+                        })
+                    })];
+            case 3:
+                newsletterResponse = _a.sent();
+                newsletter = JSON.stringify(newsletterResponse);
+                return [4 /*yield*/, db_1["default"]({
+                        query: "SELECT * FROM js_about_info LIMIT 1"
                     })];
             case 4:
+                aboutInfoResponse = _a.sent();
+                aboutInfo = JSON.stringify(aboutInfoResponse);
+                return [4 /*yield*/, aboutInfoResponse[0].about_gallery_id];
+            case 5:
+                galleryId = _a.sent();
+                return [4 /*yield*/, db_1["default"]({
+                        query: queries_1.selectGalleryById(galleryId)
+                    })];
+            case 6:
+                galleryResponse = _a.sent();
+                gallery = JSON.stringify(galleryResponse);
+                return [4 /*yield*/, db_1["default"]({
+                        query: "SELECT * FROM fb_token LIMIT 1"
+                    })];
+            case 7:
                 fbTokenResponse = _a.sent();
                 fbToken = JSON.stringify(fbTokenResponse);
                 return [4 /*yield*/, db_1["default"]({
                         query: "SELECT * FROM fb_feed WHERE type='posts' ORDER BY ID DESC LIMIT 1"
                     })];
-            case 5:
+            case 8:
                 fbFeedResponse = _a.sent();
                 fbFeed = JSON.stringify(fbFeedResponse);
                 return [4 /*yield*/, db_1["default"]({
                         query: "SELECT * FROM fb_feed WHERE type='events' ORDER BY ID DESC LIMIT 1"
                     })];
-            case 6:
+            case 9:
                 fbEventsReponse = _a.sent();
                 fbEvents = JSON.stringify(fbEventsReponse);
                 return [2 /*return*/, {
                         props: {
                             navItems: navItems,
-                            headerGallery: headerGallery,
                             posts: posts,
+                            newsletter: newsletter,
                             fbFeed: fbFeed,
                             fbEvents: fbEvents,
-                            fbToken: fbToken
+                            fbToken: fbToken,
+                            aboutInfo: aboutInfo,
+                            gallery: gallery
                         }
                     }];
         }

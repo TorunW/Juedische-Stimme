@@ -38,6 +38,7 @@ function Posts(props) {
 
           return (
             <article key={index} className={styles.article}>
+              <div className={styles.date}>12 January 2022</div>
               <h2>
                 <a href={'/' + post.post_name}>{post.post_title}</a>
               </h2>
@@ -46,7 +47,10 @@ function Posts(props) {
                   {post.categoryName}
                 </a>
               </h4>
-              <div dangerouslySetInnerHTML={{ __html: content }}></div>
+              <div
+                className={styles.articlePreview}
+                dangerouslySetInnerHTML={{ __html: content }}
+              ></div>
             </article>
           );
         })}

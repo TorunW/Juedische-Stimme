@@ -11,15 +11,9 @@ const navSlice = createSlice({
     setMenuItems: (state, action) => {
       state.items = action.payload;
     },
-    displayMenutItems: (state, action) => {
-      const topMenu = state.items.findIndex(
-        (m) => m.post_title === action.payload.post_title
-      );
-      console.log(topMenu, 'hello');
-    },
   },
 });
 
-export const { setMenuItems, displayMenutItems } = navSlice.actions;
+export const { setMenuItems } = navSlice.actions;
 
 export default navSlice.reducer;

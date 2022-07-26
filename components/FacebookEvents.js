@@ -62,19 +62,22 @@ const FacebookEvents = (props) => {
   let eventsDisplay;
   if (events && events.content && events.content.length > 0) {
     const eventsArray = JSON.parse(events.content);
+    console.log(eventsArray);
     eventsDisplay = eventsArray.map((fbEvent, index) => {
-        return (
-          <div
-            key={index}
-            style={{ width: '33%', float: 'left', padding: '5px' }}>
-            <h2>{fbEvent.name}</h2>
-            <p>
-              {fbEvent.description.length > 300
-                ? `${fbEvent.description.substring(0, 300)}[...]`
-                : fbEvent.description}
-            </p>
-          </div>
-        );
+      return (
+        <div
+          key={index}
+          style={{ width: '33%', float: 'left', padding: '5px' }}
+        >
+          <h2>{fbEvent.name}</h2>
+          {/* <p>
+            {fbEvent.description.length > 100
+              ? `${fbEvent.description.substring(0, 100)}[...]`
+              : fbEvent.description}
+          </p> */}
+          <p>{fbEvent.start_time}</p>
+        </div>
+      );
     });
   }
 
