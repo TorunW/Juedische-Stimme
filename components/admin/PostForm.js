@@ -76,7 +76,7 @@ const PostForm = ({post,nextPostId,galleries}) => {
   let selectCategoriesDisplay;
   if (categories){
     selectCategoriesDisplay = categories.map((category,index)=>(
-      <option key={index} value={category.term_id}>{category.name}</option>
+      <option key={Date.now() + index} value={category.term_id}>{category.name}</option>
     ))
   }
 
@@ -149,7 +149,7 @@ const PostForm = ({post,nextPostId,galleries}) => {
   let tabMenuDisplay;
   if (post){
     tabMenuDisplay = tabs.map((tab,index)=>(
-      <li><a onClick={() => setCurrentTab(tab)}>{tab}</a></li>
+      <li key={Date.now() + index}><a onClick={() => setCurrentTab(tab)}>{tab}</a></li>
     ))
   }
 
