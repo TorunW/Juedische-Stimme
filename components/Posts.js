@@ -4,7 +4,7 @@ import styles from 'styles/Articles.module.css';
 function Posts(props) {
   return (
     <div className={styles.articlesPage}>
-      <h1>Aktuelles</h1>
+      <h1>{props.title}</h1>
       <div className={styles.articleContainer}>
         {props.posts.map((post, index) => {
           let content = post.post_content;

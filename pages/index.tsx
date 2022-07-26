@@ -3,12 +3,12 @@ import { LayoutPageProps } from 'types/LayoutPageProps.type';
 
 import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
-import { selectPosts } from 'lib/queries/posts';
+import { selectPosts, selectPostsByTag } from 'lib/queries/posts';
 import { selectGalleryById, selectNavItems } from 'lib/queries';
 
 import { useDispatch, useSelector } from 'store/hooks';
 import { setToken, setEvents, setFeed } from 'store/fbdata/fbDataSlice';
-import { setPosts } from 'store/posts/postsSlice';
+import { setPosts, setNewsletter } from 'store/posts/postsSlice';
 import { setMenuItems } from 'store/nav/navSlice';
 
 import Posts from 'components/Posts';
@@ -21,11 +21,12 @@ import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';
 const Home: LayoutPage = (props: LayoutPageProps) => {
 
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.posts);
+  const { posts, newsletter } = useSelector((state) => state.posts);
 
   useEffect(() => {
     if (props.navItems) dispatch(setMenuItems(JSON.parse(props.navItems)));
     if (props.posts) dispatch(setPosts(JSON.parse(props.posts)));
+    if (props.newsletter) dispatch(setNewsletter(JSON.parse(props.newsletter)))
     if (props.fbToken)
       dispatch(
         setToken(
@@ -44,10 +45,12 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   return (
     <div>
       <Header />
-      {posts ? <Posts posts={posts} /> : ''}
+      {posts ? <Posts posts={posts} title={"Aktuelles"} /> : ''}
       <hr />
       <FacebookEvents />
       <hr />
+      <AboutInfo />
+      {newsletter ? <Posts posts={newsletter} title={"Newsletter"} /> : ''}
       <h1>BUTTONS AND CALL TO ACTION</h1>
       <blockquote>BUTTONS AND CALL TO ACTION</blockquote>
       <hr />
@@ -56,7 +59,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <hr />
       <FacebookFeed />
       <hr />
-      <AboutInfo />
     </div>
   );
 };
@@ -71,7 +73,7 @@ export const getServerSideProps = async () => {
   });
   const navItems = JSON.stringify(navItemsResponse);
 
-  // POSTS
+  // POSTS ( aktuelles )
   const postsResponse = await excuteQuery({
     query: selectPosts({
       numberOfPosts: 6,
@@ -87,9 +89,23 @@ export const getServerSideProps = async () => {
         'post_title',
         'post_name',
       ],
+      exclude:{
+        category:66
+      }
     }),
   });
   const posts = JSON.stringify(postsResponse);
+
+  // Newsletter
+  const newsletterResponse = await excuteQuery({
+    query: selectPostsByTag({
+      slug:'newsletter',
+      numberOfPosts:6,
+      pageNum:1,
+      isCategory:true
+    })
+  });
+  const newsletter = JSON.stringify(newsletterResponse);
 
   // ABOUT INFO ( texts & gallery)
   const aboutInfoResponse = await excuteQuery({
@@ -120,6 +136,7 @@ export const getServerSideProps = async () => {
     props: {
       navItems,
       posts,
+      newsletter,
       fbFeed,
       fbEvents,
       fbToken,

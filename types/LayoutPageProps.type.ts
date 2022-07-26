@@ -3,6 +3,7 @@ export type LayoutPageProps = {
     gallery?:string;
     galleryImages?:string;
     posts?: string;
+    newsletter?: string;
     page?:string;
     fbFeed?: string;
     fbEvents?: string;

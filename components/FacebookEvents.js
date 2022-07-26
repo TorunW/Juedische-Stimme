@@ -31,7 +31,7 @@ const FacebookEvents = (props) => {
 
   async function fetchFacebookEvents() {
     const res = await fetch(
-      `https://graph.facebook.com/998665673528998/events?limit=3&access_token=${token}`
+      `https://graph.facebook.com/998665673528998/events?limit=4&access_token=${token}`
     );
     const fetchedEvents = await res.json();
     // remove all the weird characters from the content to avoid mySql errors
@@ -63,12 +63,10 @@ const FacebookEvents = (props) => {
   if (events && events.content && events.content.length > 0) {
     const eventsArray = JSON.parse(events.content);
     eventsDisplay = eventsArray.map((fbEvent, index) => {
-      if (index <= 2) {
         return (
           <div
             key={index}
-            style={{ width: '33%', float: 'left', padding: '5px' }}
-          >
+            style={{ width: '33%', float: 'left', padding: '5px' }}>
             <h2>{fbEvent.name}</h2>
             <p>
               {fbEvent.description.length > 300
@@ -77,7 +75,6 @@ const FacebookEvents = (props) => {
             </p>
           </div>
         );
-      }
     });
   }
 
