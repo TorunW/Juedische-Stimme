@@ -6,17 +6,17 @@ import Posts from 'components/Posts'
 import styles from 'styles/Home.module.css'
 import SearchFilter from 'components/SearchFilter';
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'store/hooks';
 import { setPosts } from 'store/posts/postsSlice';
 import { setCatgories } from 'store/categories/categoriesSlice'
 import { setMenuItems } from 'store/nav/navSlice'
+import { LayoutPage } from 'types/LayoutPage.type'
+import { LayoutPageProps } from 'types/LayoutPageProps.type'
 
-export default function PostsPage(props) {
-
-
-  const dispatch = useDispatch()
-  const { posts } = useSelector(state => state.posts)
-  const { categories } = useSelector(state => state.categories)
+const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
+  const dispatch = useDispatch();
+  const { posts } = useSelector((state) => state.posts)
+  const { categories } = useSelector((state) => state.categories)
 
   useEffect(() => {
     dispatch(setPosts(JSON.parse(props.posts)))
@@ -26,13 +26,13 @@ export default function PostsPage(props) {
 
   return (
     <div className={styles.container}>
-        {categories ? <SearchFilter categoryName={props.categoryName} categories={categories} /> : ""}
+        {categories ? <SearchFilter phrase={''} categoryName={props.categoryName} categories={categories} /> : ""}
         {posts ? <Posts posts={posts}/> : ""}
     </div>
   )
 }
 
-PostsPage.layout = "main"
+CategoryPostsPage.layout = "main"
 
 export const getServerSideProps = async (context) => {
 
@@ -54,7 +54,7 @@ export const getServerSideProps = async (context) => {
       query: selectCategories(100)
     });
     const categories = JSON.stringify(categoriesResponse);
-    console.log(categories)
+
     return {
       props:{
         posts,
@@ -65,3 +65,5 @@ export const getServerSideProps = async (context) => {
       }
     }
 }
+
+export default CategoryPostsPage;
