@@ -7,16 +7,18 @@ import SearchFilter from 'components/SearchFilter';
 
 import styles from 'styles/Home.module.css'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'store/hooks'
 import { setPosts } from 'store/posts/postsSlice'
 import { setCatgories } from 'store/categories/categoriesSlice'
 import { setMenuItems } from 'store/nav/navSlice';
+import { LayoutPage } from 'types/LayoutPage.type'
+import { LayoutPageProps } from 'types/LayoutPageProps.type'
 
-export default function PostsPage(props) {
+const PostsPage: LayoutPage = (props: LayoutPageProps) => {
 
   const dispatch = useDispatch()
-  const { posts } = useSelector(state => state.posts)
-  const {categories} = useSelector(state => state.categories)
+  const { posts } = useSelector((state) => state.posts)
+  const {categories} = useSelector((state) => state.categories)
 
   useEffect(() => {
     dispatch(setCatgories(JSON.parse(props.categories)))
@@ -58,3 +60,5 @@ export const getServerSideProps = async (context) => {
       }
     }
 }
+
+export default PostsPage

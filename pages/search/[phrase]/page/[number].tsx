@@ -4,13 +4,15 @@ import { selectPostsBySearchPhrase } from 'lib/queries/posts'
 import { selectNavItems, selectCategories } from 'lib/queries'
 import Posts from 'components/Posts'
 import styles from 'styles/Home.module.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'store/hooks'
 import { setPosts } from 'store/posts/postsSlice';
 import { setMenuItems } from 'store/nav/navSlice';
 import SearchFilter from 'components/SearchFilter'
 import { setCatgories } from 'store/categories/categoriesSlice'
+import { LayoutPage } from 'types/LayoutPage.type'
+import { LayoutPageProps } from 'types/LayoutPageProps.type'
 
-export default function PostsPage(props) {
+const SearchPhrasePostsPage: LayoutPage = (props: LayoutPageProps) => {
   
   const dispatch = useDispatch()
   const { posts } = useSelector(state => state.posts)
@@ -31,7 +33,7 @@ export default function PostsPage(props) {
   )
 }
 
-PostsPage.layout = "main"
+SearchPhrasePostsPage.layout = "main"
 
 export const getServerSideProps = async (context) => {
     const navItemsResponse = await excuteQuery({
@@ -58,3 +60,5 @@ export const getServerSideProps = async (context) => {
       }
     }
   }
+
+  export default SearchPhrasePostsPage;

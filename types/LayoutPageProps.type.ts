@@ -12,4 +12,5 @@ export type LayoutPageProps = {
     fbEvents?: string;
     fbToken?: string;
     aboutInfo?: string;
+    phrase?: string;
 }
