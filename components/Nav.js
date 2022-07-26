@@ -4,17 +4,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from 'styles/Nav.module.css';
 
 function Nav() {
-  const { items } = useSelector((state) => state.nav);
+  const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
 
-  let menuDisplay = items.map((item, index) => (
-    <li
-      className={
-        item.taxonomy === 'main_menu'
-          ? styles.mainMenu
-          : styles.callToActionMenu
-      }
-      key={Date.now() + index}
-    >
+  let mainMenuDisplay = mainMenu.map((item, index) => (
+    <li key={Date.now() + index}>
+      <Link
+        href={
+          '/' + (item.link && item.link !== null ? item.link : item.post_name)
+        }
+      >
+        {item.title && item.title !== null ? item.title : item.post_title}
+      </Link>
+    </li>
+  ));
+
+  let callToActionMenuDisplay = callToActionMenu.map((item, index) => (
+    <li key={Date.now() + index}>
       <Link
         href={
           '/' + (item.link && item.link !== null ? item.link : item.post_name)
@@ -34,10 +39,10 @@ function Nav() {
             <img style={{ height: '50px' }} src='Logo-text.png' />
           </div>
         </Link>
-        <div className={styles.buttonContainer}>{menuDisplay}</div>
+        <div className={styles.buttonContainer}>{callToActionMenuDisplay}</div>
         <div>socialmedoa</div>
       </div>
-      <div className={styles.bottomContainer}>{menuDisplay}</div>
+      <div className={styles.bottomContainer}>{mainMenuDisplay}</div>
     </nav>
   );
 }

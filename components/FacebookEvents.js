@@ -76,6 +76,7 @@ const FacebookEvents = (props) => {
               : fbEvent.description}
           </p> */}
           <p>{fbEvent.start_time}</p>
+          <p>{fbEvent.place ? fbEvent.place.name : ''}</p>
         </div>
       );
     });

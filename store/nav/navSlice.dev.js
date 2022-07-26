@@ -8,14 +8,20 @@ exports["default"] = exports.setMenuItems = void 0;
 var _toolkit = require("@reduxjs/toolkit");
 
 var initialState = {
-  items: []
+  mainMenu: [],
+  callToActionMenu: []
 };
 var navSlice = (0, _toolkit.createSlice)({
   name: 'nav',
   initialState: initialState,
   reducers: {
     setMenuItems: function setMenuItems(state, action) {
-      state.items = action.payload;
+      state.mainMenu = action.payload.filter(function (item) {
+        return item.taxonomy === 'main_menu';
+      });
+      state.callToActionMenu = action.payload.filter(function (item) {
+        return item.taxonomy === 'call_to_action_menu';
+      });
     }
   }
 });

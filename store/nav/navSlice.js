@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 let initialState = {
-  items: [],
+  mainMenu: [],
+  callToActionMenu: [],
 };
 
 const navSlice = createSlice({
@@ -9,7 +10,13 @@ const navSlice = createSlice({
   initialState,
   reducers: {
     setMenuItems: (state, action) => {
-      state.items = action.payload;
+      state.mainMenu = action.payload.filter(
+        (item) => item.taxonomy === 'main_menu'
+      );
+
+      state.callToActionMenu = action.payload.filter(
+        (item) => item.taxonomy === 'call_to_action_menu'
+      );
     },
   },
 });
