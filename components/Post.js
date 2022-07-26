@@ -1,7 +1,6 @@
 import React from 'react';
 
 function Post({ post }) {
-  console.log(post);
 
   /* TO DO'S
      - DISPLAY TAGS IN A BETTER WAY

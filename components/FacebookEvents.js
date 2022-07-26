@@ -62,7 +62,6 @@ const FacebookEvents = (props) => {
   let eventsDisplay;
   if (events && events.content && events.content.length > 0) {
     const eventsArray = JSON.parse(events.content);
-    console.log(eventsArray);
     eventsDisplay = eventsArray.map((fbEvent, index) => {
       return (
         <div
@@ -75,6 +74,7 @@ const FacebookEvents = (props) => {
               ? `${fbEvent.description.substring(0, 100)}[...]`
               : fbEvent.description}
           </p> */}
+          <b>{fbEvent.place ? fbEvent.place.name : ""}</b>
           <p>{fbEvent.start_time}</p>
         </div>
       );
