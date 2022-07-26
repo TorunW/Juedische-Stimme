@@ -33,6 +33,21 @@ const AboutInfoForm = ({aboutInfo}) => {
     return (
         <div className={styles.container}>
             <form onSubmit={formik.handleSubmit}>
+                <h2>HEADER SLOGAN</h2>
+                <div className={styles['form-row']}>
+                    <Suspense fallback={"LOADING..."}>
+                        <DynamicTiptapEditor
+                            id="header_slogan"
+                            name="header_slogan"
+                            type="header_slogan"
+                            onChange={val => formik.setFieldValue('header_slogan',val,true)}
+                            value={formik.values.header_slogan}
+                            height={200}
+                        />
+                    </Suspense>
+                </div>
+
+                <h2>ABOUT SECTION</h2>
                 <div className={styles['form-row']}>
                     <label htmlFor="text_top">Top Text</label>
                     <Suspense fallback={"LOADING..."}>

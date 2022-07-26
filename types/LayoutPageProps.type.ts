@@ -4,9 +4,13 @@ export type LayoutPageProps = {
     galleryImages?:string;
     posts?: string;
     newsletter?: string;
+    categories?: string;
+    categoryName?: string;
+    category?: string;
     page?:string;
     fbFeed?: string;
     fbEvents?: string;
     fbToken?: string;
     aboutInfo?: string;
+    phrase?: string;
 }

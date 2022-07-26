@@ -1,8 +1,16 @@
 import React, {useState} from 'react'
-const SearchFilter = ({categoryName, categories, phrase}) => {
+import { Category } from 'types/Category.type';
+
+type SearchFilterProps = {
+    categoryName?:string;
+    categories?: Category[];
+    phrase?: string;
+}
+
+const SearchFilter = ({categoryName, categories, phrase}:SearchFilterProps) => {
 
     const [ searchPhrase, setSearchPhrase ] = useState(phrase ? phrase : '')
-    function onCategorySelectChange(val){
+    function onCategorySelectChange(val:string){
         window.location.href = `/category/${val}`
     }
     let categoryOptionsDisplay;
