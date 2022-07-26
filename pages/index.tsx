@@ -50,9 +50,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
     <div>
       <Header />
       {posts ? <Posts posts={posts} title={'Aktuelles'} /> : ''}
-      <hr />
       <FacebookEvents />
-      <hr />
       <AboutInfo />
       {newsletter ? <Posts posts={newsletter} title={'Newsletter'} /> : ''}
       <h1>BUTTONS AND CALL TO ACTION</h1>

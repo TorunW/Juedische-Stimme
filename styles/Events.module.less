@@ -1,3 +1,39 @@
 .eventsPage {
-  width: 80%;
+  hr {
+    width: 95%;
+  }
+  .contentContainer {
+    width: 90%;
+    margin: 0 auto;
+    h1 {
+      margin: 32px 0;
+      font-weight: 600;
+      font-size: 25.6px;
+    }
+    .eventsContainer {
+      display: flex;
+      justify-content: space-evenly;
+      margin-bottom: 32px;
+
+      .event {
+        border: 1px solid black;
+        width: 310px;
+        padding: 16px;
+        display: grid;
+        gap: 16px;
+
+        .info {
+          p {
+            margin: 0;
+          }
+        }
+
+        h2 {
+          font-weight: 600;
+          margin: 0;
+          font-size: 20px;
+        }
+      }
+    }
+  }
 }

@@ -15,31 +15,21 @@
   display: flex;
   align-items: center;
   gap: 16px;
-}
-.nav .topContainer .buttonContainer .callToActionMenu {
   list-style: none;
 }
-.nav .topContainer .buttonContainer .callToActionMenu a {
+.nav .topContainer .buttonContainer a {
   padding: 8px 16px;
   background-color: #635d80;
   color: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-.nav .topContainer .mainMenu {
-  display: none;
 }
 .nav .bottomContainer {
   display: flex;
   justify-content: center;
   gap: 16px;
   margin: 8px 0 16px;
-}
-.nav .bottomContainer .mainMenu {
   list-style: none;
 }
-.nav .bottomContainer .mainMenu:hover {
+.nav .bottomContainer:hover {
   color: #635d80;
-}
-.nav .bottomContainer .callToActionMenu {
-  display: none;
 }

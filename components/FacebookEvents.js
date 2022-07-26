@@ -5,6 +5,7 @@ import renderToString from 'helpers/renderToString';
 
 import { setEvents } from 'store/fbdata/fbDataSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import styles from 'styles/Events.module.css';
 
 const FacebookEvents = (props) => {
   const dispatch = useDispatch();
@@ -64,28 +65,32 @@ const FacebookEvents = (props) => {
     const eventsArray = JSON.parse(events.content);
     eventsDisplay = eventsArray.map((fbEvent, index) => {
       return (
-        <div
-          key={index}
-          style={{ width: '33%', float: 'left', padding: '5px' }}
-        >
+        <div key={index} className={styles.event}>
+          <div className={styles.info}>
+            <p>{fbEvent.place ? fbEvent.place.name : ''}</p>
+            <p>{fbEvent.start_time.split('T')}</p>
+          </div>
           <h2>{fbEvent.name}</h2>
+
           {/* <p>
             {fbEvent.description.length > 100
               ? `${fbEvent.description.substring(0, 100)}[...]`
               : fbEvent.description}
           </p> */}
-          <b>{fbEvent.place ? fbEvent.place.name : ""}</b>
-          <p>{fbEvent.start_time}</p>
-          <p>{fbEvent.place ? fbEvent.place.name : ''}</p>
         </div>
       );
     });
   }
 
   return (
-    <div id='events' style={{ overflow: 'auto', backgroundColor: '#efefef' }}>
-      <h1>FACEBOOK EVENTS</h1>
-      <div>{eventsDisplay}</div>
+    <div id='events' className={styles.eventsPage}>
+      <hr />
+      <div className={styles.contentContainer}>
+        <h1>Aktivitäten</h1>
+        <div className={styles.eventsContainer}>{eventsDisplay}</div>
+      </div>
+
+      <hr />
     </div>
   );
 };
