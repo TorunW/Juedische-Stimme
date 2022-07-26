@@ -1,6 +1,7 @@
 export type LayoutPageProps = {
     navItems: string;
-    headerGallery?: string;
+    gallery?:string;
+    galleryImages?:string;
     posts?: string;
     page?:string;
     fbFeed?: string;

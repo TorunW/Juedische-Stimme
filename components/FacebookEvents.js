@@ -49,9 +49,7 @@ const FacebookEvents = (props) => {
         (response) => {
           console.log(fetchedEvents, ' FETCHED EVENTS');
           dispatch(setEvents(fetchedEvents.data));
-          // setEvents(fetchedEvents.data)
           console.log(response, 'response on create fb feed record');
-          // window.location.href = "/admin/posts/page/1" // BETTER FETCH THE POSTS THEN REFRESH PAGE
         },
         (error) => {
           console.log(error, 'ERROR on create fb feed record');
@@ -64,7 +62,6 @@ const FacebookEvents = (props) => {
   let eventsDisplay;
   if (events && events.content && events.content.length > 0) {
     const eventsArray = JSON.parse(events.content);
-    console.log(eventsArray, ' EVENTS ARRAY ');
     eventsDisplay = eventsArray.map((fbEvent, index) => {
       if (index <= 2) {
         return (

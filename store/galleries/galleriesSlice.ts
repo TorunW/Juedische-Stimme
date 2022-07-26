@@ -1,24 +1,14 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import type { Image } from 'types/Image.type';
+import {createSlice } from '@reduxjs/toolkit'
 import type { Gallery } from 'types/Gallery.type';
 
 export interface GalleriesState {
-  headerGallery: Gallery;
   gallery: Gallery;
   galleries: Gallery[];
 }
 
 let initialState: GalleriesState = {
-    headerGallery:null,
     gallery:null,
     galleries:[]
-}
-
-type SetGalleryPayloadAction = {
-  payload: {
-    gallery: Gallery;
-    images: Image[];
-  }
 }
 
 const galleriesSlice = createSlice({
@@ -29,20 +19,15 @@ const galleriesSlice = createSlice({
       state.galleries = action.payload
     },
     setGallery: (state , action) => {
-
       console.log(action.payload, " ACTION PAYLOAD ")
-
-        state.gallery = { 
-            ...action.payload.gallery, 
-            images: action.payload.images
-        }
-    },
-    setHeaderGallery: (state, action ) => {
-        state.headerGallery = action.payload
+      state.gallery = { 
+          ...action.payload.gallery, 
+          images: action.payload.images
+      }
     }
   }
 })
 
-export const { setGalleries, setGallery, setHeaderGallery } = galleriesSlice.actions
+export const { setGalleries, setGallery } = galleriesSlice.actions
 
 export default galleriesSlice.reducer

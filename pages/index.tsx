@@ -8,7 +8,6 @@ import { selectGalleryById, selectNavItems } from 'lib/queries';
 
 import { useDispatch, useSelector } from 'store/hooks';
 import { setToken, setEvents, setFeed } from 'store/fbdata/fbDataSlice';
-import { setHeaderGallery } from 'store/galleries/galleriesSlice';
 import { setPosts } from 'store/posts/postsSlice';
 import { setMenuItems } from 'store/nav/navSlice';
 
@@ -17,16 +16,15 @@ import FacebookFeed from 'components/FacebookFeed';
 import FacebookEvents from 'components/FacebookEvents';
 import Header from 'components/Header';
 import AboutInfo from 'components/AboutInfo';
+import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const { posts } = useSelector((state) => state.posts);
 
   useEffect(() => {
     if (props.navItems) dispatch(setMenuItems(JSON.parse(props.navItems)));
-    if (props.headerGallery)
-      dispatch(setHeaderGallery(JSON.parse(props.headerGallery)[0]));
     if (props.posts) dispatch(setPosts(JSON.parse(props.posts)));
     if (props.fbToken)
       dispatch(
@@ -38,6 +36,9 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       );
     if (props.fbEvents) dispatch(setEvents(JSON.parse(props.fbEvents)[0]));
     if (props.fbFeed) dispatch(setFeed(JSON.parse(props.fbFeed)[0]));
+    if (props.aboutInfo && props.gallery){
+      dispatch(setAboutInfo({aboutInfo:JSON.parse(props.aboutInfo)[0],gallery:JSON.parse(props.gallery)[0]}))
+    }
   }, []);
   
   return (
@@ -55,9 +56,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <hr />
       <FacebookFeed />
       <hr />
-      <AboutInfo 
-        aboutInfo={JSON.parse(props.aboutInfo)[0]}
-      />
+      <AboutInfo />
     </div>
   );
 };
@@ -65,16 +64,14 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async () => {
+
+  // NAVIGATION
   const navItemsResponse = await excuteQuery({
     query: selectNavItems(),
   });
   const navItems = JSON.stringify(navItemsResponse);
 
-  const headerGalleryResponse = await excuteQuery({
-    query: selectGalleryById(1),
-  });
-  const headerGallery = JSON.stringify(headerGalleryResponse);
-
+  // POSTS
   const postsResponse = await excuteQuery({
     query: selectPosts({
       numberOfPosts: 6,
@@ -94,21 +91,26 @@ export const getServerSideProps = async () => {
   });
   const posts = JSON.stringify(postsResponse);
 
+  // ABOUT INFO ( texts & gallery)
   const aboutInfoResponse = await excuteQuery({
     query: `SELECT * FROM js_about_info LIMIT 1`,
   });
   const aboutInfo = JSON.stringify(aboutInfoResponse)
+  const galleryId = await aboutInfoResponse[0].about_gallery_id;
+  const galleryResponse = await excuteQuery({
+    query: selectGalleryById(galleryId)
+  });
+  const gallery = JSON.stringify(galleryResponse);
 
+  // FB 
   const fbTokenResponse = await excuteQuery({
     query: `SELECT * FROM fb_token LIMIT 1`,
   });
   const fbToken = JSON.stringify(fbTokenResponse);
-
   const fbFeedResponse = await excuteQuery({
     query: `SELECT * FROM fb_feed WHERE type='posts' ORDER BY ID DESC LIMIT 1`,
   });
   const fbFeed = JSON.stringify(fbFeedResponse);
-
   const fbEventsReponse = await excuteQuery({
     query: `SELECT * FROM fb_feed WHERE type='events' ORDER BY ID DESC LIMIT 1`,
   });
@@ -117,12 +119,12 @@ export const getServerSideProps = async () => {
   return {
     props: {
       navItems,
-      headerGallery,
       posts,
       fbFeed,
       fbEvents,
       fbToken,
-      aboutInfo
+      aboutInfo,
+      gallery
     },
   };
 };
