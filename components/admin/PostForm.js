@@ -12,11 +12,9 @@ const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
 })
 
 import PostTagForm from './PostTagForm';
-import PostGalleryForm from './PostGalleryForm';
 
 const PostForm = ({post,nextPostId,galleries}) => {
-
-  const tabs = ['post','gallery','translations']
+  const tabs = ['post','translations']
   const [ currentTab, setCurrentTab ] = useState('post')
 
   const { categories } = useSelector(state => state.categories)
@@ -139,14 +137,6 @@ const PostForm = ({post,nextPostId,galleries}) => {
           </div>
         </form>
       </React.Fragment>
-    )
-  } else if (currentTab === 'gallery'){
-    formDisplay = (
-      <PostGalleryForm 
-        postId={post.postId}
-        postName={post.post_name}
-        galleryId={post.galleryId}
-      />
     )
   } else if (currentTab === 'translations'){
     formDisplay = (

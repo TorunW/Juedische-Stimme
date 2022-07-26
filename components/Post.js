@@ -33,6 +33,12 @@ function Post({ post }) {
             __html: post.post_content.replace(/(?:\r\n|\r|\n)/g, '<br>'),
           }}
         ></div>
+
+          <hr/>
+
+          next: {post.nextPostName ? <a href={'/' + post.nextPostName}>{post.nextPostName}</a> : ''}<br/>
+          previous: {post.previousPostName ? <a href={'/' + post.previousPostName}>{post.previousPostName}</a> : ''}
+
       </React.Fragment>
     );
   } else {

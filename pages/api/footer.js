@@ -6,7 +6,7 @@ export default async (req, res) => {
         const result = await excuteQuery({
             query: selectNavItems('footer_menu')
         });
-        // console.log(result)
+        console.log(result)
         res.json(result)
     } catch ( error ) {
         console.log(error );
