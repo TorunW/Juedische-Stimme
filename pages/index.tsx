@@ -4,7 +4,7 @@ import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
 import { selectPosts, selectPostsByTag } from 'lib/queries/posts';
-import { selectGalleryById, selectNavItems } from 'lib/queries';
+import { selectGalleryById, selectMenuItems } from 'lib/queries';
 
 import { useDispatch, useSelector } from 'store/hooks';
 import { setToken, setEvents, setFeed } from 'store/fbdata/fbDataSlice';
@@ -70,7 +70,7 @@ Home.layout = 'main';
 export const getServerSideProps = async () => {
   // NAVIGATION
   const navItemsResponse = await excuteQuery({
-    query: selectNavItems(),
+    query: selectMenuItems(),
   });
   const navItems = JSON.stringify(navItemsResponse);
 

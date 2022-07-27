@@ -1,10 +1,10 @@
-import React, {Suspense } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import styles from 'styles/Form.module.css';
 import * as Yup from 'yup';
 
-const ContactForm = ({category}) => {
+const ContactForm = () => {
 
     const formik = useFormik({
         initialValues: {
@@ -26,9 +26,6 @@ const ContactForm = ({category}) => {
                 }
             }).then((response) => {
                 console.log(response,"response on send contact");
-                // if (response.data){
-                //     window.location.href = `/admin/categories/${category ? category.term_id : response.data.insertId}`
-                // }
             }, (error) => {
                 console.log(error, "ERROR on send contact");
             });
@@ -69,7 +66,6 @@ const ContactForm = ({category}) => {
                     <textarea 
                         id="message"
                         name="message"
-                        type="message"
                         onChange={formik.handleChange}
                         value={formik.values.message}
                     />

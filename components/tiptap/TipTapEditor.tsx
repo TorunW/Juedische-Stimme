@@ -1,11 +1,20 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
 import styles from 'styles/tiptap.module.css'
 import MenuBar from './MenuBar'
 
-const TipTapEditor = ({value, onChange, itemId, itemType, showMenu, height}) => {
+interface TipTapEditorProps {
+    value: string;
+    onChange: Function;
+    itemId?: string | number;
+    itemType?: string;
+    showMenu?: boolean;
+    height?: number;
+}
+
+const TipTapEditor = ({value, onChange, itemId, itemType, showMenu, height}:TipTapEditorProps) => {
 
     const editor = useEditor({
         extensions: [
@@ -18,7 +27,7 @@ const TipTapEditor = ({value, onChange, itemId, itemType, showMenu, height}) => 
         }
     })
 
-    let menuDispaly;
+    let menuDispaly: ReactElement;
     if (showMenu !== false){
         menuDispaly = (
             <MenuBar 

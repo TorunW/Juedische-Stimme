@@ -1,3 +1,4 @@
+import { generateImageUrl } from 'helpers/imageUrlHelper';
 import React from 'react';
 import styles from 'styles/Articles.module.css';
 
@@ -38,6 +39,7 @@ function Posts(props) {
 
           return (
             <article key={index} className={styles.article}>
+              <img src={generateImageUrl(post.post_image)}/>
               <div className={styles.date}>12 January 2022</div>
               <h2>
                 <a href={'/' + post.post_name}>{post.post_title}</a>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Post from 'components/Post';
 import { selectPostByName } from 'lib/queries/posts';
-import { selectNavItems } from 'lib/queries';
+import { selectMenuItems } from 'lib/queries';
 import { setMenuItems } from 'store/nav/navSlice';
 import { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
@@ -28,7 +28,7 @@ ContentPage.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
   const navItemsResponse = await excuteQuery({
-    query: selectNavItems(),
+    query: selectMenuItems(),
   });
   const navItems = JSON.stringify(navItemsResponse);
 

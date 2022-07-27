@@ -1,15 +1,17 @@
 import { useEffect } from 'react'
 import excuteQuery from 'lib/db'
 import { selectPostsByTag } from 'lib/queries/posts'
-import { selectNavItems } from 'lib/queries'
+import { selectMenuItems } from 'lib/queries'
 import Posts from 'components/Posts'
 import styles from 'styles/Home.module.css'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'store/hooks'
 import { setPosts } from 'store/posts/postsSlice';
 import { setMenuItems } from 'store/nav/navSlice'
+import { LayoutPage } from 'types/LayoutPage.type'
+import { LayoutPageProps } from 'types/LayoutPageProps.type'
 
-export default function PostsPage(props) {
+const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
   
   const dispatch = useDispatch();
   const { posts } = useSelector(state => state.posts)
@@ -31,27 +33,29 @@ export default function PostsPage(props) {
   )
 }
 
-PostsPage.layout = "main"
+TagPostsPage.layout = "main"
 
 export const getServerSideProps = async (context) => {
-    const navItemsResponse = await excuteQuery({
-        query: selectNavItems()
-    });
-    const navItems = JSON.stringify(navItemsResponse) 
-    const postsResponse = await excuteQuery({
-      query: selectPostsByTag({
-          slug:context.query.slug,
-          numberOfPosts:10,
-          pageNum:context.query.number
-      })
-    });
-    const posts = JSON.stringify(postsResponse);
-    return {
-      props:{
-        posts:posts,
+  const navItemsResponse = await excuteQuery({
+      query: selectMenuItems()
+  });
+  const navItems = JSON.stringify(navItemsResponse) 
+  const postsResponse = await excuteQuery({
+    query: selectPostsByTag({
         slug:context.query.slug,
-        pageNum:context.query.number,
-        navItems
-      }
+        numberOfPosts:10,
+        pageNum:context.query.number
+    })
+  });
+  const posts = JSON.stringify(postsResponse);
+  return {
+    props:{
+      posts:posts,
+      slug:context.query.slug,
+      pageNum:context.query.number,
+      navItems
     }
   }
+}
+
+export default TagPostsPage;
