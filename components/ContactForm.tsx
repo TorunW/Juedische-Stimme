@@ -66,7 +66,6 @@ const ContactForm = () => {
                     <textarea 
                         id="message"
                         name="message"
-                        type="message"
                         onChange={formik.handleChange}
                         value={formik.values.message}
                     />

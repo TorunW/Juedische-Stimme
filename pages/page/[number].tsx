@@ -51,6 +51,7 @@ export const getServerSideProps = async (context) => {
       query: selectCategories(100)
     });
     const categories = JSON.stringify(categoriesResponse);
+
     return {
       props:{
         posts,

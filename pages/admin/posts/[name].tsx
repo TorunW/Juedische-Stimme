@@ -5,12 +5,14 @@ import PostForm from 'components/admin/PostForm'
 import { selectPostByName } from 'lib/queries/posts'
 import { selectCategories, selectGalleries } from 'lib/queries'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'store/hooks'
 import { setPost } from 'store/posts/postsSlice'
 import { setCatgories } from 'store/categories/categoriesSlice'
 import { setGalleries } from 'store/galleries/galleriesSlice';
+import { LayoutPage } from 'types/LayoutPage.type'
+import { LayoutPageProps } from 'types/LayoutPageProps.type'
 
-export default function EditPostPage(props) {
+const EditPostPage: LayoutPage = (props: LayoutPageProps) => {
 
   const dispatch = useDispatch()
   const { post } = useSelector(state => state.posts)
@@ -25,7 +27,7 @@ export default function EditPostPage(props) {
   return (
     <div className={styles.container}>
       <h2>EDIT POST</h2>
-      {post ? <PostForm post={post} categories={categories} /> : ''}
+      {post ? <PostForm post={post} /> : ''}
     </div>
   )
 }
@@ -45,11 +47,16 @@ export const getServerSideProps = async (context) => {
     query: selectGalleries(50,context.query.number)
   });
   const galleries = JSON.stringify(galleriesResponse);
+
   return {
     props:{
       post,
       categories,
-      galleries
+      galleries,
+      locales:context.locales,
+      locale:context.locale
     }
   }
 }
+
+export default EditPostPage;

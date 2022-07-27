@@ -1,10 +1,10 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, ReactElement } from 'react';
 import dynamic from 'next/dynamic'
 import { useFormik } from 'formik';
 import axios from 'axios';
 import dateTimeHelper from 'helpers/dateTimeHelper';
 import styles from 'styles/Form.module.css';
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'store/hooks'
 import { v4 as uuidv4 } from 'uuid';
 import PostTagForm from './PostTagForm';
 import { generateFileName } from 'helpers/generateFileName'
@@ -12,11 +12,15 @@ import { generateImageUrl } from 'helpers/imageUrlHelper'
 
 const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
   suspense:true,
-  // loading: () => <p>Loading...</p>
+  loading: () => <p>Loading...</p>
 })
 
+interface PostFormProps {
+  post?: any;
+  nextPostId?: string | number;
+}
 
-const PostForm = ({post,nextPostId}) => {
+const PostForm = ({post,nextPostId}: PostFormProps) => {
   
   const tabs = ['post','translations']
   const { categories } = useSelector(state => state.categories);
@@ -25,21 +29,6 @@ const PostForm = ({post,nextPostId}) => {
   const [ previewImage, setPreviewImage ] = useState(null)
   const [ previewImageFile, setPreviewImageFile ] = useState(null)
 
-  function onPostImageChange(event){
-    // read file as data uri for preview, upload it on onSubmit
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.addEventListener("load", () => {
-      setPreviewImage(reader.result)
-    }, false);
-    if (file){
-      setPreviewImageFile(file)
-      reader.readAsDataURL(file);
-    }
-  }
-
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
   const formik = useFormik({
     initialValues: {
         post_author: post ? post.post_author : 2, // '' --> CHANGE THIS BACK!!!!,
@@ -87,7 +76,7 @@ const PostForm = ({post,nextPostId}) => {
           if (post.post_image){
             console.log('delete current post image')
             console.log(post.post_image)
-            const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== 80 ? ':'+window.location.port : ""}/media/${post.post_image.split('/').join('+++')}`;
+            const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== '80' ? ':'+window.location.port : ""}/media/${post.post_image.split('/').join('+++')}`;
             const deleteFileRequest = axios.delete(deleteFileUrl)
             requestsArray.push(deleteFileRequest)
           }
@@ -125,22 +114,30 @@ const PostForm = ({post,nextPostId}) => {
     },
   });
 
-  let selectCategoriesDisplay;
+  function onPostImageChange(event){
+    // read file as data uri for preview, upload it on onSubmit
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      setPreviewImage(reader.result)
+    }, false);
+    if (file){
+      setPreviewImageFile(file)
+      reader.readAsDataURL(file);
+    }
+  }
+
+  let selectCategoriesDisplay: ReactElement[];
   if (categories){
     selectCategoriesDisplay = categories.map((category,index)=>(
       <option key={Date.now() + index} value={category.term_id}>{category.name}</option>
     ))
   }
 
-  /* 
-    TO DO: add translation forms per language in locales.
-    translation will be a record in the wp_post_meta table in the db
-  */
-
   let formDisplay;
   if (currentTab === 'post'){
     formDisplay = (
-      <React.Fragment>
+      <div className='post-form-tab' id="post-form">
         {post ? <p><a target={"_blank"} rel="noreferrer" href={"/"+post.post_name}>view post on live site</a></p> : ""}
         <form onSubmit={formik.handleSubmit}>
           <div className={styles['form-row']}>
@@ -154,7 +151,7 @@ const PostForm = ({post,nextPostId}) => {
             />
           </div>
 
-          <div id="post-image">
+          <div id="post-image" className={styles['form-row']}>
 
             {
               previewImage !== null ?
@@ -171,8 +168,6 @@ const PostForm = ({post,nextPostId}) => {
                 name="post_image"
                 type="file"
                 onChange={onPostImageChange}
-                // onChange={formik.handleChange}
-                // value={formik.values.post_image}
               />
             </div>
 
@@ -183,7 +178,6 @@ const PostForm = ({post,nextPostId}) => {
             <select 
               id="categoryId"
               name="categoryId"
-              type="categoryId"
               value={formik.values.categoryId} 
               onChange={formik.handleChange}>
               {selectCategoriesDisplay}
@@ -191,12 +185,9 @@ const PostForm = ({post,nextPostId}) => {
           </div>
           <div className={styles['form-row']}>
             <label htmlFor='post_content'>Post Content</label>
-            <Suspense fallback={`Loading...`}>
+            <Suspense>
               <TipTapEditor
-                  id="post_content"
-                  name="post_content"
-                  type="post_content"
-                  onChange={val => formik.setFieldValue('post_content',val,true)}
+                  onChange={(val:string)  => formik.setFieldValue('post_content',val,true)}
                   value={formik.values.post_content}
                   itemType={'post'}
                   itemId={post ? post.postId : nextPostId}   
@@ -212,26 +203,27 @@ const PostForm = ({post,nextPostId}) => {
             <button type="submit">Submit</button>
           </div>
         </form>
-      </React.Fragment>
+      </div>
     )
   } else if (currentTab === 'translations'){
     formDisplay = (
-      <React.Fragment>
+      <div className='post-form-tab' id="translations-form">
        <h2> TRANSLATIONS FORM</h2>
-      </React.Fragment>
+      </div>
     )
   }
 
-  let tabMenuDisplay;
+  let tabMenuDisplay: ReactElement;
   if (post){
-    tabMenuDisplay = tabs.map((tab,index)=>(
+    const tabMenu: ReactElement[] = tabs.map((tab,index)=>(
       <li key={Date.now() + index}><a onClick={() => setCurrentTab(tab)}>{tab}</a></li>
     ))
+    tabMenuDisplay = <ul>{tabMenu}</ul>
   }
 
   return (
     <div className={styles.container}>
-      <ul>{tabMenuDisplay}</ul>
+      {tabMenuDisplay}
       {formDisplay}
     </div>
   );
