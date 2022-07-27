@@ -24,8 +24,8 @@ var Gallery = function (_a) {
     }
     var slideShow = gallery.imageSrcs
         .split(',')
-        .map(function (imgSrc, index) { return (react_1["default"].createElement("div", { className: slideIndex === index + 1 ? Gallery_module_css_1["default"].slideActive : Gallery_module_css_1["default"].slide },
-        react_1["default"].createElement("img", { key: Date.now() + index, src: imageUrlHelper_1.generateImageUrl(imgSrc) }))); });
+        .map(function (imgSrc, index) { return (react_1["default"].createElement("div", { key: Date.now() + index, className: slideIndex === index + 1 ? Gallery_module_css_1["default"].slideActive : Gallery_module_css_1["default"].slide },
+        react_1["default"].createElement("img", { src: imageUrlHelper_1.generateImageUrl(imgSrc) }))); });
     console.log(slideShow.length);
     // = gallery.imageSrcs
     // .split(',')

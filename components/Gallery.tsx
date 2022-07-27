@@ -25,9 +25,10 @@ const Gallery = ({ gallery }) => {
     .split(',')
     .map((imgSrc: string, index: number) => (
       <div
+        key={Date.now() + index}
         className={slideIndex === index + 1 ? styles.slideActive : styles.slide}
       >
-        <img key={Date.now() + index} src={generateImageUrl(imgSrc)} />
+        <img src={generateImageUrl(imgSrc)} />
       </div>
     ));
 

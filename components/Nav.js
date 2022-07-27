@@ -35,8 +35,8 @@ function Nav() {
       <div className={styles.topContainer}>
         <Link href={'/'}>
           <div className={styles.logoContainer}>
-            <img style={{ height: '50px' }} src='Logo-img.png' />{' '}
-            <img style={{ height: '50px' }} src='Logo-text.png' />
+            <img style={{ height: '50px' }} src='/Logo-img.png' />{' '}
+            <img style={{ height: '50px' }} src='/Logo-text.png' />
           </div>
         </Link>
         <div className={styles.buttonContainer}>{callToActionMenuDisplay}</div>
