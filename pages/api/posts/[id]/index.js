@@ -6,12 +6,11 @@ export default async (req, res) => {
     try {
         if (req.method === 'PUT') {
 
-            console.log(req.body.previousCategoryId, " PREVIOUS CATEGORY ID")
-            console.log(req.body.categoryId, " CATEGORY ID")
-
             const result = await excuteQuery({
                 query: updatePost({...req.body,postId:req.query.id})
             });
+            
+            console.log(result, " UPDATE POST RESULT ")
 
             if (req.body.previousCategoryId !== null && req.body.previousCategoryId !== req.body.categoryId){
                 // update wp_term_relationship
@@ -30,7 +29,6 @@ export default async (req, res) => {
                 })
                 console.log(decreaseCategoryCountResult," decreaseCategoryCountResult")
                 // update previous category wp_terms
-
             }
 
             res.json(result)

@@ -1,4 +1,5 @@
-import React from 'react';
+import { generateImageUrl } from 'helpers/imageUrlHelper';
+import React, { ReactElement } from 'react';
 
 function Post({ post }) {
 
@@ -8,9 +9,9 @@ function Post({ post }) {
      - show the NEXT POST / PREVIOUS POST buttons, get the next post name, previous post name in the query!
     */
 
-  let postDisplay;
+  let postDisplay: ReactElement;
   if (post && post !== null) {
-    let tagsDisplay;
+    let tagsDisplay: ReactElement[];
     if (post.tagNames && post.tagNames.length > 0) {
       let tagsArray = [post.tagNames];
       if (post.tagNames.indexOf(',') > -1) tagsArray = post.tagNames.split(',');
@@ -23,6 +24,7 @@ function Post({ post }) {
     postDisplay = (
       <React.Fragment>
         <h1>{post.post_title}</h1>
+        <img src={generateImageUrl(post.post_image)}/>
         <h4>
           <a href={`/category/${post.categoryName}`}>{post.categoryName}</a>
         </h4>

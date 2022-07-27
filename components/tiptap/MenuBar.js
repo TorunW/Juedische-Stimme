@@ -22,11 +22,9 @@ const MenuBar = ({ editor, itemId, itemType }) => {
       const file = event.target.files[0]
       let fileType = file.name.split('.')[file.name.split.length - 1]
       let fileName = file.name.split(`.${fileType}`)[0] + `__${uuidv4()}.${fileType}`
-      console.log(fileName,  " FILENAME ")
       Array.from(event.target.files).forEach((file) => {
         formData.append(event.target.name, file, fileName);
       });
-      console.log(fileInputRef, " FILE INPUT RED")
       fileInputRef.current.value = "";
       uploadImage(formData,fileName);
     };
