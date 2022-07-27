@@ -1,5 +1,6 @@
 .eventsPage hr {
   width: 95%;
+  opacity: 0.5;
 }
 .eventsPage .contentContainer {
   width: 90%;
@@ -24,6 +25,7 @@
 }
 .eventsPage .contentContainer .eventsContainer .event .info p {
   margin: 0;
+  font-size: 16px;
 }
 .eventsPage .contentContainer .eventsContainer .event h2 {
   font-weight: 600;

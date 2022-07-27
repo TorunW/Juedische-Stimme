@@ -1,0 +1,45 @@
+.aboutPage {
+  text-align: center;
+  margin: 120px auto;
+
+  h1 {
+    font-weight: 900;
+    font-size: 88px;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .aboutContainer {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .contentContainer {
+    height: 385px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    img {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .linkContainer {
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      p {
+        color: white;
+      }
+
+      .buttonContainer {
+      }
+    }
+  }
+}

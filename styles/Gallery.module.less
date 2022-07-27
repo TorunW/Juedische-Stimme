@@ -1,0 +1,141 @@
+// .aboutGallery {
+//   // display: flex;
+//   // justify-content: center;
+//   // margin: 0 auto;
+//   // overflow: hidden;
+//   // margin: 64px 0;
+
+//   width: 50%;
+//   margin-inline: auto;
+//   .slider {
+//     .sliderInner {
+//       width: 100%;
+//       overflow: hidden;
+//       &:after {
+//         content: '';
+//         display: block;
+//         clear: both;
+//       }
+//       .item {
+//         float: left;
+//         width: 100%;
+//         margin-right: -100%;
+//         img {
+//           display: block;
+//           width: 100%;
+//         }
+//       }
+//       .itemActive,
+//       .itemActivePosNext {
+//         display: block;
+//         img {
+//           display: block;
+//           width: 100%;
+//         }
+//       }
+
+//       .itemNext {
+//         transform: translateX(-100%);
+//         transition: transform 0.5s ease-in-out;
+//       }
+
+//       .itemActivePosNext {
+//         left: 100%;
+//         img {
+//           display: block;
+//           width: 100%;
+//         }
+//       }
+//     }
+//   }
+// }
+
+.containerSlider {
+  max-width: 700px;
+  height: 500px;
+  margin: 100px auto 0;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+@media screen and (max-width: 700px) {
+  .containerSlider {
+    margin: 100px 10px 0;
+  }
+}
+.slide {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  opacity: 0;
+  transition: opacity ease-in-out 0.4s;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.slideActive {
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  transition: opacity ease-in-out 0.4s;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.prev,
+.next {
+  width: 60px;
+  height: 60px;
+  background: #f1f1f1;
+  border: 1px solid rgba(34, 34, 34, 0.287);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 20;
+}
+
+// .btn-slide img {
+//   width: 25px;
+//   height: 25px;
+//   pointer-events: none;
+// }
+.prev {
+  top: 50%;
+  left: 20px;
+  transform: translateY(-60%);
+}
+.next {
+  top: 50%;
+  right: 20px;
+  transform: translateY(-60%);
+}
+
+.container-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 3px solid #f1f1f1;
+  margin: 0 5px;
+  background: #f1f1f1;
+}
+.dot.active {
+  background: rgb(32, 32, 32);
+}
