@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import excuteQuery from 'lib/db'
 import { selectPostsByTag } from 'lib/queries/posts'
-import { selectCategories, selectNavItems } from 'lib/queries'
+import { selectCategories, selectMenuItems } from 'lib/queries'
 import Posts from 'components/Posts'
 import styles from 'styles/Home.module.css'
 import SearchFilter from 'components/SearchFilter';
@@ -37,7 +37,7 @@ CategoryPostsPage.layout = "main"
 export const getServerSideProps = async (context) => {
 
     const navItemsResponse = await excuteQuery({
-        query: selectNavItems()
+        query: selectMenuItems()
     });
     const navItems = JSON.stringify(navItemsResponse)
 
