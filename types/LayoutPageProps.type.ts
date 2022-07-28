@@ -17,4 +17,5 @@ export type LayoutPageProps = {
     phrase?: string;
     locales?: string;
     locale?: string;
+    defaultLocale?: string;
 }

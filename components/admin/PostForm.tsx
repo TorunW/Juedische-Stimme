@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import PostTagForm from './PostTagForm';
 import { generateFileName } from 'helpers/generateFileName'
 import { generateImageUrl } from 'helpers/imageUrlHelper'
+import PostTranslationsForm from './PostTranslationsForm';
 
 const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
   suspense:true,
@@ -24,6 +25,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
   
   const tabs = ['post','translations']
   const { categories } = useSelector(state => state.categories);
+  const { locales, defaultLocale } = useSelector(state => state.languages)
 
   const [ currentTab, setCurrentTab ] = useState('post')
   const [ previewImage, setPreviewImage ] = useState(null)
@@ -74,8 +76,6 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
         if (previewImageFile !== null){
           
           if (post.post_image){
-            console.log('delete current post image')
-            console.log(post.post_image)
             const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== '80' ? ':'+window.location.port : ""}/media/${post.post_image.split('/').join('+++')}`;
             const deleteFileRequest = axios.delete(deleteFileUrl)
             requestsArray.push(deleteFileRequest)
@@ -134,7 +134,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
     ))
   }
 
-  let formDisplay;
+  let formDisplay: ReactElement;
   if (currentTab === 'post'){
     formDisplay = (
       <div className='post-form-tab' id="post-form">
@@ -206,9 +206,25 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
       </div>
     )
   } else if (currentTab === 'translations'){
+
+    console.log('WHAT')
+
+    const translationFormsDisplay: ReactElement[] = locales.map((l,index) => {
+      console.log(l, " L ")
+      if (l !== defaultLocale){
+        return (
+          <PostTranslationsForm 
+            post={post}
+            language={l}
+          />
+        )
+      }
+    })
+
     formDisplay = (
       <div className='post-form-tab' id="translations-form">
-       <h2> TRANSLATIONS FORM</h2>
+       <h2> TRANSLATIONS FORMS</h2>
+       {translationFormsDisplay}
       </div>
     )
   }

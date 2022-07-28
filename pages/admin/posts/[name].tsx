@@ -11,17 +11,22 @@ import { setCatgories } from 'store/categories/categoriesSlice'
 import { setGalleries } from 'store/galleries/galleriesSlice';
 import { LayoutPage } from 'types/LayoutPage.type'
 import { LayoutPageProps } from 'types/LayoutPageProps.type'
+import { setLanguages } from 'store/languages/languagesSlice'
 
 const EditPostPage: LayoutPage = (props: LayoutPageProps) => {
 
   const dispatch = useDispatch()
   const { post } = useSelector(state => state.posts)
-  const { categories } = useSelector(state => state.categories)
 
   useEffect(() => {
     dispatch(setPost(JSON.parse(props.post)[0]))
     dispatch(setCatgories(JSON.parse(props.categories)))
     dispatch(setGalleries(JSON.parse(props.galleries)))
+    dispatch(setLanguages({
+      locales:props.locales,
+      locale:props.locale,
+      defaultLocale:props.defaultLocale
+    }))
   },[])
   
   return (
@@ -47,14 +52,15 @@ export const getServerSideProps = async (context) => {
     query: selectGalleries(50,context.query.number)
   });
   const galleries = JSON.stringify(galleriesResponse);
-
+  console.log(context)
   return {
     props:{
       post,
       categories,
       galleries,
       locales:context.locales,
-      locale:context.locale
+      locale:context.locale,
+      defaultLocale:context.defaultLocale
     }
   }
 }

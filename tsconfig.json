@@ -23,9 +23,7 @@
     "__tests__/index.test.js",
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx",
-    "components/Nav.js",
-    "components/Footer.tsx"
+    "**/*.tsx"
   ],
   "exclude": ["node_modules"]
 }
