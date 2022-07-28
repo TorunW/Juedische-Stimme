@@ -14,6 +14,12 @@ export default async (req, res) => {
             });
             // console.log(result, " PUT post image result")
             res.json(result)
+        } else if (req.method === 'DELETE'){
+            const result = await excuteQuery({
+                query: `DELETE wp_postmeta WHERE post_id='${req.query.id}' AND meta_key='_post_main_image'`
+            });
+            // console.log(result, " PUT post image result")
+            res.json(result)
         } else {
             // Handle any other HTTP method
             res.json({message:'no GET on this route (/api/posts/[id]/image)!'})

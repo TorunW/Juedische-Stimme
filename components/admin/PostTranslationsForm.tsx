@@ -27,13 +27,14 @@ const PostTranslationsForm = ({post,language}) => {
         }),
         onSubmit: values => {
             axios({
-                method: post[`_post_title_translation_${language}`] ? 'put' : 'post',
+                method: post[`post_title_translation_${language}`] ? 'put' : 'post',
                 url: `/api/posts/${post.postId}/translation`,
                 data: { 
                     ...values
                 }
             }).then((response) => {
                 console.log(response,"response on translation (put or post)");
+                window.location.reload()
             }, (error) => {
                 console.log(error, "ERROR on post / put translation");
             });

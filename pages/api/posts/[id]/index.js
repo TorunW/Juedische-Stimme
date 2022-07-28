@@ -39,13 +39,9 @@ export default async (req, res) => {
             const result = await excuteQuery({
                 query: deletePost(req.query.id)
             });
-
             const deleteTermRelationshipResult = await excuteQuery({
                 query: deleteTermRelationship(req.body.categoryId,req.query.id)
             })
-
-            console.log(req.body, " REQ BODY!!!!!")
-
             const decreaseCategoryCountResult = await excuteQuery({
                 query:`UPDATE wp_term_taxonomy SET count=count-1 WHERE term_id=${req.body.categoryId}`
             })
