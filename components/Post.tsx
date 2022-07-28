@@ -2,23 +2,9 @@ import { generateImageUrl } from 'helpers/imageUrlHelper';
 import React, { ReactElement } from 'react';
 import { useSelector } from 'store/hooks'
 
-function Post({ post } : any) {
+function Post({ post }) {
 
   const { locale } = useSelector(state => state.languages)
-
-  let postTitle = post.post_title,
-      postExcerpt = post.post_excerpt,
-      postContent = post.post_content
-
-  if (locale !== null){
-    postTitle = post[`post_title_translation_${locale}`] ? post[`post_title_translation_${locale}`] : post.post_title
-    postExcerpt = post[`post_excerpt_translation_${locale}`] ? post[`post_excerpt_translation_${locale}`] : post.post_excerpt
-    postContent = post[`post_content_translation_${locale}`] ? post[`post_content_translation_${locale}`] :  post.post_content
-  }
-
-  // const postTitle = post[`post_title_translation_${locale}`] ? post[`post_title_translation_${locale}`] : post.post_title
-  // const postExcerpt = post[`post_excerpt_translation_${locale}`] ? post[`post_excerpt_translation_${locale}`] : post.post_title
-  // let postContent = post[`post_content_translation_${locale}`] ? post[`post_content_translation_${locale}`] :  post.post_content;
   
   /* TO DO'S
      - DISPLAY TAGS IN A BETTER WAY
@@ -28,6 +14,17 @@ function Post({ post } : any) {
 
   let postDisplay: ReactElement;
   if (post && post !== null) {
+
+    let postTitle = post.post_title,
+    postExcerpt = post.post_excerpt,
+    postContent = post.post_content;
+
+    if (locale !== null){
+      postTitle = post[`post_title_translation_${locale}`] ? post[`post_title_translation_${locale}`] : post.post_title
+      postExcerpt = post[`post_excerpt_translation_${locale}`] ? post[`post_excerpt_translation_${locale}`] : post.post_excerpt
+      postContent = post[`post_content_translation_${locale}`] ? post[`post_content_translation_${locale}`] :  post.post_content
+    }
+
     let tagsDisplay: ReactElement[];
     if (post.tagNames && post.tagNames.length > 0) {
       let tagsArray = [post.tagNames];
@@ -38,6 +35,7 @@ function Post({ post } : any) {
         </a>
       ));
     }
+
     postDisplay = (
       <React.Fragment>
         <h1>{postTitle}</h1>
@@ -51,13 +49,11 @@ function Post({ post } : any) {
           dangerouslySetInnerHTML={{
             __html: postContent.replace(/(?:\r\n|\r|\n)/g, '<br>'),
           }}
-        ></div>
-
-          <hr/>
-
-          next: {post.nextPostName ? <a href={'/' + post.nextPostName}>{post.nextPostName}</a> : ''}<br/>
-          previous: {post.previousPostName ? <a href={'/' + post.previousPostName}>{post.previousPostName}</a> : ''}
-
+        >
+        </div>
+        <hr/>
+        next: {post.nextPostName ? <a href={'/' + post.nextPostName}>{post.nextPostName}</a> : ''}<br/>
+        previous: {post.previousPostName ? <a href={'/' + post.previousPostName}>{post.previousPostName}</a> : ''}
       </React.Fragment>
     );
   } else {
