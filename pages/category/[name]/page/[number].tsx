@@ -12,6 +12,7 @@ import { setCatgories } from 'store/categories/categoriesSlice'
 import { setMenuItems } from 'store/nav/navSlice'
 import { LayoutPage } from 'types/LayoutPage.type'
 import { LayoutPageProps } from 'types/LayoutPageProps.type'
+import { setLanguages } from 'store/languages/languagesSlice'
 
 const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -22,6 +23,11 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
     dispatch(setPosts(JSON.parse(props.posts)))
     dispatch(setCatgories(JSON.parse(props.categories)))
     dispatch(setMenuItems(JSON.parse(props.navItems)))
+    dispatch(setLanguages({
+      locales:props.locales,
+      locale:props.locale,
+      defaultLocale:props.defaultLocale
+    }))
   },[])
 
   return (
@@ -46,7 +52,8 @@ export const getServerSideProps = async (context) => {
         slug:context.query.name.split(' ').join('-').toLowerCase(),
         numberOfPosts:10,
         pageNum:context.query.number,
-        isCategory:true
+        isCategory:true,
+        locale: context.locale !== context.defaultLocale ? context.locale : ''
       })
     });
     const posts = JSON.stringify(postsResponse);
@@ -61,7 +68,10 @@ export const getServerSideProps = async (context) => {
         categories,
         categoryName:context.query.name,
         pageNum:context.query.number,
-        navItems
+        navItems,
+        locales:context.locales,
+        locale:context.locale,
+        defaultLocale:context.defaultLocale
       }
     }
 }

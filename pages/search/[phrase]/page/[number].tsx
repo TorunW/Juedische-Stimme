@@ -11,6 +11,7 @@ import SearchFilter from 'components/SearchFilter'
 import { setCatgories } from 'store/categories/categoriesSlice'
 import { LayoutPage } from 'types/LayoutPage.type'
 import { LayoutPageProps } from 'types/LayoutPageProps.type'
+import { setLanguages } from 'store/languages/languagesSlice'
 
 const SearchPhrasePostsPage: LayoutPage = (props: LayoutPageProps) => {
   
@@ -23,6 +24,11 @@ const SearchPhrasePostsPage: LayoutPage = (props: LayoutPageProps) => {
     dispatch(setMenuItems(JSON.parse(props.navItems)))
     dispatch(setCatgories(JSON.parse(props.categories)))
     dispatch(setPosts(JSON.parse(props.posts)))
+    dispatch(setLanguages({
+      locales:props.locales,
+      locale:props.locale,
+      defaultLocale:props.defaultLocale
+    }))
   },[])
 
   return (
@@ -41,7 +47,12 @@ export const getServerSideProps = async (context) => {
     });
     const navItems = JSON.stringify(navItemsResponse) 
     const postsResponse = await excuteQuery({
-      query: selectPostsBySearchPhrase({phrase:context.query.phrase,numberOfPosts:10,number:context.query.number})
+      query: selectPostsBySearchPhrase({
+        phrase:context.query.phrase,
+        numberOfPosts:10,
+        number:context.query.number,
+        locale: context.locale !== context.defaultLocale ? context.locale : ''
+      })
     });
     const posts = JSON.stringify(postsResponse);
 

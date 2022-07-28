@@ -25,34 +25,29 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   const { posts, newsletter } = useSelector((state) => state.posts);
 
   useEffect(() => {
-    if (props.navItems) dispatch(setMenuItems(JSON.parse(props.navItems)));
-    if (props.posts) dispatch(setPosts(JSON.parse(props.posts)));
-    if (props.newsletter) dispatch(setNewsletter(JSON.parse(props.newsletter)));
-    if (props.fbToken)
-      dispatch(
-        setToken(
-          JSON.parse(props.fbToken).length > 0
-            ? JSON.parse(props.fbToken)[0].token
-            : null
-        )
-      );
-    if (props.fbEvents) dispatch(setEvents(JSON.parse(props.fbEvents)[0]));
-    if (props.fbFeed) dispatch(setFeed(JSON.parse(props.fbFeed)[0]));
-    if (props.aboutInfo && props.gallery) {
-      dispatch(
-        setAboutInfo({
-          aboutInfo: JSON.parse(props.aboutInfo)[0],
-          gallery: JSON.parse(props.gallery)[0],
-        })
-      );
-    }
-    if (props.locales) {
-      dispatch(setLanguages({
-        locales:props.locales,
-        locale:props.locale,
-        defaultLocale:props.defaultLocale
-      }))
-    }
+    dispatch(setMenuItems(JSON.parse(props.navItems)));
+    dispatch(setPosts(JSON.parse(props.posts)));
+    dispatch(setNewsletter(JSON.parse(props.newsletter)));    
+    dispatch(
+      setToken(
+        JSON.parse(props.fbToken).length > 0
+          ? JSON.parse(props.fbToken)[0].token
+          : null
+      )
+    );
+    dispatch(setEvents(JSON.parse(props.fbEvents)[0]));
+    dispatch(setFeed(JSON.parse(props.fbFeed)[0]));
+    dispatch(
+      setAboutInfo({
+        aboutInfo: JSON.parse(props.aboutInfo)[0],
+        gallery: JSON.parse(props.gallery)[0],
+      })
+    );
+    dispatch(setLanguages({
+      locales:props.locales,
+      locale:props.locale,
+      defaultLocale:props.defaultLocale
+    }))
   }, []);
 
   return (
@@ -115,6 +110,7 @@ export const getServerSideProps = async (context:NextPageContext) => {
       numberOfPosts: 6,
       pageNum: 1,
       isCategory: true,
+      locale: context.locale !== context.defaultLocale ? context.locale : ''
     }),
   });
   const newsletter = JSON.stringify(newsletterResponse);
