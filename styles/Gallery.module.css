@@ -16,6 +16,7 @@
   height: 100%;
   position: absolute;
   opacity: 0;
+  z-index: 0;
 }
 .gallery .slideActive {
   width: 100%;
@@ -23,15 +24,11 @@
   position: absolute;
   opacity: 0;
   animation-delay: 0.1s;
-  animation: fadein 1s;
-}
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  animation: fadein 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  z-index: 2;
 }
 .gallery .prevSlide {
   width: 100%;
@@ -39,14 +36,26 @@
   position: absolute;
   opacity: 1;
   animation-delay: 0.1s;
-  animation: fadeout 1s;
+  animation: fadeOut 3s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 1;
+  z-index: 1;
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @keyframes fadeout {
   0% {
-    opacity: 1;
+    opacity: 0;
   }
   100% {
-    opacity: 0;
+    opacity: 1;
   }
 }
 .gallery img {
