@@ -1,30 +1,36 @@
 import React from 'react';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
-import { useSelector } from 'store/hooks'
+import { useSelector } from 'store/hooks';
 import styles from 'styles/Articles.module.css';
 
 function Posts(props) {
-
-  const { locale } = useSelector(state => state.languages)
+  console.log(props, 'props');
+  const { locale } = useSelector((state) => state.languages);
 
   return (
     <div className={styles.articlesPage}>
       <h1>{props.title}</h1>
       <div className={styles.articleContainer}>
         {props.posts.map((post, index) => {
-          
           let postTitle = post.post_title,
-          postExcerpt = post.post_excerpt,
-          postContent = post.post_content
-    
-          if (locale !== null){
-            postTitle = post[`post_title_translation_${locale}`] ? post[`post_title_translation_${locale}`] : post.post_title
-            postExcerpt = post[`post_excerpt_translation_${locale}`] ? post[`post_excerpt_translation_${locale}`] : post.post_excerpt
-            postContent = post[`post_content_translation_${locale}`] ? post[`post_content_translation_${locale}`] :  post.post_content
+            postExcerpt = post.post_excerpt,
+            postContent = post.post_content;
+
+          if (locale !== null) {
+            postTitle = post[`post_title_translation_${locale}`]
+              ? post[`post_title_translation_${locale}`]
+              : post.post_title;
+            postExcerpt = post[`post_excerpt_translation_${locale}`]
+              ? post[`post_excerpt_translation_${locale}`]
+              : post.post_excerpt;
+            postContent = post[`post_content_translation_${locale}`]
+              ? post[`post_content_translation_${locale}`]
+              : post.post_content;
           }
 
           let textLength = 600;
-          let startIndex = 0, endIndex = textLength;
+          let startIndex = 0,
+            endIndex = textLength;
 
           // if we have a phrase - search phrase, i.e if this is search page, we will search for the phrase inside the content
           if (props.phrase) {
@@ -52,8 +58,8 @@ function Posts(props) {
 
           return (
             <article key={index} className={styles.article}>
-              <img src={generateImageUrl(post.post_image)}/>
-              <div className={styles.date}>12 January 2022</div>
+              <img src={generateImageUrl(post.post_image)} />
+              <div className={styles.date}>{post.post_date}</div>
               <h2>
                 <a href={'/' + post.post_name}>{postTitle}</a>
               </h2>

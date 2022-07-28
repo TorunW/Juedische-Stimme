@@ -1,9 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import styles from 'styles/Gallery.module.css';
+import { usePrevious } from 'helpers/usePreviousHelper';
 
 const Gallery = ({ gallery }) => {
   const [slideIndex, setSlideIndex] = useState(1);
+  const prevSlideIndex = usePrevious(slideIndex);
+
+  console.log(prevSlideIndex, 'prev');
+  console.log(slideIndex, 'current');
 
   function nextSlide() {
     if (slideIndex !== slideShow.length) {
@@ -26,24 +31,20 @@ const Gallery = ({ gallery }) => {
     .map((imgSrc: string, index: number) => (
       <div
         key={Date.now() + index}
-        className={slideIndex === index + 1 ? styles.slideActive : styles.slide}
+        className={
+          slideIndex === index + 1
+            ? styles.slideActive
+            : prevSlideIndex === index + 1
+            ? styles.prevSlide
+            : styles.slide
+        }
       >
         <img className={styles.img} src={generateImageUrl(imgSrc)} />
       </div>
     ));
 
-  console.log(slideShow.length);
-
-  // = gallery.imageSrcs
-  // .split(',')
-  // .map((imgSrc: string, index: number) => (
-  //   <div className={styles.item}>
-  //     <img key={Date.now() + index} src={generateImageUrl(imgSrc)} />
-  //   </div>
-  // ));
-
   return (
-    <div>
+    <div className={styles.gallery}>
       <div className={styles.containerSlider}>
         <button className={styles.prev} onClick={prevSlide}>
           Prev
