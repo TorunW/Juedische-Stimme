@@ -10,6 +10,7 @@ import { setPosts } from 'store/posts/postsSlice';
 import { setMenuItems } from 'store/nav/navSlice'
 import { LayoutPage } from 'types/LayoutPage.type'
 import { LayoutPageProps } from 'types/LayoutPageProps.type'
+import { setLanguages } from 'store/languages/languagesSlice'
 
 const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
   
@@ -19,6 +20,11 @@ const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
   useEffect(() => {
     dispatch(setPosts(JSON.parse(props.posts)))
     dispatch(setMenuItems(JSON.parse(props.navItems)))
+    dispatch(setLanguages({
+      locales:props.locales,
+      locale:props.locale,
+      defaultLocale:props.defaultLocale
+    }))
   },[])
 
   return (
@@ -44,7 +50,8 @@ export const getServerSideProps = async (context) => {
     query: selectPostsByTag({
         slug:context.query.slug,
         numberOfPosts:10,
-        pageNum:context.query.number
+        pageNum:context.query.number,
+        locale: context.locale !== context.defaultLocale ? context.locale : ''
     })
   });
   const posts = JSON.stringify(postsResponse);
@@ -53,7 +60,10 @@ export const getServerSideProps = async (context) => {
       posts:posts,
       slug:context.query.slug,
       pageNum:context.query.number,
-      navItems
+      navItems,
+      locales:context.locales,
+      locale:context.locale,
+      defaultLocale:context.defaultLocale
     }
   }
 }
