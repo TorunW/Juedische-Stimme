@@ -28,7 +28,7 @@ const Gallery = ({ gallery }) => {
         key={Date.now() + index}
         className={slideIndex === index + 1 ? styles.slideActive : styles.slide}
       >
-        <img src={generateImageUrl(imgSrc)} />
+        <img className={styles.img} src={generateImageUrl(imgSrc)} />
       </div>
     ));
 
