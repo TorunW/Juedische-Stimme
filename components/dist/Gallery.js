@@ -6,7 +6,7 @@ var Gallery_module_css_1 = require("styles/Gallery.module.css");
 var usePreviousHelper_1 = require("helpers/usePreviousHelper");
 var Gallery = function (_a) {
     var gallery = _a.gallery;
-    var _b = react_1.useState(1), slideIndex = _b[0], setSlideIndex = _b[1];
+    var _b = react_1.useState(0), slideIndex = _b[0], setSlideIndex = _b[1];
     var prevSlideIndex = usePreviousHelper_1.usePrevious(slideIndex);
     console.log(prevSlideIndex, 'prev');
     console.log(slideIndex, 'current');
@@ -19,10 +19,10 @@ var Gallery = function (_a) {
         }
     }
     function prevSlide() {
-        if (slideIndex !== 1) {
+        if (slideIndex !== 0) {
             setSlideIndex(slideIndex - 1);
         }
-        else if (slideIndex === 1) {
+        else if (slideIndex === 0) {
             setSlideIndex(slideShow.length);
         }
     }

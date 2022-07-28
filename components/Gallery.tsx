@@ -4,7 +4,7 @@ import styles from 'styles/Gallery.module.css';
 import { usePrevious } from 'helpers/usePreviousHelper';
 
 const Gallery = ({ gallery }) => {
-  const [slideIndex, setSlideIndex] = useState(1);
+  const [slideIndex, setSlideIndex] = useState(0);
   const prevSlideIndex = usePrevious(slideIndex);
 
   console.log(prevSlideIndex, 'prev');
@@ -19,9 +19,9 @@ const Gallery = ({ gallery }) => {
   }
 
   function prevSlide() {
-    if (slideIndex !== 1) {
+    if (slideIndex !== 0) {
       setSlideIndex(slideIndex - 1);
-    } else if (slideIndex === 1) {
+    } else if (slideIndex === 0) {
       setSlideIndex(slideShow.length);
     }
   }
