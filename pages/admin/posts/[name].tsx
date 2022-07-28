@@ -41,7 +41,7 @@ EditPostPage.layout = "admin";
 
 export const getServerSideProps = async (context) => {
   const postsResponse = await excuteQuery({
-    query: selectPostByName({name:context.query.name,showUnpublished:true})
+    query: selectPostByName({name:context.query.name,showUnpublished:true,locales:context.locales.filter((l:string) => l !== context.defaultLocale)})
   });
   const post = JSON.stringify(postsResponse);
   const categoriesResponse = await excuteQuery({
@@ -52,7 +52,7 @@ export const getServerSideProps = async (context) => {
     query: selectGalleries(50,context.query.number)
   });
   const galleries = JSON.stringify(galleriesResponse);
-  console.log(context)
+
   return {
     props:{
       post,

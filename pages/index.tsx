@@ -17,6 +17,8 @@ import FacebookEvents from 'components/FacebookEvents';
 import Header from 'components/Header';
 import AboutInfo from 'components/AboutInfo';
 import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';
+import { NextPageContext } from 'next';
+import { setLanguages } from 'store/languages/languagesSlice';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -44,6 +46,13 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
         })
       );
     }
+    if (props.locales) {
+      dispatch(setLanguages({
+        locales:props.locales,
+        locale:props.locale,
+        defaultLocale:props.defaultLocale
+      }))
+    }
   }, []);
 
   return (
@@ -67,7 +76,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 
 Home.layout = 'main';
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context:NextPageContext) => {
   // NAVIGATION
   const navItemsResponse = await excuteQuery({
     query: selectMenuItems(),
@@ -93,8 +102,10 @@ export const getServerSideProps = async () => {
       exclude: {
         category: 66,
       },
+      locale: context.locale !== context.defaultLocale ? context.locale : ''
     }),
   });
+
   const posts = JSON.stringify(postsResponse);
 
   // Newsletter
@@ -143,6 +154,9 @@ export const getServerSideProps = async () => {
       fbToken,
       aboutInfo,
       gallery,
+      locales:context.locales,
+      locale:context.locale,
+      defaultLocale:context.defaultLocale
     },
   };
 };

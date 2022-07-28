@@ -1,8 +1,25 @@
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import React, { ReactElement } from 'react';
+import { useSelector } from 'store/hooks'
 
-function Post({ post }) {
+function Post({ post } : any) {
 
+  const { locale } = useSelector(state => state.languages)
+
+  let postTitle = post.post_title,
+      postExcerpt = post.post_excerpt,
+      postContent = post.post_content
+
+  if (locale !== null){
+    postTitle = post[`post_title_translation_${locale}`] ? post[`post_title_translation_${locale}`] : post.post_title
+    postExcerpt = post[`post_excerpt_translation_${locale}`] ? post[`post_excerpt_translation_${locale}`] : post.post_excerpt
+    postContent = post[`post_content_translation_${locale}`] ? post[`post_content_translation_${locale}`] :  post.post_content
+  }
+
+  // const postTitle = post[`post_title_translation_${locale}`] ? post[`post_title_translation_${locale}`] : post.post_title
+  // const postExcerpt = post[`post_excerpt_translation_${locale}`] ? post[`post_excerpt_translation_${locale}`] : post.post_title
+  // let postContent = post[`post_content_translation_${locale}`] ? post[`post_content_translation_${locale}`] :  post.post_content;
+  
   /* TO DO'S
      - DISPLAY TAGS IN A BETTER WAY
      - MAKE A BETTER NO POST FOUND PAGE! maybe even split to a different compoent -> show suggested posts? show helpful links?
@@ -23,15 +40,16 @@ function Post({ post }) {
     }
     postDisplay = (
       <React.Fragment>
-        <h1>{post.post_title}</h1>
+        <h1>{postTitle}</h1>
         <img src={generateImageUrl(post.post_image)}/>
         <h4>
           <a href={`/category/${post.categoryName}`}>{post.categoryName}</a>
         </h4>
         <p>{tagsDisplay}</p>
+        <div dangerouslySetInnerHTML={{__html:postExcerpt.replace(/(?:\r\n|\r|\n)/g, '<br>')}}></div>
         <div
           dangerouslySetInnerHTML={{
-            __html: post.post_content.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+            __html: postContent.replace(/(?:\r\n|\r|\n)/g, '<br>'),
           }}
         ></div>
 

@@ -9,11 +9,17 @@ import { setMenuItems } from 'store/nav/navSlice';
 import { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import { NextPageContext } from 'next';
+import { setLanguages } from 'store/languages/languagesSlice';
 
 const ContentPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
+    dispatch(setLanguages({
+      locales:props.locales,
+      locale:props.locale,
+      defaultLocale:props.defaultLocale
+    }))
   }, []);
   let page = JSON.parse(props.page)[0];
 
@@ -33,7 +39,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
   const navItems = JSON.stringify(navItemsResponse);
 
   const pageResponse = await excuteQuery({
-    query: selectPostByName({ name: context.query.name }),
+    query: selectPostByName({ name: context.query.name, locale:context.locale }),
   });
   const page = JSON.stringify(pageResponse);
 
@@ -41,6 +47,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
     props: {
       page,
       navItems,
+      locale:context.locale,
+      defaultLocale:context.defaultLocale
     },
   };
 };

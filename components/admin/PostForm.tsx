@@ -10,6 +10,7 @@ import PostTagForm from './PostTagForm';
 import { generateFileName } from 'helpers/generateFileName'
 import { generateImageUrl } from 'helpers/imageUrlHelper'
 import PostTranslationsForm from './PostTranslationsForm';
+import PostTranslations from './PostTranslations';
 
 const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
   suspense:true,
@@ -183,6 +184,20 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
               {selectCategoriesDisplay}
             </select>
           </div>
+
+          <div className={styles['form-row']}>
+            <label htmlFor='post_content'>Post Summary (?)</label>
+            <Suspense>
+              <TipTapEditor
+                  onChange={(val:string)  => formik.setFieldValue('post_excerpt',val,true)}
+                  value={formik.values.post_excerpt}
+                  itemType={'post'}
+                  itemId={post ? post.postId : nextPostId}
+                  height={150}
+              />
+            </Suspense>
+          </div>
+
           <div className={styles['form-row']}>
             <label htmlFor='post_content'>Post Content</label>
             <Suspense>
@@ -209,22 +224,16 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
 
     console.log('WHAT')
 
-    const translationFormsDisplay: ReactElement[] = locales.map((l,index) => {
-      console.log(l, " L ")
-      if (l !== defaultLocale){
-        return (
-          <PostTranslationsForm 
-            post={post}
-            language={l}
-          />
-        )
-      }
-    })
+
 
     formDisplay = (
       <div className='post-form-tab' id="translations-form">
-       <h2> TRANSLATIONS FORMS</h2>
-       {translationFormsDisplay}
+        <h2> TRANSLATIONS FORMS</h2>
+        <PostTranslations 
+          post={post}
+          locales={locales}
+          defaultLocale={defaultLocale}
+        />
       </div>
     )
   }
