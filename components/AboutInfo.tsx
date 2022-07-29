@@ -1,7 +1,12 @@
 import React, { ReactElement } from 'react';
 import { useDispatch, useSelector } from 'store/hooks';
+
+import Image from 'next/image';
+
 import Gallery from './Gallery';
+
 import styles from 'styles/About.module.css';
+import containerBackground from 'styles/images/about.jpg';
 
 const AboutInfo = () => {
   const { gallery } = useSelector((state) => state.aboutinfo);
@@ -23,10 +28,10 @@ const AboutInfo = () => {
       <h1>Über Uns</h1>
       {aboutInfoDisplay}
       <div className={styles.contentContainer}>
-        <img src='about.jpg' />
+        <Image src={containerBackground} className={styles.img} />
         <div className={styles.linkContainer}>
           <p>Grundlagen unserer Arbeit sind</p>
-          <div className={styles.btnContainer}>
+          <div className='btnContainer'>
             <button>Selbsverständnis der Jüdischen Stimme</button>
             <button>Satzung der Jüdischen Stimme</button>
           </div>

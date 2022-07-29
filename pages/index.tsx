@@ -27,7 +27,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
-    dispatch(setNewsletter(JSON.parse(props.newsletter)));    
+    dispatch(setNewsletter(JSON.parse(props.newsletter)));
     dispatch(
       setToken(
         JSON.parse(props.fbToken).length > 0
@@ -43,11 +43,13 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
         gallery: JSON.parse(props.gallery)[0],
       })
     );
-    dispatch(setLanguages({
-      locales:props.locales,
-      locale:props.locale,
-      defaultLocale:props.defaultLocale
-    }))
+    dispatch(
+      setLanguages({
+        locales: props.locales,
+        locale: props.locale,
+        defaultLocale: props.defaultLocale,
+      })
+    );
   }, []);
 
   return (
@@ -71,7 +73,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 
 Home.layout = 'main';
 
-export const getServerSideProps = async (context:NextPageContext) => {
+export const getServerSideProps = async (context: NextPageContext) => {
   // NAVIGATION
   const navItemsResponse = await excuteQuery({
     query: selectMenuItems(),
@@ -97,7 +99,7 @@ export const getServerSideProps = async (context:NextPageContext) => {
       exclude: {
         category: 66,
       },
-      locale: context.locale !== context.defaultLocale ? context.locale : ''
+      locale: context.locale !== context.defaultLocale ? context.locale : '',
     }),
   });
 
@@ -110,7 +112,7 @@ export const getServerSideProps = async (context:NextPageContext) => {
       numberOfPosts: 6,
       pageNum: 1,
       isCategory: true,
-      locale: context.locale !== context.defaultLocale ? context.locale : ''
+      locale: context.locale !== context.defaultLocale ? context.locale : '',
     }),
   });
   const newsletter = JSON.stringify(newsletterResponse);
@@ -150,9 +152,9 @@ export const getServerSideProps = async (context:NextPageContext) => {
       fbToken,
       aboutInfo,
       gallery,
-      locales:context.locales,
-      locale:context.locale,
-      defaultLocale:context.defaultLocale
+      locales: context.locales,
+      locale: context.locale,
+      defaultLocale: context.defaultLocale,
     },
   };
 };

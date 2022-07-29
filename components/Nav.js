@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from 'styles/Nav.module.css';
+import logo1 from 'styles/images/Logo-img.png';
+import logo2 from 'styles/images/Logo-text.png';
 
 function Nav() {
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
@@ -35,8 +38,8 @@ function Nav() {
       <div className={styles.topContainer}>
         <Link href={'/'}>
           <div className={styles.logoContainer}>
-            <img style={{ height: '50px' }} src='/Logo-img.png' />{' '}
-            <img style={{ height: '50px' }} src='/Logo-text.png' />
+            <Image style={{ height: '50px' }} src={logo1} />
+            <Image style={{ height: '50px' }} src={logo2} />
           </div>
         </Link>
         <div className={styles.buttonContainer}>{callToActionMenuDisplay}</div>

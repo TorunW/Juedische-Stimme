@@ -32,14 +32,14 @@ const Gallery = ({ gallery }) => {
       <div
         key={Date.now() + index}
         className={
-          slideIndex === index + 1
+          slideIndex === index
             ? styles.slideActive
-            : prevSlideIndex === index + 1
+            : prevSlideIndex === index
             ? styles.prevSlide
             : styles.slide
         }
       >
-        <img className={styles.img} src={generateImageUrl(imgSrc)} />
+        <img src={generateImageUrl(imgSrc)} />
       </div>
     ));
 

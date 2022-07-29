@@ -1,35 +1,58 @@
-.articlesPage {
+.aktuelles {
   margin: 120px auto 120px;
   width: 80%;
 }
-.articlesPage h1 {
+.aktuelles h1 {
   text-align: center;
   font-weight: 900;
   font-size: 88px;
   margin: 0;
 }
-.articlesPage .articleContainer {
+.aktuelles .postContainer {
   margin-top: 48px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.articlesPage .articleContainer .article {
+.aktuelles .postContainer .post {
   width: calc(50% - 15px);
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-bottom: 64px;
 }
-.articlesPage .articleContainer .article h2 {
+.aktuelles .postContainer .post h2 {
   margin: 0;
 }
-.articlesPage .articleContainer .article h4 {
+.aktuelles .postContainer .post h4 {
   margin: 0;
 }
-.articlesPage .articleContainer .article a {
+.aktuelles .postContainer .post a {
   margin: 0;
 }
-.articlesPage .articleContainer .article .articlePreview p {
+.aktuelles .postContainer .post .postPreview p {
   margin: 0;
+}
+.newsletter {
+  margin: 120px auto 120px;
+  width: 80%;
+}
+.newsletter h1 {
+  text-align: center;
+  font-weight: 900;
+  font-size: 88px;
+  margin: 0;
+}
+.newsletter .postContainer {
+  margin-top: 48px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.newsletter .postContainer .post {
+  width: calc(30% - 15px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 64px;
 }

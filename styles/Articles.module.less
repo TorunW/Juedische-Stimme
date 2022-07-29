@@ -1,4 +1,4 @@
-.articlesPage {
+.aktuelles {
   margin: 120px auto 120px;
   width: 80%;
   h1 {
@@ -8,12 +8,12 @@
     margin: 0;
   }
 
-  .articleContainer {
+  .postContainer {
     margin-top: 48px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    .article {
+    .post {
       width: calc(50% - 15px);
       display: flex;
       flex-direction: column;
@@ -28,10 +28,38 @@
       a {
         margin: 0;
       }
-      .articlePreview {
+      .postPreview {
         p {
           margin: 0;
         }
+      }
+    }
+  }
+}
+
+.newsletter {
+  margin: 120px auto 120px;
+  width: 80%;
+  h1 {
+    text-align: center;
+    font-weight: 900;
+    font-size: 88px;
+    margin: 0;
+  }
+
+  .postContainer {
+    margin-top: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .post {
+      width: calc(30% - 15px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 64px;
+
+      .postPreview {
       }
     }
   }

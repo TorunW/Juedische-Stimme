@@ -8,9 +8,13 @@ function Posts(props) {
   const { locale } = useSelector((state) => state.languages);
 
   return (
-    <div className={styles.articlesPage}>
+    <div
+      className={
+        props.title === 'Newsletter' ? styles.newsletter : styles.aktuelles
+      }
+    >
       <h1>{props.title}</h1>
-      <div className={styles.articleContainer}>
+      <div className={styles.postContainer}>
         {props.posts.map((post, index) => {
           let postTitle = post.post_title,
             postExcerpt = post.post_excerpt,
@@ -57,7 +61,7 @@ function Posts(props) {
           } else postContent = postContent.substring(startIndex, endIndex);
 
           return (
-            <article key={index} className={styles.article}>
+            <article key={index} className={styles.post}>
               <img src={generateImageUrl(post.post_image)} />
               <div className={styles.date}>{post.post_date}</div>
               <h2>
@@ -69,12 +73,17 @@ function Posts(props) {
                 </a>
               </h4>
               <div
-                className={styles.articlePreview}
+                className={styles.postPreview}
                 dangerouslySetInnerHTML={{ __html: postContent }}
               ></div>
             </article>
           );
         })}
+      </div>
+      <div className='btnContainer'>
+        <button>
+          Weitere {props.title === 'Aktuelles' ? 'Artikeln' : props.title} lesen
+        </button>
       </div>
     </div>
   );

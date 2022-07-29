@@ -28,12 +28,12 @@ var Gallery = function (_a) {
     }
     var slideShow = gallery.imageSrcs
         .split(',')
-        .map(function (imgSrc, index) { return (react_1["default"].createElement("div", { key: Date.now() + index, className: slideIndex === index + 1
+        .map(function (imgSrc, index) { return (react_1["default"].createElement("div", { key: Date.now() + index, className: slideIndex === index
             ? Gallery_module_css_1["default"].slideActive
-            : prevSlideIndex === index + 1
+            : prevSlideIndex === index
                 ? Gallery_module_css_1["default"].prevSlide
                 : Gallery_module_css_1["default"].slide },
-        react_1["default"].createElement("img", { className: Gallery_module_css_1["default"].img, src: imageUrlHelper_1.generateImageUrl(imgSrc) }))); });
+        react_1["default"].createElement("img", { src: imageUrlHelper_1.generateImageUrl(imgSrc) }))); });
     return (react_1["default"].createElement("div", { className: Gallery_module_css_1["default"].gallery },
         react_1["default"].createElement("div", { className: Gallery_module_css_1["default"].containerSlider },
             react_1["default"].createElement("button", { className: Gallery_module_css_1["default"].prev, onClick: prevSlide }, "Prev"),

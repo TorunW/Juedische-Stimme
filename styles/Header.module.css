@@ -1,5 +1,5 @@
 .header {
-  background: url('/background-header.jpg') no-repeat center center;
+  background: url('../styles/images/header-background.jpg') no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -19,7 +19,6 @@
 }
 .header .container p {
   font-weight: 700;
-  font-size: 16px;
   text-align: center;
   color: #ffffff;
   text-transform: uppercase;
