@@ -4,6 +4,7 @@ var react_1 = require("react");
 var imageUrlHelper_1 = require("helpers/imageUrlHelper");
 var hooks_1 = require("store/hooks");
 var Articles_module_css_1 = require("styles/Articles.module.css");
+var formateDate_1 = require("helpers/formateDate");
 function Posts(props) {
     console.log(props, 'props');
     var locale = hooks_1.useSelector(function (state) { return state.languages; }).locale;
@@ -48,7 +49,7 @@ function Posts(props) {
                 postContent = postContent.substring(startIndex, endIndex);
             return (react_1["default"].createElement("article", { key: index, className: Articles_module_css_1["default"].post },
                 react_1["default"].createElement("img", { src: imageUrlHelper_1.generateImageUrl(post.post_image) }),
-                react_1["default"].createElement("div", { className: Articles_module_css_1["default"].date }, post.post_date),
+                react_1["default"].createElement("div", { className: Articles_module_css_1["default"].date }, post.post_date ? formateDate_1["default"](post.post_date) : ''),
                 react_1["default"].createElement("h2", null,
                     react_1["default"].createElement("a", { href: '/' + post.post_name }, postTitle)),
                 react_1["default"].createElement("h4", null,

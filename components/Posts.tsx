@@ -2,6 +2,7 @@ import React from 'react';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import { useSelector } from 'store/hooks';
 import styles from 'styles/Articles.module.css';
+import formateDate from 'helpers/formateDate';
 
 function Posts(props) {
   console.log(props, 'props');
@@ -63,7 +64,9 @@ function Posts(props) {
           return (
             <article key={index} className={styles.post}>
               <img src={generateImageUrl(post.post_image)} />
-              <div className={styles.date}>{post.post_date}</div>
+              <div className={styles.date}>
+                {post.post_date ? formateDate(post.post_date) : ''}
+              </div>
               <h2>
                 <a href={'/' + post.post_name}>{postTitle}</a>
               </h2>
