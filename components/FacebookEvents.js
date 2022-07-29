@@ -72,12 +72,6 @@ const FacebookEvents = (props) => {
             <p>{fbEvent.start_time ? formateDate(fbEvent.start_time) : ''}</p>
           </div>
           <h2>{fbEvent.name}</h2>
-
-          {/* <p>
-            {fbEvent.description.length > 100
-              ? `${fbEvent.description.substring(0, 100)}[...]`
-              : fbEvent.description}
-          </p> */}
         </div>
       );
     });

@@ -78,9 +78,14 @@ const FacebookFeed = (props) => {
       console.log(fbPost);
       return (
         <div key={index}>
-          <h2>{fbPost.story}</h2>
+          <h2 style={{ color: 'blue' }}>{fbPost.story}</h2>
           <img src={fbPost.full_picture} />
-          <p>{fbPost.message}</p>
+          <p style={{ color: 'red' }}>{fbPost.message}</p>
+          {/* <p>
+            {fbEvent.description.length > 100
+              ? `${fbEvent.description.substring(0, 100)}[...]`
+              : fbEvent.description}
+          </p> */}
         </div>
       );
     });

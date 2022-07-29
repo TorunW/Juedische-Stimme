@@ -11,15 +11,17 @@ var Gallery = function (_a) {
     console.log(prevSlideIndex, 'prev');
     console.log(slideIndex, 'current');
     function nextSlide() {
-        if (slideIndex !== slideShow.length) {
+        var nextSlideIndex = slideIndex + 1;
+        if (nextSlideIndex < slideShow.length) {
             setSlideIndex(slideIndex + 1);
         }
-        else if (slideIndex === slideShow.length) {
-            setSlideIndex(1);
+        else {
+            setSlideIndex(0);
         }
     }
     function prevSlide() {
-        if (slideIndex !== 0) {
+        var nextSlideIndex = slideIndex + 1;
+        if (nextSlideIndex === 0) {
             setSlideIndex(slideIndex - 1);
         }
         else if (slideIndex === 0) {
