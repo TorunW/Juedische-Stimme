@@ -8,9 +8,28 @@
   }
 
   .facebookPosts {
+    width: 80%;
     display: flex;
     flex-direction: row;
+    grid-gap: 16px;
     gap: 16px;
-    width: 30%;
+    flex-wrap: wrap;
+    // justify-content: center;
+    // margin: 0 auto;
+
+    .postContainer {
+      width: 340px;
+      padding: 16px;
+      border: 1px solid;
+      height: auto;
+      .imgContainer {
+        width: 100%;
+        height: auto;
+        margin-bottom: 16px;
+        img {
+          width: 100%;
+        }
+      }
+    }
   }
 }

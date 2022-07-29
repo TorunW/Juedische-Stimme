@@ -77,15 +77,17 @@ const FacebookFeed = (props) => {
     feedDisplay = feedArray.map((fbPost, index) => {
       console.log(fbPost);
       return (
-        <div key={index}>
+        <div key={index} className={styles.postContainer}>
           <h2 style={{ color: 'blue' }}>{fbPost.story}</h2>
-          <img src={fbPost.full_picture} />
-          <p style={{ color: 'red' }}>{fbPost.message}</p>
-          {/* <p>
-            {fbEvent.description.length > 100
-              ? `${fbEvent.description.substring(0, 100)}[...]`
-              : fbEvent.description}
-          </p> */}
+          <div className={styles.imgContainer}>
+            <img src={fbPost.full_picture} />
+          </div>
+
+          <p style={{ color: 'red' }}>
+            {fbPost.message.lenght > 100
+              ? `${fbPost.message.substring(0, 100)}[...]`
+              : fbPost.message}
+          </p>
         </div>
       );
     });
