@@ -1,0 +1,14 @@
+.facebookPage {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.facebookPage h1 {
+  text-transform: uppercase;
+}
+.facebookPage .facebookPosts {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 30%;
+}

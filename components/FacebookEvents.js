@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import dateTimeHelper from 'helpers/dateTimeHelper';
+import formateDate from 'helpers/formateDate';
 import axios from 'axios';
 import renderToString from 'helpers/renderToString';
 
@@ -68,7 +69,7 @@ const FacebookEvents = (props) => {
         <div key={index} className={styles.event}>
           <div className={styles.info}>
             <p>{fbEvent.place ? fbEvent.place.name : ''}</p>
-            <p>{fbEvent.start_time.split('T')}</p>
+            <p>{fbEvent.start_time ? formateDate(fbEvent.start_time) : ''}</p>
           </div>
           <h2>{fbEvent.name}</h2>
 
