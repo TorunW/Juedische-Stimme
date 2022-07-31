@@ -70,27 +70,6 @@ const FacebookFeed = (props) => {
   }
 
   let feedDisplay;
-<<<<<<< HEAD
-  if (feed && feed.content && feed.content.length > 0) {
-    const feedArray = JSON.parse(feed.content);
-    feedDisplay = feedArray.map((fbPost, index) => {
-      console.log(fbPost);
-      return (
-        <div key={index} className={styles.postContainer}>
-          <h2 style={{ color: 'blue' }}>{fbPost.story}</h2>
-          <div className={styles.imgContainer}>
-            <img src={fbPost.full_picture} />
-          </div>
-
-          <p style={{ color: 'red' }}>
-            {fbPost.message.lenght > 100
-              ? `${fbPost.message.substring(0, 100)}[...]`
-              : fbPost.message}
-          </p>
-        </div>
-      );
-    });
-=======
   if (feed && feed.content && feed.content.length > 0){
       const feedArray = JSON.parse(feed.content)
       feedDisplay = feedArray.map((fbPost, index) => {
@@ -103,7 +82,6 @@ const FacebookFeed = (props) => {
               </div>
           )
       })
->>>>>>> d5eb4d777b0be28c1068a079222d7991d9001436
   }
 
   return (

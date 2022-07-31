@@ -24,7 +24,7 @@ const PostsPage: LayoutPage = (props: LayoutPageProps) => {
     dispatch(setCatgories(JSON.parse(props.categories)))
     dispatch(setPosts(JSON.parse(props.posts)))
     dispatch(setMenuItems(JSON.parse(props.navItems)))
-  },[])
+  },[props.posts])
 
   return (
     <div className={styles.container}>

@@ -25,7 +25,7 @@ const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
       locale:props.locale,
       defaultLocale:props.defaultLocale
     }))
-  },[])
+  },[props.posts])
 
   return (
     <div className={styles.container}>
