@@ -1,4 +1,4 @@
-export function generateFileName(fileName:string){
+export function generateFileName<T>(fileName:T): string{
     const today = new Date();
     let month : number | string = today.getMonth();
     month += 1;

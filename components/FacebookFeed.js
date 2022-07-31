@@ -73,7 +73,6 @@ const FacebookFeed = (props) => {
   if (feed && feed.content && feed.content.length > 0){
       const feedArray = JSON.parse(feed.content)
       feedDisplay = feedArray.map((fbPost, index) => {
-          console.log(fbPost, " FB POSTO")
           return (
               <div key={index} style={{width: "33%", height:700, float: "left",padding:"5px"}}>
                   <h2>{fbPost.story}</h2>
