@@ -12,7 +12,7 @@ export default function AdminCategoriesPage(props) {
   const {categories} = useSelector(state => state.categories)
   useEffect(() => {
     dispatch(setCatgories(JSON.parse(props.categories)))
-  },[])
+  },[props.categories])
   let categoriesDisplay;
   if (categories){
     categoriesDisplay = <AdminCategories categories={categories}/>

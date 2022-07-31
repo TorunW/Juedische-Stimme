@@ -19,7 +19,7 @@ export default function AdminPostsPage(props) {
 
   useEffect(() => {
     dispatch(setPosts(JSON.parse(props.posts)))
-  },[])
+  },[props.posts])
 
   let postsDisplay;
   if (posts){

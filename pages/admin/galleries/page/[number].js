@@ -14,7 +14,7 @@ export default function AdminGalleriesPage(props) {
 
     useEffect(() => {
         dispatch(setGalleries(JSON.parse(props.galleries)))
-    },[])
+    },[props.galleries])
 
     return (
         <div className={styles.container}>

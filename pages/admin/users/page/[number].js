@@ -12,7 +12,7 @@ export default function AdminUserPage(props) {
 
   useEffect(() => {
     dispatch(setUsers(JSON.parse(props.users)))
-  },[])
+  },[props.users])
 
   let usersDisplay;
   if (users){

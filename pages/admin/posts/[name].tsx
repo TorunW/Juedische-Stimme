@@ -27,7 +27,7 @@ const EditPostPage: LayoutPage = (props: LayoutPageProps) => {
       locale:props.locale,
       defaultLocale:props.defaultLocale
     }))
-  },[])
+  },[props.post])
   
   return (
     <div className={styles.container}>
