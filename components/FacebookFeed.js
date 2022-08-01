@@ -37,14 +37,13 @@ const FacebookFeed = (props) => {
   }
 
   async function fetchFacebookFeed() {
-    const res = await fetch(
-      `https://graph.facebook.com/998665673528998/feed?limit=6&fields=id,likes,reactions,comments,shares,attachments,full_picture,message,from&access_token=${token}`
-    );
-    const fetchedFeed = await res.json();
 
-    // remove all the weird characters from the content to avoid mySql errors
-    if (fetchedFeed.data && fetchedFeed.data.length > 0) {
-      const renderedFeed = renderToString(fetchedFeed.data);
+      const res  = await fetch(`https://graph.facebook.com/998665673528998/feed?limit=6&fields=id,likes,reactions,comments,shares,attachments,full_picture,message,from,permalink_url&access_token=${token}`)
+      const fetchedFeed = await res.json()
+      
+      // remove all the weird characters from the content to avoid mySql errors
+      if (fetchedFeed.data && fetchedFeed.data.length > 0){
+          const renderedFeed = renderToString(fetchedFeed.data);
 
       axios({
         method: 'post',
