@@ -41,11 +41,9 @@ const FacebookFeed = (props) => {
       // const pageTokenRes = await fetch(`https://graph.facebook.com/PAGE-ID?fields=access_token&access_token=${token}`)
       // const pageToken = await pageTokenRes.json()
 
-      const res  = await fetch(`https://graph.facebook.com/998665673528998/feed?limit=6&fields=likes,attachments,full_picture,message,from&access_token=${token}`)
+      const res  = await fetch(`https://graph.facebook.com/998665673528998/feed?limit=6&fields=likes,reactions,comments,shares,attachments,full_picture,message,from&access_token=${token}`)
       const fetchedFeed = await res.json()
       
-      console.log(fetchedFeed, " FETCHED DEEF")
-
       // remove all the weird characters from the content to avoid mySql errors
       if (fetchedFeed.data && fetchedFeed.data.length > 0){
           const renderedFeed = renderToString(fetchedFeed.data);
@@ -73,6 +71,7 @@ const FacebookFeed = (props) => {
   if (feed && feed.content && feed.content.length > 0){
       const feedArray = JSON.parse(feed.content)
       feedDisplay = feedArray.map((fbPost, index) => {
+        console.log(fbPost, " FB POST ")
           return (
               <div key={index} style={{width: "33%", height:700, float: "left",padding:"5px"}}>
                   <h2>{fbPost.story}</h2>
