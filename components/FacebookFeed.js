@@ -40,21 +40,10 @@ const FacebookFeed = (props) => {
     // const pageTokenRes = await fetch(`https://graph.facebook.com/PAGE-ID?fields=access_token&access_token=${token}`)
     // const pageToken = await pageTokenRes.json()
 
-<<<<<<< HEAD
     const res = await fetch(
-      `https://graph.facebook.com/998665673528998/feed?limit=6&fields=likes,attachments,full_picture,message,from&access_token=${token}`
+      `https://graph.facebook.com/998665673528998/feed?limit=6&fields=id,likes,reactions,comments,shares,attachments,full_picture,message,from&access_token=${token}`
     );
     const fetchedFeed = await res.json();
-
-    console.log(fetchedFeed, ' FETCHED DEEF');
-=======
-      const res  = await fetch(`https://graph.facebook.com/998665673528998/feed?limit=6&fields=id,likes,reactions,comments,shares,attachments,full_picture,message,from&access_token=${token}`)
-      const fetchedFeed = await res.json()
-      
-      // remove all the weird characters from the content to avoid mySql errors
-      if (fetchedFeed.data && fetchedFeed.data.length > 0){
-          const renderedFeed = renderToString(fetchedFeed.data);
->>>>>>> 8f91eb83074230c529066bcb50a1cfc2fec4ff5a
 
     // remove all the weird characters from the content to avoid mySql errors
     if (fetchedFeed.data && fetchedFeed.data.length > 0) {
@@ -83,18 +72,21 @@ const FacebookFeed = (props) => {
   }
 
   let feedDisplay;
-  if (feed && feed.content && feed.content.length > 0){
-      const feedArray = JSON.parse(feed.content)
-      feedDisplay = feedArray.map((fbPost, index) => {
-        console.log(fbPost, " FB POST ")
-          return (
-              <div key={index} style={{width: "33%", height:700, float: "left",padding:"5px"}}>
-                  <h2>{fbPost.story}</h2>
-                  <img src={fbPost.full_picture} width={"100%"}/>
-                  <p>{fbPost.message}</p>
-              </div>
-          )
-      })
+  if (feed && feed.content && feed.content.length > 0) {
+    const feedArray = JSON.parse(feed.content);
+    feedDisplay = feedArray.map((fbPost, index) => {
+      console.log(fbPost, ' FB POST ');
+      return (
+        <div
+          key={index}
+          style={{ width: '33%', height: 700, float: 'left', padding: '5px' }}
+        >
+          <h2>{fbPost.story}</h2>
+          <img src={fbPost.full_picture} width={'100%'} />
+          <p>{fbPost.message}</p>
+        </div>
+      );
+    });
   }
 
   return (
