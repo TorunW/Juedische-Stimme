@@ -14,7 +14,7 @@ export default function AdminMediaPage(props) {
 
   useEffect(() => {
       dispatch(setMediaItems(JSON.parse(props.mediaItems)))
-  },[])
+  },[props.mediaItems])
 
   let mediaItemsDisplay;
   if (mediaItems) mediaItemsDisplay = <MediaItems mediaItems={mediaItems} />

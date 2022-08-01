@@ -20,7 +20,7 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
       locale:props.locale,
       defaultLocale:props.defaultLocale
     }))
-  }, []);
+  }, [props.page]);
   let page = JSON.parse(props.page)[0];
 
   return (

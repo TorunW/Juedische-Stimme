@@ -28,7 +28,7 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
       locale:props.locale,
       defaultLocale:props.defaultLocale
     }))
-  },[])
+  },[props.posts])
 
   return (
     <div className={styles.container}>
@@ -46,7 +46,6 @@ export const getServerSideProps = async (context) => {
         query: selectMenuItems()
     });
     const navItems = JSON.stringify(navItemsResponse)
-
     const postsResponse = await excuteQuery({
       query: selectPostsByTag({
         slug:context.query.name.split(' ').join('-').toLowerCase(),
@@ -60,8 +59,8 @@ export const getServerSideProps = async (context) => {
     const categoriesResponse = await excuteQuery({
       query: selectCategories(100)
     });
-    const categories = JSON.stringify(categoriesResponse);
 
+    const categories = JSON.stringify(categoriesResponse);
     return {
       props:{
         posts,

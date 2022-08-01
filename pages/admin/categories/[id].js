@@ -13,7 +13,7 @@ export default function EditCategoryPage(props) {
 
   useEffect(() => {
     dispatch(setCategory(JSON.parse(props.category)[0]))
-  },[])
+  },[props.category])
   return (
     <div className={styles.container}>
       <h2>EDIT CATEGORY</h2>

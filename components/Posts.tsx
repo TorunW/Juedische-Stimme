@@ -5,7 +5,7 @@ import styles from 'styles/Articles.module.css';
 import formateDate from 'helpers/formateDate';
 
 function Posts(props) {
-  console.log(props, 'props');
+
   const { locale } = useSelector((state) => state.languages);
 
   return (

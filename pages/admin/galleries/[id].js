@@ -21,7 +21,7 @@ export default function EditGalleryPage(props) {
         images:JSON.parse(props.galleryImages)
       })
     )
-  },[])
+  },[props.gallery])
 
   return (
     <div className={styles.container}>

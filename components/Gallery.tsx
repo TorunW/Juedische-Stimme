@@ -6,10 +6,6 @@ import { usePrevious } from 'helpers/usePreviousHelper';
 const Gallery = ({ gallery }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const prevSlideIndex = usePrevious(slideIndex);
-
-  console.log(prevSlideIndex, 'prev');
-  console.log(slideIndex, 'current');
-
   function nextSlide() {
     const nextSlideIndex = slideIndex + 1;
     if (nextSlideIndex < slideShow.length) {

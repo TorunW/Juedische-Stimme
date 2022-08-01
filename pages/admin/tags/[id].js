@@ -12,11 +12,11 @@ export default function EditTagPage(props) {
   // console.log(tag, " TAG ")
   useEffect(() => {
     dispatch(setTag(JSON.parse(props.tag)[0]))
-  },[])
+  },[props.tag])
   return (
     <div className={styles.container}>
       <h2>EDIT TAG</h2>
-      <TagForm tag={JSON.parse(props.tag)[0]} />
+      <TagForm tag={tag} />
     </div>
   )
 }
