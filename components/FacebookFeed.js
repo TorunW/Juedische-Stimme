@@ -36,74 +36,59 @@ const FacebookFeed = (props) => {
     }
   }
 
-  async function fetchFacebookFeed(){
-      
-      // const pageTokenRes = await fetch(`https://graph.facebook.com/PAGE-ID?fields=access_token&access_token=${token}`)
-      // const pageToken = await pageTokenRes.json()
+  async function fetchFacebookFeed() {
+    // const pageTokenRes = await fetch(`https://graph.facebook.com/PAGE-ID?fields=access_token&access_token=${token}`)
+    // const pageToken = await pageTokenRes.json()
 
-      const res  = await fetch(`https://graph.facebook.com/998665673528998/feed?limit=6&fields=likes,attachments,full_picture,message,from&access_token=${token}`)
-      const fetchedFeed = await res.json()
-      
-      console.log(fetchedFeed, " FETCHED DEEF")
+    const res = await fetch(
+      `https://graph.facebook.com/998665673528998/feed?limit=6&fields=likes,attachments,full_picture,message,from&access_token=${token}`
+    );
+    const fetchedFeed = await res.json();
 
-      // remove all the weird characters from the content to avoid mySql errors
-      if (fetchedFeed.data && fetchedFeed.data.length > 0){
-          const renderedFeed = renderToString(fetchedFeed.data);
+    console.log(fetchedFeed, ' FETCHED DEEF');
 
-          axios({
-              method: 'post',
-              url: `/api/fbfeed`,
-              data: {
-                  content:renderedFeed,
-                  date_updated:dateTimeHelper(new Date()),
-                  type:'posts'
-              }
-          }).then((response) => {
-              dispatch(setFeed(fetchedFeed.data))
-              console.log(response,"response on create fb feed record");
-              // window.location.href = "/admin/posts/page/1" // BETTER FETCH THE POSTS THEN REFRESH PAGE
-          }, (error) => {
-              console.log(error, "ERROR on create fb feed record");
-              // console.log('NOW NEEDS TO DISPLAY ERRORS!')
-          });
-      }
+    // remove all the weird characters from the content to avoid mySql errors
+    if (fetchedFeed.data && fetchedFeed.data.length > 0) {
+      const renderedFeed = renderToString(fetchedFeed.data);
+
+      axios({
+        method: 'post',
+        url: `/api/fbfeed`,
+        data: {
+          content: renderedFeed,
+          date_updated: dateTimeHelper(new Date()),
+          type: 'posts',
+        },
+      }).then(
+        (response) => {
+          dispatch(setFeed(fetchedFeed.data));
+          console.log(response, 'response on create fb feed record');
+          // window.location.href = "/admin/posts/page/1" // BETTER FETCH THE POSTS THEN REFRESH PAGE
+        },
+        (error) => {
+          console.log(error, 'ERROR on create fb feed record');
+          // console.log('NOW NEEDS TO DISPLAY ERRORS!')
+        }
+      );
+    }
   }
 
   let feedDisplay;
-<<<<<<< HEAD
   if (feed && feed.content && feed.content.length > 0) {
     const feedArray = JSON.parse(feed.content);
     feedDisplay = feedArray.map((fbPost, index) => {
-      console.log(fbPost);
+      console.log(fbPost, ' FB POSTO');
       return (
-        <div key={index} className={styles.postContainer}>
-          <h2 style={{ color: 'blue' }}>{fbPost.story}</h2>
-          <div className={styles.imgContainer}>
-            <img src={fbPost.full_picture} />
-          </div>
-
-          <p style={{ color: 'red' }}>
-            {fbPost.message.lenght > 100
-              ? `${fbPost.message.substring(0, 100)}[...]`
-              : fbPost.message}
-          </p>
+        <div
+          key={index}
+          style={{ width: '33%', height: 700, float: 'left', padding: '5px' }}
+        >
+          <h2>{fbPost.story}</h2>
+          <img src={fbPost.full_picture} width={'100%'} />
+          <p>{fbPost.message}</p>
         </div>
       );
     });
-=======
-  if (feed && feed.content && feed.content.length > 0){
-      const feedArray = JSON.parse(feed.content)
-      feedDisplay = feedArray.map((fbPost, index) => {
-          console.log(fbPost, " FB POSTO")
-          return (
-              <div key={index} style={{width: "33%", height:700, float: "left",padding:"5px"}}>
-                  <h2>{fbPost.story}</h2>
-                  <img src={fbPost.full_picture} width={"100%"}/>
-                  <p>{fbPost.message}</p>
-              </div>
-          )
-      })
->>>>>>> d5eb4d777b0be28c1068a079222d7991d9001436
   }
 
   return (
