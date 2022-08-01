@@ -37,10 +37,6 @@ const FacebookFeed = (props) => {
   }
 
   async function fetchFacebookFeed() {
-    const res = await fetch(
-      `https://graph.facebook.com/998665673528998/feed?limit=6&fields=id,likes,reactions,comments,shares,attachments,full_picture,message,from&access_token=${token}`
-    );
-    const fetchedFeed = await res.json();
 
       const res  = await fetch(`https://graph.facebook.com/998665673528998/feed?limit=6&fields=id,likes,reactions,comments,shares,attachments,full_picture,message,from,permalink_url&access_token=${token}`)
       const fetchedFeed = await res.json()
