@@ -19,6 +19,7 @@ import AboutInfo from 'components/AboutInfo';
 import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
+import NewsletterForm from '@/components/NewsletterForm';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -62,8 +63,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <h1>BUTTONS AND CALL TO ACTION</h1>
       <blockquote>BUTTONS AND CALL TO ACTION</blockquote>
       <hr />
-      <h1>SIGN UP TO NEWSLETTER</h1>
-      <div>SIGN UP TO NEWSLETTER COMPONENET!</div>
+      <NewsletterForm/>
       <hr />
       <FacebookFeed />
       <hr />
