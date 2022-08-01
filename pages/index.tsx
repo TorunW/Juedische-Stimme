@@ -1,3 +1,4 @@
+import { app } from '../firebaseConfig';
 import type { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
 
@@ -20,9 +21,19 @@ import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
 
+import { useRouter } from 'next/router';
+
 const Home: LayoutPage = (props: LayoutPageProps) => {
+  let router = useRouter();
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
+
+  useEffect(() => {
+    let token = sessionStorage.getItem('Token');
+    if (!token) {
+      router.push('/register');
+    }
+  }, []);
 
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
@@ -52,6 +63,10 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
     );
   }, []);
 
+  function logout() {
+    sessionStorage.removeItem('Token');
+    router.push('/');
+  }
   return (
     <div>
       <Header />
@@ -67,6 +82,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <hr />
       <FacebookFeed />
       <hr />
+      <button onClick={logout}>Logga ut</button>
     </div>
   );
 };

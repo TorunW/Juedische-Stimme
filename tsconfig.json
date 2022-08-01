@@ -23,7 +23,10 @@
     "__tests__/index.test.js",
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "pages/login.js",
+    "pages/register.tsx",
+    "firebaseConfig.js"
   ],
   "exclude": ["node_modules"]
 }
