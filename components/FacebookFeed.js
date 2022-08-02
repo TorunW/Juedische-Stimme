@@ -9,6 +9,7 @@ import { setFeed } from 'store/fbdata/fbDataSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from 'styles/FacebookFeed.module.css';
+import { isUpdatedToday } from 'helpers/checkIfUpdatedToday';
 
 const FacebookFeed = (props) => {
   const dispatch = useDispatch();
@@ -26,13 +27,7 @@ const FacebookFeed = (props) => {
     if (!feed) {
       fetchFacebookFeed();
     } else {
-      const fbFeedUpdatedMonth = parseInt(feed.date_updated.split('-')[1]);
-      const fbFeedUpdatedDay = parseInt(feed.date_updated.split('-')[2]);
-      const today = new Date();
-      const month = today.getMonth() + 1;
-      const day = today.getDate();
-      if (day !== fbFeedUpdatedDay || month !== fbFeedUpdatedMonth)
-        fetchFacebookFeed();
+      if (!isUpdatedToday(feed.date_updated)) fetchFacebookFeed();
     }
   }
 

@@ -54,6 +54,10 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
     );
   }, []);
 
+  console.log(posts, " POSTS ")
+
+  console.log(newsletter, " NEWSLETTER ")
+
   return (
     <div>
       <Header />

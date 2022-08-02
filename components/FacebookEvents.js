@@ -21,13 +21,7 @@ const FacebookEvents = (props) => {
     if (!events) {
       fetchFacebookEvents();
     } else {
-      const fbEventsUpdatedMonth = parseInt(events.date_updated.split('-')[1]);
-      const fbEventsUpdatedDay = parseInt(events.date_updated.split('-')[2]);
-      const today = new Date();
-      const month = today.getMonth() + 1;
-      const day = today.getDate();
-      if (day !== fbEventsUpdatedDay || month !== fbEventsUpdatedMonth)
-        fetchFacebookEvents();
+      if (!isUpdatedToday(events.date_updated)) fetchFacebookFeed();
     }
   }
 
