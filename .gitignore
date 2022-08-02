@@ -45,4 +45,4 @@ yarn-error.log*
 
 # auth
 firebaseConfig.js
-firebaseConfig.ts
+firebaseConfig.tsx
