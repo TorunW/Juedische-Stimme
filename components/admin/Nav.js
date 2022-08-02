@@ -7,7 +7,7 @@ function AdminNav() {
 
   function logout() {
     sessionStorage.removeItem('Token');
-    router.push('/');
+    router.push('/login');
   }
   return (
     <div>
