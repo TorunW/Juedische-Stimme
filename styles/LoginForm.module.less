@@ -1,21 +1,61 @@
-.main {
+.loginPage {
+  background: rgb(211, 208, 221);
+  background: linear-gradient(
+    167deg,
+    rgba(211, 208, 221, 1) 0%,
+    rgba(155, 151, 175, 1) 15%,
+    rgba(99, 93, 128, 1) 60%
+  );
   min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.inputBox {
-  width: 200px;
-  height: 30px;
-  margin: 5px;
-}
+.container {
+  height: 296px;
+  width: 296px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  gap: 16px;
+  .inputBox {
+    width: 200px;
+    padding: 4px;
+    font-size: 14px;
+    font-family: 'Raleway';
+  }
 
-.button {
-  width: 100px;
-  height: 30px;
-  cursor: pointer;
+  .forgotButton {
+    background: none;
+    color: #454250;
+    &:hover {
+      color: #9b97af;
+    }
+  }
+
+  .button {
+    color: white;
+    background-color: #454250;
+    text-transform: uppercase;
+    font-size: 16px;
+    border-radius: 50px;
+    padding: 8px 0;
+    width: 110px;
+    margin-top: 16px;
+    &:hover {
+      background-color: #9b97af;
+    }
+  }
+
+  .button,
+  .forgotButton {
+    cursor: pointer;
+    font-family: 'Raleway';
+    border-style: none;
+    font-weight: 500;
+  }
 }

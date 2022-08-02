@@ -42,3 +42,6 @@ yarn-error.log*
 
 # dev files
 *.dev.js
+
+# auth
+firebaseConfig.tsx

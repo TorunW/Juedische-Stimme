@@ -1,19 +1,52 @@
-.main {
+.loginPage {
+  background: #d3d0dd;
+  background: linear-gradient(167deg, #d3d0dd 0%, #9b97af 15%, #635d80 60%);
   min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  height: 296px;
+  width: 296px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  gap: 16px;
 }
-.inputBox {
+.container .inputBox {
   width: 200px;
-  height: 30px;
-  margin: 5px;
+  padding: 4px;
+  font-size: 14px;
+  font-family: 'Raleway';
 }
-.button {
-  width: 100px;
-  height: 30px;
+.container .forgotButton {
+  background: none;
+  color: #454250;
+}
+.container .forgotButton:hover {
+  color: #9b97af;
+}
+.container .button {
+  color: white;
+  background-color: #454250;
+  text-transform: uppercase;
+  font-size: 16px;
+  border-radius: 50px;
+  padding: 8px 0;
+  width: 110px;
+  margin-top: 16px;
+}
+.container .button:hover {
+  background-color: #9b97af;
+}
+.container .button,
+.container .forgotButton {
   cursor: pointer;
+  font-family: 'Raleway';
+  border-style: none;
+  font-weight: 500;
 }

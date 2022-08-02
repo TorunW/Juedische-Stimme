@@ -22,19 +22,9 @@ import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
 import NewsletterForm from '@/components/NewsletterForm';
 
-import { useRouter } from 'next/router';
-
 const Home: LayoutPage = (props: LayoutPageProps) => {
-  let router = useRouter();
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
-
-  useEffect(() => {
-    let token = sessionStorage.getItem('Token');
-    if (!token) {
-      router.push('/register');
-    }
-  }, []);
 
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
@@ -64,10 +54,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
     );
   }, []);
 
-  function logout() {
-    sessionStorage.removeItem('Token');
-    router.push('/');
-  }
   return (
     <div>
       <Header />
@@ -78,11 +64,9 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <h1>BUTTONS AND CALL TO ACTION</h1>
       <blockquote>BUTTONS AND CALL TO ACTION</blockquote>
       <hr />
-      <NewsletterForm/>
+      <NewsletterForm />
       <hr />
       <FacebookFeed />
-      <hr />
-      <button onClick={logout}>Logga ut</button>
     </div>
   );
 };

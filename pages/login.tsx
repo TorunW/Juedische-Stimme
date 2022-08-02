@@ -15,7 +15,7 @@ import styles from '/styles/LoginForm.module.css';
 
 const Login: LayoutPage = (props: LayoutPageProps) => {
   const auth = getAuth(app);
-  const googleProvider = new GoogleAuthProvider();
+  // const googleProvider = new GoogleAuthProvider();
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -35,47 +35,53 @@ const Login: LayoutPage = (props: LayoutPageProps) => {
         router.push('/');
       })
       .catch((err) => {
+        console.log(err);
         alert('Cannot Log in');
       });
   };
 
-  const signUpWithGoogle = () => {
-    signInWithPopup(auth, googleProvider).then((response: any) => {
-      sessionStorage.setItem('Token', response.user.accessToken);
-      console.log(response.user);
-      router.push('/admin');
-    });
-  };
+  // const signUpWithGoogle = () => {
+  //   signInWithPopup(auth, googleProvider).then((response: any) => {
+  //     sessionStorage.setItem('Token', response.user.accessToken);
+  //     console.log(response.user);
+  //     router.push('/admin');
+  //   });
+  // };
 
   return (
-    <div className={styles.main}>
-      <h1>Login</h1>
-      <input
-        placeholder='Email'
-        className={styles.inputBox}
-        onChange={(event) => setEmail(event.target.value)}
-        value={email}
-        type='email'
-      />
-      <input
-        placeholder='Password'
-        className={styles.inputBox}
-        onChange={(event) => setPassword(event.target.value)}
-        value={password}
-        type='password'
-      />
+    <div className={styles.loginPage}>
+      <div className={styles.container}>
+        <input
+          placeholder='Email'
+          className={styles.inputBox}
+          onChange={(event) => setEmail(event.target.value)}
+          value={email}
+          type='email'
+        />
+        <input
+          placeholder='Password'
+          className={styles.inputBox}
+          onChange={(event) => setPassword(event.target.value)}
+          value={password}
+          type='password'
+        />
 
-      <button className={styles.button} onClick={signUp}>
-        Sign In
-      </button>
-      <hr />
-      <button className={styles.googleAlt} onClick={signUpWithGoogle}>
-        Sign Up with Google
-      </button>
+        <button className={styles.button} onClick={signUp}>
+          Login
+        </button>
+
+        <button className={styles.forgotButton} onClick={signUp}>
+          Forgot password?
+        </button>
+        {/* <hr />
+        <button className={styles.googleAlt} onClick={signUpWithGoogle}>
+          Sign Up with Google
+        </button> */}
+      </div>
     </div>
   );
 };
 
-Login.layout = 'empty';
+Login.layout = 'auth';
 
 export default Login;
