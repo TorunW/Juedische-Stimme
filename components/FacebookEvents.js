@@ -7,6 +7,7 @@ import renderToString from 'helpers/renderToString';
 import { setEvents } from 'store/fbdata/fbDataSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from 'styles/Events.module.css';
+import { isUpdatedToday } from 'helpers/checkIfUpdatedToday';
 
 const FacebookEvents = (props) => {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ const FacebookEvents = (props) => {
     if (!events) {
       fetchFacebookEvents();
     } else {
-      if (!isUpdatedToday(events.date_updated)) fetchFacebookFeed();
+      if (!isUpdatedToday(events.date_updated)) fetchFacebookEvents();
     }
   }
 
