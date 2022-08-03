@@ -102,3 +102,11 @@ a {
   font-size: 20px;
   border: 3px solid #8179a6;
 }
+input,
+button {
+  font-family: 'Raleway';
+}
+button {
+  cursor: pointer;
+  border-style: none;
+}

@@ -1,6 +1,6 @@
 .loginPage {
   background: #d3d0dd;
-  background: linear-gradient(167deg, #d3d0dd 0%, #9b97af 15%, #635d80 60%);
+  background: linear-gradient(167deg, #9b97af 0%, #635d80 60%);
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -26,9 +26,11 @@
 .container .forgotButton {
   background: none;
   color: #454250;
+  font-weight: 600;
 }
 .container .forgotButton:hover {
   color: #9b97af;
+  font-weight: 700;
 }
 .container .button {
   color: white;
@@ -39,14 +41,9 @@
   padding: 8px 0;
   width: 110px;
   margin-top: 16px;
+  font-weight: 500;
 }
 .container .button:hover {
   background-color: #9b97af;
-}
-.container .button,
-.container .forgotButton {
-  cursor: pointer;
-  font-family: 'Raleway';
-  border-style: none;
-  font-weight: 500;
+  font-weight: 600;
 }

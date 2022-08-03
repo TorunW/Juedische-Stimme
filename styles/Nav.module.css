@@ -9,6 +9,9 @@
   justify-content: space-evenly;
   margin: 16px 0 8px;
 }
+.nav .topContainer .logoContainer:hover {
+  cursor: pointer;
+}
 .nav .topContainer .logoContainer img {
   height: 50px !important;
 }
