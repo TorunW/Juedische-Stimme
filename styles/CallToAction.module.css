@@ -1,0 +1,10 @@
+.ctaPage {
+  height: 385px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.ctaPage .backgroundImage {
+  position: absolute !important;
+  top: -50% !important;
+}

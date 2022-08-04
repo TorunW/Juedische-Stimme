@@ -8,7 +8,12 @@ import { selectPosts, selectPostsByTag } from 'lib/queries/posts';
 import { selectGalleryById, selectMenuItems } from 'lib/queries';
 
 import { useDispatch, useSelector } from 'store/hooks';
-import { setToken, setEvents, setFeed } from 'store/fbdata/fbDataSlice';
+import {
+  setToken,
+  setEvents,
+  setFeed,
+  setAttchments,
+} from 'store/fbdata/fbDataSlice';
 import { setPosts, setNewsletter } from 'store/posts/postsSlice';
 import { setMenuItems } from 'store/nav/navSlice';
 
@@ -21,6 +26,7 @@ import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
 import NewsletterForm from '@/components/NewsletterForm';
+import CallToAction from '@/components/CallToAction';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -39,6 +45,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
     );
     dispatch(setEvents(JSON.parse(props.fbEvents)[0]));
     dispatch(setFeed(JSON.parse(props.fbFeed)[0]));
+
     dispatch(
       setAboutInfo({
         aboutInfo: JSON.parse(props.aboutInfo)[0],
@@ -54,9 +61,9 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
     );
   }, []);
 
-  console.log(posts, " POSTS ")
+  // console.log(posts, ' POSTS ');
 
-  console.log(newsletter, " NEWSLETTER ")
+  // console.log(newsletter, ' NEWSLETTER ');
 
   return (
     <div>
@@ -65,7 +72,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <FacebookEvents />
       <AboutInfo />
       {newsletter ? <Posts posts={newsletter} title={'Newsletter'} /> : ''}
-      <h1>BUTTONS AND CALL TO ACTION</h1>
+      <CallToAction />
       <blockquote>BUTTONS AND CALL TO ACTION</blockquote>
       <hr />
       <NewsletterForm />

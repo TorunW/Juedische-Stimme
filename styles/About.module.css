@@ -3,21 +3,20 @@
   margin: 120px auto;
 }
 .aboutPage h1 {
+  margin: 0;
   font-weight: 900;
   font-size: 88px;
-  margin: 0;
   text-transform: uppercase;
 }
 .aboutPage .aboutContainer {
   width: 80%;
-  margin: 0 auto;
+  margin: 32px auto 48px;
 }
 .aboutPage .contentContainer {
-  height: 385px;
+  height: 400px;
   position: relative;
   overflow: hidden;
   z-index: 1;
-  margin-top: 64px;
 }
 .aboutPage .contentContainer .img {
   position: absolute !important;
@@ -32,9 +31,18 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 32px;
+  padding: 32px 48px;
+  min-width: 700px;
+  height: 272px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .aboutPage .contentContainer .linkContainer p {
   color: white;
   font-size: 25px;
+  margin: 0;
+}
+.aboutPage .contentContainer .linkContainer button {
+  color: white;
 }

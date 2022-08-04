@@ -85,9 +85,6 @@ a {
 }
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  line-height: 1.5rem;
 }
 .btnContainer {
   margin-top: 32px;
@@ -109,4 +106,14 @@ button {
 button {
   cursor: pointer;
   border-style: none;
+}
+button:hover {
+  background-color: #8179a6;
+  color: white;
+}
+p {
+  line-height: 1.5rem;
+}
+h1 {
+  margin-bottom: 32px;
 }

@@ -7,6 +7,7 @@ import Gallery from './Gallery';
 
 import styles from 'styles/About.module.css';
 import containerBackground from 'styles/images/about.jpg';
+import Link from 'next/link';
 
 const AboutInfo = () => {
   const { gallery } = useSelector((state) => state.aboutinfo);
@@ -30,10 +31,18 @@ const AboutInfo = () => {
       <div className={styles.contentContainer}>
         <Image src={containerBackground} className={styles.img} />
         <div className={styles.linkContainer}>
-          <p>Grundlagen unserer Arbeit sind</p>
+          <p>Grundlagen unserer Arbeit sind:</p>
           <div className='btnContainer'>
-            <button>Selbsverständnis der Jüdischen Stimme</button>
-            <button>Satzung der Jüdischen Stimme</button>
+            <button>
+              <Link href={'/selbstverstaendnis'}>
+                Selbsverständnis der Jüdischen Stimme
+              </Link>
+            </button>
+            <button>
+              <Link href={'/wp-content/uploads/2011/11/Satzung_2011.pdf'}>
+                Satzung der Jüdischen Stimme
+              </Link>
+            </button>
           </div>
         </div>
       </div>
