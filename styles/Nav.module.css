@@ -1,60 +1,75 @@
-.nav {
+.nav,
+.navActive {
   position: fixed;
   width: 100%;
-  background-color: #d1cedf;
   z-index: 100;
 }
-.nav .topContainer {
+.nav .topContainer,
+.navActive .topContainer {
   display: flex;
   justify-content: space-evenly;
   margin: 16px 0 8px;
 }
-.nav .topContainer .logoContainer:hover {
+.nav .topContainer .logoContainer:hover,
+.navActive .topContainer .logoContainer:hover {
   cursor: pointer;
 }
-.nav .topContainer .logoContainer img {
+.nav .topContainer .logoContainer img,
+.navActive .topContainer .logoContainer img {
   height: 50px !important;
 }
-.nav .topContainer .buttonContainer {
+.nav .topContainer .buttonContainer,
+.navActive .topContainer .buttonContainer {
   display: flex;
   align-items: center;
   gap: 32px;
   list-style: none;
 }
-.nav .topContainer .buttonContainer a {
+.nav .topContainer .buttonContainer a,
+.navActive .topContainer .buttonContainer a {
   padding: 8px 16px;
   background-color: #635d80;
   color: white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.nav .topContainer .buttonContainer a:active {
+.nav .topContainer .buttonContainer a:active,
+.navActive .topContainer .buttonContainer a:active {
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.45);
   transform: translateY(4px);
 }
-.nav .topContainer .leftContainer {
+.nav .topContainer .leftContainer,
+.navActive .topContainer .leftContainer {
   display: flex;
   align-items: center;
   gap: 16px;
 }
-.nav .topContainer .leftContainer .socialmediaMenu {
+.nav .topContainer .leftContainer .socialmediaMenu,
+.navActive .topContainer .leftContainer .socialmediaMenu {
   display: flex;
   gap: 8px;
 }
-.nav .topContainer .leftContainer .socialmediaMenu svg {
+.nav .topContainer .leftContainer .socialmediaMenu svg,
+.navActive .topContainer .leftContainer .socialmediaMenu svg {
   cursor: pointer;
 }
-.nav .topContainer .leftContainer .languageMenu {
+.nav .topContainer .leftContainer .languageMenu,
+.navActive .topContainer .leftContainer .languageMenu {
   font-size: 18px;
   font-weight: 500;
   cursor: pointer;
 }
-.nav .bottomContainer {
+.nav .bottomContainer,
+.navActive .bottomContainer {
   display: flex;
   justify-content: center;
   gap: 16px;
   margin: 8px 0 16px;
   list-style: none;
 }
-.nav .bottomContainer li:hover {
+.nav .bottomContainer li:hover,
+.navActive .bottomContainer li:hover {
   color: #635d80;
+}
+.navActive {
+  background-color: #d1cedf;
 }

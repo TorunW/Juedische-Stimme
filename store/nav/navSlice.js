@@ -4,7 +4,7 @@ let initialState = {
   mainMenu: [],
   callToActionMenu: [],
   socialsMenu: [],
-  footerMenu: []
+  footerMenu: [],
 };
 
 const navSlice = createSlice({

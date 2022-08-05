@@ -16,8 +16,6 @@ const FacebookFeed = (props) => {
   const token = useSelector((state) => state.fbData.token);
   const feed = useSelector((state) => state.fbData.feed);
 
-  console.log(feed ? feed : '');
-
   useEffect(() => {
     if (token) {
       initFacebookFeed();
@@ -69,10 +67,7 @@ const FacebookFeed = (props) => {
   return (
     <div className={styles.facebookPage}>
       <h1>News from our facebook</h1>
-      <div className={styles.facebookPosts}>
-        {/* {feedDisplay} */}
-        <FacebookPost feed={feed} />
-      </div>
+      <FacebookPost feed={feed} />
     </div>
   );
 };

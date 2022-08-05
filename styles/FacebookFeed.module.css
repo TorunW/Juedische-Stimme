@@ -14,6 +14,8 @@
   grid-gap: 16px;
   gap: 16px;
   flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
 }
 .facebookPage .facebookPosts .postContainer {
   width: 340px;

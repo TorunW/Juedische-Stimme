@@ -9,6 +9,23 @@ import logo2 from 'styles/images/Logo-text.png';
 function Nav() {
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
 
+  const [navbar, setNavbar] = useState(false);
+
+  function handleScroll() {
+    if (typeof window !== 'undefined') {
+      if (window.scrollY >= 180) {
+        setNavbar(true);
+        console.log(window.scrollY);
+      } else {
+        setNavbar(false);
+      }
+    }
+  }
+
+  if (typeof window !== 'undefined') {
+    window.addEventListener('scroll', handleScroll);
+  }
+
   let mainMenuDisplay = mainMenu.map((item, index) => (
     <li key={Date.now() + index}>
       <Link
@@ -82,7 +99,7 @@ function Nav() {
   );
 
   return (
-    <nav className={styles.nav}>
+    <nav className={navbar === true ? styles.navActive : styles.nav}>
       <div className={styles.topContainer}>
         <Link href={'/'}>
           <div className={styles.logoContainer}>
