@@ -39,12 +39,6 @@
       }
 
       button {
-        width: 372px;
-        padding: 8px 16px;
-        font-family: 'Raleway' !important;
-        background-color: rgba(0, 0, 0, 0);
-        font-size: 20px;
-        border: 3px solid #8179a6;
         color: white;
       }
     }
@@ -62,4 +56,43 @@
   font-weight: bold;
   width: auto;
   display: inline-block;
+}
+
+.newsletterForm {
+  display: flex;
+  flex-direction: column;
+  form {
+    display: flex;
+    justify-content: space-evenly;
+
+    button {
+      color: black;
+      text-transform: uppercase;
+    }
+
+    .formCol {
+      input,
+      textarea {
+        width: 372px;
+        font-size: 20px;
+        padding: 8px;
+        border: 2px solid black;
+        font-family: 'Raleway';
+      }
+
+      input {
+        height: 51px;
+      }
+    }
+  }
+}
+
+.button {
+  width: 372px;
+  padding: 8px 16px;
+  font-family: 'Raleway' !important;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 25px;
+  border: 3px solid #8179a6;
+  font-weight: 700;
 }

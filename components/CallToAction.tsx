@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import backgroundImage from 'styles/images/call-to-action.jpg';
 import styles from 'styles/CallToAction.module.css';
+import NewsletterForm from './NewsletterForm';
 
 const CallToAction = () => {
   return (
@@ -12,6 +13,7 @@ const CallToAction = () => {
         <div className={styles.cta}></div>
         <div className={styles.cta}></div>
       </div>
+      <NewsletterForm />
     </div>
   );
 };

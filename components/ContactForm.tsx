@@ -86,7 +86,9 @@ const ContactForm = () => {
           )}
         </div>
         <div className={styles.formRow}>
-          <button type='submit'>Senden</button>
+          <button type='submit' className={styles.button}>
+            Senden
+          </button>
         </div>
       </form>
     </div>

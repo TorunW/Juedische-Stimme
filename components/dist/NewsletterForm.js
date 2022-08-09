@@ -14,9 +14,11 @@ exports.__esModule = true;
 var react_1 = require("react");
 var formik_1 = require("formik");
 var axios_1 = require("axios");
-var Form_module_css_1 = require("styles/Form.module.css");
 var Yup = require("yup");
-var ContactForm = function () {
+var Form_module_css_1 = require("styles/Form.module.css");
+var NewsletterForm = function () {
+    var MAILCHIMP_URL = process.env.MAILCHIMP_URL;
+    // console.log(MAILCHIMP_URL, " MAILCHIMP URL")
     var formik = formik_1.useFormik({
         initialValues: {
             name: '',
@@ -24,9 +26,8 @@ var ContactForm = function () {
             message: ''
         },
         validationSchema: Yup.object().shape({
-            name: Yup.string().min(3, '* too short!').required('* required!'),
-            email: Yup.string().email().required('* required!'),
-            message: Yup.string().required('* required!')
+            name: Yup.string().min(3, '* too short!'),
+            email: Yup.string().email().required('* required!')
         }),
         onSubmit: function (values) {
             axios_1["default"]({
@@ -41,19 +42,16 @@ var ContactForm = function () {
         }
     });
     // console.log(formik.errors)
-    return (react_1["default"].createElement("div", { id: 'contact', className: Form_module_css_1["default"].container },
+    return (react_1["default"].createElement("div", { id: 'newsletter', className: Form_module_css_1["default"].newsletterForm },
+        react_1["default"].createElement("h1", null, "Signup to Newsletter"),
         react_1["default"].createElement("form", { onSubmit: formik.handleSubmit },
-            react_1["default"].createElement("h1", null, "Kontakt"),
-            react_1["default"].createElement("div", { className: Form_module_css_1["default"].formRow },
+            react_1["default"].createElement("div", { className: Form_module_css_1["default"].formCol },
                 react_1["default"].createElement("input", { id: 'name', name: 'name', type: 'name', onChange: formik.handleChange, value: formik.values.name, placeholder: 'Name' }),
                 formik.errors && formik.errors.name ? (react_1["default"].createElement("div", { className: Form_module_css_1["default"].error }, formik.errors.name)) : ('')),
-            react_1["default"].createElement("div", { className: Form_module_css_1["default"].formRow },
+            react_1["default"].createElement("div", { className: Form_module_css_1["default"].formCol },
                 react_1["default"].createElement("input", { id: 'email', name: 'email', type: 'email', onChange: formik.handleChange, value: formik.values.email, placeholder: 'Email' }),
                 formik.errors && formik.errors.email ? (react_1["default"].createElement("div", { className: Form_module_css_1["default"].error }, formik.errors.email)) : ('')),
-            react_1["default"].createElement("div", { className: Form_module_css_1["default"].formRow },
-                react_1["default"].createElement("textarea", { id: 'message', name: 'message', onChange: formik.handleChange, value: formik.values.message }),
-                formik.errors && formik.errors.message ? (react_1["default"].createElement("div", { className: Form_module_css_1["default"].error }, formik.errors.message)) : ('')),
-            react_1["default"].createElement("div", { className: Form_module_css_1["default"].formRow },
+            react_1["default"].createElement("div", { className: Form_module_css_1["default"].formCol },
                 react_1["default"].createElement("button", { type: 'submit', className: Form_module_css_1["default"].button }, "Senden")))));
 };
-exports["default"] = ContactForm;
+exports["default"] = NewsletterForm;
