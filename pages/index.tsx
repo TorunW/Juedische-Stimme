@@ -150,30 +150,22 @@ export const getServerSideProps = async (context: NextPageContext) => {
   });
   const fbEvents = JSON.stringify(fbEventsReponse);
 
-  if (!hasCookie("Token",{ req:context.req, res:context.res})){
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      }
-    }
-  } else {
-    return {
-      props: {
-        navItems,
-        posts,
-        newsletter,
-        fbFeed,
-        fbEvents,
-        fbToken,
-        aboutInfo,
-        gallery,
-        locales: context.locales,
-        locale: context.locale,
-        defaultLocale: context.defaultLocale,
-      },
-    }; 
-  }
+  if (!hasCookie("Token",{ req:context.req, res:context.res})) return { redirect: { destination: '/login', permanent: false}}
+  return {
+    props: {
+      navItems,
+      posts,
+      newsletter,
+      fbFeed,
+      fbEvents,
+      fbToken,
+      aboutInfo,
+      gallery,
+      locales: context.locales,
+      locale: context.locale,
+      defaultLocale: context.defaultLocale,
+    },
+  };
 };
 
 export default Home;

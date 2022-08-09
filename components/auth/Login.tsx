@@ -21,11 +21,11 @@ function LoginForm() {
   const signUp = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((response: any) => {
-        console.log(response.user);
+        // console.log(response.user);
         sessionStorage.setItem('Token', response.user.accessToken);
         setCookie('Token', response.user.accessToken);
-        console.log(getCookies())
-        // router.push('/');
+        // console.log(getCookies()) 
+        router.push('/');
       })
       .catch((err) => {
         console.log(err);
