@@ -17,13 +17,12 @@ var axios_1 = require("axios");
 var Yup = require("yup");
 var Form_module_css_1 = require("styles/Form.module.css");
 var NewsletterForm = function () {
-    var MAILCHIMP_URL = process.env.MAILCHIMP_URL;
+    // const MAILCHIMP_URL = process.env.MAILCHIMP_URL;
     // console.log(MAILCHIMP_URL, " MAILCHIMP URL")
     var formik = formik_1.useFormik({
         initialValues: {
             name: '',
-            email: '',
-            message: ''
+            email: ''
         },
         validationSchema: Yup.object().shape({
             name: Yup.string().min(3, '* too short!'),
@@ -32,7 +31,7 @@ var NewsletterForm = function () {
         onSubmit: function (values) {
             axios_1["default"]({
                 method: 'post',
-                url: "/api/contact",
+                url: "/api/newsletter",
                 data: __assign({}, values)
             }).then(function (response) {
                 console.log(response, 'response on send contact');

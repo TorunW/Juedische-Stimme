@@ -19,16 +19,16 @@ const ContactForm = () => {
     onSubmit: (values) => {
       axios({
         method: 'post',
-        url: `/api/contact`,
+        url: `/api/newsletter`,
         data: {
           ...values,
         },
       }).then(
         (response) => {
-          console.log(response, 'response on send contact');
+          console.log(response, 'response on send newsletter');
         },
         (error) => {
-          console.log(error, 'ERROR on send contact');
+          console.log(error, 'ERROR on send newsletter');
         }
       );
     },
