@@ -19,7 +19,7 @@ const ContactForm = () => {
     onSubmit: (values) => {
       axios({
         method: 'post',
-        url: `/api/newsletter`,
+        url: `/api/contact`,
         data: {
           ...values,
         },

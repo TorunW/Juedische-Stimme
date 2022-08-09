@@ -9,7 +9,6 @@ function FacebookPost({ feed }) {
     const feedArray = JSON.parse(feed.content);
     feedDisplay = feedArray.map((fbPost, index) => {
       let sharedPostDisplay;
-      console.log(fbPost);
       if (fbPost.attachments) {
         sharedPostDisplay = fbPost.attachments.data.map((attPost, index) => {
           return (

@@ -41,6 +41,7 @@ function getRequestParams(name, email) {
     // get env variables
     var API_KEY = process.env.MAILCHIMP_API_KEY;
     var LIST_ID = process.env.MAILCHIMP_LIST_ID;
+    console.log(API_KEY, LIST_ID);
     // mailchimp datacenter - mailchimp api keys always look like this:
     // fe4f064432e4684878063s83121e4971-us6
     // We need the us6 part
@@ -66,27 +67,27 @@ function getRequestParams(name, email) {
     };
 }
 exports["default"] = (function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var email, _a, url, data, headers, response, error_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
+    var _a, name, email, _b, url, data, headers, response, error_1;
+    return __generator(this, function (_c) {
+        switch (_c.label) {
             case 0:
-                email = req.body.email;
+                _a = req.body, name = _a.name, email = _a.email;
                 if (!email || !email.length) {
                     return [2 /*return*/, res.status(400).json({
                             error: 'Forgot to add your email?'
                         })];
                 }
-                _b.label = 1;
+                _c.label = 1;
             case 1:
-                _b.trys.push([1, 3, , 4]);
-                _a = getRequestParams(name, email), url = _a.url, data = _a.data, headers = _a.headers;
+                _c.trys.push([1, 3, , 4]);
+                _b = getRequestParams(name, email), url = _b.url, data = _b.data, headers = _b.headers;
                 return [4 /*yield*/, axios_1["default"].post(url, data, { headers: headers })];
             case 2:
-                response = _b.sent();
+                response = _c.sent();
                 // Success
                 return [2 /*return*/, res.status(201).json({ error: null })];
             case 3:
-                error_1 = _b.sent();
+                error_1 = _c.sent();
                 return [2 /*return*/, res.status(400).json({
                         error: "Oops, something went wrong... Send us an email at mail@juedische-stimme.de and we'll add you to the list."
                     })];

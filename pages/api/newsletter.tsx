@@ -4,6 +4,7 @@ function getRequestParams(name, email) {
   // get env variables
   const API_KEY = process.env.MAILCHIMP_API_KEY;
   const LIST_ID = process.env.MAILCHIMP_LIST_ID;
+  console.log(API_KEY, LIST_ID);
   // mailchimp datacenter - mailchimp api keys always look like this:
   // fe4f064432e4684878063s83121e4971-us6
   // We need the us6 part
@@ -34,7 +35,7 @@ function getRequestParams(name, email) {
 }
 
 export default async (req, res) => {
-  const { email } = req.body;
+  const { name, email } = req.body;
 
   if (!email || !email.length) {
     return res.status(400).json({

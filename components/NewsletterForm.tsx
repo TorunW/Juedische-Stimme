@@ -5,9 +5,6 @@ import * as Yup from 'yup';
 import styles from 'styles/Form.module.css';
 
 const NewsletterForm = () => {
-  // const MAILCHIMP_URL = process.env.MAILCHIMP_URL;
-  // console.log(MAILCHIMP_URL, " MAILCHIMP URL")
-
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -34,8 +31,6 @@ const NewsletterForm = () => {
       );
     },
   });
-
-  // console.log(formik.errors)
 
   return (
     <div id='newsletter' className={styles.newsletterForm}>
