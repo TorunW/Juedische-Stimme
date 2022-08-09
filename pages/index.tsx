@@ -8,12 +8,7 @@ import { selectPosts, selectPostsByTag } from 'lib/queries/posts';
 import { selectGalleryById, selectMenuItems } from 'lib/queries';
 
 import { useDispatch, useSelector } from 'store/hooks';
-import {
-  setToken,
-  setEvents,
-  setFeed,
-  setAttchments,
-} from 'store/fbdata/fbDataSlice';
+import { setToken, setEvents, setFeed } from 'store/fbdata/fbDataSlice';
 import { setPosts, setNewsletter } from 'store/posts/postsSlice';
 import { setMenuItems } from 'store/nav/navSlice';
 
@@ -27,6 +22,7 @@ import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
 import NewsletterForm from '@/components/NewsletterForm';
 import CallToAction from '@/components/CallToAction';
+import Footer from '@/components/Footer';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -73,11 +69,9 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <AboutInfo />
       {newsletter ? <Posts posts={newsletter} title={'Newsletter'} /> : ''}
       <CallToAction />
-      <blockquote>BUTTONS AND CALL TO ACTION</blockquote>
-      <hr />
       <NewsletterForm />
-      <hr />
       <FacebookFeed />
+      <Footer />
     </div>
   );
 };

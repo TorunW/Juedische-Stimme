@@ -1,4 +1,5 @@
 .facebookPage {
+  margin: 120px 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -12,7 +13,6 @@
   display: flex;
   flex-direction: row;
   grid-gap: 16px;
-  gap: 16px;
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
@@ -20,8 +20,15 @@
 .facebookPage .facebookPosts .postContainer {
   width: 340px;
   padding: 16px;
-  border: 1px solid;
-  height: auto;
+  background: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.facebookPage .facebookPosts .postContainer h4 {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+.facebookPage .facebookPosts .postContainer p {
+  margin-bottom: 16px;
 }
 .facebookPage .facebookPosts .postContainer .imgContainer {
   width: 100%;
@@ -30,4 +37,31 @@
 }
 .facebookPage .facebookPosts .postContainer .imgContainer img {
   width: 100%;
+}
+.facebookPage .facebookPosts .postContainer .sharedPostContainer {
+  background-color: #f9f9f9;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  padding: 16px;
+}
+.facebookPage .facebookPosts .postContainer .sharedPostContainer .author {
+  font-size: 14px;
+  color: #9a9a9a;
+}
+.facebookPage .facebookPosts .postContainer .bottomContainer {
+  display: flex;
+  margin-top: 16px;
+  align-items: baseline;
+  font-size: 14px;
+  color: #9a9a9a;
+  justify-content: space-between;
+}
+.facebookPage .facebookPosts .postContainer .bottomContainer .reaction {
+  display: flex;
+  gap: 8px;
+}
+.facebookPage .facebookPosts .postContainer .bottomContainer .action {
+  display: flex;
+}
+.facebookPage .facebookPosts .postContainer .bottomContainer .action p {
+  cursor: pointer;
 }

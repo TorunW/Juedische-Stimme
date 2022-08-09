@@ -1,24 +1,30 @@
 #footer {
-  background-color: black;
+  background-color: #2e2e2e;
+  padding-top: 64px;
+}
+#footer .footerTopMenu {
+  display: flex;
+  margin-bottom: 32px;
+  justify-content: space-evenly;
+}
+#footer .footerTopMenu .footerSideMenu {
+  display: flex;
+  flex-direction: column;
   color: white;
-  margin-top: 50px;
-  padding: 30px 100px;
-  overflow: auto;
 }
-#footer .contactFormContainer {
-  width: 50%;
-  float: left;
+#footer .footerTopMenu .footerSideMenu .footerMenuContent {
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
-#footer ul.footerSideMenu {
-  width: 50%;
-  float: left;
+#footer .footerTopMenu .footerSideMenu .footerMenuContent p {
+  text-transform: lowercase;
 }
 #footer .footerBottomMenu {
   width: 100%;
-  float: left;
   text-align: center;
-  color: blue;
-  font-size: 10px;
-  padding: 2em 0;
-  border-top: 1px solid white;
+  font-size: 20px;
+  color: white;
+  text-transform: uppercase;
+  padding: 32px 0;
 }

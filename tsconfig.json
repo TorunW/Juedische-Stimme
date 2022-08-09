@@ -26,7 +26,8 @@
     "**/*.tsx",
     "pages/login.js",
     "pages/register.tsx",
-    "firebaseConfig.tsx"
+    "firebaseConfig.tsx",
+    "components/Nav.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -16,25 +16,28 @@ export const Footer = () => {
 
   return (
     <footer id={styles.footer}>
-      <div className={styles.contactFormContainer}>
-        <ContactForm />
+      <div className={styles.footerTopMenu}>
+        <div className={styles.contactFormContainer}>
+          <ContactForm />
+        </div>
+        <div className={styles.footerSideMenu}>
+          <div className={styles.footerMenuContent}>
+            <div className={styles.label}>Unsere partner & freunde</div>
+          </div>
+          <div className={styles.footerMenuContent}>
+            <div className={styles.label}>Kontakt</div>{' '}
+            <p>mail@juedische-stimme.de</p>
+          </div>
+          <div className={styles.footerMenuContent}>
+            <div className={styles.label}>Impressum</div>
+          </div>
+        </div>
       </div>
-      <ul className={styles.footerSideMenu}>
-        {footerMenu.map((item, index) => (
-          <li key={Date.now() + index}>
-            <Link
-              href={
-                '/' +
-                (item.link && item.link !== null ? item.link : item.post_name)
-              }
-            >
-              {item.title && item.title !== null ? item.title : item.post_title}
-            </Link>
-          </li>
-        ))}
-      </ul>
+
       <div className={styles.footerBottomMenu}>
         <button onClick={logout}>Logout</button>
+        copyright © 2022 JÜDISCHE STIMME für gerechten frieden in nahost, berlin
+        seit 2007. Privacy Policy Terms of Use
       </div>
     </footer>
   );
