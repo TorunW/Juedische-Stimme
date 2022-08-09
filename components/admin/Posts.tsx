@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { GeneratePostUrl } from 'helpers/generatePostUrl';
 
 function Posts({posts}) {
 
@@ -32,7 +33,7 @@ function Posts({posts}) {
     if (posts){
         postsDisplay = posts.map((post,index)=>(
             <div key={index}>
-                <h3><a href={"/admin/posts/" + post.post_name}>{post.post_title}</a></h3>
+                <h3><a href={"/admin/posts/" + GeneratePostUrl(post.post_name)}>{post.post_title}</a></h3>
                 <span>AUTHOR: {post.username}</span>
                 <span>DATE PUBLISHED:{new Date(post.post_date).toLocaleString('de')}</span>
                 <button onClick={() => deletePost(post)}>

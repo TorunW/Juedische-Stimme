@@ -11,6 +11,7 @@ import { generateFileName } from 'helpers/generateFileName'
 import { generateImageUrl } from 'helpers/imageUrlHelper'
 import PostTranslationsForm from './PostTranslationsForm';
 import PostTranslations from './PostTranslations';
+import { GeneratePostUrl } from 'helpers/generatePostUrl';
 
 const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
   suspense:true,
@@ -139,7 +140,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
   if (currentTab === 'post'){
     formDisplay = (
       <div className='post-form-tab' id="post-form">
-        {post ? <p><a target={"_blank"} rel="noreferrer" href={"/"+post.post_name}>view post on live site</a></p> : ""}
+        {post ? <p><a target={"_blank"} rel="noreferrer" href={"/"+GeneratePostUrl(post.post_name)}>view post on live site</a></p> : ""}
         <form onSubmit={formik.handleSubmit}>
           <div className={styles['form-row']}>
             <label htmlFor="post_title">POST TITLE</label>
