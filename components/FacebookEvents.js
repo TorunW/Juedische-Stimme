@@ -50,7 +50,6 @@ const FacebookEvents = (props) => {
         },
         (error) => {
           console.log(error, 'ERROR on create fb feed record');
-          // console.log('NOW NEEDS TO DISPLAY ERRORS!')
         }
       );
     }

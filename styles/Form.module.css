@@ -19,15 +19,7 @@
 }
 .container form .formRow input,
 .container form .formRow textarea {
-  width: 372px;
-  font-size: 20px;
-  padding: 8px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border: 1px solid black;
-  font-family: 'Raleway';
-}
-.container form .formRow input {
-  height: 51px;
 }
 .container form .formRow textarea {
   height: 162px;
@@ -35,7 +27,44 @@
 .container form .formRow button {
   color: white;
 }
-.error {
+.newsletterForm {
+  display: flex;
+  flex-direction: column;
+  margin: 32px auto;
+  width: 80%;
+}
+.newsletterForm h1 {
+  text-transform: capitalize;
+}
+.newsletterForm form {
+  display: flex;
+  gap: 16px;
+}
+.newsletterForm form button {
+  color: black;
+  text-transform: capitalize;
+}
+.form input,
+.form textarea {
+  width: 372px;
+  font-size: 20px;
+  padding: 8px;
+  border: 2px solid black;
+  font-family: 'Raleway';
+}
+.form input {
+  height: 51px;
+}
+.form button {
+  width: 372px;
+  padding: 8px 16px;
+  font-family: 'Raleway' !important;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 25px;
+  border: 3px solid #8179a6;
+  font-weight: 700;
+}
+.form .error {
   background: white;
   color: red;
   padding: 5px 10px;
@@ -46,36 +75,4 @@
   font-weight: bold;
   width: auto;
   display: inline-block;
-}
-.newsletterForm {
-  display: flex;
-  flex-direction: column;
-}
-.newsletterForm form {
-  display: flex;
-  justify-content: space-evenly;
-}
-.newsletterForm form button {
-  color: black;
-  text-transform: uppercase;
-}
-.newsletterForm form .formCol input,
-.newsletterForm form .formCol textarea {
-  width: 372px;
-  font-size: 20px;
-  padding: 8px;
-  border: 2px solid black;
-  font-family: 'Raleway';
-}
-.newsletterForm form .formCol input {
-  height: 51px;
-}
-.button {
-  width: 372px;
-  padding: 8px 16px;
-  font-family: 'Raleway' !important;
-  background-color: rgba(0, 0, 0, 0);
-  font-size: 25px;
-  border: 3px solid #8179a6;
-  font-weight: 700;
 }

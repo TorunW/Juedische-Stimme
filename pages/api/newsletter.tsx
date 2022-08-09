@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-function getRequestParams(name, email) {
+function getRequestParams({ email, name }) {
   // get env variables
   const API_KEY = process.env.MAILCHIMP_API_KEY;
   const LIST_ID = process.env.MAILCHIMP_LIST_ID;
@@ -15,8 +15,8 @@ function getRequestParams(name, email) {
   // Add aditional params here. See full list of available params:
   // https://mailchimp.com/developer/reference/lists/list-members/
   const data = {
-    name: name,
     email_address: email,
+    name: name,
     status: 'subscribed',
   };
 
@@ -35,7 +35,9 @@ function getRequestParams(name, email) {
 }
 
 export default async (req, res) => {
-  const { name, email } = req.body;
+  const { email, name } = req.body;
+  console.log('hello');
+  console.log(email, name);
 
   if (!email || !email.length) {
     return res.status(400).json({
@@ -44,13 +46,14 @@ export default async (req, res) => {
   }
 
   try {
-    const { url, data, headers } = getRequestParams(name, email);
+    const { url, data, headers } = getRequestParams({ email, name });
 
     const response = await axios.post(url, data, { headers });
-
+    console.log(response);
     // Success
     return res.status(201).json({ error: null });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({
       error: `Oops, something went wrong... Send us an email at mail@juedische-stimme.de and we'll add you to the list.`,
     });

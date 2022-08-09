@@ -38,7 +38,7 @@ const ContactForm = () => {
 
   return (
     <div id='contact' className={styles.container}>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={styles.form}>
         <h1>Kontakt</h1>
         <div className={styles.formRow}>
           <input
@@ -86,9 +86,7 @@ const ContactForm = () => {
           )}
         </div>
         <div className={styles.formRow}>
-          <button type='submit' className={styles.button}>
-            Senden
-          </button>
+          <button type='submit'>Senden</button>
         </div>
       </form>
     </div>

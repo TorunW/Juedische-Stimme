@@ -1,11 +1,68 @@
 .ctaPage {
-  height: 385px;
   position: relative;
-  overflow: hidden;
-  z-index: 1;
 
-  .backgroundImage {
-    position: absolute !important;
-    top: -50% !important;
+  .hidden {
+    position: absolute;
+    background-color: red;
+    top: 0;
+    height: 300px;
+    width: 100%;
+    transition: top 2s;
+  }
+
+  .visible {
+    position: absolute;
+    background-color: yellow;
+    top: 466px;
+    height: 300px;
+    width: 100%;
+    z-index: 1;
+    transition: top 2s;
+  }
+
+  .imgWrapper {
+    height: 466px;
+    overflow: hidden;
+    .backgroundImage {
+      position: absolute !important;
+      top: -50% !important;
+      z-index: 10;
+    }
+  }
+
+  .ctaContainer {
+    position: absolute;
+    z-index: 20;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+
+    .cta {
+      background-color: rgba(0, 0, 0, 0.363);
+      color: white;
+      height: 338px;
+      width: 404px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+
+      a {
+        position: fixed;
+        height: 338px;
+        width: 404px;
+      }
+      h2 {
+        text-transform: uppercase;
+      }
+    }
   }
 }

@@ -69,7 +69,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <AboutInfo />
       {newsletter ? <Posts posts={newsletter} title={'Newsletter'} /> : ''}
       <CallToAction />
-      <NewsletterForm />
+      {/* <NewsletterForm /> */}
       <FacebookFeed />
       <Footer />
     </div>

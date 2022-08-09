@@ -35,7 +35,7 @@ const NewsletterForm = () => {
   return (
     <div id='newsletter' className={styles.newsletterForm}>
       <h1>Signup to Newsletter</h1>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit} className={styles.form}>
         <div className={styles.formCol}>
           <input
             id='name'
@@ -68,9 +68,7 @@ const NewsletterForm = () => {
           )}
         </div>
         <div className={styles.formCol}>
-          <button type='submit' className={styles.button}>
-            Senden
-          </button>
+          <button type='submit'>Senden</button>
         </div>
       </form>
     </div>

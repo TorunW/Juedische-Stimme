@@ -42,7 +42,7 @@ var ContactForm = function () {
     });
     // console.log(formik.errors)
     return (react_1["default"].createElement("div", { id: 'contact', className: Form_module_css_1["default"].container },
-        react_1["default"].createElement("form", { onSubmit: formik.handleSubmit },
+        react_1["default"].createElement("form", { onSubmit: formik.handleSubmit, className: Form_module_css_1["default"].form },
             react_1["default"].createElement("h1", null, "Kontakt"),
             react_1["default"].createElement("div", { className: Form_module_css_1["default"].formRow },
                 react_1["default"].createElement("input", { id: 'name', name: 'name', type: 'name', onChange: formik.handleChange, value: formik.values.name, placeholder: 'Name' }),
@@ -54,6 +54,6 @@ var ContactForm = function () {
                 react_1["default"].createElement("textarea", { id: 'message', name: 'message', onChange: formik.handleChange, value: formik.values.message }),
                 formik.errors && formik.errors.message ? (react_1["default"].createElement("div", { className: Form_module_css_1["default"].error }, formik.errors.message)) : ('')),
             react_1["default"].createElement("div", { className: Form_module_css_1["default"].formRow },
-                react_1["default"].createElement("button", { type: 'submit', className: Form_module_css_1["default"].button }, "Senden")))));
+                react_1["default"].createElement("button", { type: 'submit' }, "Senden")))));
 };
 exports["default"] = ContactForm;

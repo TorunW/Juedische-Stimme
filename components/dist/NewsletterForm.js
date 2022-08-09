@@ -40,7 +40,7 @@ var NewsletterForm = function () {
     });
     return (react_1["default"].createElement("div", { id: 'newsletter', className: Form_module_css_1["default"].newsletterForm },
         react_1["default"].createElement("h1", null, "Signup to Newsletter"),
-        react_1["default"].createElement("form", { onSubmit: formik.handleSubmit },
+        react_1["default"].createElement("form", { onSubmit: formik.handleSubmit, className: Form_module_css_1["default"].form },
             react_1["default"].createElement("div", { className: Form_module_css_1["default"].formCol },
                 react_1["default"].createElement("input", { id: 'name', name: 'name', type: 'name', onChange: formik.handleChange, value: formik.values.name, placeholder: 'Name' }),
                 formik.errors && formik.errors.name ? (react_1["default"].createElement("div", { className: Form_module_css_1["default"].error }, formik.errors.name)) : ('')),
@@ -48,6 +48,6 @@ var NewsletterForm = function () {
                 react_1["default"].createElement("input", { id: 'email', name: 'email', type: 'email', onChange: formik.handleChange, value: formik.values.email, placeholder: 'Email' }),
                 formik.errors && formik.errors.email ? (react_1["default"].createElement("div", { className: Form_module_css_1["default"].error }, formik.errors.email)) : ('')),
             react_1["default"].createElement("div", { className: Form_module_css_1["default"].formCol },
-                react_1["default"].createElement("button", { type: 'submit', className: Form_module_css_1["default"].button }, "Senden")))));
+                react_1["default"].createElement("button", { type: 'submit' }, "Senden")))));
 };
 exports["default"] = NewsletterForm;

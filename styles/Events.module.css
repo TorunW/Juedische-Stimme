@@ -1,19 +1,18 @@
 .eventsPage hr {
   width: 95%;
   opacity: 0.5;
+  margin: 0 auto;
 }
 .eventsPage .contentContainer {
-  width: 90%;
   margin: 0 auto;
+  max-width: 1440px;
 }
 .eventsPage .contentContainer h1 {
   margin: 32px 0;
-  font-weight: 600;
-  font-size: 25.6px;
 }
 .eventsPage .contentContainer .eventsContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin-bottom: 32px;
 }
 .eventsPage .contentContainer .eventsContainer .event {
