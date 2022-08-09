@@ -3,6 +3,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import styles from '/styles/LoginForm.module.css';
+import { setCookie, getCookies } from 'cookies-next';
 
 function LoginForm() {
   const auth = getAuth(app);
@@ -22,7 +23,9 @@ function LoginForm() {
       .then((response: any) => {
         console.log(response.user);
         sessionStorage.setItem('Token', response.user.accessToken);
-        router.push('/admin');
+        setCookie('Token', response.user.accessToken);
+        console.log(getCookies())
+        // router.push('/');
       })
       .catch((err) => {
         console.log(err);

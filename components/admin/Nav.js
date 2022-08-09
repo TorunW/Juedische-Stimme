@@ -1,11 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { deleteCookie } from 'cookies-next';
 
 function AdminNav() {
   const router = useRouter();
 
   function logout() {
+    deleteCookie('Token')
     sessionStorage.removeItem('Token');
     router.push('/login');
   }
