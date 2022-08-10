@@ -64,7 +64,7 @@ const ContactForm = () => {
             onChange={formik.handleChange}
             value={formik.values.email}
             placeholder='Email'
-          />
+          ></input>
           {formik.errors && formik.errors.email ? (
             <div className={styles.error}>{formik.errors.email}</div>
           ) : (

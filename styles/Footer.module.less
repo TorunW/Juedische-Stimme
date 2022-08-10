@@ -1,24 +1,38 @@
 #footer {
   background-color: #2e2e2e;
   padding-top: 64px;
+  min-height: 652px;
 
   .footerTopMenu {
     display: flex;
     margin-bottom: 32px;
     justify-content: space-evenly;
 
+    .vl {
+      border-left: 2px solid #9a9a9a;
+      height: 468px;
+    }
+
     .footerSideMenu {
       display: flex;
       flex-direction: column;
       color: white;
+      justify-content: space-between;
 
       .footerMenuContent {
         font-size: 20px;
         font-weight: 700;
         text-transform: uppercase;
 
+        .imgContainer {
+          margin-top: 32px;
+          display: flex;
+          gap: 16px;
+        }
         p {
           text-transform: lowercase;
+          font-weight: 400;
+          font-size: 18px;
         }
       }
     }
