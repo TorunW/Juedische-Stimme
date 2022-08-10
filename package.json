@@ -17,6 +17,7 @@
     "@tiptap/extension-image": "^2.0.0-beta.27",
     "@tiptap/react": "^2.0.0-beta.109",
     "@tiptap/starter-kit": "^2.0.0-beta.185",
+    "cookies-next": "^2.1.1",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "firebase": "^9.9.1",

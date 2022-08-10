@@ -39,7 +39,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
   const navItems = JSON.stringify(navItemsResponse);
 
   const pageResponse = await excuteQuery({
-    query: selectPostByName({ name: context.query.name, locale:context.locale }),
+    query: selectPostByName({ name: context.query.name.toString().split(':__--__:').join('#'), locale:context.locale }),
   });
   const page = JSON.stringify(pageResponse);
 

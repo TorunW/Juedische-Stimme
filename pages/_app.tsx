@@ -19,10 +19,10 @@ function MyApp({ Component, pageProps }: LayoutAppProps) {
   const Layout = layouts[Component.layout] || ((children) => <>{children}</>);
 
   useEffect(() => {
-    let token = sessionStorage.getItem('Token');
-    if (!token) {
-      router.push('/login');
-    }
+    // let token = sessionStorage.getItem('Token');
+    // if (!token) {
+    //   router.push('/login');
+    // }
   }, []);
 
   return (

@@ -3,6 +3,7 @@ import { generateImageUrl } from 'helpers/imageUrlHelper';
 import { useSelector } from 'store/hooks';
 import styles from 'styles/Posts.module.css';
 import formateDate from 'helpers/formateDate';
+import { GeneratePostUrl } from 'helpers/generatePostUrl';
 
 function Posts(props) {
   const { locale } = useSelector((state) => state.languages);
@@ -67,7 +68,7 @@ function Posts(props) {
                 {post.post_date ? formateDate(post.post_date) : ''}
               </div>
               <h2>
-                <a href={'/' + post.post_name}>{postTitle}</a>
+                <a href={'/' + GeneratePostUrl(post.post_name)}>{postTitle}</a>
               </h2>
               <h4>
                 <a href={`/category/${post.categoryName}`}>

@@ -1,8 +1,11 @@
 import { app } from '../firebaseConfig';
+
+import { useEffect } from 'react';
+import { hasCookie, getCookies } from 'cookies-next';
+
 import type { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
 
-import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
 import { selectPosts, selectPostsByTag } from 'lib/queries/posts';
 import { selectGalleryById, selectMenuItems } from 'lib/queries';
@@ -146,6 +149,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
   });
   const fbEvents = JSON.stringify(fbEventsReponse);
 
+  if (!hasCookie("Token",{ req:context.req, res:context.res})) return { redirect: { destination: '/login', permanent: false}}
   return {
     props: {
       navItems,
