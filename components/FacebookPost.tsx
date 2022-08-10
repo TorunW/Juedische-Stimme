@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import styles from 'styles/FacebookFeed.module.css';
+import TimeAgo from 'javascript-time-ago';
 
 type Props = {
   post: any;
@@ -10,13 +11,23 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
   let sharedPostDisplay;
   if (post.attachments) {
     sharedPostDisplay = post.attachments.data.map((attPost, index) => {
+      let string;
+      if (attPost.target) {
+        string = attPost.target.url.split('F')[2];
+      }
+
+      let authorDisplay;
+      if (string) {
+        authorDisplay = string.split('%')[0];
+      }
+
       return (
         <div key={index} className={styles.sharedPostContainer}>
           <div className={styles.imgContainer}>
             <img src={attPost.media ? attPost.media.image.src : ''} />
           </div>
-          <h4>{attPost.title}</h4>
-          <p className={styles.author}>berliner-zeitung.de </p>
+          <h4>{attPost.title !== 'Timeline photos' ? attPost.title : ''}</h4>
+          <p className={styles.author}>{authorDisplay}</p>
           <p>{attPost.description}</p>
         </div>
       );
