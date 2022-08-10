@@ -11,16 +11,12 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
   let sharedPostDisplay;
   if (post.attachments) {
     sharedPostDisplay = post.attachments.data.map((attPost, index) => {
-      let string;
-      if (attPost.target) {
-        string = attPost.target.url.split('F')[2];
-      }
-
       let authorDisplay;
-      if (string) {
-        authorDisplay = string.split('%')[0];
+      if (attPost.target) {
+        authorDisplay = attPost.target.url.split('%2F')[2];
       }
 
+      console.log(authorDisplay);
       return (
         <div key={index} className={styles.sharedPostContainer}>
           <div className={styles.imgContainer}>

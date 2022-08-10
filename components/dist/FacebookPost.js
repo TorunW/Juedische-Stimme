@@ -8,14 +8,11 @@ var FacebookPost = function (_a) {
     var sharedPostDisplay;
     if (post.attachments) {
         sharedPostDisplay = post.attachments.data.map(function (attPost, index) {
-            var string;
-            if (attPost.target) {
-                string = attPost.target.url.split('F')[2];
-            }
             var authorDisplay;
-            if (string) {
-                authorDisplay = string.split('%')[0];
+            if (attPost.target) {
+                authorDisplay = attPost.target.url.split('%2F')[2];
             }
+            console.log(authorDisplay);
             return (react_1["default"].createElement("div", { key: index, className: FacebookFeed_module_css_1["default"].sharedPostContainer },
                 react_1["default"].createElement("div", { className: FacebookFeed_module_css_1["default"].imgContainer },
                     react_1["default"].createElement("img", { src: attPost.media ? attPost.media.image.src : '' })),
