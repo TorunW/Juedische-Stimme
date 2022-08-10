@@ -1,11 +1,11 @@
 "use strict";
 var _a;
 exports.__esModule = true;
-exports.setToken = exports.setFeed = exports.setEvents = exports.setFbData = void 0;
+exports.setToken = exports.setFeed = exports.setEvents = void 0;
 var toolkit_1 = require("@reduxjs/toolkit");
 var initialState = {
     token: null,
-    feed: [],
+    feed: null,
     events: []
 };
 var fbDataSlice = toolkit_1.createSlice({
@@ -23,5 +23,5 @@ var fbDataSlice = toolkit_1.createSlice({
         }
     }
 });
-exports.setFbData = (_a = fbDataSlice.actions, _a.setFbData), exports.setEvents = _a.setEvents, exports.setFeed = _a.setFeed, exports.setToken = _a.setToken;
+exports.setEvents = (_a = fbDataSlice.actions, _a.setEvents), exports.setFeed = _a.setFeed, exports.setToken = _a.setToken;
 exports["default"] = fbDataSlice.reducer;

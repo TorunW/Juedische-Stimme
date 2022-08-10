@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { string } from 'yup';
 
 export type FeedType = {
   date_updated: string;
@@ -8,13 +7,13 @@ export type FeedType = {
 
 interface FbFeedState {
   token: any;
-  feed: FeedType[];
+  feed: FeedType;
   events: [];
 }
 
 let initialState: FbFeedState = {
   token: null,
-  feed: [],
+  feed: null,
   events: [],
 };
 
@@ -34,6 +33,6 @@ const fbDataSlice = createSlice({
   },
 });
 
-export const { setFbData, setEvents, setFeed, setToken } = fbDataSlice.actions;
+export const { setEvents, setFeed, setToken } = fbDataSlice.actions;
 
 export default fbDataSlice.reducer;
