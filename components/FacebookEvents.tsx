@@ -5,11 +5,11 @@ import axios from 'axios';
 import renderToString from 'helpers/renderToString';
 
 import { setEvents } from 'store/fbdata/fbDataSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'store/hooks';
 import styles from 'styles/Events.module.css';
 import { isUpdatedToday } from 'helpers/checkIfUpdatedToday';
 
-const FacebookEvents = (props) => {
+const FacebookEvents = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.fbData.token);
   const events = useSelector((state) => state.fbData.events);

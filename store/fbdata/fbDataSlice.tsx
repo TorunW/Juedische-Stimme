@@ -5,16 +5,21 @@ export type FeedType = {
   content: string;
 };
 
+export type EventType = {
+  date_updated: string;
+  content: string;
+};
+
 interface FbFeedState {
   token: any;
   feed: FeedType;
-  events: [];
+  events: EventType;
 }
 
 let initialState: FbFeedState = {
   token: null,
   feed: null,
-  events: [],
+  events: null,
 };
 
 const fbDataSlice = createSlice({
