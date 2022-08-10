@@ -9,9 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from 'styles/FacebookFeed.module.css';
 import { isUpdatedToday } from 'helpers/checkIfUpdatedToday';
-import FacebookPost from './FacbookPost';
+import FacebookPosts from './FacbookPosts';
 
-const FacebookFeed = (props) => {
+const FacebookFeed: React.FC = (props) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.fbData.token);
   const feed = useSelector((state) => state.fbData.feed);
@@ -67,7 +67,7 @@ const FacebookFeed = (props) => {
   return (
     <div className={styles.facebookPage}>
       <h1>News from our facebook</h1>
-      <FacebookPost feed={feed} />
+      <FacebookPosts feed={feed} />
     </div>
   );
 };

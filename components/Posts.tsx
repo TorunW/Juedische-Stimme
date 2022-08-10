@@ -1,7 +1,7 @@
 import React from 'react';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import { useSelector } from 'store/hooks';
-import styles from 'styles/Articles.module.css';
+import styles from 'styles/Posts.module.css';
 import formateDate from 'helpers/formateDate';
 
 function Posts(props) {
@@ -10,7 +10,7 @@ function Posts(props) {
   return (
     <div
       className={
-        props.title === 'Newsletter' ? styles.newsletter : styles.aktuelles
+        props.title === 'Newsletter' ? styles.threeColPage : styles.twoColPage
       }
     >
       <h1>{props.title}</h1>

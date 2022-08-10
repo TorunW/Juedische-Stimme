@@ -1,55 +1,55 @@
-.aktuelles {
+.twoColPage {
   margin: 120px auto 120px;
   width: 80%;
 }
-.aktuelles h1 {
+.twoColPage h1 {
   text-align: center;
   font-weight: 900;
   font-size: 88px;
   margin: 0;
 }
-.aktuelles .postContainer {
+.twoColPage .postContainer {
   margin-top: 48px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.aktuelles .postContainer .post {
+.twoColPage .postContainer .post {
   width: calc(50% - 15px);
   display: flex;
   flex-direction: column;
   gap: 16px;
   margin-bottom: 64px;
 }
-.aktuelles .postContainer .post h2 {
+.twoColPage .postContainer .post h2 {
   margin: 0;
 }
-.aktuelles .postContainer .post h4 {
+.twoColPage .postContainer .post h4 {
   margin: 0;
 }
-.aktuelles .postContainer .post a {
+.twoColPage .postContainer .post a {
   margin: 0;
 }
-.aktuelles .postContainer .post .postPreview p {
+.twoColPage .postContainer .post .postPreview p {
   margin: 0;
 }
-.newsletter {
+.threeColPage {
   margin: 120px auto 120px;
   width: 80%;
 }
-.newsletter h1 {
+.threeColPage h1 {
   text-align: center;
   font-weight: 900;
   font-size: 88px;
   margin: 0;
 }
-.newsletter .postContainer {
+.threeColPage .postContainer {
   margin-top: 48px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.newsletter .postContainer .post {
+.threeColPage .postContainer .post {
   width: calc(30% - 15px);
   display: flex;
   flex-direction: column;
