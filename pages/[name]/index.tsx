@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Post from 'components/Post';
+import Post from '@/components/PostPage';
 import { selectPostByName } from 'lib/queries/posts';
 import { selectMenuItems } from 'lib/queries';
 import { setMenuItems } from 'store/nav/navSlice';
