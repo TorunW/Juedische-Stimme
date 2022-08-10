@@ -5,13 +5,13 @@ import axios from 'axios';
 import renderToString from 'helpers/renderToString';
 
 import { setFeed } from 'store/fbdata/fbDataSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'store/hooks';
 
 import styles from 'styles/FacebookFeed.module.css';
 import { isUpdatedToday } from 'helpers/checkIfUpdatedToday';
 import FacebookPosts from './FacbookPosts';
 
-const FacebookFeed: React.FC = (props) => {
+const FacebookFeed = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.fbData.token);
   const feed = useSelector((state) => state.fbData.feed);

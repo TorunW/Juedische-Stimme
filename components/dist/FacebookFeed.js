@@ -41,14 +41,14 @@ var dateTimeHelper_1 = require("helpers/dateTimeHelper");
 var axios_1 = require("axios");
 var renderToString_1 = require("helpers/renderToString");
 var fbDataSlice_1 = require("store/fbdata/fbDataSlice");
-var react_redux_1 = require("react-redux");
+var hooks_1 = require("store/hooks");
 var FacebookFeed_module_css_1 = require("styles/FacebookFeed.module.css");
 var checkIfUpdatedToday_1 = require("helpers/checkIfUpdatedToday");
 var FacbookPosts_1 = require("./FacbookPosts");
-var FacebookFeed = function (props) {
-    var dispatch = react_redux_1.useDispatch();
-    var token = react_redux_1.useSelector(function (state) { return state.fbData.token; });
-    var feed = react_redux_1.useSelector(function (state) { return state.fbData.feed; });
+var FacebookFeed = function () {
+    var dispatch = hooks_1.useDispatch();
+    var token = hooks_1.useSelector(function (state) { return state.fbData.token; });
+    var feed = hooks_1.useSelector(function (state) { return state.fbData.feed; });
     react_1.useEffect(function () {
         if (token) {
             initFacebookFeed();
