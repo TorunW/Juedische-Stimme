@@ -45,8 +45,8 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
       )}
 
       <p>
-        {post.message && post.message.length > 100
-          ? `${post.message.substring(0, 100)}[...]`
+        {post.message && post.message.length > 300
+          ? `${post.message.substring(0, 300)}[...]`
           : post.message}
       </p>
       {sharedPostDisplay}

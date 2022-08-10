@@ -29,8 +29,8 @@ var FacebookPost = function (_a) {
         react_1["default"].createElement("h4", null, post.from.name),
         !post.attachments ? (react_1["default"].createElement("div", { className: FacebookFeed_module_css_1["default"].imgContainer },
             react_1["default"].createElement("img", { src: post.full_picture }))) : (''),
-        react_1["default"].createElement("p", null, post.message && post.message.length > 100
-            ? post.message.substring(0, 100) + "[...]"
+        react_1["default"].createElement("p", null, post.message && post.message.length > 300
+            ? post.message.substring(0, 300) + "[...]"
             : post.message),
         sharedPostDisplay,
         react_1["default"].createElement("div", { className: FacebookFeed_module_css_1["default"].bottomContainer },

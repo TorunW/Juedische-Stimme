@@ -1,6 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { string } from 'yup';
 
-let initialState = {
+export type FeedType = {
+  date_updated: string;
+  content: string;
+};
+
+interface FbFeedState {
+  token: any;
+  feed: FeedType[];
+  events: [];
+}
+
+let initialState: FbFeedState = {
   token: null,
   feed: [],
   events: [],
