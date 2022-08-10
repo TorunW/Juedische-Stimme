@@ -1,6 +1,5 @@
 "use strict";
 exports.__esModule = true;
-var link_1 = require("next/link");
 var react_1 = require("react");
 var FacebookFeed_module_css_1 = require("styles/FacebookFeed.module.css");
 var FacebookPost = function (_a) {
@@ -12,12 +11,12 @@ var FacebookPost = function (_a) {
             if (attPost.target) {
                 authorDisplay = attPost.target.url.split('%2F')[2];
             }
-            console.log(authorDisplay);
+            //
             return (react_1["default"].createElement("div", { key: index, className: FacebookFeed_module_css_1["default"].sharedPostContainer },
                 react_1["default"].createElement("div", { className: FacebookFeed_module_css_1["default"].imgContainer },
                     react_1["default"].createElement("img", { src: attPost.media ? attPost.media.image.src : '' })),
                 react_1["default"].createElement("h4", null, attPost.title !== 'Timeline photos' ? attPost.title : ''),
-                react_1["default"].createElement("p", { className: FacebookFeed_module_css_1["default"].author }, authorDisplay),
+                react_1["default"].createElement("p", { className: FacebookFeed_module_css_1["default"].author }, authorDisplay && authorDisplay.length > 0 ? authorDisplay : ''),
                 react_1["default"].createElement("p", null, attPost.description)));
         });
     }
@@ -30,8 +29,9 @@ var FacebookPost = function (_a) {
         commentsCount = post.comments.data.length;
     }
     return (react_1["default"].createElement("div", { className: FacebookFeed_module_css_1["default"].postContainer },
-        react_1["default"].createElement("img", { src: 'http://graph.facebook.com/998665673528998/picture?type=square' }),
-        react_1["default"].createElement("h4", null, post.from.name),
+        react_1["default"].createElement("div", { className: FacebookFeed_module_css_1["default"].postHeader },
+            react_1["default"].createElement("img", { src: 'http://graph.facebook.com/998665673528998/picture?type=square' }),
+            react_1["default"].createElement("h4", null, post.from.name)),
         !post.attachments ? (react_1["default"].createElement("div", { className: FacebookFeed_module_css_1["default"].imgContainer },
             react_1["default"].createElement("img", { src: post.full_picture }))) : (''),
         react_1["default"].createElement("p", null, post.message && post.message.length > 300
@@ -49,7 +49,7 @@ var FacebookPost = function (_a) {
                         react_1["default"].createElement("path", { id: 'Vector', d: 'M12.6666 1.3335H3.33325C2.80282 1.3335 2.29411 1.54421 1.91904 1.91928C1.54397 2.29436 1.33325 2.80306 1.33325 3.3335V10.0002C1.33325 10.5306 1.54397 11.0393 1.91904 11.4144C2.29411 11.7894 2.80282 12.0002 3.33325 12.0002H11.0599L13.5266 14.4735C13.5889 14.5353 13.6628 14.5842 13.744 14.6173C13.8252 14.6505 13.9122 14.6673 13.9999 14.6668C14.0874 14.6691 14.1741 14.6508 14.2533 14.6135C14.375 14.5635 14.4792 14.4786 14.5528 14.3694C14.6263 14.2603 14.6659 14.1318 14.6666 14.0002V3.3335C14.6666 2.80306 14.4559 2.29436 14.0808 1.91928C13.7057 1.54421 13.197 1.3335 12.6666 1.3335ZM13.3333 12.3935L11.8066 10.8602C11.7443 10.7984 11.6704 10.7495 11.5892 10.7163C11.508 10.6831 11.421 10.6663 11.3333 10.6668H3.33325C3.15644 10.6668 2.98687 10.5966 2.86185 10.4716C2.73682 10.3465 2.66659 10.177 2.66659 10.0002V3.3335C2.66659 3.15669 2.73682 2.98712 2.86185 2.86209C2.98687 2.73707 3.15644 2.66683 3.33325 2.66683H12.6666C12.8434 2.66683 13.013 2.73707 13.138 2.86209C13.263 2.98712 13.3333 3.15669 13.3333 3.3335V12.3935Z', fill: '#9a9a9a' }))),
                 commentsCount),
             react_1["default"].createElement("div", { className: FacebookFeed_module_css_1["default"].action },
-                react_1["default"].createElement(link_1["default"], { href: post.permalink_url },
+                react_1["default"].createElement("a", { href: post.permalink_url, target: '_blank', rel: 'noopener noreferrer' },
                     react_1["default"].createElement("p", null, "View on Facebook")),
                 react_1["default"].createElement("svg", { width: '24', height: '24', viewBox: '0 0 24 24', fill: 'none', xmlns: 'http://www.w3.org/2000/svg' },
                     react_1["default"].createElement("g", { id: 'User Interface / Steering Wheel' },

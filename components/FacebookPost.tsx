@@ -16,14 +16,16 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
         authorDisplay = attPost.target.url.split('%2F')[2];
       }
 
-      console.log(authorDisplay);
+      //
       return (
         <div key={index} className={styles.sharedPostContainer}>
           <div className={styles.imgContainer}>
             <img src={attPost.media ? attPost.media.image.src : ''} />
           </div>
           <h4>{attPost.title !== 'Timeline photos' ? attPost.title : ''}</h4>
-          <p className={styles.author}>{authorDisplay}</p>
+          <p className={styles.author}>
+            {authorDisplay && authorDisplay.length > 0 ? authorDisplay : ''}
+          </p>
           <p>{attPost.description}</p>
         </div>
       );
@@ -41,8 +43,11 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
   }
   return (
     <div className={styles.postContainer}>
-      <img src='http://graph.facebook.com/998665673528998/picture?type=square' />
-      <h4>{post.from.name}</h4>
+      <div className={styles.postHeader}>
+        <img src='http://graph.facebook.com/998665673528998/picture?type=square' />
+        <h4>{post.from.name}</h4>
+      </div>
+
       {!post.attachments ? (
         <div className={styles.imgContainer}>
           <img src={post.full_picture} />
@@ -95,9 +100,13 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
           {commentsCount}
         </div>
         <div className={styles.action}>
-          <Link href={post.permalink_url}>
+          <a
+            href={post.permalink_url}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             <p>View on Facebook</p>
-          </Link>
+          </a>
           <svg
             width='24'
             height='24'
