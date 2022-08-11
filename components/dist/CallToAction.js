@@ -78,6 +78,7 @@ var CallToAction = function () {
                     react_1["default"].createElement("h2", null, "Spenden"),
                     react_1["default"].createElement("p", null, "Deine Spende hilt uns, die Menschenrechte weltweit zu verteidigen!")))),
         react_1["default"].createElement("div", { className: isShown === true ? CallToAction_module_css_1["default"].visible : CallToAction_module_css_1["default"].hidden },
-            react_1["default"].createElement(NewsletterForm_1["default"], null))));
+            react_1["default"].createElement("div", { className: CallToAction_module_css_1["default"].formContainer },
+                react_1["default"].createElement(NewsletterForm_1["default"], null)))));
 };
 exports["default"] = CallToAction;

@@ -1,23 +1,22 @@
 .ctaPage {
-  height: 466px;
-  max-height: 100%;
+  height: auto;
+
   .hidden {
     position: relative;
-    background-color: red;
     top: -200px;
-    height: 200px;
+    height: 0;
     width: 100%;
-    transition: top 0.5s;
+    transition: top 1s;
+    overflow: hidden;
   }
 
   .visible {
     position: relative;
-    background-color: yellow;
     top: 0;
-    height: 200px;
+    height: auto;
     width: 100%;
     z-index: 1;
-    transition: top 0.5s;
+    transition: top 1s;
     margin-bottom: 64px;
   }
 
@@ -43,7 +42,6 @@
       justify-content: center;
       align-items: center;
       gap: 32px;
-      height: 466px;
 
       .cta {
         background-color: rgba(0, 0, 0, 0.363);
@@ -58,6 +56,10 @@
         padding: 16px;
         text-align: center;
         cursor: pointer;
+
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.463);
+        }
 
         a {
           position: fixed;

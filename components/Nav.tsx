@@ -13,7 +13,7 @@ function Nav() {
 
   function handleScroll() {
     if (typeof window !== 'undefined') {
-      if (window.scrollY >= 180) {
+      if (window.scrollY >= 80) {
         setNavbar(true);
       } else {
         setNavbar(false);

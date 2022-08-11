@@ -3,6 +3,8 @@
   position: fixed;
   width: 100%;
   z-index: 100;
+  font-size: 18px;
+  transition: all 0.4s ease-in-out;
 }
 .nav .topContainer,
 .navActive .topContainer {
@@ -37,6 +39,10 @@
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.45);
   transform: translateY(4px);
 }
+.nav .topContainer .buttonContainer a:hover,
+.navActive .topContainer .buttonContainer a:hover {
+  background-color: #635d80e7;
+}
 .nav .topContainer .leftContainer,
 .navActive .topContainer .leftContainer {
   display: flex;
@@ -54,7 +60,6 @@
 }
 .nav .topContainer .leftContainer .languageMenu,
 .navActive .topContainer .leftContainer .languageMenu {
-  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
 }
@@ -65,11 +70,29 @@
   gap: 16px;
   margin: 8px 0 16px;
   list-style: none;
+  text-transform: capitalize;
 }
-.nav .bottomContainer li:hover,
-.navActive .bottomContainer li:hover {
-  color: #635d80;
+.nav .leftContainer .languageMenu {
+  color: white;
+}
+.nav svg {
+  filter: invert(100%) sepia(0%) saturate(100%) hue-rotate(100deg) brightness(100%) contrast(100%);
+}
+.nav .bottomContainer li a {
+  color: white;
+}
+.nav .bottomContainer li a:hover {
+  color: black;
+  transition: color 0.3s ease-in-out;
 }
 .navActive {
   background-color: #d1cedf;
+  transition: all 0.4s ease-in-out;
+}
+.navActive li a {
+  color: black;
+}
+.navActive li a:hover {
+  color: #635d80;
+  transition: color 0.3s ease-in-out;
 }

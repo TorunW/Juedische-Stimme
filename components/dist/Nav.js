@@ -12,7 +12,7 @@ function Nav() {
     var _b = react_1.useState(false), navbar = _b[0], setNavbar = _b[1];
     function handleScroll() {
         if (typeof window !== 'undefined') {
-            if (window.scrollY >= 180) {
+            if (window.scrollY >= 80) {
                 setNavbar(true);
             }
             else {

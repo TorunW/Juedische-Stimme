@@ -215,7 +215,9 @@ const CallToAction = () => {
         {/* </div> */}
       </div>
       <div className={isShown === true ? styles.visible : styles.hidden}>
-        <NewsletterForm />
+        <div className={styles.formContainer}>
+          <NewsletterForm />
+        </div>
       </div>
     </div>
   );
