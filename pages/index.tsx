@@ -16,8 +16,8 @@ import { setPosts, setNewsletter } from 'store/posts/postsSlice';
 import { setMenuItems } from 'store/nav/navSlice';
 
 import Posts from '@/components/posts/Posts';
-import FacebookFeed from 'components/FacebookFeed';
-import FacebookEvents from 'components/FacebookEvents';
+import FacebookFeed from '@/components/facebook/FacebookFeed';
+import FacebookEvents from '@/components/facebook/FacebookEvents';
 import Header from 'components/Header';
 import AboutInfo from 'components/AboutInfo';
 import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';

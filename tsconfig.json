@@ -28,7 +28,7 @@
     "pages/register.tsx",
     "firebaseConfig.tsx",
     "components/Nav.tsx",
-    "components/FacebookEvents.tsx"
+    "components/facebook/FacebookEvents.tsx"
   ],
   "exclude": ["node_modules"]
 }

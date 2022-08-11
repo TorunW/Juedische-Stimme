@@ -33,10 +33,11 @@ const FacebookFeed = () => {
 
   // each fbpost has a attachment.data => array, every data has a type, theres if its their photo its photo, if its a shared hen its smt else
   async function fetchFacebookFeed() {
-    const fields = "id,likes,reactions,comments,shares,attachments,full_picture,message,from,permalink_url,created_time"
-    const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=21&fields=${fields}&access_token=${token}`
-    console.log(fields, " FIELDS ")
-    console.log(fbFetchUrl, " FETCH URL")
+    const fields =
+      'id,likes,reactions,comments,shares,attachments,full_picture,message,from,permalink_url,created_time';
+    const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=21&fields=${fields}&access_token=${token}`;
+    console.log(fields, ' FIELDS ');
+    console.log(fbFetchUrl, ' FETCH URL');
     const res = await fetch(fbFetchUrl);
     const fetchedFeed = await res.json();
 
