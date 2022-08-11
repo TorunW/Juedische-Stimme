@@ -30,11 +30,12 @@
 .newsletterForm {
   display: flex;
   flex-direction: column;
-  margin: 32px auto;
-  width: 80%;
+  width: 1440px;
+  margin: 0 auto;
 }
 .newsletterForm h1 {
   text-transform: capitalize;
+  margin: 32px 0;
 }
 .newsletterForm form {
   display: flex;
