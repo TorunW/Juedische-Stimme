@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector } from 'store/hooks';
 import styles from 'styles/Header.module.css';
 
 const Header = () => {
