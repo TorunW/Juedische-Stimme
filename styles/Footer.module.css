@@ -2,6 +2,7 @@
   background-color: #2e2e2e;
   padding-top: 64px;
   min-height: 652px;
+  height: 100%;
 }
 #footer .footerTopMenu {
   display: flex;
@@ -10,7 +11,8 @@
 }
 #footer .footerTopMenu .vl {
   border-left: 2px solid #9a9a9a;
-  height: 468px;
+  min-height: 468px;
+  height: auto;
 }
 #footer .footerTopMenu .footerSideMenu {
   display: flex;
@@ -18,17 +20,21 @@
   color: white;
   justify-content: space-between;
 }
-#footer .footerTopMenu .footerSideMenu .footerMenuContent {
+#footer .footerTopMenu .footerSideMenu .footerRow {
   font-size: 20px;
   font-weight: 700;
   text-transform: uppercase;
 }
-#footer .footerTopMenu .footerSideMenu .footerMenuContent .imgContainer {
+#footer .footerTopMenu .footerSideMenu .footerRow .iconsContainer {
+  display: flex;
+  gap: 16px;
+}
+#footer .footerTopMenu .footerSideMenu .footerRow .imgContainer {
   margin-top: 32px;
   display: flex;
   gap: 16px;
 }
-#footer .footerTopMenu .footerSideMenu .footerMenuContent p {
+#footer .footerTopMenu .footerSideMenu .footerRow p {
   text-transform: lowercase;
   font-weight: 400;
   font-size: 18px;

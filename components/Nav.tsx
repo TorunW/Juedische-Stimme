@@ -51,7 +51,11 @@ function Nav() {
 
   let socialmediaMenuDisplay = (
     <div className={styles.socialmediaMenu}>
-      <Link href={'https://www.facebook.com/12juedischestimme'}>
+      <a
+        href={'https://www.facebook.com/12juedischestimme'}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         <svg
           width='30'
           height='30'
@@ -64,8 +68,12 @@ function Nav() {
             fill='black'
           />
         </svg>
-      </Link>
-      <Link href={'https://twitter.com/JNahost'}>
+      </a>
+      <a
+        href={'https://twitter.com/JNahost'}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         <svg
           width='30'
           height='30'
@@ -78,9 +86,13 @@ function Nav() {
             fill='black'
           />
         </svg>
-      </Link>
+      </a>
 
-      <Link href={'https://www.instagram.com/juedischestimme/'}>
+      <a
+        href={'https://www.instagram.com/juedischestimme/'}
+        target='_blank'
+        rel='noopener noreferrer'
+      >
         <svg
           width='30'
           height='30'
@@ -93,7 +105,7 @@ function Nav() {
             fill='black'
           />
         </svg>
-      </Link>
+      </a>
     </div>
   );
 
