@@ -1,71 +1,74 @@
-import { useEffect } from 'react'
-import excuteQuery from 'lib/db'
-import { selectPostsByTag } from 'lib/queries/posts'
-import { selectMenuItems } from 'lib/queries'
-import Posts from 'components/Posts'
-import styles from 'styles/Home.module.css'
+import { useEffect } from 'react';
+import excuteQuery from 'lib/db';
+import { selectPostsByTag } from 'lib/queries/posts';
+import { selectMenuItems } from 'lib/queries';
+import Posts from '@/components/posts/Posts';
+import styles from 'styles/Home.module.css';
 
-import { useDispatch, useSelector } from 'store/hooks'
+import { useDispatch, useSelector } from 'store/hooks';
 import { setPosts } from 'store/posts/postsSlice';
-import { setMenuItems } from 'store/nav/navSlice'
-import { LayoutPage } from 'types/LayoutPage.type'
-import { LayoutPageProps } from 'types/LayoutPageProps.type'
-import { setLanguages } from 'store/languages/languagesSlice'
+import { setMenuItems } from 'store/nav/navSlice';
+import { LayoutPage } from 'types/LayoutPage.type';
+import { LayoutPageProps } from 'types/LayoutPageProps.type';
+import { setLanguages } from 'store/languages/languagesSlice';
 
 const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
-  
   const dispatch = useDispatch();
-  const { posts } = useSelector(state => state.posts)
+  const { posts } = useSelector((state) => state.posts);
 
   useEffect(() => {
-    dispatch(setPosts(JSON.parse(props.posts)))
-    dispatch(setMenuItems(JSON.parse(props.navItems)))
-    dispatch(setLanguages({
-      locales:props.locales,
-      locale:props.locale,
-      defaultLocale:props.defaultLocale
-    }))
-  },[props.posts])
+    dispatch(setPosts(JSON.parse(props.posts)));
+    dispatch(setMenuItems(JSON.parse(props.navItems)));
+    dispatch(
+      setLanguages({
+        locales: props.locales,
+        locale: props.locale,
+        defaultLocale: props.defaultLocale,
+      })
+    );
+  }, [props.posts]);
 
   return (
     <div className={styles.container}>
-        {posts ? <Posts posts={posts}/> : ""}
-        {/* PAGINATION NEEDED */
+      {posts ? <Posts posts={posts} /> : ''}
+      {
+        /* PAGINATION NEEDED */
         // get total number of items - in this case post by COUNTING the table rows
         // create a reuseable component to display pagination
         // pass props.pageNum, totalItemsCount, itemsPerPage to pagination component
-        /* /PAGINATION NEEDED */}
+        /* /PAGINATION NEEDED */
+      }
     </div>
-  )
-}
+  );
+};
 
-TagPostsPage.layout = "main"
+TagPostsPage.layout = 'main';
 
 export const getServerSideProps = async (context) => {
   const navItemsResponse = await excuteQuery({
-      query: selectMenuItems()
+    query: selectMenuItems(),
   });
-  const navItems = JSON.stringify(navItemsResponse) 
+  const navItems = JSON.stringify(navItemsResponse);
   const postsResponse = await excuteQuery({
     query: selectPostsByTag({
-        slug:context.query.slug,
-        numberOfPosts:10,
-        pageNum:context.query.number,
-        locale: context.locale !== context.defaultLocale ? context.locale : ''
-    })
+      slug: context.query.slug,
+      numberOfPosts: 10,
+      pageNum: context.query.number,
+      locale: context.locale !== context.defaultLocale ? context.locale : '',
+    }),
   });
   const posts = JSON.stringify(postsResponse);
   return {
-    props:{
-      posts:posts,
-      slug:context.query.slug,
-      pageNum:context.query.number,
+    props: {
+      posts: posts,
+      slug: context.query.slug,
+      pageNum: context.query.number,
       navItems,
-      locales:context.locales,
-      locale:context.locale,
-      defaultLocale:context.defaultLocale
-    }
-  }
-}
+      locales: context.locales,
+      locale: context.locale,
+      defaultLocale: context.defaultLocale,
+    },
+  };
+};
 
 export default TagPostsPage;

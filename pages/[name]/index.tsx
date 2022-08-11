@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Post from '@/components/PostPage';
+import Post from '@/components/posts/PostPage';
 import { selectPostByName } from 'lib/queries/posts';
 import { selectMenuItems } from 'lib/queries';
 import { setMenuItems } from 'store/nav/navSlice';
@@ -15,11 +15,13 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
-    dispatch(setLanguages({
-      locales:props.locales,
-      locale:props.locale,
-      defaultLocale:props.defaultLocale
-    }))
+    dispatch(
+      setLanguages({
+        locales: props.locales,
+        locale: props.locale,
+        defaultLocale: props.defaultLocale,
+      })
+    );
   }, [props.page]);
   let page = JSON.parse(props.page)[0];
 
@@ -39,7 +41,10 @@ export const getServerSideProps = async (context: NextPageContext) => {
   const navItems = JSON.stringify(navItemsResponse);
 
   const pageResponse = await excuteQuery({
-    query: selectPostByName({ name: context.query.name.toString().split(':__--__:').join('#'), locale:context.locale }),
+    query: selectPostByName({
+      name: context.query.name.toString().split(':__--__:').join('#'),
+      locale: context.locale,
+    }),
   });
   const page = JSON.stringify(pageResponse);
 
@@ -47,8 +52,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
     props: {
       page,
       navItems,
-      locale:context.locale,
-      defaultLocale:context.defaultLocale
+      locale: context.locale,
+      defaultLocale: context.defaultLocale,
     },
   };
 };

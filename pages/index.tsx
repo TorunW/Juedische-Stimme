@@ -15,7 +15,7 @@ import { setToken, setEvents, setFeed } from 'store/fbdata/fbDataSlice';
 import { setPosts, setNewsletter } from 'store/posts/postsSlice';
 import { setMenuItems } from 'store/nav/navSlice';
 
-import Posts from 'components/Posts';
+import Posts from '@/components/posts/Posts';
 import FacebookFeed from 'components/FacebookFeed';
 import FacebookEvents from 'components/FacebookEvents';
 import Header from 'components/Header';
@@ -149,7 +149,8 @@ export const getServerSideProps = async (context: NextPageContext) => {
   });
   const fbEvents = JSON.stringify(fbEventsReponse);
 
-  if (!hasCookie("Token",{ req:context.req, res:context.res})) return { redirect: { destination: '/login', permanent: false}}
+  if (!hasCookie('Token', { req: context.req, res: context.res }))
+    return { redirect: { destination: '/login', permanent: false } };
   return {
     props: {
       navItems,
