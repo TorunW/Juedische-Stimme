@@ -2,15 +2,13 @@
   text-align: center;
   margin: 120px auto;
 }
-.aboutPage h1 {
-  margin: 0;
-  font-weight: 900;
-  font-size: 88px;
-  text-transform: uppercase;
-}
 .aboutPage .aboutContainer {
   width: 80%;
   margin: 32px auto 48px;
+}
+.aboutPage .aboutContainer p {
+  font-size: 1.3rem;
+  line-height: 1.5rem;
 }
 .aboutPage .contentContainer {
   height: 400px;
@@ -39,10 +37,5 @@
   justify-content: center;
 }
 .aboutPage .contentContainer .linkContainer p {
-  color: white;
-  font-size: 25px;
-  margin: 0;
-}
-.aboutPage .contentContainer .linkContainer button {
   color: white;
 }

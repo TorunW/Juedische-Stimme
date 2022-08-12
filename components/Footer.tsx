@@ -24,7 +24,7 @@ export const Footer = () => {
         <div className={styles.vl}></div>
         <div className={styles.footerSideMenu}>
           <div className={styles.footerRow}>
-            <div className={styles.label}>Unsere partner & freunde</div>
+            <h5 className={styles.label}>Unsere partner & freunde</h5>
             <div className={styles.imgContainer}>
               <a
                 href='https://www.jewishvoiceforpeace.org/p'
@@ -114,8 +114,10 @@ export const Footer = () => {
 
       <div className={styles.footerBottomMenu}>
         <button onClick={logout}>Logout</button>
-        copyright © 2022 JÜDISCHE STIMME für gerechten frieden in nahost, berlin
-        seit 2007. Privacy Policy Terms of Use
+        <h6>
+          copyright © 2022 JÜDISCHE STIMME für gerechten frieden in nahost,
+          berlin seit 2007. Privacy Policy Terms of Use
+        </h6>
       </div>
     </footer>
   );

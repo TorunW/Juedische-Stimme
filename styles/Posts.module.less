@@ -1,63 +1,94 @@
 .twoColPage {
-  margin: 120px auto 120px;
-  width: 80%;
-  h1 {
-    text-align: center;
-    font-weight: 900;
-    font-size: 88px;
-    margin: 0;
-  }
+  .postsContainer {
+    .post {
+      width: calc(50% - 32px);
 
-  .postContainer {
-    margin-top: 48px;
+      .imageWrapper {
+        aspect-ratio: auto 645 / 290;
+      }
+    }
+  }
+}
+
+.twoColPage,
+.threeColPage {
+  margin: 120px 0;
+  display: block;
+  .postsContainer {
+    width: 80%;
+    margin: auto;
+    padding: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
     .post {
-      width: calc(50% - 15px);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
       margin-bottom: 64px;
-      h2 {
-        margin: 0;
-      }
-      h4 {
-        margin: 0;
-      }
-      a {
-        margin: 0;
-      }
-      .postPreview {
-        p {
-          margin: 0;
+
+      .imageWrapper {
+        margin-bottom: 16px;
+        overflow: hidden;
+        cursor: pointer;
+        display: block;
+        aspect-ratio: auto 645 / 290;
+        width: 100%;
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
         }
+      }
+
+      .postTitle {
+        color: #2e2e2e;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+        h3 {
+          font-size: 1.9rem;
+          margin-bottom: 16px;
+          font-weight: 600;
+        }
+
+        &:hover {
+          color: blueviolet;
+        }
+      }
+
+      .date,
+      .tags {
+        font-size: 1rem;
+        margin-bottom: 16px;
+        font-weight: 400;
+        color: #626161;
+      }
+
+      .tags {
+        transition: color 0.3s ease-in-out;
+        &:hover {
+          color: #2e2e2e;
+        }
+      }
+
+      .postPreview {
+        color: #2e2e2e;
+        line-height: 1.5rem;
+        font-size: 1rem;
+        font-weight: 400;
+        margin-top: 16px;
       }
     }
   }
 }
 
 .threeColPage {
-  margin: 120px auto 120px;
-  width: 80%;
-  h1 {
-    text-align: center;
-    font-weight: 900;
-    font-size: 88px;
-    margin: 0;
-  }
-
-  .postContainer {
-    margin-top: 48px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  .postsContainer {
     .post {
-      width: calc(30% - 15px);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-bottom: 64px;
+      width: calc(30% - 32px);
+
+      .imageWrapper {
+        // change
+        aspect-ratio: auto 460 / 280;
+      }
     }
   }
 }

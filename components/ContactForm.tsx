@@ -39,7 +39,7 @@ const ContactForm = () => {
   return (
     <div id='contact' className={styles.container}>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
-        <h1>Kontakt</h1>
+        <h2>Kontakt</h2>
         <div className={styles.formRow}>
           <input
             id='name'
@@ -85,7 +85,7 @@ const ContactForm = () => {
             ''
           )}
         </div>
-        <div className={styles.formRow}>
+        <div className='button blackBg formBtn'>
           <button type='submit'>Senden</button>
         </div>
       </form>

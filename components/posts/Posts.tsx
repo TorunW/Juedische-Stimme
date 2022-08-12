@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 import styles from 'styles/Posts.module.css';
@@ -14,15 +15,15 @@ function Posts(props) {
       }
     >
       <h1>{props.title}</h1>
-      <div className={styles.postContainer}>
+      <div className={styles.postsContainer}>
         {props.posts.map((post, index) => {
           return <Post post={post} />;
         })}
       </div>
-      <div className='btnContainer'>
-        <button>
+      <div className='link whiteBg'>
+        <a href={`/category/${props.title}`} className='link-button'>
           Weitere {props.title === 'Aktuelles' ? 'Artikeln' : props.title} lesen
-        </button>
+        </a>
       </div>
     </div>
   );

@@ -3,20 +3,20 @@
 }
 .ctaPage .hidden {
   position: relative;
-  top: -200px;
   height: 0;
   width: 100%;
-  transition: top 1s;
+  transition: all 1s;
   overflow: hidden;
+  background-color: red;
 }
 .ctaPage .visible {
   position: relative;
   top: 0;
+  background-color: yellow;
   height: auto;
   width: 100%;
   z-index: 1;
   transition: top 1s;
-  margin-bottom: 64px;
 }
 .ctaPage .imgWrapper {
   height: 466px;
@@ -62,6 +62,6 @@
   height: 338px;
   width: 404px;
 }
-.ctaPage .imgWrapper .boxContainer .cta h2 {
+.ctaPage .imgWrapper .boxContainer .cta h3 {
   text-transform: uppercase;
 }

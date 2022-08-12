@@ -1,58 +1,86 @@
-.twoColPage {
-  margin: 120px auto 120px;
-  width: 80%;
+.twoColPage .postsContainer .post {
+  width: calc(50% - 32px);
 }
-.twoColPage h1 {
-  text-align: center;
-  font-weight: 900;
-  font-size: 88px;
-  margin: 0;
+.twoColPage .postsContainer .post .imageWrapper {
+  aspect-ratio: auto 2.22413793;
 }
-.twoColPage .postContainer {
-  margin-top: 48px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-.twoColPage .postContainer .post {
-  width: calc(50% - 15px);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 64px;
-}
-.twoColPage .postContainer .post h2 {
-  margin: 0;
-}
-.twoColPage .postContainer .post h4 {
-  margin: 0;
-}
-.twoColPage .postContainer .post a {
-  margin: 0;
-}
-.twoColPage .postContainer .post .postPreview p {
-  margin: 0;
-}
+.twoColPage,
 .threeColPage {
-  margin: 120px auto 120px;
+  margin: 120px 0;
+  display: block;
+}
+.twoColPage .postsContainer,
+.threeColPage .postsContainer {
   width: 80%;
-}
-.threeColPage h1 {
-  text-align: center;
-  font-weight: 900;
-  font-size: 88px;
-  margin: 0;
-}
-.threeColPage .postContainer {
-  margin-top: 48px;
+  margin: auto;
+  padding: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.threeColPage .postContainer .post {
-  width: calc(30% - 15px);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+.twoColPage .postsContainer .post,
+.threeColPage .postsContainer .post {
   margin-bottom: 64px;
+}
+.twoColPage .postsContainer .post .imageWrapper,
+.threeColPage .postsContainer .post .imageWrapper {
+  margin-bottom: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+  aspect-ratio: auto 2.22413793;
+  width: 100%;
+}
+.twoColPage .postsContainer .post .imageWrapper img,
+.threeColPage .postsContainer .post .imageWrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.twoColPage .postsContainer .post .postTitle,
+.threeColPage .postsContainer .post .postTitle {
+  color: #2e2e2e;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+.twoColPage .postsContainer .post .postTitle h3,
+.threeColPage .postsContainer .post .postTitle h3 {
+  font-size: 1.9rem;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.twoColPage .postsContainer .post .postTitle:hover,
+.threeColPage .postsContainer .post .postTitle:hover {
+  color: blueviolet;
+}
+.twoColPage .postsContainer .post .date,
+.threeColPage .postsContainer .post .date,
+.twoColPage .postsContainer .post .tags,
+.threeColPage .postsContainer .post .tags {
+  font-size: 1rem;
+  margin-bottom: 16px;
+  font-weight: 400;
+  color: #626161;
+}
+.twoColPage .postsContainer .post .tags,
+.threeColPage .postsContainer .post .tags {
+  transition: color 0.3s ease-in-out;
+}
+.twoColPage .postsContainer .post .tags:hover,
+.threeColPage .postsContainer .post .tags:hover {
+  color: #2e2e2e;
+}
+.twoColPage .postsContainer .post .postPreview,
+.threeColPage .postsContainer .post .postPreview {
+  color: #2e2e2e;
+  line-height: 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-top: 16px;
+}
+.threeColPage .postsContainer .post {
+  width: calc(30% - 32px);
+}
+.threeColPage .postsContainer .post .imageWrapper {
+  aspect-ratio: auto 1.64285714;
 }

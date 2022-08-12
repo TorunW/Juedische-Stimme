@@ -3,21 +3,22 @@
 
   .hidden {
     position: relative;
-    top: -200px;
+    // top: -200px;
     height: 0;
     width: 100%;
-    transition: top 1s;
+    transition: all 1s;
     overflow: hidden;
+    background-color: red;
   }
 
   .visible {
     position: relative;
     top: 0;
+    background-color: yellow;
     height: auto;
     width: 100%;
     z-index: 1;
     transition: top 1s;
-    margin-bottom: 64px;
   }
 
   .imgWrapper {
@@ -66,7 +67,7 @@
           height: 338px;
           width: 404px;
         }
-        h2 {
+        h3 {
           text-transform: uppercase;
         }
       }

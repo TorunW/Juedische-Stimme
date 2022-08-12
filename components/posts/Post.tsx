@@ -58,16 +58,29 @@ const Post: React.FC<Props> = ({ post }) => {
 
   return (
     <article className={styles.post}>
-      <img src={generateImageUrl(post.post_image)} />
+      <div className={styles.imageWrapper}>
+        <img
+          // src={generateImageUrl(post.post_image)}
+          src='testpic.jpg'
+          width='767'
+          height='431'
+        />
+      </div>
+
       <div className={styles.date}>
         {post.post_date ? formateDate(post.post_date) : ''}
       </div>
-      <h2>
-        <a href={'/' + GeneratePostUrl(post.post_name)}>{postTitle}</a>
-      </h2>
-      <h4>
-        <a href={`/category/${post.categoryName}`}>{post.categoryName}</a>
-      </h4>
+
+      <a
+        href={'/' + GeneratePostUrl(post.post_name)}
+        className={styles.postTitle}
+      >
+        <h3>{postTitle} </h3>
+      </a>
+
+      <a href={`/category/${post.categoryName}`} className={styles.tags}>
+        #{post.categoryName}
+      </a>
       <div
         className={styles.postPreview}
         dangerouslySetInnerHTML={{ __html: postContent }}

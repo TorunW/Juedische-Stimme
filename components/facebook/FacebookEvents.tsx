@@ -65,6 +65,7 @@ const FacebookEvents = () => {
             <p>{fbEvent.place ? fbEvent.place.name : ''}</p>
             <p>{fbEvent.start_time ? formateDate(fbEvent.start_time) : ''}</p>
           </div>
+          {/* not h2 probably 4 or 5 */}
           <h2>{fbEvent.name}</h2>
         </div>
       );
@@ -75,7 +76,7 @@ const FacebookEvents = () => {
     <div id='events' className={styles.eventsPage}>
       <hr />
       <div className={styles.contentContainer}>
-        <h1>Aktivitäten</h1>
+        <h3>Aktivitäten</h3>
         <div className={styles.eventsContainer}>{eventsDisplay}</div>
       </div>
 

@@ -31,18 +31,17 @@ const AboutInfo = () => {
       <div className={styles.contentContainer}>
         <Image src={containerBackground} className={styles.img} />
         <div className={styles.linkContainer}>
-          <p>Grundlagen unserer Arbeit sind:</p>
-          <div className='btnContainer'>
-            <button>
-              <Link href={'/selbstverstaendnis'}>
-                Selbsverständnis der Jüdischen Stimme
-              </Link>
-            </button>
-            <button>
-              <Link href={'/wp-content/uploads/2011/11/Satzung_2011.pdf'}>
-                Satzung der Jüdischen Stimme
-              </Link>
-            </button>
+          <h4>Grundlagen unserer Arbeit sind:</h4>
+          <div className='link blackBg'>
+            <a href={'/selbstverstaendnis'} className='link-button'>
+              Selbsverständnis der Jüdischen Stimme
+            </a>
+            <a
+              href={'/wp-content/uploads/2011/11/Satzung_2011.pdf'}
+              className='link-button'
+            >
+              Satzung der Jüdischen Stimme
+            </a>
           </div>
         </div>
       </div>

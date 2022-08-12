@@ -69,7 +69,7 @@ const FacebookFeed = () => {
 
   return (
     <div className={styles.facebookPage}>
-      <h1>News from our facebook</h1>
+      <h2>News from our facebook</h2>
       <FacebookPosts feed={feed} />
     </div>
   );
