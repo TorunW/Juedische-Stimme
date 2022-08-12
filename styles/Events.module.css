@@ -1,33 +1,55 @@
+.eventsPage {
+  max-width: 1600px;
+  padding: 0 60px;
+}
 .eventsPage hr {
-  width: 95%;
-  opacity: 0.5;
+  color: #626161;
   margin: 0 auto;
 }
 .eventsPage .contentContainer {
-  margin: 0 auto;
-  max-width: 1440px;
-}
-.eventsPage .contentContainer h1 {
-  margin: 32px 0;
-}
-.eventsPage .contentContainer .eventsContainer {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 32px;
+  flex-wrap: wrap;
+  margin: 32px 0;
 }
-.eventsPage .contentContainer .eventsContainer .event {
-  border: 1px solid black;
-  width: 310px;
-  padding: 16px;
-  display: grid;
-  gap: 16px;
+.eventsPage .contentContainer .eventContainer {
+  margin: 32px 0;
+  display: flex;
+  flex-direction: column;
+  width: calc(30.33333% - 30px);
+  border: 1px solid #efefef;
+  border-radius: 2px;
+  padding: 20px;
+  cursor: pointer;
+  background-image: linear-gradient(to top, #8179a6 50%, transparent 50%);
+  background-size: 200% 200%;
+  background-position: top;
+  transition: all 0.3s;
 }
-.eventsPage .contentContainer .eventsContainer .event .info p {
-  margin: 0;
-  font-size: 16px;
+.eventsPage .contentContainer .eventContainer svg {
+  transition: fill 0.3s !important;
+  margin-bottom: 16px;
 }
-.eventsPage .contentContainer .eventsContainer .event h2 {
+.eventsPage .contentContainer .eventContainer .title {
+  line-height: 1.5rem;
+  font-size: 1.2rem;
+  text-align: left;
+  color: #2e2e2e;
   font-weight: 600;
-  margin: 0;
-  font-size: 20px;
+  margin-bottom: 16px;
+  transition: color 0.3s;
+}
+.eventsPage .contentContainer .eventContainer p {
+  line-height: 1.5rem;
+  font-size: 1rem;
+  color: #626161;
+  padding: 0;
+  transition: all 0.3s;
+}
+.eventsPage .contentContainer .eventContainer:hover {
+  background-image: linear-gradient(to top, #8179a6 51%, transparent 50%);
+  background-position: 0 100%;
+  transition: all 0.3s;
+  color: #fff;
+  fill: #fff;
 }

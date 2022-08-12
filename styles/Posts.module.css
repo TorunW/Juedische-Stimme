@@ -79,7 +79,7 @@
   margin-top: 16px;
 }
 .threeColPage .postsContainer .post {
-  width: calc(30% - 32px);
+  width: calc(30.33333333% - 32px);
 }
 .threeColPage .postsContainer .post .imageWrapper {
   aspect-ratio: auto 1.64285714;
