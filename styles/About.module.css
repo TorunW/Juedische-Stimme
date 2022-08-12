@@ -1,14 +1,16 @@
 .aboutPage {
   text-align: center;
   margin: 120px auto;
+  color: #2e2e2e;
 }
 .aboutPage .aboutContainer {
-  width: 80%;
-  margin: 32px auto 48px;
+  max-width: 1200px;
+  padding: 0 60px;
+  margin: 0 auto 48px;
 }
-.aboutPage .aboutContainer p {
+.aboutPage .aboutContainer .text p {
   font-size: 1.3rem;
-  line-height: 1.5rem;
+  margin-bottom: 32px;
 }
 .aboutPage .contentContainer {
   height: 400px;
@@ -30,12 +32,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 32px 48px;
-  min-width: 700px;
+  min-width: 950px;
   height: 272px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.aboutPage .contentContainer .linkContainer p {
-  color: white;
+.aboutPage .contentContainer .linkContainer h4 {
+  font-size: 1.6rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 32px;
 }

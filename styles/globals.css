@@ -141,3 +141,15 @@ button {
 input {
   font-size: 1.4rem;
 }
+h1 {
+  font-size: 5.5rem;
+  text-transform: uppercase;
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 32px;
+  color: #2e2e2e;
+}
+h4 {
+  font-size: 1.6rem;
+  font-weight: 500;
+}

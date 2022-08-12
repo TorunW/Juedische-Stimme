@@ -1,22 +1,19 @@
 .eventsPage {
   max-width: 1600px;
-  padding: 0 60px;
+  margin: 0 auto;
+
   hr {
     color: #626161;
     margin: 0 auto;
   }
   .contentContainer {
+    padding: 0 60px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin: 32px 0;
 
     .eventContainer {
       margin: 32px 0;
-
-      // margin bottom reall here???
-      display: flex;
-      flex-direction: column;
       // from longe rules
       width: calc(30.33333% - 30px);
       border: 1px solid #efefef;
@@ -29,8 +26,13 @@
       transition: all 0.3s;
 
       svg {
-        transition: fill 0.3s !important;
+        transition: all 0.3s !important;
         margin-bottom: 16px;
+        fill: #8179a6;
+
+        &:hover {
+          fill: #fff;
+        }
       }
 
       .title {

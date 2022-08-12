@@ -17,9 +17,15 @@ const AboutInfo = () => {
   if (aboutInfo !== null) {
     aboutInfoDisplay = (
       <div className={styles.aboutContainer}>
-        <div dangerouslySetInnerHTML={{ __html: aboutInfo.text_top }}></div>
+        <div
+          dangerouslySetInnerHTML={{ __html: aboutInfo.text_top }}
+          className={styles.text}
+        ></div>
         <Gallery gallery={gallery} />
-        <div dangerouslySetInnerHTML={{ __html: aboutInfo.text_bottom }}></div>
+        <div
+          dangerouslySetInnerHTML={{ __html: aboutInfo.text_bottom }}
+          className={styles.text}
+        ></div>
       </div>
     );
   }
