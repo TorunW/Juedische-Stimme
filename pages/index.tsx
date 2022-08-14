@@ -32,6 +32,9 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   const { posts, newsletter } = useSelector((state) => state.posts);
 
   useEffect(() => {
+
+    console.log(props.navItems)
+
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
     dispatch(setNewsletter(JSON.parse(props.newsletter)));

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 import styles from 'styles/FacebookFeed.module.css';
-import TimeAgo from 'javascript-time-ago';
+// import TimeAgo from 'javascript-time-ago';
 
 type Props = {
   post: any;
@@ -18,11 +18,11 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
 
       //
       return (
-        <div key={index} className={styles.sharedPostContainer}>
+        <div data-testid={`attachment-${index}`} key={index} className={styles.sharedPostContainer}>
           <div className={styles.imgContainer}>
             <img src={attPost.media ? attPost.media.image.src : ''} />
           </div>
-          <h4>{attPost.title !== 'Timeline photos' ? attPost.title : ''}</h4>
+          <h4 data-testid={`attachment-${index}-title`}>{attPost.title !== 'Timeline photos' ? attPost.title : ''}</h4>
           <p className={styles.author}>
             {authorDisplay && authorDisplay.length > 0 ? authorDisplay : ''}
           </p>
@@ -42,10 +42,10 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
     commentsCount = post.comments.data.length;
   }
   return (
-    <div className={styles.postContainer}>
+    <div data-testid="container" className={styles.postContainer}>
       <div className={styles.postHeader}>
         <img src='http://graph.facebook.com/998665673528998/picture?type=square' />
-        <h4>{post.from.name}</h4>
+        <h4 data-testid="from">{post.from.name}</h4>
       </div>
 
       {!post.attachments ? (
@@ -64,7 +64,7 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
       {sharedPostDisplay}
 
       <div className={styles.bottomContainer}>
-        <div className={styles.reaction}>
+        <div data-testid="reactions" className={styles.reaction}>
           <svg
             width='16'
             height='16'
