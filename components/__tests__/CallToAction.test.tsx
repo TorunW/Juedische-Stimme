@@ -7,6 +7,6 @@ beforeEach(()=>{
 
 describe('Tests for CallToAction.tsx',() => {
     it('should render',()=>{
-        expect(true).toBe(true)
+        expect(screen.getByText('Newsletter')).toBeInTheDocument()
     })
 })
