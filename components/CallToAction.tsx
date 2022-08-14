@@ -48,7 +48,7 @@ const CallToAction = () => {
                   width='119.667'
                   height='97.3335'
                   filterUnits='userSpaceOnUse'
-                  color-interpolation-filters='sRGB'
+                  colorInterpolationFilters='sRGB'
                 >
                   <feFlood flood-opacity='0' result='BackgroundImageFix' />
                   <feColorMatrix
@@ -108,7 +108,7 @@ const CallToAction = () => {
                   width='130.667'
                   height='102.917'
                   filterUnits='userSpaceOnUse'
-                  color-interpolation-filters='sRGB'
+                  colorInterpolationFilters='sRGB'
                 >
                   <feFlood flood-opacity='0' result='BackgroundImageFix' />
                   <feColorMatrix
@@ -175,7 +175,7 @@ const CallToAction = () => {
                   width='108.5'
                   height='119.695'
                   filterUnits='userSpaceOnUse'
-                  color-interpolation-filters='sRGB'
+                  colorInterpolationFilters='sRGB'
                 >
                   <feFlood flood-opacity='0' result='BackgroundImageFix' />
                   <feColorMatrix
