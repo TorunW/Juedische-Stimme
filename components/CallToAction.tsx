@@ -7,10 +7,8 @@ import Link from 'next/link';
 
 const CallToAction = () => {
   const [isShown, setIsShown] = useState(false);
-  console.log(isShown);
-
   function handleClick() {
-    console.log('object');
+    // console.log('handle click!')
     if (isShown === false) {
       setIsShown(true);
     } else {
@@ -24,7 +22,7 @@ const CallToAction = () => {
       <div className={styles.imgWrapper}>
         <Image src={backgroundImage} className={styles.backgroundImage} />
         <div className={styles.boxContainer}>
-          <div className={styles.cta} onClick={handleClick}>
+          <div data-testid="newsletter-button-container" className={styles.cta} onClick={handleClick}>
             <svg
               width='134'
               height='134'
@@ -79,7 +77,7 @@ const CallToAction = () => {
               </defs>
             </svg>
 
-            <h4>Newsletter</h4>
+            <h4 >Newsletter</h4>
             <p>
               Bleib auf dem Laufenden und mach dich für die Menschenrchte stark!
             </p>
@@ -214,7 +212,7 @@ const CallToAction = () => {
         </div>
         {/* </div> */}
       </div>
-      <div className={isShown === true ? styles.visible : styles.hidden}>
+      <div data-testid="newsletter-form" className={isShown === true ? styles.visible : styles.hidden}>
         <NewsletterForm />
       </div>
     </div>
