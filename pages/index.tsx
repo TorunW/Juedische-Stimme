@@ -33,8 +33,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 
   useEffect(() => {
 
-    console.log(props.navItems)
-
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
     dispatch(setNewsletter(JSON.parse(props.newsletter)));
@@ -62,10 +60,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       })
     );
   }, []);
-
-  // console.log(posts, ' POSTS ');
-
-  // console.log(newsletter, ' NEWSLETTER ');
 
   return (
     <div>

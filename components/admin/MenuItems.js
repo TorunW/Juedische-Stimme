@@ -4,8 +4,6 @@ import axios from 'axios';
 const MenuItems = ({menuItems}) => {
 
     function deleteMenuItem(menuItem){
-        console.log(menuItem, " MENU ITEM TO DELETE")
-
         axios.delete(`/api/menus/${menuItem.term_id}`, {
             data: {
                 ...menuItem
@@ -13,10 +11,8 @@ const MenuItems = ({menuItems}) => {
         }).then((response) => {
             window.location.reload()
             console.log(response,"response on delete media item");
-            console.log('NOW NEEDS TO REFRESH media itemS LIST!');
         }, (error) => {
             console.log(error, "ERROR on delete media item");
-            console.log('NOW NEEDS TO DISPLAY ERROR')
         });
 
     }

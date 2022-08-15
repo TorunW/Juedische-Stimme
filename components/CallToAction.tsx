@@ -8,7 +8,6 @@ import Link from 'next/link';
 const CallToAction = () => {
   const [isShown, setIsShown] = useState(false);
   function handleClick() {
-    // console.log('handle click!')
     if (isShown === false) {
       setIsShown(true);
     } else {
