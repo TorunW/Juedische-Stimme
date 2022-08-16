@@ -85,13 +85,8 @@ const ContactForm = () => {
             ''
           )}
         </div>
-<<<<<<< HEAD
-        <div className='button blackBg submitBtn'>
-          <button type='submit'>Senden</button>
-=======
         <div className='button blackBg formBtn'>
           <button data-testid="submit-button" type='submit'>Senden</button>
->>>>>>> c9214c1bb0d0c2d67408d234c6a7e0cf4a7620da
         </div>
       </form>
     </div>
