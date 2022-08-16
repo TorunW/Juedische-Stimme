@@ -76,12 +76,7 @@ const CallToAction = () => {
                 </filter>
               </defs>
             </svg>
-
-<<<<<<< HEAD
             <h3>Newsletter</h3>
-=======
-            <h4 >Newsletter</h4>
->>>>>>> c9214c1bb0d0c2d67408d234c6a7e0cf4a7620da
             <p>
               Bleib auf dem Laufenden und mach dich für die Menschenrchte stark!
             </p>
@@ -207,7 +202,6 @@ const CallToAction = () => {
                 </filter>
               </defs>
             </svg>
-
             <h4>Spenden</h4>
             <p>
               Deine Spende hilt uns, die Menschenrechte weltweit zu verteidigen!
@@ -215,17 +209,13 @@ const CallToAction = () => {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-      <div
+      <div data-testid="newsletter-form" 
         className={
           styles.drawer +
           ' ' +
-          (isShown === true ? styles.visible : styles.hidden)
+          (isShown === true ? styles.visible : "")
         }
       >
-=======
-      <div data-testid="newsletter-form" className={isShown === true ? styles.visible : styles.hidden}>
->>>>>>> c9214c1bb0d0c2d67408d234c6a7e0cf4a7620da
         <NewsletterForm />
       </div>
     </div>
