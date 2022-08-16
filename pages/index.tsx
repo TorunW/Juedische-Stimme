@@ -1,7 +1,5 @@
-import { app } from '../firebaseConfig';
-
 import { useEffect } from 'react';
-import { hasCookie, getCookies } from 'cookies-next';
+import { hasCookie } from 'cookies-next';
 
 import type { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
@@ -23,7 +21,6 @@ import AboutInfo from 'components/AboutInfo';
 import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
-import NewsletterForm from '@/components/NewsletterForm';
 import CallToAction from '@/components/CallToAction';
 import Footer from '@/components/Footer';
 
@@ -32,8 +29,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   const { posts, newsletter } = useSelector((state) => state.posts);
 
   useEffect(() => {
-
-    console.log(props.navItems)
 
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
@@ -62,10 +57,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       })
     );
   }, []);
-
-  // console.log(posts, ' POSTS ');
-
-  // console.log(newsletter, ' NEWSLETTER ');
 
   return (
     <div>

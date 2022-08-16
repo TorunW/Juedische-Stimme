@@ -34,8 +34,6 @@ const ContactForm = () => {
     },
   });
 
-  // console.log(formik.errors)
-
   return (
     <div id='contact' className={styles.container}>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
@@ -48,9 +46,10 @@ const ContactForm = () => {
             onChange={formik.handleChange}
             value={formik.values.name}
             placeholder='Name'
+            data-testid="name-input"
           />
           {formik.errors && formik.errors.name ? (
-            <div className={styles.error}>{formik.errors.name}</div>
+            <div data-testid="name-error" className={styles.error}>{formik.errors.name}</div>
           ) : (
             ''
           )}
@@ -61,12 +60,13 @@ const ContactForm = () => {
             id='email'
             name='email'
             type='email'
+            data-testid="email-input"
             onChange={formik.handleChange}
             value={formik.values.email}
             placeholder='Email'
           ></input>
           {formik.errors && formik.errors.email ? (
-            <div className={styles.error}>{formik.errors.email}</div>
+            <div data-testid="email-error" className={styles.error}>{formik.errors.email}</div>
           ) : (
             ''
           )}
@@ -80,13 +80,18 @@ const ContactForm = () => {
             value={formik.values.message}
           />
           {formik.errors && formik.errors.message ? (
-            <div className={styles.error}>{formik.errors.message}</div>
+            <div  data-testid="message-error" className={styles.error}>{formik.errors.message}</div>
           ) : (
             ''
           )}
         </div>
+<<<<<<< HEAD
         <div className='button blackBg submitBtn'>
           <button type='submit'>Senden</button>
+=======
+        <div className='button blackBg formBtn'>
+          <button data-testid="submit-button" type='submit'>Senden</button>
+>>>>>>> c9214c1bb0d0c2d67408d234c6a7e0cf4a7620da
         </div>
       </form>
     </div>

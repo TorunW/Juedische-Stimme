@@ -22,7 +22,6 @@ const MenuItemForm = ({menuItem}) => {
             term_order: menuItem ? menuItem.term_order : ''
         },
         onSubmit: values => {
-            console.log(values)
             axios({
                 method: menuItem ? 'put' : 'post',
                 url: `/api/menus${menuItem ? "/" + menuItem.term_id : ''}`,

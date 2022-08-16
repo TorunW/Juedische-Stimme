@@ -10,8 +10,6 @@ const DynamicTiptapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
 })
 const CategoryForm = ({category}) => {
 
-    // console.log(category)
-
     const formik = useFormik({
         initialValues: {
             name: category ? category.name : '',
@@ -46,8 +44,6 @@ const CategoryForm = ({category}) => {
 
         },
     });
-
-    // console.log(formik.errors)
 
     return (
         <div className={styles.container}>

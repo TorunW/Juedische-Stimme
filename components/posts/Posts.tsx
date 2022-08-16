@@ -6,8 +6,6 @@ import styles from 'styles/Posts.module.css';
 import Post from './Post';
 
 function Posts(props) {
-  console.log(props, 'hello');
-
   return (
     <div
       className={

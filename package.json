@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
+    "@testing-library/user-event": "^14.4.3",
     "@tiptap/extension-image": "^2.0.0-beta.27",
     "@tiptap/react": "^2.0.0-beta.109",
     "@tiptap/starter-kit": "^2.0.0-beta.185",
