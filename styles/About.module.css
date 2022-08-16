@@ -4,13 +4,7 @@
   color: #2e2e2e;
 }
 .aboutPage .aboutContainer {
-  max-width: 1200px;
-  padding: 0 60px;
   margin: 0 auto 48px;
-}
-.aboutPage .aboutContainer .text p {
-  font-size: 1.3rem;
-  margin-bottom: 32px;
 }
 .aboutPage .contentContainer {
   height: 400px;
@@ -45,4 +39,23 @@
   text-align: center;
   color: #ffffff;
   margin-bottom: 32px;
+}
+@media (min-width: 1201px) {
+  .aboutContainer {
+    max-width: 1200px;
+    padding: 0 60px;
+    margin: 0 auto 48px;
+  }
+  .aboutContainer .text p {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 1200px) {
+  .aboutContainer {
+    padding: 0 40px;
+    margin: 0 auto 48px;
+  }
+  .aboutContainer .text p {
+    font-size: 1.1rem;
+  }
 }

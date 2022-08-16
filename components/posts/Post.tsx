@@ -75,7 +75,7 @@ const Post: React.FC<Props> = ({ post }) => {
         href={'/' + GeneratePostUrl(post.post_name)}
         className={styles.postTitle}
       >
-        <h3>{postTitle} </h3>
+        <h4>{postTitle} </h4>
       </a>
 
       <a href={`/category/${post.categoryName}`} className={styles.tags}>

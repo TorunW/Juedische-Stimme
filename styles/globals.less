@@ -123,7 +123,6 @@ a {
 
 * {
   box-sizing: border-box;
-  margin: 0;
 }
 
 .link {
@@ -152,84 +151,124 @@ a {
 }
 
 .blackBg {
-  .link-button {
+  color: #fff;
+  button {
     color: #fff;
   }
 }
 
-.button {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
+.submitBtn {
+  width: 100%;
+
   button {
+    border: 5px solid #8179a6;
     padding: 8px 16px;
     font-family: 'Raleway' !important;
-    border: 3px solid #8179a6;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    height: 56px;
+    width: 100%;
     background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
-    font-size: 1.2rem;
-
+    transition: all 0.2s ease-in-out;
     &:hover {
       background-color: #8179a6;
       color: white;
-      transition: all 0.2s ease-in-out;
     }
   }
 }
 
-.formBtn {
-  button {
-    font-size: 1.6rem;
-    font-weight: 600;
-    text-transform: uppercase;
-
-    max-height: 51px;
-  }
-}
-
 input,
-button {
-  font-family: 'Raleway';
-}
-input {
+textarea {
   font-size: 1.4rem;
-}
-
-// p {
-//   line-height: 1.5rem;
-//   font-size: 1rem;
-// }
-
-h1 {
-  font-size: 5.5rem;
-  text-transform: uppercase;
-  font-weight: 900;
-  text-align: center;
-  margin-bottom: 32px;
+  border: 1px solid #2e2e2e;
+  font-family: 'Raleway';
+  width: 100%;
+  padding: 8px;
   color: #2e2e2e;
 }
 
-// h2 {
-//   font-size: 3.3rem;
-//   font-weight: 600;
-// }
+input {
+  height: 56px;
 
-// h3 {
-//   font-size: 2.3rem;
-//   font-weight: 600;
-// }
-
-h4 {
-  font-size: 1.6rem;
-  font-weight: 500;
+  &:focus-visible {
+    border: 1px solid #2e2e2e;
+  }
 }
 
-// h5 {
-//   font-size: 1.25rem;
-//   font-weight: 600;
-// }
+p {
+  line-height: 1.5rem;
+}
 
-// h6 {
-//   font-size: 1.1rem;
-//   font-weight: 400;
-// }
+@media (min-width: 1201px) {
+  // Aktuelles, About, Newsletter
+  h1 {
+    font-size: 5.5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 48px;
+    color: #2e2e2e;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 1200px) {
+  // Aktuelles, About, Newsletter
+  h1 {
+    font-size: 4.5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 48px;
+    color: #2e2e2e;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+
+  // h3 {
+  //   font-size: 1.25rem;
+  //   text-transform: uppercase;
+  //   font-weight: 600;
+  // }
+}
+
+@media (max-width: 991px) {
+  // Aktuelles, About, Newsletter
+  h1 {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 48px;
+    color: #2e2e2e;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}

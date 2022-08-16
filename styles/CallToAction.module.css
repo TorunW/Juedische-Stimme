@@ -1,22 +1,22 @@
 .ctaPage {
   height: auto;
 }
-.ctaPage .hidden {
+.ctaPage .drawer {
   position: relative;
-  height: 0;
   width: 100%;
-  transition: all 1s;
   overflow: hidden;
-  background-color: red;
+  height: 0;
+  transition: all 0.5s;
+}
+.ctaPage .hidden {
+  transition: all 1s;
 }
 .ctaPage .visible {
   position: relative;
-  top: 0;
-  background-color: yellow;
-  height: auto;
+  height: 215px;
   width: 100%;
   z-index: 1;
-  transition: top 1s;
+  transition: all 1s;
 }
 .ctaPage .imgWrapper {
   height: 466px;
@@ -41,7 +41,6 @@
   gap: 32px;
 }
 .ctaPage .imgWrapper .boxContainer .cta {
-  background-color: rgba(0, 0, 0, 0.363);
   color: white;
   height: 338px;
   width: 404px;
@@ -53,15 +52,28 @@
   padding: 16px;
   text-align: center;
   cursor: pointer;
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.463) 50%, rgba(0, 0, 0, 0.363) 50%);
+  background-size: 200% 200%;
+  background-position: top;
+  transition: all 0.3s;
 }
 .ctaPage .imgWrapper .boxContainer .cta:hover {
   background-color: rgba(0, 0, 0, 0.463);
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.463) 51%, rgba(0, 0, 0, 0.363) 50%);
+  background-position: 0 100%;
+  transition: all 0.3s;
+}
+.ctaPage .imgWrapper .boxContainer .cta h4 {
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 .ctaPage .imgWrapper .boxContainer .cta a {
   position: fixed;
   height: 338px;
   width: 404px;
 }
-.ctaPage .imgWrapper .boxContainer .cta h3 {
-  text-transform: uppercase;
+.ctaPage .imgWrapper .boxContainer .cta p {
+  line-height: 1.5rem;
+  font-size: 1.1rem;
 }

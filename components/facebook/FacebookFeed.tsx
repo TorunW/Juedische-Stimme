@@ -34,7 +34,7 @@ const FacebookFeed = () => {
   async function fetchFacebookFeed() {
     const fields =
       'id,likes,reactions,comments,shares,attachments,full_picture,message,from,permalink_url,created_time';
-    const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=21&fields=${fields}&access_token=${token}`; 
+    const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=21&fields=${fields}&access_token=${token}`;
     const res = await fetch(fbFetchUrl);
     const fetchedFeed = await res.json();
 
@@ -52,7 +52,7 @@ const FacebookFeed = () => {
         },
       }).then(
         (response) => {
-          console.log(fetchedFeed.data, " FETCHED FEED DATA ")
+          console.log(fetchedFeed.data, ' FETCHED FEED DATA ');
           dispatch(setFeed(fetchedFeed.data));
           console.log(response, 'response on create fb feed record');
           // window.location.href = "/admin/posts/page/1" // BETTER FETCH THE POSTS THEN REFRESH PAGE

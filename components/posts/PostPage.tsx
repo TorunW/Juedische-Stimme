@@ -1,11 +1,10 @@
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import React, { ReactElement } from 'react';
-import { useSelector } from 'store/hooks'
+import { useSelector } from 'store/hooks';
 
 function Post({ post }) {
+  const { locale } = useSelector((state) => state.languages);
 
-  const { locale } = useSelector(state => state.languages)
-  
   /* TO DO'S
      - DISPLAY TAGS IN A BETTER WAY
      - MAKE A BETTER NO POST FOUND PAGE! maybe even split to a different compoent -> show suggested posts? show helpful links?
@@ -14,15 +13,20 @@ function Post({ post }) {
 
   let postDisplay: ReactElement;
   if (post && post !== null) {
-
     let postTitle = post.post_title,
-    postExcerpt = post.post_excerpt,
-    postContent = post.post_content;
+      postExcerpt = post.post_excerpt,
+      postContent = post.post_content;
 
-    if (locale !== null){
-      postTitle = post[`post_title_translation_${locale}`] ? post[`post_title_translation_${locale}`] : post.post_title
-      postExcerpt = post[`post_excerpt_translation_${locale}`] ? post[`post_excerpt_translation_${locale}`] : post.post_excerpt
-      postContent = post[`post_content_translation_${locale}`] ? post[`post_content_translation_${locale}`] :  post.post_content
+    if (locale !== null) {
+      postTitle = post[`post_title_translation_${locale}`]
+        ? post[`post_title_translation_${locale}`]
+        : post.post_title;
+      postExcerpt = post[`post_excerpt_translation_${locale}`]
+        ? post[`post_excerpt_translation_${locale}`]
+        : post.post_excerpt;
+      postContent = post[`post_content_translation_${locale}`]
+        ? post[`post_content_translation_${locale}`]
+        : post.post_content;
     }
 
     let tagsDisplay: ReactElement[];
@@ -38,28 +42,42 @@ function Post({ post }) {
 
     postDisplay = (
       <React.Fragment>
-        <h1>{postTitle}</h1>
-        <img src={generateImageUrl(post.post_image)}/>
+        <h4>{postTitle}</h4>
+        <img src={generateImageUrl(post.post_image)} />
         <h4>
           <a href={`/category/${post.categoryName}`}>{post.categoryName}</a>
         </h4>
         <p>{tagsDisplay}</p>
-        <div dangerouslySetInnerHTML={{__html:postExcerpt.replace(/(?:\r\n|\r|\n)/g, '<br>')}}></div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: postExcerpt.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+          }}
+        ></div>
         <div
           dangerouslySetInnerHTML={{
             __html: postContent.replace(/(?:\r\n|\r|\n)/g, '<br>'),
           }}
-        >
-        </div>
-        <hr/>
-        next: {post.nextPostName ? <a href={'/' + post.nextPostName}>{post.nextPostName}</a> : ''}<br/>
-        previous: {post.previousPostName ? <a href={'/' + post.previousPostName}>{post.previousPostName}</a> : ''}
+        ></div>
+        <hr />
+        next:{' '}
+        {post.nextPostName ? (
+          <a href={'/' + post.nextPostName}>{post.nextPostName}</a>
+        ) : (
+          ''
+        )}
+        <br />
+        previous:{' '}
+        {post.previousPostName ? (
+          <a href={'/' + post.previousPostName}>{post.previousPostName}</a>
+        ) : (
+          ''
+        )}
       </React.Fragment>
     );
   } else {
     postDisplay = (
       <React.Fragment>
-        <h1>No Post Found!</h1>
+        <h4>No Post Found!</h4>
       </React.Fragment>
     );
   }

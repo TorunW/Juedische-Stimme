@@ -5,6 +5,8 @@ import styles from 'styles/CallToAction.module.css';
 import NewsletterForm from './NewsletterForm';
 import Link from 'next/link';
 
+// import backgroundImage from 'styles/images/test.jpg';
+
 const CallToAction = () => {
   const [isShown, setIsShown] = useState(false);
   console.log(isShown);
@@ -20,7 +22,6 @@ const CallToAction = () => {
 
   return (
     <div className={styles.ctaPage}>
-      {/* <div className={styles.ctaContainer}> */}
       <div className={styles.imgWrapper}>
         <Image src={backgroundImage} className={styles.backgroundImage} />
         <div className={styles.boxContainer}>
@@ -79,7 +80,7 @@ const CallToAction = () => {
               </defs>
             </svg>
 
-            <h4>Newsletter</h4>
+            <h3>Newsletter</h3>
             <p>
               Bleib auf dem Laufenden und mach dich für die Menschenrchte stark!
             </p>
@@ -212,9 +213,14 @@ const CallToAction = () => {
             </p>
           </div>
         </div>
-        {/* </div> */}
       </div>
-      <div className={isShown === true ? styles.visible : styles.hidden}>
+      <div
+        className={
+          styles.drawer +
+          ' ' +
+          (isShown === true ? styles.visible : styles.hidden)
+        }
+      >
         <NewsletterForm />
       </div>
     </div>

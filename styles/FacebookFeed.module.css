@@ -5,11 +5,12 @@
   flex-direction: column;
   align-items: center;
 }
-.facebookPage h1 {
+.facebookPage h2 {
   text-transform: uppercase;
+  color: #2e2e2e;
+  text-align: center;
 }
 .facebookPage .facebookPosts {
-  width: 80%;
   display: flex;
   flex-direction: row;
   grid-gap: 16px;
@@ -18,6 +19,8 @@
   margin: 0 auto;
 }
 .facebookPage .facebookPosts .postContainer {
+  position: relative;
+  height: 100%;
   width: 340px;
   padding: 16px;
   background: #ffffff;
@@ -52,6 +55,7 @@
   padding: 16px;
 }
 .facebookPage .facebookPosts .postContainer .sharedPostContainer .author {
+  margin-top: 16px;
   font-size: 14px;
   color: #9a9a9a;
 }
@@ -69,7 +73,22 @@
 }
 .facebookPage .facebookPosts .postContainer .bottomContainer .action {
   display: flex;
+  align-items: baseline;
+}
+.facebookPage .facebookPosts .postContainer .bottomContainer .action span {
+  padding: 0 8px;
+  font-size: 0.5rem;
 }
 .facebookPage .facebookPosts .postContainer .bottomContainer .action p {
   cursor: pointer;
+}
+@media (min-width: 1321px) {
+  .facebookPosts {
+    width: 80%;
+  }
+}
+@media (max-width: 1320px) {
+  .facebookPosts {
+    padding: 0 40px;
+  }
 }

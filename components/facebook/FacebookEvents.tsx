@@ -84,11 +84,8 @@ const FacebookEvents = () => {
 
   return (
     <div id='events' className={styles.eventsPage}>
-      <hr />
-      <h3>Aktivitäten</h3>
+      <h2>Aktivitäten</h2>
       <div className={styles.contentContainer}>{eventsDisplay}</div>
-
-      <hr />
     </div>
   );
 };

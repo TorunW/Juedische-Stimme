@@ -33,8 +33,11 @@ const NewsletterForm = () => {
   });
 
   return (
-    <div id='newsletter' className={styles.newsletterForm}>
-      <h3>Signup to Newsletter</h3>
+    <div
+      id='newsletter'
+      className={styles.newsletterForm + ' ' + styles.formContainer}
+    >
+      <h2>Signup to Newsletter</h2>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
         <div className={styles.formCol}>
           <input
@@ -59,7 +62,7 @@ const NewsletterForm = () => {
             type='email'
             onChange={formik.handleChange}
             value={formik.values.email}
-            placeholder='Email'
+            placeholder='Email *'
           />
           {formik.errors && formik.errors.email ? (
             <div className={styles.error}>{formik.errors.email}</div>
@@ -67,7 +70,7 @@ const NewsletterForm = () => {
             ''
           )}
         </div>
-        <div className='button whiteBg formBtn'>
+        <div className='button whiteBg submitBtn'>
           <button type='submit'>Senden</button>
         </div>
       </form>

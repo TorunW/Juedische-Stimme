@@ -1,49 +1,120 @@
-#footer {
-  background-color: #2e2e2e;
-  padding-top: 64px;
-  min-height: 652px;
-  height: 100%;
+@media (min-width: 921px) {
+  #footer {
+    background-color: #2e2e2e;
+    padding-top: 64px;
+    min-height: 652px;
+    height: 100%;
+  }
+  #footer .footerTopMenu {
+    display: flex;
+    margin-bottom: 32px;
+    justify-content: space-evenly;
+  }
+  #footer .footerTopMenu .vl {
+    border-left: 2px solid #9a9a9a;
+    min-height: 468px;
+    height: auto;
+  }
+  #footer .footerTopMenu .footerSideMenu {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    justify-content: space-between;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow {
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .link {
+    cursor: pointer;
+    transition: fill 0.3s ease-in-out;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .link:hover {
+    color: #8179a6;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .iconsContainer {
+    display: flex;
+    gap: 16px;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .iconsContainer svg {
+    fill: #fff;
+    transition: fill 0.3s ease-in-out;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .iconsContainer svg:hover {
+    fill: #8179a6;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .imgContainer {
+    margin-top: 32px;
+    display: flex;
+    gap: 16px;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow p {
+    text-transform: lowercase;
+    font-weight: 400;
+    font-size: 1.25rem;
+  }
+  #footer .footerBottomMenu {
+    text-align: center;
+    font-size: 1.1rem;
+    color: white;
+    padding: 32px 80px;
+    text-align: left;
+  }
 }
-#footer .footerTopMenu {
-  display: flex;
-  margin-bottom: 32px;
-  justify-content: space-evenly;
-}
-#footer .footerTopMenu .vl {
-  border-left: 2px solid #9a9a9a;
-  min-height: 468px;
-  height: auto;
-}
-#footer .footerTopMenu .footerSideMenu {
-  display: flex;
-  flex-direction: column;
-  color: white;
-  justify-content: space-between;
-}
-#footer .footerTopMenu .footerSideMenu .footerRow {
-  font-size: 20px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-#footer .footerTopMenu .footerSideMenu .footerRow .iconsContainer {
-  display: flex;
-  gap: 16px;
-}
-#footer .footerTopMenu .footerSideMenu .footerRow .imgContainer {
-  margin-top: 32px;
-  display: flex;
-  gap: 16px;
-}
-#footer .footerTopMenu .footerSideMenu .footerRow p {
-  text-transform: lowercase;
-  font-weight: 400;
-  font-size: 18px;
-}
-#footer .footerBottomMenu {
-  width: 100%;
-  text-align: center;
-  font-size: 20px;
-  color: white;
-  text-transform: uppercase;
-  padding: 32px 0;
+@media (max-width: 920px) {
+  #footer {
+    background-color: #2e2e2e;
+    padding: 64px 60px;
+    height: 100%;
+  }
+  #footer .footerTopMenu {
+    margin-bottom: 32px;
+  }
+  #footer .footerTopMenu .footerSideMenu {
+    margin: 48px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 32px;
+    width: 100%;
+    color: white;
+  }
+  #footer .footerTopMenu .footerSideMenu .linksRow {
+    width: 100%;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .link {
+    cursor: pointer;
+    transition: fill 0.3s ease-in-out;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .link:hover {
+    color: #8179a6;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .iconsContainer {
+    display: flex;
+    gap: 16px;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .iconsContainer svg {
+    fill: #fff;
+    transition: fill 0.3s ease-in-out;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .iconsContainer svg:hover,
+  #footer .footerTopMenu .footerSideMenu .footerRow .iconsContainer svg:active {
+    fill: #8179a6;
+  }
+  #footer .footerTopMenu .footerSideMenu .footerRow .imgContainer {
+    margin-top: 32px;
+    display: flex;
+    gap: 16px;
+  }
+  #footer .footerBottomMenu {
+    width: 100%;
+    color: white;
+  }
+  #footer .footerBottomMenu p {
+    text-align: left;
+    font-weight: 400;
+    font-size: 1.1rem;
+  }
 }

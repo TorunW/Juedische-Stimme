@@ -1,21 +1,18 @@
 .eventsPage {
-  max-width: 1600px;
   margin: 0 auto;
 
-  hr {
-    color: #626161;
-    margin: 0 auto;
+  h2 {
+    text-transform: uppercase;
+    text-align: center;
   }
+
   .contentContainer {
-    padding: 0 60px;
+    padding: 0 70px;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 
     .eventContainer {
-      margin: 32px 0;
-      // from longe rules
-      width: calc(30.33333% - 30px);
       border: 1px solid #efefef;
       border-radius: 2px;
       padding: 20px;
@@ -26,6 +23,7 @@
       transition: all 0.3s;
       fill: #8179a6;
       color: #2e2e2e;
+      margin-bottom: 16px;
 
       svg {
         margin-bottom: 16px;
@@ -44,7 +42,6 @@
         line-height: 1.5rem;
         font-size: 1rem;
         padding: 0;
-        transition: all 0.3s;
       }
 
       &:hover {
@@ -54,6 +51,35 @@
         color: #fff;
         fill: #fff;
       }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .eventsPage {
+    max-width: 1600px;
+    padding: 0 60px;
+
+    .eventContainer {
+      width: calc(30.33333% - 30px);
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .eventsPage {
+    padding: 0 40px;
+    .eventContainer {
+      width: calc(50% - 30px);
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .eventsPage {
+    padding: 0 25px;
+    .eventContainer {
+      width: calc(100% - 30px);
     }
   }
 }

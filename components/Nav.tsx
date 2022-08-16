@@ -8,8 +8,8 @@ import logo2 from 'styles/images/Logo-text.png';
 
 function Nav() {
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
-  const { locale, defaultLocale } = useSelector((state) => state.languages);  
-  const [ pathName, setPathName] = useState('')
+  const { locale, defaultLocale } = useSelector((state) => state.languages);
+  const [pathName, setPathName] = useState('');
 
   const [navbar, setNavbar] = useState(false);
 
@@ -17,17 +17,18 @@ function Nav() {
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', handleScroll);
     }
-  },[])
+  }, []);
 
   useEffect(() => {
-    if (locale !== null){
+    if (locale !== null) {
       let newPathName = window.location.pathname;
-      console.log(locale, " LOCALE ")
-      if (window.location.pathname.indexOf(locale) > -1) newPathName = window.location.pathname.split(locale)[1]
-      console.log(newPathName)
-      setPathName(newPathName)
+      console.log(locale, ' LOCALE ');
+      if (window.location.pathname.indexOf(locale) > -1)
+        newPathName = window.location.pathname.split(locale)[1];
+      console.log(newPathName);
+      setPathName(newPathName);
     }
-  },[locale])
+  }, [locale]);
 
   function handleScroll() {
     if (typeof window !== 'undefined') {
@@ -137,7 +138,7 @@ function Nav() {
           {socialmediaMenuDisplay}
           <div className={styles.languageMenu}>
             <a href={`${pathName}`}>DE</a>
-             <b>|</b>
+            <b> | </b>
             <a href={`/en_US${pathName}`}>EN</a>
           </div>
         </div>

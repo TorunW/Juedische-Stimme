@@ -85,7 +85,7 @@ const ContactForm = () => {
             ''
           )}
         </div>
-        <div className='button blackBg formBtn'>
+        <div className='button blackBg submitBtn'>
           <button type='submit'>Senden</button>
         </div>
       </form>

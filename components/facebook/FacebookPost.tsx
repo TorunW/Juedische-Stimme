@@ -18,11 +18,17 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
 
       //
       return (
-        <div data-testid={`attachment-${index}`} key={index} className={styles.sharedPostContainer}>
+        <div
+          data-testid={`attachment-${index}`}
+          key={index}
+          className={styles.sharedPostContainer}
+        >
           <div className={styles.imgContainer}>
             <img src={attPost.media ? attPost.media.image.src : ''} />
           </div>
-          <h4 data-testid={`attachment-${index}-title`}>{attPost.title !== 'Timeline photos' ? attPost.title : ''}</h4>
+          <h4 data-testid={`attachment-${index}-title`}>
+            {attPost.title !== 'Timeline photos' ? attPost.title : ''}
+          </h4>
           <p className={styles.author}>
             {authorDisplay && authorDisplay.length > 0 ? authorDisplay : ''}
           </p>
@@ -42,10 +48,10 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
     commentsCount = post.comments.data.length;
   }
   return (
-    <div data-testid="container" className={styles.postContainer}>
+    <div data-testid='container' className={styles.postContainer}>
       <div className={styles.postHeader}>
         <img src='http://graph.facebook.com/998665673528998/picture?type=square' />
-        <h4 data-testid="from">{post.from.name}</h4>
+        <h4 data-testid='from'>{post.from.name}</h4>
       </div>
 
       {!post.attachments ? (
@@ -64,7 +70,7 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
       {sharedPostDisplay}
 
       <div className={styles.bottomContainer}>
-        <div data-testid="reactions" className={styles.reaction}>
+        <div data-testid='reactions' className={styles.reaction}>
           <svg
             width='16'
             height='16'
@@ -107,21 +113,7 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
           >
             <p>View on Facebook</p>
           </a>
-          <svg
-            width='24'
-            height='24'
-            viewBox='0 0 24 24'
-            fill='none'
-            xmlns='http://www.w3.org/2000/svg'
-          >
-            <g id='User Interface / Steering Wheel'>
-              <path
-                id='Vector'
-                d='M11.4444 12.1685C11.6089 12.0586 11.8022 12 12 12C12.2652 12 12.5196 12.1054 12.7071 12.2929C12.8946 12.4804 13 12.7348 13 13C13 13.1978 12.9414 13.3911 12.8315 13.5556C12.7216 13.72 12.5654 13.8482 12.3827 13.9239C12.2 13.9996 11.9989 14.0194 11.8049 13.9808C11.6109 13.9422 11.4327 13.847 11.2929 13.7071C11.153 13.5673 11.0578 13.3891 11.0192 13.1951C10.9806 13.0011 11.0004 12.8 11.0761 12.6173C11.1518 12.4346 11.28 12.2784 11.4444 12.1685Z'
-                fill='#9a9a9a'
-              />
-            </g>
-          </svg>
+          <span>●</span>
           <p>Share</p>
         </div>
       </div>
