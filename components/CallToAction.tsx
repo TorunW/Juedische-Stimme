@@ -22,7 +22,11 @@ const CallToAction = () => {
       <div className={styles.imgWrapper}>
         <Image src={backgroundImage} className={styles.backgroundImage} />
         <div className={styles.boxContainer}>
-          <div data-testid="newsletter-button-container" className={styles.cta} onClick={handleClick}>
+          <div
+            data-testid='newsletter-button-container'
+            className={styles.cta}
+            onClick={handleClick}
+          >
             <svg
               width='134'
               height='134'
@@ -77,11 +81,7 @@ const CallToAction = () => {
               </defs>
             </svg>
 
-<<<<<<< HEAD
-            <h3>Newsletter</h3>
-=======
-            <h4 >Newsletter</h4>
->>>>>>> c9214c1bb0d0c2d67408d234c6a7e0cf4a7620da
+            <h4>Newsletter</h4>
             <p>
               Bleib auf dem Laufenden und mach dich für die Menschenrchte stark!
             </p>
@@ -215,17 +215,15 @@ const CallToAction = () => {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
+
       <div
+        data-testid='newsletter-form'
         className={
           styles.drawer +
           ' ' +
           (isShown === true ? styles.visible : styles.hidden)
         }
       >
-=======
-      <div data-testid="newsletter-form" className={isShown === true ? styles.visible : styles.hidden}>
->>>>>>> c9214c1bb0d0c2d67408d234c6a7e0cf4a7620da
         <NewsletterForm />
       </div>
     </div>
