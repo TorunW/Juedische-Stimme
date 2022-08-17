@@ -59,7 +59,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   }, []);
 
   return (
-    <div>
+    <main id="home-page">
       <Header />
       {posts ? <Posts posts={posts} title={'Aktuelles'} /> : ''}
       <FacebookEvents />
@@ -68,7 +68,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <CallToAction />
       <FacebookFeed />
       <Footer />
-    </div>
+    </main>
   );
 };
 

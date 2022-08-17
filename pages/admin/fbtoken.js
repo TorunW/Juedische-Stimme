@@ -3,10 +3,10 @@ import FacebookTokenForm from 'components/admin/FacebookTokenForm';
 
 export default function EditFbTokenPage(props) {
   return (
-    <div>
+    <section>
       <h2>EDIT FB TOKEN</h2>
       <FacebookTokenForm fbToken={JSON.parse(props.fbToken)[0]} />
-    </div>
+    </section>
   );
 }
 
