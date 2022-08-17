@@ -22,7 +22,6 @@ import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
 import CallToAction from '@/components/CallToAction';
-import Footer from '@/components/Footer';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
