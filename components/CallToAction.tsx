@@ -18,7 +18,7 @@ const CallToAction = () => {
   }
 
   return (
-    <div className={styles.ctaPage}>
+    <section className={styles.ctaPage}>
       <div className={styles.imgWrapper}>
         <Image src={backgroundImage} className={styles.backgroundImage} />
         <div className={styles.boxContainer}>
@@ -218,7 +218,7 @@ const CallToAction = () => {
       >
         <NewsletterForm />
       </div>
-    </div>
+    </section>
   );
 };
 
