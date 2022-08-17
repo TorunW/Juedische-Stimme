@@ -15,7 +15,7 @@ function Posts(props) {
       <h1>{props.title}</h1>
       <div className={styles.postsContainer}>
         {props.posts.map((post, index) => {
-          return <Post post={post} />;
+          return <Post key={index} post={post} />;
         })}
       </div>
       <div className='link whiteBg'>
