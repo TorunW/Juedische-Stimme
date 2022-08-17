@@ -16,7 +16,6 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
         authorDisplay = attPost.target.url.split('%2F')[2];
       }
 
-      //
       return (
         <div
           data-testid={`attachment-${index}`}

@@ -6,6 +6,9 @@
 .aboutPage .aboutContainer {
   margin: 0 auto 48px;
 }
+.aboutPage .aboutContainer p {
+  margin: 16px 0;
+}
 .aboutPage .contentContainer {
   height: 400px;
   position: relative;

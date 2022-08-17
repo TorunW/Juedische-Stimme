@@ -1,16 +1,3 @@
-@media (min-width: 601px) {
-  .twoColPage .postsContainer .post {
-    width: calc(50% - 32px);
-  }
-  .twoColPage .postsContainer .post .imageWrapper {
-    aspect-ratio: auto 2.22413793;
-  }
-}
-@media (max-width: 600px) {
-  .twoColPage .post {
-    width: 100%;
-  }
-}
 .twoColPage,
 .threeColPage {
   margin: 120px 0;
@@ -18,7 +5,6 @@
 }
 .twoColPage .postsContainer,
 .threeColPage .postsContainer {
-  width: 80%;
   margin: auto;
   padding: 0;
   display: flex;
@@ -35,7 +21,6 @@
   overflow: hidden;
   cursor: pointer;
   display: block;
-  aspect-ratio: auto 2.22413793;
   width: 100%;
 }
 .twoColPage .postsContainer .post .imageWrapper img,
@@ -86,6 +71,38 @@
   font-weight: 400;
   margin-top: 16px;
 }
+@media (min-width: 992px) {
+  .twoColPage,
+  .threeColPage {
+    padding: 0 60px;
+  }
+  .twoColPage .postsContainer,
+  .threeColPage .postsContainer {
+    max-width: 1400px;
+  }
+}
+@media (max-width: 991px) {
+  .twoColPage,
+  .threeColPage {
+    padding: 0 40px;
+  }
+}
+@media (min-width: 992px) {
+  .twoColPage .postsContainer .post {
+    width: calc(50% - 32px);
+  }
+  .twoColPage .postsContainer .post .imageWrapper {
+    aspect-ratio: auto 2.22413793;
+  }
+}
+@media (max-width: 991px) {
+  .twoColPage .post {
+    width: 100%;
+  }
+  .twoColPage .post .imageWrapper {
+    aspect-ratio: auto 2.22413793;
+  }
+}
 @media (min-width: 991px) {
   .threeColPage .postsContainer .post {
     width: calc(33.3333% - 32px);
@@ -105,5 +122,8 @@
 @media (max-width: 600px) {
   .threeColPage .postsContainer .post {
     width: 100%;
+  }
+  .threeColPage .postsContainer .post .imageWrapper {
+    aspect-ratio: auto 1.64285714;
   }
 }

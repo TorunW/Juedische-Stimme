@@ -1,10 +1,55 @@
 import React from 'react';
+import { useEffect, useCallback, useState } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
 import styles from 'styles/Form.module.css';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 const NewsletterForm = () => {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
+  const [notification, setNotification] = useState('');
+
+  const handleSumitForm = useCallback(
+    (e) => {
+      e.preventDefault();
+      if (!executeRecaptcha) {
+        console.log('Execute recaptcha not yet available');
+        return;
+      }
+      executeRecaptcha('enquiryFormSubmit').then((gReCaptchaToken) => {
+        console.log(gReCaptchaToken, 'response Google reCaptcha server');
+        submitEnquiryForm(gReCaptchaToken);
+      });
+    },
+    [executeRecaptcha]
+  );
+
+  const submitEnquiryForm = (gReCaptchaToken) => {
+    fetch('/api/enquiry', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        // name: name,
+        // email: email,
+        gRecaptchaToken: gReCaptchaToken,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res, 'response from backend');
+        if (res?.status === 'success') {
+          setNotification(res?.message);
+        } else {
+          setNotification(res?.message);
+        }
+      });
+  };
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -71,7 +116,10 @@ const NewsletterForm = () => {
           )}
         </div>
         <div className='button whiteBg submitBtn'>
-          <button type='submit'>Senden</button>
+          <button type='submit' onClick={handleSumitForm}>
+            Senden
+          </button>
+          {notification && <p>{notification}</p>}
         </div>
       </form>
     </div>

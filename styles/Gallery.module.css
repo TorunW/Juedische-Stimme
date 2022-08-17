@@ -1,13 +1,12 @@
 .gallery {
   margin: 48px 0;
+  padding: 0 60px;
 }
 .gallery .containerSlider {
-  max-width: 700px;
-  height: 500px;
+  aspect-ratio: 2.25;
   margin: 0 auto;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 @media screen and (max-width: 700px) {
   .gallery .containerSlider {
@@ -70,8 +69,9 @@
 .gallery .next {
   width: 60px;
   height: 60px;
-  background: #f1f1f1;
-  border: 1px solid rgba(34, 34, 34, 0.287);
+  background: rgba(0, 0, 0, 0.445);
+  border-radius: 50%;
+  border: none;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -80,6 +80,10 @@
   z-index: 20;
   top: 50%;
   transform: translateY(-60%);
+  opacity: 1;
+}
+.gallery .hidden {
+  opacity: 0;
 }
 .gallery .prev {
   left: 20px;

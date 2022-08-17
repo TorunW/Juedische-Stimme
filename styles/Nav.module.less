@@ -2,13 +2,14 @@
 .navActive {
   position: fixed;
   width: 100%;
+  padding: 0 60px;
   z-index: 100;
   font-size: 18px;
   transition: all 0.4s ease-in-out;
 
   .topContainer {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     margin: 16px 0 8px;
     .logoContainer {
       &:hover {
@@ -75,21 +76,29 @@
   .leftContainer {
     .languageMenu {
       color: white;
+      transition: color 0.3s ease-in-out;
+      &:hover {
+        color: #2e2e2e;
+      }
     }
   }
 
   svg {
-    filter: invert(100%) sepia(0%) saturate(100%) hue-rotate(100deg)
-      brightness(100%) contrast(100%);
+    fill: white;
+    transition: fill 0.3s ease-in-out;
+
+    &:hover {
+      fill: #2e2e2e;
+    }
   }
 
   .bottomContainer {
     li {
       a {
         color: white;
+        transition: color 0.3s ease-in-out;
         &:hover {
-          color: black;
-          transition: color 0.3s ease-in-out;
+          color: #2e2e2e;
         }
       }
     }
@@ -100,12 +109,32 @@
   background-color: #d1cedf;
   transition: all 0.4s ease-in-out;
 
-  li {
-    a {
-      color: black;
+  svg {
+    fill: #2e2e2e;
+    transition: fill 0.3s ease-in-out;
+
+    &:hover {
+      fill: #635d80;
+    }
+  }
+
+  .leftContainer {
+    .languageMenu {
+      color: #2e2e2e;
+      transition: color 0.3s ease-in-out;
       &:hover {
         color: #635d80;
-        transition: color 0.3s ease-in-out;
+      }
+    }
+  }
+
+  li {
+    a {
+      color: #2e2e2e;
+      transition: color 0.3s ease-in-out;
+
+      &:hover {
+        color: #635d80;
       }
     }
   }

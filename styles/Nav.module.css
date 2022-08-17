@@ -2,6 +2,7 @@
 .navActive {
   position: fixed;
   width: 100%;
+  padding: 0 60px;
   z-index: 100;
   font-size: 18px;
   transition: all 0.4s ease-in-out;
@@ -9,7 +10,7 @@
 .nav .topContainer,
 .navActive .topContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   margin: 16px 0 8px;
 }
 .nav .topContainer .logoContainer:hover,
@@ -74,25 +75,47 @@
 }
 .nav .leftContainer .languageMenu {
   color: white;
+  transition: color 0.3s ease-in-out;
+}
+.nav .leftContainer .languageMenu:hover {
+  color: #2e2e2e;
 }
 .nav svg {
-  filter: invert(100%) sepia(0%) saturate(100%) hue-rotate(100deg) brightness(100%) contrast(100%);
+  fill: white;
+  transition: fill 0.3s ease-in-out;
+}
+.nav svg:hover {
+  fill: #2e2e2e;
 }
 .nav .bottomContainer li a {
   color: white;
+  transition: color 0.3s ease-in-out;
 }
 .nav .bottomContainer li a:hover {
-  color: black;
-  transition: color 0.3s ease-in-out;
+  color: #2e2e2e;
 }
 .navActive {
   background-color: #d1cedf;
   transition: all 0.4s ease-in-out;
 }
+.navActive svg {
+  fill: #2e2e2e;
+  transition: fill 0.3s ease-in-out;
+}
+.navActive svg:hover {
+  fill: #635d80;
+}
+.navActive .leftContainer .languageMenu {
+  color: #2e2e2e;
+  transition: color 0.3s ease-in-out;
+}
+.navActive .leftContainer .languageMenu:hover {
+  color: #635d80;
+}
 .navActive li a {
-  color: black;
+  color: #2e2e2e;
+  transition: color 0.3s ease-in-out;
 }
 .navActive li a:hover {
   color: #635d80;
-  transition: color 0.3s ease-in-out;
 }

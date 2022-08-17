@@ -7,6 +7,7 @@ import AuthLayout from 'components/auth/Layout';
 import { store } from 'store/store';
 import { Provider } from 'react-redux';
 import { useRouter } from 'next/router';
+import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 
 const layouts = {
   main: Layout,
@@ -27,9 +28,19 @@ function MyApp({ Component, pageProps }: LayoutAppProps) {
 
   return (
     <Provider store={store}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <GoogleReCaptchaProvider
+        reCaptchaKey='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
+        scriptProps={{
+          async: false,
+          defer: false,
+          appendTo: 'head',
+          nonce: undefined,
+        }}
+      >
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </GoogleReCaptchaProvider>
     </Provider>
   );
 }

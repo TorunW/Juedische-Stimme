@@ -4,6 +4,7 @@
 .eventsPage h2 {
   text-transform: uppercase;
   text-align: center;
+  color: #626161;
 }
 .eventsPage .contentContainer {
   padding: 0 70px;
