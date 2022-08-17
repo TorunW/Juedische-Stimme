@@ -88,9 +88,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       postType: 'post',
       fieldsList: [
         'ID',
-        'post_author',
         'post_date',
-        'post_date_gmt',
         'post_content',
         'post_title',
         'post_name',
@@ -101,9 +99,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       locale: context.locale !== context.defaultLocale ? context.locale : '',
     }),
   });
-
   const posts = JSON.stringify(postsResponse);
-
   // Newsletter
   const newsletterResponse = await excuteQuery({
     query: selectPostsByTag({
