@@ -15,6 +15,7 @@ function Layout({ children }) {
     <div id="main-layout">
       <Nav />
       {children}
+      <Footer/>
     </div>
   );
 }

@@ -67,7 +67,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       {newsletter ? <Posts posts={newsletter} title={'Newsletter'} /> : ''}
       <CallToAction />
       <FacebookFeed />
-      <Footer />
     </main>
   );
 };
