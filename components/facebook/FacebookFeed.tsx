@@ -33,15 +33,10 @@ const FacebookFeed = () => {
     const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=21&fields=${fields}&access_token=${token}`;
     const res = await fetch(fbFetchUrl);
     const fetchedFeed = await res.json();
-    console.log(fetchedFeed, " FETCHED FEED ")
 
     // remove all the weird characters from the content to avoid mySql errors
     if (fetchedFeed.data && fetchedFeed.data.length > 0) {
       const renderedFeed = renderToString(fetchedFeed.data);
-      console.log('*** RENDERED FEED ***')
-      console.log(renderedFeed)
-      console.log('*** /RENDERED FEED ***')
-
       const data = {
         content: renderedFeed,
         date_updated: dateTimeHelper(new Date()),
@@ -62,8 +57,6 @@ const FacebookFeed = () => {
       );
     }
   }
-
-  console.log(feed, " FEED IN FACEBOOKFEED")
 
   return (
     <section className={styles.facebookPage}>
