@@ -155,7 +155,8 @@ main {
   padding-top: 115px;
 }
 #home-page,
-#admin-content {
+#admin-content,
+#login-page {
   padding-top: 0;
 }
 @media (min-width: 1201px) {

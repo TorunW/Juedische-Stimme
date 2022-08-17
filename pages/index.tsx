@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { NextPageContext } from 'next';
 import { hasCookie } from 'cookies-next';
 
 import type { LayoutPage } from 'types/LayoutPage.type';
@@ -12,17 +13,16 @@ import { useDispatch, useSelector } from 'store/hooks';
 import { setToken, setEvents, setFeed } from 'store/fbdata/fbDataSlice';
 import { setPosts, setNewsletter } from 'store/posts/postsSlice';
 import { setMenuItems } from 'store/nav/navSlice';
+import { setLanguages } from 'store/languages/languagesSlice';
+import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';
 
 import Posts from '@/components/posts/Posts';
 import FacebookFeed from '@/components/facebook/FacebookFeed';
 import FacebookEvents from '@/components/facebook/FacebookEvents';
 import Header from 'components/Header';
 import AboutInfo from 'components/AboutInfo';
-import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';
-import { NextPageContext } from 'next';
-import { setLanguages } from 'store/languages/languagesSlice';
+
 import CallToAction from '@/components/CallToAction';
-import Footer from '@/components/Footer';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -89,9 +89,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       postType: 'post',
       fieldsList: [
         'ID',
-        'post_author',
         'post_date',
-        'post_date_gmt',
         'post_content',
         'post_title',
         'post_name',
@@ -102,9 +100,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       locale: context.locale !== context.defaultLocale ? context.locale : '',
     }),
   });
-
   const posts = JSON.stringify(postsResponse);
-
   // Newsletter
   const newsletterResponse = await excuteQuery({
     query: selectPostsByTag({
