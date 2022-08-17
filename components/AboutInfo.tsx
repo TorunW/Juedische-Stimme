@@ -31,7 +31,7 @@ const AboutInfo = () => {
   }
 
   return (
-    <div id='about-info' className={styles.aboutPage}>
+    <section id='about-info' className={styles.aboutPage}>
       <h1>Über Uns</h1>
       {aboutInfoDisplay}
       <div className={styles.contentContainer}>
@@ -51,7 +51,7 @@ const AboutInfo = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

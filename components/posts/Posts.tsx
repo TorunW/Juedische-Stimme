@@ -7,9 +7,9 @@ import Post from './Post';
 
 function Posts(props) {
   return (
-    <div
-      className={
-        props.title === 'Newsletter' ? styles.threeColPage : styles.twoColPage
+    <section
+      className={'posts-sections ' + 
+        (props.title === 'Newsletter' ? styles.threeColPage : styles.twoColPage)
       }
     >
       <h1>{props.title}</h1>
@@ -23,7 +23,7 @@ function Posts(props) {
           Weitere {props.title === 'Aktuelles' ? 'Artikeln' : props.title} lesen
         </a>
       </div>
-    </div>
+    </section>
   );
 }
 export default Posts;

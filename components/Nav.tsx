@@ -22,13 +22,6 @@ function Nav() {
   useEffect(() => {
     if (locale !== null) {
       let newPathName = window.location.pathname;
-      // <<<<<<< HEAD
-      //       console.log(locale, ' LOCALE ');
-      //       if (window.location.pathname.indexOf(locale) > -1)
-      //         newPathName = window.location.pathname.split(locale)[1];
-      //       console.log(newPathName);
-      //       setPathName(newPathName);
-      // =======
       if (window.location.pathname.indexOf(locale) > -1)
         newPathName = window.location.pathname.split(locale)[1];
       setPathName(newPathName);

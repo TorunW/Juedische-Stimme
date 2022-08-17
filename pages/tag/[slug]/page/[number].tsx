@@ -29,16 +29,18 @@ const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
   }, [props.posts]);
 
   return (
-    <div className={styles.container}>
-      {posts ? <Posts posts={posts} /> : ''}
-      {
-        /* PAGINATION NEEDED */
-        // get total number of items - in this case post by COUNTING the table rows
-        // create a reuseable component to display pagination
-        // pass props.pageNum, totalItemsCount, itemsPerPage to pagination component
-        /* /PAGINATION NEEDED */
-      }
-    </div>
+    <main id="tag-posts-page">
+      <section className={styles.container}>
+        {posts ? <Posts posts={posts} /> : ''}
+        {
+          /* PAGINATION NEEDED */
+          // get total number of items - in this case post by COUNTING the table rows
+          // create a reuseable component to display pagination
+          // pass props.pageNum, totalItemsCount, itemsPerPage to pagination component
+          /* /PAGINATION NEEDED */
+        }
+      </section>
+    </main>
   );
 };
 

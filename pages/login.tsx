@@ -4,9 +4,11 @@ import LoginForm from '@/components/auth/Login';
 
 const Login: LayoutPage = (props: LayoutPageProps) => {
   return (
-    <div>
+    <main id="login-page">
+      <section>
       <LoginForm />
-    </div>
+      </section>
+    </main>
   );
 };
 

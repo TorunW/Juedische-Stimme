@@ -18,7 +18,7 @@ const CallToAction = () => {
   }
 
   return (
-    <div className={styles.ctaPage}>
+    <section className={styles.ctaPage}>
       <div className={styles.imgWrapper}>
         <Image src={backgroundImage} className={styles.backgroundImage} />
         <div className={styles.boxContainer}>
@@ -207,7 +207,6 @@ const CallToAction = () => {
                 </filter>
               </defs>
             </svg>
-
             <h4>Spenden</h4>
             <p>
               Deine Spende hilt uns, die Menschenrechte weltweit zu verteidigen!
@@ -215,18 +214,14 @@ const CallToAction = () => {
           </div>
         </div>
       </div>
-
       <div
-        data-testid='newsletter-form'
         className={
-          styles.drawer +
-          ' ' +
-          (isShown === true ? styles.visible : styles.hidden)
+          styles.drawer + ' ' + (isShown === true ? styles.visible : '')
         }
       >
         <NewsletterForm />
       </div>
-    </div>
+    </section>
   );
 };
 

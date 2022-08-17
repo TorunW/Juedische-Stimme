@@ -8,12 +8,12 @@ const Header = () => {
   if (aboutInfo && aboutInfo.header_slogan)
     headerSlogan = aboutInfo.header_slogan;
   return (
-    <div id='main-header' role='main-header' className={styles.header}>
+    <header id='main-header' role='main-header' className={styles.header}>
       <div
         className={styles.container}
         dangerouslySetInnerHTML={{ __html: headerSlogan }}
       ></div>
-    </div>
+    </header>
   );
 };
 

@@ -3,12 +3,10 @@ import AdminNav from './Nav'
 
 import styles from '../../styles/Admin.module.css'
 import Link from 'next/link'
-
 function AdminLayout({ children }) {
   return (
-    <div>
-
-      <div className={styles.adminHeader}>
+    <div id="admin-layout">
+      <header id="admin-header" className={styles.adminHeader}>
         <h1>Admin</h1>
         <ul>
           <li>NEW</li>
@@ -20,18 +18,12 @@ function AdminLayout({ children }) {
             <li>USER</li>
           </ul>
         </ul>
-      </div>
-
-      <hr/>
-
-      <div className={styles.adminSidebar}>
+      </header>
+      <main id="admin-content">
         <AdminNav/>
-      </div>
-      <div className={styles.adminMain}>
         {children}
-      </div>
+      </main>
     </div>
   )
 }
-
 export default AdminLayout

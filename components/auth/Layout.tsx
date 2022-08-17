@@ -1,7 +1,7 @@
 import React from 'react';
 
 function EmptyLayout({ children }) {
-  return <div>{children}</div>;
+  return <div id="auth-layout">{children}</div>;
 }
 
 export default EmptyLayout;

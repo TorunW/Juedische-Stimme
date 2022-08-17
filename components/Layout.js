@@ -12,9 +12,10 @@ function Layout({ children }) {
   }, []);
 
   return (
-    <div>
+    <div id="main-layout">
       <Nav />
       {children}
+      <Footer/>
     </div>
   );
 }

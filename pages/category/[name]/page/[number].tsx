@@ -33,7 +33,8 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
   }, [props.posts]);
 
   return (
-    <div className={styles.container}>
+    <main id="category-posts-page">
+    <section className={styles.container}>
       {categories ? (
         <SearchFilter
           phrase={''}
@@ -44,7 +45,8 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
         ''
       )}
       {posts ? <Posts posts={posts} /> : ''}
-    </div>
+    </section>
+    </main>
   );
 };
 

@@ -83,10 +83,10 @@ const FacebookEvents = () => {
   }
 
   return (
-    <div id='events' className={styles.eventsPage}>
+    <section id='events' className={styles.eventsPage}>
       <h2>Aktivitäten</h2>
       <div className={styles.contentContainer}>{eventsDisplay}</div>
-    </div>
+    </section>
   );
 };
 

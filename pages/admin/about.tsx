@@ -15,12 +15,12 @@ export default function AboutInfoPage(props) {
   },[])
   console.log(aboutInfo)
   return (
-      <div>
+      <section>
         <h2>ABOUT INFO</h2>
         <AboutInfoForm
           aboutInfo={aboutInfo}
         />
-      </div>
+      </section>
   )
 }
 

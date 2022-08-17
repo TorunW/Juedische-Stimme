@@ -26,17 +26,19 @@ const PostsPage: LayoutPage = (props: LayoutPageProps) => {
   }, [props.posts]);
 
   return (
-    <div className={styles.container}>
-      {categories ? (
-        <SearchFilter
-          categoryName={props.categoryName}
-          categories={categories}
-        />
-      ) : (
-        ''
-      )}
-      {posts ? <Posts posts={posts} /> : ''}
-    </div>
+    <main id="list-page">
+      <section className={styles.container}>
+        {categories ? (
+          <SearchFilter
+            categoryName={props.categoryName}
+            categories={categories}
+          />
+        ) : (
+          ''
+        )}
+        {posts ? <Posts posts={posts} /> : ''}
+      </section>
+    </main>
   );
 };
 

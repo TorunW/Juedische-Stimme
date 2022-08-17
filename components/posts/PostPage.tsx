@@ -81,7 +81,7 @@ function Post({ post }) {
       </React.Fragment>
     );
   }
-  return <div>{postDisplay}</div>;
+  return <div id="post-view" style={{padding:"15px"}}>{postDisplay}</div>;
 }
 
 export default Post;

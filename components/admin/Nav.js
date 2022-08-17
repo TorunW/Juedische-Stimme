@@ -12,7 +12,7 @@ function AdminNav() {
     router.push('/login');
   }
   return (
-    <div>
+    <aside id="admin-sidebar">
       <ul>
         <li>
           <Link href='/admin'>Dashboard</Link>
@@ -49,7 +49,7 @@ function AdminNav() {
         </li>
       </ul>
       <button onClick={logout}>Logout</button>
-    </div>
+    </aside>
   );
 }
 

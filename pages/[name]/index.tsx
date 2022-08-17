@@ -26,9 +26,11 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
   let page = JSON.parse(props.page)[0];
 
   return (
-    <div>
-      <Post post={page} />
-    </div>
+    <main id="post-page">
+      <section>
+        <Post post={page} />
+      </section>
+    </main>
   );
 };
 
