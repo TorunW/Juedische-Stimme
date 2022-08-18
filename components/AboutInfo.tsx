@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'store/hooks';
 
 import Image from 'next/image';
 
-import Gallery from './Gallery';
+import Gallery from './gallery/Gallery';
 
 import styles from 'styles/About.module.css';
 import containerBackground from 'styles/images/about.jpg';
