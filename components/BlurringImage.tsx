@@ -1,19 +1,23 @@
 import React from 'react';
+import Image from 'next/image';
 
-function BlurringImage({ svg }) {
+function BlurringImage({ svg, img }) {
   const Svg = svg[0];
   const svgProps = svg[1];
   const rectangles = svg[2];
 
   return (
-    <Svg {...svgProps}>
-      {rectangles.map((rect) => {
-        const Rect = rect[0];
-        const rectProps = rect[1];
+    <div>
+      <Svg style={{ ...svgProps.style, filter: `blur(5px)` }}>
+        {rectangles.map((rect) => {
+          const Rect = rect[0];
+          const rectProps = rect[1];
 
-        <Rect {...rectProps} key={`${rectProps.x}${rectProps.y}`} />;
-      })}
-    </Svg>
+          <Rect {...rectProps} key={`${rectProps.x}${rectProps.y}`} />;
+        })}
+      </Svg>
+      <Image {...img} />
+    </div>
   );
 }
 
