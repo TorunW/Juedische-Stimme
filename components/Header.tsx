@@ -17,7 +17,7 @@ const Header = () => {
     headerSlogan = aboutInfo.header_slogan;
   return (
     <header id='main-header' role='main-header' className={styles.header}>
-      <BlurringImage svg={svg} />
+      {svg.length > 0 ? <BlurringImage svg={svg} /> : ""}
       <div
         className={styles.container}
         dangerouslySetInnerHTML={{ __html: headerSlogan }}

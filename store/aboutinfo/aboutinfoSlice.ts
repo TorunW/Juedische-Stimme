@@ -5,7 +5,7 @@ let initialState = {
     gallery:null,
     headerImage:{
       img:null,
-      svg:null,
+      svg:[],
       uri:null
     }
 }
