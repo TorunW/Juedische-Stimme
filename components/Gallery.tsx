@@ -2,38 +2,41 @@ import React, { useState, useRef } from 'react';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import styles from 'styles/Gallery.module.css';
 import { usePrevious } from 'helpers/usePreviousHelper';
+import GalleryImage from './GalleryImage';
 
 const Gallery = ({ gallery }) => {
   const [slideIndex, setSlideIndex] = useState(0);
   const [buttonHidden, setButtonHidden] = useState(false);
   const prevSlideIndex = usePrevious(slideIndex);
 
-  console.log(buttonHidden, 'visivle');
-
   function nextSlide() {
-    const nextSlideIndex = slideIndex + 1;
-    if (nextSlideIndex < slideShow.length) {
-      setSlideIndex(slideIndex + 1);
-    } else {
-      setSlideIndex(0);
+    if (buttonHidden === false) {
+      const nextSlideIndex = slideIndex + 1;
+      if (nextSlideIndex < slideShow.length) {
+        setSlideIndex(slideIndex + 1);
+      } else {
+        setSlideIndex(0);
+      }
+      setButtonHidden(true);
     }
-    setButtonHidden(true);
   }
 
   function prevSlide() {
-    const nextSlideIndex = slideIndex + 1;
-    if (nextSlideIndex === 0) {
-      setSlideIndex(slideIndex - 1);
-    } else if (slideIndex === 0) {
-      setSlideIndex(slideShow.length);
+    if (buttonHidden === false) {
+      const nextSlideIndex = slideIndex - 1;
+      if (nextSlideIndex < 0) {
+        setSlideIndex(slideShow.length - 1);
+      } else {
+        setSlideIndex(nextSlideIndex);
+      }
+      setButtonHidden(true);
     }
-    setButtonHidden(true);
   }
 
   if (buttonHidden === true) {
     setTimeout(() => {
       setButtonHidden(false);
-    }, 500);
+    }, 5000);
   }
 
   let slideShow = gallery.imageSrcs
@@ -49,21 +52,14 @@ const Gallery = ({ gallery }) => {
             : styles.slide
         }
       >
-        <img src={generateImageUrl(imgSrc)} />
+        <GalleryImage image={imgSrc} />
       </div>
     ));
 
   return (
     <div className={styles.gallery}>
       <div className={styles.containerSlider}>
-        <button
-          className={
-            buttonHidden === true
-              ? styles.prev + ' ' + styles.hidden
-              : styles.prev
-          }
-          onClick={prevSlide}
-        >
+        <button className={styles.prev} onClick={prevSlide}>
           <svg
             width='70'
             height='70'
@@ -77,15 +73,10 @@ const Gallery = ({ gallery }) => {
             />
           </svg>
         </button>
+
         {slideShow}
-        <button
-          className={
-            buttonHidden === true
-              ? styles.next + ' ' + styles.hidden
-              : styles.next
-          }
-          onClick={nextSlide}
-        >
+
+        <button className={styles.next} onClick={nextSlide}>
           <svg
             width='70'
             height='70'
