@@ -51,6 +51,7 @@
     "react-google-recaptcha": "^2.1.0",
     "react-google-recaptcha-v3": "^1.10.0",
     "react-hook-form": "^7.30.0",
+    "sharp": "^0.30.7",
     "typescript": "^4.7.4",
     "yup": "^0.32.11"
   }
