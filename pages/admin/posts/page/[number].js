@@ -5,7 +5,7 @@ import styles from 'styles/Home.module.css'
 import excuteQuery from 'lib/db'
 
 import AdminPosts from 'components/admin/Posts'
-import { selectPosts } from 'lib/queries/posts';
+import { selectAdminPosts } from 'lib/queries/posts';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setPosts } from 'store/posts/postsSlice';
@@ -40,12 +40,14 @@ AdminPostsPage.layout = "admin"
 export const getServerSideProps = async (context) => {
     
     const postsResponse = await excuteQuery({
-      query: selectPosts({
+      query: selectAdminPosts({
         numberOfPosts:50,
         pageNum:context.query.number,
         showUnpublished:true,
         postType:'post', 
-        fieldsList:['post_title','post_name','post_date']})
+        fieldsList:['post_title','post_name','post_date'],
+        locale: context.locale !== context.defaultLocale ? context.locale : '',
+      })
     });
     const posts = JSON.stringify(postsResponse);
     return {

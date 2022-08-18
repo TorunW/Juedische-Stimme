@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios';
 
 const MenuItems = ({menuItems}) => {
-
+    
     function deleteMenuItem(menuItem){
         axios.delete(`/api/menus/${menuItem.term_id}`, {
             data: {
