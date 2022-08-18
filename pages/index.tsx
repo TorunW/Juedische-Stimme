@@ -159,7 +159,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
   });
   const fbEvents = JSON.stringify(fbEventsReponse);
 
-  const headerImageUri = 'http://localhost:3000/header-background.jpg'
+  const headerImageUri = `${context.req.headers.referer}header-background.jpg`
   let { img , svg} = await getPlaiceholder(headerImageUri, {
     size: 64,
   });

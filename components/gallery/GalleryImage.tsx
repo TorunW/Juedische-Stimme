@@ -19,7 +19,9 @@ const GalleryImage = ({ image }) => {
       method: 'post',
       url: `/api/galleryimage/placeholder`,
         data:{
-          uri:image
+          uri:image,
+          host:window.location.host,
+          port:window.location.port
         }
     }).then((response) => {
       setImageData(response.data)

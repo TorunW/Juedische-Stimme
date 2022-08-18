@@ -3,8 +3,8 @@ import { getPlaiceholder } from 'plaiceholder';
 export default async (req, res) => {
     try {
         if (req.method === 'POST') {
-        
-            const uri = `http://localhost:3000/wp-content/uploads/${req.body.uri}`
+
+            const uri = `${req.headers.referer}wp-content/uploads/${req.body.uri}`
 
             const {img, svg} = await getPlaiceholder(uri, {
               size: 64,
