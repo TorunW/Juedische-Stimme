@@ -103,7 +103,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
       locale: context.locale !== context.defaultLocale ? context.locale : '',
     }),
   });
-  console.log(postsResponse)
   const posts = JSON.stringify(postsResponse);
   // Newsletter
   const newsletterResponse = await excuteQuery({
