@@ -117,6 +117,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
         'post_content',
         'post_title',
         'post_name',
+        'categoryId',
         'categoryName',
         'postImage'
       ],

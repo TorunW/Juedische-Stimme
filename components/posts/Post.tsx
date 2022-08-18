@@ -60,8 +60,8 @@ const Post: React.FC<Props> = ({ post }) => {
     <article className={styles.post}>
       <div className={styles.imageWrapper}>
         <img
-          // src={generateImageUrl(post.post_image)}
-          src='testpic.jpg'
+          src={generateImageUrl(post.post_image)}
+          // src='testpic.jpg'
           width='767'
           height='431'
         />

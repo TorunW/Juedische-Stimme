@@ -1,6 +1,8 @@
 import React from 'react'
+import Image from 'next/image';
 import axios from 'axios'
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
+import { generateImageUrl } from 'helpers/imageUrlHelper';
 
 function Posts({posts}) {
 
@@ -33,6 +35,7 @@ function Posts({posts}) {
     if (posts){
         postsDisplay = posts.map((post,index)=>(
             <div key={index}>
+                <Image height="100" width="100" src={generateImageUrl(post.post_image)}/>
                 <h3><a href={"/admin/posts/" + GeneratePostUrl(post.post_name)}>{post.post_title}</a></h3>
                 <span>AUTHOR: {post.username}</span>
                 <span>DATE PUBLISHED:{new Date(post.post_date).toLocaleString('de')}</span>
