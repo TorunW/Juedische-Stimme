@@ -93,6 +93,9 @@ export const getServerSideProps = async (context: NextPageContext) => {
         'post_content',
         'post_title',
         'post_name',
+        'categoryId',
+        'categoryName',
+        'postImage'
       ],
       exclude: {
         category: 66,
@@ -108,6 +111,16 @@ export const getServerSideProps = async (context: NextPageContext) => {
       numberOfPosts: 6,
       pageNum: 1,
       isCategory: true,
+      fieldsList: [
+        'ID',
+        'post_date',
+        'post_content',
+        'post_title',
+        'post_name',
+        'categoryId',
+        'categoryName',
+        'postImage'
+      ],
       locale: context.locale !== context.defaultLocale ? context.locale : '',
     }),
   });

@@ -9,8 +9,10 @@ const DynamicTiptapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
     suspense:true
 })
 const AboutInfoForm = ({aboutInfo}) => {
+    
     const { galleries } = useSelector(state => state.galleries)
     const [ selectedGalleryId, setSelectedGalleryId ] = useState(aboutInfo.about_gallery_id)
+
     const formik = useFormik({
         initialValues: {
             ...aboutInfo

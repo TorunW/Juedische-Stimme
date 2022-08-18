@@ -45,7 +45,8 @@ export const getServerSideProps = async (context) => {
         pageNum:context.query.number,
         showUnpublished:true,
         postType:'post', 
-        fieldsList:['post_title','post_name','post_date']})
+        locale: context.locale !== context.defaultLocale ? context.locale : '',
+      })
     });
     const posts = JSON.stringify(postsResponse);
     return {

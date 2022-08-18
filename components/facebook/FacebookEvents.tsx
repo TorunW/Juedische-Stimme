@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import dateTimeHelper from 'helpers/dateTimeHelper';
 import formateDate from 'helpers/formateDate';
 import axios from 'axios';
@@ -15,38 +15,36 @@ const FacebookEvents = () => {
   const events = useSelector((state) => state.fbData.events);
 
   useEffect(() => {
-    if (token) initFacebookEvents();
+    if (token) {
+      initFacebookEvents();
+      // fetchFacebookEvents();
+    }
   }, [token]);
 
   async function initFacebookEvents() {
-    if (!events) {
-      fetchFacebookEvents();
-    } else {
-      if (!isUpdatedToday(events.date_updated)) fetchFacebookEvents();
-    }
+    if (!events || !isUpdatedToday(events.date_updated)) fetchFacebookEvents();
   }
 
   async function fetchFacebookEvents() {
     const res = await fetch(
-      `https://graph.facebook.com/998665673528998/events?limit=4&access_token=${token}`
+      `https://graph.facebook.com/998665673528998/events?limit=3&access_token=${token}`
     );
     const fetchedEvents = await res.json();
-    // remove all the weird characters from the content to avoid mySql errors
     if (fetchedEvents.data && fetchedEvents.data.length > 0) {
+      // remove all the weird characters from the content to avoid mySql errors
       const renderedEvents = renderToString(fetchedEvents.data);
+      const data = {
+        content: renderedEvents,
+        date_updated: dateTimeHelper(new Date()),
+        type: 'events',
+      }
       axios({
         method: 'post',
         url: `/api/fbfeed`,
-        data: {
-          content: renderedEvents,
-          date_updated: dateTimeHelper(new Date()),
-          type: 'events',
-        },
+        data
       }).then(
         (response) => {
-          console.log(fetchedEvents, ' FETCHED EVENTS');
-          dispatch(setEvents(fetchedEvents.data));
-          console.log(response, 'response on create fb feed record');
+          dispatch(setEvents(data));
         },
         (error) => {
           console.log(error, 'ERROR on create fb feed record');
@@ -55,7 +53,7 @@ const FacebookEvents = () => {
     }
   }
 
-  let eventsDisplay;
+  let eventsDisplay: ReactElement;
   if (events && events.content && events.content.length > 0) {
     const eventsArray = JSON.parse(events.content);
     eventsDisplay = eventsArray.map((fbEvent, index) => {

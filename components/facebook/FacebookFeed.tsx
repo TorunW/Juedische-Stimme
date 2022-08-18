@@ -30,7 +30,7 @@ const FacebookFeed = () => {
   async function fetchFacebookFeed() {
     const fields =
       'id,likes,reactions,comments,shares,attachments,full_picture,message,from,permalink_url,created_time';
-    const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=21&fields=${fields}&access_token=${token}`;
+    const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=4&fields=${fields}&access_token=${token}`;
     const res = await fetch(fbFetchUrl);
     const fetchedFeed = await res.json();
 
@@ -49,6 +49,8 @@ const FacebookFeed = () => {
         data,
       }).then(
         (response) => {
+
+          console.log(data, " DATA ")
           dispatch(setFeed(data));
         },
         (error) => {
