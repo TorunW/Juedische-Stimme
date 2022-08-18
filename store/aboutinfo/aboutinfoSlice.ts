@@ -3,7 +3,11 @@ import {createSlice} from '@reduxjs/toolkit'
 let initialState = {
     aboutInfo:null,
     gallery:null,
-    headerImage:null
+    headerImage:{
+      img:null,
+      svg:null,
+      uri:null
+    }
 }
 
 const aboutInfoSlice = createSlice({

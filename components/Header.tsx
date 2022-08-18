@@ -4,6 +4,7 @@ import styles from 'styles/Header.module.css';
 
 const Header = () => {
   const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
+
   const { img, svg, uri } = headerImage
 
   console.log(img, " IMG ")
