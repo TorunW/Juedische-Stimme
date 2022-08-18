@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
-import styles from 'styles/Gallery.module.css';
 import axios from 'axios';
 import BlurringImage from '../BlurringImage';
+import styles from 'styles/Gallery.module.css';
 
 const GalleryImage = ({ image }) => {
   
@@ -11,11 +11,10 @@ const GalleryImage = ({ image }) => {
   console.log(imageData, " IMAGE DATA ")
 
   useEffect(() => {
-    if (imageData !== null) fetchPlaceholderImage()
+    if (imageData === null) fetchPlaceholderImage()
   },[])
 
   function fetchPlaceholderImage(){
-    console.log('FETCH PLACEHOLDER IMAGE ')
     axios({
       method: 'post',
       url: `/api/galleryimage/placeholder`,
