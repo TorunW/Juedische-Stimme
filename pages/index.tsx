@@ -51,7 +51,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       setAboutInfo({
         aboutInfo: JSON.parse(props.aboutInfo)[0],
         gallery: JSON.parse(props.gallery)[0],
-        headerImage:JSON.parse(props.homePageImage)
+        headerImage:JSON.parse(props.headerImage)
       })
     );
     dispatch(
@@ -161,12 +161,12 @@ export const getServerSideProps = async (context: NextPageContext) => {
   });
   const fbEvents = JSON.stringify(fbEventsReponse);
 
-  const homePageImageUri = 'http://localhost:3000/header-background.jpg'
-  let { img , svg} = await getPlaiceholder(homePageImageUri, {
+  const headerImage = 'http://localhost:3000/header-background.jpg'
+  let { img , svg} = await getPlaiceholder(headerImage, {
     size: 64,
   });
   const homePageImage = JSON.stringify({
-    uri:homePageImageUri,
+    uri:headerImage,
     img,
     svg
   })
@@ -184,7 +184,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       locales: context.locales,
       locale: context.locale,
       defaultLocale: context.defaultLocale,
-      homePageImage
+      headerImage
     },
   };
 };
