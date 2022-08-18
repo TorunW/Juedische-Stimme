@@ -37,11 +37,11 @@ const FacebookEvents = () => {
         content: renderedEvents,
         date_updated: dateTimeHelper(new Date()),
         type: 'events',
-      }
+      };
       axios({
         method: 'post',
         url: `/api/fbfeed`,
-        data
+        data,
       }).then(
         (response) => {
           dispatch(setEvents(data));
