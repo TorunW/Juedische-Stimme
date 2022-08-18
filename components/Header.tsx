@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { useSelector } from 'store/hooks';
 import styles from 'styles/Header.module.css';
 
@@ -10,7 +10,7 @@ const Header = () => {
   console.log(svg, " SVG ")
   console.log(uri, " URI ")
 
-  let headerSlogan: Text;
+  let headerSlogan: any;
   if (aboutInfo && aboutInfo.header_slogan)
     headerSlogan = aboutInfo.header_slogan;
   return (
