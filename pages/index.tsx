@@ -24,11 +24,15 @@ import AboutInfo from 'components/AboutInfo';
 
 import CallToAction from '@/components/CallToAction';
 
+import { getPlaiceholder } from "plaiceholder";
+
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
 
   useEffect(() => {
+
+    console.log(props.homePageImage, " HOME PAGE IMAGE ")
 
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
@@ -47,6 +51,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       setAboutInfo({
         aboutInfo: JSON.parse(props.aboutInfo)[0],
         gallery: JSON.parse(props.gallery)[0],
+        headerImage:JSON.parse(props.homePageImage)
       })
     );
     dispatch(
@@ -74,6 +79,10 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
+
+  if (!hasCookie('Token', { req: context.req, res: context.res })) 
+    return { redirect: { destination: '/login', permanent: false } };
+
   // NAVIGATION
   const navItemsResponse = await excuteQuery({
     query: selectMenuItems(),
@@ -104,6 +113,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     }),
   });
   const posts = JSON.stringify(postsResponse);
+
   // Newsletter
   const newsletterResponse = await excuteQuery({
     query: selectPostsByTag({
@@ -151,8 +161,16 @@ export const getServerSideProps = async (context: NextPageContext) => {
   });
   const fbEvents = JSON.stringify(fbEventsReponse);
 
-  if (!hasCookie('Token', { req: context.req, res: context.res }))
-    return { redirect: { destination: '/login', permanent: false } };
+  const homePageImageUri = 'http://localhost:3000/header-background.jpg'
+  let { img , svg} = await getPlaiceholder(homePageImageUri, {
+    size: 64,
+  });
+  const homePageImage = JSON.stringify({
+    uri:homePageImageUri,
+    img,
+    svg
+  })
+  
   return {
     props: {
       navItems,
@@ -166,6 +184,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       locales: context.locales,
       locale: context.locale,
       defaultLocale: context.defaultLocale,
+      homePageImage
     },
   };
 };
