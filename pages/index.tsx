@@ -32,8 +32,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 
   useEffect(() => {
 
-    console.log(props.homePageImage, " HOME PAGE IMAGE ")
-
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
     dispatch(setNewsletter(JSON.parse(props.newsletter)));
@@ -161,12 +159,12 @@ export const getServerSideProps = async (context: NextPageContext) => {
   });
   const fbEvents = JSON.stringify(fbEventsReponse);
 
-  const headerImage = 'http://localhost:3000/header-background.jpg'
-  let { img , svg} = await getPlaiceholder(headerImage, {
+  const headerImageUri = 'http://localhost:3000/header-background.jpg'
+  let { img , svg} = await getPlaiceholder(headerImageUri, {
     size: 64,
   });
-  const homePageImage = JSON.stringify({
-    uri:headerImage,
+  const headerImage = JSON.stringify({
+    uri:headerImageUri,
     img,
     svg
   })
