@@ -8,6 +8,9 @@ type Props = {
 };
 
 const FacebookPost: React.FC<Props> = ({ post }) => {
+
+  console.log(post, " POST ")
+
   let sharedPostDisplay;
   if (post.attachments) {
     sharedPostDisplay = post.attachments.data.map((attPost, index) => {

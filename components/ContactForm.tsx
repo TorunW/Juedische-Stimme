@@ -34,9 +34,6 @@ const ContactForm = () => {
     },
   });
 
-  console.log(formik.touched)
-
-
   return (
     <div id='contact' className={styles.container}>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
