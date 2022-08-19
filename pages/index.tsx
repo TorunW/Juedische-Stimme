@@ -31,19 +31,10 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   const { posts, newsletter } = useSelector((state) => state.posts);
 
   useEffect(() => {
+    getFbToken();
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
     dispatch(setNewsletter(JSON.parse(props.newsletter)));
-    dispatch(
-      setToken(
-        JSON.parse(props.fbToken).length > 0
-          ? JSON.parse(props.fbToken)[0].token
-          : null
-      )
-    );
-    dispatch(setEvents(JSON.parse(props.fbEvents)[0]));
-    dispatch(setFeed(JSON.parse(props.fbFeed)[0]));
-
     dispatch(
       setAboutInfo({
         aboutInfo: JSON.parse(props.aboutInfo)[0],
@@ -59,6 +50,14 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       })
     );
   }, []);
+
+  async function getFbToken(){
+    const fbTokenResult = await fetch('/api/fbtoken')
+    const fbToken = await fbTokenResult.json()
+    dispatch(
+      setToken(fbToken[0])
+    );
+  }
 
   return (
     <main id='home-page'>
@@ -143,27 +142,10 @@ export const getServerSideProps = async (context: NextPageContext) => {
   });
   const gallery = JSON.stringify(galleryResponse);
 
-  // FB
-  const fbTokenResponse = await excuteQuery({
-    query: `SELECT * FROM fb_token LIMIT 1`,
-  });
-  const fbToken = JSON.stringify(fbTokenResponse);
-  const fbFeedResponse = await excuteQuery({
-    query: `SELECT * FROM fb_feed WHERE type='posts' ORDER BY ID DESC LIMIT 1`,
-  });
-  const fbFeed = JSON.stringify(fbFeedResponse);
-  const fbEventsReponse = await excuteQuery({
-    query: `SELECT * FROM fb_feed WHERE type='events' ORDER BY ID DESC LIMIT 1`,
-  });
-  const fbEvents = JSON.stringify(fbEventsReponse);
-
-  // console.log(context.req.headers, " CONTEXT ")
-
   const headerImageUri = `http://${context.req.headers.host}/header-background.jpg`;
   let { img, svg } = await getPlaiceholder(headerImageUri, {
     size: 64,
   });
-  // console.log(img, svg)
   const headerImage = JSON.stringify({
     uri: headerImageUri,
     img,
@@ -175,9 +157,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
       navItems,
       posts,
       newsletter,
-      fbFeed,
-      fbEvents,
-      fbToken,
       aboutInfo,
       gallery,
       locales: context.locales,

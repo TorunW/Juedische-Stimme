@@ -15,19 +15,25 @@ const FacebookFeed = () => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.fbData.token);
   const feed = useSelector((state) => state.fbData.feed);
+
   useEffect(() => {
-    if (token) {
-      initFacebookFeed();
-      // fetchFacebookFeed()
+    fetchFacebookFeedFromDb()
+  },[])
+
+  useEffect(() => {
+    if (token && token !== null) {
+      if (!feed || !isUpdatedToday(feed.date_updated)) fetchFacebookFeedFromFb();
     }
   }, [token]);
 
-  async function initFacebookFeed() {
-    if (!feed || !isUpdatedToday(feed.date_updated)) fetchFacebookFeed();
+  async function fetchFacebookFeedFromDb(){
+    const res = await fetch('/api/fbfeed')
+    const feedRes = await res.json()
+    dispatch(setFeed(feedRes[0]));
   }
 
   // each fbpost has a attachment.data => array, every data has a type, theres if its their photo its photo, if its a shared hen its smt else
-  async function fetchFacebookFeed() {
+  async function fetchFacebookFeedFromFb() {
     const fields =
       'id,likes.summary(true).limit(0),comments.summary(true).limit(0),reactions,shares,attachments,full_picture,message,from,permalink_url,created_time';
     const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=4&fields=${fields}&access_token=${token}`;

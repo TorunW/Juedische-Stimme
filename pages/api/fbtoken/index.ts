@@ -7,13 +7,13 @@ export default async (req, res) => {
             const result = await excuteQuery({
                 query: insertFbToken(req.body)
             });
-            // console.log(result,"result")
             res.json(result)
         }
-        else {
-            // Handle any other HTTP method
-            console.log('not post request')
-            res.json({message:'no GET here!'})
+        else if (req.method === 'GET') {
+            const result = await excuteQuery({
+                query: `SELECT * FROM fb_token LIMIT 1`,
+            });
+            res.json(result)
         }
     } catch ( error ) {
         console.log(error );
