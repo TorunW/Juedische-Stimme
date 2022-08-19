@@ -18,6 +18,12 @@ function Posts({posts}) {
           })
         }
 
+        if (post.post_image !== null && post.post_image.indexOf('null') === -1){
+            const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== '80' ? ':'+window.location.port : ""}/media/${post.post_image.split('/').join('+++')}`;
+            const deleteFileRequest = axios.delete(deleteFileUrl)
+            deleteRequests.push(deleteFileRequest)
+        }
+
         const deletePostUrl = `/api/posts/${post.postId}`
         const deletePostRequest = axios.delete(deletePostUrl,{data:{categoryId:post.categoryId}})
         deleteRequests.push(deletePostRequest);
