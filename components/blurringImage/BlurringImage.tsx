@@ -19,7 +19,7 @@ function BlurringImage({
 
   return (
     <div className={styles.container}>
-      {hasPlaceholder && (
+      <div className={styles.blurringImageContainer}>
         <Svg
           {...svgProps}
           style={{ ...svgProps.style, filter: `blur(${blurLevel}px)` }}
@@ -29,12 +29,19 @@ function BlurringImage({
             <Rect {...rectProps} key={`${rectProps.x}${rectProps.y}`} />
           ))}
         </Svg>
-      )}
+      </div>
       <Image
         {...img}
         {...props}
+<<<<<<< HEAD
         // className={styles.img}
         // onLoadingComplete={() => setHasPlaceholder(false)}
+=======
+        className={styles.img}
+        layout='fixed'
+        alt={alt}
+        onLoadingComplete={() => setHasPlaceholder(false)}
+>>>>>>> 2fc1951c483367b4e267ddffb63e0e71d87e211b
       />
     </div>
   );
