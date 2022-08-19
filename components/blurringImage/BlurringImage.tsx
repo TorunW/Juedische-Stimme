@@ -33,15 +33,10 @@ function BlurringImage({
       <Image
         {...img}
         {...props}
-<<<<<<< HEAD
-        // className={styles.img}
-        // onLoadingComplete={() => setHasPlaceholder(false)}
-=======
         className={styles.img}
         layout='fixed'
         alt={alt}
         onLoadingComplete={() => setHasPlaceholder(false)}
->>>>>>> 2fc1951c483367b4e267ddffb63e0e71d87e211b
       />
     </div>
   );
