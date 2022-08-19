@@ -22,19 +22,21 @@ function BlurringImage({
       {hasPlaceholder && (
         <Svg
           {...svgProps}
-          style={{ ...svgProps.style, filter: `${blurLevel}px` }}
+          style={{ ...svgProps.style, filter: `blur(${blurLevel}px)` }}
+          height={height}
         >
-          {rectangles.map(([Rect, rectProps]) => {
-            <Rect {...rectProps} key={`${rectProps.x}${rectProps.y}`} />;
-          })}
+          {rectangles.map(([Rect, rectProps]) => (
+            <Rect {...rectProps} key={`${rectProps.x}${rectProps.y}`} />
+          ))}
         </Svg>
       )}
       <Image
         {...img}
         {...props}
         className={styles.img}
+        // height={height}
         alt={alt}
-        onLoadingComplete={() => setHasPlaceholder(false)}
+        // onLoadingComplete={() => setHasPlaceholder(false)}
       />
     </div>
   );

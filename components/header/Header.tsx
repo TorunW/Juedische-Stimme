@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react';
 import { useSelector } from 'store/hooks';
 import styles from './Styles.module.css';
 import BlurringImage from '../blurringImage/BlurringImage';
+import { imageConfigDefault } from 'next/dist/shared/lib/image-config';
 
 const Header = () => {
   const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
@@ -17,7 +18,7 @@ const Header = () => {
         img={img}
         alt={undefined}
         style={undefined}
-        className={styles.background}
+        height={img.height}
       />
     );
   }
@@ -27,7 +28,7 @@ const Header = () => {
     headerSlogan = aboutInfo.header_slogan;
   return (
     <header id='main-header' role='main-header' className={styles.header}>
-      {blurringImageDisplay}
+      <div className={styles.background}> {blurringImageDisplay}</div>
       <div
         className={styles.container}
         dangerouslySetInnerHTML={{ __html: headerSlogan }}
