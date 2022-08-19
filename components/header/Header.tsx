@@ -28,7 +28,7 @@ const Header = () => {
     headerSlogan = aboutInfo.header_slogan;
   return (
     <header id='main-header' role='main-header' className={styles.header}>
-      <div className={styles.background}> {blurringImageDisplay}</div>
+      <div className={styles.background}>{blurringImageDisplay}</div>
       <div
         className={styles.container}
         dangerouslySetInnerHTML={{ __html: headerSlogan }}
