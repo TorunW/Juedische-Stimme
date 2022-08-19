@@ -32,7 +32,7 @@ const GalleryControllers = ({ slideIndex, setSlideIndex, slideshowLength }) => {
   if (buttonHidden === true) {
     setTimeout(() => {
       setButtonHidden(false);
-    }, 5000);
+    }, 500);
   }
 
   return (
