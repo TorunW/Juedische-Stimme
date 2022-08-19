@@ -34,6 +34,9 @@ const ContactForm = () => {
     },
   });
 
+  console.log(formik.touched)
+
+
   return (
     <div id='contact' className={styles.container}>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
@@ -48,7 +51,7 @@ const ContactForm = () => {
             placeholder='Name'
             data-testid='name-input'
           />
-          {formik.errors && formik.errors.name ? (
+          {formik.errors && formik.errors.name && formik.touched && formik.touched.name ? (
             <div data-testid='name-error' className={styles.error}>
               {formik.errors.name}
             </div>
@@ -67,7 +70,7 @@ const ContactForm = () => {
             value={formik.values.email}
             placeholder='Email'
           ></input>
-          {formik.errors && formik.errors.email ? (
+          {formik.errors && formik.errors.email  && formik.touched && formik.touched.email  ? (
             <div data-testid='email-error' className={styles.error}>
               {formik.errors.email}
             </div>
@@ -83,7 +86,7 @@ const ContactForm = () => {
             onChange={formik.handleChange}
             value={formik.values.message}
           />
-          {formik.errors && formik.errors.message ? (
+          {formik.errors && formik.errors.message  && formik.touched && formik.touched.message  ? (
             <div data-testid='message-error' className={styles.error}>
               {formik.errors.message}
             </div>
