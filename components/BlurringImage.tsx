@@ -1,24 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled from '@emotion/styled';
 import Image from 'next/image';
 
-function BlurringImage({ svg, img }) {
+function BlurringImage({
+  svg,
+  img,
+  alt,
+  style,
+  blurLevel = 5,
+  height = undefined,
+  width = undefined,
+  ...props
+}) {
+  const [hasPlaceholder, setHasPlaceholder] = useState(true);
   const Svg = svg[0];
   const svgProps = svg[1];
   const rectangles = svg[2];
 
   return (
     <div>
-      <Svg style={{ ...svgProps.style, filter: `blur(5px)` }}>
-        {rectangles.map((rect) => {
-          const Rect = rect[0];
-          const rectProps = rect[1];
-
-          <Rect {...rectProps} key={`${rectProps.x}${rectProps.y}`} />;
-        })}
-      </Svg>
-      <Image {...img} />
+      {hasPlaceholder && (
+        <Svg
+          {...svgProps}
+          style={{ ...svgProps.style, filter: `${blurLevel}px` }}
+        >
+          {rectangles.map((Rect, rectProps) => {
+            <Rect {...rectProps} key={`${rectProps.x}${rectProps.y}`} />;
+          })}
+        </Svg>
+      )}
+      <Image
+        {...img}
+        {...props}
+        height={height}
+        width={width}
+        alt={alt}
+        onLoadingComplete={() => setHasPlaceholder(false)}
+      />
     </div>
   );
 }
+
+// const Container = styled.div`
+//   position: relative;
+//   overflow: hidden;
+//   height: 100%;
+//   width: 100%;
+// `;
 
 export default BlurringImage;

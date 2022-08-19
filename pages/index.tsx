@@ -24,14 +24,13 @@ import AboutInfo from 'components/AboutInfo';
 
 import CallToAction from '@/components/CallToAction';
 
-import { getPlaiceholder } from "plaiceholder";
+import { getPlaiceholder } from 'plaiceholder';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
 
   useEffect(() => {
-
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
     dispatch(setNewsletter(JSON.parse(props.newsletter)));
@@ -49,7 +48,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       setAboutInfo({
         aboutInfo: JSON.parse(props.aboutInfo)[0],
         gallery: JSON.parse(props.gallery)[0],
-        headerImage:JSON.parse(props.headerImage)
+        headerImage: JSON.parse(props.headerImage),
       })
     );
     dispatch(
@@ -62,7 +61,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   }, []);
 
   return (
-    <main id="home-page">
+    <main id='home-page'>
       <Header />
       {posts ? <Posts posts={posts} title={'Aktuelles'} /> : ''}
       <FacebookEvents />
@@ -77,8 +76,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
-
-  if (!hasCookie('Token', { req: context.req, res: context.res })) 
+  if (!hasCookie('Token', { req: context.req, res: context.res }))
     return { redirect: { destination: '/login', permanent: false } };
 
   // NAVIGATION
@@ -102,7 +100,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
         'post_name',
         'categoryId',
         'categoryName',
-        'postImage'
+        'postImage',
       ],
       exclude: {
         category: 66,
@@ -127,7 +125,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
         'post_name',
         'categoryId',
         'categoryName',
-        'postImage'
+        'postImage',
       ],
       locale: context.locale !== context.defaultLocale ? context.locale : '',
     }),
@@ -159,16 +157,16 @@ export const getServerSideProps = async (context: NextPageContext) => {
   });
   const fbEvents = JSON.stringify(fbEventsReponse);
 
-  const headerImageUri = `${context.req.headers.referer}header-background.jpg`
-  let { img , svg} = await getPlaiceholder(headerImageUri, {
+  const headerImageUri = `${context.req.headers.referer}header-background.jpg`;
+  let { img, svg } = await getPlaiceholder(headerImageUri, {
     size: 64,
   });
   const headerImage = JSON.stringify({
-    uri:headerImageUri,
+    uri: headerImageUri,
     img,
-    svg
-  })
-  
+    svg,
+  });
+
   return {
     props: {
       navItems,
@@ -182,7 +180,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       locales: context.locales,
       locale: context.locale,
       defaultLocale: context.defaultLocale,
-      headerImage
+      headerImage,
     },
   };
 };
