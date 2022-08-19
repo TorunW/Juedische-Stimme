@@ -24,7 +24,7 @@ function BlurringImage({
           {...svgProps}
           style={{ ...svgProps.style, filter: `${blurLevel}px` }}
         >
-          {rectangles.map((Rect, rectProps) => {
+          {rectangles.map(([Rect, rectProps]) => {
             <Rect {...rectProps} key={`${rectProps.x}${rectProps.y}`} />;
           })}
         </Svg>

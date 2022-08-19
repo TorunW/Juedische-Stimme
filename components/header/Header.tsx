@@ -12,7 +12,13 @@ const Header = () => {
   if (svg.length > 0 && img && img !== null) {
     console.log(img, ' IMG ');
     blurringImageDisplay = (
-      <BlurringImage svg={svg} img={img} alt={undefined} style={undefined} />
+      <BlurringImage
+        svg={svg}
+        img={img}
+        alt={undefined}
+        style={undefined}
+        className={styles.background}
+      />
     );
   }
 

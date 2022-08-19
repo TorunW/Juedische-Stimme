@@ -1,30 +1,74 @@
-.header {
-  // // background: url('../styles/images/header-background.jpg') no-repeat center
-  //   center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  height: 611px;
-  display: flex;
-  align-items: center;
-  .container {
-    background-color: rgba(0, 0, 0, 0.7);
-    width: auto;
+@media (min-width: 992px) {
+  .header {
+    height: 611px;
+    width: 100%;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    gap: 16px;
-    height: 246px;
-    margin: 0 auto;
-    padding: 48px;
+    overflow: hidden;
 
-    p {
-      font-size: 1.6rem;
-      line-height: 1.5rem;
-      font-weight: 400;
-      text-align: center;
-      color: #ffffff;
+    .background {
+      position: relative;
+      object-fit: cover;
+      object-position: center;
+    }
+    .container {
+      background-color: rgba(0, 0, 0, 0.7);
+      position: absolute;
+      width: 682px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+      height: 246px;
+      margin: 0 auto;
+      padding: 48px;
+
+      p {
+        font-size: 1.6rem;
+        line-height: 1.5rem;
+        font-weight: 400;
+        text-align: center;
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .header {
+    height: 611px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    .background {
+      position: relative;
+      object-fit: cover;
+      object-position: center;
+    }
+    .container {
+      background-color: rgba(0, 0, 0, 0.7);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+      height: 200px;
+      margin: 0 auto;
+      padding: 32px;
+
+      p {
+        font-size: 1.1rem;
+        line-height: 1.5rem;
+        font-weight: 400;
+        text-align: center;
+        color: #ffffff;
+      }
     }
   }
 }
