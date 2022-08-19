@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import styles from 'styles/Footer.module.css';
-import ContactForm from './ContactForm';
+import styles from './Styles.module.css';
+import ContactForm from '../forms/ContactForm';
 import { useSelector } from 'store/hooks';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 export const Footer = () => {
-  // delete???
   const { footerMenu } = useSelector((state) => state.nav);
   const router = useRouter();
 

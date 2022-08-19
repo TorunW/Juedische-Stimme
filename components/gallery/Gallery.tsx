@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
-import styles from 'styles/Gallery.module.css';
+import styles from './Styles.module.css';
 import { usePrevious } from 'helpers/usePreviousHelper';
 import GalleryImage from './GalleryImage';
 import GalleryControllers from './GalleryControllers';

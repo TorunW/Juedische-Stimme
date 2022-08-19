@@ -1,25 +1,26 @@
-import { render, screen, cleanup, waitFor } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import CallToAction from 'components/CallToAction'
+import { render, screen, cleanup, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import CallToAction from '@/components/callToAction/CallToAction';
 
-describe('Tests for CallToAction.tsx',() => {
+describe('Tests for CallToAction.tsx', () => {
+  beforeEach(() => {
+    render(<CallToAction />);
+  });
 
-    beforeEach(()=>{
-        render(<CallToAction/>)
-    })
+  afterEach(() => {
+    cleanup();
+  });
 
-    afterEach(()=>{
-        cleanup()
-    })
-
-    it('click on newsletter button should show newsletter form',async () => {
-        const newsletterContainer = screen.getByTestId('newsletter-button-container');
-        expect(newsletterContainer).toBeInTheDocument();
-        const newseletterForm = screen.getByTestId('newsletter-form')
-        expect(newseletterForm.className).toBe('hidden')
-        userEvent.click(newsletterContainer)
-        await waitFor(() => {
-            expect(newseletterForm.className).toBe('visible')
-        })
-    })
-})
+  it('click on newsletter button should show newsletter form', async () => {
+    const newsletterContainer = screen.getByTestId(
+      'newsletter-button-container'
+    );
+    expect(newsletterContainer).toBeInTheDocument();
+    const newseletterForm = screen.getByTestId('newsletter-form');
+    expect(newseletterForm.className).toBe('hidden');
+    userEvent.click(newsletterContainer);
+    await waitFor(() => {
+      expect(newseletterForm.className).toBe('visible');
+    });
+  });
+});

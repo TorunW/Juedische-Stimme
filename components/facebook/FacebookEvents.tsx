@@ -6,7 +6,7 @@ import renderToString from 'helpers/renderToString';
 
 import { setEvents } from 'store/fbdata/fbDataSlice';
 import { useDispatch, useSelector } from 'store/hooks';
-import styles from 'styles/Events.module.css';
+import styles from './StylesEvents.module.css';
 import { isUpdatedToday } from 'helpers/checkIfUpdatedToday';
 
 const FacebookEvents = () => {

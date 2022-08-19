@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import backgroundImage from 'styles/images/call-to-action.jpg';
-import styles from 'styles/CallToAction.module.css';
-import NewsletterForm from './NewsletterForm';
+import styles from './Styles.module.css';
+import NewsletterForm from '../forms/NewsletterForm';
 import Link from 'next/link';
 
 // import backgroundImage from 'styles/images/test.jpg';

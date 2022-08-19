@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import styles from 'styles/Gallery.module.css';
+import styles from './Styles.module.css';
 
 const GalleryControllers = ({ slideIndex, setSlideIndex, slideshowLength }) => {
   const [buttonHidden, setButtonHidden] = useState(false);

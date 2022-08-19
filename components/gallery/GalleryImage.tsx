@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
-import axios from 'axios';
-import BlurringImage from '../BlurringImage';
-import styles from 'styles/Gallery.module.css';
+import BlurringImage from '../blurringImage/BlurringImage';
 
 const GalleryImage = ({ image }) => {
   return (
-    <div><img src={generateImageUrl(image)} /></div>
+    <div>
+      <img src={generateImageUrl(image)} />
+    </div>
   );
 };
 

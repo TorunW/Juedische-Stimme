@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import React from 'react';
-import Nav from './Nav';
-import Footer from './Footer';
+import Nav from './nav/Nav';
+import Footer from './footer/Footer';
 
 function Layout({ children }) {
   useEffect(() => {
@@ -12,10 +12,10 @@ function Layout({ children }) {
   }, []);
 
   return (
-    <div id="main-layout">
+    <div id='main-layout'>
       <Nav />
       {children}
-      <Footer/>
+      <Footer />
     </div>
   );
 }

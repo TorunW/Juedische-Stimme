@@ -3,7 +3,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
-import styles from 'styles/Form.module.css';
+import styles from './Styles.module.css';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
 const NewsletterForm = () => {

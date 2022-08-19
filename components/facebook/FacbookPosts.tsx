@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import FacebookPost from './FacebookPost';
-import styles from 'styles/FacebookFeed.module.css';
+import styles from './StylesFeed.module.css';
 
 type Props = {
   feed: any;

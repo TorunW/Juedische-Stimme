@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import styled from '@emotion/styled';
 import Image from 'next/image';
+import styles from './Styles.module.css';
 
 function BlurringImage({
   svg,
@@ -17,10 +17,8 @@ function BlurringImage({
   const svgProps = svg[1];
   const rectangles = svg[2];
 
-  // console.log(img, " IMG ")
-
   return (
-    <div>
+    <div className={styles.container}>
       {hasPlaceholder && (
         <Svg
           {...svgProps}
@@ -34,20 +32,12 @@ function BlurringImage({
       <Image
         {...img}
         {...props}
-        height={height}
-        width={width}
+        className={styles.img}
         alt={alt}
         onLoadingComplete={() => setHasPlaceholder(false)}
       />
     </div>
   );
 }
-
-// const Container = styled.div`
-//   position: relative;
-//   overflow: hidden;
-//   height: 100%;
-//   width: 100%;
-// `;
 
 export default BlurringImage;

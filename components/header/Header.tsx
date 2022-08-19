@@ -1,20 +1,20 @@
 import React, { ReactElement } from 'react';
 import { useSelector } from 'store/hooks';
-import styles from 'styles/Header.module.css';
-import BlurringImage from './BlurringImage';
+import styles from './Styles.module.css';
+import BlurringImage from '../blurringImage/BlurringImage';
 
 const Header = () => {
   const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
 
   const { img, svg, uri } = headerImage;
 
-
   let blurringImageDisplay;
-  if (svg.length > 0 && img ){
-    console.log(img, " IMG ")
-    blurringImageDisplay = <BlurringImage svg={svg} img={img} />
+  if (svg.length > 0 && img && img !== null) {
+    console.log(img, ' IMG ');
+    blurringImageDisplay = (
+      <BlurringImage svg={svg} img={img} alt={undefined} style={undefined} />
+    );
   }
-
 
   let headerSlogan: any;
   if (aboutInfo && aboutInfo.header_slogan)

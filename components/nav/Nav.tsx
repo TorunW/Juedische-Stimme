@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'store/hooks';
-import styles from 'styles/Nav.module.css';
+import styles from './Styles.module.css';
 import logo1 from 'styles/images/Logo-img.png';
 import logo2 from 'styles/images/Logo-text.png';
 

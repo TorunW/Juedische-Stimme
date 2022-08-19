@@ -19,10 +19,10 @@ import { setAboutInfo } from 'store/aboutinfo/aboutinfoSlice';
 import Posts from '@/components/posts/Posts';
 import FacebookFeed from '@/components/facebook/FacebookFeed';
 import FacebookEvents from '@/components/facebook/FacebookEvents';
-import Header from 'components/Header';
-import AboutInfo from 'components/AboutInfo';
+import Header from '@/components/header/Header';
+import AboutInfo from '@/components/about/AboutInfo';
 
-import CallToAction from '@/components/CallToAction';
+import CallToAction from '@/components/callToAction/CallToAction';
 
 import { getPlaiceholder } from 'plaiceholder';
 

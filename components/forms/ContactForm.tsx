@@ -1,7 +1,7 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import styles from 'styles/Form.module.css';
+import styles from './Styles.module.css';
 import * as Yup from 'yup';
 
 const ContactForm = () => {
@@ -48,7 +48,10 @@ const ContactForm = () => {
             placeholder='Name'
             data-testid='name-input'
           />
-          {formik.errors && formik.errors.name && formik.touched && formik.touched.name ? (
+          {formik.errors &&
+          formik.errors.name &&
+          formik.touched &&
+          formik.touched.name ? (
             <div data-testid='name-error' className={styles.error}>
               {formik.errors.name}
             </div>
@@ -67,7 +70,10 @@ const ContactForm = () => {
             value={formik.values.email}
             placeholder='Email'
           ></input>
-          {formik.errors && formik.errors.email  && formik.touched && formik.touched.email  ? (
+          {formik.errors &&
+          formik.errors.email &&
+          formik.touched &&
+          formik.touched.email ? (
             <div data-testid='email-error' className={styles.error}>
               {formik.errors.email}
             </div>
@@ -83,7 +89,10 @@ const ContactForm = () => {
             onChange={formik.handleChange}
             value={formik.values.message}
           />
-          {formik.errors && formik.errors.message  && formik.touched && formik.touched.message  ? (
+          {formik.errors &&
+          formik.errors.message &&
+          formik.touched &&
+          formik.touched.message ? (
             <div data-testid='message-error' className={styles.error}>
               {formik.errors.message}
             </div>

@@ -7,7 +7,7 @@ import renderToString from 'helpers/renderToString';
 import { setFeed } from 'store/fbdata/fbDataSlice';
 import { useDispatch, useSelector } from 'store/hooks';
 
-import styles from 'styles/FacebookFeed.module.css';
+import styles from './StylesFeed.module.css';
 import { isUpdatedToday } from 'helpers/checkIfUpdatedToday';
 import FacebookPosts from './FacbookPosts';
 
@@ -41,7 +41,7 @@ const FacebookFeed = () => {
         content: renderedFeed,
         date_updated: dateTimeHelper(new Date()),
         type: 'posts',
-      }
+      };
 
       axios({
         method: 'post',
@@ -49,8 +49,7 @@ const FacebookFeed = () => {
         data,
       }).then(
         (response) => {
-
-          console.log(data, " DATA ")
+          console.log(data, ' DATA ');
           dispatch(setFeed(data));
         },
         (error) => {

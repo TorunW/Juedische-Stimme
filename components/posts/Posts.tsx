@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-import styles from 'styles/Posts.module.css';
+import styles from './Styles.module.css';
 
 import Post from './Post';
 

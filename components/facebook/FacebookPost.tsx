@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import styles from 'styles/FacebookFeed.module.css';
+import styles from './StylesFeed.module.css';
 // import TimeAgo from 'javascript-time-ago';
 
 type Props = {

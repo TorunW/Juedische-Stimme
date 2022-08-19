@@ -3,7 +3,7 @@ import { app } from 'firebaseConfig';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
-import styles from 'styles/LoginForm.module.css';
+import styles from './Styles.module.css';
 
 function SignupForm() {
   const auth = getAuth(app);

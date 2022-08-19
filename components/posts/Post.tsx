@@ -1,11 +1,11 @@
-import React, {ReactElement, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import { useSelector } from 'store/hooks';
 import formateDate from 'helpers/formateDate';
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
-import styles from 'styles/Posts.module.css';
+import styles from './Styles.module.css';
 import axios from 'axios';
-import BlurringImage from '../BlurringImage';
+// import BlurringImage from '../BlurringImage';
 
 type Props = {
   post: any;
@@ -14,7 +14,7 @@ type Props = {
 const Post: React.FC<Props> = ({ post }) => {
   const { locale } = useSelector((state) => state.languages);
   // const [ imageData, setImageData ] = useState(null)
-  
+
   // useEffect(() => {
   //   if (imageData === null && post.post_image !== null && post.post_image.indexOf('null') === -1) fetchPlaceholderImage()
   // },[])
@@ -79,13 +79,12 @@ const Post: React.FC<Props> = ({ post }) => {
     }
   } else postContent = postContent.substring(startIndex, endIndex);
 
-
   // let blurringImageDisplay: ReactElement;
   // if (imageData !== null && imageData.svg.length > 0 && imageData.img ){
   //   console.log(imageData.img, " IMG ")
   //   blurringImageDisplay = <BlurringImage svg={imageData.svg} img={imageData.img} />
   // }
-  
+
   return (
     <article className={styles.post}>
       <div className={styles.imageWrapper}>
