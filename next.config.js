@@ -6,6 +6,10 @@ const nextConfig = {
     defaultLocale: 'de_DE',
     localeDetection: false
   },
+  images: {
+    domains: ['localhost','www.juedische-stimme.com','www.juedische-stimme.de'],
+    // formats: ['image/avif', 'image/webp'],
+  },
   async redirects() {
     return [
       {

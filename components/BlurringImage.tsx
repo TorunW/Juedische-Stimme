@@ -17,6 +17,8 @@ function BlurringImage({
   const svgProps = svg[1];
   const rectangles = svg[2];
 
+  // console.log(img, " IMG ")
+
   return (
     <div>
       {hasPlaceholder && (

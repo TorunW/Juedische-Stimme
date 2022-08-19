@@ -8,16 +8,20 @@ const Header = () => {
 
   const { img, svg, uri } = headerImage;
 
-  console.log(img, ' IMG ');
-  console.log(svg, ' SVG ');
-  console.log(uri, ' URI ');
+
+  let blurringImageDisplay;
+  if (svg.length > 0 && img ){
+    console.log(img, " IMG ")
+    blurringImageDisplay = <BlurringImage svg={svg} img={img} />
+  }
+
 
   let headerSlogan: any;
   if (aboutInfo && aboutInfo.header_slogan)
     headerSlogan = aboutInfo.header_slogan;
   return (
     <header id='main-header' role='main-header' className={styles.header}>
-      {svg.length > 0 ? <BlurringImage svg={svg} img={img} /> : ''}
+      {blurringImageDisplay}
       <div
         className={styles.container}
         dangerouslySetInnerHTML={{ __html: headerSlogan }}

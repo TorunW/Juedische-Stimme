@@ -77,7 +77,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
         
         if (previewImageFile !== null){
           
-          if (post.post_image){
+          if (post && post.post_image){
             const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== '80' ? ':'+window.location.port : ""}/media/${post.post_image.split('/').join('+++')}`;
             const deleteFileRequest = axios.delete(deleteFileUrl)
             requestsArray.push(deleteFileRequest)
