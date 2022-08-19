@@ -1,5 +1,5 @@
-import excuteQuery from '../../../lib/db'
-import { insertFbFeed, insertMediaItem } from '../../../lib/queries';
+import excuteQuery from 'lib/db'
+import { insertFbFeed } from 'lib/queries';
 
 export default async (req, res) => {
     try {
@@ -10,9 +10,11 @@ export default async (req, res) => {
             console.log(result,"result")
             res.json(result)
         }
-        else {
-            // Handle any other HTTP method
-            res.json({message:'no GET here!'})
+        else if (req.method === 'GET') {
+            const result = await excuteQuery({
+                query: `SELECT * FROM fb_feed WHERE type='events' ORDER BY ID DESC LIMIT 1`,
+              });
+            res.json(result)
         }
     } catch ( error ) {
         console.log(error );

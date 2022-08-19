@@ -1,5 +1,5 @@
-import { updateFbToken, deleteGallery } from 'lib/queries';
 import excuteQuery from 'lib/db'
+import { updateFbToken } from 'lib/queries';
 
 export default async (req, res) => {
     try {

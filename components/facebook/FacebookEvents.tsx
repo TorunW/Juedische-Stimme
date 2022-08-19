@@ -15,11 +15,20 @@ const FacebookEvents = () => {
   const events = useSelector((state) => state.fbData.events);
 
   useEffect(() => {
+    fetchFacebookEventsFromDb()
+  },[])
+
+  useEffect(() => {
     if (token) {
       initFacebookEvents();
-      // fetchFacebookEvents();
     }
   }, [token]);
+
+  async function fetchFacebookEventsFromDb() {
+    const res = await fetch('/api/fbevents')
+    const eventsRes = await res.json()
+    dispatch(setEvents(eventsRes[0]));
+  }
 
   async function initFacebookEvents() {
     if (!events || !isUpdatedToday(events.date_updated)) fetchFacebookEvents();
