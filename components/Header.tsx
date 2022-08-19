@@ -7,17 +7,12 @@ const Header = () => {
   const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
 
   const { img, svg, uri } = headerImage;
-
-  console.log(img, ' IMG ');
-  console.log(svg, ' SVG ');
-  console.log(uri, ' URI ');
-
   let headerSlogan: any;
   if (aboutInfo && aboutInfo.header_slogan)
     headerSlogan = aboutInfo.header_slogan;
   return (
     <header id='main-header' role='main-header' className={styles.header}>
-      {svg.length > 0 ? <BlurringImage svg={svg} img={img} /> : ''}
+      {svg.length > 0 && img !== null ? <BlurringImage svg={svg} img={img} /> : ''}
       <div
         className={styles.container}
         dangerouslySetInnerHTML={{ __html: headerSlogan }}

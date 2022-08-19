@@ -6,6 +6,8 @@ function BlurringImage({ svg, img }) {
   const svgProps = svg[1];
   const rectangles = svg[2];
 
+  console.log(img, " IMG ")
+
   return (
     <div>
       <Svg style={{ ...svgProps.style, filter: `blur(5px)` }}>
