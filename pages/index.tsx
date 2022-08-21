@@ -29,6 +29,10 @@ import { getPlaiceholder } from 'plaiceholder';
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
+  const { gallery, aboutInfo } = useSelector((state) => state.aboutinfo);
+
+  console.log(gallery, " GALLERY ")
+  console.log(aboutInfo, " ABOUT INFO ")
 
   useEffect(() => {
     initHomePage()
@@ -68,7 +72,10 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <Header />
       {posts ? <Posts posts={posts} title={'Aktuelles'} /> : ''}
       <FacebookEvents />
-      <AboutInfo />
+      <AboutInfo 
+        gallery={gallery}
+        aboutInfo={aboutInfo}
+      />
       {newsletter ? <Posts posts={newsletter} title={'Newsletter'} /> : ''}
       <CallToAction />
       <FacebookFeed />
@@ -79,8 +86,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
-  if (!hasCookie('Token', { req: context.req, res: context.res }))
-    return { redirect: { destination: '/login', permanent: false } };
+  // if (!hasCookie('Token', { req: context.req, res: context.res }))
+  //   return { redirect: { destination: '/login', permanent: false } };
 
   // NAVIGATION
   const navItemsResponse = await excuteQuery({

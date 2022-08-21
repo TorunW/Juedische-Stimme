@@ -22,6 +22,7 @@
   height: 246px;
   margin: 0 auto;
   padding: 48px;
+  max-width: 80%;
 }
 .header .container p {
   font-size: 1.6rem;

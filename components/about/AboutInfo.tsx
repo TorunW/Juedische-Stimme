@@ -1,27 +1,21 @@
 import React, { ReactElement } from 'react';
-import { useDispatch, useSelector } from 'store/hooks';
-
+import { useSelector } from 'store/hooks';
 import Image from 'next/image';
-
 import Gallery from '../gallery/Gallery';
-
 import styles from './Styles.module.css';
 import containerBackground from 'styles/images/about.jpg';
-import Link from 'next/link';
 
-const AboutInfo = () => {
-  const { gallery } = useSelector((state) => state.aboutinfo);
-  const { aboutInfo } = useSelector((state) => state.aboutinfo);
+const AboutInfo = ({gallery,aboutInfo}) => {
 
   let aboutInfoDisplay: ReactElement;
-  if (aboutInfo !== null) {
+  if (aboutInfo && aboutInfo !== null) {
     aboutInfoDisplay = (
-      <div className={styles.aboutContainer}>
+      <div data-testid="about-info-container" className={styles.aboutContainer}>
         <div
           dangerouslySetInnerHTML={{ __html: aboutInfo.text_top }}
           className={styles.text}
         ></div>
-        <Gallery gallery={gallery} />
+        { gallery && gallery !== null ? <div data-testid="about-info-gallery"><Gallery gallery={gallery} /></div> : ""}
         <div
           dangerouslySetInnerHTML={{ __html: aboutInfo.text_bottom }}
           className={styles.text}

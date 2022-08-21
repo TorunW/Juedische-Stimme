@@ -27,7 +27,7 @@ const Gallery = ({ gallery }) => {
     ));
 
   return (
-    <div className={styles.gallery}>
+    <div data-testid="gallery-container" className={styles.gallery}>
       <div className={styles.containerSlider}>
         <GalleryControllers
           slideIndex={slideIndex}

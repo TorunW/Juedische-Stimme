@@ -29,6 +29,7 @@ describe('Test for FacebookPost.tsx',() => {
 
     it.todo('matches snapshot')
     it.todo('should render facebook post reaction svgs')
+    it.todo('should render facebook post without attachment')
 
     // it('matches snapshot', () => {
     //     const tree = renderer.create(<FacebookPost post={JSON.parse(fbPost)}/>).toJSON()

@@ -17,10 +17,10 @@ describe('Tests for CallToAction.tsx', () => {
     );
     expect(newsletterContainer).toBeInTheDocument();
     const newseletterForm = screen.getByTestId('newsletter-form');
-    expect(newseletterForm.className).toBe('hidden');
+    expect(newseletterForm.className).toBe('drawer');
     userEvent.click(newsletterContainer);
     await waitFor(() => {
-      expect(newseletterForm.className).toBe('visible');
+      expect(newseletterForm.className).toBe('drawer visible');
     });
   });
 });

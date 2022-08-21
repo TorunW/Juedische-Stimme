@@ -215,8 +215,9 @@ const CallToAction = () => {
         </div>
       </div>
       <div
+        data-testid="newsletter-form"
         className={
-          styles.drawer + ' ' + (isShown === true ? styles.visible : '')
+          styles.drawer + (isShown === true ? ' ' + styles.visible : '')
         }
       >
         <NewsletterForm />
