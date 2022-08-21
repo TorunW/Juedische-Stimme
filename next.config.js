@@ -7,7 +7,7 @@ const nextConfig = {
     localeDetection: false
   },
   images: {
-    domains: ['localhost','www.juedische-stimme.com','www.juedische-stimme.de'],
+    domains: ['localhost','www.juedische-stimme.com','juedische-stimme.com','www.juedische-stimme.de','juedische-stimme.de'],
     // formats: ['image/avif', 'image/webp'],
   },
   async redirects() {

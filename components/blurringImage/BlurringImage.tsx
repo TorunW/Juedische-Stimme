@@ -26,7 +26,7 @@ function BlurringImage({
           height={height}
         >
           {rectangles.map(([Rect, rectProps]) => (
-            <Rect {...rectProps} key={`${rectProps.x}${rectProps.y}`} />
+            <Rect {...rectProps} key={`${rectProps.x}${rectProps.y}${Date.now()}`} />
           ))}
         </Svg>
       </div>

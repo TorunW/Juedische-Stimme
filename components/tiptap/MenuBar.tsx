@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import styles from '/Styles.module.css';
+import styles from './Styles.module.css';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
 const MenuBar = ({ editor, itemId, itemType }) => {
@@ -22,7 +22,7 @@ const MenuBar = ({ editor, itemId, itemType }) => {
     let fileType = file.name.split('.')[file.name.split.length - 1];
     let fileName =
       file.name.split(`.${fileType}`)[0] + `__${uuidv4()}.${fileType}`;
-    Array.from(event.target.files).forEach((file) => {
+    Array.from(event.target.files).forEach((file:Blob) => {
       formData.append(event.target.name, file, fileName);
     });
     fileInputRef.current.value = '';
@@ -44,7 +44,7 @@ const MenuBar = ({ editor, itemId, itemType }) => {
     const response = await axios.post('/api/uploads', formData, config);
 
     const today = new Date();
-    let month = today.getMonth();
+    let month: string | number = today.getMonth();
     month += 1;
     month = month < 10 ? '0' + month : month;
 
