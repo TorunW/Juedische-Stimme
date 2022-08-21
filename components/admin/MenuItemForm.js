@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useFormik } from 'formik';
 import axios from 'axios';
-import styles from 'styles/Form.module.css';
+import styles from 'components/forms/Styles.module.css';
 
 const MenuItemForm = ({menuItem}) => {
 

@@ -31,6 +31,10 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   const { posts, newsletter } = useSelector((state) => state.posts);
 
   useEffect(() => {
+    initHomePage()
+  }, []);
+
+  function initHomePage(){
     getFbToken();
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
@@ -49,7 +53,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
         defaultLocale: props.defaultLocale,
       })
     );
-  }, []);
+  }
 
   async function getFbToken(){
     const fbTokenResult = await fetch('/api/fbtoken')

@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
-import styles from '/Styles.module.css';
+import styles from './Styles.module.css';
 import MenuBar from './MenuBar';
 
 interface TipTapEditorProps {

@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { useFormik } from 'formik';
 import axios from 'axios';
 import dateTimeHelper from 'helpers/dateTimeHelper';
-import styles from 'styles/Form.module.css';
+import styles from 'components/forms/Styles.module.css';
 import { useDispatch, useSelector } from 'store/hooks'
 import { v4 as uuidv4 } from 'uuid';
 import PostTagForm from './PostTagForm';

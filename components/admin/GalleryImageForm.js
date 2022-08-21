@@ -2,7 +2,7 @@ import React, { Suspense, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import styles from 'styles/Form.module.css';
+import styles from 'components/forms/Styles.module.css';
 
 const DynamicTiptapEditor = dynamic(() => import('../tiptap/TipTapEditor'), {
   suspense: true,
