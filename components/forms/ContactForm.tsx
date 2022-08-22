@@ -6,8 +6,6 @@ import * as Yup from 'yup';
 
 const ContactForm = () => {
 
-  
-
   const formik = useFormik({
     initialValues: {
       name: '',

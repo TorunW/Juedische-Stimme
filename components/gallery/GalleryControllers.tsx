@@ -37,7 +37,7 @@ const GalleryControllers = ({ slideIndex, setSlideIndex, slideshowLength }) => {
 
   return (
     <div>
-      <button className={styles.prev} onClick={prevSlide}>
+      <button className={styles.prev} onClick={prevSlide}  data-testid="previous-button">
         <svg
           width='70'
           height='70'
@@ -51,7 +51,7 @@ const GalleryControllers = ({ slideIndex, setSlideIndex, slideshowLength }) => {
           />
         </svg>
       </button>
-      <button className={styles.next} onClick={nextSlide}>
+      <button className={styles.next} onClick={nextSlide} data-testid="next-button">
         <svg
           width='70'
           height='70'

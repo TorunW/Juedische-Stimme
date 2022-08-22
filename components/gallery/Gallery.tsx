@@ -14,6 +14,7 @@ const Gallery = ({ gallery }) => {
     .map((imgSrc: string, index: number) => (
       <div
         key={Date.now() + index}
+        data-testid={`slide-${index}`}
         className={
           slideIndex === index
             ? styles.slideActive
