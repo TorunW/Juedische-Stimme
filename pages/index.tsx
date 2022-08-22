@@ -62,8 +62,9 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   async function getFbToken(){
     const fbTokenResult = await fetch('/api/fbtoken')
     const fbToken = await fbTokenResult.json()
+    console.log(fbToken, " FB")
     dispatch(
-      setToken(fbToken[0])
+      setToken(fbToken[0].token)
     );
   }
 

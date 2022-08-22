@@ -35,9 +35,9 @@ describe('Tests for Contact Form ( components/ContactForm.tsx )', () => {
 
   it('should show an error if a name is too short', async () => {
     const user = userEvent.setup()
-    await user.type(screen.getByTestId('name-input'), 'ab');
     const submitButton = screen.getByTestId('submit-button');
     await user.click(submitButton);
+    await user.type(screen.getByTestId('name-input'), 'ab');
     await waitFor(() => {
       const nameError = screen.getByTestId('name-error');
       expect(nameError).toBeInTheDocument();
@@ -56,4 +56,18 @@ describe('Tests for Contact Form ( components/ContactForm.tsx )', () => {
       expect(emailError).toHaveTextContent('email must be a valid email');
     });
   });
+
+  it('should submit the form if all the fields are valid', async () => {
+    const user = userEvent.setup()
+    await user.type(screen.getByTestId('email-input'), 'dnelband@gmail.com');
+    await user.type(screen.getByTestId('name-input'), 'david test');
+    await user.type(screen.getByTestId('name-input'), 'david test message');
+    const submitButton = screen.getByTestId('submit-button');
+    await user.click(submitButton);
+    await waitFor(() => {
+      const emailError = screen.getByTestId('email-error');
+      expect(emailError).toBeInTheDocument();
+      expect(emailError).toHaveTextContent('email must be a valid email');
+    });
+  })
 });

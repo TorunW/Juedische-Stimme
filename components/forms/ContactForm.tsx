@@ -48,8 +48,7 @@ const ContactForm = () => {
             placeholder='Name'
             data-testid='name-input'
           />
-          {
-          formik.errors.name &&
+          {formik.errors.name &&
           formik.touched.name ? (
             <div data-testid='name-error' className={styles.error}>
               {formik.errors.name}
@@ -69,8 +68,7 @@ const ContactForm = () => {
             value={formik.values.email}
             placeholder='Email'
           ></input>
-          {
-          formik.errors.email &&
+          {formik.errors.email &&
           formik.touched.email ? (
             <div data-testid='email-error' className={styles.error}>
               {formik.errors.email}
@@ -88,9 +86,7 @@ const ContactForm = () => {
             value={formik.values.message}
             data-testid='message-input'
           />
-          {formik.errors &&
-          formik.errors.message &&
-          formik.touched &&
+          {formik.errors.message &&
           formik.touched.message ? (
             <div data-testid='message-error' className={styles.error}>
               {formik.errors.message}
