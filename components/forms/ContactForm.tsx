@@ -48,9 +48,8 @@ const ContactForm = () => {
             placeholder='Name'
             data-testid='name-input'
           />
-          {formik.errors &&
+          {
           formik.errors.name &&
-          formik.touched &&
           formik.touched.name ? (
             <div data-testid='name-error' className={styles.error}>
               {formik.errors.name}
@@ -70,9 +69,8 @@ const ContactForm = () => {
             value={formik.values.email}
             placeholder='Email'
           ></input>
-          {formik.errors &&
+          {
           formik.errors.email &&
-          formik.touched &&
           formik.touched.email ? (
             <div data-testid='email-error' className={styles.error}>
               {formik.errors.email}
@@ -88,6 +86,7 @@ const ContactForm = () => {
             name='message'
             onChange={formik.handleChange}
             value={formik.values.message}
+            data-testid='message-input'
           />
           {formik.errors &&
           formik.errors.message &&
@@ -101,7 +100,7 @@ const ContactForm = () => {
           )}
         </div>
         <div className='button blackBg submitBtn'>
-          <button type='submit'>Senden</button>
+          <button data-testid="submit-button" type='submit'>Senden</button>
         </div>
       </form>
     </div>
