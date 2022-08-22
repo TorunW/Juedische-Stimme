@@ -87,8 +87,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
-  // if (!hasCookie('Token', { req: context.req, res: context.res }))
-  //   return { redirect: { destination: '/login', permanent: false } };
+  if (!hasCookie('Token', { req: context.req, res: context.res }))
+    return { redirect: { destination: '/login', permanent: false } };
 
   // NAVIGATION
   const navItemsResponse = await excuteQuery({
