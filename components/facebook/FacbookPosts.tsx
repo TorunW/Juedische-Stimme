@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { ReactElement } from 'react';
 import FacebookPost from './FacebookPost';
 import styles from './StylesFeed.module.css';
 
@@ -7,10 +7,10 @@ type Props = {
 };
 
 const FacebookPosts: React.FC<Props> = ({ feed }) => {
-  let feedDisplay;
+  let feedDisplay: ReactElement;
   if (feed && feed.content && feed.content.length > 0) {
     const feedArray = JSON.parse(feed.content);
-    feedDisplay = feedArray.map((fbPost, index) => {
+    feedDisplay = feedArray.map((fbPost:any, index:number) => {
       return <FacebookPost key={index} post={fbPost} />;
     });
   }

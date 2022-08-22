@@ -8,13 +8,13 @@ import logo2 from 'styles/images/Logo-text.png';
 
 function Nav() {
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
-  const { locale, defaultLocale } = useSelector((state) => state.languages);
+  const { locale } = useSelector((state) => state.languages);
   const [pathName, setPathName] = useState('');
-
   const [navbar, setNavbar] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      // setNavbar(window.location.pathname.length <= 1 ? false : true) 
       window.addEventListener('scroll', handleScroll);
     }
   }, []);
@@ -114,7 +114,7 @@ function Nav() {
   );
 
   return (
-    <nav className={navbar === true ? styles.navActive : styles.nav}>
+    <nav className={navbar === true ? styles.navActive : styles.nav} data-testid="nav">
       <div className={styles.topContainer}>
         <Link href={'/'}>
           <div className={styles.logoContainer}>
@@ -128,7 +128,7 @@ function Nav() {
           <div className={styles.languageMenu}>
             <a href={`${pathName}`}>DE</a>
             <b> | </b>
-            <a href={`/en_US${pathName}`}>EN</a>
+            <a href={`/en_US${pathName}`} data-testid="english-button" >EN</a>
           </div>
         </div>
       </div>

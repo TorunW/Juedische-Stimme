@@ -55,7 +55,7 @@ function LoginForm() {
           Login
         </button>
 
-        <button className={styles.forgotButton} onClick={signUp}>
+        <button className={styles.forgotButton} /*onClick={signUp}*/>
           Forgot password?
         </button>
       </div>
