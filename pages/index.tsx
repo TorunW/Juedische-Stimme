@@ -63,13 +63,27 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
     dispatch(setToken(fbToken[0].token));
   }
 
+  async function getNewsletterPosts() {
+    axios
+      .post('/api/posts/newsletter', {
+        locale: props.locale,
+        defaultLocale: props.defaultLocale,
+      })
+      .then(function (response) {
+        dispatch(setNewsletter(response.data));
+      })
+      .catch(function (error) {
+        console.log(error, ' ERROR ON FETCHING NEWSLETTER ');
+      });
+  }
+
   return (
     <main id='home-page'>
       <Header />
       <Posts posts={posts} title={'Aktuelles'} />
       <FacebookEvents />
       <AboutInfo gallery={gallery} aboutInfo={aboutInfo} />
-      {newsletter ? <Posts posts={newsletter} title={'Newsletter'} /> : ''}
+      <Posts posts={newsletter} title={'Newsletter'} />
       <CallToAction />
       <FacebookFeed />
     </main>
