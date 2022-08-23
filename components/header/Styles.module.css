@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: #989183;
+  background: linear-gradient(#cc9a7b, #989183);
 }
 .header .background {
   position: relative;

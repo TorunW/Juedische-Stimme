@@ -31,9 +31,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   const { posts, newsletter } = useSelector((state) => state.posts);
   const { gallery, aboutInfo } = useSelector((state) => state.aboutinfo);
 
-  console.log(gallery, " GALLERY ")
-  console.log(aboutInfo, " ABOUT INFO ")
-
   useEffect(() => {
     initHomePage()
   }, []);
@@ -62,7 +59,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   async function getFbToken(){
     const fbTokenResult = await fetch('/api/fbtoken')
     const fbToken = await fbTokenResult.json()
-    console.log(fbToken, " FB")
     dispatch(
       setToken(fbToken[0].token)
     );
