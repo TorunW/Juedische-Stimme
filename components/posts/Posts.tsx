@@ -5,23 +5,23 @@ import styles from './Styles.module.css';
 
 import Post from './Post';
 
-function Posts(props) {
+function Posts({posts,title}) {
   return (
     <section
       className={
         'posts-sections ' +
-        (props.title === 'Newsletter' ? styles.threeColPage : styles.twoColPage)
+        (title === 'Newsletter' ? styles.threeColPage : styles.twoColPage)
       }
     >
-      <h1>{props.title}</h1>
+      <h1>{title}</h1>
       <div className={styles.postsContainer}>
-        {props.posts.map((post, index) => {
+        {posts && posts !== null ? posts.map((post:any, index:number) => {
           return <Post key={index} post={post} />;
-        })}
+        }) : ""}
       </div>
       <div className='link whiteBg'>
-        <a href={`/category/${props.title}`} className='link-button'>
-          Weitere {props.title === 'Aktuelles' ? 'Artikeln' : props.title} lesen
+        <a href={`/category/${title}`} className='link-button'>
+          Weitere {title === 'Aktuelles' ? 'Artikeln' : title} lesen
         </a>
       </div>
     </section>

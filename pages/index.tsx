@@ -25,6 +25,7 @@ import AboutInfo from '@/components/about/AboutInfo';
 import CallToAction from '@/components/callToAction/CallToAction';
 
 import { getPlaiceholder } from 'plaiceholder';
+import axios from 'axios';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -37,9 +38,9 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 
   function initHomePage() {
     getFbToken();
+    getNewsletterPosts();
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
-    dispatch(setNewsletter(JSON.parse(props.newsletter)));
     dispatch(
       setAboutInfo({
         aboutInfo: JSON.parse(props.aboutInfo)[0],
@@ -65,7 +66,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   return (
     <main id='home-page'>
       <Header />
-      {posts ? <Posts posts={posts} title={'Aktuelles'} /> : ''}
+      <Posts posts={posts} title={'Aktuelles'} />
       <FacebookEvents />
       <AboutInfo gallery={gallery} aboutInfo={aboutInfo} />
       {newsletter ? <Posts posts={newsletter} title={'Newsletter'} /> : ''}
@@ -78,8 +79,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
-  // if (!hasCookie('Token', { req: context.req, res: context.res }))
-  //   return { redirect: { destination: '/login', permanent: false } };
+  if (!hasCookie('Token', { req: context.req, res: context.res }))
+    return { redirect: { destination: '/login', permanent: false } };
 
   // NAVIGATION
   const navItemsResponse = await excuteQuery({
@@ -87,7 +88,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
   });
   const navItems = JSON.stringify(navItemsResponse);
 
-  // POSTS ( aktuelles )
+  // POSTS
   const postsResponse = await excuteQuery({
     query: selectPosts({
       numberOfPosts: 6,
@@ -111,28 +112,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
     }),
   });
   const posts = JSON.stringify(postsResponse);
-
-  // Newsletter
-  const newsletterResponse = await excuteQuery({
-    query: selectPostsByTag({
-      slug: 'newsletter',
-      numberOfPosts: 6,
-      pageNum: 1,
-      isCategory: true,
-      fieldsList: [
-        'ID',
-        'post_date',
-        'post_content',
-        'post_title',
-        'post_name',
-        'categoryId',
-        'categoryName',
-        'postImage',
-      ],
-      locale: context.locale !== context.defaultLocale ? context.locale : '',
-    }),
-  });
-  const newsletter = JSON.stringify(newsletterResponse);
 
   // ABOUT INFO ( texts & gallery)
   const aboutInfoResponse = await excuteQuery({
@@ -159,7 +138,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
     props: {
       navItems,
       posts,
-      newsletter,
       aboutInfo,
       gallery,
       locales: context.locales,
