@@ -6,7 +6,7 @@ export default async (req, res) => {
         if (req.method === "POST") {
             const newsletterResponse = await excuteQuery({
                 query: selectPostsByTag({
-                  slug: 'newsletter',
+                  slug: req.body.category,
                   numberOfPosts: 6,
                   pageNum: 1,
                   isCategory: true,

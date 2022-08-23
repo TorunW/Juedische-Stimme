@@ -17,6 +17,14 @@ function BlurringImage({
   const svgProps = svg[1];
   const rectangles = svg[2];
 
+  function onLoadingComplete(){
+    // () => {
+      console.log('what')
+      setHasPlaceholder(false)
+      props.onLoadingComplete()
+    // }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.blurringImageContainer}>
@@ -36,7 +44,7 @@ function BlurringImage({
         className={styles.img}
         layout='fixed'
         alt={alt}
-        onLoadingComplete={() => setHasPlaceholder(false)}
+        onLoadingComplete={onLoadingComplete}
       />
     </div>
   );

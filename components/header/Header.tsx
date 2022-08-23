@@ -1,17 +1,18 @@
 import React, { ReactElement } from 'react';
-import { useSelector } from 'store/hooks';
+import { useDispatch, useSelector } from 'store/hooks';
 import styles from './Styles.module.css';
 import BlurringImage from '../blurringImage/BlurringImage';
-import { imageConfigDefault } from 'next/dist/shared/lib/image-config';
+import { setHeaderImageLoaded } from 'store/aboutinfo/aboutinfoSlice';
 
 const Header = () => {
   const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
+  const dispatch = useDispatch();
 
   const { img, svg, uri } = headerImage;
 
   let blurringImageDisplay;
   if (svg.length > 0 && img && img !== null) {
-    console.log(img, ' IMG ');
+    // console.log(img, ' IMG ');
     blurringImageDisplay = (
       <BlurringImage
         svg={svg}
@@ -19,6 +20,7 @@ const Header = () => {
         alt={undefined}
         style={undefined}
         height={img.height}
+        onLoadingComplete={() => dispatch(setHeaderImageLoaded(true))}
       />
     );
   }

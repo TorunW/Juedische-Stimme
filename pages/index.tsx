@@ -30,15 +30,20 @@ import axios from 'axios';
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
-  const { gallery, aboutInfo } = useSelector((state) => state.aboutinfo);
+  const { gallery, aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
 
   useEffect(() => {
     initHomePage();
   }, []);
 
-  function initHomePage() {
-    getFbToken();
-    getNewsletterPosts();
+  useEffect(() => {
+    if (headerImage.isLoaded === true){
+      getFbToken();
+      getNewsletterPosts();
+    }
+  },[headerImage.isLoaded])
+
+  function initHomePage(){
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
     dispatch(
@@ -64,17 +69,19 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   }
 
   async function getNewsletterPosts() {
-    axios
-      .post('/api/posts/newsletter', {
-        locale: props.locale,
-        defaultLocale: props.defaultLocale,
-      })
-      .then(function (response) {
-        dispatch(setNewsletter(response.data));
-      })
-      .catch(function (error) {
-        console.log(error, ' ERROR ON FETCHING NEWSLETTER ');
-      });
+    axios.post('/api/posts/category', {
+      locale:props.locale,
+      defaultLocale:props.defaultLocale,
+      category:'newsletter'
+    })
+    .then(function (response) {
+      dispatch(
+        setNewsletter(response.data)
+      );
+    })
+    .catch(function (error) {
+      console.log(error, " ERROR ON FETCHING NEWSLETTER ");
+    });
   }
 
   return (

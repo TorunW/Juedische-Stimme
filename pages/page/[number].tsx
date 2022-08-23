@@ -36,7 +36,7 @@ const PostsPage: LayoutPage = (props: LayoutPageProps) => {
         ) : (
           ''
         )}
-        {posts ? <Posts posts={posts} /> : ''}
+        <Posts posts={posts} title={props.categoryName} /> 
       </section>
     </main>
   );
