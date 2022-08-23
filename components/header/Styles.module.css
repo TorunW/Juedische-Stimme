@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background-color: #989183;
 }
 .header .background {
   position: relative;
