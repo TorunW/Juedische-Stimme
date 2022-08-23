@@ -30,15 +30,20 @@ import axios from 'axios';
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
-  const { gallery, aboutInfo } = useSelector((state) => state.aboutinfo);
+  const { gallery, aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
 
   useEffect(() => {
     initHomePage()
   }, []);
 
+  useEffect(() => {
+    if (headerImage.isLoaded === true){
+      getFbToken();
+      getNewsletterPosts();
+    }
+  },[headerImage.isLoaded])
+
   function initHomePage(){
-    getFbToken();
-    getNewsletterPosts();
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
     dispatch(
@@ -66,9 +71,10 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   }
 
   async function getNewsletterPosts() {
-    axios.post('/api/posts/newsletter', {
+    axios.post('/api/posts/category', {
       locale:props.locale,
-      defaultLocale:props.defaultLocale
+      defaultLocale:props.defaultLocale,
+      category:'newsletter'
     })
     .then(function (response) {
       dispatch(
@@ -99,8 +105,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
-  if (!hasCookie('Token', { req: context.req, res: context.res }))
-    return { redirect: { destination: '/login', permanent: false } };
+  // if (!hasCookie('Token', { req: context.req, res: context.res }))
+  //   return { redirect: { destination: '/login', permanent: false } };
 
   // NAVIGATION
   const navItemsResponse = await excuteQuery({

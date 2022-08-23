@@ -6,7 +6,8 @@ let initialState = {
     headerImage:{
       img:null,
       svg:[],
-      uri:null
+      uri:null,
+      isLoaded: false
     }
 }
 
@@ -17,11 +18,20 @@ const aboutInfoSlice = createSlice({
     setAboutInfo: (state, action) => {
       state.aboutInfo = action.payload.aboutInfo;
       state.gallery = action.payload.gallery;
-      state.headerImage = action.payload.headerImage
+      state.headerImage = {
+        ...state.headerImage,
+        ...action.payload.headerImage
+      }
     },
+    setHeaderImageLoaded: (state,action) => {
+      state.headerImage = {
+        ...state.headerImage,
+        isLoaded:true
+      }
+    }
   }
 })
 
-export const { setAboutInfo } = aboutInfoSlice.actions
+export const { setAboutInfo, setHeaderImageLoaded } = aboutInfoSlice.actions
 
 export default aboutInfoSlice.reducer
