@@ -75,9 +75,11 @@
 }
 .nav .leftContainer .languageMenu {
   color: white;
+}
+.nav .leftContainer .languageMenu a {
   transition: color 0.3s ease-in-out;
 }
-.nav .leftContainer .languageMenu:hover {
+.nav .leftContainer .languageMenu a:hover {
   color: #2e2e2e;
 }
 .nav svg {
@@ -107,9 +109,11 @@
 }
 .navActive .leftContainer .languageMenu {
   color: #2e2e2e;
+}
+.navActive .leftContainer .languageMenu a {
   transition: color 0.3s ease-in-out;
 }
-.navActive .leftContainer .languageMenu:hover {
+.navActive .leftContainer .languageMenu a:hover {
   color: #635d80;
 }
 .navActive li a {

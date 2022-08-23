@@ -32,10 +32,10 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   const { gallery, aboutInfo } = useSelector((state) => state.aboutinfo);
 
   useEffect(() => {
-    initHomePage()
+    initHomePage();
   }, []);
 
-  function initHomePage(){
+  function initHomePage() {
     getFbToken();
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPosts(JSON.parse(props.posts)));
@@ -56,12 +56,10 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
     );
   }
 
-  async function getFbToken(){
-    const fbTokenResult = await fetch('/api/fbtoken')
-    const fbToken = await fbTokenResult.json()
-    dispatch(
-      setToken(fbToken[0].token)
-    );
+  async function getFbToken() {
+    const fbTokenResult = await fetch('/api/fbtoken');
+    const fbToken = await fbTokenResult.json();
+    dispatch(setToken(fbToken[0].token));
   }
 
   return (
@@ -69,10 +67,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <Header />
       {posts ? <Posts posts={posts} title={'Aktuelles'} /> : ''}
       <FacebookEvents />
-      <AboutInfo 
-        gallery={gallery}
-        aboutInfo={aboutInfo}
-      />
+      <AboutInfo gallery={gallery} aboutInfo={aboutInfo} />
       {newsletter ? <Posts posts={newsletter} title={'Newsletter'} /> : ''}
       <CallToAction />
       <FacebookFeed />
