@@ -5,7 +5,8 @@ import styles from './Styles.module.css';
 
 import Post from './Post';
 
-function Posts({posts,title}) {
+function Posts(props) {
+  const {posts,title} = props;
   return (
     <section
       className={
