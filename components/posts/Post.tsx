@@ -5,6 +5,7 @@ import formateDate from 'helpers/formateDate';
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
 import styles from './Styles.module.css';
 import axios from 'axios';
+import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
 // import BlurringImage from '../BlurringImage';
 
 type Props = {
@@ -82,6 +83,8 @@ const Post: React.FC<Props> = ({ post }) => {
     }
   } else postContent = postContent.substring(startIndex, endIndex);
 
+  // trimStringToLastSpace(postContent);
+
   // let blurringImageDisplay: ReactElement;
   // if (imageData !== null && imageData.svg.length > 0 && imageData.img ){
   //   console.log(imageData.img, " IMG ")
@@ -116,7 +119,7 @@ const Post: React.FC<Props> = ({ post }) => {
       </a>
       <div
         className={styles.postPreview}
-        dangerouslySetInnerHTML={{ __html: postContent }}
+        dangerouslySetInnerHTML={{ __html: trimStringToLastSpace(postContent) }}
       ></div>
     </article>
   );

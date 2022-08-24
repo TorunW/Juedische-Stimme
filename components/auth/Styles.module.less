@@ -1,9 +1,9 @@
 .loginPage {
   background: rgb(211, 208, 221);
   background: linear-gradient(
-    167deg,
-    rgba(155, 151, 175, 1) 0%,
-    rgba(99, 93, 128, 1) 60%
+    180deg,
+    rgb(211, 208, 221) 30%,
+    rgba(155, 151, 175, 1) 70%
   );
   min-height: 100vh;
   display: flex;
@@ -13,7 +13,7 @@
 
 .container {
   height: 296px;
-  width: 296px;
+  width: 310px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -21,11 +21,16 @@
   background-color: #ffffff;
   border-radius: 10px;
   gap: 16px;
+  padding: 32px;
   .inputBox {
-    width: 200px;
+    width: 100%;
     padding: 4px;
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Raleway';
+  }
+
+  .button {
+    border-style: none;
   }
 
   .forgotButton {
@@ -33,12 +38,14 @@
     color: #454250;
     font-weight: 600;
     &:hover {
-      color: #9b97af;
+      color: #454250c0;
+
+      // color: #9b97af;
       font-weight: 700;
     }
   }
 
-  .button {
+  .loginButton {
     color: white;
     background-color: #454250;
     text-transform: uppercase;
@@ -49,7 +56,8 @@
     margin-top: 16px;
     font-weight: 500;
     &:hover {
-      background-color: #9b97af;
+      background-color: #454250de;
+
       font-weight: 600;
     }
   }
