@@ -119,6 +119,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       fieldsList: [
         'ID',
         'post_date',
+        'post_excerpt',
         'post_content',
         'post_title',
         'post_name',

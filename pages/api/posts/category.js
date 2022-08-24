@@ -14,6 +14,7 @@ export default async (req, res) => {
                     'ID',
                     'post_date',
                     'post_content',
+                    'post_excerpt',
                     'post_title',
                     'post_name',
                     'categoryId',

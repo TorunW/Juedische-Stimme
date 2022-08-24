@@ -10,10 +10,8 @@ export default function AboutInfoPage(props) {
   const dispatch = useDispatch()
   const aboutInfo = JSON.parse(props.aboutInfo)[0];
   useEffect(() => {
-    console.log(props.galleries)
     dispatch(setGalleries(JSON.parse(props.galleries)))
   },[])
-  console.log(aboutInfo)
   return (
       <section>
         <h2>ABOUT INFO</h2>
