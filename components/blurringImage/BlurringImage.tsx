@@ -7,30 +7,22 @@ function BlurringImage({
   img,
   alt,
   style,
-  blurLevel = 5,
+  blurLevel = 40,
   height = undefined,
   width = undefined,
   ...props
 }) {
-  const [hasPlaceholder, setHasPlaceholder] = useState(true);
+  // const [hasPlaceholder, setHasPlaceholder] = useState(true);
   const Svg = svg[0];
   const svgProps = svg[1];
   const rectangles = svg[2];
-
-  function onLoadingComplete(){
-    // () => {
-      console.log('what')
-      setHasPlaceholder(false)
-      props.onLoadingComplete()
-    // }
-  }
-
+  
   return (
     <div className={styles.container}>
       <div className={styles.blurringImageContainer}>
         <Svg
           {...svgProps}
-          style={{ ...svgProps.style, filter: `blur(${blurLevel}px)` }}
+          style={{ ...svgProps.style, filter: `blur(${blurLevel}px)`,  transform: ["scale(1.5)", svg[1].style.transform].join(" ") }}
           height={height}
         >
           {rectangles.map(([Rect, rectProps]) => (
@@ -44,7 +36,7 @@ function BlurringImage({
         className={styles.img}
         layout='fixed'
         alt={alt}
-        onLoadingComplete={onLoadingComplete}
+        onLoadingComplete={() => props.onLoadingComplete()}
       />
     </div>
   );
