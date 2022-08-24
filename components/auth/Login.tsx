@@ -58,7 +58,16 @@ function LoginForm() {
           className={styles.loginButton + ' ' + styles.button}
           onClick={signUp}
         >
-          Login
+          {loading === false ? (
+            <div className={styles.ldsRing}>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          ) : (
+            'Login'
+          )}
         </button>
 
         <button className={styles.forgotButton + ' ' + styles.button}>
