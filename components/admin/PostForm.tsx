@@ -12,6 +12,7 @@ import { generateImageUrl } from 'helpers/imageUrlHelper'
 import PostTranslationsForm from './PostTranslationsForm';
 import PostTranslations from './PostTranslations';
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
+import Image from 'next/image';
 
 const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
   suspense:true,
@@ -157,9 +158,9 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
 
             {
               previewImage !== null ?
-              <img width={200} src={previewImage}/> :
+              <Image layout='fixed' width={320} height={180} src={previewImage}/> :
               post && post.post_image ?
-              <img width={200} src={generateImageUrl(post.post_image)}/> :
+              <Image layout='fixed' width={320} height={180}  src={generateImageUrl(post.post_image)}/> :
               ''
             }
 
