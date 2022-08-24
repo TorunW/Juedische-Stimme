@@ -44,7 +44,7 @@ const SearchPhrasePostsPage: LayoutPage = (props: LayoutPageProps) => {
         ''
       )}
       {posts && posts.length > 0 ? (
-        <Posts posts={posts} title={"Search"} />
+        <Posts posts={posts} title={"Search"} phrase={props.phrase} />
       ) : (
         <h2>nothing found for {'"' + props.phrase + '"'}!</h2>
       )}

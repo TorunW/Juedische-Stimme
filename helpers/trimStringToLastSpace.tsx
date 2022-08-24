@@ -5,7 +5,6 @@ export default function trimStringToLastSpace(string) {
   if (lastChar !== ' ') {
     return trimStringToLastSpace(trimmedString);
   } else {
-    console.log(trimmedString, 'heheheh');
     return trimmedString;
   }
 }

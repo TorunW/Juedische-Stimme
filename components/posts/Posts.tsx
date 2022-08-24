@@ -5,14 +5,13 @@ import Post from './Post';
 interface PostsProps {
   posts: any[];
   title?: string;
+  phrase?: string;
 }
 
-function Posts(props:PostsProps) {
+function Posts({posts,title,phrase}:PostsProps) {
   
-  const {posts,title} = props;
-
   return (
-    
+
     <section
       className={
         'posts-sections ' +
@@ -22,7 +21,7 @@ function Posts(props:PostsProps) {
       <h1>{title}</h1>
       <div className={styles.postsContainer}>
         {posts && posts !== null ? posts.map((post:any, index:number) => {
-          return <Post key={index} post={post} />;
+          return <Post key={index} post={post} phrase={phrase} />;
         }) : ""}
       </div>
       <div className='link whiteBg'>
