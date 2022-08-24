@@ -51,11 +51,18 @@ function LoginForm() {
           type='password'
         />
 
-        <button className={styles.button} onClick={signUp}>
+        <button
+          className={styles.loginButton + ' ' + styles.button}
+          onClick={signUp}
+        >
           Login
         </button>
 
-        <button className={styles.forgotButton} /*onClick={signUp}*/>
+        <button
+          className={
+            styles.forgotButton + ' ' + styles.button
+          } /*onClick={signUp}*/
+        >
           Forgot password?
         </button>
       </div>
