@@ -12,6 +12,9 @@ type Props = {
 };
 
 const Post: React.FC<Props> = ({ post }) => {
+
+  console.log(JSON.stringify(post), " POST ")
+
   const { locale } = useSelector((state) => state.languages);
   // const [ imageData, setImageData ] = useState(null)
 

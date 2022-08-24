@@ -147,7 +147,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
 
   const headerImageUri = `http://${context.req.headers.host}/header-background.jpg`;
   let { img, svg } = await getPlaiceholder(headerImageUri, {
-    size: 64,
+    size: 32,
   });
   const headerImage = JSON.stringify({
     uri: headerImageUri,

@@ -1,13 +1,18 @@
-import Link from 'next/link';
 import React from 'react';
-
 import styles from './Styles.module.css';
-
 import Post from './Post';
 
-function Posts(props) {
+interface PostsProps {
+  posts: any[];
+  title?: string;
+}
+
+function Posts(props:PostsProps) {
+  
   const {posts,title} = props;
+
   return (
+    
     <section
       className={
         'posts-sections ' +
@@ -26,6 +31,8 @@ function Posts(props) {
         </a>
       </div>
     </section>
+
   );
 }
+
 export default Posts;
