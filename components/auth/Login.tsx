@@ -10,6 +10,8 @@ function LoginForm() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  console.log(loading);
 
   useEffect(() => {
     let token = sessionStorage.getItem('Token');
@@ -21,6 +23,7 @@ function LoginForm() {
   const signUp = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((response: any) => {
+        setLoading(true);
         // console.log(response.user);
         sessionStorage.setItem('Token', response.user.accessToken);
         setCookie('Token', response.user.accessToken);
@@ -58,11 +61,7 @@ function LoginForm() {
           Login
         </button>
 
-        <button
-          className={
-            styles.forgotButton + ' ' + styles.button
-          } /*onClick={signUp}*/
-        >
+        <button className={styles.forgotButton + ' ' + styles.button}>
           Forgot password?
         </button>
       </div>

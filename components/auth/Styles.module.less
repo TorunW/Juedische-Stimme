@@ -27,10 +27,17 @@
     padding: 4px;
     font-size: 16px;
     font-family: 'Raleway';
+    border-radius: 3px;
+
+    &:focus-visible {
+      outline: #2e2e2e;
+      border: 2px solid #2e2e2e;
+    }
   }
 
   .button {
     border-style: none;
+    cursor: pointer;
   }
 
   .forgotButton {
@@ -39,8 +46,6 @@
     font-weight: 600;
     &:hover {
       color: #454250c0;
-
-      // color: #9b97af;
       font-weight: 700;
     }
   }
