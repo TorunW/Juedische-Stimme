@@ -10,7 +10,7 @@ const Header = () => {
 
   const { img, svg, uri } = headerImage;
 
-  let blurringImageDisplay;
+  let blurringImageDisplay: ReactElement;
   if (svg.length > 0 && img && img !== null) {
     // console.log(img, ' IMG ');
     blurringImageDisplay = (

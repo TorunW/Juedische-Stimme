@@ -10,9 +10,11 @@ import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
 
 type Props = {
   post: any;
+  phrase?: string
 };
 
-const Post: React.FC<Props> = ({ post }) => {
+const Post: React.FC<Props> = ({ post, phrase }) => {
+
   const { locale } = useSelector((state) => state.languages);
   // const [ imageData, setImageData ] = useState(null)
 
@@ -57,28 +59,29 @@ const Post: React.FC<Props> = ({ post }) => {
     endIndex = textLength;
 
   // if we have a phrase - search phrase, i.e if this is search page, we will search for the phrase inside the content
-  if (post.phrase) {
-    postContent = postContent.replace(/<\/?[^>]+(>|$)/g, '');
+  // if (phrase) {
 
-    const phraseIndexInText = post.post_content.indexOf(post.phrase);
+  //   postContent = postContent.replace(/<\/?[^>]+(>|$)/g, '');
 
-    if (phraseIndexInText > -1) {
-      startIndex = phraseIndexInText - textLength / 2;
-      if (startIndex < 0) startIndex = 0;
+  //   const phraseIndexInText = post.post_content.indexOf(post.phrase);
 
-      endIndex = phraseIndexInText + textLength / 2;
-      if (endIndex > post.post_content.length - 1)
-        endIndex = post.post_content.length;
+  //   if (phraseIndexInText > -1) {
+  //     startIndex = phraseIndexInText - textLength / 2;
+  //     if (startIndex < 0) startIndex = 0;
 
-      postContent =
-        '...' +
-        postContent
-          .toLowerCase()
-          .split(post.phrase)
-          .join(`<b>${post.phrase}</b>`) +
-        '...';
-    }
-  } else postContent = postContent.substring(startIndex, endIndex);
+  //     endIndex = phraseIndexInText + textLength / 2;
+  //     if (endIndex > post.post_content.length - 1)
+  //       endIndex = post.post_content.length;
+
+  //     postContent =
+  //       '...' +
+  //       postContent
+  //         .toLowerCase()
+  //         .split(post.phrase)
+  //         .join(`<b>${post.phrase}</b>`) +
+  //       '...';
+  //   }
+  // } else postContent = postContent.substring(startIndex, endIndex);
 
   // let blurringImageDisplay: ReactElement;
   // if (imageData !== null && imageData.svg.length > 0 && imageData.img ){
@@ -87,7 +90,7 @@ const Post: React.FC<Props> = ({ post }) => {
   // }
 
   return (
-    <article className={styles.post}>
+    <article className={styles.post} data-testid="post-container">
       <div className={styles.imageWrapper}>
         {/* {blurringImageDisplay} */}
         <img
@@ -114,7 +117,7 @@ const Post: React.FC<Props> = ({ post }) => {
       </a>
       <div
         className={styles.postPreview}
-        dangerouslySetInnerHTML={{ __html: trimStringToLastSpace(postContent) }}
+        dangerouslySetInnerHTML={{ __html: trimStringToLastSpace(postContent.substring(0,400)) }}
       ></div>
     </article>
   );
