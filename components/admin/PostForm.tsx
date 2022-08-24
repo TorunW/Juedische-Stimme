@@ -71,6 +71,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
             post_name:values.post_title.replace(/\s+/g, '-').toLowerCase().replace(),
             post_modified: dateTimeHelper(new Date()),
             previousCategoryId: post ? post.categoryId : null,
+            post_content:values.post_content.replaceAll(`'`, `"`),
             nextPostId
         }
         const postRequest = post ? axios.put(postUrl,postData) : axios.post(postUrl,postData);
@@ -110,7 +111,8 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
 
         axios.all([...requestsArray]).then(axios.spread((...responses) => {
           console.log(responses, " RESPONSES")
-            window.location.href = `/admin/posts/${values.post_title.replace(/\s+/g, '-').toLowerCase().replace()}` 
+          if (post) window.location.reload()
+          else window.location.href = `/admin/posts/${values.post_title.replace(/\s+/g, '-').toLowerCase().replace()}` 
         })).catch(errors => {
             console.log(errors, " ERRORS")
         })

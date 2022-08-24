@@ -44,6 +44,7 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
 ContentPage.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
+
   const navItemsResponse = await excuteQuery({
     query: selectMenuItems(),
   });
