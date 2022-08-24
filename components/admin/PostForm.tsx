@@ -12,6 +12,7 @@ import { generateImageUrl } from 'helpers/imageUrlHelper'
 import PostTranslationsForm from './PostTranslationsForm';
 import PostTranslations from './PostTranslations';
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
+import Image from 'next/image';
 
 const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
   suspense:true,
@@ -70,6 +71,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
             post_name:values.post_title.replace(/\s+/g, '-').toLowerCase().replace(),
             post_modified: dateTimeHelper(new Date()),
             previousCategoryId: post ? post.categoryId : null,
+            post_content:values.post_content.replaceAll(`'`, `"`),
             nextPostId
         }
         const postRequest = post ? axios.put(postUrl,postData) : axios.post(postUrl,postData);
@@ -109,7 +111,8 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
 
         axios.all([...requestsArray]).then(axios.spread((...responses) => {
           console.log(responses, " RESPONSES")
-            window.location.href = `/admin/posts/${values.post_title.replace(/\s+/g, '-').toLowerCase().replace()}` 
+          if (post) window.location.reload()
+          else window.location.href = `/admin/posts/${values.post_title.replace(/\s+/g, '-').toLowerCase().replace()}` 
         })).catch(errors => {
             console.log(errors, " ERRORS")
         })
@@ -157,9 +160,9 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
 
             {
               previewImage !== null ?
-              <img width={200} src={previewImage}/> :
+              <Image layout='fixed' width={320} height={180} src={previewImage}/> :
               post && post.post_image ?
-              <img width={200} src={generateImageUrl(post.post_image)}/> :
+              <Image layout='fixed' width={320} height={180}  src={generateImageUrl(post.post_image)}/> :
               ''
             }
 

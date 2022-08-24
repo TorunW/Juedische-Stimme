@@ -10,6 +10,7 @@ import { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
+import Head from 'next/head';
 
 const ContentPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -28,6 +29,12 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
   return (
     <main id="post-page">
       <section>
+        <Head>
+          <title>{page.post_title}</title>
+          <meta property="og:title" content={page.post_title} key="title" />
+          <meta property="og:keywords" key="keywords" name="keywords" content={page.tagNames !== null ? page.tagNames : page.post_title}/>
+          <meta property="og:description" key="description" name="description" content={page.post_content.substring(0,200)}/>
+        </Head>
         <Post post={page} />
       </section>
     </main>
@@ -37,6 +44,7 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
 ContentPage.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
+
   const navItemsResponse = await excuteQuery({
     query: selectMenuItems(),
   });
