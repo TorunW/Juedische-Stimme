@@ -80,8 +80,6 @@ const Post: React.FC<Props> = ({ post }) => {
     }
   } else postContent = postContent.substring(startIndex, endIndex);
 
-  // trimStringToLastSpace(postContent);
-
   // let blurringImageDisplay: ReactElement;
   // if (imageData !== null && imageData.svg.length > 0 && imageData.img ){
   //   console.log(imageData.img, " IMG ")
