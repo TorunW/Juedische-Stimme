@@ -54,10 +54,9 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
       : post.post_content;
   }
 
-  let textLength = 600;
-  let startIndex = 0,
-    endIndex = textLength;
-
+  // let textLength = 600;
+  // let startIndex = 0,
+  //   endIndex = textLength;
   // if we have a phrase - search phrase, i.e if this is search page, we will search for the phrase inside the content
   // if (phrase) {
 
@@ -119,7 +118,7 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
       </a>
       <div
         className={styles.postPreview}
-        dangerouslySetInnerHTML={{ __html: trimStringToLastSpace(postContent.substring(0,400)) }}
+        dangerouslySetInnerHTML={{ __html: postExcerpt && postExcerpt !== null ? postExcerpt : trimStringToLastSpace(postContent.substring(0,400)) }}
       ></div>
     </article>
   );
