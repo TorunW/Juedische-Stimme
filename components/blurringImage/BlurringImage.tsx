@@ -7,7 +7,7 @@ function BlurringImage({
   img,
   alt,
   style,
-  blurLevel = 40,
+  blurLevel = 20,
   height = undefined,
   width = undefined,
   ...props
@@ -16,7 +16,7 @@ function BlurringImage({
   const Svg = svg[0];
   const svgProps = svg[1];
   const rectangles = svg[2];
-  
+
   return (
     <div className={styles.container}>
       <div className={styles.blurringImageContainer}>
