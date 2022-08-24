@@ -10,11 +10,10 @@ import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
 
 type Props = {
   post: any;
-  phrase?: string
+  phrase?: string;
 };
 
 const Post: React.FC<Props> = ({ post, phrase }) => {
-
   const { locale } = useSelector((state) => state.languages);
   // const [ imageData, setImageData ] = useState(null)
 
@@ -89,7 +88,7 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
   // }
 
   return (
-    <article className={styles.post} data-testid="post-container">
+    <article className={styles.post} data-testid='post-container'>
       <div className={styles.imageWrapper}>
         {/* {blurringImageDisplay} */}
         <img
@@ -116,7 +115,12 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
       </a>
       <div
         className={styles.postPreview}
-        dangerouslySetInnerHTML={{ __html: postExcerpt && postExcerpt !== null ? postExcerpt : trimStringToLastSpace(postContent.substring(0,400)) }}
+        dangerouslySetInnerHTML={{
+          __html:
+            postExcerpt && postExcerpt !== null
+              ? postExcerpt
+              : `${trimStringToLastSpace(postContent.substring(0, 400))}[...]`,
+        }}
       ></div>
     </article>
   );

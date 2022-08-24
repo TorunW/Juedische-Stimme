@@ -1,3 +1,4 @@
+import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
 import Link from 'next/link';
 import React from 'react';
 import styles from './StylesFeed.module.css';
@@ -63,7 +64,7 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
 
       <p>
         {post.message && post.message.length > 300
-          ? `${post.message.substring(0, 300)}[...]`
+          ? `${trimStringToLastSpace(post.message.substring(0, 300))}[...]`
           : post.message}
       </p>
       {sharedPostDisplay}

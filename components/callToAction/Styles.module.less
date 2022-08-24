@@ -1,97 +1,402 @@
-.ctaPage {
-  height: auto;
+@media (min-width: 1251px) {
+  .ctaPage {
+    height: auto;
 
-  .drawer {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    height: 0;
-    transition: all 0.5s;
-  }
-  .hidden {
-    transition: all 1s;
-  }
-
-  .visible {
-    position: relative;
-    height: 215px;
-    width: 100%;
-    z-index: 1;
-    transition: all 1s;
-  }
-
-  .imgWrapper {
-    height: 466px;
-    overflow: hidden;
-    position: relative;
-
-    .backgroundImage {
-      position: absolute !important;
-      top: -50% !important;
-      z-index: 10;
+    .drawer {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 0;
+      transition: all 0.5s;
+    }
+    .hidden {
+      transition: all 1s;
     }
 
-    .boxContainer {
-      position: absolute;
-      z-index: 20;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 32px;
+    .visible {
+      position: relative;
+      height: 215px;
+      width: 100%;
+      z-index: 1;
+      transition: all 1s;
+    }
 
-      .cta {
-        color: white;
-        height: 338px;
-        width: 404px;
+    .imgWrapper {
+      height: 466px;
+      overflow: hidden;
+      position: relative;
+
+      .backgroundImage {
+        position: absolute !important;
+        top: -50% !important;
+        z-index: 10;
+      }
+
+      .boxContainer {
+        position: absolute;
+        z-index: 20;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
         justify-content: center;
-        gap: 16px;
-        padding: 16px;
-        text-align: center;
-        cursor: pointer;
+        align-items: center;
+        gap: 32px;
 
-        background-image: linear-gradient(
-          to top,
-          rgba(0, 0, 0, 0.463) 50%,
-          rgba(0, 0, 0, 0.363) 50%
-        );
-        background-size: 200% 200%;
-        background-position: top;
-        transition: all 0.3s;
-
-        &:hover {
-          background-color: rgba(0, 0, 0, 0.463);
+        .cta {
+          color: white;
+          height: 338px;
+          width: 404px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          padding: 16px;
+          text-align: center;
+          cursor: pointer;
 
           background-image: linear-gradient(
             to top,
-            rgba(0, 0, 0, 0.463) 51%,
+            rgba(0, 0, 0, 0.463) 50%,
             rgba(0, 0, 0, 0.363) 50%
           );
-          background-position: 0 100%;
+          background-size: 200% 200%;
+          background-position: top;
           transition: all 0.3s;
-        }
 
-        h4 {
-          font-size: 1.6rem;
-          text-transform: uppercase;
-          font-weight: 600;
-        }
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.463);
 
-        a {
-          position: fixed;
-          height: 338px;
-          width: 404px;
-        }
+            background-image: linear-gradient(
+              to top,
+              rgba(0, 0, 0, 0.463) 51%,
+              rgba(0, 0, 0, 0.363) 50%
+            );
+            background-position: 0 100%;
+            transition: all 0.3s;
+          }
 
-        p {
-          line-height: 1.5rem;
-          font-size: 1.1rem;
+          h4 {
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            font-weight: 600;
+          }
+
+          a {
+            position: fixed;
+            height: 338px;
+            width: 404px;
+          }
+
+          p {
+            line-height: 1.5rem;
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1250px) {
+  .ctaPage {
+    height: auto;
+
+    .drawer {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 0;
+      transition: all 0.5s;
+    }
+    .hidden {
+      transition: all 1s;
+    }
+
+    .visible {
+      position: relative;
+      height: 215px;
+      width: 100%;
+      z-index: 1;
+      transition: all 1s;
+    }
+
+    .imgWrapper {
+      height: 366px;
+      overflow: hidden;
+      position: relative;
+
+      .backgroundImage {
+        position: absolute !important;
+        top: -50% !important;
+        z-index: 10;
+      }
+
+      .boxContainer {
+        position: absolute;
+        z-index: 20;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+
+        .cta {
+          color: white;
+          height: 238px;
+          width: 304px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          padding: 16px;
+          text-align: center;
+          cursor: pointer;
+
+          background-image: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.463) 50%,
+            rgba(0, 0, 0, 0.363) 50%
+          );
+          background-size: 200% 200%;
+          background-position: top;
+          transition: all 0.3s;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.463);
+
+            background-image: linear-gradient(
+              to top,
+              rgba(0, 0, 0, 0.463) 51%,
+              rgba(0, 0, 0, 0.363) 50%
+            );
+            background-position: 0 100%;
+            transition: all 0.3s;
+          }
+
+          h4 {
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            font-weight: 600;
+          }
+
+          a {
+            position: fixed;
+            height: 338px;
+            width: 404px;
+          }
+
+          p {
+            line-height: 1.5rem;
+            font-size: 1.1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1010px) {
+  .ctaPage {
+    height: auto;
+
+    .drawer {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 0;
+      transition: all 0.5s;
+    }
+    .hidden {
+      transition: all 1s;
+    }
+
+    .visible {
+      position: relative;
+      height: 215px;
+      width: 100%;
+      z-index: 1;
+      transition: all 1s;
+    }
+
+    .imgWrapper {
+      height: 316px;
+      overflow: hidden;
+      position: relative;
+
+      .backgroundImage {
+        position: absolute !important;
+        top: -50% !important;
+        z-index: 10;
+      }
+
+      .boxContainer {
+        position: absolute;
+        z-index: 20;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+
+        .cta {
+          color: white;
+          height: 238px;
+          width: 254px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          padding: 16px;
+          text-align: center;
+          cursor: pointer;
+
+          background-image: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.463) 50%,
+            rgba(0, 0, 0, 0.363) 50%
+          );
+          background-size: 200% 200%;
+          background-position: top;
+          transition: all 0.3s;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.463);
+
+            background-image: linear-gradient(
+              to top,
+              rgba(0, 0, 0, 0.463) 51%,
+              rgba(0, 0, 0, 0.363) 50%
+            );
+            background-position: 0 100%;
+            transition: all 0.3s;
+          }
+
+          h4 {
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            font-weight: 600;
+          }
+
+          a {
+            position: fixed;
+            height: 338px;
+            width: 404px;
+          }
+
+          p {
+            line-height: 1.5rem;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 830px) {
+  .ctaPage {
+    height: auto;
+    overflow: hidden;
+
+    .drawer {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      height: 0;
+      transition: all 0.5s;
+    }
+    .hidden {
+      transition: all 1s;
+    }
+
+    .visible {
+      position: relative;
+      height: 215px;
+      width: 100%;
+      z-index: 1;
+      transition: all 1s;
+    }
+
+    .imgWrapper {
+      height: 798px;
+      // overflow: hidden;
+      // position: relative;
+
+      .backgroundImage {
+        // position: absolute !important;
+        // top: -50% !important;
+        z-index: 10;
+      }
+
+      .boxContainer {
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 32px;
+
+        .cta {
+          color: white;
+          height: 208px;
+          width: 364px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 16px;
+          padding: 16px;
+          text-align: center;
+          cursor: pointer;
+
+          background-image: linear-gradient(
+            to top,
+            rgba(0, 0, 0, 0.463) 50%,
+            rgba(0, 0, 0, 0.363) 50%
+          );
+          background-size: 200% 200%;
+          background-position: top;
+          transition: all 0.3s;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.463);
+
+            background-image: linear-gradient(
+              to top,
+              rgba(0, 0, 0, 0.463) 51%,
+              rgba(0, 0, 0, 0.363) 50%
+            );
+            background-position: 0 100%;
+            transition: all 0.3s;
+          }
+
+          h4 {
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            font-weight: 600;
+          }
+
+          a {
+            position: fixed;
+            height: 338px;
+            width: 404px;
+          }
+
+          p {
+            line-height: 1.5rem;
+            font-size: 1rem;
+          }
         }
       }
     }
