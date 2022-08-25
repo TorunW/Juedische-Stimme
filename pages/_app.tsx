@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }: LayoutAppProps) {
 
   return (
     <Provider store={store}>
-      <GoogleReCaptchaProvider
+      {/* <GoogleReCaptchaProvider
         reCaptchaKey='6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI'
         scriptProps={{
           async: false,
@@ -36,11 +36,11 @@ function MyApp({ Component, pageProps }: LayoutAppProps) {
           appendTo: 'head',
           nonce: undefined,
         }}
-      >
+      > */}
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </GoogleReCaptchaProvider>
+      {/* </GoogleReCaptchaProvider> */}
     </Provider>
   );
 }

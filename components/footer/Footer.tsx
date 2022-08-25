@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 
 export const Footer = () => {
-  const { footerMenu } = useSelector((state) => state.nav);
+  // const { footerMenu } = useSelector((state) => state.nav);
   const router = useRouter();
 
   function logout() {
@@ -100,7 +100,7 @@ export const Footer = () => {
       </div>
 
       <div className={styles.footerBottomMenu}>
-        <button onClick={logout}>Logout</button>
+        {/* <button onClick={logout}>Logout</button> */}
         <p>
           copyright © 2022 JÜDISCHE STIMME für gerechten frieden in nahost,
           berlin seit 2007.
