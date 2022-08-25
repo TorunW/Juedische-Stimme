@@ -22,11 +22,18 @@ function BlurringImage({
       <div className={styles.blurringImageContainer}>
         <Svg
           {...svgProps}
-          style={{ ...svgProps.style, filter: `blur(${blurLevel}px)`,  transform: ["scale(1.5)", svg[1].style.transform].join(" ") }}
+          style={{
+            ...svgProps.style,
+            filter: `blur(${blurLevel}px)`,
+            transform: ['scale(1.5)', svg[1].style.transform].join(' '),
+          }}
           height={height}
         >
           {rectangles.map(([Rect, rectProps]) => (
-            <Rect {...rectProps} key={`${rectProps.x}${rectProps.y}${Date.now()}`} />
+            <Rect
+              {...rectProps}
+              key={`${rectProps.x}${rectProps.y}${Date.now()}`}
+            />
           ))}
         </Svg>
       </div>
@@ -36,6 +43,7 @@ function BlurringImage({
         className={styles.img}
         layout='fixed'
         alt={alt}
+        priority={true}
         onLoadingComplete={() => props.onLoadingComplete()}
       />
     </div>

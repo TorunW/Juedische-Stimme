@@ -13,6 +13,7 @@ const CallToAction = () => {
   const [isBigScreen, setIsBigScreen] = useState(true);
 
   useEffect(() => {
+    updateScreenSize();
     window.addEventListener('resize', updateScreenSize);
   }, []);
 
