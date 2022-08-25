@@ -83,6 +83,7 @@
 }
 .nav .leftContainer .languageMenu {
   color: white;
+  transition: color 0.3s ease-in-out;
 }
 .nav .leftContainer .languageMenu a {
   transition: color 0.3s ease-in-out;
@@ -117,6 +118,7 @@
 }
 .navActive .leftContainer .languageMenu {
   color: #2e2e2e;
+  transition: color 0.3s ease-in-out;
 }
 .navActive .leftContainer .languageMenu a {
   transition: color 0.3s ease-in-out;
