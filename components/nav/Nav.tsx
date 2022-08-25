@@ -14,7 +14,7 @@ function Nav() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // setNavbar(window.location.pathname.length <= 1 ? false : true) 
+      // setNavbar(window.location.pathname.length <= 1 ? false : true)
       window.addEventListener('scroll', handleScroll);
     }
   }, []);
@@ -114,7 +114,10 @@ function Nav() {
   );
 
   return (
-    <nav className={navbar === true ? styles.navActive : styles.nav} data-testid="nav">
+    <nav
+      className={navbar === true ? styles.navActive : styles.nav}
+      data-testid='nav'
+    >
       <div className={styles.topContainer}>
         <Link href={'/'}>
           <div className={styles.logoContainer}>
@@ -122,17 +125,23 @@ function Nav() {
             <Image src={logo2} />
           </div>
         </Link>
-        <div className={styles.buttonContainer}>{callToActionMenuDisplay}</div>
+        <div className={styles.buttonContainer}>
+          <ul>{callToActionMenuDisplay}</ul>
+        </div>
         <div className={styles.leftContainer}>
           {socialmediaMenuDisplay}
           <div className={styles.languageMenu}>
             <a href={`${pathName}`}>DE</a>
             <b> | </b>
-            <a href={`/en_US${pathName}`} data-testid="english-button" >EN</a>
+            <a href={`/en_US${pathName}`} data-testid='english-button'>
+              EN
+            </a>
           </div>
         </div>
       </div>
-      <div className={styles.bottomContainer}>{mainMenuDisplay}</div>
+      <div className={styles.bottomContainer}>
+        <ul>{mainMenuDisplay}</ul>
+      </div>
     </nav>
   );
 }
