@@ -6,6 +6,7 @@ import { GeneratePostUrl } from 'helpers/generatePostUrl';
 import styles from './Styles.module.css';
 import axios from 'axios';
 import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
+import Image from 'next/image';
 // import BlurringImage from '../BlurringImage';
 
 type Props = {
@@ -90,12 +91,12 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
   return (
     <article className={styles.post} data-testid='post-container'>
       <div className={styles.imageWrapper}>
-        {/* {blurringImageDisplay} */}
-        <img
+        <Image
           src={generateImageUrl(post.post_image)}
-          // src='testpic.jpg'
-          width='767'
-          height='431'
+          alt={post.post_title}
+          title={post.post_title}
+          layout='fill'
+          objectFit='cover'
         />
       </div>
 

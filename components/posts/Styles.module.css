@@ -21,6 +21,7 @@
   overflow: hidden;
   cursor: pointer;
   display: block;
+  position: relative;
   width: 100%;
 }
 .twoColPage .postsContainer .post .imageWrapper img,
