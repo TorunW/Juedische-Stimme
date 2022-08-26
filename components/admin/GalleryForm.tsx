@@ -18,9 +18,11 @@ function GalleryForm({ gallery }) {
       gallery_description: gallery ? gallery.gallery_description : '',
     },
     onSubmit: (values) => {
+
+      
       axios({
         method: gallery ? 'put' : 'post',
-        url: `/api/galleries${gallery ? '/' + gallery.gallery_id : ''}`,
+        url:  `/api/galleries/${gallery ? '/' + gallery.gallery_id : ''}`,
         data: { ...values },
       }).then(
         (response) => {
