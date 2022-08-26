@@ -4,6 +4,7 @@ import ContactForm from '../forms/ContactForm';
 import { useSelector } from 'store/hooks';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export const Footer = () => {
   // const { footerMenu } = useSelector((state) => state.nav);
@@ -30,14 +31,26 @@ export const Footer = () => {
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                <img src='./Jewish-voice-for-peace.svg' />
+                <Image
+                  src='/Jewish-voice-for-peace.svg'
+                  title='Jewish-voice-for-peace'
+                  alt='Jewish-voice-for-peace'
+                  height={79}
+                  width={120}
+                />
               </a>
               <a
                 href='https://www.palaestinaspricht.de/'
                 target='_blank'
                 rel='noopener noreferrer'
               >
-                <img src='./Palästina-spricht.svg' />
+                <Image
+                  src='/Palästina-spricht.svg'
+                  title='Palästina-spricht'
+                  alt='Palästina-spricht'
+                  height={79}
+                  width={120}
+                />
               </a>
             </div>
           </div>

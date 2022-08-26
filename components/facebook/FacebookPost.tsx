@@ -23,9 +23,17 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
           key={index}
           className={styles.sharedPostContainer}
         >
-          <div className={styles.imgContainer}>
-            <img src={attPost.media ? attPost.media.image.src : ''} />
-          </div>
+          {attPost.media && attPost.media.image.src ? (
+            <div className={styles.imgContainer}>
+              <img
+                src={attPost.media.image.src}
+                alt={attPost.title !== 'Timeline photos' ? attPost.title : ''}
+                title={attPost.title !== 'Timeline photos' ? attPost.title : ''}
+              />
+            </div>
+          ) : (
+            ''
+          )}
           <h4 data-testid={`attachment-${index}-title`}>
             {attPost.title !== 'Timeline photos' ? attPost.title : ''}
           </h4>
@@ -50,13 +58,21 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
   return (
     <div data-testid='container' className={styles.postContainer}>
       <div className={styles.postHeader}>
-        <img src='http://graph.facebook.com/998665673528998/picture?type=square' />
+        <img
+          src='http://graph.facebook.com/998665673528998/picture?type=square'
+          alt='juedische-stimme-logo'
+          title='juedische-stimme-logo'
+        />
         <h4 data-testid='from'>{post.from.name}</h4>
       </div>
 
       {!post.attachments ? (
         <div className={styles.imgContainer}>
-          <img src={post.full_picture} />
+          <img
+            src={post.full_picture}
+            alt='juedische-stimme-facebook-post-image'
+            title='juedische-stimme-facebook-post-image'
+          />
         </div>
       ) : (
         ''

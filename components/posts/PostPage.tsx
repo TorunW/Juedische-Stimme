@@ -1,4 +1,5 @@
 import { generateImageUrl } from 'helpers/imageUrlHelper';
+import Image from 'next/image';
 import React, { ReactElement } from 'react';
 import { useSelector } from 'store/hooks';
 
@@ -43,7 +44,13 @@ function Post({ post }) {
     postDisplay = (
       <React.Fragment>
         <h4>{postTitle}</h4>
-        <img src={generateImageUrl(post.post_image)} />
+        <Image
+          src={generateImageUrl(post.post_image)}
+          alt={post.post_title}
+          title={post.post_title}
+          layout='fill'
+          objectFit='cover'
+        />
         <h4>
           <a href={`/category/${post.categoryName}`}>{post.categoryName}</a>
         </h4>
@@ -81,7 +88,11 @@ function Post({ post }) {
       </React.Fragment>
     );
   }
-  return <div id="post-view" style={{padding:"15px"}}>{postDisplay}</div>;
+  return (
+    <div id='post-view' style={{ padding: '15px' }}>
+      {postDisplay}
+    </div>
+  );
 }
 
 export default Post;
