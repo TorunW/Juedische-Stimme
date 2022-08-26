@@ -52,6 +52,19 @@ export const Footer = () => {
                   width={120}
                 />
               </a>
+              <a
+                href='https://www.palaestinaspricht.de/'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <Image
+                  src='/ejjp.png'
+                  title='Palästina-spricht'
+                  alt='Palästina-spricht'
+                  height={79}
+                  width={120}
+                />
+              </a>
             </div>
           </div>
           <div className={styles.footerRow}>
