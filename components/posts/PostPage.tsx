@@ -5,7 +5,7 @@ import { useSelector } from 'store/hooks';
 
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
-  console.log(post, " POST ")
+
   /* TO DO'S
      - DISPLAY TAGS IN A BETTER WAY
      - MAKE A BETTER NO POST FOUND PAGE! maybe even split to a different compoent -> show suggested posts? show helpful links?
@@ -81,13 +81,13 @@ function Post({ post }) {
         ></div>
         <hr />
         {post.nextPostName !== null ? (
-          <React.Fragment>next:{' '} <a href={'/' + post.nextPostName}>{post.nextPostName}</a></React.Fragment>
+          <React.Fragment>next:{' '} <a href={'/' + post.nextPostName.split('#').join(':__--__:')}>{post.nextPostName}</a></React.Fragment>
         ) : (
           ''
         )}
         <br />
         {post.previousPostName !== null ? (
-          <React.Fragment>previous:{' '} <a href={'/' + post.previousPostName}>{post.previousPostName}</a></React.Fragment>
+          <React.Fragment>previous:{' '} <a href={'/' + post.previousPostName.split('#').join(':__--__:')}>{post.previousPostName}</a></React.Fragment>
         ) : (
           ''
         )}

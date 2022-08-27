@@ -29,6 +29,8 @@ import axios from 'axios';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import { setHeaderGallery } from 'store/galleries/galleriesSlice';
 
+import Head from 'next/head';
+
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
