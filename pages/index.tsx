@@ -32,20 +32,22 @@ import { setHeaderGallery } from 'store/galleries/galleriesSlice';
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
-  const { gallery, aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
+  const { gallery, aboutInfo, headerImage } = useSelector(
+    (state) => state.aboutinfo
+  );
 
   useEffect(() => {
     initHomePage();
   }, []);
 
   useEffect(() => {
-    if (headerImage.isLoaded === true){
+    if (headerImage.isLoaded === true) {
       getFbToken();
       getNewsletterPosts();
     }
-  },[headerImage.isLoaded])
+  }, [headerImage.isLoaded]);
 
-  function initHomePage(){
+  function initHomePage() {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setHeaderGallery(JSON.parse(props.headerGallery)[0]))
     dispatch(setPosts(JSON.parse(props.posts)));
@@ -72,23 +74,46 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   }
 
   async function getNewsletterPosts() {
-    axios.post('/api/posts/category', {
-      locale:props.locale,
-      defaultLocale:props.defaultLocale,
-      category:'newsletter'
-    })
-    .then(function (response) {
-      dispatch(
-        setNewsletter(response.data)
-      );
-    })
-    .catch(function (error) {
-      console.log(error, " ERROR ON FETCHING NEWSLETTER ");
-    });
+    axios
+      .post('/api/posts/category', {
+        locale: props.locale,
+        defaultLocale: props.defaultLocale,
+        category: 'newsletter',
+      })
+      .then(function (response) {
+        dispatch(setNewsletter(response.data));
+      })
+      .catch(function (error) {
+        console.log(error, ' ERROR ON FETCHING NEWSLETTER ');
+      });
   }
 
   return (
     <main id='home-page'>
+      <Head>
+        <title>Jüdische Stimme</title>
+        <div>
+          <link
+            rel='apple-touch-icon'
+            sizes='180x180'
+            href='/apple-touch-icon.png'
+          />
+          <link
+            rel='icon'
+            type='image/png'
+            sizes='32x32'
+            href='/favicon-32x32.png'
+          />
+          <link
+            rel='icon'
+            type='image/png'
+            sizes='16x16'
+            href='/favicon-16x16.png'
+          />
+        </div>
+
+        {/* <link rel='manifest' href='/site.webmanifest' /> */}
+      </Head>
       <Header />
       <Posts posts={posts} title={'Aktuelles'} />
       <FacebookEvents />
