@@ -26,6 +26,8 @@ import CallToAction from '@/components/callToAction/CallToAction';
 
 import { getPlaiceholder } from 'plaiceholder';
 import axios from 'axios';
+import { generateImageUrl } from 'helpers/imageUrlHelper';
+import { setHeaderGallery } from 'store/galleries/galleriesSlice';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -45,6 +47,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 
   function initHomePage(){
     dispatch(setMenuItems(JSON.parse(props.navItems)));
+    dispatch(setHeaderGallery(JSON.parse(props.headerGallery)[0]))
     dispatch(setPosts(JSON.parse(props.posts)));
     dispatch(
       setAboutInfo({
@@ -100,8 +103,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
-  if (!hasCookie('Token', { req: context.req, res: context.res }))
-    return { redirect: { destination: '/login', permanent: false } };
+  // if (!hasCookie('Token', { req: context.req, res: context.res }))
+  //   return { redirect: { destination: '/login', permanent: false } };
 
   // NAVIGATION
   const navItemsResponse = await excuteQuery({
@@ -146,7 +149,12 @@ export const getServerSideProps = async (context: NextPageContext) => {
   });
   const gallery = JSON.stringify(galleryResponse);
 
-  const headerImageUri = `http://${context.req.headers.host}/header-background.jpg`;
+  const headerGalleryResponse = await excuteQuery({
+    query: selectGalleryById(6)
+  })
+  const headerGallery = JSON.stringify(headerGalleryResponse)
+
+  const headerImageUri = `http://${context.req.headers.host}/${generateImageUrl(headerGalleryResponse[0].imageSrcs.split(',')[0])}`;
   let { img, svg } = await getPlaiceholder(headerImageUri, {
     size: 32,
   });
@@ -165,6 +173,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       locales: context.locales,
       locale: context.locale,
       defaultLocale: context.defaultLocale,
+      headerGallery,
       headerImage,
     },
   };

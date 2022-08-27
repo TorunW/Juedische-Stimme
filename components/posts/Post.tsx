@@ -120,7 +120,7 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
           __html:
             postExcerpt && postExcerpt !== null
               ? postExcerpt
-              : `${trimStringToLastSpace(postContent.substring(0, 400))}[...]`,
+              : `${trimStringToLastSpace(postContent.substring(0, 600))} [...]`,
         }}
       ></div>
     </article>

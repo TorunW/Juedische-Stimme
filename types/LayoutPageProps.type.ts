@@ -18,5 +18,6 @@ export type LayoutPageProps = {
   locales?: string;
   locale?: string;
   defaultLocale?: string;
+  headerGallery?:string;
   headerImage: string;
 };

@@ -4,11 +4,13 @@ import type { Gallery } from 'types/Gallery.type';
 export interface GalleriesState {
   gallery: Gallery;
   galleries: Gallery[];
+  headerGallery:Gallery;
 }
 
 let initialState: GalleriesState = {
     gallery:null,
-    galleries:[]
+    galleries:[],
+    headerGallery:null
 }
 
 const galleriesSlice = createSlice({
@@ -19,15 +21,19 @@ const galleriesSlice = createSlice({
       state.galleries = action.payload
     },
     setGallery: (state , action) => {
-      console.log(action.payload, " ACTION PAYLOAD ")
+      // console.log(action.payload, " ACTION PAYLOAD ")
       state.gallery = { 
           ...action.payload.gallery, 
           images: action.payload.images
       }
+    },
+    setHeaderGallery: (state, action) => {
+      // console.log(ac)
+      state.headerGallery = action.payload
     }
   }
 })
 
-export const { setGalleries, setGallery } = galleriesSlice.actions
+export const { setGalleries, setGallery, setHeaderGallery } = galleriesSlice.actions
 
 export default galleriesSlice.reducer

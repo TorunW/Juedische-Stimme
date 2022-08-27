@@ -5,7 +5,7 @@ import { useSelector } from 'store/hooks';
 
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
-
+  console.log(post, " POST ")
   /* TO DO'S
      - DISPLAY TAGS IN A BETTER WAY
      - MAKE A BETTER NO POST FOUND PAGE! maybe even split to a different compoent -> show suggested posts? show helpful links?
@@ -16,7 +16,9 @@ function Post({ post }) {
   if (post && post !== null) {
     let postTitle = post.post_title,
       postExcerpt = post.post_excerpt,
-      postContent = post.post_content;
+      postContent = post.post_content,
+      postExcerpt2 = post.post_excerpt_2,
+      postContent2 = post.post_content_2
 
     if (locale !== null) {
       postTitle = post[`post_title_translation_${locale}`]
@@ -44,6 +46,7 @@ function Post({ post }) {
     postDisplay = (
       <React.Fragment>
         <h4>{postTitle}</h4>
+        <div style={{width:"100%",height:"300px",position:"relative"}}>
         <Image
           src={generateImageUrl(post.post_image)}
           alt={post.post_title}
@@ -51,6 +54,7 @@ function Post({ post }) {
           layout='fill'
           objectFit='cover'
         />
+        </div>
         <h4>
           <a href={`/category/${post.categoryName}`}>{post.categoryName}</a>
         </h4>
@@ -65,17 +69,25 @@ function Post({ post }) {
             __html: postContent.replace(/(?:\r\n|\r|\n)/g, '<br>'),
           }}
         ></div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: postExcerpt2,
+          }}
+        ></div>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: postContent2,
+          }}
+        ></div>
         <hr />
-        next:{' '}
-        {post.nextPostName ? (
-          <a href={'/' + post.nextPostName}>{post.nextPostName}</a>
+        {post.nextPostName !== null ? (
+          <React.Fragment>next:{' '} <a href={'/' + post.nextPostName}>{post.nextPostName}</a></React.Fragment>
         ) : (
           ''
         )}
         <br />
-        previous:{' '}
-        {post.previousPostName ? (
-          <a href={'/' + post.previousPostName}>{post.previousPostName}</a>
+        {post.previousPostName !== null ? (
+          <React.Fragment>previous:{' '} <a href={'/' + post.previousPostName}>{post.previousPostName}</a></React.Fragment>
         ) : (
           ''
         )}

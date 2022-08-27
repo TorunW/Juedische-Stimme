@@ -40,8 +40,10 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
         post_date: post ? post.post_date : '',
         post_date_gmt:post ? post.post_date_gmt : '',
         post_content:post ? post.post_content.replace(/(?:\r\n|\r|\n)/g, '<br>') : '',
+        post_content_2:post && post.post_content_2 !== null ? post.post_content_2.replace(/(?:\r\n|\r|\n)/g, '<br>') : '',
         post_title:post ? post.post_title : '',
         post_excerpt: post ? post.post_excerpt : '',
+        post_excerpt_2: post ? post.post_excerpt_2 : '',
         post_status: post ? post.post_status : '',
         ping_status: post ? post.ping_status : '',
         post_password: post ? post.post_password : '',
@@ -190,7 +192,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
           </div>
 
           <div className={styles['form-row']}>
-            <label htmlFor='post_content'>Post Summary (?)</label>
+            <label htmlFor='post_excerpt'>Post Summary (?)</label>
             <Suspense>
               <TipTapEditor
                   onChange={(val:string)  => formik.setFieldValue('post_excerpt',val,true)}
@@ -201,7 +203,6 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
               />
             </Suspense>
           </div>
-
           <div className={styles['form-row']}>
             <label htmlFor='post_content'>Post Content</label>
             <Suspense>
@@ -213,13 +214,38 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
               />
             </Suspense>
           </div>
+
+          <div className={styles['form-row']}>
+            <label htmlFor='post_excerpt_2'>Post Summary 2</label>
+            <Suspense>
+              <TipTapEditor
+                  onChange={(val:string)  => formik.setFieldValue('post_excerpt_2',val,true)}
+                  value={formik.values.post_excerpt_2}
+                  itemType={'post'}
+                  itemId={post ? post.postId : nextPostId}
+                  height={150}
+              />
+            </Suspense>
+          </div>
+          <div className={styles['form-row']}>
+            <label htmlFor='post_content_2'>Post Content 2</label>
+            <Suspense>
+              <TipTapEditor
+                  onChange={(val:string)  => formik.setFieldValue('post_content_2',val,true)}
+                  value={formik.values.post_content_2}
+                  itemType={'post'}
+                  itemId={post ? post.postId : nextPostId}   
+              />
+            </Suspense>
+          </div>
+
           <div className={styles['form-row']}>
             <PostTagForm 
               postId={post ? post.postId : nextPostId}
             />          
           </div>
           <div className={styles['form-row']}>
-            <button type="submit">Submit</button>
+            <button type="submit">{post ? "update post" : "create post"}</button>
           </div>
         </form>
       </div>

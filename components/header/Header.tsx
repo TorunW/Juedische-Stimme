@@ -6,13 +6,11 @@ import { setHeaderImageLoaded } from 'store/aboutinfo/aboutinfoSlice';
 
 const Header = () => {
   const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
+  const { headerGallery } = useSelector((state) => state.galleries)
   const dispatch = useDispatch();
-
   const { img, svg, uri } = headerImage;
-
   let blurringImageDisplay: ReactElement;
   if (svg.length > 0 && img && img !== null) {
-    // console.log(img, ' IMG ');
     blurringImageDisplay = (
       <BlurringImage
         svg={svg}
