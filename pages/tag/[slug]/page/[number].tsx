@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
-import { selectPostsByTag } from 'lib/queries/posts';
+import { countPostsByTag, selectPostsByTag } from 'lib/queries/posts';
 import { selectMenuItems } from 'lib/queries';
 import Posts from '@/components/posts/Posts';
 import styles from 'styles/Home.module.css';
 
 import { useDispatch, useSelector } from 'store/hooks';
-import { setPosts } from 'store/posts/postsSlice';
+import { setPosts, setPostsPagination } from 'store/posts/postsSlice';
 import { setMenuItems } from 'store/nav/navSlice';
 import { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
@@ -14,10 +14,11 @@ import { setLanguages } from 'store/languages/languagesSlice';
 
 const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.posts);
+  const { posts, postsCount, postsPerPage } = useSelector((state) => state.posts);
 
   useEffect(() => {
     dispatch(setPosts(JSON.parse(props.posts)));
+    dispatch(setPostsPagination({postsPerPage:props.postsPerPage,postsCount:props.postsCount}))
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(
       setLanguages({
@@ -31,7 +32,7 @@ const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
   return (
     <main id="tag-posts-page">
       <section className={styles.container}>
-        {posts ? <Posts posts={posts} /> : ''}
+      <Posts posts={posts} title={props.slug}  postsCount={postsCount} postsPerPage={postsPerPage} />
         {
           /* PAGINATION NEEDED */
           // get total number of items - in this case post by COUNTING the table rows
@@ -51,6 +52,14 @@ export const getServerSideProps = async (context) => {
     query: selectMenuItems(),
   });
   const navItems = JSON.stringify(navItemsResponse);
+
+  const tagCountReponse = await excuteQuery({
+    query:countPostsByTag({
+      slug: context.query.slug,
+      isCategory: false,
+    })
+  })
+
   const postsResponse = await excuteQuery({
     query: selectPostsByTag({
       slug: context.query.slug,
@@ -63,6 +72,8 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       posts: posts,
+      postsCount:tagCountReponse[0]['COUNT(*)'],
+      postsPerPage:10,
       slug: context.query.slug,
       pageNum: context.query.number,
       navItems,

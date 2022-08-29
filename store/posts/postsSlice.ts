@@ -3,7 +3,9 @@ import {createSlice} from '@reduxjs/toolkit'
 let initialState = {
     posts:[],
     newsletter:[],
-    post:null
+    post:null,
+    postsCount:null,
+    postsPerPage:null
 }
 
 const postsSlice = createSlice({
@@ -12,6 +14,10 @@ const postsSlice = createSlice({
   reducers: {
     setPosts: (state, action) => {
       state.posts = action.payload
+    },
+    setPostsPagination: (state, action) => {
+      state.postsCount = action.payload.postsCount
+      state.postsPerPage = action.payload.postsPerPage
     },
     setNewsletter: (state, action) => {
       state.newsletter = action.payload
@@ -22,6 +28,6 @@ const postsSlice = createSlice({
   }
 })
 
-export const { setPosts, setPost, setNewsletter } = postsSlice.actions
+export const { setPosts, setPost, setNewsletter, setPostsPagination } = postsSlice.actions
 
 export default postsSlice.reducer

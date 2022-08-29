@@ -5,6 +5,8 @@ export type LayoutPageProps = {
   posts?: string;
   newsletter?: string;
   post?: string;
+  postsCount: number,
+  postsPerPage: number,
   galleries?: string;
   categories?: string;
   categoryName?: string;
@@ -20,4 +22,5 @@ export type LayoutPageProps = {
   defaultLocale?: string;
   headerGallery?:string;
   headerImage: string;
+  slug?: string;
 };

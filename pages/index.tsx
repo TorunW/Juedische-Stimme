@@ -113,7 +113,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
             href='/favicon-16x16.png'
           />
         </div>
-
         {/* <link rel='manifest' href='/site.webmanifest' /> */}
       </Head>
       <Header />

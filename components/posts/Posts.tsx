@@ -6,10 +6,12 @@ interface PostsProps {
   posts: any[];
   title?: string;
   phrase?: string;
+  postsCount?: number;
+  postsPerPage?: number;
 }
 
 function Posts({posts,title,phrase}:PostsProps) {
-  
+
   return (
 
     <section
