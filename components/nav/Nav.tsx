@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'store/hooks';
 import styles from './Styles.module.css';
 import logo1 from 'styles/images/Logo-img.png';
 import logo2 from 'styles/images/Logo-text.png';
+import Head from 'next/head';
 
 function Nav() {
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
@@ -118,6 +119,28 @@ function Nav() {
       className={navbar === true ? styles.navActive : styles.nav}
       data-testid='nav'
     >
+      <Head>
+        <div>
+          <link
+            rel='apple-touch-icon'
+            sizes='180x180'
+            href='/apple-touch-icon.png'
+          />
+          <link
+            rel='icon'
+            type='image/png'
+            sizes='32x32'
+            href='/favicon-32x32.png'
+          />
+          <link
+            rel='icon'
+            type='image/png'
+            sizes='16x16'
+            href='/favicon-16x16.png'
+          />
+          <link rel='manifest' href='/site.webmanifest' />
+        </div>
+      </Head>
       <div className={styles.topContainer}>
         <Link href={'/'}>
           <div className={styles.logoContainer}>

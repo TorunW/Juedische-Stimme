@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Styles.module.css';
 import Post from './Post';
+import Link from 'next/link';
 
 interface PostsProps {
   posts: any[];
@@ -11,12 +12,34 @@ interface PostsProps {
   pageNum?: number;
 }
 
-function Posts({posts,title,phrase, postsCount, postsPerPage, pageNum}:PostsProps) {
+function Posts({
+  posts,
+  title,
+  phrase,
+  postsCount,
+  postsPerPage,
+  pageNum,
+}: PostsProps) {
+  console.log(postsCount, postsPerPage, pageNum);
 
-  console.log(postsCount, postsPerPage, pageNum)
+  let buttonDisplay;
+  if (typeof window !== 'undefined') {
+    if (window.location.pathname === `/category/${title}/page/${pageNum}`) {
+      buttonDisplay = <div>pagination</div>;
+    }
+  } else {
+    buttonDisplay = (
+      <div className='link whiteBg'>
+        <Link href={`/category/${title}`}>
+          <a className='link-button'>
+            Weitere {title === 'Aktuelles' ? 'Artikeln' : title} lesen
+          </a>
+        </Link>
+      </div>
+    );
+  }
 
   return (
-
     <section
       className={
         'posts-sections ' +
@@ -25,17 +48,14 @@ function Posts({posts,title,phrase, postsCount, postsPerPage, pageNum}:PostsProp
     >
       <h1>{title}</h1>
       <div className={styles.postsContainer}>
-        {posts && posts !== null ? posts.map((post:any, index:number) => {
-          return <Post key={index} post={post} phrase={phrase} />;
-        }) : ""}
+        {posts && posts !== null
+          ? posts.map((post: any, index: number) => {
+              return <Post key={index} post={post} phrase={phrase} />;
+            })
+          : ''}
       </div>
-      <div className='link whiteBg'>
-        <a href={`/category/${title}`} className='link-button'>
-          Weitere {title === 'Aktuelles' ? 'Artikeln' : title} lesen
-        </a>
-      </div>
+      <div>{buttonDisplay}</div>
     </section>
-
   );
 }
 

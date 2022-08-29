@@ -112,9 +112,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
             sizes='16x16'
             href='/favicon-16x16.png'
           />
+          <link rel='manifest' href='/site.webmanifest' />
         </div>
-
-        {/* <link rel='manifest' href='/site.webmanifest' /> */}
       </Head>
       <Header />
       <Posts posts={posts} title={'Aktuelles'} />
