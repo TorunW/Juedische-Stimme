@@ -10,7 +10,9 @@ interface PostsProps {
   postsPerPage?: number;
 }
 
-function Posts({posts,title,phrase}:PostsProps) {
+function Posts({posts,title,phrase, postsCount, postsPerPage}:PostsProps) {
+
+  console.log(postsCount, postsPerPage)
 
   return (
 
