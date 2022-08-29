@@ -39,18 +39,24 @@ function Posts({
     window.location.href = `/category/${title}/page/${pageNum + 1}`;
   }
 
+  // as a prop type
   let buttonDisplay: ReactElement;
   if (pageNum !== null) {
     buttonDisplay = (
       <ul className={styles.pagination}>
         <button onClick={prevPage}>prev</button>
-        {numberOfPages.map((number) => (
-          <li key={number} className={styles.pageItem}>
-            <a href={number} className={styles.pageLink}>
-              {number}
-            </a>
-          </li>
-        ))}
+        {numberOfPages
+          .filter((number) => number >= minNumber && number < maxNumber)
+          .map((number) => (
+            <li key={number} className={styles.pageItem}>
+              <a
+                href={`/category/${title}/page/${number}`}
+                className={styles.pageLink}
+              >
+                {number}
+              </a>
+            </li>
+          ))}
         <button onClick={nextPage}>next</button>
       </ul>
     );
