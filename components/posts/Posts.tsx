@@ -21,9 +21,8 @@ function Posts({
   postsPerPage,
   pageNum,
 }: PostsProps) {
-  let numberOfPages = [];
-
-  for (let i = 1; 1 <= Math.ceil(postsCount / postsPerPage); i++) {
+  const numberOfPages = [];
+  for (let i = 1; i <= Math.ceil(postsCount / postsPerPage); i++) {
     numberOfPages.push(i);
   }
 
