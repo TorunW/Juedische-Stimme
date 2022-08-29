@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { ReactElement, useState, useEffect } from 'react';
 import styles from './Styles.module.css';
 import Post from './Post';
 import Link from 'next/link';
+import ReactPaginate from 'react-paginate';
 
 interface PostsProps {
   posts: any[];
@@ -20,13 +21,41 @@ function Posts({
   postsPerPage,
   pageNum,
 }: PostsProps) {
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [currentPosts, setCurrentPosts] = useState([]);
   console.log(postsCount, postsPerPage, pageNum);
+  console.log(currentPosts);
 
-  let buttonDisplay;
-  if (typeof window !== 'undefined') {
-    if (window.location.pathname === `/category/${title}/page/${pageNum}`) {
-      buttonDisplay = <div>pagination</div>;
-    }
+  useEffect(() => {
+    const endOffset = itemOffset + postsPerPage;
+    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    setCurrentPosts(posts.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(postsCount / postsPerPage));
+  }, [itemOffset, postsPerPage, posts]);
+
+  const handlePageClick = (pageNum) => {
+    console.log(pageNum, 'event');
+    const newOffset = (pageNum.selected * postsPerPage) % posts.length;
+    console.log(
+      `User requested page number ${pageNum.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
+
+  let buttonDisplay: ReactElement;
+  if (pageNum !== null) {
+    buttonDisplay = (
+      <ReactPaginate
+        breakLabel='...'
+        nextLabel='next >'
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        previousLabel='< previous'
+        renderOnZeroPageCount={null}
+      />
+    );
   } else {
     buttonDisplay = (
       <div className='link whiteBg'>
@@ -54,7 +83,7 @@ function Posts({
             })
           : ''}
       </div>
-      <div>{buttonDisplay}</div>
+      {buttonDisplay}
     </section>
   );
 }
