@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
-import { selectPostsByTag } from 'lib/queries/posts';
+import { countPostsByTag, selectPostsByTag } from 'lib/queries/posts';
 import { selectCategories, selectMenuItems } from 'lib/queries';
 import Posts from '@/components/posts/Posts';
 import styles from 'styles/Home.module.css';
 import SearchFilter from 'components/SearchFilter';
 
 import { useDispatch, useSelector } from 'store/hooks';
-import { setPosts } from 'store/posts/postsSlice';
+import { setPosts, setPostsPagination } from 'store/posts/postsSlice';
 import { setCatgories } from 'store/categories/categoriesSlice';
 import { setMenuItems } from 'store/nav/navSlice';
 import { LayoutPage } from 'types/LayoutPage.type';
@@ -16,11 +16,12 @@ import { setLanguages } from 'store/languages/languagesSlice';
 
 const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
-  const { posts } = useSelector((state) => state.posts);
+  const { posts, postsCount, postsPerPage } = useSelector((state) => state.posts);
   const { categories } = useSelector((state) => state.categories);
 
   useEffect(() => {
     dispatch(setPosts(JSON.parse(props.posts)));
+    dispatch(setPostsPagination({postsPerPage:props.postsPerPage,postsCount:props.postsCount}))
     dispatch(setCatgories(JSON.parse(props.categories)));
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(
@@ -43,8 +44,8 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
         />
       ) : (
         ''
-      )}
-      <Posts posts={posts} title={props.categoryName} />
+      )}0
+      <Posts posts={posts} title={props.categoryName} pageNum={props.pageNum} postsCount={postsCount} postsPerPage={postsPerPage} />
     </section>
     </main>
   );
@@ -57,6 +58,14 @@ export const getServerSideProps = async (context) => {
     query: selectMenuItems(),
   });
   const navItems = JSON.stringify(navItemsResponse);
+
+  const categoryCountReponse = await excuteQuery({
+    query:countPostsByTag({
+      slug: context.query.name.split(' ').join('-').toLowerCase(),
+      isCategory: true,
+    })
+  })
+
   const postsResponse = await excuteQuery({
     query: selectPostsByTag({
       slug: context.query.name.split(' ').join('-').toLowerCase(),
@@ -75,9 +84,11 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       posts,
+      postsCount:categoryCountReponse[0]['COUNT(*)'],
+      postsPerPage:10,
       categories,
       categoryName: context.query.name,
-      pageNum: context.query.number,
+      pageNum: parseInt(context.query.number),
       navItems,
       locales: context.locales,
       locale: context.locale,

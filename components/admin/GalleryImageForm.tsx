@@ -8,8 +8,14 @@ const DynamicTiptapEditor = dynamic(() => import('../tiptap/TipTapEditor'), {
   suspense: true,
 });
 
-function GalleryImageForm({ galleryImage, galleryId, addImageToGallery }) {
-  const fileInputRef = useRef();
+interface GalleryImageFormProps {
+  galleryId:number | string;
+  galleryImage?:any;
+}
+
+function GalleryImageForm({ galleryId, galleryImage }:GalleryImageFormProps) {
+
+  const fileInputRef: any = useRef();
 
   function onUpladImageClick() {
     fileInputRef.current.click();

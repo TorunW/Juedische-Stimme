@@ -26,6 +26,8 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
   }, [props.page]);
   let page = JSON.parse(props.page)[0];
 
+  // console.log(page, " PROPST PAGE")
+
   return (
     <main id="post-page">
       <section>

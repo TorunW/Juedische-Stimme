@@ -6,10 +6,15 @@ interface PostsProps {
   posts: any[];
   title?: string;
   phrase?: string;
+  postsCount?: number;
+  postsPerPage?: number;
+  pageNum?: number;
 }
 
-function Posts({posts,title,phrase}:PostsProps) {
-  
+function Posts({posts,title,phrase, postsCount, postsPerPage, pageNum}:PostsProps) {
+
+  console.log(postsCount, postsPerPage, pageNum)
+
   return (
 
     <section

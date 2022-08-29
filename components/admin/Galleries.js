@@ -45,7 +45,7 @@ const Galleries = (props) => {
               <li key={index}>
                 <Link href={`/admin/galleries/${gallery.gallery_id}`}>{gallery.gallery_name}</Link>
                 <br/>
-                <button onClick={() => deleteGallery(gallery)}>DELETE GALLERY</button>
+                {gallery.gallery_id === 6 || gallery.gallery_id === 5 ? "" : <button onClick={() => deleteGallery(gallery)}>DELETE GALLERY</button> }
               </li>
           ))
       } else galleriesDisplay = <h3>NO GALLERIES FOUND</h3>
