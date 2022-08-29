@@ -8,11 +8,12 @@ interface PostsProps {
   phrase?: string;
   postsCount?: number;
   postsPerPage?: number;
+  pageNum?: number;
 }
 
-function Posts({posts,title,phrase, postsCount, postsPerPage}:PostsProps) {
+function Posts({posts,title,phrase, postsCount, postsPerPage, pageNum}:PostsProps) {
 
-  console.log(postsCount, postsPerPage)
+  console.log(postsCount, postsPerPage, pageNum)
 
   return (
 

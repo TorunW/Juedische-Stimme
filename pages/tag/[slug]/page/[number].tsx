@@ -32,7 +32,7 @@ const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
   return (
     <main id="tag-posts-page">
       <section className={styles.container}>
-      <Posts posts={posts} title={props.slug}  postsCount={postsCount} postsPerPage={postsPerPage} />
+      <Posts posts={posts} title={props.slug} pageNum={props.pageNum} postsCount={postsCount} postsPerPage={postsPerPage} />
         {
           /* PAGINATION NEEDED */
           // get total number of items - in this case post by COUNTING the table rows
@@ -75,7 +75,7 @@ export const getServerSideProps = async (context) => {
       postsCount:tagCountReponse[0]['COUNT(*)'],
       postsPerPage:10,
       slug: context.query.slug,
-      pageNum: context.query.number,
+      pageNum: parseInt(context.query.number),
       navItems,
       locales: context.locales,
       locale: context.locale,

@@ -45,7 +45,7 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
       ) : (
         ''
       )}0
-      <Posts posts={posts} title={props.categoryName}  postsCount={postsCount} postsPerPage={postsPerPage} />
+      <Posts posts={posts} title={props.categoryName} pageNum={props.pageNum} postsCount={postsCount} postsPerPage={postsPerPage} />
     </section>
     </main>
   );
@@ -88,7 +88,7 @@ export const getServerSideProps = async (context) => {
       postsPerPage:10,
       categories,
       categoryName: context.query.name,
-      pageNum: context.query.number,
+      pageNum: parseInt(context.query.number),
       navItems,
       locales: context.locales,
       locale: context.locale,
