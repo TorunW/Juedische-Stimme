@@ -21,40 +21,38 @@ function Posts({
   postsPerPage,
   pageNum,
 }: PostsProps) {
-  const [pageCount, setPageCount] = useState(0);
-  const [itemOffset, setItemOffset] = useState(0);
-  const [currentPosts, setCurrentPosts] = useState([]);
-  console.log(postsCount, postsPerPage, pageNum);
-  console.log(currentPosts);
+  let numberOfPages = [];
 
-  useEffect(() => {
-    const endOffset = itemOffset + postsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentPosts(posts.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(postsCount / postsPerPage));
-  }, [itemOffset, postsPerPage, posts]);
+  for (let i = 1; 1 <= Math.ceil(postsCount / postsPerPage); i++) {
+    numberOfPages.push(i);
+  }
 
-  const handlePageClick = (pageNum) => {
-    console.log(pageNum, 'event');
-    const newOffset = (pageNum.selected * postsPerPage) % posts.length;
-    console.log(
-      `User requested page number ${pageNum.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-  };
+  // function pageRange(numberOfPages, pageNum) {
+  //   let minNumber = pageNum - 5;
+  //   let maxNumber = pageNum + 5;
+  //   let diff = 0;
+  //   console.log(minNumber, maxNumber);
+  // }
+
+  // function recive totoal number of pages, recives the current page,
+  // dertirme min number and max number,  min = pageNum - 5, max = pagenum + 5
+  // let diff = 0
+  // then adjust if min is smaller than one then diff = 1 - minnumber
+  //  after the if => min + diff, max + diff
+  // return an object with minnumber and maxnumber,
 
   let buttonDisplay: ReactElement;
   if (pageNum !== null) {
     buttonDisplay = (
-      <ReactPaginate
-        breakLabel='...'
-        nextLabel='next >'
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel='< previous'
-        renderOnZeroPageCount={null}
-      />
+      <ul className={styles.pagination}>
+        {numberOfPages.map((number) => (
+          <li key={number} className={styles.pageItem}>
+            <a href={number} className={styles.pageLink}>
+              {number}
+            </a>
+          </li>
+        ))}
+      </ul>
     );
   } else {
     buttonDisplay = (
