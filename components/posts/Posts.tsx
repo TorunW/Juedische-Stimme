@@ -36,8 +36,8 @@ function Posts({
       diff = 1 - minNumber;
       console.log(minNumber, 'minnumber');
     }
-    minNumber + diff;
-    maxNumber + diff;
+    // minNumber + diff;
+    // maxNumber + diff;
   }
 
   pageRange();
