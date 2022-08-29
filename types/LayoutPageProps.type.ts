@@ -23,4 +23,5 @@ export type LayoutPageProps = {
   headerGallery?:string;
   headerImage: string;
   slug?: string;
+  pageNum?: number;
 };
