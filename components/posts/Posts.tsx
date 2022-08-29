@@ -22,20 +22,22 @@ function Posts({
   postsPerPage,
   pageNum,
 }: PostsProps) {
+  const [minNumber, setMinNumber] = useState(pageNum - 5);
+  const [maxNumber, setMaxNumber] = useState(pageNum + 5);
   const numberOfPages = [];
   for (let i = 1; i <= Math.ceil(postsCount / postsPerPage); i++) {
     numberOfPages.push(i);
   }
 
-  let minNumber = pageNum - 5;
-  let maxNumber = pageNum + 5;
   let diff = 0;
 
   function pageRange() {
     if (minNumber < 1) {
       diff = 1 - minNumber;
-      console.log(minNumber, 'inside');
+      console.log(minNumber, 'minnumber');
     }
+    minNumber + diff;
+    maxNumber + diff;
   }
 
   pageRange();
@@ -49,13 +51,6 @@ function Posts({
     window.location.href = `/category/${title}/page/${pageNum + 1}`;
   }
 
-  // function recive totoal number of pages, recives the current page,
-  // dertirme min number and max number,  min = pageNum - 5, max = pagenum + 5
-  // let diff = 0
-  // then adjust if min is smaller than one then diff = 1 - minnumber
-  //  after the if => min + diff, max + diff
-  // return an object with minnumber and maxnumber,
-
   let buttonDisplay: ReactElement;
   if (pageNum !== null) {
     buttonDisplay = (
@@ -63,9 +58,7 @@ function Posts({
         <button onClick={prevPage}>prev</button>
         {numberOfPages.map((number) => (
           <li key={number} className={styles.pageItem}>
-            <a href={number} className={styles.pageLink}>
-              {number}
-            </a>
+            <a href={number}>{number}</a>
           </li>
         ))}
         <button onClick={nextPage}>next</button>

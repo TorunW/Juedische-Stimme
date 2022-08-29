@@ -128,3 +128,8 @@
     aspect-ratio: auto 1.64285714;
   }
 }
+.pagination {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
