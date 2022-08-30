@@ -11,6 +11,7 @@ const FacebookPosts: React.FC<Props> = ({ feed }) => {
   if (feed && feed.content && feed.content.length > 0) {
     const feedArray = JSON.parse(feed.content);
     feedDisplay = feedArray.map((fbPost:any, index:number) => {
+      // here we need to add some logic to filter
       return <FacebookPost key={index} post={fbPost} />;
     });
   }
