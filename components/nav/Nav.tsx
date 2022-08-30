@@ -13,6 +13,8 @@ function Nav() {
   const [pathName, setPathName] = useState('');
   const [navbar, setNavbar] = useState(false);
 
+  console.log(pathName, " PATH NAME ")
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // setNavbar(window.location.pathname.length <= 1 ? false : true)
@@ -20,11 +22,9 @@ function Nav() {
     }
   }, []);
 
-  useEffect(() => {
-    if (pathName !== '' && pathName !== '/'){
-      setNavbar(true)
-    }
-  },[pathName])
+  // useEffect(() => {
+  //   if (pathName !== '' && pathName !== '/') setNavbar(true) 
+  // },[pathName])
 
   useEffect(() => {
     if (locale !== null) {
@@ -36,16 +36,12 @@ function Nav() {
   }, [locale]);
 
   function handleScroll() {
-    if (pathName !== '' && pathName !== '/'){
-      if (typeof window !== 'undefined') {
-        if (window.scrollY >= 80) {
-          setNavbar(true);
-        } else {
-          setNavbar(false);
-        }
+    if (typeof window !== 'undefined') {
+      if (window.scrollY >= 80) {
+        setNavbar(true);
+      } else {
+        setNavbar(false);
       }
-    } else {
-      window.removeEventListener('scroll',handleScroll)
     }
   }
 
