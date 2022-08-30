@@ -6,14 +6,14 @@ import styles from './Styles.module.css';
 import logo1 from 'styles/images/Logo-img.png';
 import logo2 from 'styles/images/Logo-text.png';
 import Head from 'next/head';
+import { useRouter } from 'next/router'
 
 function Nav() {
+  const router = useRouter()
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
   const { locale } = useSelector((state) => state.languages);
   const [pathName, setPathName] = useState('');
   const [navbar, setNavbar] = useState(false);
-
-  console.log(pathName, " PATH NAME ")
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -21,10 +21,6 @@ function Nav() {
       window.addEventListener('scroll', handleScroll);
     }
   }, []);
-
-  // useEffect(() => {
-  //   if (pathName !== '' && pathName !== '/') setNavbar(true) 
-  // },[pathName])
 
   useEffect(() => {
     if (locale !== null) {
@@ -35,12 +31,17 @@ function Nav() {
     }
   }, [locale]);
 
+  useEffect(() => {
+    handleScroll()
+  },[router])
+
   function handleScroll() {
     if (typeof window !== 'undefined') {
       if (window.scrollY >= 80) {
         setNavbar(true);
       } else {
-        setNavbar(false);
+        if (router.pathname !== '' && router.pathname !== '/') setNavbar(true)
+        else setNavbar(false);
       }
     }
   }
@@ -122,7 +123,7 @@ function Nav() {
 
   return (
     <nav
-      className={navbar === true ? styles.navActive : styles.nav}
+      className={(pathName !== '' && pathName !== '/' ? styles.navActive : "") + ' ' + (navbar === true ? styles.navActive : styles.nav)}
       data-testid='nav'
     >
       <Head>
