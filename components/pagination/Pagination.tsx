@@ -1,10 +1,10 @@
 import React from 'react'
-import getRange from 'helpers/getPaginationRange';
+import getPaginationRange from 'helpers/getPaginationRange';
 import styles from './Styles.module.css';
 
 const Pagination = ({pageNum,itemsCount,itemsPerPage,type,title}) => {
 
-    const { minNumber, maxNumber } = getRange(
+    const { minNumber, maxNumber } = getPaginationRange(
         pageNum,
         Math.ceil(itemsCount / itemsPerPage)
     );

@@ -1,4 +1,4 @@
-function getRange(pageNum, totalPages) {
+function getPaginationRange(pageNum: number, totalPages: number) {
   let minNumber = pageNum - 4;
   let maxNumber = pageNum + 5;
   let diff = 0;
@@ -22,4 +22,4 @@ function getRange(pageNum, totalPages) {
   };
 }
 
-export default getRange;
+export default getPaginationRange;
