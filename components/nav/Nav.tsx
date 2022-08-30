@@ -21,6 +21,12 @@ function Nav() {
   }, []);
 
   useEffect(() => {
+    if (pathName !== '' && pathName !== '/'){
+      setNavbar(true)
+    }
+  },[pathName])
+
+  useEffect(() => {
     if (locale !== null) {
       let newPathName = window.location.pathname;
       if (window.location.pathname.indexOf(locale) > -1)
@@ -30,12 +36,16 @@ function Nav() {
   }, [locale]);
 
   function handleScroll() {
-    if (typeof window !== 'undefined') {
-      if (window.scrollY >= 80) {
-        setNavbar(true);
-      } else {
-        setNavbar(false);
+    if (pathName !== '' && pathName !== '/'){
+      if (typeof window !== 'undefined') {
+        if (window.scrollY >= 80) {
+          setNavbar(true);
+        } else {
+          setNavbar(false);
+        }
       }
+    } else {
+      window.removeEventListener('scroll',handleScroll)
     }
   }
 
