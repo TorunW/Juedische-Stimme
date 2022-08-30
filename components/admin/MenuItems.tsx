@@ -1,10 +1,11 @@
 import React, { ReactElement, useState } from 'react'
 import axios from 'axios';
+import menuTypes from 'lib/menuTypes.json'
 
 const MenuItems = ({menuItems}) => {
-    
-    const menus =  ['call_to_action_menu','footer_menu','main_menu','socials_menu']
 
+    console.log(menuItems, " MENU ITEMS ")
+    
     const [ currentMenu, setCurrentMenu ] = useState('main_menu')
 
     function deleteMenuItem(menuItem){
@@ -41,7 +42,7 @@ const MenuItems = ({menuItems}) => {
   return (
     <div>
         <ul>
-        {menus.map((menu,index)=>(
+        {menuTypes.map((menu,index)=>(
             <li key={index + Date.now()}>
                 <a onClick={() => setCurrentMenu(menu)}>
                 {menu}
