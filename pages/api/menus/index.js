@@ -22,7 +22,6 @@ export default async (req, res) => {
             const insertTermTaxonomyResult = await excuteQuery({
                 query: insertTermTaxonomy(body)
             });
-            // console.log(insertTermTaxonomyResult , " insertTermTaxonomyResult ")
 
             const insertTermMetaResult = await excuteQuery({
                 query: insertTermMeta({term_id:termId, meta_key:'_menuitem_link', meta_value:req.body.link})
@@ -32,17 +31,13 @@ export default async (req, res) => {
                 query: insertTermMeta({term_id:termId, meta_key:'_menuitem_image', meta_value:req.body.term_image})
             })
 
-            console.log(insertTermImageResult, " INSERT TERM META RESULT")
-
-            // if (req.body.post_id  && req.body.post_id !== null){
-                const insertTermRelationshipResult = await excuteQuery({
-                    query: insertTermRelationship(termId,req.body.post_id,req.body.term_order)
-                })
-                console.log(insertTermRelationshipResult, " INSERT TERM RELATIONSHIP RESULT")
-            // }
+            // const insertTermRelationshipResult = await excuteQuery({
+            //     query: insertTermRelationship(termId,req.body.post_id,req.body.term_order)
+            // })
+            // console.log(insertTermRelationshipResult, " INSERT TERM RELATIONSHIP RESULT")
             
             // console.log(result,"result")
-            res.json(insertTermTaxonomyResult)
+            res.json({insertId:termId})
         }
         else {
             // Handle any other HTTP method
