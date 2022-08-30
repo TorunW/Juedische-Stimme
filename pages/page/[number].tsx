@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
 import { selectPosts } from 'lib/queries/posts';
-import { selectCategories, selectMenuItems } from 'lib/queries';
+import { selectCategories } from 'lib/queries';
+import { selectMenuItems } from 'lib/queries/menuItems';
+
 import Posts from '@/components/posts/Posts';
 import SearchFilter from 'components/SearchFilter';
 

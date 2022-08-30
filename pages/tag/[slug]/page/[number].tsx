@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
 import { countPostsByTag, selectPostsByTag } from 'lib/queries/posts';
-import { selectMenuItems } from 'lib/queries';
+import { selectMenuItems } from 'lib/queries/menuItems';
 import Posts from '@/components/posts/Posts';
 import styles from 'styles/Home.module.css';
 

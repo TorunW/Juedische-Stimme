@@ -1,6 +1,6 @@
 import excuteQuery from 'lib/db'
 import styles from 'styles/Home.module.css'
-import { selectMenuItemById } from 'lib/queries';
+import { selectMenuItemById } from 'lib/queries/menuItems';
 import MenuItemForm from 'components/admin/MenuItemForm';
 
 export default function AdminMenuItemEditPage(props) {

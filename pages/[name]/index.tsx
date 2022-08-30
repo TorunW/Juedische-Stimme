@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Post from '@/components/posts/PostPage';
 import { selectPostByName } from 'lib/queries/posts';
-import { selectMenuItems } from 'lib/queries';
+import { selectMenuItems } from 'lib/queries/menuItems';
 import { setMenuItems } from 'store/nav/navSlice';
 import { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
