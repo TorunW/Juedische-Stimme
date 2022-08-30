@@ -2,7 +2,7 @@ import React, { ReactElement, useState, useEffect } from 'react';
 import styles from './Styles.module.css';
 import Post from './Post';
 import Link from 'next/link';
-import getRange from 'helpers/getPaginationRange';
+import Pagination from '../pagination/Pagination';
 
 interface PostsProps {
   posts: any[];
@@ -21,44 +21,18 @@ function Posts({
   postsPerPage,
   pageNum,
 }: PostsProps) {
-  const { minNumber, maxNumber } = getRange(
-    pageNum,
-    Math.ceil(postsCount / postsPerPage)
-  );
-
-  const numberOfPages = [];
-  for (let i = 1; i <= Math.ceil(postsCount / postsPerPage); i++) {
-    numberOfPages.push(i);
-  }
-
-  function prevPage() {
-    window.location.href = `/category/${title}/page/${pageNum - 1}`;
-  }
-
-  function nextPage() {
-    window.location.href = `/category/${title}/page/${pageNum + 1}`;
-  }
 
   // as a prop type
   let buttonDisplay: ReactElement;
   if (pageNum !== null) {
     buttonDisplay = (
-      <ul className={styles.pagination}>
-        <button onClick={prevPage}>prev</button>
-        {numberOfPages
-          .filter((number) => number >= minNumber && number < maxNumber)
-          .map((number) => (
-            <li key={number} className={styles.pageItem}>
-              <a
-                href={`/category/${title}/page/${number}`}
-                className={number === pageNum ? styles.active : styles.pageLink}
-              >
-                {number}
-              </a>
-            </li>
-          ))}
-        <button onClick={nextPage}>next</button>
-      </ul>
+      <Pagination 
+        pageNum={pageNum}
+        itemsCount={postsCount}
+        itemsPerPage={postsPerPage}
+        type={'category'}
+        title={title}
+      />
     );
   } else {
     buttonDisplay = (

@@ -56,8 +56,6 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
     sharesCount = Object.values(post.shares);
   }
 
-  console.log(post.comments)
-
   let commentsCount: number;
   if (post.comments) {
     commentsCount = post.comments.summary.total_count;

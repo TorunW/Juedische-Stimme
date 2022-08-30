@@ -22,12 +22,13 @@ const AdminCategories = ({ categories }:AdminCategoriesProps) => {
 
     let categoriesDisplay: ReactElement[];
     if (categories){
+        console.log(categories)
         categoriesDisplay = categories.map((category:Category,index:number)=>(
             <li key={category.term_id}>
                 <a href={`/admin/categories/${category.term_id}`}>
                     <span>{category.name} ({category.count})</span>
                 </a>
-                <button onClick={() => deleteCategory(category)}>DELETE</button>
+                {category.term_id !== 66 && category.term_id !== 2 && category.term_id !== 1 ? <button onClick={() => deleteCategory(category)}>DELETE</button> : ""}
             </li>
         ))
     }

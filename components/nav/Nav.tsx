@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'store/hooks';
+import { useSelector } from 'store/hooks';
 import styles from './Styles.module.css';
 import logo1 from 'styles/images/Logo-img.png';
 import logo2 from 'styles/images/Logo-text.png';
@@ -14,7 +14,6 @@ function Nav() {
   const { locale } = useSelector((state) => state.languages);
   const [pathName, setPathName] = useState('');
   const [navbar, setNavbar] = useState(false);
-  console.log(navbar, " NAV BAR ")
 
   useEffect(() => {
     if (locale !== null) {
