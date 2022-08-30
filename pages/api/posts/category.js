@@ -1,11 +1,11 @@
 import excuteQuery from 'lib/db'
-import {  selectPostsByTag } from 'lib/queries/posts'
+import {  selectPosts } from 'lib/queries/posts'
 
 export default async (req, res) => {
     try {
         if (req.method === "POST") {
             const newsletterResponse = await excuteQuery({
-                query: selectPostsByTag({
+                query: selectPosts({
                   slug: req.body.category,
                   numberOfPosts: 6,
                   pageNum: 1,
@@ -24,7 +24,7 @@ export default async (req, res) => {
                   locale: req.body.locale !==  req.body.defaultLocale ?  req.body.locale : '',
                 }),
             });
-
+            console.log(newsletterResponse, " NEWSLETTER RESPONSE ")
             res.json(newsletterResponse)
 
         } else  {

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
-import { countPostsByTag, selectPostsByTag } from 'lib/queries/posts';
+import { countPostsByTag, selectPosts } from 'lib/queries/posts';
 import { selectMenuItems } from 'lib/queries/menuItems';
 import Posts from '@/components/posts/Posts';
 import styles from 'styles/Home.module.css';
@@ -61,7 +61,7 @@ export const getServerSideProps = async (context) => {
   })
 
   const postsResponse = await excuteQuery({
-    query: selectPostsByTag({
+    query: selectPosts({
       slug: context.query.slug,
       numberOfPosts: 10,
       pageNum: context.query.number,

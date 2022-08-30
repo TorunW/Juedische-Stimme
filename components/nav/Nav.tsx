@@ -38,14 +38,8 @@ function Nav() {
       if (window.scrollY >= 80) {
         setNavbar(true);
       } else {
-        console.log(router.pathname, " ROUTER PATHNAME ")
-        if (router.pathname !== '' && router.pathname !== '/'){
-          setNavbar(true)
-        }
-        else {
-          console.log("ROUTER PATHNAME IS EMPTY OR /")
-          setNavbar(false);
-        }
+        if (router.pathname !== '' && router.pathname !== '/') setNavbar(true)
+        else setNavbar(false);
       }
     }
   }
