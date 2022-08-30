@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import excuteQuery from 'lib/db';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -28,15 +28,22 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
 
   // console.log(page, " PROPST PAGE")
 
+  let headDisplay: ReactElement;
+  if (page && page !== null){
+    headDisplay = (
+      <Head>
+        <title>{page.post_title}</title>
+        <meta property="og:title" content={page.post_title} key="title" />
+        <meta property="og:keywords" key="keywords" name="keywords" content={page.tagNames !== null ? page.tagNames : page.post_title}/>
+        <meta property="og:description" key="description" name="description" content={page.post_content.substring(0,200)}/>
+      </Head>
+    )
+  }
+
   return (
     <main id="post-page">
       <section>
-        <Head>
-          <title>{page.post_title}</title>
-          <meta property="og:title" content={page.post_title} key="title" />
-          <meta property="og:keywords" key="keywords" name="keywords" content={page.tagNames !== null ? page.tagNames : page.post_title}/>
-          <meta property="og:description" key="description" name="description" content={page.post_content.substring(0,200)}/>
-        </Head>
+        {headDisplay}
         <Post post={page} />
       </section>
     </main>

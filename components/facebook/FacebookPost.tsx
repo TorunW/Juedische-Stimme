@@ -64,7 +64,7 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
     <div data-testid='container' className={styles.postContainer}>
       <div className={styles.postHeader}>
         <img
-          src='http://graph.facebook.com/998665673528998/picture?type=square'
+          src='https://graph.facebook.com/998665673528998/picture?type=square'
           alt='juedische-stimme-logo'
           title='juedische-stimme-logo'
         />

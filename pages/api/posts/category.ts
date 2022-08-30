@@ -1,7 +1,8 @@
 import excuteQuery from 'lib/db'
 import {  selectPosts } from 'lib/queries/posts'
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         if (req.method === "POST") {
             const newsletterResponse = await excuteQuery({
@@ -24,7 +25,6 @@ export default async (req, res) => {
                   locale: req.body.locale !==  req.body.defaultLocale ?  req.body.locale : '',
                 }),
             });
-            console.log(newsletterResponse, " NEWSLETTER RESPONSE ")
             res.json(newsletterResponse)
 
         } else  {

@@ -13,6 +13,7 @@
     "kill": "pm2 stop ecosystem.config.js"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^12.2.5",
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/user-event": "^14.4.3",
     "@tiptap/extension-image": "^2.0.0-beta.27",
