@@ -24,7 +24,8 @@ function Posts({
 
   // as a prop type
   let buttonDisplay: ReactElement;
-  if (pageNum !== null) {
+  if (pageNum && pageNum !== null) {
+    if (postsCount > postsPerPage)
     buttonDisplay = (
       <Pagination 
         pageNum={pageNum}
