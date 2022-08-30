@@ -56,9 +56,11 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
     sharesCount = Object.values(post.shares);
   }
 
-  let commentsCount;
+  console.log(post.comments)
+
+  let commentsCount: number;
   if (post.comments) {
-    commentsCount = post.comments.data.length;
+    commentsCount = post.comments.summary.total_count;
   }
   return (
     <div data-testid='container' className={styles.postContainer}>
