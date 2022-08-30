@@ -11,7 +11,6 @@ function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  console.log(loading);
 
   useEffect(() => {
     let token = sessionStorage.getItem('Token');
@@ -24,10 +23,8 @@ function LoginForm() {
     signInWithEmailAndPassword(auth, email, password)
       .then((response: any) => {
         setLoading(true);
-        // console.log(response.user);
         sessionStorage.setItem('Token', response.user.accessToken);
         setCookie('Token', response.user.accessToken);
-        // console.log(getCookies())
         router.push('/');
       })
       .catch((err) => {
@@ -35,6 +32,12 @@ function LoginForm() {
         alert('Cannot Log in');
       });
   };
+
+  if (loading === true) {
+    setTimeout(() => {
+      setLoading(false);
+    }, 10000);
+  }
 
   return (
     <div className={styles.loginPage}>
@@ -54,21 +57,23 @@ function LoginForm() {
           type='password'
         />
 
-        <button
-          className={styles.loginButton + ' ' + styles.button}
-          onClick={signUp}
-        >
-          {loading === true ? (
+        {loading === true ? (
+          <div className={styles.loadingButton}>
             <div className={styles.ldsRing}>
               <div></div>
               <div></div>
               <div></div>
               <div></div>
             </div>
-          ) : (
-            'Login'
-          )}
-        </button>
+          </div>
+        ) : (
+          <button
+            className={styles.loginButton + ' ' + styles.button}
+            onClick={signUp}
+          >
+            Login
+          </button>
+        )}
 
         <button className={styles.forgotButton + ' ' + styles.button}>
           Forgot password?
