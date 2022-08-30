@@ -133,3 +133,6 @@
   display: flex;
   justify-content: space-between;
 }
+.pagination .active {
+  color: red;
+}

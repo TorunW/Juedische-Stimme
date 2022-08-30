@@ -51,7 +51,7 @@ function Posts({
             <li key={number} className={styles.pageItem}>
               <a
                 href={`/category/${title}/page/${number}`}
-                className={styles.pageLink}
+                className={number === pageNum ? styles.active : styles.pageLink}
               >
                 {number}
               </a>
