@@ -15,7 +15,7 @@ const FacebookPosts: React.FC<Props> = ({ feed }) => {
       if (displayedPosts < 4){
         let displayPost = true;
         if (undisplayedPosts < 4 && fbPost.attachments){
-          fbPost.attachments.data.forEach(function(att,index){
+          fbPost.attachments.data.forEach(function(att:any,index:number){
             if (att.title == "This content isnt available right now"){
               displayPost = false;
               undisplayedPosts += 1;
