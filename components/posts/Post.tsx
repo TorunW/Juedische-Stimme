@@ -7,6 +7,7 @@ import styles from './Styles.module.css';
 import axios from 'axios';
 import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
 import Image from 'next/image';
+import Link from 'next/link';
 // import BlurringImage from '../BlurringImage';
 
 type Props = {
@@ -104,12 +105,13 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
         {post.post_date ? formateDate(post.post_date) : ''}
       </div>
 
-      <a
+      <Link
         href={'/' + GeneratePostUrl(post.post_name)}
-        className={styles.postTitle}
       >
-        <h4>{postTitle} </h4>
-      </a>
+        <a className={styles.postTitle}>
+          <h4>{postTitle} </h4>
+        </a>
+      </Link>
 
       <a href={`/category/${post.categoryName}`} className={styles.tags}>
         #{post.categoryName}

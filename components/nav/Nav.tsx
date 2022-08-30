@@ -14,9 +14,11 @@ function Nav() {
   const { locale } = useSelector((state) => state.languages);
   const [pathName, setPathName] = useState('');
   const [navbar, setNavbar] = useState(false);
+  console.log(navbar, " NAV BAR ")
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      handleScroll()
       // setNavbar(window.location.pathname.length <= 1 ? false : true)
       window.addEventListener('scroll', handleScroll);
     }
@@ -40,8 +42,14 @@ function Nav() {
       if (window.scrollY >= 80) {
         setNavbar(true);
       } else {
-        if (router.pathname !== '' && router.pathname !== '/') setNavbar(true)
-        else setNavbar(false);
+        console.log(router.pathname, " ROUTER PATHNAME ")
+        if (router.pathname !== '' && router.pathname !== '/'){
+          setNavbar(true)
+        }
+        else {
+          console.log("ROUTER PATHNAME IS EMPTY OR /")
+          setNavbar(false);
+        }
       }
     }
   }
@@ -123,7 +131,7 @@ function Nav() {
 
   return (
     <nav
-      className={(pathName !== '' && pathName !== '/' ? styles.navActive : "") + ' ' + (navbar === true ? styles.navActive : styles.nav)}
+      className={navbar === true ? styles.navActive : styles.nav}
       data-testid='nav'
     >
       <Head>
