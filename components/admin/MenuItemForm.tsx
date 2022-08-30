@@ -99,11 +99,7 @@ const MenuItemForm = ({menuItem}) => {
           formik.setFieldValue('term_image',generateFileName(fileName),true)
           reader.readAsDataURL(file);
         }
-
-    }
-
-    console.log(menuItem.term_image, " TERM IMAGE ")
-    
+    }    
 
     return (
         <div className={styles.container}>
@@ -140,7 +136,7 @@ const MenuItemForm = ({menuItem}) => {
                         value={formik.values.taxonomy} 
                         onChange={formik.handleChange}>
                         {menuTypes.map((mt,index)=>(
-                            <option value={mt}>{mt.split('_').join(' ').toLocaleUpperCase()}</option>
+                            <option key={index+Date.now()} value={mt}>{mt.split('_').join(' ').toLocaleUpperCase()}</option>
                         ))}
                     </select>
                 </div>

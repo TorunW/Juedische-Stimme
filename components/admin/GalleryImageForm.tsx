@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import styles from 'components/forms/Styles.module.css';
+import { generateFileName } from 'helpers/generateFileName';
 
 const DynamicTiptapEditor = dynamic(() => import('../tiptap/TipTapEditor'), {
   suspense: true,
@@ -27,7 +28,7 @@ function GalleryImageForm({ galleryId, galleryImage }:GalleryImageFormProps) {
     }
     const formData = new FormData();
     let fileName = event.target.files[0].name;
-    Array.from(event.target.files).forEach((file) => {
+    Array.from(event.target.files).forEach((file: string | Blob) => {
       console.log(event.target.name, file);
       formData.append(event.target.name, file);
     });
@@ -46,18 +47,11 @@ function GalleryImageForm({ galleryId, galleryImage }:GalleryImageFormProps) {
         );
       },
     };
-
     const response = await axios.post('/api/uploads', formData, config);
     console.log(response, ' RESPONSE OF UPLOAD');
-
-    const today = new Date();
-    let month = today.getMonth();
-    month += 1;
-    month = month < 10 ? '0' + month : month;
-
     formik.setFieldValue(
       'image_src',
-      `${today.getFullYear()}/${month}/${fileName}`
+      generateFileName(fileName)
     );
   };
 
@@ -124,15 +118,12 @@ function GalleryImageForm({ galleryId, galleryImage }:GalleryImageFormProps) {
           <label htmlFor='image_description'>IMAGE DESCRIPTION</label>
           <Suspense fallback={'LOADING...'}>
             <DynamicTiptapEditor
-              id='image_description'
-              name='image_description'
-              type='image_description'
               onChange={(val) =>
                 formik.setFieldValue('image_description', val, true)
               }
               value={formik.values.image_description}
               showMenu={false}
-              height={'200px'}
+              height={200}
             />
           </Suspense>
         </div>
