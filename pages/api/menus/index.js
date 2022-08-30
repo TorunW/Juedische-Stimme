@@ -16,7 +16,8 @@ export default async (req, res) => {
                 taxonomy:req.body.taxonomy,
                 description:req.body.title,
                 parent:'0',
-                count:'0'
+                count:'0',
+                term_image:req.body.term_image
             }
             const insertTermTaxonomyResult = await excuteQuery({
                 query: insertTermTaxonomy(body)
@@ -26,7 +27,12 @@ export default async (req, res) => {
             const insertTermMetaResult = await excuteQuery({
                 query: insertTermMeta({term_id:termId, meta_key:'_menuitem_link', meta_value:req.body.link})
             })
-            console.log(insertTermMetaResult, " INSERT TERM META RESULT")
+
+            const insertTermImageResult = await excuteQuery({
+                query: insertTermMeta({term_id:termId, meta_key:'_menuitem_image', meta_value:req.body.term_image})
+            })
+
+            console.log(insertTermImageResult, " INSERT TERM META RESULT")
 
             // if (req.body.post_id  && req.body.post_id !== null){
                 const insertTermRelationshipResult = await excuteQuery({
