@@ -30,12 +30,12 @@ const Pagination = ({pageNum,itemsCount,itemsPerPage,type,title}) => {
                 .filter((number) => number >= minNumber && number < maxNumber)
                 .map((number) => (
                     <li key={number} className={styles.pageItem}>
-                    <a
-                        href={`/category/${title}/page/${number}`}
-                        className={number === pageNum ? styles.active : styles.pageLink}
-                    >
-                        {number}
-                    </a>
+                        <a
+                            href={`/${type}/${title}/page/${number}`}
+                            className={number === pageNum ? styles.active : styles.pageLink}
+                        >
+                            {number}
+                        </a>
                     </li>
                 ))}
                 <button onClick={onNextPageClick}>next</button>

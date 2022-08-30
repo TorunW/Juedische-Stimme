@@ -1,5 +1,5 @@
 
-import { useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
 
 import styles from 'styles/Home.module.css'
 import excuteQuery from 'lib/db'
@@ -7,7 +7,7 @@ import excuteQuery from 'lib/db'
 import AdminPosts from 'components/admin/Posts'
 import { countPostsByTag, selectPosts } from 'lib/queries/posts';
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'store/hooks'
 import { setPosts, setPostsPagination } from 'store/posts/postsSlice';
 
 
@@ -22,7 +22,7 @@ export default function AdminPostsPage(props) {
     dispatch(setPostsPagination({postsPerPage:props.postsPerPage,postsCount:props.postsCount,pageNum:props.pageNum}))
   },[props.posts])
 
-  let postsDisplay;
+  let postsDisplay: ReactElement;
   if (posts){
     postsDisplay = (
       <AdminPosts 
@@ -30,8 +30,8 @@ export default function AdminPostsPage(props) {
         pageNum={pageNum} 
         postsPerPage={postsPerPage} 
         postsCount={postsCount} 
-        type={"admin"} 
-        title={"posts"}
+        type={"admin/posts/category"} 
+        title={props.categoryName}
       />
     )
   }
@@ -48,9 +48,9 @@ export default function AdminPostsPage(props) {
 AdminPostsPage.layout = "admin"
 
 export const getServerSideProps = async (context) => {
-  const categoryCountResponse = await excuteQuery({
-    query:countPostsByTag({})
-  })
+    const categoryCountResponse = await excuteQuery({
+        query:countPostsByTag({slug:context.query.name,isCategory:true})
+    })
     const postsResponse = await excuteQuery({
       query: selectPosts({
         numberOfPosts:50,
@@ -67,6 +67,7 @@ export const getServerSideProps = async (context) => {
         pageNum:context.query.number,
         postsCount:categoryCountResponse[0]['COUNT(*)'],
         postsPerPage:50,
+        categoryName:context.query.name
       }
     }
   }

@@ -32,14 +32,7 @@ const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
   return (
     <main id="tag-posts-page">
       <section className={styles.container}>
-      <Posts posts={posts} title={props.slug} pageNum={props.pageNum} postsCount={postsCount} postsPerPage={postsPerPage} />
-        {
-          /* PAGINATION NEEDED */
-          // get total number of items - in this case post by COUNTING the table rows
-          // create a reuseable component to display pagination
-          // pass props.pageNum, totalItemsCount, itemsPerPage to pagination component
-          /* /PAGINATION NEEDED */
-        }
+      <Posts posts={posts} type={"tag"} title={props.slug} pageNum={props.pageNum} postsCount={postsCount} postsPerPage={postsPerPage} />
       </section>
     </main>
   );

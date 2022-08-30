@@ -11,6 +11,7 @@ interface PostsProps {
   postsCount?: number;
   postsPerPage?: number;
   pageNum?: number;
+  type?: string;
 }
 
 function Posts({
@@ -20,6 +21,7 @@ function Posts({
   postsCount,
   postsPerPage,
   pageNum,
+  type
 }: PostsProps) {
 
   // as a prop type
@@ -31,7 +33,7 @@ function Posts({
         pageNum={pageNum}
         itemsCount={postsCount}
         itemsPerPage={postsPerPage}
-        type={'category'}
+        type={type}
         title={title}
       />
     );
