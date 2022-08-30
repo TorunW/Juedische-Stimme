@@ -17,14 +17,6 @@ function Nav() {
   console.log(navbar, " NAV BAR ")
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      handleScroll()
-      // setNavbar(window.location.pathname.length <= 1 ? false : true)
-      window.addEventListener('scroll', handleScroll);
-    }
-  }, []);
-
-  useEffect(() => {
     if (locale !== null) {
       let newPathName = window.location.pathname;
       if (window.location.pathname.indexOf(locale) > -1)
@@ -35,6 +27,11 @@ function Nav() {
 
   useEffect(() => {
     handleScroll()
+    if (typeof window !== 'undefined') {
+      handleScroll()
+      // setNavbar(window.location.pathname.length <= 1 ? false : true)
+      window.addEventListener('scroll', handleScroll);
+    }
   },[router])
 
   function handleScroll() {
