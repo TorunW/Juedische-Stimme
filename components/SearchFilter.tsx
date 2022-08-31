@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Category } from 'types/Category.type';
+import styles from '../components/Styles.module.css';
 
 type SearchFilterProps = {
   categoryName?: string;
@@ -29,21 +30,23 @@ const SearchFilter = ({
     ));
   }
   return (
-    <div style={{ backgroundColor: 'yellow' }}>
-      <h2>Filter</h2>
-      <select
-        value={categoryName}
-        onChange={(e) => onCategorySelectChange(e.target.value)}
-      >
-        <option value={'Select'}>Select Category</option>
-        {categoryOptionsDisplay}
-      </select>
-      <input
-        type={'text'}
-        placeholder='search'
-        value={searchPhrase}
-        onChange={(e) => setSearchPhrase(e.target.value)}
-      />
+    <div className={styles.filterContainer}>
+      <h3>Filter by:</h3>
+      <div className={styles.searchContainer}>
+        <select
+          value={categoryName}
+          onChange={(e) => onCategorySelectChange(e.target.value)}
+        >
+          <option value={'Select'}>Select Category</option>
+          {categoryOptionsDisplay}
+        </select>
+        <input
+          type={'text'}
+          placeholder='search'
+          value={searchPhrase}
+          onChange={(e) => setSearchPhrase(e.target.value)}
+        />
+      </div>
       <button
         onClick={() => (window.location.href = `/search/${searchPhrase}`)}
       >

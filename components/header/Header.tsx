@@ -6,7 +6,7 @@ import { setHeaderImageLoaded } from 'store/aboutinfo/aboutinfoSlice';
 
 const Header = () => {
   const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
-  const { headerGallery } = useSelector((state) => state.galleries)
+  const { headerGallery } = useSelector((state) => state.galleries);
   const dispatch = useDispatch();
   const { img, svg, uri } = headerImage;
   let blurringImageDisplay: ReactElement;
@@ -28,7 +28,7 @@ const Header = () => {
     headerSlogan = aboutInfo.header_slogan;
   return (
     <header id='main-header' role='main-header' className={styles.header}>
-      <div className={styles.background}> {blurringImageDisplay}</div>
+      <div className={styles.background}>{blurringImageDisplay}</div>
       <div
         className={styles.container}
         dangerouslySetInnerHTML={{ __html: headerSlogan }}
