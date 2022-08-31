@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Pagination from '../pagination/Pagination';
 import Image from 'next/image';
 import postHeader from 'public/post-header.jpg';
+import Placeholder from '../placeholder/Placeholder';
 
 interface PostsProps {
   posts: any[];
@@ -111,6 +112,8 @@ function Posts({
       }
     >
       {headerDisplay}
+      <Placeholder />
+
       {postsDisplay}
       {buttonDisplay}
     </section>

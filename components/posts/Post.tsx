@@ -8,6 +8,7 @@ import axios from 'axios';
 import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
 import Image from 'next/image';
 import Link from 'next/link';
+import Placeholder from '../placeholder/Placeholder';
 // import BlurringImage from '../BlurringImage';
 
 type Props = {
@@ -105,9 +106,7 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
         {post.post_date ? formateDate(post.post_date) : ''}
       </div>
 
-      <Link
-        href={'/' + GeneratePostUrl(post.post_name)}
-      >
+      <Link href={'/' + GeneratePostUrl(post.post_name)}>
         <a className={styles.postTitle}>
           <h4>{postTitle} </h4>
         </a>
