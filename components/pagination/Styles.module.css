@@ -12,10 +12,15 @@
   border-radius: 3px;
 }
 .pagination a {
-  padding: 4px 10px;
+  padding: 7px 10px 8px;
 }
 .pagination a:hover {
   background-color: #d1cedf;
-  padding: 4px 10px;
+  padding: 7px 10px 8px;
   border-radius: 3px;
+}
+.pagination button {
+  border-style: none;
+  background: none;
+  cursor: pointer;
 }
