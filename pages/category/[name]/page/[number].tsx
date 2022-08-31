@@ -9,7 +9,7 @@ import SearchFilter from 'components/SearchFilter';
 
 import { useDispatch, useSelector } from 'store/hooks';
 import { setPosts, setPostsPagination } from 'store/posts/postsSlice';
-import { setCatgories } from 'store/categories/categoriesSlice';
+import { setCatgories, setCategoryName } from 'store/categories/categoriesSlice';
 import { setMenuItems } from 'store/nav/navSlice';
 import { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
@@ -24,6 +24,8 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
     dispatch(setPosts(JSON.parse(props.posts)));
     dispatch(setPostsPagination({postsPerPage:props.postsPerPage,postsCount:props.postsCount, pageNum:props.pageNum}))
     dispatch(setCatgories(JSON.parse(props.categories)));
+    dispatch(setCategoryName(props.categoryName));
+
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(
       setLanguages({
@@ -36,18 +38,9 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
 
   return (
     <main id="category-posts-page">
-    <section className={styles.container}>
-      {categories ? (
-        <SearchFilter
-          phrase={''}
-          categoryName={props.categoryName}
-          categories={categories}
-        />
-      ) : (
-        ''
-      )}0
-      <Posts posts={posts} type={"category"} title={props.categoryName} pageNum={pageNum} postsCount={postsCount} postsPerPage={postsPerPage} />
-    </section>
+      <section className={styles.container + ' ' + styles.postsContainer}>
+        <Posts posts={posts} type={"category"} title={props.categoryName} pageNum={pageNum} postsCount={postsCount} postsPerPage={postsPerPage} />
+      </section>
     </main>
   );
 };

@@ -1,7 +1,8 @@
 .filterContainer {
   background-color: #2e2e2e;
-  position: relative;
-  top: 299px;
+  position: absolute;
+  top: 414px;
+  left: 0;
   width: 100%;
   padding: 32px 0;
   display: flex;

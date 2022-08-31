@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
+import { useSelector } from 'store/hooks';
 import { Category } from 'types/Category.type';
 import styles from '../components/Styles.module.css';
 
 type SearchFilterProps = {
-  categoryName?: string;
-  categories?: Category[];
   phrase?: string;
 };
 
 const SearchFilter = ({
-  categoryName,
-  categories,
   phrase,
 }: SearchFilterProps) => {
+
+  const { categories, categoryName } = useSelector(state => state.categories)
+
   const [searchPhrase, setSearchPhrase] = useState(phrase ? phrase : '');
+
   function onCategorySelectChange(val: string) {
     window.location.href = `/category/${val}`;
   }
-  let categoryOptionsDisplay;
+  let categoryOptionsDisplay: ReactElement[];
   if (categories) {
     categoryOptionsDisplay = categories.map((cat, index) => (
       <option

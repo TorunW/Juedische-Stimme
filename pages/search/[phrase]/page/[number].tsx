@@ -36,20 +36,7 @@ const SearchPhrasePostsPage: LayoutPage = (props: LayoutPageProps) => {
   return (
     <main id="search-page">
     <section className={styles.container}>
-      {categories ? (
-        <SearchFilter
-          categoryName={props.categoryName}
-          phrase={props.phrase}
-          categories={categories}
-        />
-      ) : (
-        ''
-      )}
-      {posts && posts.length > 0 ? (
-        <Posts posts={posts} title={"Search"} phrase={props.phrase} />
-      ) : (
-        <h2>nothing found for {'"' + props.phrase + '"'}!</h2>
-      )}
+      <Posts posts={posts} title={"Search"} phrase={props.phrase} pageNum={props.pageNum} />
     </section>
     </main>
   );

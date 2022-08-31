@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Pagination from '../pagination/Pagination';
 import Image from 'next/image';
 import postHeader from 'public/post-header.jpg';
+import SearchFilter from '../SearchFilter';
 
 interface PostsProps {
   posts: any[];
@@ -27,8 +28,19 @@ function Posts({
 }: PostsProps) {
   // as a prop type
 
-  let headerDisplay;
+  let headerDisplay: ReactElement = <h1>{title}</h1>;
+  let searchDisplay: ReactElement;
+  let postsDisplay: ReactElement = (
+    <div className={styles.postsContainer}>
+      {posts && posts !== null
+        ? posts.map((post: any, index: number) => {
+            return <Post key={index} post={post} phrase={phrase} />;
+          })
+        : ''}
+    </div>
+  );
   if (pageNum !== undefined) {
+
     headerDisplay = (
       <div className={styles.header}>
         <div className={styles.imageWrapper}>
@@ -49,13 +61,9 @@ function Posts({
         </p>
       </div>
     );
-  } else {
-    headerDisplay = <h1>{title}</h1>;
-  }
 
-  let postsDisplay;
+    searchDisplay = <SearchFilter phrase={phrase} />
 
-  if (pageNum !== undefined) {
     postsDisplay = (
       <div className={styles.postPage}>
         <div className={styles.postsContainer}>
@@ -65,16 +73,6 @@ function Posts({
               })
             : ''}
         </div>
-      </div>
-    );
-  } else {
-    postsDisplay = (
-      <div className={styles.postsContainer}>
-        {posts && posts !== null
-          ? posts.map((post: any, index: number) => {
-              return <Post key={index} post={post} phrase={phrase} />;
-            })
-          : ''}
       </div>
     );
   }
@@ -111,6 +109,7 @@ function Posts({
       }
     >
       {headerDisplay}
+      {searchDisplay}
       {postsDisplay}
       {buttonDisplay}
     </section>

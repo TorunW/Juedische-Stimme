@@ -31,7 +31,7 @@ const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
 
   return (
     <main id="tag-posts-page">
-      <section className={styles.container}>
+      <section className={styles.container + ' ' + styles.postsContainer}>
       <Posts posts={posts} type={"tag"} title={props.slug} pageNum={props.pageNum} postsCount={postsCount} postsPerPage={postsPerPage} />
       </section>
     </main>
