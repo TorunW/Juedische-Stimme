@@ -3,6 +3,8 @@ import styles from './Styles.module.css';
 import Post from './Post';
 import Link from 'next/link';
 import Pagination from '../pagination/Pagination';
+import Image from 'next/image';
+import postHeader from 'public/post-header.jpg';
 
 interface PostsProps {
   posts: any[];
@@ -24,6 +26,59 @@ function Posts({
   type,
 }: PostsProps) {
   // as a prop type
+
+  let headerDisplay;
+  if (pageNum !== undefined) {
+    headerDisplay = (
+      <div className={styles.header}>
+        <div className={styles.imageWrapper}>
+          <div className={styles.backgroundOverlay}></div>
+          <Image
+            src={postHeader}
+            className={styles.headerImage}
+            layout='fill'
+            objectFit='cover'
+          />
+        </div>
+        <h1>{title}</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
+        </p>
+      </div>
+    );
+  } else {
+    headerDisplay = <h1>{title}</h1>;
+  }
+
+  let postsDisplay;
+
+  if (pageNum !== undefined) {
+    postsDisplay = (
+      <div className={styles.postPage}>
+        <div className={styles.postsContainer}>
+          {posts && posts !== null
+            ? posts.map((post: any, index: number) => {
+                return <Post key={index} post={post} phrase={phrase} />;
+              })
+            : ''}
+        </div>
+      </div>
+    );
+  } else {
+    postsDisplay = (
+      <div className={styles.postsContainer}>
+        {posts && posts !== null
+          ? posts.map((post: any, index: number) => {
+              return <Post key={index} post={post} phrase={phrase} />;
+            })
+          : ''}
+      </div>
+    );
+  }
+
   let buttonDisplay: ReactElement;
   if (pageNum && pageNum !== null) {
     if (postsCount > postsPerPage)
