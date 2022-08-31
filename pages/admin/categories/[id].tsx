@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 import styles from 'styles/Home.module.css'
 import excuteQuery from 'lib/db'
 import CategoryForm from 'components/admin/CategoryForm'
-import { selectCategoryById } from 'lib/queries'
-import { useDispatch, useSelector } from 'react-redux'
+import { selectCategory } from 'lib/queries'
+import { useDispatch, useSelector } from 'store/hooks'
 import { setCategory } from 'store/categories/categoriesSlice'
 
 export default function EditCategoryPage(props) {
@@ -26,7 +26,7 @@ EditCategoryPage.layout = "admin";
 
 export const getServerSideProps = async (context) => {
   const categoryResponse = await excuteQuery({
-    query: selectCategoryById(context.query.id)
+    query: selectCategory({categoryId:context.query.id})
   });
   const category = JSON.stringify(categoryResponse);
   return {

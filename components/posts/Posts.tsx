@@ -1,32 +1,31 @@
-import React, { ReactElement, useState, useEffect } from 'react';
-import styles from './Styles.module.css';
-import Post from './Post';
+import React, { ReactElement } from 'react';
 import Link from 'next/link';
-import Pagination from '../pagination/Pagination';
 import Image from 'next/image';
+import Post from './Post';
+import Pagination from 'components/pagination/Pagination';
+import SearchFilter from 'components/SearchFilter';
+import styles from './Styles.module.css';
 import postHeader from 'public/post-header.jpg';
-import SearchFilter from '../SearchFilter';
 
 interface PostsProps {
   posts: any[];
   title?: string;
+  pageNum?: number;
   phrase?: string;
   postsCount?: number;
   postsPerPage?: number;
-  pageNum?: number;
   type?: string;
 }
 
 function Posts({
   posts,
   title,
-  phrase,
+  pageNum,
   postsCount,
   postsPerPage,
-  pageNum,
+  phrase,
   type,
 }: PostsProps) {
-  // as a prop type
 
   let headerDisplay: ReactElement = <h1>{title}</h1>;
   let searchDisplay: ReactElement;
