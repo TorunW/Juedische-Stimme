@@ -37,7 +37,14 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
   return (
     <main id="category-posts-page">
       <section className={styles.container + ' ' + styles.postsContainer}>
-        <Posts posts={posts} type={"category"} title={props.categoryName} pageNum={pageNum} postsCount={postsCount} postsPerPage={postsPerPage} />
+        <Posts 
+          posts={posts}
+          type={"category"} 
+          title={props.categoryName} 
+          pageNum={pageNum} 
+          postsCount={postsCount} 
+          postsPerPage={postsPerPage} 
+        />
       </section>
     </main>
   );

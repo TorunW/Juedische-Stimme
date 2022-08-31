@@ -27,17 +27,31 @@ function Posts({
   phrase,
   type,
 }: PostsProps) {
-  let headerDisplay: ReactElement = <h1>{title}</h1>;
-  let searchDisplay: ReactElement;
-  let postsDisplay: ReactElement = (
+
+  /* POSTS */
+
+  const postsDisplay: ReactElement = (
     <div className={styles.postsContainer}>
       {posts && posts !== null
-        ? posts.map((post: any, index: number) => {
-            return <Post key={index} post={post} phrase={phrase} />;
-          })
-        : ''}
+        ? 
+          posts.map((post: any, index: number) => (
+            <Post key={index} post={post} phrase={phrase} />
+          ))
+        : 
+          [0,1,2,3,4,5].map((ph,index) => (
+            <Placeholder key={index}/>
+          ))
+        }
     </div>
   );
+
+  /* TEMPLATE */
+
+  let headerDisplay: ReactElement = <h1>{title}</h1>;
+  let searchDisplay: ReactElement;
+  
+  let postsTemplateDisplay = postsDisplay;
+
   let paginationDisplay: ReactElement = (
     <div className='link whiteBg'>
       <Link href={`/category/${title}`}>
@@ -72,15 +86,9 @@ function Posts({
 
     searchDisplay = <SearchFilter phrase={phrase} />;
 
-    postsDisplay = (
+    postsTemplateDisplay = (
       <div className={styles.postPage}>
-        <div className={styles.postsContainer}>
-          {posts && posts !== null
-            ? posts.map((post: any, index: number) => {
-                return <Post key={index} post={post} phrase={phrase} />;
-              })
-            : ''}
-        </div>
+        {postsDisplay}
       </div>
     );
 
@@ -107,7 +115,7 @@ function Posts({
     >
       {headerDisplay}
       {searchDisplay}
-      {postsDisplay}
+      {postsTemplateDisplay}
       {paginationDisplay}
     </section>
   );
