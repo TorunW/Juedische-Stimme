@@ -7,6 +7,7 @@ import SearchFilter from 'components/SearchFilter';
 import styles from './Styles.module.css';
 import postHeader from 'public/post-header.jpg';
 import Placeholder from '../placeholder/Placeholder';
+import PostsHeader from './PostsHeader';
 
 interface PostsProps {
   posts: any[];
@@ -63,26 +64,7 @@ function Posts({
   );
 
   if (pageNum && pageNum !== null) {
-    headerDisplay = (
-      <div className={styles.header}>
-        <div className={styles.imageWrapper}>
-          <div className={styles.backgroundOverlay}></div>
-          <Image
-            src={postHeader}
-            className={styles.headerImage}
-            layout='fill'
-            objectFit='cover'
-          />
-        </div>
-        <h1>{title}</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
-      </div>
-    );
+    headerDisplay = <PostsHeader />
 
     searchDisplay = <SearchFilter phrase={phrase} />;
 
