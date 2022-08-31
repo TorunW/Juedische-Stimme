@@ -1,35 +1,54 @@
-import React, { ReactElement, useState, useEffect } from 'react';
-import styles from './Styles.module.css';
-import Post from './Post';
+import React, { ReactElement } from 'react';
 import Link from 'next/link';
-import Pagination from '../pagination/Pagination';
 import Image from 'next/image';
+import Post from './Post';
+import Pagination from 'components/pagination/Pagination';
+import SearchFilter from 'components/SearchFilter';
+import styles from './Styles.module.css';
 import postHeader from 'public/post-header.jpg';
 import Placeholder from '../placeholder/Placeholder';
 
 interface PostsProps {
   posts: any[];
   title?: string;
+  pageNum?: number;
   phrase?: string;
   postsCount?: number;
   postsPerPage?: number;
-  pageNum?: number;
   type?: string;
 }
 
 function Posts({
   posts,
   title,
-  phrase,
+  pageNum,
   postsCount,
   postsPerPage,
-  pageNum,
+  phrase,
   type,
 }: PostsProps) {
-  // as a prop type
+  let headerDisplay: ReactElement = <h1>{title}</h1>;
+  let searchDisplay: ReactElement;
+  let postsDisplay: ReactElement = (
+    <div className={styles.postsContainer}>
+      {posts && posts !== null
+        ? posts.map((post: any, index: number) => {
+            return <Post key={index} post={post} phrase={phrase} />;
+          })
+        : ''}
+    </div>
+  );
+  let paginationDisplay: ReactElement = (
+    <div className='link whiteBg'>
+      <Link href={`/category/${title}`}>
+        <a className='link-button'>
+          Weitere {title === 'Aktuelles' ? 'Artikeln' : title} lesen
+        </a>
+      </Link>
+    </div>
+  );
 
-  let headerDisplay;
-  if (pageNum !== undefined) {
+  if (pageNum && pageNum !== null) {
     headerDisplay = (
       <div className={styles.header}>
         <div className={styles.imageWrapper}>
@@ -50,13 +69,9 @@ function Posts({
         </p>
       </div>
     );
-  } else {
-    headerDisplay = <h1>{title}</h1>;
-  }
 
-  let postsDisplay;
+    searchDisplay = <SearchFilter phrase={phrase} />;
 
-  if (pageNum !== undefined) {
     postsDisplay = (
       <div className={styles.postPage}>
         <div className={styles.postsContainer}>
@@ -68,22 +83,10 @@ function Posts({
         </div>
       </div>
     );
-  } else {
-    postsDisplay = (
-      <div className={styles.postsContainer}>
-        {posts && posts !== null
-          ? posts.map((post: any, index: number) => {
-              return <Post key={index} post={post} phrase={phrase} />;
-            })
-          : ''}
-      </div>
-    );
-  }
 
-  let buttonDisplay: ReactElement;
-  if (pageNum && pageNum !== null) {
-    if (postsCount > postsPerPage)
-      buttonDisplay = (
+    paginationDisplay = <React.Fragment>{''}</React.Fragment>;
+    if (postsCount > postsPerPage) {
+      paginationDisplay = (
         <Pagination
           pageNum={pageNum}
           itemsCount={postsCount}
@@ -92,16 +95,7 @@ function Posts({
           title={title}
         />
       );
-  } else {
-    buttonDisplay = (
-      <div className='link whiteBg'>
-        <Link href={`/category/${title}`}>
-          <a className='link-button'>
-            Weitere {title === 'Aktuelles' ? 'Artikeln' : title} lesen
-          </a>
-        </Link>
-      </div>
-    );
+    }
   }
 
   return (
@@ -112,10 +106,9 @@ function Posts({
       }
     >
       {headerDisplay}
-      <Placeholder />
-
+      {searchDisplay}
       {postsDisplay}
-      {buttonDisplay}
+      {paginationDisplay}
     </section>
   );
 }
