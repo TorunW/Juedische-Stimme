@@ -11,6 +11,7 @@ export type LayoutPageProps = {
   categories?: string;
   categoryName?: string;
   category?: string;
+  tag?: string;
   page?: string;
   fbFeed?: string;
   fbEvents?: string;

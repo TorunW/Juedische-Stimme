@@ -61,15 +61,7 @@ export const getServerSideProps = async (context) => {
   const categoryResponse = await excuteQuery({
     query: selectCategory({categoryName:context.query.name})
   });
-  console.log(categoryResponse, " CATEGORY RESPONSE ")
   const category = JSON.stringify(categoryResponse);
-
-  const categoryCountResponse = await excuteQuery({
-    query:countPostsByTag({
-      slug: context.query.name.split(' ').join('-').toLowerCase(),
-      isCategory: true,
-    })
-  })
 
   const postsResponse = await excuteQuery({
     query: selectPosts({

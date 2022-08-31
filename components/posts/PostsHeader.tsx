@@ -8,6 +8,17 @@ const PostsHeader = () => {
     const { category } = useSelector(state => state.categories)
     const { tag } = useSelector(state => state.tags)
 
+    let title: string,
+        description: string;
+
+    if (category){
+        title = category.name;
+        description = category.description;
+    } else if (tag) {
+        title = tag.name;
+        description = tag.description;
+    }
+
     return (
         <div className={styles.header}>
             <div className={styles.imageWrapper}>
@@ -19,8 +30,8 @@ const PostsHeader = () => {
                 objectFit='cover'
             />
             </div>
-            <h1>{category ? category.name : tag ? tag.name : ""}</h1>
-            <div dangerouslySetInnerHTML={{__html:category.description}}></div>
+            <h1>{title}</h1>
+            <div dangerouslySetInnerHTML={{__html:description}}></div>
         </div>
     )
 }
