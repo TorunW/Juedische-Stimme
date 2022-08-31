@@ -54,15 +54,7 @@ export const getServerSideProps = async (context) => {
   const tagResponse = await excuteQuery({
     query: selectTag({slug:context.query.slug})
   });
-  console.log(tagResponse[0].count)
   const tag = JSON.stringify(tagResponse);
-
-  const tagCountReponse = await excuteQuery({
-    query:countPostsByTag({
-      slug: context.query.slug,
-      isCategory: false,
-    })
-  })
 
   const categoriesResponse = await excuteQuery({
     query: selectCategories(100),
@@ -82,7 +74,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       posts,
-      postsCount:tagCountReponse[0]['COUNT(*)'],
+      postsCount:tagResponse[0].count,
       postsPerPage:10,
       slug: context.query.slug,
       pageNum: parseInt(context.query.number),

@@ -18,7 +18,7 @@ const TagForm = ({tag}) => {
             count: tag ? tag.count : ''
         },
         onSubmit: values => {
-            console.log(values)
+            // console.log(values)
             axios({
                 method: tag ? 'put' : 'post',
                 url: `/api/tags/tag/${tag ? "/" + tag.term_id : ''}`,
