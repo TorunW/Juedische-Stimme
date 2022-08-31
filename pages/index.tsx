@@ -6,8 +6,9 @@ import type { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
 
 import excuteQuery from 'lib/db';
-import { selectPosts, selectPostsByTag } from 'lib/queries/posts';
-import { selectGalleryById, selectMenuItems } from 'lib/queries';
+import { selectPosts } from 'lib/queries/posts';
+import { selectGalleryById } from 'lib/queries';
+import { selectMenuItems } from 'lib/queries/menuItems';
 
 import { useDispatch, useSelector } from 'store/hooks';
 import { setToken, setEvents, setFeed } from 'store/fbdata/fbDataSlice';

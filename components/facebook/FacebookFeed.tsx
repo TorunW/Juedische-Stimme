@@ -18,6 +18,7 @@ const FacebookFeed = () => {
 
   useEffect(() => {
     fetchFacebookFeedFromDb()
+    // fetchFacebookFeedFromFb()
   },[])
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const FacebookFeed = () => {
   async function fetchFacebookFeedFromFb() {
     const fields =
       'id,likes.summary(true).limit(0),comments.summary(true).limit(0),reactions,shares,attachments,full_picture,message,from,permalink_url,created_time';
-    const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=4&fields=${fields}&access_token=${token}`;
+    const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=8&fields=${fields}&access_token=${token}`;
     const res = await fetch(fbFetchUrl);
     const fetchedFeed = await res.json();
 

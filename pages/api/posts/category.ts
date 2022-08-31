@@ -1,11 +1,12 @@
 import excuteQuery from 'lib/db'
-import {  selectPostsByTag } from 'lib/queries/posts'
+import {  selectPosts } from 'lib/queries/posts'
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         if (req.method === "POST") {
             const newsletterResponse = await excuteQuery({
-                query: selectPostsByTag({
+                query: selectPosts({
                   slug: req.body.category,
                   numberOfPosts: 6,
                   pageNum: 1,
@@ -24,7 +25,6 @@ export default async (req, res) => {
                   locale: req.body.locale !==  req.body.defaultLocale ?  req.body.locale : '',
                 }),
             });
-
             res.json(newsletterResponse)
 
         } else  {

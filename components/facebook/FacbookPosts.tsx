@@ -9,9 +9,24 @@ type Props = {
 const FacebookPosts: React.FC<Props> = ({ feed }) => {
   let feedDisplay: ReactElement;
   if (feed && feed.content && feed.content.length > 0) {
+    let displayedPosts = 0, undisplayedPosts = 0;
     const feedArray = JSON.parse(feed.content);
     feedDisplay = feedArray.map((fbPost:any, index:number) => {
-      return <FacebookPost key={index} post={fbPost} />;
+      if (displayedPosts < 4){
+        let displayPost = true;
+        if (undisplayedPosts < 4 && fbPost.attachments){
+          fbPost.attachments.data.forEach(function(att:any){
+            if (att.title == "This content isnt available right now"){
+              displayPost = false;
+              undisplayedPosts += 1;
+            }
+          })
+        }
+        if (displayPost){
+          displayedPosts += 1;
+          return <FacebookPost key={index} post={fbPost} />;
+        }
+      }
     });
   }
 

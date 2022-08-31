@@ -5,7 +5,8 @@ let initialState = {
     newsletter:[],
     post:null,
     postsCount:null,
-    postsPerPage:null
+    postsPerPage:null,
+    pageNum:null
 }
 
 const postsSlice = createSlice({
@@ -18,6 +19,7 @@ const postsSlice = createSlice({
     setPostsPagination: (state, action) => {
       state.postsCount = action.payload.postsCount
       state.postsPerPage = action.payload.postsPerPage
+      state.pageNum = action.payload.pageNum
     },
     setNewsletter: (state, action) => {
       state.newsletter = action.payload

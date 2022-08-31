@@ -17,6 +17,11 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
         authorDisplay = attPost.target.url.split('%2F')[2];
       }
 
+      let descriptionDisplay = attPost.description;
+      if (attPost.description && attPost.description.length > 300){
+        descriptionDisplay = `${trimStringToLastSpace(attPost.description.substring(0, 300))}[...]`;
+      }
+
       return (
         <div
           data-testid={`attachment-${index}`}
@@ -40,7 +45,7 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
           <p className={styles.author}>
             {authorDisplay && authorDisplay.length > 0 ? authorDisplay : ''}
           </p>
-          <p>{attPost.description}</p>
+          <p>{descriptionDisplay}</p>
         </div>
       );
     });
@@ -51,15 +56,15 @@ const FacebookPost: React.FC<Props> = ({ post }) => {
     sharesCount = Object.values(post.shares);
   }
 
-  let commentsCount;
+  let commentsCount: number;
   if (post.comments) {
-    commentsCount = post.comments.data.length;
+    commentsCount = post.comments.summary.total_count;
   }
   return (
     <div data-testid='container' className={styles.postContainer}>
       <div className={styles.postHeader}>
         <img
-          src='http://graph.facebook.com/998665673528998/picture?type=square'
+          src='https://graph.facebook.com/998665673528998/picture?type=square'
           alt='juedische-stimme-logo'
           title='juedische-stimme-logo'
         />

@@ -1,7 +1,9 @@
 import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
 import { selectPostsBySearchPhrase } from 'lib/queries/posts';
-import { selectMenuItems, selectCategories } from 'lib/queries';
+import { selectCategories } from 'lib/queries';
+import { selectMenuItems } from 'lib/queries/menuItems';
+
 import Posts from '@/components/posts/Posts';
 import styles from 'styles/Home.module.css';
 import { useDispatch, useSelector } from 'store/hooks';

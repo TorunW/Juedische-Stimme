@@ -2,9 +2,7 @@ import React, { ReactElement, useState, useEffect } from 'react';
 import styles from './Styles.module.css';
 import Post from './Post';
 import Link from 'next/link';
-import getRange from 'helpers/getPaginationRange';
-import Image from 'next/image';
-import postHeader from 'public/post-header.jpg';
+import Pagination from '../pagination/Pagination';
 
 interface PostsProps {
   posts: any[];
@@ -13,6 +11,7 @@ interface PostsProps {
   postsCount?: number;
   postsPerPage?: number;
   pageNum?: number;
+  type?: string;
 }
 
 function Posts({
@@ -22,25 +21,8 @@ function Posts({
   postsCount,
   postsPerPage,
   pageNum,
+  type,
 }: PostsProps) {
-  const { minNumber, maxNumber } = getRange(
-    pageNum,
-    Math.ceil(postsCount / postsPerPage)
-  );
-
-  const numberOfPages = [];
-  for (let i = 1; i <= Math.ceil(postsCount / postsPerPage); i++) {
-    numberOfPages.push(i);
-  }
-
-  function prevPage() {
-    window.location.href = `/category/${title}/page/${pageNum - 1}`;
-  }
-
-  function nextPage() {
-    window.location.href = `/category/${title}/page/${pageNum + 1}`;
-  }
-
   let headerDisplay;
   if (pageNum !== undefined) {
     headerDisplay = (
@@ -96,25 +78,17 @@ function Posts({
   console.log(posts);
   // as a prop type
   let buttonDisplay: ReactElement;
-  if (pageNum !== undefined) {
-    buttonDisplay = (
-      <ul className={styles.pagination}>
-        <button onClick={prevPage}>prev</button>
-        {numberOfPages
-          .filter((number) => number >= minNumber && number < maxNumber)
-          .map((number) => (
-            <li key={number} className={styles.pageItem}>
-              <a
-                href={`/category/${title}/page/${number}`}
-                className={number === pageNum ? styles.active : styles.pageLink}
-              >
-                {number}
-              </a>
-            </li>
-          ))}
-        <button onClick={nextPage}>next</button>
-      </ul>
-    );
+  if (pageNum && pageNum !== null) {
+    if (postsCount > postsPerPage)
+      buttonDisplay = (
+        <Pagination
+          pageNum={pageNum}
+          itemsCount={postsCount}
+          itemsPerPage={postsPerPage}
+          type={type}
+          title={title}
+        />
+      );
   } else {
     buttonDisplay = (
       <div className='link whiteBg'>

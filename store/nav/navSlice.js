@@ -5,6 +5,7 @@ let initialState = {
   callToActionMenu: [],
   socialsMenu: [],
   footerMenu: [],
+  parterMenu: []
 };
 
 const navSlice = createSlice({
@@ -24,6 +25,9 @@ const navSlice = createSlice({
       state.footerMenu = action.payload.filter(
         (item) => item.taxonomy === 'footer_menu'
       );
+      state.parterMenu = action.payload.filter(
+        (item) => item.taxonomy === 'partner_menu'
+      )
     },
   },
 });

@@ -10,6 +10,8 @@ import { generateFileName } from 'helpers/generateFileName';
 
 const MenuItemForm = ({menuItem}) => {
 
+    // console.log(menuItem, " MENU ITEM ")
+
     const [ previewImage, setPreviewImage ] = useState(null)
     const [ previewImageFile, setPreviewImageFile ] = useState(null)
 
@@ -37,13 +39,7 @@ const MenuItemForm = ({menuItem}) => {
             requestsArray.push(menuItemRequest)
 
             if (previewImageFile !== null){
-          
-                // if (menuItem && menuItem.term_image){
-                //   const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== '80' ? ':'+window.location.port : ""}/media/${menuItem.term_image.split('/').join('+++')}`;
-                //   const deleteFileRequest = axios.delete(deleteFileUrl)
-                //   requestsArray.push(deleteFileRequest)
-                // }
-      
+                
                 // POST IMAGE FILE ( FILE UPLOAD )
                 const config = {
                   headers: { 'content-type': 'multipart/form-data' },
@@ -56,6 +52,11 @@ const MenuItemForm = ({menuItem}) => {
                 const termImageFileRequest = axios.post('/api/uploads', formData, config);
                 requestsArray.push(termImageFileRequest)
       
+                if (menuItem && menuItem.term_image){
+                    const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== '80' ? ':'+window.location.port : ""}/media/${menuItem.term_image.split('/').join('+++')}`;
+                    const deleteFileRequest = axios.delete(deleteFileUrl)
+                    requestsArray.push(deleteFileRequest)
+                }
             }
             
             axios.all([...requestsArray]).then(axios.spread((...responses) => {
@@ -176,7 +177,7 @@ const MenuItemForm = ({menuItem}) => {
                 </div>
 
                 <div className={styles['form-row']}>
-                    <button type="submit">Submit</button>
+                    <button type="submit">{menuItem ? 'update menu item' : 'create menu item'}</button>
                 </div>
             </form>
         </div>

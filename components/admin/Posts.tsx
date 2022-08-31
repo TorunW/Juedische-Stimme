@@ -1,10 +1,29 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import Image from 'next/image';
 import axios from 'axios'
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
+import Pagination from '../pagination/Pagination';
 
-function Posts({posts}) {
+interface PostsProps {
+    posts: any[];
+    title?: string;
+    phrase?: string;
+    postsCount?: number;
+    postsPerPage?: number;
+    pageNum?: number;
+    type?: string;
+}  
+
+function Posts({
+    posts,
+    title,
+    phrase,
+    postsCount,
+    postsPerPage,
+    pageNum,
+    type,
+}: PostsProps) {
 
     function deletePost(post){
         
@@ -52,9 +71,24 @@ function Posts({posts}) {
         ))
     }
 
+    let paginationDisplay: ReactElement;
+    if (postsCount > postsPerPage){
+        paginationDisplay = (
+            <Pagination 
+              pageNum={pageNum}
+              itemsCount={postsCount}
+              itemsPerPage={postsPerPage}
+              type={type}
+              title={title}
+            />
+        );
+    }
+
+
     return (
         <div>
             {postsDisplay}
+            {paginationDisplay}
         </div>
     )
 }

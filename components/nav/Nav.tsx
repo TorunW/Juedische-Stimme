@@ -1,24 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'store/hooks';
+import { useSelector } from 'store/hooks';
 import styles from './Styles.module.css';
 import logo1 from 'styles/images/Logo-img.png';
 import logo2 from 'styles/images/Logo-text.png';
 import Head from 'next/head';
+import { useRouter } from 'next/router'
 
 function Nav() {
+  const router = useRouter()
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
   const { locale } = useSelector((state) => state.languages);
   const [pathName, setPathName] = useState('');
   const [navbar, setNavbar] = useState(false);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // setNavbar(window.location.pathname.length <= 1 ? false : true)
-      window.addEventListener('scroll', handleScroll);
-    }
-  }, []);
 
   useEffect(() => {
     if (locale !== null) {
@@ -29,12 +24,22 @@ function Nav() {
     }
   }, [locale]);
 
+  useEffect(() => {
+    handleScroll()
+    if (typeof window !== 'undefined') {
+      handleScroll()
+      // setNavbar(window.location.pathname.length <= 1 ? false : true)
+      window.addEventListener('scroll', handleScroll);
+    }
+  },[router])
+
   function handleScroll() {
     if (typeof window !== 'undefined') {
       if (window.scrollY >= 80) {
         setNavbar(true);
       } else {
-        setNavbar(false);
+        if (router.pathname !== '' && router.pathname !== '/') setNavbar(true)
+        else setNavbar(false);
       }
     }
   }
