@@ -39,7 +39,17 @@ function Posts({
         : ''}
     </div>
   );
-  if (pageNum !== undefined) {
+  let paginationDisplay: ReactElement = (
+    <div className='link whiteBg'>
+      <Link href={`/category/${title}`}>
+        <a className='link-button'>
+          Weitere {title === 'Aktuelles' ? 'Artikeln' : title} lesen
+        </a>
+      </Link>
+    </div>
+  );
+
+  if (pageNum && pageNum !== null) {
 
     headerDisplay = (
       <div className={styles.header}>
@@ -75,12 +85,10 @@ function Posts({
         </div>
       </div>
     );
-  }
 
-  let buttonDisplay: ReactElement;
-  if (pageNum && pageNum !== null) {
-    if (postsCount > postsPerPage)
-      buttonDisplay = (
+    paginationDisplay = <React.Fragment>{''}</React.Fragment>
+    if (postsCount > postsPerPage){
+      paginationDisplay = (
         <Pagination
           pageNum={pageNum}
           itemsCount={postsCount}
@@ -89,16 +97,7 @@ function Posts({
           title={title}
         />
       );
-  } else {
-    buttonDisplay = (
-      <div className='link whiteBg'>
-        <Link href={`/category/${title}`}>
-          <a className='link-button'>
-            Weitere {title === 'Aktuelles' ? 'Artikeln' : title} lesen
-          </a>
-        </Link>
-      </div>
-    );
+    }
   }
 
   return (
@@ -111,7 +110,7 @@ function Posts({
       {headerDisplay}
       {searchDisplay}
       {postsDisplay}
-      {buttonDisplay}
+      {paginationDisplay}
     </section>
   );
 }
