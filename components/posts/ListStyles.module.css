@@ -69,10 +69,15 @@
   margin-bottom: 32px;
 }
 .firstLayout .contentContainer .middleWrapper .image {
-  background: #626262;
-  height: 300px;
-  width: 50%;
+  min-width: 50%;
   position: relative;
+  overflow: hidden;
+  aspect-ratio: auto 1.86333333;
+}
+.firstLayout .contentContainer .middleWrapper .image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 .firstLayout .contentContainer .middleWrapper .bottomExcerpt {
   width: 50%;
@@ -129,10 +134,16 @@
   margin: 16px auto;
 }
 .secondLayout .contentContainer .image {
-  margin: 0 auto;
-  width: 749px;
-  height: 326px;
-  background: #626262;
+  margin: 48px auto;
+  max-width: 749px;
+  aspect-ratio: auto 2.43558282;
+  overflow: hidden;
+  position: relative;
+}
+.secondLayout .contentContainer .image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 .secondLayout .contentContainer .bottomExcerpt {
   font-size: 1.25rem;

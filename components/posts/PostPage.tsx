@@ -65,6 +65,7 @@ function Post({ post }) {
         </a>
       ));
     }
+    console.log(post);
 
     let headerDisplay;
     if (
@@ -153,7 +154,17 @@ function Post({ post }) {
             ></div>
           </div>
           <div className={styles.middleWrapper}>
-            <div className={styles.image}></div>
+            <div className={styles.image}>
+              <div className={styles.image}>
+                <Image
+                  src={generateImageUrl(post.post_image_2)}
+                  alt={post.post_title}
+                  title={post.post_title}
+                  layout='fill'
+                  objectFit='cover'
+                />
+              </div>
+            </div>
 
             <div
               className={styles.bottomExcerpt + ' ' + styles.excerpt}
@@ -194,7 +205,15 @@ function Post({ post }) {
               __html: postContent.replace(/(?:\r\n|\r|\n)/g, '<br>'),
             }}
           ></div>
-          <div className={styles.image}>IMAGE</div>
+          <div className={styles.image}>
+            <Image
+              src={generateImageUrl(post.post_image_2)}
+              alt={post.post_title}
+              title={post.post_title}
+              layout='fill'
+              objectFit='cover'
+            />
+          </div>
 
           <div
             className={styles.bottomContent + ' ' + styles.content}
@@ -209,7 +228,6 @@ function Post({ post }) {
     postDisplay = (
       <React.Fragment>
         {headerDisplay}
-
         {contentDisplay}
         <div className={styles.navigationContainer}>
           {nextPost !== null ? (

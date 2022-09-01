@@ -76,10 +76,16 @@
       gap: 64px;
       margin-bottom: 32px;
       .image {
-        background: #626262;
-        height: 300px;
-        width: 50%;
+        min-width: 50%;
         position: relative;
+        overflow: hidden;
+        aspect-ratio: auto 559 / 300;
+
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
       }
 
       .bottomExcerpt {
@@ -148,10 +154,16 @@
     }
 
     .image {
-      margin: 0 auto;
-      width: 749px;
-      height: 326px;
-      background: #626262;
+      margin: 48px auto;
+      max-width: 749px;
+      aspect-ratio: auto 794 / 326;
+      overflow: hidden;
+      position: relative;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
     }
     .bottomExcerpt {
       font-size: 1.25rem;
