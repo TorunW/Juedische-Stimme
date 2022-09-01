@@ -46,6 +46,8 @@ function Post({ post }) {
       ));
     }
 
+    console.log(post.post_name);
+
     let headerDisplay;
     if (
       post.categoryName === 'Aktuelles' ||
@@ -88,9 +90,7 @@ function Post({ post }) {
             <h2>{postTitle}</h2>
             <div className={styles.linksContainer}>
               <div className={styles.socialMediaLinks}>
-                <ShareLink
-                  link={`https://juedische-stimme.com//${post.categoryName}`}
-                >
+                <ShareLink link={`/${post.post_name}`}>
                   {(link) => (
                     <a href={link} target='_blank'>
                       <svg
