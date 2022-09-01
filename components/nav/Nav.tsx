@@ -13,7 +13,7 @@ function Nav() {
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
   const { locale } = useSelector((state) => state.languages);
   const [pathName, setPathName] = useState('');
-  const [navbar, setNavbar] = useState(false);
+  const [bgVisible, setBgVisible] = useState(false);
 
   useEffect(() => {
     if (locale !== null) {
@@ -36,10 +36,11 @@ function Nav() {
   function handleScroll() {
     if (typeof window !== 'undefined') {
       if (window.scrollY >= 80) {
-        setNavbar(true);
+        setBgVisible(true);
       } else {
-        if (router.pathname !== '' && router.pathname !== '/') setNavbar(true);
-        else setNavbar(false);
+        if (router.pathname !== '' && router.pathname !== '/')
+          setBgVisible(true);
+        else setBgVisible(false);
       }
     }
   }
@@ -121,7 +122,7 @@ function Nav() {
 
   return (
     <nav
-      className={navbar === true ? styles.navActive : styles.nav}
+      className={bgVisible === true ? styles.navActive : styles.nav}
       data-testid='nav'
     >
       <Head>
