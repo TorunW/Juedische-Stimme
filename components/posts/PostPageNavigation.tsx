@@ -28,7 +28,7 @@ const PostPageNavigation = ({postId,categoryId}) => {
 
         <div className={styles.navigationContainer}>
             {nextPost && nextPost !== null ? (
-                <a href={'/' + nextPost.post_name}>
+                <a href={'/' + nextPost.post_name.replaceAll('#',':__--__:')}>
                 <svg
                     width='24'
                     height='24'
@@ -44,10 +44,10 @@ const PostPageNavigation = ({postId,categoryId}) => {
                 <div>{nextPost.post_title} </div>
                 </a>
             ) : (
-                ''
+                <div></div>
             )}
             {prevPost && prevPost !== null ? (
-                <a href={'/' + prevPost.post_name}>
+                <a href={'/' + prevPost.post_name.replaceAll('#',':__--__:')}>
                 <div>{prevPost.post_title} </div>
                 <svg
                     width='24'
@@ -63,7 +63,7 @@ const PostPageNavigation = ({postId,categoryId}) => {
                 </svg>
                 </a>
             ) : (
-                ''
+                <div></div>
             )}
         </div>
 
