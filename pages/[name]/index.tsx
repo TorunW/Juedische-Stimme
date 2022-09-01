@@ -11,12 +11,13 @@ import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
 import Head from 'next/head';
-import Script from 'next/script';
+import { setPost } from 'store/posts/postsSlice';
 
 const ContentPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
+    dispatch(setPost(JSON.parse(props.page)[0]))
     dispatch(
       setLanguages({
         locales: props.locales,

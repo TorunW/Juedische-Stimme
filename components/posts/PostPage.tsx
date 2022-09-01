@@ -1,13 +1,28 @@
 import formateDate from 'helpers/formateDate';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import Image from 'next/image';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { useSelector } from 'store/hooks';
 import styles from '../posts/ListStyles.module.css';
 import ShareLink from 'react-facebook-share-link';
+import axios from 'axios';
 
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
+  const [ nextPost, setNextPost ] = useState(null)
+  const [ prevPost, setPrevPost ] = useState(null)
+
+  useEffect(() => {
+    getNextPrevPostNames()
+  },[])
+
+  async function getNextPrevPostNames() {
+      const nextPostResponse = await axios.post(`/api/posts/${post.postId}/nextpost`, {categoryId:post.categoryId});
+      setNextPost(nextPostResponse.data)
+      const prevPostResponse = await axios.post(`/api/posts/${post.postId}/prevpost`, {categoryId:post.categoryId});
+      setPrevPost(prevPostResponse.data)
+  }
+
 
   /* TO DO'S
      - DISPLAY TAGS IN A BETTER WAY
@@ -45,8 +60,6 @@ function Post({ post }) {
         </a>
       ));
     }
-
-    console.log(post.post_name);
 
     let headerDisplay;
     if (
@@ -191,8 +204,8 @@ function Post({ post }) {
         </div>
 
         <div className={styles.navigationContainer}>
-          {post.nextPostName !== null ? (
-            <a href={'/' + post.nextPostName.split('#').join(':__--__:')}>
+          {nextPost !== null ? (
+            <a href={'/' + nextPost.post_name}>
               <svg
                 width='24'
                 height='24'
@@ -205,14 +218,14 @@ function Post({ post }) {
                   fill='black'
                 />
               </svg>
-              <div>{post.nextPostName} </div>
+              <div>{nextPost.post_title} </div>
             </a>
           ) : (
             ''
           )}
-          {post.previousPostName !== null ? (
-            <a href={'/' + post.previousPostName.split('#').join(':__--__:')}>
-              <div>{post.previousPostName} </div>
+          {prevPost !== null ? (
+            <a href={'/' + prevPost.post_name}>
+              <div>{prevPost.post_title} </div>
               <svg
                 width='24'
                 height='24'

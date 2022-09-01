@@ -11,8 +11,6 @@ export const Footer = () => {
   const { footerMenu, parterMenu } = useSelector((state) => state.nav);
   const router = useRouter();
 
-  console.log(footerMenu, " FOOTER E")
-
   return (
     <footer id={styles.footer}>
       <div className={styles.footerTopMenu}>
