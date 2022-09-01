@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { Gallery } from 'types/gallery.type';
+import type { Gallery } from 'types/Gallery.type';
 
 export interface GalleriesState {
   gallery: Gallery;

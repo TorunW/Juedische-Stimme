@@ -5,7 +5,7 @@ import axios from 'axios';
 import styles from 'components/forms/Styles.module.css';
 import GalleryImageForm from './GalleryImageForm';
 import { Image } from 'types/Image.type';
-import { Gallery } from 'types/gallery.type';
+import { Gallery } from 'types/Gallery.type';
 import galleryTypes from 'lib/galleryTypes.json';
 
 const DynamicTiptapEditor = dynamic(() => import('../tiptap/TipTapEditor'), {

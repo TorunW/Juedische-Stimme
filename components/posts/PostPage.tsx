@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { useSelector } from 'store/hooks';
 import styles from '../posts/ListStyles.module.css';
 import PostPageNavigation from './PostPageNavigation';
@@ -7,9 +7,9 @@ import PostPageArticleLayout from './PostPageArticleLayout';
 import { getPostLaoyut } from 'helpers/getPostLayout';
 import PostPageMemberFormLayout from './PostPageMemberFormLayout';
 import PostPageDonationFormLayout from './PostPageDonationFormLayout';
+import { useRouter } from 'next/router';
 
 function Post({ post }) {
-
   const { locale } = useSelector((state) => state.languages);
 
     /* TO DO'S
@@ -54,6 +54,7 @@ function Post({ post }) {
     postDisplay = (
       <React.Fragment>
         {postLayoutDisplay}
+        {post.post_embed_html ? <div dangerouslySetInnerHTML={{__html:post.post_embed_html}}></div> : ""}
         <PostPageNavigation postId={post.postId} categoryId={post.categoryId}/>
       </React.Fragment>
     );

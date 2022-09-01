@@ -12,9 +12,11 @@ import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
 import Head from 'next/head';
 import { setPost } from 'store/posts/postsSlice';
+import Script from 'next/script';
 
 const ContentPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
+  let page = JSON.parse(props.page)[0];
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPost(JSON.parse(props.page)[0]))
@@ -26,10 +28,6 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
       })
     );
   }, [props.page]);
-  let page = JSON.parse(props.page)[0];
-
-  // console.log(page, " PROPST PAGE")
-
   let headDisplay: ReactElement;
   if (page && page !== null){
     headDisplay = (

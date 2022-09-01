@@ -334,6 +334,33 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
           </div>
 
           <div className={styles['form-row']}>
+            <label htmlFor="post_embed_script">POST EMBED SCRIPT</label>
+            <div className={styles.inputContainer}>
+              <input
+                id="post_embed_script"
+                name="post_embed_script"
+                type="text"
+                className={styles.input}
+                onChange={formik.handleChange}
+                value={formik.values.post_embed_script}
+              />
+            </div>
+          </div>
+
+          <div className={styles['form-row']}>
+            <label htmlFor="post_embed_html">POST EMBED HTML</label>
+            <div className={styles.inputContainer}>
+              <textarea
+                id="post_embed_html"
+                name="post_embed_html"
+                className={styles.input}
+                onChange={formik.handleChange}
+                value={formik.values.post_embed_html}
+              />
+            </div>
+          </div>
+
+          <div className={styles['form-row']}>
             <label htmlFor='post_tags'>Tags</label>
             <PostTagForm 
               postId={post ? post.postId : nextPostId}
@@ -345,6 +372,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
         </form>
       </div>
     )
+
   } else if (currentTab === 'translations'){
 
     formDisplay = (
