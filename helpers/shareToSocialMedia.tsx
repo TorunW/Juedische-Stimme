@@ -11,7 +11,6 @@ export default function Share({ description }: ShareProps) {
 
   return (
     <>
-      Share on:
       <div className='share-icon-collections'>
         {/* Facebook */}
         <a
