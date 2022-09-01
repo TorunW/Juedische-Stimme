@@ -5,9 +5,10 @@ import { useSelector } from 'store/hooks';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Image from 'next/image';
+import { generateImageUrl } from 'helpers/imageUrlHelper';
 
 export const Footer = () => {
-  // const { footerMenu } = useSelector((state) => state.nav);
+  const { footerMenu, parterMenu } = useSelector((state) => state.nav);
   const router = useRouter();
 
   function logout() {
@@ -26,45 +27,14 @@ export const Footer = () => {
           <div className={styles.footerRow + ' ' + styles.linksRow}>
             <h3 className={styles.label}>Unsere partner & freunde</h3>
             <div className={styles.imgContainer}>
-              <a
-                href='https://www.jewishvoiceforpeace.org/p'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <Image
-                  src='/Jewish-voice-for-peace.svg'
-                  title='Jewish-voice-for-peace'
-                  alt='Jewish-voice-for-peace'
-                  height={79}
-                  width={120}
-                />
-              </a>
-              <a
-                href='https://www.palaestinaspricht.de/'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <Image
-                  src='/Palästina-spricht.svg'
-                  title='Palästina-spricht'
-                  alt='Palästina-spricht'
-                  height={79}
-                  width={120}
-                />
-              </a>
-              <a
-                href='https://www.palaestinaspricht.de/'
-                target='_blank'
-                rel='noopener noreferrer'
-              >
-                <Image
-                  src='/ejjp.png'
-                  title='Palästina-spricht'
-                  alt='Palästina-spricht'
-                  height={79}
-                  width={120}
-                />
-              </a>
+              {parterMenu.map((menuItem,index)=>(
+                <a key={menuItem.term_id + Date.now()}
+                  href={menuItem.link}
+                  target='_blank'
+                  rel='noopener noreferrer'>
+                <img width={100} src={generateImageUrl(menuItem.term_image)}/>
+                </a>
+              ))}
             </div>
           </div>
           <div className={styles.footerRow}>

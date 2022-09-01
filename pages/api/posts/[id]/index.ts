@@ -10,8 +10,6 @@ export default async (req, res) => {
                 query: updatePost({...req.body,postId:req.query.id})
             });
             
-            console.log(result, " UPDATE POST RESULT ")
-            console.log(req.body.previousCategoryId, " PREVIOUS CAT ID")
             if (req.body.previousCategoryId !== null && req.body.previousCategoryId !== req.body.categoryId){
                 console.log('WHAT THE FUCK!!!!')
                 // update wp_term_relationship

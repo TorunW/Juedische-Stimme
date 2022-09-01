@@ -46,7 +46,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
         post_title:post ? post.post_title : '',
         post_excerpt: post ? post.post_excerpt : '',
         post_excerpt_2: post ? post.post_excerpt_2 : '',
-        post_status: post ? post.post_status : '',
+        post_status: post ? post.post_status : 'draft',
         ping_status: post ? post.ping_status : '',
         post_password: post ? post.post_password : '',
         post_name: post ? post.post_name : '',
@@ -149,16 +149,29 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
         <form className={styles.form} onSubmit={formik.handleSubmit}>
           <div className={styles['form-row']}>
             <label htmlFor="post_title">POST TITLE</label>
-            <div>
+            <div className={styles.inputContainer}>
               <input
                 id="post_title"
                 name="post_title"
                 type="text"
+                className={styles.input}
                 onChange={formik.handleChange}
                 value={formik.values.post_title}
               />
               {post ? <p><a target={"_blank"} rel="noreferrer" href={"/"+GeneratePostUrl(post.post_name)}>view post on live site</a></p> : ""}
             </div>
+          </div>
+
+          <div className={styles['form-row']}>
+            <label htmlFor="post_status">POST STATUS</label>
+            <select 
+              id="post_status"
+              name="post_status"
+              value={formik.values.post_status} 
+              onChange={formik.handleChange}>
+                <option value={'publish'}>publish</option>
+                <option value={'draft'}>draft</option>
+            </select>
           </div>
 
           <div id="post-image" className={styles['form-row']}>

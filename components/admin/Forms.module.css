@@ -17,3 +17,9 @@
   background-color: cadetblue;
   padding: 5px;
 }
+.form-row .inputContainer {
+  width: 100%;
+}
+.form-row .inputContainer .input {
+  width: 100%;
+}

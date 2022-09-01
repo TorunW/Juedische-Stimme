@@ -62,7 +62,7 @@ const MenuItemForm = ({menuItem}) => {
             axios.all([...requestsArray]).then(axios.spread((...responses) => {
                 console.log(responses, " RESPONSES")
                 if (menuItem) window.location.reload()
-                else window.location.href = `/admin/menus/${responses[0].insertId}` 
+                else window.location.href = `/admin/menus/${responses[0].data.insertId}` 
             })).catch(errors => {
                 console.log(errors, " ERRORS")
             })
