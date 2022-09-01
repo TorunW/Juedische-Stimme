@@ -6,19 +6,15 @@ export default async (req, res) => {
             const titleResult = await excuteQuery({
                 query: `INSERT INTO wp_postmeta (post_id,meta_key,meta_value) VALUES ('${req.query.id}','_post_title_translation_${req.body.language}','${req.body.title}')`
             });
-
             const excerptResult = await excuteQuery({
                 query: `INSERT INTO wp_postmeta (post_id,meta_key,meta_value) VALUES ('${req.query.id}','_post_excerpt_translation_${req.body.language}','${req.body.excerpt}')`
             });
-
             const contentResult = await excuteQuery({
                 query: `INSERT INTO wp_postmeta (post_id,meta_key,meta_value) VALUES ('${req.query.id}','_post_content_translation_${req.body.language}','${req.body.content}')`
             });
-
             const excerpt2Result = await excuteQuery({
                 query: `INSERT INTO wp_postmeta (post_id,meta_key,meta_value) VALUES ('${req.query.id}','_post_excerpt_2_translation_${req.body.language}','${req.body.excerpt_2}')`
             });
-
             const content2Result = await excuteQuery({
                 query: `INSERT INTO wp_postmeta (post_id,meta_key,meta_value) VALUES ('${req.query.id}','_post_content_2_translation_${req.body.language}','${req.body.content_2}')`
             });
