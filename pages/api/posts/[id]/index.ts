@@ -1,6 +1,6 @@
 import excuteQuery from 'lib/db'
 import { updatePost, deletePost } from 'lib/queries/posts'
-import { decreaseTermTaxonomyCount, deleteTermRelationship, incrementTermTaxonomyCount, updateTermRelationship } from 'lib/queries';
+import { decreaseTermTaxonomyCount, deleteTermRelationship, incrementTermTaxonomyCount, insertTermRelationship, updateTermRelationship } from 'lib/queries';
 
 export default async (req, res) => {
     try {
@@ -11,8 +11,9 @@ export default async (req, res) => {
             });
             
             console.log(result, " UPDATE POST RESULT ")
-
+            console.log(req.body.previousCategoryId, " PREVIOUS CAT ID")
             if (req.body.previousCategoryId !== null && req.body.previousCategoryId !== req.body.categoryId){
+                console.log('WHAT THE FUCK!!!!')
                 // update wp_term_relationship
                 const categoryChangedResult = await excuteQuery({
                     query: updateTermRelationship(req.body.categoryId,req.body.previousCategoryId,req.query.id)
@@ -29,6 +30,16 @@ export default async (req, res) => {
                 })
                 console.log(decreaseCategoryCountResult," decreaseCategoryCountResult")
                 // update previous category wp_terms
+            } else if (req.body.previousCategoryId !== req.body.categoryId){
+                const insertTermRelationshipResult = await excuteQuery({
+                    query: insertTermRelationship(req.body.categoryId, req.query.id)
+                })
+                console.log(insertTermRelationshipResult, " INSERT TERM RELATIONSHIP RESULT")            
+    
+                const incrementCategoryCountResult = await excuteQuery({
+                    query:incrementTermTaxonomyCount(req.body.categoryId)
+                })
+                console.log(incrementCategoryCountResult," incrementCategoryCountResult")
             }
 
             res.json(result)

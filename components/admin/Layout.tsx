@@ -1,8 +1,8 @@
 import React from 'react'
 import AdminNav from './Nav'
-
-import styles from '../../styles/Admin.module.css'
+import styles from '/components/admin/Admin.module.css'
 import Link from 'next/link'
+
 function AdminLayout({ children }) {
   return (
     <div id="admin-layout">
@@ -19,7 +19,7 @@ function AdminLayout({ children }) {
           </ul>
         </ul>
       </header>
-      <main id="admin-content">
+      <main className={styles.adminContent} id="admin-content">
         <AdminNav/>
         {children}
       </main>
