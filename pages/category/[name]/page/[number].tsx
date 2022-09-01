@@ -73,6 +73,7 @@ export const getServerSideProps = async (context) => {
     }),
   });
   const posts = JSON.stringify(postsResponse);
+  console.log(postsResponse)
   const categoriesResponse = await excuteQuery({
     query: selectCategories(100),
   });

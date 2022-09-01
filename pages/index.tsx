@@ -143,6 +143,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
   const postsResponse = await excuteQuery({
     query: selectPosts({
       numberOfPosts: 6,
+      slug:'aktuelles',
       pageNum: 0,
       showUnpublished: false,
       postType: 'post',
