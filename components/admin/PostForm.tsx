@@ -65,7 +65,10 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
         post_mime_type:  post ? post.post_mime_type : '',
         categoryId: post ? post.categoryId : 2,
         post_image: post ? post.post_image : '',
-        post_image_2: post ? post.post_image_2 : ''
+        post_image_2: post ? post.post_image_2 : '',
+        post_embed_script: post ? post.post_embed_script : '',
+        post_embed_html: post ? post.post_embed_html : '',
+        post_layout: post ? post.post_layout : 'article'
     },
     onSubmit: values => {
         const requestsArray = [];
@@ -210,6 +213,20 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
               onChange={formik.handleChange}>
                 <option value={'publish'}>publish</option>
                 <option value={'draft'}>draft</option>
+            </select>
+          </div>
+
+          <div className={styles['form-row']}>
+            <label htmlFor="post_layout">POST LAYOUT</label>
+            <select 
+              id="post_layout"
+              name="post_layout"
+              value={formik.values.post_layout} 
+              onChange={formik.handleChange}>
+                <option value={'article'}>article</option>
+                <option value={'newsletter'}>newsletter</option>
+                <option value={'member_form'}>member form</option>
+                <option value={'donation'}>donation</option>
             </select>
           </div>
 

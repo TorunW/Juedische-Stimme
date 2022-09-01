@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import styles from '../posts/ListStyles.module.css';
 import formateDate from 'helpers/formateDate';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import Image from 'next/image';
 
-const PostPageArticleLayout = ({post,locale,tagsDisplay}) => {
+const PostPageArticleLayout = ({post,locale}) => {
 
 
     let postTitle = post.post_title,
@@ -29,6 +29,17 @@ const PostPageArticleLayout = ({post,locale,tagsDisplay}) => {
       postContent2 = post[`post_content_2_translation_${locale}`]
         ? post[`post_content_2_translation_${locale}`]
         : post.post_content;
+    }
+
+    let tagsDisplay: ReactElement[];
+    if (post.tagNames && post.tagNames.length > 0) {
+      let tagsArray = [post.tagNames];
+      if (post.tagNames.indexOf(',') > -1) tagsArray = post.tagNames.split(',');
+      tagsDisplay = tagsArray.map((tag, index) => (
+        <a key={index} href={'/tag/' + tag}>
+          {' #' + tag}
+        </a>
+      ));
     }
 
     return (

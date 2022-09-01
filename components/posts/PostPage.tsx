@@ -4,8 +4,12 @@ import styles from '../posts/ListStyles.module.css';
 import PostPageNavigation from './PostPageNavigation';
 import PostPageNewsletterLayout from './PostPageNewsletterLayout';
 import PostPageArticleLayout from './PostPageArticleLayout';
+import { getPostLaoyut } from 'helpers/getPostLayout';
+import PostPageMemberFormLayout from './PostPageMemberFormLayout';
+import PostPageDonationFormLayout from './PostPageDonationFormLayout';
 
 function Post({ post }) {
+
   const { locale } = useSelector((state) => state.languages);
 
     /* TO DO'S
@@ -14,34 +18,36 @@ function Post({ post }) {
 
   let postDisplay: ReactElement;
   if (post && post !== null) {
-    let tagsDisplay: ReactElement[];
-    if (post.tagNames && post.tagNames.length > 0) {
-      let tagsArray = [post.tagNames];
-      if (post.tagNames.indexOf(',') > -1) tagsArray = post.tagNames.split(',');
-      tagsDisplay = tagsArray.map((tag, index) => (
-        <a key={index} href={'/tag/' + tag}>
-          {' #' + tag}
-        </a>
-      ));
-    }
+    const postLayout = getPostLaoyut(post);
     let postLayoutDisplay: ReactElement;
     if (
-      post.categoryName === 'Aktuelles' ||
-      post.categoryName === 'Allgemein'
+      postLayout === 'newsletter'
     ) {
-      postLayoutDisplay = (
-        <PostPageArticleLayout 
-          post={post} 
-          locale={locale}
-          tagsDisplay={tagsDisplay}
-        />
-      );
-    } else {
       postLayoutDisplay = (
         <PostPageNewsletterLayout 
           post={post} 
           locale={locale}
-          tagsDisplay={tagsDisplay}
+        />
+      );
+    } else if (postLayout === 'member_form'){
+      postLayoutDisplay = (
+        <PostPageMemberFormLayout 
+          post={post} 
+          locale={locale}
+        />
+      )
+    } else if (postLayout === 'donation'){
+      postLayoutDisplay = (
+        <PostPageDonationFormLayout 
+          post={post} 
+          locale={locale}
+        />
+      )
+    } else {
+      postLayoutDisplay = (
+        <PostPageArticleLayout 
+          post={post} 
+          locale={locale}
         />
       );
     }
@@ -58,6 +64,7 @@ function Post({ post }) {
       </React.Fragment>
     );
   }
+
   return (
     <div
       id='post-view'
