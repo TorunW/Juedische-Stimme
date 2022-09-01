@@ -94,7 +94,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   return (
     <main id='home-page'>
       <Head>
-        <title>Jüdische Stimme</title>
+        <title>Jüdische Stimme | für gerechten Frieden in Nahost</title>
         <div>
           <link
             rel='apple-touch-icon'
@@ -130,8 +130,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
-  if (!hasCookie('Token', { req: context.req, res: context.res }))
-    return { redirect: { destination: '/login', permanent: false } };
+  // if (!hasCookie('Token', { req: context.req, res: context.res }))
+  //   return { redirect: { destination: '/login', permanent: false } };
 
   // NAVIGATION
   const navItemsResponse = await excuteQuery({

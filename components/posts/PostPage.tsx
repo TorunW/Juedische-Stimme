@@ -89,7 +89,15 @@ function Post({ post }) {
             ></div>
           </div>
           <div className={styles.middleWrapper}>
-            <div className={styles.image}></div>
+            <div className={styles.image}>
+            <Image
+                src={generateImageUrl(post.post_image_2)}
+                alt={post.post_title}
+                title={post.post_title}
+                layout='fill'
+                objectFit='cover'
+              />
+            </div>
 
             <div
               className={styles.bottomExcerpt + ' ' + styles.excerpt}

@@ -36,6 +36,9 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
   const [ previewImage, setPreviewImage ] = useState(null)
   const [ previewImageFile, setPreviewImageFile ] = useState(null)
 
+  const [ previewImage2, setPreviewImage2 ] = useState(null)
+  const [ previewImage2File, setPreviewImage2File ] = useState(null)
+
   const formik = useFormik({
     initialValues: {
         post_author: post ? post.post_author : 2, // '' --> CHANGE THIS BACK!!!!,
@@ -61,7 +64,8 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
         post_type: post ? post.post_type : '',
         post_mime_type:  post ? post.post_mime_type : '',
         categoryId: post ? post.categoryId : 2,
-        post_image: post ? post.post_image : ''
+        post_image: post ? post.post_image : '',
+        post_image_2: post ? post.post_image_2 : ''
     },
     onSubmit: values => {
         const requestsArray = [];
@@ -81,36 +85,58 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
         const postRequest = post ? axios.put(postUrl,postData) : axios.post(postUrl,postData);
         requestsArray.push(postRequest)
         
-        if (previewImageFile !== null){
-          
-          if (post && post.post_image){
-            const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== '80' ? ':'+window.location.port : ""}/media/${post.post_image.split('/').join('+++')}`;
-            const deleteFileRequest = axios.delete(deleteFileUrl)
-            requestsArray.push(deleteFileRequest)
-          }
+        // POST IMAGE FILE ( FILE UPLOAD )
+        const config = {
+          headers: { 'content-type': 'multipart/form-data' },
+          onUploadProgress: (event) => {
+              console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
+          },
+        };
 
+        if (previewImageFile !== null){
+          if (post){
+            if (post.post_image && post.post_image !== null){
+              const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== '80' ? ':'+window.location.port : ""}/media/${post.post_image.split('/').join('+++')}`;
+              const deleteFileRequest = axios.delete(deleteFileUrl)
+              requestsArray.push(deleteFileRequest)
+            }
+          }
           let fileType = previewImageFile.name.split('.')[previewImageFile.name.split.length - 1]
           let fileName = previewImageFile.name.split(`.${fileType}`)[0] + `__${uuidv4()}.${fileType}`
-
           const postImageUrl = `/api/posts/${post ?  + post.postId : nextPostId}/image`
           const postImageData = {
-            meta_value: generateFileName(fileName)
+            meta_value: generateFileName(fileName),
+            image_number:1
           }
           const postImageRequest = post && post.post_image ? axios.put(postImageUrl,postImageData) : axios.post(postImageUrl,postImageData)
           requestsArray.push(postImageRequest)
-
-          // POST IMAGE FILE ( FILE UPLOAD )
-          const config = {
-            headers: { 'content-type': 'multipart/form-data' },
-            onUploadProgress: (event) => {
-                console.log(`Current progress:`, Math.round((event.loaded * 100) / event.total));
-            },
-          };
           const formData = new FormData();
           formData.append("theFiles", previewImageFile, fileName);
           const postImageFileRequest = axios.post('/api/uploads', formData, config);
           requestsArray.push(postImageFileRequest)
+        }
 
+        if (previewImage2File !== null){
+          if (post){
+            if (post.post_image_2 && post.post_image_2 !== null){
+              const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== '80' ? ':'+window.location.port : ""}/media/${post.post_image_2.split('/').join('+++')}`;
+              const deleteFileRequest = axios.delete(deleteFileUrl)
+              requestsArray.push(deleteFileRequest)
+            }
+          }
+          let fileType = previewImage2File.name.split('.')[previewImage2File.name.split.length - 1]
+          let fileName = previewImage2File.name.split(`.${fileType}`)[0] + `__${uuidv4()}.${fileType}`
+          const postImageUrl = `/api/posts/${post ?  + post.postId : nextPostId}/image`
+          const postImageData = {
+            meta_value: generateFileName(fileName),
+            image_number:2
+          }
+          const postImageRequest = post && post.post_image_2 ? axios.put(postImageUrl,postImageData) : axios.post(postImageUrl,postImageData)
+          requestsArray.push(postImageRequest)
+          const formData = new FormData();
+          formData.append("theFiles", previewImage2File, fileName);
+          const postImageFileRequest = axios.post('/api/uploads', formData, config);
+          requestsArray.push(postImageFileRequest)
         }
 
         axios.all([...requestsArray]).then(axios.spread((...responses) => {
@@ -131,6 +157,19 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
     }, false);
     if (file){
       setPreviewImageFile(file)
+      reader.readAsDataURL(file);
+    }
+  }
+
+  function onPostImage2Change(event){
+    // read file as data uri for preview, upload it on onSubmit
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.addEventListener("load", () => {
+      setPreviewImage2(reader.result)
+    }, false);
+    if (file){
+      setPreviewImage2File(file)
       reader.readAsDataURL(file);
     }
   }
@@ -229,6 +268,28 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
                   itemId={post ? post.postId : nextPostId}   
               />
             </Suspense>
+          </div>
+
+          <div id="post-image" className={styles['form-row']}>
+            <div className={styles['form-row']}>
+              <label htmlFor="post_image_2">POST IMAGE 2</label>
+              <div>
+                <input
+                  id="post_image_2"
+                  name="post_image_2"
+                  type="file"
+                  onChange={onPostImage2Change}
+                />
+
+                {
+                  previewImage2 !== null ?
+                  <Image layout='fixed' width={320} height={180} src={previewImage2}/> :
+                  post && post.post_image_2 ?
+                  <Image layout='fixed' width={320} height={180}  src={generateImageUrl(post.post_image_2)}/> :
+                  ''
+                }
+              </div>
+            </div>
           </div>
 
           <div className={styles['form-row']}>
