@@ -1,0 +1,25 @@
+.container {
+  background-color: gray;
+}
+.tabsMenu {
+  background-color: black;
+  color: white;
+}
+.form {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.form-row {
+  width: 100%;
+  display: flex;
+  margin: 20px 0;
+  background-color: cadetblue;
+  padding: 5px;
+}
+.form-row .inputContainer {
+  width: 100%;
+}
+.form-row .inputContainer .input {
+  width: 100%;
+}

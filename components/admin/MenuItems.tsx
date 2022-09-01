@@ -3,8 +3,6 @@ import axios from 'axios';
 import menuTypes from 'lib/menuTypes.json'
 
 const MenuItems = ({menuItems}) => {
-
-    console.log(menuItems, " MENU ITEMS ")
     
     const [ currentMenu, setCurrentMenu ] = useState('main_menu')
 

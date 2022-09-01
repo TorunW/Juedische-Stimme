@@ -19,12 +19,14 @@ const PostTranslationsForm = ({post,language}) => {
             title:post[`post_title_translation_${language}`] ? post[`post_title_translation_${language}`] : '',
             content:post[`post_content_translation_${language}`] ? post[`post_content_translation_${language}`] : '',
             excerpt:post[`post_excerpt_translation_${language}`] ? post[`post_excerpt_translation_${language}`] : '',
+            content_2:post[`post_content_2_translation_${language}`] ? post[`post_content_2_translation_${language}`] : '',
+            excerpt_2:post[`post_excerpt_2_translation_${language}`] ? post[`post_excerpt_2_translation_${language}`] : '',
         },
-        validationSchema:  Yup.object().shape({
-            title:Yup.string().min(3,'Title must be at least 3 characters long!').required('Title is required!'),
-            excerpt:Yup.string().required('Excerpt is required!'),
-            content:Yup.string().required('Content is required!')
-        }),
+        // validationSchema:  Yup.object().shape({
+        //     title:Yup.string().min(3,'Title must be at least 3 characters long!').required('Title is required!'),
+        //     excerpt:Yup.string().required('Excerpt is required!'),
+        //     content:Yup.string().required('Content is required!')
+        // }),
         onSubmit: values => {
             axios({
                 method: post[`post_title_translation_${language}`] ? 'put' : 'post',

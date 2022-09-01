@@ -11,6 +11,7 @@ import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
 import Head from 'next/head';
+import Script from 'next/script';
 
 const ContentPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
         {headDisplay}
         <Post post={page} />
       </section>
+      {/* <Script id="proca" src="https://sign.stopsettlements.org/d/stopsettlements/jnahost"></Script> */}
     </main>
   );
 };

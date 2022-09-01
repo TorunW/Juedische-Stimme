@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { useFormik } from 'formik';
 import axios from 'axios';
 import dateTimeHelper from 'helpers/dateTimeHelper';
-import styles from 'components/forms/Styles.module.css';
+import styles from 'components/admin/Forms.module.css';
 import { useDispatch, useSelector } from 'store/hooks'
 import { v4 as uuidv4 } from 'uuid';
 import PostTagForm from './PostTagForm';
@@ -26,6 +26,8 @@ interface PostFormProps {
 
 const PostForm = ({post,nextPostId}: PostFormProps) => {
   
+  console.log(post, " POST ")
+
   const tabs = ['post','translations']
   const { categories } = useSelector(state => state.categories);
   const { locales, defaultLocale } = useSelector(state => state.languages)
@@ -44,7 +46,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
         post_title:post ? post.post_title : '',
         post_excerpt: post ? post.post_excerpt : '',
         post_excerpt_2: post ? post.post_excerpt_2 : '',
-        post_status: post ? post.post_status : '',
+        post_status: post ? post.post_status : 'draft',
         ping_status: post ? post.ping_status : '',
         post_password: post ? post.post_password : '',
         post_name: post ? post.post_name : '',
@@ -113,8 +115,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
 
         axios.all([...requestsArray]).then(axios.spread((...responses) => {
           console.log(responses, " RESPONSES")
-          if (post) window.location.reload()
-          else window.location.href = `/admin/posts/${values.post_title.replace(/\s+/g, '-').toLowerCase().replace()}` 
+          window.location.href = `/admin/posts/${values.post_title.replace(/\s+/g, '-').toLowerCase().replace().replaceAll('#',':__--__:')}` 
         })).catch(errors => {
             console.log(errors, " ERRORS")
         })
@@ -145,39 +146,54 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
   if (currentTab === 'post'){
     formDisplay = (
       <div className='post-form-tab' id="post-form">
-        {post ? <p><a target={"_blank"} rel="noreferrer" href={"/"+GeneratePostUrl(post.post_name)}>view post on live site</a></p> : ""}
-        <form onSubmit={formik.handleSubmit}>
+        <form className={styles.form} onSubmit={formik.handleSubmit}>
           <div className={styles['form-row']}>
             <label htmlFor="post_title">POST TITLE</label>
-            <input
-              id="post_title"
-              name="post_title"
-              type="text"
-              onChange={formik.handleChange}
-              value={formik.values.post_title}
-            />
+            <div className={styles.inputContainer}>
+              <input
+                id="post_title"
+                name="post_title"
+                type="text"
+                className={styles.input}
+                onChange={formik.handleChange}
+                value={formik.values.post_title}
+              />
+              {post ? <p><a target={"_blank"} rel="noreferrer" href={"/"+GeneratePostUrl(post.post_name)}>view post on live site</a></p> : ""}
+            </div>
+          </div>
+
+          <div className={styles['form-row']}>
+            <label htmlFor="post_status">POST STATUS</label>
+            <select 
+              id="post_status"
+              name="post_status"
+              value={formik.values.post_status} 
+              onChange={formik.handleChange}>
+                <option value={'publish'}>publish</option>
+                <option value={'draft'}>draft</option>
+            </select>
           </div>
 
           <div id="post-image" className={styles['form-row']}>
-
-            {
-              previewImage !== null ?
-              <Image layout='fixed' width={320} height={180} src={previewImage}/> :
-              post && post.post_image ?
-              <Image layout='fixed' width={320} height={180}  src={generateImageUrl(post.post_image)}/> :
-              ''
-            }
-
             <div className={styles['form-row']}>
               <label htmlFor="post_image">POST IMAGE</label>
-              <input
-                id="post_image"
-                name="post_image"
-                type="file"
-                onChange={onPostImageChange}
-              />
-            </div>
+              <div>
+                <input
+                  id="post_image"
+                  name="post_image"
+                  type="file"
+                  onChange={onPostImageChange}
+                />
 
+                {
+                  previewImage !== null ?
+                  <Image layout='fixed' width={320} height={180} src={previewImage}/> :
+                  post && post.post_image ?
+                  <Image layout='fixed' width={320} height={180}  src={generateImageUrl(post.post_image)}/> :
+                  ''
+                }
+              </div>
+            </div>
           </div>
 
           <div className={styles['form-row']}>
@@ -240,6 +256,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
           </div>
 
           <div className={styles['form-row']}>
+            <label htmlFor='post_tags'>Tags</label>
             <PostTagForm 
               postId={post ? post.postId : nextPostId}
             />          
@@ -251,10 +268,6 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
       </div>
     )
   } else if (currentTab === 'translations'){
-
-    console.log('WHAT')
-
-
 
     formDisplay = (
       <div className='post-form-tab' id="translations-form">
@@ -273,7 +286,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
     const tabMenu: ReactElement[] = tabs.map((tab,index)=>(
       <li key={Date.now() + index}><a onClick={() => setCurrentTab(tab)}>{tab}</a></li>
     ))
-    tabMenuDisplay = <ul>{tabMenu}</ul>
+    tabMenuDisplay = <div className={styles.tabsMenu}><ul>{tabMenu}</ul></div>
   }
 
   return (
