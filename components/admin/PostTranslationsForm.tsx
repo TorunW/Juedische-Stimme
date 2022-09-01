@@ -2,7 +2,7 @@ import React, {Suspense } from 'react';
 import dynamic from 'next/dynamic'
 import { useFormik } from 'formik';
 import axios from 'axios';
-import styles from 'components/forms/Styles.module.css';
+import styles from 'components/admin/Forms.module.css';
 import * as Yup from 'yup';
 
 const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
@@ -22,11 +22,6 @@ const PostTranslationsForm = ({post,language}) => {
             content_2:post[`post_content_2_translation_${language}`] ? post[`post_content_2_translation_${language}`] : '',
             excerpt_2:post[`post_excerpt_2_translation_${language}`] ? post[`post_excerpt_2_translation_${language}`] : '',
         },
-        // validationSchema:  Yup.object().shape({
-        //     title:Yup.string().min(3,'Title must be at least 3 characters long!').required('Title is required!'),
-        //     excerpt:Yup.string().required('Excerpt is required!'),
-        //     content:Yup.string().required('Content is required!')
-        // }),
         onSubmit: values => {
             axios({
                 method: post[`post_title_translation_${language}`] ? 'put' : 'post',
@@ -47,7 +42,7 @@ const PostTranslationsForm = ({post,language}) => {
 
     return (
         <div className={styles.container}>
-            <form onSubmit={formik.handleSubmit}>
+            <form className={styles.form} onSubmit={formik.handleSubmit}>
 
                 <div className={styles['form-row']}>
                     <label htmlFor="name">Post Title ({language})</label>

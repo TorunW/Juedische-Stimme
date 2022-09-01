@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useState } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
@@ -14,14 +14,8 @@ interface TipTapEditorProps {
   height?: number;
 }
 
-const TipTapEditor = ({
-  value,
-  onChange,
-  itemId,
-  itemType,
-  showMenu,
-  height,
-}: TipTapEditorProps) => {
+const TipTapEditor = (props : TipTapEditorProps) => {
+  const { value, onChange, itemId, itemType, showMenu, height } = props
   const editor = useEditor({
     extensions: [StarterKit, Image],
     content: value,
@@ -30,14 +24,12 @@ const TipTapEditor = ({
       onChange(rawHtml);
     },
   });
-
   let menuDispaly: ReactElement;
   if (showMenu !== false) {
     menuDispaly = (
       <MenuBar editor={editor} itemId={itemId} itemType={itemType} />
     );
   }
-
   return (
     <div className={styles.container}>
       {menuDispaly}
@@ -48,4 +40,23 @@ const TipTapEditor = ({
   );
 };
 
-export default TipTapEditor;
+const TipTapEditorWrapper = (props:TipTapEditorProps) => {
+
+  const [ showEditor , setShowEditor ] = useState(true)
+
+  let editorDisplay: ReactElement;
+  if (showEditor === true){
+    editorDisplay = <TipTapEditor {...props}/>
+  } else {
+    editorDisplay = <textarea style={{width:"100%",minHeight:"400px"}} value={props.value} onChange={e => props.onChange(e.target.value)}></textarea>
+  }
+
+  return (
+    <div style={{width:"100%"}} className='tip-tap-editor-wrapper'>
+      <a style={{border:"1px solid #000"}} onClick={() => setShowEditor(showEditor === true ? false : true)}>Toggle Editor</a>
+      {editorDisplay}
+    </div>
+  )
+}
+
+export default TipTapEditorWrapper;
