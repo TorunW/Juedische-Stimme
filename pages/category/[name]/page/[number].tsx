@@ -37,7 +37,14 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
   return (
     <main id="category-posts-page">
       <section className={styles.container + ' ' + styles.postsContainer}>
-        <Posts posts={posts} type={"category"} title={props.categoryName} pageNum={pageNum} postsCount={postsCount} postsPerPage={postsPerPage} />
+        <Posts 
+          posts={posts}
+          type={"category"} 
+          title={props.categoryName} 
+          pageNum={pageNum} 
+          postsCount={postsCount} 
+          postsPerPage={postsPerPage} 
+        />
       </section>
     </main>
   );
@@ -54,15 +61,7 @@ export const getServerSideProps = async (context) => {
   const categoryResponse = await excuteQuery({
     query: selectCategory({categoryName:context.query.name})
   });
-  console.log(categoryResponse, " CATEGORY RESPONSE ")
   const category = JSON.stringify(categoryResponse);
-
-  const categoryCountResponse = await excuteQuery({
-    query:countPostsByTag({
-      slug: context.query.name.split(' ').join('-').toLowerCase(),
-      isCategory: true,
-    })
-  })
 
   const postsResponse = await excuteQuery({
     query: selectPosts({

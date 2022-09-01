@@ -11,6 +11,9 @@ import { setMenuItems } from 'store/nav/navSlice';
 import { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import { setLanguages } from 'store/languages/languagesSlice';
+import { selectCategories, selectTag } from 'lib/queries';
+import { setCatgories } from 'store/categories/categoriesSlice';
+import { setTag } from 'store/tags/tagsSlice';
 
 const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -19,6 +22,8 @@ const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
   useEffect(() => {
     dispatch(setPosts(JSON.parse(props.posts)));
     dispatch(setPostsPagination({postsPerPage:props.postsPerPage,postsCount:props.postsCount}))
+    dispatch(setCatgories(JSON.parse(props.categories)));
+    dispatch(setTag(JSON.parse(props.tag)[0]));
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(
       setLanguages({
@@ -46,12 +51,16 @@ export const getServerSideProps = async (context) => {
   });
   const navItems = JSON.stringify(navItemsResponse);
 
-  const tagCountReponse = await excuteQuery({
-    query:countPostsByTag({
-      slug: context.query.slug,
-      isCategory: false,
-    })
-  })
+  const tagResponse = await excuteQuery({
+    query: selectTag({slug:context.query.slug})
+  });
+  const tag = JSON.stringify(tagResponse);
+
+  const categoriesResponse = await excuteQuery({
+    query: selectCategories(100),
+  });
+
+  const categories = JSON.stringify(categoriesResponse);
 
   const postsResponse = await excuteQuery({
     query: selectPosts({
@@ -64,8 +73,8 @@ export const getServerSideProps = async (context) => {
   const posts = JSON.stringify(postsResponse);
   return {
     props: {
-      posts: posts,
-      postsCount:tagCountReponse[0]['COUNT(*)'],
+      posts,
+      postsCount:tagResponse[0].count,
       postsPerPage:10,
       slug: context.query.slug,
       pageNum: parseInt(context.query.number),
@@ -73,6 +82,8 @@ export const getServerSideProps = async (context) => {
       locales: context.locales,
       locale: context.locale,
       defaultLocale: context.defaultLocale,
+      categories,
+      tag
     },
   };
 };

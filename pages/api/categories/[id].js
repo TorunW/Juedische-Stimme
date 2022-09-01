@@ -4,7 +4,7 @@ import { updateTerm, updateTermTaxonomy, deleteTerm, deleteTermTaxonomy } from '
 export default async (req, res) => {
     try {
         if (req.method === 'PUT') {
-        
+            const termId = req.query.id;
             const updateCategoryResult = await excuteQuery({
                 query: updateTerm({name:req.body.name, slug:req.body.slug,termId})
             });
@@ -16,15 +16,14 @@ export default async (req, res) => {
         }
         else if (req.method === "DELETE"){
             const termId = req.query.id;
-            console.log(termId, " TERM ID ")
+
             const deleteCategoryResult = await excuteQuery({
                 query: deleteTerm(termId)
             })
-            console.log(deleteCategoryResult, " DELETE CAT RESULT ")
+
             const deleteCategoryTaxonomyResult = await excuteQuery({
                 query: deleteTermTaxonomy(termId)
             })
-            console.log(deleteCategoryTaxonomyResult, " DELETE CAT TAX RESULT ")
 
             res.json({message:'category deleted!'})
         }

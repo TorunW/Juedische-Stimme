@@ -7,6 +7,7 @@ import SearchFilter from 'components/SearchFilter';
 import styles from './Styles.module.css';
 import postHeader from 'public/post-header.jpg';
 import Placeholder from '../placeholder/Placeholder';
+import PostsHeader from './PostsHeader';
 
 interface PostsProps {
   posts: any[];
@@ -27,17 +28,31 @@ function Posts({
   phrase,
   type,
 }: PostsProps) {
-  let headerDisplay: ReactElement = <h1>{title}</h1>;
-  let searchDisplay: ReactElement;
-  let postsDisplay: ReactElement = (
+
+  /* POSTS */
+
+  const postsDisplay: ReactElement = (
     <div className={styles.postsContainer}>
       {posts && posts !== null
-        ? posts.map((post: any, index: number) => {
-            return <Post key={index} post={post} phrase={phrase} />;
-          })
-        : ''}
+        ? 
+          posts.map((post: any, index: number) => (
+            <Post key={index} post={post} phrase={phrase} />
+          ))
+        : 
+          [0,1,2,3,4,5].map((ph,index) => (
+            <Placeholder key={index}/>
+          ))
+        }
     </div>
   );
+
+  /* TEMPLATE */
+
+  let headerDisplay: ReactElement = <h1>{title}</h1>;
+  let searchDisplay: ReactElement;
+  
+  let postsTemplateDisplay = postsDisplay;
+
   let paginationDisplay: ReactElement = (
     <div className='link whiteBg'>
       <Link href={`/category/${title}`}>
@@ -49,38 +64,13 @@ function Posts({
   );
 
   if (pageNum && pageNum !== null) {
-    headerDisplay = (
-      <div className={styles.header}>
-        <div className={styles.imageWrapper}>
-          <div className={styles.backgroundOverlay}></div>
-          <Image
-            src={postHeader}
-            className={styles.headerImage}
-            layout='fill'
-            objectFit='cover'
-          />
-        </div>
-        <h1>{title}</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat.
-        </p>
-      </div>
-    );
+    headerDisplay = <PostsHeader />
 
     searchDisplay = <SearchFilter phrase={phrase} />;
 
-    postsDisplay = (
+    postsTemplateDisplay = (
       <div className={styles.postPage}>
-        <div className={styles.postsContainer}>
-          {posts && posts !== null
-            ? posts.map((post: any, index: number) => {
-                return <Post key={index} post={post} phrase={phrase} />;
-              })
-            : ''}
-        </div>
+        {postsDisplay}
       </div>
     );
 
@@ -107,7 +97,7 @@ function Posts({
     >
       {headerDisplay}
       {searchDisplay}
-      {postsDisplay}
+      {postsTemplateDisplay}
       {paginationDisplay}
     </section>
   );

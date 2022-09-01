@@ -1,11 +1,13 @@
-import React, {useState, useEffect} from 'react'
+import React, { Suspense} from 'react'
 import { useFormik } from 'formik';
 import axios from 'axios';
 import styles from 'components/forms/Styles.module.css';
+import dynamic from 'next/dynamic';
+const DynamicTiptapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
+    suspense:true
+})
 
 const TagForm = ({tag}) => {
-
-    console.log(tag, " TAG ")
 
     const formik = useFormik({
         initialValues: {
@@ -16,7 +18,7 @@ const TagForm = ({tag}) => {
             count: tag ? tag.count : ''
         },
         onSubmit: values => {
-            console.log(values)
+            // console.log(values)
             axios({
                 method: tag ? 'put' : 'post',
                 url: `/api/tags/tag/${tag ? "/" + tag.term_id : ''}`,
@@ -26,14 +28,13 @@ const TagForm = ({tag}) => {
                 }
             }).then((response) => {
                 console.log(response,"response on tag (put or post)");
-                // window.location.href = '/admin/tags'
+                if (tag) window.location.href = `/admin/tags/${tag.term_id}`
+                else window.location.href = `/admin/tags`
             }, (error) => {
                 console.log(error, "ERROR on post / put tag");
             });
         },
     });
-
-    console.log(formik.values)
 
     return (
         <div className={styles.container}>
@@ -43,20 +44,20 @@ const TagForm = ({tag}) => {
                     <input
                         id="name"
                         name="name"
-                        type="name"
+                        type="text"
                         onChange={formik.handleChange}
                         value={formik.values.name}
                     />
                 </div>
                 <div className={styles['form-row']}>
                     <label htmlFor="name">TAG DESCRIPTION</label>
-                    <textarea
-                        id="description"
-                        name="description"
-                        type="description"
-                        onChange={formik.handleChange}
-                        value={formik.values.description}
-                    />
+                    <Suspense fallback={"LOADING..."}>
+                        <DynamicTiptapEditor
+                            onChange={val => formik.setFieldValue('description',val,true)}
+                            value={formik.values.description}
+                        />
+                    </Suspense>
+
                 </div>
                 <div className={styles['form-row']}>
                     <button type="submit">Submit</button>

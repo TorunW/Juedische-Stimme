@@ -1,5 +1,6 @@
 .post {
   margin-bottom: 64px;
+  width: calc(50% - 32px);
 }
 .post .imageWrapper {
   margin-bottom: 16px;
@@ -8,7 +9,7 @@
   display: block;
   position: relative;
   width: 100%;
-  aspect-ratio: auto 2.22413793;
+  aspect-ratio: auto 645 / 290;
 }
 .post .imageWrapper img {
   height: 100%;
