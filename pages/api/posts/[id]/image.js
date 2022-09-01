@@ -4,19 +4,19 @@ export default async (req, res) => {
     try {
         if (req.method === 'POST'){
             const result = await excuteQuery({
-                query: `INSERT INTO wp_postmeta (post_id,meta_key,meta_value) VALUES ('${req.query.id}','_post_main_image','${req.body.meta_value}')`
+                query: `INSERT INTO wp_postmeta (post_id,meta_key,meta_value) VALUES ('${req.query.id}','_post_main_image${req.body.image_number === 2 ? "_2" : ""}','${req.body.meta_value}')`
             });
             // console.log(result, " POST post image result")
             res.json(result)
         } else if (req.method === 'PUT') {
             const result = await excuteQuery({
-                query: `UPDATE wp_postmeta SET meta_value='${req.body.meta_value}' WHERE post_id='${req.query.id}' AND meta_key='_post_main_image'`
+                query: `UPDATE wp_postmeta SET meta_value='${req.body.meta_value}' WHERE post_id='${req.query.id}' AND meta_key='_post_main_image${req.body.image_number === 2 ? "_2" : ""}'`
             });
             // console.log(result, " PUT post image result")
             res.json(result)
         } else if (req.method === 'DELETE'){
             const result = await excuteQuery({
-                query: `DELETE wp_postmeta WHERE post_id='${req.query.id}' AND meta_key='_post_main_image'`
+                query: `DELETE wp_postmeta WHERE post_id='${req.query.id}' AND meta_key='_post_main_image${req.body.image_number === 2 ? "_2" : ""}'`
             });
             // console.log(result, " PUT post image result")
             res.json(result)

@@ -11,10 +11,7 @@ export const Footer = () => {
   const { footerMenu, parterMenu } = useSelector((state) => state.nav);
   const router = useRouter();
 
-  function logout() {
-    sessionStorage.removeItem('Token');
-    router.push('/login');
-  }
+  console.log(footerMenu, " FOOTER E")
 
   return (
     <footer id={styles.footer}>

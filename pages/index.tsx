@@ -94,7 +94,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   return (
     <main id='home-page'>
       <Head>
-        <title>Jüdische Stimme</title>
+        <title>Jüdische Stimme | für gerechten Frieden in Nahost</title>
         <div>
           <link
             rel='apple-touch-icon'
