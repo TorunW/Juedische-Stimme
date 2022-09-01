@@ -52,6 +52,10 @@ const nextConfig = {
         source: '/admin/categories',
         destination: '/admin/categories/page/1',
         permanent: false,
+      },{
+        source: '/hilf-uns',
+        destination: '/spenden',
+        permanent: false,
       }
     ]
   },

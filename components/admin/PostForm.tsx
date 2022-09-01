@@ -217,6 +217,17 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
           </div>
 
           <div className={styles['form-row']}>
+            <label htmlFor="categoryId">CATEGORY</label>
+            <select 
+              id="categoryId"
+              name="categoryId"
+              value={formik.values.categoryId} 
+              onChange={formik.handleChange}>
+              {selectCategoriesDisplay}
+            </select>
+          </div>
+
+          <div className={styles['form-row']}>
             <label htmlFor="post_layout">POST LAYOUT</label>
             <select 
               id="post_layout"
@@ -253,18 +264,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
           </div>
 
           <div className={styles['form-row']}>
-            <label htmlFor="categoryId">CATEGORY</label>
-            <select 
-              id="categoryId"
-              name="categoryId"
-              value={formik.values.categoryId} 
-              onChange={formik.handleChange}>
-              {selectCategoriesDisplay}
-            </select>
-          </div>
-
-          <div className={styles['form-row']}>
-            <label htmlFor='post_excerpt'>Post Summary (?)</label>
+            <label htmlFor='post_excerpt'>POST EXCERPT</label>
             <Suspense>
               <TipTapEditor
                   onChange={(val:string)  => formik.setFieldValue('post_excerpt',val,true)}
@@ -276,7 +276,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
             </Suspense>
           </div>
           <div className={styles['form-row']}>
-            <label htmlFor='post_content'>Post Content</label>
+            <label htmlFor='post_content'>POST CONTENT</label>
             <Suspense>
               <TipTapEditor
                   onChange={(val:string)  => formik.setFieldValue('post_content',val,true)}
@@ -310,7 +310,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
           </div>
 
           <div className={styles['form-row']}>
-            <label htmlFor='post_excerpt_2'>Post Summary 2</label>
+            <label htmlFor='post_excerpt_2'>POST EXCERPT 2</label>
             <Suspense>
               <TipTapEditor
                   onChange={(val:string)  => formik.setFieldValue('post_excerpt_2',val,true)}
@@ -322,7 +322,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
             </Suspense>
           </div>
           <div className={styles['form-row']}>
-            <label htmlFor='post_content_2'>Post Content 2</label>
+            <label htmlFor='post_content_2'>POST CONTENT 2</label>
             <Suspense>
               <TipTapEditor
                   onChange={(val:string)  => formik.setFieldValue('post_content_2',val,true)}

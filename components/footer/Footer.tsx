@@ -20,14 +20,14 @@ export const Footer = () => {
         <div className={styles.vl}></div>
         <div className={styles.footerSideMenu}>
           <div className={styles.footerRow + ' ' + styles.linksRow}>
-            <h3 className={styles.label}>Unsere partner & freunde</h3>
+            <h3 className={styles.label}>Unsere partner {'&'} freunde</h3>
             <div className={styles.imgContainer}>
               {parterMenu.map((menuItem,index)=>(
                 <a key={menuItem.term_id + Date.now()}
                   href={menuItem.link}
                   target='_blank'
                   rel='noopener noreferrer'>
-                <img width={100} src={generateImageUrl(menuItem.term_image)}/>
+                  <img width={100} src={generateImageUrl(menuItem.term_image)}  alt={menuItem.alt} title={menuItem.title}/>
                 </a>
               ))}
             </div>
