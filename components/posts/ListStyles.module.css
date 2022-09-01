@@ -145,7 +145,7 @@
   display: flex;
   justify-content: space-between;
   width: 1440px;
-  margin: auto 48px;
+  margin: 0 auto 48px;
 }
 .navigationContainer a {
   display: flex;
