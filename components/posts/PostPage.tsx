@@ -65,6 +65,7 @@ function Post({ post }) {
         </a>
       ));
     }
+    console.log(post);
 
     let headerDisplay;
     if (
@@ -131,9 +132,12 @@ function Post({ post }) {
       );
     }
 
-    postDisplay = (
-      <React.Fragment>
-        {headerDisplay}
+    let contentDisplay;
+    if (
+      post.categoryName === 'Aktuelles' ||
+      post.categoryName === 'Allgemein'
+    ) {
+      contentDisplay = (
         <div className={styles.contentContainer}>
           <div className={styles.topWrapper}>
             <div
@@ -150,7 +154,17 @@ function Post({ post }) {
             ></div>
           </div>
           <div className={styles.middleWrapper}>
-            <div className={styles.image}></div>
+            <div className={styles.image}>
+              <div className={styles.image}>
+                <Image
+                  src={generateImageUrl(post.post_image_2)}
+                  alt={post.post_title}
+                  title={post.post_title}
+                  layout='fill'
+                  objectFit='cover'
+                />
+              </div>
+            </div>
 
             <div
               className={styles.bottomExcerpt + ' ' + styles.excerpt}
@@ -169,7 +183,52 @@ function Post({ post }) {
             ></div>
           </div>
         </div>
+      );
+    } else {
+      contentDisplay = (
+        <div className={styles.contentContainer}>
+          <div
+            className={styles.topExcerpt + ' ' + styles.excerpt}
+            dangerouslySetInnerHTML={{
+              __html: postExcerpt.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+            }}
+          ></div>
+          <div
+            className={styles.bottomExcerpt + ' ' + styles.excerpt}
+            dangerouslySetInnerHTML={{
+              __html: postExcerpt2,
+            }}
+          ></div>
+          <div
+            className={styles.topContent + ' ' + styles.content}
+            dangerouslySetInnerHTML={{
+              __html: postContent.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+            }}
+          ></div>
+          <div className={styles.image}>
+            <Image
+              src={generateImageUrl(post.post_image_2)}
+              alt={post.post_title}
+              title={post.post_title}
+              layout='fill'
+              objectFit='cover'
+            />
+          </div>
 
+          <div
+            className={styles.bottomContent + ' ' + styles.content}
+            dangerouslySetInnerHTML={{
+              __html: postContent2,
+            }}
+          ></div>
+        </div>
+      );
+    }
+
+    postDisplay = (
+      <React.Fragment>
+        {headerDisplay}
+        {contentDisplay}
         <div className={styles.navigationContainer}>
           {nextPost !== null ? (
             <a href={'/' + nextPost.post_name}>
