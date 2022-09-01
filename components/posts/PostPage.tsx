@@ -1,7 +1,9 @@
+import formateDate from 'helpers/formateDate';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import Image from 'next/image';
 import React, { ReactElement } from 'react';
 import { useSelector } from 'store/hooks';
+import styles from '../posts/ListStyles.module.css';
 
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
@@ -18,7 +20,7 @@ function Post({ post }) {
       postExcerpt = post.post_excerpt,
       postContent = post.post_content,
       postExcerpt2 = post.post_excerpt_2,
-      postContent2 = post.post_content_2
+      postContent2 = post.post_content_2;
 
     if (locale !== null) {
       postTitle = post[`post_title_translation_${locale}`]
@@ -43,54 +45,92 @@ function Post({ post }) {
       ));
     }
 
+    console.log(post.post_date);
+
     postDisplay = (
       <React.Fragment>
-        <h4>{postTitle}</h4>
-        <div style={{width:"100%",height:"300px",position:"relative"}}>
-        <Image
-          src={generateImageUrl(post.post_image)}
-          alt={post.post_title}
-          title={post.post_title}
-          layout='fill'
-          objectFit='cover'
-        />
+        <div className={styles.header}>
+          <div className={styles.contentWrapper}>
+            <h2>{postTitle}</h2>
+            <div className={styles.imageWrapper}>
+              <Image
+                src={generateImageUrl(post.post_image)}
+                alt={post.post_title}
+                title={post.post_title}
+                layout='fill'
+                objectFit='cover'
+              />
+            </div>
+          </div>
         </div>
-        <h4>
-          <a href={`/category/${post.categoryName}`}>{post.categoryName}</a>
-        </h4>
-        <p>{tagsDisplay}</p>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: postExcerpt.replace(/(?:\r\n|\r|\n)/g, '<br>'),
-          }}
-        ></div>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: postContent.replace(/(?:\r\n|\r|\n)/g, '<br>'),
-          }}
-        ></div>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: postExcerpt2,
-          }}
-        ></div>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: postContent2,
-          }}
-        ></div>
-        <hr />
-        {post.nextPostName !== null ? (
-          <React.Fragment>next:{' '} <a href={'/' + post.nextPostName.split('#').join(':__--__:')}>{post.nextPostName}</a></React.Fragment>
-        ) : (
-          ''
-        )}
-        <br />
-        {post.previousPostName !== null ? (
-          <React.Fragment>previous:{' '} <a href={'/' + post.previousPostName.split('#').join(':__--__:')}>{post.previousPostName}</a></React.Fragment>
-        ) : (
-          ''
-        )}
+
+        <div className={styles.linksContainer}>
+          <p>Published {post.post_date ? formateDate(post.post_date) : ''}</p>
+          <p>
+            <a href={`/category/${post.categoryName}`}>#{post.categoryName}</a>
+            {tagsDisplay}
+          </p>
+          <div className={styles.socialMediaLinks}></div>
+        </div>
+
+        <div className={styles.contentContainer}>
+          <div className={styles.topWrapper}>
+            <div
+              className={styles.topExcerpt + ' ' + styles.excerpt}
+              dangerouslySetInnerHTML={{
+                __html: postExcerpt.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+              }}
+            ></div>
+            <div
+              className={styles.topContent + ' ' + styles.content}
+              dangerouslySetInnerHTML={{
+                __html: postContent.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+              }}
+            ></div>
+          </div>
+          <div className={styles.middleWrapper}>
+            <div className={styles.image}></div>
+
+            <div
+              className={styles.bottomExcerpt + ' ' + styles.excerpt}
+              dangerouslySetInnerHTML={{
+                __html: postExcerpt2,
+              }}
+            ></div>
+          </div>
+
+          <div className={styles.bottomWrapper}>
+            <div
+              className={styles.bottomContent + ' ' + styles.content}
+              dangerouslySetInnerHTML={{
+                __html: postContent2,
+              }}
+            ></div>
+          </div>
+        </div>
+
+        <div className={styles.navigationContainer}>
+          {post.nextPostName !== null ? (
+            <React.Fragment>
+              next:{' '}
+              <a href={'/' + post.nextPostName.split('#').join(':__--__:')}>
+                {post.nextPostName}
+              </a>
+            </React.Fragment>
+          ) : (
+            ''
+          )}
+          {post.previousPostName !== null ? (
+            <React.Fragment>
+              previous:{' '}
+              <a href={'/' + post.previousPostName.split('#').join(':__--__:')}>
+                {post.previousPostName}
+              </a>
+            </React.Fragment>
+          ) : (
+            ''
+          )}
+        </div>
       </React.Fragment>
     );
   } else {
@@ -101,7 +141,16 @@ function Post({ post }) {
     );
   }
   return (
-    <div id='post-view' style={{ padding: '15px' }}>
+    <div
+      id='post-view'
+      className={
+        post.categoryName === 'Aktuelles'
+          ? styles.firstLayout
+          : post.categoryName === 'Newsletter'
+          ? styles.secondLayout
+          : ''
+      }
+    >
       {postDisplay}
     </div>
   );
