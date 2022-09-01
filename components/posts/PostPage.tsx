@@ -54,7 +54,7 @@ function Post({ post }) {
     postDisplay = (
       <React.Fragment>
         {postLayoutDisplay}
-        {post.post_embed_html ? <div dangerouslySetInnerHTML={{__html:post.post_embed_html}}></div> : ""}
+        {post.post_embed_html ? <div className={styles.contentContainer} dangerouslySetInnerHTML={{__html:post.post_embed_html}}></div> : ""}
         <PostPageNavigation postId={post.postId} categoryId={post.categoryId}/>
       </React.Fragment>
     );
