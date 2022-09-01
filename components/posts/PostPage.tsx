@@ -4,8 +4,8 @@ import Image from 'next/image';
 import React, { ReactElement, useEffect, useState } from 'react';
 import { useSelector } from 'store/hooks';
 import styles from '../posts/ListStyles.module.css';
-import ShareLink from 'react-facebook-share-link';
 import axios from 'axios';
+import Share from 'helpers/shareToSocialMedia';
 
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
