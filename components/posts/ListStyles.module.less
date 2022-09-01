@@ -86,9 +86,6 @@
       }
     }
 
-    .bottomWrapper {
-    }
-
     .excerpt {
       p {
         font-size: 2rem;
@@ -128,6 +125,36 @@
 
       &:hover {
         color: #8179a6;
+      }
+    }
+  }
+}
+
+.secondLayout {
+  width: 1440px;
+  margin: 48px auto;
+  .header {
+    text-align: center;
+
+    .linksContainer {
+      .socialMediaLinks {
+        svg {
+          fill: #2e2e2e;
+        }
+      }
+    }
+    .imageWrapper {
+      max-width: 994px;
+      aspect-ratio: auto 994 / 337;
+      margin: 0 auto;
+      overflow: hidden;
+      cursor: pointer;
+      display: block;
+      position: relative;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
       }
     }
   }
