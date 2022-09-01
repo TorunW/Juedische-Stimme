@@ -46,7 +46,6 @@ const Pagination = ({ pageNum, itemsCount, itemsPerPage, type, title }) => {
           </svg>
         </button>
         <button onClick={onPrevPageClick}>
-          {' '}
           <svg
             width='24'
             height='24'

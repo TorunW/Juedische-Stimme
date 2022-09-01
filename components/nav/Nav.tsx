@@ -6,10 +6,10 @@ import styles from './Styles.module.css';
 import logo1 from 'styles/images/Logo-img.png';
 import logo2 from 'styles/images/Logo-text.png';
 import Head from 'next/head';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
 function Nav() {
-  const router = useRouter()
+  const router = useRouter();
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
   const { locale } = useSelector((state) => state.languages);
   const [pathName, setPathName] = useState('');
@@ -25,20 +25,20 @@ function Nav() {
   }, [locale]);
 
   useEffect(() => {
-    handleScroll()
+    handleScroll();
     if (typeof window !== 'undefined') {
-      handleScroll()
+      handleScroll();
       // setNavbar(window.location.pathname.length <= 1 ? false : true)
       window.addEventListener('scroll', handleScroll);
     }
-  },[router])
+  }, [router]);
 
   function handleScroll() {
     if (typeof window !== 'undefined') {
       if (window.scrollY >= 80) {
         setNavbar(true);
       } else {
-        if (router.pathname !== '' && router.pathname !== '/') setNavbar(true)
+        if (router.pathname !== '' && router.pathname !== '/') setNavbar(true);
         else setNavbar(false);
       }
     }
@@ -149,8 +149,8 @@ function Nav() {
       <div className={styles.topContainer}>
         <Link href={'/'}>
           <div className={styles.logoContainer}>
-            <Image src={logo1} />
-            <Image src={logo2} />
+            <Image src={logo1} title='home' alt='home-logo' />
+            <Image src={logo2} title='home' alt='home-logo' />
           </div>
         </Link>
         <div className={styles.buttonContainer}>

@@ -19,7 +19,7 @@
   width: 800px;
   color: white;
   z-index: 5;
-  margin-top: 72px;
+  margin-top: 48px;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .firstLayout .header .contentWrapper .imageWrapper {
@@ -87,4 +87,26 @@
 .firstLayout .contentContainer .content p {
   line-height: 1.5rem;
   margin: 16px 0;
+}
+.firstLayout .navigationContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 1440px;
+  margin: 0 auto 48px;
+}
+.firstLayout .navigationContainer a {
+  display: flex;
+  align-items: center;
+  text-transform: capitalize;
+  transition: all 0.4s ease-in-out;
+}
+.firstLayout .navigationContainer a div {
+  max-width: 500px;
+}
+.firstLayout .navigationContainer a svg {
+  width: 35px;
+  height: 35px;
+}
+.firstLayout .navigationContainer a:hover {
+  color: #8179a6;
 }
