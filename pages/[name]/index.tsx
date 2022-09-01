@@ -44,7 +44,7 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
     <main id="post-page">
       <section>
         {headDisplay}
-        <Post post={page} />
+        {page && page !== null ? <Post post={page} /> : ""}
       </section>
       {/* <Script id="proca" src="https://sign.stopsettlements.org/d/stopsettlements/jnahost"></Script> */}
     </main>
