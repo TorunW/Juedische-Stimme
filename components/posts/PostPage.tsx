@@ -27,16 +27,6 @@ function Post({ post }) {
 
   let postDisplay: ReactElement;
   if (post && post !== null) {
-
-    let embededCodeDisplay;
-    if (post.post_embed_script){
-      embededCodeDisplay = (
-        <div className={styles.contentContainer}>
-          <iframe width={"100%"} height={"800px"} style={{border:0}} src={post.post_embed_script}></iframe>
-        </div>
-      )
-    }
-
     const postLayout = getPostLaoyut(post);
     let postLayoutDisplay: ReactElement;
     if (
@@ -73,7 +63,6 @@ function Post({ post }) {
     postDisplay = (
       <React.Fragment>
         {postLayoutDisplay}
-        {embededCodeDisplay}
         <PostPageNavigation postId={post.postId} categoryId={post.categoryId}/>
       </React.Fragment>
     );
