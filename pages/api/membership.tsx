@@ -26,13 +26,7 @@ export default async (req, res) => {
         to: 'info@juedische-stimme.com',
         subject: `Membership application`,
         text: req.body.message,
-        html: `<div><ul> <li>${req.body.birthdate}</li>
-        <li>${req.body.street}</li>
-        <li>${req.body.postcode}</li>
-        <li>${req.body.location}</li>
-        <li>${req.body.tel}</li>
-        <li>${req.body.email}</li>
-        </ul></div>`,
+        html: `<div>${req.body.message}</div>`,
       };
 
       transporter.sendMail(mailData, function (err, info) {

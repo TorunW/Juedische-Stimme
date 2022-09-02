@@ -42,6 +42,10 @@ const MembershipForm = () => {
     },
   });
 
+  function handleClick() {
+    console.log('hello');
+  }
+
   return (
     <div id='membership' className={styles.membershipFormContainer}>
       <form onSubmit={formik.handleSubmit} className={styles.membershipForm}>
@@ -103,7 +107,9 @@ const MembershipForm = () => {
         />
 
         <div className='button blackBg submitBtn'>
-          <button type='submit'>Senden</button>
+          <button type='submit' onClick={handleClick}>
+            Senden
+          </button>
         </div>
       </form>
     </div>
