@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import styles from './ListStyles.module.css';
 import background from '../../styles/images/memberspage-bg.jpg';
-import MembershipForm from '../forms/membershipForm';
+import MembershipForm from '../forms/MembershipForm';
 
 const PostPageMemberFormLayout = ({ post, locale }) => {
   let postTitle = post.post_title,
