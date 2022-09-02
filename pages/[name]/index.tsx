@@ -1,7 +1,7 @@
 import { ReactElement, useEffect } from 'react';
 import excuteQuery from 'lib/db';
-import { useDispatch, useSelector } from 'react-redux';
-
+import { useDispatch } from 'react-redux';
+import Head from 'next/head';
 import Post from '@/components/posts/PostPage';
 import { selectPostByName } from 'lib/queries/posts';
 import { selectMenuItems } from 'lib/queries/menuItems';
@@ -10,13 +10,11 @@ import { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
-import Head from 'next/head';
 import { setPost } from 'store/posts/postsSlice';
-import Script from 'next/script';
 
 const ContentPage: LayoutPage = (props: LayoutPageProps) => {
-  const dispatch = useDispatch();
   let page = JSON.parse(props.page)[0];
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setPost(JSON.parse(props.page)[0]))
@@ -28,6 +26,9 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
       })
     );
   }, [props.page]);
+
+  // console.log(page, " PROPST PAGE")
+
   let headDisplay: ReactElement;
   if (page && page !== null){
     headDisplay = (
@@ -44,9 +45,8 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
     <main id="post-page">
       <section>
         {headDisplay}
-        {page && page !== null ? <Post post={page} /> : ""}
+        <Post post={page} />
       </section>
-      {/* <Script id="proca" src="https://sign.stopsettlements.org/d/stopsettlements/jnahost"></Script> */}
     </main>
   );
 };
