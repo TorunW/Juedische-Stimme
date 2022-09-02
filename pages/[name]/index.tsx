@@ -2,7 +2,6 @@ import { ReactElement, useEffect } from 'react';
 import excuteQuery from 'lib/db';
 import { useDispatch } from 'react-redux';
 import Head from 'next/head';
-import Post from '@/components/posts/PostPage';
 import { selectPostByName } from 'lib/queries/posts';
 import { selectMenuItems } from 'lib/queries/menuItems';
 import { setMenuItems } from 'store/nav/navSlice';
@@ -11,6 +10,10 @@ import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
 import { setPost } from 'store/posts/postsSlice';
+import dynamic from 'next/dynamic'
+const PostPage = dynamic(() => import('@/components/posts/PostPage'), {
+  ssr: false,
+});
 
 const ContentPage: LayoutPage = (props: LayoutPageProps) => {
   let page = JSON.parse(props.page)[0];
@@ -45,7 +48,7 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
     <main id="post-page">
       <section>
         {headDisplay}
-        <Post post={page} />
+        <PostPage post={page} />
       </section>
     </main>
   );

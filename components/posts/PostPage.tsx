@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import { useSelector } from 'store/hooks';
 import styles from '../posts/ListStyles.module.css';
 import PostPageNavigation from './PostPageNavigation';
@@ -13,6 +13,14 @@ import Script from 'next/script';
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
 
+  // useEffect(() => {
+  //   if (post && post.post_embed_script !== null){
+  //     var s = document.createElement('script');
+  //     s.setAttribute('src', post.post_embed_script);
+  //     (document.body || document.head).appendChild(s);
+  //   }
+  // }, []);
+
     /* TO DO'S
      - MAKE A BETTER NO POST FOUND PAGE! maybe even split to a different compoent -> show suggested posts? show helpful links?
     */
@@ -20,12 +28,12 @@ function Post({ post }) {
   let postDisplay: ReactElement;
   if (post && post !== null) {
 
-    let headDisplay;
+    let embededCodeDisplay;
     if (post.post_embed_script){
-      headDisplay = (
-        <Head>
-          <Script src={post.post_embed_script} />
-        </Head>
+      embededCodeDisplay = (
+        <div className={styles.contentContainer}>
+          <iframe width={"100%"} height={"800px"} style={{border:0}} src={post.post_embed_script}></iframe>
+        </div>
       )
     }
 
@@ -64,9 +72,8 @@ function Post({ post }) {
     }
     postDisplay = (
       <React.Fragment>
-        {headDisplay}
         {postLayoutDisplay}
-        {post.post_embed_html ? <div className={styles.contentContainer} dangerouslySetInnerHTML={{__html:post.post_embed_html}}></div> : ""}
+        {embededCodeDisplay}
         <PostPageNavigation postId={post.postId} categoryId={post.categoryId}/>
       </React.Fragment>
     );
