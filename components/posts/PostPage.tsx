@@ -1,14 +1,18 @@
 import React, { ReactElement, useEffect } from 'react';
 import { useSelector } from 'store/hooks';
-import styles from '../posts/ListStyles.module.css';
+import styles from 'components/posts/ListStyles.module.css';
 import PostPageNavigation from './PostPageNavigation';
 import PostPageNewsletterLayout from './PostPageNewsletterLayout';
 import PostPageArticleLayout from './PostPageArticleLayout';
 import { getPostLaoyut } from 'helpers/getPostLayout';
 import PostPageMemberFormLayout from './PostPageMemberFormLayout';
 import PostPageDonationFormLayout from './PostPageDonationFormLayout';
-import Head from 'next/head';
-import Script from 'next/script';
+import dynamic from 'next/dynamic';
+
+const PostPageEmbededContent = dynamic(() => import('./PostPageEmbededContent'), {
+  suspense: true,
+  ssr:false
+});
 
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
@@ -63,6 +67,7 @@ function Post({ post }) {
     postDisplay = (
       <React.Fragment>
         {postLayoutDisplay}
+        {post.post_embed_script ? <PostPageEmbededContent script={post.post_embed_script} html={post.post_embed_html} /> : ""}
         <PostPageNavigation postId={post.postId} categoryId={post.categoryId}/>
       </React.Fragment>
     );
