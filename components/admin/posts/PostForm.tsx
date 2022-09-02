@@ -1,20 +1,19 @@
 import React, { useState, Suspense, ReactElement } from 'react';
 import dynamic from 'next/dynamic'
+import Image from 'next/image';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import dateTimeHelper from 'helpers/dateTimeHelper';
 import styles from 'components/admin/Forms.module.css';
 import { useDispatch, useSelector } from 'store/hooks'
 import { v4 as uuidv4 } from 'uuid';
-import PostTagForm from './PostTagForm';
 import { generateFileName } from 'helpers/generateFileName'
 import { generateImageUrl } from 'helpers/imageUrlHelper'
-import PostTranslationsForm from './PostTranslationsForm';
-import PostTranslations from './PostTranslations';
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
-import Image from 'next/image';
+import dateTimeHelper from 'helpers/dateTimeHelper';
+import PostTagForm from './PostTagForm';
+import PostTranslations from './PostTranslations';
 
-const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
+const TipTapEditor =  dynamic(() => import('components/tiptap/TipTapEditor'), {
   suspense:true,
   loading: () => <p>Loading...</p>
 })

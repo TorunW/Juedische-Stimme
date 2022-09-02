@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import styles from 'styles/Home.module.css'
 import excuteQuery from 'lib/db'
-import PostForm from 'components/admin/PostForm'
+import PostForm from '@/components/admin/posts/PostForm'
 import { selectPostByName } from 'lib/queries/posts'
 import { selectCategories, selectGalleries } from 'lib/queries'
 
