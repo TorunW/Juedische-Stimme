@@ -4,6 +4,7 @@ import axios from 'axios'
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import Pagination from 'components/pagination/Pagination';
+import PostsHeader from './PostsHeader';
 
 interface PostsProps {
     posts: any[];
@@ -56,7 +57,10 @@ function Posts({
         })
     }
 
-    let postsDisplay;
+    let listHeaderDisplay: ReactElement;
+
+
+    let postsDisplay: ReactElement[];
     if (posts){
         postsDisplay = posts.map((post,index)=>(
             <div key={index}>
@@ -86,7 +90,8 @@ function Posts({
 
 
     return (
-        <div>
+        <div id="admin-posts">
+            <PostsHeader/>
             {postsDisplay}
             {paginationDisplay}
         </div>
