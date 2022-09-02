@@ -53,7 +53,7 @@ const MembershipForm = () => {
         <input
           id='birthdate'
           name='birthdate'
-          type='birthdate'
+          type='text'
           onChange={formik.handleChange}
           value={formik.values.birthdate}
           placeholder='TT/MM/JJJJ'
@@ -62,7 +62,7 @@ const MembershipForm = () => {
         <input
           id='street'
           name='street'
-          type='street'
+          type='text'
           onChange={formik.handleChange}
           value={formik.values.street}
           placeholder='Straße'
@@ -72,7 +72,7 @@ const MembershipForm = () => {
           <input
             id='postcode'
             name='postcode'
-            type='postcode'
+            type='text'
             onChange={formik.handleChange}
             value={formik.values.postcode}
             placeholder='PLZ'
@@ -81,7 +81,7 @@ const MembershipForm = () => {
           <input
             id='location'
             name='location'
-            type='location'
+            type='text'
             onChange={formik.handleChange}
             value={formik.values.location}
             placeholder='Ort'
@@ -91,7 +91,7 @@ const MembershipForm = () => {
         <input
           id='tel'
           name='tel'
-          type='tel'
+          type='text'
           onChange={formik.handleChange}
           value={formik.values.tel}
           placeholder='Tel'
