@@ -1,5 +1,6 @@
 @media (min-width: 921px) {
   #footer {
+    position: relative;
     background-color: #2e2e2e;
     padding-top: 64px;
     min-height: 652px;
