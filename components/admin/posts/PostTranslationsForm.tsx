@@ -3,9 +3,8 @@ import dynamic from 'next/dynamic'
 import { useFormik } from 'formik';
 import axios from 'axios';
 import styles from 'components/admin/Forms.module.css';
-import * as Yup from 'yup';
 
-const TipTapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
+const TipTapEditor =  dynamic(() => import('components/tiptap/TipTapEditor'), {
     suspense:true,
     loading: () => <p>Loading...</p>
 })

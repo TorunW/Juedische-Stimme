@@ -4,7 +4,7 @@ import { ReactElement, useEffect } from 'react'
 import styles from 'styles/Home.module.css'
 import excuteQuery from 'lib/db'
 
-import AdminPosts from 'components/admin/Posts'
+import AdminPosts from '@/components/admin/posts/Posts'
 import { countPostsByTag, selectPosts } from 'lib/queries/posts';
 
 import { useDispatch, useSelector } from 'store/hooks'
@@ -54,12 +54,15 @@ export const getServerSideProps = async (context) => {
     const postsResponse = await excuteQuery({
       query: selectPosts({
         numberOfPosts:50,
+        slug: context.query.name.split(' ').join('-').toLowerCase(),
+        isCategory:true,
         pageNum:context.query.number,
         showUnpublished:true,
         postType:'post', 
         locale: context.locale !== context.defaultLocale ? context.locale : '',
       })
     });
+
     const posts = JSON.stringify(postsResponse);
     return {
       props:{

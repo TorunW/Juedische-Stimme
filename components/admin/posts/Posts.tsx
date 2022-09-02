@@ -3,7 +3,7 @@ import Image from 'next/image';
 import axios from 'axios'
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
-import Pagination from '../pagination/Pagination';
+import Pagination from 'components/pagination/Pagination';
 
 interface PostsProps {
     posts: any[];
