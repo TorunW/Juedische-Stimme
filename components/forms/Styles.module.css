@@ -94,3 +94,34 @@
   font-weight: bold;
   width: auto;
 }
+.membershipFormContainer {
+  background: rgba(0, 0, 0, 0.637);
+  border-radius: 3px;
+  width: 500px;
+  padding: 48px 32px;
+}
+.membershipFormContainer .membershipForm .formRow {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+}
+.membershipFormContainer .membershipForm h3 {
+  color: white;
+  margin-bottom: 16px;
+}
+.membershipFormContainer .membershipForm input {
+  background: none;
+  color: white;
+  border: none;
+  border-bottom: #8179a6 2px solid;
+  margin-bottom: 16px;
+  height: 40px;
+}
+.membershipFormContainer .membershipForm input:focus-visible {
+  outline: none;
+  border: none;
+  border-bottom: #8179a6 2px solid;
+}
+.membershipFormContainer .membershipForm button {
+  margin-top: 32px;
+}

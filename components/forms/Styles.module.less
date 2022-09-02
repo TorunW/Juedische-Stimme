@@ -109,3 +109,42 @@
     width: auto;
   }
 }
+
+.membershipFormContainer {
+  background: rgba(0, 0, 0, 0.637);
+  border-radius: 3px;
+  width: 500px;
+  padding: 48px 32px;
+
+  .membershipForm {
+    .formRow {
+      display: flex;
+      flex-direction: row;
+      gap: 16px;
+    }
+
+    h3 {
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    input {
+      background: none;
+      color: white;
+      border: none;
+      border-bottom: #8179a6 2px solid;
+      margin-bottom: 16px;
+      height: 40px;
+
+      &:focus-visible {
+        outline: none;
+        border: none;
+        border-bottom: #8179a6 2px solid;
+      }
+    }
+
+    button {
+      margin-top: 32px;
+    }
+  }
+}
