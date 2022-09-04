@@ -1,6 +1,7 @@
 import excuteQuery from 'lib/db'
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         if (req.method === 'PUT'){
             const result = await excuteQuery({
@@ -9,7 +10,7 @@ export default async (req, res) => {
             console.log(result)
             res.json(result)   
         } else {
-            req.json({message:'NO GET / POST / DELETE HERE!'})
+            res.json({message:'NO GET / POST / DELETE HERE!'})
         }
     } catch ( error ) {
         console.log(error );
