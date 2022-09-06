@@ -106,9 +106,11 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
         {post.post_date ? formateDate(post.post_date) : ''}
       </div>
 
-      <a href={'/' + GeneratePostUrl(post.post_name)} className={styles.postTitle}>
+      <Link href={'/' + GeneratePostUrl(post.post_name)}>
+        <a  className={styles.postTitle}>
           <h4>{postTitle} </h4>
-      </a>
+        </a>
+      </Link>
 
       <a href={`/category/${post.categoryName}`} className={styles.tags}>
         #{post.categoryName}
