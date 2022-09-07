@@ -38,6 +38,7 @@ export default async (req, res) => {
           res.json({ type: 'success', info: info });
         }
       });
+      // res.json({message:'membership form sent!'})
     } else {
       res.json({ message: 'NO GET HERE!' });
     }

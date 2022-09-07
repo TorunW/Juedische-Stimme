@@ -35,11 +35,13 @@ function Post({ post }) {
   let postDisplay: ReactElement;
   if (post && post !== null) {
     const postLayout = getPostLaoyut(post);
-    let postLayoutDisplay: ReactElement;
+    let postLayoutDisplay: ReactElement,
+        postNavigationDisplay: ReactElement;
     if (postLayout === 'newsletter') {
       postLayoutDisplay = (
         <PostPageNewsletterLayout post={post} locale={locale} />
       );
+      postNavigationDisplay = <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
     } else if (postLayout === 'member_form') {
       postLayoutDisplay = (
         <PostPageMemberFormLayout post={post} locale={locale} />
@@ -50,6 +52,7 @@ function Post({ post }) {
       );
     } else {
       postLayoutDisplay = <PostPageArticleLayout post={post} locale={locale} />;
+      postNavigationDisplay = <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
     }
     postDisplay = (
       <React.Fragment>
@@ -62,7 +65,7 @@ function Post({ post }) {
         ) : (
           ''
         )}
-        <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
+        {postNavigationDisplay}
       </React.Fragment>
     );
   } else {

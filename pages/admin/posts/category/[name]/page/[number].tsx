@@ -4,11 +4,13 @@ import { ReactElement, useEffect } from 'react'
 import styles from 'styles/Home.module.css'
 import excuteQuery from 'lib/db'
 
-import AdminPosts from '@/components/admin/posts/Posts'
+import Posts from '@/components/admin/posts/Posts'
 import { countPostsByTag, selectPosts } from 'lib/queries/posts';
 
 import { useDispatch, useSelector } from 'store/hooks'
 import { setPosts, setPostsPagination } from 'store/posts/postsSlice';
+import { selectCategories, selectCategory } from 'lib/queries';
+import { setCategory, setCategoryName, setCatgories } from 'store/categories/categoriesSlice';
 
 
 export default function AdminPostsPage(props) {
@@ -20,12 +22,15 @@ export default function AdminPostsPage(props) {
   useEffect(() => {
     dispatch(setPosts(JSON.parse(props.posts)))
     dispatch(setPostsPagination({postsPerPage:props.postsPerPage,postsCount:props.postsCount,pageNum:props.pageNum}))
+    dispatch(setCatgories(JSON.parse(props.categories)));
+    dispatch(setCategory(JSON.parse(props.category)[0]));
+    dispatch(setCategoryName(props.categoryName));
   },[props.posts])
 
   let postsDisplay: ReactElement;
   if (posts){
     postsDisplay = (
-      <AdminPosts 
+      <Posts 
         posts={posts} 
         pageNum={pageNum} 
         postsPerPage={postsPerPage} 
@@ -48,9 +53,10 @@ export default function AdminPostsPage(props) {
 AdminPostsPage.layout = "admin"
 
 export const getServerSideProps = async (context) => {
-    const categoryCountResponse = await excuteQuery({
-        query:countPostsByTag({slug:context.query.name,isCategory:true})
-    })
+    const categoryResponse = await excuteQuery({
+      query: selectCategory({categoryName:context.query.name})
+    });
+    const category = JSON.stringify(categoryResponse);
     const postsResponse = await excuteQuery({
       query: selectPosts({
         numberOfPosts:50,
@@ -62,13 +68,18 @@ export const getServerSideProps = async (context) => {
         locale: context.locale !== context.defaultLocale ? context.locale : '',
       })
     });
-
     const posts = JSON.stringify(postsResponse);
+    const categoriesResponse = await excuteQuery({
+      query: selectCategories(100),
+    });
+    const categories = JSON.stringify(categoriesResponse);
     return {
       props:{
         posts,
+        category,
+        categories,
         pageNum:context.query.number,
-        postsCount:categoryCountResponse[0]['COUNT(*)'],
+        postsCount:categoryResponse[0].count,
         postsPerPage:50,
         categoryName:context.query.name
       }

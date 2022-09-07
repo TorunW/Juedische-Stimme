@@ -29,6 +29,10 @@ const PostPageArticleLayout = ({ post, locale }) => {
       : post.post_content;
   }
 
+  function onSecondImageErrorCapture(arrgs){
+    console.log(arrgs, " ERROR ")
+  }
+
   let tagsDisplay: ReactElement[];
   if (post.tagNames && post.tagNames.length > 0) {
     let tagsArray = [post.tagNames];
@@ -90,7 +94,9 @@ const PostPageArticleLayout = ({ post, locale }) => {
                   title={post.post_title}
                   layout='fill'
                   objectFit='cover'
-                />
+                  onErrorCapture={onSecondImageErrorCapture}
+
+                  />
               </div>
             </div>
 

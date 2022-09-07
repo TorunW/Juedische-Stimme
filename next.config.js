@@ -30,7 +30,7 @@ const nextConfig = {
         permanent: false,
       },{
         source: '/admin/posts',
-        destination: '/admin/posts/page/1',
+        destination: '/admin/posts/category/Aktuelles/page/1',
         permanent: false,
       },{
         source: '/admin/media',

@@ -1,7 +1,6 @@
-import excuteQuery from 'lib/db'
-import { selectNavItems } from 'lib/queries';
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         if (req.method === "POST"){
             

@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const PostTagForm = (props) => {
 
-    const [ tags, setTags ] = useState()
+    const [ tags, setTags ] = useState([])
     const [ tagNames, setTagNames ] = useState(props.tagNames)
     const [ suggestedTags, setSuggestedTags ] = useState([])
     const [ searchPhrase, setSearchPhrase ] = useState("")
