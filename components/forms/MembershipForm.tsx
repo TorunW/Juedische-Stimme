@@ -1,27 +1,50 @@
-import React, { useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import styles from './Styles.module.css';
 import * as Yup from 'yup';
 
 const MembershipForm = () => {
-
-
   const formik = useFormik({
     initialValues: {
-      birthdate: '',
+      firstname: '',
+      lastname: '',
+
+      birthdateDay: '',
+      birthdateMonth: '',
+      birthdateYear: '',
+
       street: '',
-      postcode: '',
-      location: '',
+      streetNr: '',
+      zipcode: '',
+      city: '',
+
       tel: '',
       email: '',
     },
     validationSchema: Yup.object().shape({
-      birthdate: Yup.string().min(8, '* too short!').required('* required!'),
+      firstname: Yup.string().min(2, '* too short!').required('* required!'),
+      lastname: Yup.string().min(2, '* too short!').required('* required!'),
+
+      birthdateDay: Yup.number()
+        .min(2, '* too short!')
+        .max(2, '* too long!')
+        .required('* required!'),
+      birthdateMonth: Yup.number()
+        .min(2, '* too short!')
+        .max(2, '* too long!')
+        .required('* required!'),
+      birthdateYear: Yup.number()
+        .min(4, '* too short!')
+        .max(4, '* too long!')
+        .required('* required!'),
+
       street: Yup.string().min(3, '* too short!').required('* required!'),
-      postcode: Yup.string().min(5, '* too short!').required('* required!'),
-      location: Yup.string().min(3, '* too short!').required('* required!'),
-      tel: Yup.string().min(3, '* too short!').required('* required!'),
+      streetNr: Yup.number().min(1, '* too short!').required('* required!'),
+      zipcode: Yup.string().min(5, '* too short!').required('* required!'),
+      city: Yup.string().min(3, '* too short!').required('* required!'),
+
+      tel: Yup.number().min(7, '* too short!').required('* required!'),
       email: Yup.string().email().required('* required!'),
     }),
     onSubmit: (values) => {
@@ -44,86 +67,196 @@ const MembershipForm = () => {
     },
   });
 
-  useEffect(() => {
-    console.log(formik.values.birthdate.length, " LENGTH OF BIRTHDAY INPUT")
-    if (formik.values.birthdate.length === 2) formik.setFieldValue('birthdate',formik.values.birthdate + "/")
-  },[formik.values.birthdate])
-
-  console.log(formik.errors)
-
   return (
     <div id='membership' className={styles.membershipFormContainer}>
       <form onSubmit={formik.handleSubmit} className={styles.membershipForm}>
-        <h3>Dein Info Aufüllen</h3>
-        <div>
-        <input
-          id='birthdate'
-          name='birthdate'
-          type='text'
-          onChange={formik.handleChange}
-          value={formik.values.birthdate}
-          placeholder='TT/MM/JJJJ'
-        />
-        {formik.errors && formik.errors.birthdate ? <span style={{color:"white"}}>{formik.errors.birthdate}</span> : ""}
+        <h3>Dein Info Ausfüllen</h3>
+        <div className={styles.formRow}>
+          <input
+            id='firstname'
+            name='firstname'
+            type='text'
+            onChange={formik.handleChange}
+            value={formik.values.firstname}
+            placeholder='firstname'
+          />
+          {formik.errors.firstname && formik.touched.firstname ? (
+            <span style={{ color: 'white' }}>{formik.errors.firstname}</span>
+          ) : (
+            ''
+          )}
         </div>
-
-        <input
-          id='street'
-          name='street'
-          type='text'
-          onChange={formik.handleChange}
-          value={formik.values.street}
-          placeholder='Straße'
-        />
-        {formik.errors && formik.errors.birthdate ? <span style={{color:"white"}}>{formik.errors.street}</span> : ""}
+        <div className={styles.formRow}>
+          <input
+            id='lastname'
+            name='lastname'
+            type='text'
+            onChange={formik.handleChange}
+            value={formik.values.lastname}
+            placeholder='lastname'
+          />
+          {formik.errors.lastname && formik.touched.lastname ? (
+            <span style={{ color: 'white' }}>{formik.errors.lastname}</span>
+          ) : (
+            ''
+          )}
+        </div>
 
         <div className={styles.formRow}>
-          <div>
-          <input
-            id='postcode'
-            name='postcode'
-            type='text'
-            onChange={formik.handleChange}
-            value={formik.values.postcode}
-            placeholder='PLZ'
-          />
-        {formik.errors && formik.errors.birthdate ? <span style={{color:"white"}}>{formik.errors.postcode}</span> : ""}
-
+          <div className={styles.formColumn}>
+            <input
+              id='birthdateDay'
+              name='birthdateDay'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.birthdateDay}
+              placeholder='TT'
+            />
           </div>
-          <input
-            id='location'
-            name='location'
-            type='text'
-            onChange={formik.handleChange}
-            value={formik.values.location}
-            placeholder='Ort'
-          />
-
-          {formik.errors && formik.errors.birthdate ? <span style={{color:"white"}}>{formik.errors.location}</span> : ""}
+          <span>/</span>
+          <div className={styles.formColumn}>
+            <input
+              id='birthdateMonth'
+              name='birthdateMonth'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.birthdateMonth}
+              placeholder='MM'
+            />{' '}
+          </div>
+          <span>/</span>
+          <div className={styles.formColumn}>
+            <input
+              id='birthdateYear'
+              name='birthdateYear'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.birthdateYear}
+              placeholder='YYYY'
+            />{' '}
+          </div>
+          {formik.errors.birthdateDay && formik.touched.birthdateDay ? (
+            <span style={{ color: 'white' }}>{formik.errors.birthdateDay}</span>
+          ) : (
+            ''
+          )}
+          {formik.errors.birthdateMonth && formik.touched.birthdateMonth ? (
+            <span style={{ color: 'white' }}>
+              {formik.errors.birthdateMonth}
+            </span>
+          ) : (
+            ''
+          )}
+          {formik.errors.birthdateYear && formik.touched.birthdateYear ? (
+            <span style={{ color: 'white' }}>
+              {formik.errors.birthdateYear}
+            </span>
+          ) : (
+            ''
+          )}
         </div>
 
-        <input
-          id='tel'
-          name='tel'
-          type='text'
-          onChange={formik.handleChange}
-          value={formik.values.tel}
-          placeholder='Tel'
-        />
+        <div className={styles.formRow}>
+          <div className={styles.formColumn}>
+            <input
+              id='street'
+              name='street'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.street}
+              placeholder='Straße'
+            />
+            {formik.errors.street && formik.touched.street ? (
+              <span style={{ color: 'white' }}>{formik.errors.street}</span>
+            ) : (
+              ''
+            )}
+          </div>
 
-        <input
-          id='email'
-          name='email'
-          type='email'
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          placeholder='Email'
-        />
+          <div className={styles.formColumn}>
+            <input
+              id='streetNr'
+              name='streetNr'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.streetNr}
+              placeholder='Nr'
+            />
+            {formik.errors.streetNr && formik.touched.streetNr ? (
+              <span style={{ color: 'white' }}>{formik.errors.streetNr}</span>
+            ) : (
+              ''
+            )}
+          </div>
+        </div>
+
+        <div className={styles.formRow}>
+          <div className={styles.formColumn}>
+            <input
+              id='zipcode'
+              name='zipcode'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.zipcode}
+              placeholder='PLZ'
+            />
+            {formik.errors.zipcode && formik.touched.zipcode ? (
+              <span style={{ color: 'white' }}>{formik.errors.zipcode}</span>
+            ) : (
+              ''
+            )}
+          </div>
+          <div className={styles.formColumn}>
+            <input
+              id='city'
+              name='city'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.city}
+              placeholder='City'
+            />
+            {formik.errors.city && formik.touched.city ? (
+              <span style={{ color: 'white' }}>{formik.errors.city}</span>
+            ) : (
+              ''
+            )}
+          </div>
+        </div>
+
+        <div className={styles.formRow}>
+          <input
+            id='tel'
+            name='tel'
+            type='text'
+            onChange={formik.handleChange}
+            value={formik.values.tel}
+            placeholder='Tel'
+          />
+          {formik.errors.tel && formik.touched.tel ? (
+            <span style={{ color: 'white' }}>{formik.errors.tel}</span>
+          ) : (
+            ''
+          )}
+        </div>
+
+        <div className={styles.formRow}>
+          <input
+            id='email'
+            name='email'
+            type='email'
+            onChange={formik.handleChange}
+            value={formik.values.email}
+            placeholder='Email'
+          />
+          {formik.errors.email && formik.touched.email ? (
+            <span style={{ color: 'white' }}>{formik.errors.email}</span>
+          ) : (
+            ''
+          )}
+        </div>
 
         <div className='button blackBg submitBtn'>
-          <button type='submit'>
-            Senden
-          </button>
+          <button type='submit'>Senden</button>
         </div>
       </form>
     </div>

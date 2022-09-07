@@ -32,7 +32,7 @@ const PostPageMemberFormLayout = ({ post, locale }) => {
   return (
     <React.Fragment>
       <div className={styles.memberFormLayout}>
-        <Image src={background} layout='fill' objectFit='fill' />
+        <Image src={background} layout='fill' objectFit='cover' />
 
         <div className={styles.contentContainer}>
           <h2>Mitgliedsantrag</h2>
@@ -41,6 +41,7 @@ const PostPageMemberFormLayout = ({ post, locale }) => {
             className={styles.content}
           ></div>
         </div>
+
         <div className={styles.form}>
           <MembershipForm />
         </div>
