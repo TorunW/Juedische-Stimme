@@ -143,15 +143,9 @@
 }
 .donationsForm .formContainer .box {
   width: 22%;
-  float: left;
   color: #fff;
   font-size: 24px;
-  background-image: none;
   padding: 8px;
-  margin-bottom: 15px;
-  letter-spacing: -0.03em;
-  line-height: 1.42857143;
-  display: block;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -159,33 +153,16 @@
   user-select: none;
   text-align: center;
   text-shadow: -1px -1px 1px rgba(38, 116, 52, 0.1);
-  font-weight: 400;
-  white-space: nowrap;
   position: relative;
   z-index: 1;
 }
 .donationsForm .formContainer .box input {
   position: absolute !important;
-  height: 1px;
-  width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
   width: 100% !important;
-  font-size: 0.9375rem;
-  margin-left: 0;
   height: 50px;
-  min-height: 0;
-  padding: 7px 10px 7px 1.5rem;
   outline: none;
-  border: 1px solid #bbb;
-  border-radius: 4px;
-  background-color: #fff;
-  font-size: 24px;
-  line-height: 1.42857143;
-  font-weight: 400;
-  letter-spacing: -0.03em;
-  max-width: 100%;
-  margin-bottom: 0;
 }
 .donationsForm .formContainer .box a {
   position: absolute;
@@ -193,7 +170,6 @@
   right: 0;
   height: 50px;
   left: 0;
-  display: block;
   background-color: #8179a6;
   border-radius: 4px;
   z-index: -1;

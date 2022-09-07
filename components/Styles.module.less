@@ -7,7 +7,7 @@
   padding: 32px 0;
   display: flex;
   flex-direction: column;
-  
+
   h3 {
     color: white;
     text-align: center;
@@ -20,42 +20,101 @@
     width: 80%;
     margin: 16px auto;
 
-    input,
-    select {
+    .dropDown {
+      position: relative;
       width: 50%;
-      border: solid #efefef 1px;
+      border: solid #b3aec9 1px;
+      height: 45px;
+      padding: 0 16px;
+      display: flex;
+      button {
+        width: 100%;
+        background: none;
+        border: none;
+        text-decoration: none;
+        color: #8e8e8e;
+        font-family: 'Raleway';
+        font-size: 1.1rem;
+        font-weight: 500;
+        text-transform: capitalize;
+        text-align: left;
+        cursor: pointer;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        svg {
+          fill: #b3aec9;
+        }
+      }
+      .dropDownMenu {
+        position: absolute;
+        left: -1px;
+        top: 102%;
+        background-color: #2e2e2e;
+        padding: 16px;
+        color: white;
+        border-top: none;
+        border-left: solid 1px #b3aec9;
+        border-right: solid 1px #b3aec9;
+        border-bottom: solid 1px #b3aec9;
+        width: 100.2%;
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.2s ease-in-out;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        a {
+          &:hover {
+            color: #8e8e8e;
+          }
+        }
+      }
+
+      .active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+    }
+
+    .inputSearch {
+      width: 50%;
+      border: solid #b3aec9 1px;
       background-color: #2e2e2e;
       color: white;
       font-family: 'raleway';
       text-transform: uppercase;
-      font-size: 16px;
-      font-weight: 600;
+
       height: 45px;
       padding: 0 16px;
+      display: flex;
 
-      option {
-        font-family: 'raleway' !important;
-        text-transform: uppercase;
-        font-size: 16px;
+      input {
+        background: none;
+        color: white;
+        height: 100%;
+        font-size: 1.1rem;
         font-weight: 500;
+        text-transform: capitalize;
       }
-    }
-  }
 
-  button {
-    border: solid 2px #8179a6;
-    margin: 0 auto;
-    background: #2e2e2e;
-    color: white;
-    font-family: Raleway;
-    text-transform: capitalize;
-    padding: 4px 8px;
-    font-size: 16px;
-    transition: all 0.4s ease-in-out;
-    font-weight: 500;
-    &:hover {
-      cursor: pointer;
-      background-color: #8179a6;
+      button {
+        background: none;
+        border: none;
+
+        svg {
+          fill: #b3aec9;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
     }
   }
 }
