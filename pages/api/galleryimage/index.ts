@@ -1,5 +1,5 @@
 import excuteQuery from 'lib/db'
-import { inserGalleryImage } from 'lib/queries';
+import { inserGalleryImage, selectGalleryImagesByGalleryId } from 'lib/queries';
 
 export default async (req, res) => {
     try {
@@ -13,7 +13,7 @@ export default async (req, res) => {
         else {
             // Handle any other HTTP method
             console.log('not post request')
-            res.json({message:'no GET here!'})
+            res.json({message:'no PUT / DELETE here!'})
         }
     } catch ( error ) {
         console.log(error );

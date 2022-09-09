@@ -180,6 +180,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
   const headerGalleryResponse = await excuteQuery({
     query: selectGalleryById(6),
   });
+  console.table(headerGalleryResponse)
   const headerGallery = JSON.stringify(headerGalleryResponse);
 
   const headerImageUri = `http://${context.req.headers.host}/${generateImageUrl(
