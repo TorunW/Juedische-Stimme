@@ -69,7 +69,7 @@ const CallToAction = () => {
             </p>
           </div>
           <div className={styles.cta}>
-            <Link href='/hilf-uns'>
+            <Link href='/spenden'>
               <a></a>
             </Link>
             <svg
