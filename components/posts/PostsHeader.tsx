@@ -3,6 +3,7 @@ import React from 'react'
 import styles from './Styles.module.css';
 import postHeader from 'public/post-header.jpg';
 import { useSelector } from 'store/hooks';
+import { generateImageUrl } from 'helpers/imageUrlHelper';
 
 const PostsHeader = () => {
     const { category } = useSelector(state => state.categories)
@@ -24,7 +25,7 @@ const PostsHeader = () => {
             <div className={styles.imageWrapper}>
             <div className={styles.backgroundOverlay}></div>
             <Image
-                src={postHeader}
+                src={category && category.category_image ? generateImageUrl(category.category_image) : postHeader}
                 className={styles.headerImage}
                 layout='fill'
                 objectFit='cover'
