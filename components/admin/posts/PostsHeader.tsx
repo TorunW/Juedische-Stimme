@@ -15,7 +15,7 @@ const PostsHeader = () => {
                     {categories && categories !== null 
                         ?
                             categories.map((category,index)=>(
-                                <option value={category.name}>{category.name}</option>
+                                <option key={category.term_id} value={category.name}>{category.name}</option>
                             ))
                         :
                             ""

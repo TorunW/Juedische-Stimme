@@ -8,7 +8,7 @@ type Props = {
 
 const FacebookPosts: React.FC<Props> = ({ feed }) => {
   let feedDisplay: ReactElement;
-  if (feed && feed.content && feed.content.length > 0) {
+  if (feed !== null && feed.content && feed.content.length > 0) {
     let displayedPosts = 0, undisplayedPosts = 0;
     const feedArray = JSON.parse(feed.content);
     feedDisplay = feedArray.map((fbPost:any, index:number) => {

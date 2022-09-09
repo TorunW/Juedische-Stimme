@@ -118,7 +118,7 @@ const CategoryForm = ({category}) => {
                         onChange={formik.handleChange}
                         value={formik.values.name}
                     />
-                    {formik.errors && formik.errors.name ? <div className={styles.error}>{formik.errors.name}</div> : ""}
+                    {formik.errors && formik.errors.name ? <div className={styles.error}>{formik.errors.name.toString()}</div> : ""}
                 </div>
 
                 <div id="category_image" className={styles['form-row']}>
