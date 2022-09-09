@@ -2,15 +2,16 @@ import React, { ReactElement, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import styles from 'components/forms/Styles.module.css';
+import styles from 'components/admin/Forms.module.css';
 import GalleryImageForm from './GalleryImageForm';
 import { Image } from 'types/Image.type';
 import { Gallery } from 'types/Gallery.type';
 import galleryTypes from 'lib/galleryTypes.json';
 
-const DynamicTiptapEditor = dynamic(() => import('../tiptap/TipTapEditor'), {
-  suspense: true,
-});
+const TipTapEditor =  dynamic(() => import('components/tiptap/TipTapEditor'), {
+  suspense:true,
+  loading: () => <p>Loading...</p>
+})
 
 interface GalleryFromProps {
   gallery: Gallery;
@@ -139,7 +140,7 @@ function GalleryForm({ gallery }: GalleryFromProps) {
           <div className={styles['form-row']}>
             <label htmlFor='gallery_description'>GALLERY DESCRIPTION</label>
             <Suspense fallback={'LOADING...'}>
-              <DynamicTiptapEditor
+              <TipTapEditor
                 onChange={(val) =>
                   formik.setFieldValue('gallery_description', val, true)
                 }

@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { FC } from 'react'
 import axios from 'axios';
+import { Tag } from 'types/Tag.type';
 
-const AdminTags = ({tags}) => {
+interface AdminTagsProps {
+    tags?: Tag[]
+}
 
-    function onDeleteTag(tag){
+const AdminTags: FC<AdminTagsProps> = ({tags}) => {
+    console.table(tags)
+    function onDeleteTag(tag:Tag){
         // console.log('now delete the tag + ALL OF ITS RELATIONSHIP, TAXONOMY USW')
         axios.delete(`/api/tags/tag/${tag.term_id}`).then((response) => {
             window.location.reload()
@@ -18,7 +23,7 @@ const AdminTags = ({tags}) => {
     return (
         <div>
             {tags.map((tag,index) => (
-                <li key={Date.now() + index}>
+                <li key={tag.term_id}>
                     <h3>{tag.name} <small>({tag.count})</small></h3>
                     <a href={`/admin/tags/${tag.term_id}`}>
                         edit

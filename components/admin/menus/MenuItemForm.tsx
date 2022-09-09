@@ -1,14 +1,18 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, FC} from 'react'
 import { useFormik } from 'formik';
 import axios from 'axios';
-import styles from 'components/forms/Styles.module.css';
+import styles from 'components/admin/Forms.module.css';
 import Image from 'next/image';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import menuTypes from 'lib/menuTypes.json'
 import { uuidv4 } from '@firebase/util';
 import { generateFileName } from 'helpers/generateFileName';
 
-const MenuItemForm = ({menuItem}) => {
+interface MenuItemProps {
+    menuItem?:any
+}
+
+const MenuItemForm: FC<MenuItemProps> = ({menuItem}) => {
 
     // console.log(menuItem, " MENU ITEM ")
 

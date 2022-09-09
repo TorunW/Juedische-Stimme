@@ -1,4 +1,4 @@
-import GalleryForm from 'components/admin/GalleryForm';
+import GalleryForm from 'components/admin/galleries/GalleryForm';
 import styles from 'styles/Home.module.css'
 
 export default function CreateGalleryPage() {
