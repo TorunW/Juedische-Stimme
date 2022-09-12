@@ -1,6 +1,8 @@
 import axios from 'axios'
 import React, { ReactElement } from 'react'
 import type { Category } from 'types/Category.type'
+import Image from 'next/image';
+import { generateImageUrl } from 'helpers/imageUrlHelper';
 
 interface AdminCategoriesProps {
     categories: Category[]
@@ -25,6 +27,7 @@ const AdminCategories = ({ categories }:AdminCategoriesProps) => {
         console.log(categories)
         categoriesDisplay = categories.map((category:Category,index:number)=>(
             <li key={category.term_id}>
+                <Image src={generateImageUrl(category.category_image)} width={100} height={100} />
                 <a href={`/admin/categories/${category.term_id}`}>
                     <span>{category.name} ({category.count})</span>
                 </a>

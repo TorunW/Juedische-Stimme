@@ -32,6 +32,7 @@ export const getServerSideProps = async (context) => {
     const categoriesResponse = await excuteQuery({
       query: selectCategories(50,context.query.number)
     });
+    // console.log(categoriesResponse, " CAT RES")
     const categories = JSON.stringify(categoriesResponse);
     return {
         props:{

@@ -1,4 +1,4 @@
-import MenuItemForm from 'components/admin/MenuItemForm'
+import MenuItemForm from 'components/admin/menus/MenuItemForm'
 import styles from 'styles/Home.module.css'
 
 export default function AdminCreateMenuItemPage(props) {

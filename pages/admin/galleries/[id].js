@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import excuteQuery from 'lib/db'
 import { selectGalleryById, selectGalleryImagesByGalleryId } from 'lib/queries'
-import GalleryForm from 'components/admin/GalleryForm'
+import GalleryForm from 'components/admin/galleries/GalleryForm'
 import styles from 'styles/Home.module.css'
 
 import { useDispatch, useSelector } from 'react-redux'

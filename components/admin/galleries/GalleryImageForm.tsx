@@ -2,10 +2,10 @@ import React, { Suspense, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import styles from 'components/forms/Styles.module.css';
+import styles from 'components/admin/Forms.module.css';
 import { generateFileName } from 'helpers/generateFileName';
 
-const DynamicTiptapEditor = dynamic(() => import('../tiptap/TipTapEditor'), {
+const TiptapEditor = dynamic(() => import('components/tiptap/TipTapEditor'), {
   suspense: true,
 });
 
@@ -117,7 +117,7 @@ function GalleryImageForm({ galleryId, galleryImage }:GalleryImageFormProps) {
         <div className={styles['form-row']}>
           <label htmlFor='image_description'>IMAGE DESCRIPTION</label>
           <Suspense fallback={'LOADING...'}>
-            <DynamicTiptapEditor
+            <TiptapEditor
               onChange={(val) =>
                 formik.setFieldValue('image_description', val, true)
               }

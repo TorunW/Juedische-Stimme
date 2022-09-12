@@ -1,5 +1,5 @@
 import excuteQuery from 'lib/db'
-import { insertTerm, insertTermTaxonomy } from 'lib/queries';
+import { insertTerm, insertTermTaxonomy, insertTermMeta } from 'lib/queries';
 
 export default async (req, res) => {
     try {
@@ -11,17 +11,25 @@ export default async (req, res) => {
             console.log(insertTermResult, " INSERT TERM RESULT ")
 
             const termId = insertTermResult.insertId
-            const body = {
-                term_id:termId,
-                taxonomy:'category',
-                description:req.body.description,
-                parent:'0',
-                count:'0'
-            }
             const insertTermTaxonomyResult = await excuteQuery({
-                query: insertTermTaxonomy(body)
+                query: insertTermTaxonomy({
+                    term_id:termId,
+                    taxonomy:'category',
+                    description:req.body.description,
+                    parent:'0',
+                    count:'0'
+                })
             });
             console.log(insertTermTaxonomyResult , "INSERT TERM TAXONOMY RESULT")
+
+            const insertTermMetaResult = await excuteQuery({
+                query: insertTermMeta({
+                    term_id:termId,
+                    meta_key:'_category_main_image',
+                    meta_value:req.body.category_image
+                })
+            });
+            console.log(insertTermMetaResult, " INSERT TERM META RESULT")
 
             res.json(insertTermResult)
         }

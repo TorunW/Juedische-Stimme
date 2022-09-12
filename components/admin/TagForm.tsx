@@ -1,13 +1,18 @@
-import React, { Suspense} from 'react'
+import React, { FC, Suspense} from 'react'
 import { useFormik } from 'formik';
 import axios from 'axios';
-import styles from 'components/forms/Styles.module.css';
+import styles from 'components/admin/Forms.module.css';
 import dynamic from 'next/dynamic';
-const DynamicTiptapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
+import { Tag } from 'types/Tag.type';
+const TiptapEditor =  dynamic(() => import('components/tiptap/TipTapEditor'), {
     suspense:true
 })
 
-const TagForm = ({tag}) => {
+interface TagFormProps {
+    tag?: Tag;
+}
+
+const TagForm: FC<TagFormProps> = ({tag}) => {
 
     const formik = useFormik({
         initialValues: {
@@ -52,7 +57,7 @@ const TagForm = ({tag}) => {
                 <div className={styles['form-row']}>
                     <label htmlFor="name">TAG DESCRIPTION</label>
                     <Suspense fallback={"LOADING..."}>
-                        <DynamicTiptapEditor
+                        <TiptapEditor
                             onChange={val => formik.setFieldValue('description',val,true)}
                             value={formik.values.description}
                         />
@@ -60,7 +65,7 @@ const TagForm = ({tag}) => {
 
                 </div>
                 <div className={styles['form-row']}>
-                    <button type="submit">Submit</button>
+                    <button type="submit">{tag ? "update tag" : "create tag"}</button>
                 </div>
             </form>
         </div>

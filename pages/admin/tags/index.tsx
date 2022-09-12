@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { selectTags } from 'lib/queries';
 import excuteQuery from 'lib/db'
 import styles from 'styles/Home.module.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'store/hooks'
 import { setTags } from 'store/tags/tagsSlice';
 import AdminTags from 'components/admin/Tags';
 

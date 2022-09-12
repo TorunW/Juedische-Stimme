@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import excuteQuery from 'lib/db'
 import { selectGalleries } from 'lib/queries'
 import styles from 'styles/Home.module.css'
-import Galleries from 'components/admin/Galleries';
+import Galleries from 'components/admin/galleries/Galleries';
 
 import { useDispatch, useSelector } from 'react-redux'
 import { setGalleries } from 'store/galleries/galleriesSlice';

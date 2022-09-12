@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import styles from 'styles/Home.module.css'
 import excuteQuery from 'lib/db'
-import PostForm from 'components/admin/PostForm'
+import PostForm from 'components/admin/posts/PostForm'
 import { selectCategories } from 'lib/queries'
 
 import { useDispatch, useSelector } from 'react-redux'

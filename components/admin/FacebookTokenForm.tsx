@@ -1,7 +1,7 @@
 import { useFormik } from 'formik';
 import dateTimeHelper from 'helpers/dateTimeHelper';
 import React from 'react'
-import styles from 'components/forms/Styles.module.css';
+import styles from 'components/admin/Forms.module.css';
 import axios from 'axios';
 
 const FacebookTokenForm = ({fbToken}) => {

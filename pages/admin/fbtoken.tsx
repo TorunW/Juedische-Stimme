@@ -1,9 +1,10 @@
 import excuteQuery from 'lib/db';
 import FacebookTokenForm from 'components/admin/FacebookTokenForm';
+import styles from 'styles/Home.module.css'
 
 export default function EditFbTokenPage(props) {
   return (
-    <section>
+    <section className={styles.container}>
       <h2>EDIT FB TOKEN</h2>
       <FacebookTokenForm fbToken={JSON.parse(props.fbToken)[0]} />
     </section>

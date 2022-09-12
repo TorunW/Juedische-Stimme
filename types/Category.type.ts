@@ -8,4 +8,5 @@ export type Category = {
     description: string;
     parent: number;
     count: number;
+    category_image:string;
 }

@@ -63,7 +63,7 @@ const FacebookEvents = () => {
   }
 
   let eventsDisplay: ReactElement;
-  if (events && events.content && events.content.length > 0) {
+  if (events !== null && events.content && events.content.length > 0) {
     const eventsArray = JSON.parse(events.content);
     eventsDisplay = eventsArray.map((fbEvent, index) => {
       return (

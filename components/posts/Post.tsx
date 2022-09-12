@@ -9,6 +9,7 @@ import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
 import Image from 'next/image';
 import Link from 'next/link';
 import Placeholder from '../placeholder/Placeholder';
+import { getPostContentFields } from 'helpers/getPostContentFields';
 // import BlurringImage from '../BlurringImage';
 
 type Props = {
@@ -17,7 +18,11 @@ type Props = {
 };
 
 const Post: React.FC<Props> = ({ post, phrase }) => {
+
   const { locale } = useSelector((state) => state.languages);
+  const { postTitle, postExcerpt, postContent } = getPostContentFields(post, locale)
+
+
   // const [ imageData, setImageData ] = useState(null)
 
   // useEffect(() => {
@@ -39,22 +44,6 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
   //       console.log(error, "ERROR on add tag to post");
   //   });
   // }
-
-  let postTitle = post.post_title,
-    postExcerpt = post.post_excerpt,
-    postContent = post.post_content;
-
-  if (locale !== null) {
-    postTitle = post[`post_title_translation_${locale}`]
-      ? post[`post_title_translation_${locale}`]
-      : post.post_title;
-    postExcerpt = post[`post_excerpt_translation_${locale}`]
-      ? post[`post_excerpt_translation_${locale}`]
-      : post.post_excerpt;
-    postContent = post[`post_content_translation_${locale}`]
-      ? post[`post_content_translation_${locale}`]
-      : post.post_content;
-  }
 
   // let textLength = 600;
   // let startIndex = 0,
@@ -118,10 +107,7 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
       <div
         className={styles.postPreview}
         dangerouslySetInnerHTML={{
-          __html:
-            postExcerpt && postExcerpt !== null
-              ? postExcerpt
-              : `${trimStringToLastSpace(postContent.substring(0, 600))} [...]`,
+          __html:`${trimStringToLastSpace(postContent.substring(0, 600))} [...]`
         }}
       ></div>
     </article>

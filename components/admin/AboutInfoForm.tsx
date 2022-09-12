@@ -2,12 +2,13 @@ import React, { useState, Suspense } from 'react';
 import dynamic from 'next/dynamic'
 import { useFormik } from 'formik';
 import axios from 'axios';
-import styles from 'components/forms/Styles.module.css';
-import { useDispatch, useSelector } from 'react-redux'
+import styles from 'components/admin/Forms.module.css';
+import { useDispatch, useSelector } from 'store/hooks'
 
-const DynamicTiptapEditor =  dynamic(() => import('../tiptap/TipTapEditor'), {
+const TiptapEditor =  dynamic(() => import('components/tiptap/TipTapEditor'), {
     suspense:true
 })
+
 const AboutInfoForm = ({aboutInfo}) => {
     
     const { galleries } = useSelector(state => state.galleries)
@@ -38,10 +39,7 @@ const AboutInfoForm = ({aboutInfo}) => {
                 <h2>HEADER SLOGAN</h2>
                 <div className={styles['form-row']}>
                     <Suspense fallback={"LOADING..."}>
-                        <DynamicTiptapEditor
-                            id="header_slogan"
-                            name="header_slogan"
-                            type="header_slogan"
+                        <TiptapEditor
                             onChange={val => formik.setFieldValue('header_slogan',val,true)}
                             value={formik.values.header_slogan}
                             height={200}
@@ -53,10 +51,7 @@ const AboutInfoForm = ({aboutInfo}) => {
                 <div className={styles['form-row']}>
                     <label htmlFor="text_top">Top Text</label>
                     <Suspense fallback={"LOADING..."}>
-                        <DynamicTiptapEditor
-                            id="text_top"
-                            name="text_top"
-                            type="text_top"
+                        <TiptapEditor
                             onChange={val => formik.setFieldValue('text_top',val,true)}
                             value={formik.values.text_top}
                         />
@@ -86,10 +81,7 @@ const AboutInfoForm = ({aboutInfo}) => {
                 <div className={styles['form-row']}>
                     <label htmlFor="text_bottom">Bottom Text</label>
                     <Suspense fallback={"LOADING..."}>
-                        <DynamicTiptapEditor
-                            id="text_bottom"
-                            name="text_bottom"
-                            type="text_bottom"
+                        <TiptapEditor
                             onChange={val => formik.setFieldValue('text_bottom',val,true)}
                             value={formik.values.text_bottom}
                         />

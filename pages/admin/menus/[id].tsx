@@ -1,7 +1,7 @@
 import excuteQuery from 'lib/db'
 import styles from 'styles/Home.module.css'
 import { selectMenuItemById } from 'lib/queries/menuItems';
-import MenuItemForm from 'components/admin/MenuItemForm';
+import MenuItemForm from 'components/admin/menus/MenuItemForm';
 
 export default function AdminMenuItemEditPage(props) {
     const menuItem = JSON.parse(props.menuItem)[0];
