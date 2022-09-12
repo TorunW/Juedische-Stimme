@@ -15,6 +15,8 @@ function Nav() {
   const [pathName, setPathName] = useState('');
   const [bgVisible, setBgVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
+  const [mobileDropDownIsVisibile, setMobileDropDownIsVisibile] =
+    useState(false);
 
   useEffect(() => {
     if (locale !== null) {
@@ -63,6 +65,11 @@ function Nav() {
     }
   }
 
+  function handleClick() {
+    mobileDropDownIsVisibile === false
+      ? setMobileDropDownIsVisibile(true)
+      : setMobileDropDownIsVisibile(false);
+  }
   let mainMenuDisplay = mainMenu.map((item, index) => (
     <li key={Date.now() + index}>
       <Link
@@ -138,6 +145,19 @@ function Nav() {
     </div>
   );
 
+  let mobileMenuDropDownDisplay;
+  if (mobileDropDownIsVisibile === true) {
+    mobileMenuDropDownDisplay = (
+      <div className={styles.mobileMenu}>
+        <ul>{mainMenuDisplay}</ul>
+        <ul>{callToActionMenuDisplay}</ul>
+        {socialmediaMenuDisplay}
+      </div>
+    );
+  } else {
+    mobileMenuDropDownDisplay = '';
+  }
+
   let menuDisplay;
   if (isMobileView === false) {
     menuDisplay = (
@@ -193,6 +213,7 @@ function Nav() {
               viewBox='0 0 24 24'
               fill='none'
               xmlns='http://www.w3.org/2000/svg'
+              onClick={handleClick}
             >
               <path
                 d='M20 11H4C3.4 11 3 11.4 3 12C3 12.6 3.4 13 4 13H20C20.6 13 21 12.6 21 12C21 11.4 20.6 11 20 11ZM4 8H20C20.6 8 21 7.6 21 7C21 6.4 20.6 6 20 6H4C3.4 6 3 6.4 3 7C3 7.6 3.4 8 4 8ZM20 16H4C3.4 16 3 16.4 3 17C3 17.6 3.4 18 4 18H20C20.6 18 21 17.6 21 17C21 16.4 20.6 16 20 16Z'
@@ -201,12 +222,7 @@ function Nav() {
             </svg>
           </div>
         </div>
-
-        <div className={styles.mobileMenu}>
-          <ul>{mainMenuDisplay}</ul>
-          <ul>{callToActionMenuDisplay}</ul>
-          {socialmediaMenuDisplay}
-        </div>
+        {mobileMenuDropDownDisplay}
       </React.Fragment>
     );
   }
