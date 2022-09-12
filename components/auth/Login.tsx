@@ -15,7 +15,7 @@ function LoginForm() {
   useEffect(() => {
     let token = sessionStorage.getItem('Token');
     if (token) {
-      router.push('/admin');
+      router.push('/');
     }
   }, []);
 
@@ -29,7 +29,14 @@ function LoginForm() {
       })
       .catch((err) => {
         console.log(err);
-        alert('Cannot Log in');
+
+        if (err.code === 'auth/wrong-password') {
+          alert('Wrong password');
+        } else if (err.code === 'auth/user-not-found') {
+          alert('User not found');
+        } else {
+          alert('Cannot login');
+        }
       });
   };
 
