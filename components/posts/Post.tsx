@@ -8,9 +8,7 @@ import axios from 'axios';
 import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
 import Image from 'next/image';
 import Link from 'next/link';
-import Placeholder from '../placeholder/Placeholder';
 import { getPostContentFields } from 'helpers/getPostContentFields';
-// import BlurringImage from '../BlurringImage';
 
 type Props = {
   post: any;
@@ -22,62 +20,11 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
   const { locale } = useSelector((state) => state.languages);
   const { postTitle, postExcerpt, postContent } = getPostContentFields(post, locale)
 
-
-  // const [ imageData, setImageData ] = useState(null)
-
-  // useEffect(() => {
-  //   if (imageData === null && post.post_image !== null && post.post_image.indexOf('null') === -1) fetchPlaceholderImage()
-  // },[])
-
-  // function fetchPlaceholderImage(){
-  //   axios({
-  //     method: 'post',
-  //     url: `/api/galleryimage/placeholder`,
-  //       data:{
-  //         uri:post.post_image,
-  //         host:window.location.host,
-  //         port:window.location.port
-  //       }
-  //   }).then((response) => {
-  //     setImageData(response.data)
-  //   }, (error) => {
-  //       console.log(error, "ERROR on add tag to post");
-  //   });
-  // }
-
-  // let textLength = 600;
-  // let startIndex = 0,
-  //   endIndex = textLength;
-  // if we have a phrase - search phrase, i.e if this is search page, we will search for the phrase inside the content
-  // if (phrase) {
-
-  //   postContent = postContent.replace(/<\/?[^>]+(>|$)/g, '');
-
-  //   const phraseIndexInText = post.post_content.indexOf(post.phrase);
-
-  //   if (phraseIndexInText > -1) {
-  //     startIndex = phraseIndexInText - textLength / 2;
-  //     if (startIndex < 0) startIndex = 0;
-
-  //     endIndex = phraseIndexInText + textLength / 2;
-  //     if (endIndex > post.post_content.length - 1)
-  //       endIndex = post.post_content.length;
-
-  //     postContent =
-  //       '...' +
-  //       postContent
-  //         .toLowerCase()
-  //         .split(post.phrase)
-  //         .join(`<b>${post.phrase}</b>`) +
-  //       '...';
-  //   }
-  // } else postContent = postContent.substring(startIndex, endIndex);
-
-  // let blurringImageDisplay: ReactElement;
-  // if (imageData !== null && imageData.svg.length > 0 && imageData.img ){
-  //   console.log(imageData.img, " IMG ")
-  //   blurringImageDisplay = <BlurringImage svg={imageData.svg} img={imageData.img} />
-  // }
+  /* 
+    TO DO - when there is a phrase props, it means were on a "search" page
+    which means we need to HIGHLIGHT or make BOLD the WORD THAT MATCHES THE PHRASE in the text
+    AND we need to trim AROUND that word.
+  */
 
   return (
     <article className={styles.post} data-testid='post-container'>
