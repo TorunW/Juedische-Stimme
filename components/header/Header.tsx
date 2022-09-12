@@ -18,6 +18,7 @@ const Header = () => {
       if (index == 0){
         return(
           <BlurringImage
+            key={imgSrc}
             svg={svg}
             img={img}
             alt={undefined}
@@ -28,7 +29,7 @@ const Header = () => {
         )
       } else {
         return (
-          <div>
+          <div key={imgSrc}>
             <Image layout='fill' src={generateImageUrl(imgSrc)}/>
           </div>
         )
