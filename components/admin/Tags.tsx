@@ -7,7 +7,7 @@ interface AdminTagsProps {
 }
 
 const AdminTags: FC<AdminTagsProps> = ({tags}) => {
-    console.table(tags)
+
     function onDeleteTag(tag:Tag){
         // console.log('now delete the tag + ALL OF ITS RELATIONSHIP, TAXONOMY USW')
         axios.delete(`/api/tags/tag/${tag.term_id}`).then((response) => {

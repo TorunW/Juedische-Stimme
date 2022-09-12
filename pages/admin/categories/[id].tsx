@@ -29,7 +29,6 @@ export const getServerSideProps = async (context) => {
     query: selectCategory({categoryId:context.query.id})
   });
   const category = JSON.stringify(categoryResponse);
-  console.table(category)
   return {
     props:{
       category:category

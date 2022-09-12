@@ -40,9 +40,6 @@ const AboutInfoForm = ({aboutInfo}) => {
                 <div className={styles['form-row']}>
                     <Suspense fallback={"LOADING..."}>
                         <TiptapEditor
-                            id="header_slogan"
-                            name="header_slogan"
-                            type="header_slogan"
                             onChange={val => formik.setFieldValue('header_slogan',val,true)}
                             value={formik.values.header_slogan}
                             height={200}
@@ -85,9 +82,6 @@ const AboutInfoForm = ({aboutInfo}) => {
                     <label htmlFor="text_bottom">Bottom Text</label>
                     <Suspense fallback={"LOADING..."}>
                         <TiptapEditor
-                            id="text_bottom"
-                            name="text_bottom"
-                            type="text_bottom"
                             onChange={val => formik.setFieldValue('text_bottom',val,true)}
                             value={formik.values.text_bottom}
                         />

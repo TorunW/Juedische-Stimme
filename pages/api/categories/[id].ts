@@ -4,9 +4,7 @@ import { updateTerm, updateTermTaxonomy, deleteTerm, deleteTermTaxonomy, updateT
 export default async (req, res) => {
     try {
         if (req.method === 'PUT') {
-            
-            console.table(req.body)
-
+        
             const termId = req.query.id;
 
             const updateCategoryResult = await excuteQuery({
@@ -23,9 +21,8 @@ export default async (req, res) => {
                         meta_value:req.body.category_image
                     })
                 });
-                console.table(updateCategoryImageResult)
+
             } else {
-                console.log('WHAT?!?!?!!')
                 const createCategoryImageResult = await excuteQuery({
                     query: insertTermMeta({
                         term_id:termId,
@@ -33,7 +30,7 @@ export default async (req, res) => {
                         meta_value:req.body.category_image
                     })
                 });
-                console.table(createCategoryImageResult)
+
             }
             res.json({message:'category updated!'})
         }

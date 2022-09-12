@@ -101,11 +101,8 @@ const CategoryForm = ({category}) => {
         //   formik.setFieldValue('category_image', generateFileName(file.name))
           reader.readAsDataURL(file);
         }
-      }
+    }
     
-
-    console.table(formik.values)
-
     return (
         <div className={styles.container}>
             <form onSubmit={formik.handleSubmit}>

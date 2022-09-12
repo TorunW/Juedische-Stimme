@@ -7,4 +7,5 @@ export type Gallery = {
     gallery_type: string;
     imageSrcs: string;
     images?: Image[];
+    imageIds?: string;
 }
