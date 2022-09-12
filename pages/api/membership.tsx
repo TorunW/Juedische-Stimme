@@ -25,8 +25,18 @@ export default async (req, res) => {
         replyTo: req.body.email,
         to: 'info@juedische-stimme.com',
         subject: `Membership application`,
-        text: req.body.message,
-        html: `<div>${req.body.message}</div>`,
+        text: req.body.firstname,
+        html: `<div>
+        <p><span>Firstname:</span><span>${req.body.firstname}</span></p>
+        <p><span>Lastname:</span><span>${req.body.lastname}</span></p>
+        <p><span>Birtdate:</span><span>${req.body.birthdateDay}/${req.body.birthdateMonth}/${req.body.birthdateYear}</span></p>
+        <p><span>Address:</span></br>
+        <span>${req.body.street} ${req.body.streetNr}</span></br>
+        <span>${req.body.zipcode} ${req.body.city}</span></p>
+        <p><span>Telephone:</span><span>${req.body.tel}</span></p>
+        <p><span>Email:</span><span>${req.body.email}</span></p>
+        </div>
+        `,
       };
 
       transporter.sendMail(mailData, function (err, info) {
@@ -38,7 +48,7 @@ export default async (req, res) => {
           res.json({ type: 'success', info: info });
         }
       });
-      // res.json({message:'membership form sent!'})
+      // res.json({ message: 'membership form sent!' });
     } else {
       res.json({ message: 'NO GET HERE!' });
     }
