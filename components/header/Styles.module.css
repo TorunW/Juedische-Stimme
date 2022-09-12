@@ -1,5 +1,5 @@
 .header {
-  height: 611px;
+  height: 500px;
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,24 +11,4 @@
   position: relative;
   object-fit: cover;
   object-position: center;
-}
-.header .container {
-  background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
-  width: 682px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 16px;
-  height: 246px;
-  margin: 0 auto;
-  padding: 48px;
-  max-width: 80%;
-}
-.header .container p {
-  font-size: 1.6rem;
-  line-height: 1.5rem;
-  font-weight: 400;
-  text-align: center;
-  color: #ffffff;
 }
