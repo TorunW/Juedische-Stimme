@@ -19,7 +19,6 @@ export default async (req, res) => {
 
       const mailData = {
         from: {
-          name: req.body.email,
           address: 'info@juedische-stimme.com',
         },
         replyTo: req.body.email,
@@ -27,14 +26,14 @@ export default async (req, res) => {
         subject: `Membership application`,
         text: req.body.firstname,
         html: `<div>
-        <p><span>Firstname:</span><span>${req.body.firstname}</span></p>
-        <p><span>Lastname:</span><span>${req.body.lastname}</span></p>
-        <p><span>Birtdate:</span><span>${req.body.birthdateDay}/${req.body.birthdateMonth}/${req.body.birthdateYear}</span></p>
+        <p><span>Firstname: </span><span>${req.body.firstname}</span></p>
+        <p><span>Lastname: </span><span>${req.body.lastname}</span></p>
+        <p><span>Birtdate: </span><span>${req.body.birthdateDay}/${req.body.birthdateMonth}/${req.body.birthdateYear}</span></p>
         <p><span>Address:</span></br>
         <span>${req.body.street} ${req.body.streetNr}</span></br>
         <span>${req.body.zipcode} ${req.body.city}</span></p>
-        <p><span>Telephone:</span><span>${req.body.tel}</span></p>
-        <p><span>Email:</span><span>${req.body.email}</span></p>
+        <p><span>Telephone: </span><span>${req.body.tel}</span></p>
+        <p><span>Email: </span><span>${req.body.email}</span></p>
         </div>
         `,
       };

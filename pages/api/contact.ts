@@ -19,7 +19,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       const mailData = {
         from: {
-          name: req.body.email,
           address: 'info@juedische-stimme.com',
         },
         replyTo: req.body.email,
