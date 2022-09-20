@@ -14,16 +14,21 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       const products = await stripe.products.list({
         limit: 100,
+        active: true,
       });
 
+      console.log(products.data);
+
       const groups = prices.data.reduce((groups, item) => {
-        const group = groups[item.product.toString()] || [];
-        const price = {
-          ...item,
-          name: products.data.find((pr) => pr.id === item.product).name,
-        };
-        group.push(price);
-        groups[item.product.toString()] = group;
+        if (item.active === true) {
+          const group = groups[item.product.toString()] || [];
+          const price = {
+            ...item,
+            name: products.data.find((pr) => pr.id === item.product)?.name,
+          };
+          group.push(price);
+          groups[item.product.toString()] = group;
+        }
         return groups;
       }, {});
 

@@ -6,11 +6,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 });
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { price, quantity, mode } = req.body;
+  const { price, quantity, mode, payment_method_types } = req.body;
   console.log(req.body, 'BODYYYYYY');
 
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card', 'giropay'],
+    payment_method_types,
     line_items: [
       {
         price,

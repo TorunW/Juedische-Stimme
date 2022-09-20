@@ -6,14 +6,12 @@ import { generateImageUrl } from 'helpers/imageUrlHelper';
 import { getPostContentFields } from 'helpers/getPostContentFields';
 
 const PostPageDonationFormLayout = ({ post, locale }) => {
-  const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } = getPostContentFields(post, locale)
-  
-  console.log(postContent)
+  const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } =
+    getPostContentFields(post, locale);
 
   return (
     <React.Fragment>
       <div className={styles.donationFormLayout}>
-        {' '}
         <Image
           src={generateImageUrl(post.post_image)}
           alt='donations-page-background'
@@ -29,9 +27,7 @@ const PostPageDonationFormLayout = ({ post, locale }) => {
           ></div>
         </div>
         <div className={styles.form}>
-          <DonationsForm
-            stripeProducts={post.stripeProducts}
-          />
+          <DonationsForm stripeProducts={post.stripeProducts} />
         </div>
       </div>
     </React.Fragment>
