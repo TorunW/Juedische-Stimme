@@ -13,6 +13,7 @@
     "kill": "pm2 stop ecosystem.config.js"
   },
   "dependencies": {
+    "@jswork/next-md5": "^1.0.0",
     "@next/bundle-analyzer": "^12.2.5",
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/user-event": "^14.4.3",
@@ -20,6 +21,7 @@
     "@tiptap/react": "^2.0.0-beta.109",
     "@tiptap/starter-kit": "^2.0.0-beta.185",
     "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
     "express": "^4.18.1",
     "firebase": "^9.9.1",
     "https": "^1.0.0",

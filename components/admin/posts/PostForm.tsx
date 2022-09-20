@@ -1,4 +1,4 @@
-import React, { useState, Suspense, ReactElement } from 'react';
+import React, { useState, Suspense, ReactElement, useEffect } from 'react';
 import dynamic from 'next/dynamic'
 import Image from 'next/image';
 import { useFormik } from 'formik';
@@ -25,8 +25,6 @@ interface PostFormProps {
 
 const PostForm = ({post,nextPostId}: PostFormProps) => {
   
-  console.log(post, " POST ")
-
   const tabs = ['post','translations']
   const { categories } = useSelector(state => state.categories);
   const { locales, defaultLocale } = useSelector(state => state.languages)
@@ -37,6 +35,10 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
 
   const [ previewImage2, setPreviewImage2 ] = useState(null)
   const [ previewImage2File, setPreviewImage2File ] = useState(null)
+
+  useEffect(()=>{
+    
+  },[])
 
   const formik = useFormik({
     initialValues: {
