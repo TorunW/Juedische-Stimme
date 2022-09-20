@@ -6,18 +6,21 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 });
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const { price, quantity } = req.body;
+  const { price, quantity, mode } = req.body;
   console.log(req.body, 'BODYYYYYY');
 
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card', 'giropay', 'klarna'],
+    payment_method_types: ['card', 'giropay'],
     line_items: [
       {
         price,
         quantity,
       },
     ],
-    mode: 'payment',
+
+    mode,
+    // billing_address_collection: 'required',
+    // customer_email: 'required',
     success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${req.headers.origin}/spenden`,
   });
