@@ -17,7 +17,11 @@ const PostPage = dynamic(() => import('@/components/posts/PostPage'), {
 });
 
 const ContentPage: LayoutPage = (props: LayoutPageProps) => {
-  let page = JSON.parse(props.page)[0];
+
+  let page = {
+    ...JSON.parse(props.page)[0],
+    stripeProducts: props.stripeProducts ? JSON.parse(props.stripeProducts) : null
+  }
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
@@ -30,8 +34,6 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
       })
     );
   }, [props.page]);
-
-  // console.log(page, " PROPST PAGE")
 
   let headDisplay: ReactElement;
   if (page && page !== null){
@@ -70,6 +72,13 @@ export const getServerSideProps = async (context: NextPageContext) => {
       locale: context.locale,
     }),
   });
+
+  let stripeProducts;
+  if (context.query.name === "spenden"){
+    const stripeProductsResponse = await fetch(`http://${context.req.headers.host}/api/stripeproducts`);
+    stripeProducts = await stripeProductsResponse.json();
+  }
+
   const page = JSON.stringify(pageResponse);
 
   return {
@@ -78,6 +87,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       navItems,
       locale: context.locale,
       defaultLocale: context.defaultLocale,
+      stripeProducts: JSON.stringify(stripeProducts)
     },
   };
 };

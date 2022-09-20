@@ -28,4 +28,5 @@ export type LayoutPageProps = {
   users?: string;
   user?: any;
   loggedUser?: any;
+  stripeProducts?: any;
 };
