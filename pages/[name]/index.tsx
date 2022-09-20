@@ -73,10 +73,10 @@ export const getServerSideProps = async (context: NextPageContext) => {
     }),
   });
 
-  let stripeProducts;
+  let stripeProducts = null;
   if (context.query.name === "spenden"){
     const stripeProductsResponse = await fetch(`http://${context.req.headers.host}/api/stripeproducts`);
-    stripeProducts = await stripeProductsResponse.json();
+    stripeProducts = JSON.stringify(await stripeProductsResponse.json()) ;
   }
 
   const page = JSON.stringify(pageResponse);
@@ -87,7 +87,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       navItems,
       locale: context.locale,
       defaultLocale: context.defaultLocale,
-      stripeProducts: JSON.stringify(stripeProducts)
+      stripeProducts
     },
   };
 };
