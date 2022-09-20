@@ -14,6 +14,7 @@ const Result: LayoutPage = (props: LayoutPageProps) => {
     (url) => axios.get(url).then((res) => res.data)
   );
 
+  console.log(data);
   return (
     <div>
       <h1>Payment Result</h1>
