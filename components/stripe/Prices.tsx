@@ -1,13 +1,6 @@
 import React from 'react';
 import styles from './Styles.module.css';
-import { Field, Form, Formik, useFormik } from 'formik';
-import axios from 'axios';
-
-import { loadStripe } from '@stripe/stripe-js';
-
-const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-);
+import { Field } from 'formik';
 
 function Prices({ product }) {
   let pricesDisplay = product.map((price) => {
@@ -21,7 +14,7 @@ function Prices({ product }) {
       } else if (price.unit_amount_decimal !== null) {
         priceFormattedDisplay = price.unit_amount_decimal.slice(0, -2);
       } else {
-        priceFormattedDisplay = 'Other Amount';
+        priceFormattedDisplay = '_ _';
       }
     }
     return (
@@ -38,7 +31,7 @@ function Prices({ product }) {
     );
   });
 
-  return <div>{pricesDisplay}</div>;
+  return <div className={styles.priceContainer}>{pricesDisplay}</div>;
 }
 
 export default Prices;

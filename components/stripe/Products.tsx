@@ -11,7 +11,7 @@ const stripePromise = loadStripe(
 );
 
 function PaymentForm({ products }) {
-  const [productIndex, setProductIndex] = useState(null);
+  const [productIndex, setProductIndex] = useState(1);
   console.log(productIndex, 'index');
 
   const handleSubmit = async (values) => {
@@ -57,10 +57,17 @@ function PaymentForm({ products }) {
               <Form>
                 <div>
                   <Prices product={product} />
+                  <button
+                    type='submit'
+                    className={
+                      values.price.length > 1
+                        ? styles.btn + ' ' + styles.active
+                        : styles.btn
+                    }
+                  >
+                    Click here to donate
+                  </button>
                 </div>
-                <button type='submit'>
-                  {values.price.length > 1 ? `Click here to donate` : ''}
-                </button>
               </Form>
             );
           }}
@@ -68,16 +75,26 @@ function PaymentForm({ products }) {
       );
     }
     return (
-      <div key={index} className={styles.formContainer}>
-        {priceDisplay}
-        <button onClick={() => setProductIndex(index)} className={styles.btn}>
-          {product[0].name}
-        </button>
+      <div key={index}>
+        <div className={styles.topRow}>
+          <button
+            onClick={() => setProductIndex(index)}
+            className={
+              productIndex === index
+                ? styles.btn + ' ' + styles.active
+                : styles.btn
+            }
+          >
+            {product[0].name}
+          </button>
+        </div>
+
+        <div className={styles.bottomRow}>{priceDisplay}</div>
       </div>
     );
   });
 
-  return <div>{productsDisplay}</div>;
+  return <div className={styles.formContainer}>{productsDisplay}</div>;
 }
 
 export default PaymentForm;
