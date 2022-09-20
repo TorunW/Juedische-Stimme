@@ -5,15 +5,14 @@ function getPaginationRange(pageNum: number, totalPages: number) {
 
   if (minNumber < 1) {
     diff = 1 - minNumber;
-    console.log(minNumber, 'minnumber');
   }
   minNumber = minNumber + diff;
   maxNumber = maxNumber + diff;
 
-  if (maxNumber > totalPages){
+  if (maxNumber > totalPages) {
     diff = maxNumber - totalPages;
     minNumber = minNumber - diff > 0 ? minNumber - diff : 0;
-    maxNumber = maxNumber - diff
+    maxNumber = maxNumber - diff;
   }
 
   return {

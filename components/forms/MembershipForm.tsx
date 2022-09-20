@@ -51,8 +51,6 @@ const MembershipForm = () => {
       email: Yup.string().email().required('* required!'),
     }),
     onSubmit: (values) => {
-      console.log('IM THE SUBMIT BIAZTCH');
-      console.log(values);
       axios({
         method: 'post',
         url: `/api/membership`,

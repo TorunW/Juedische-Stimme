@@ -53,13 +53,10 @@ function Nav() {
   }
 
   function handleResize() {
-    console.log('hello');
     if (typeof window !== 'undefined') {
       if (window.innerWidth >= 844) {
-        console.log('stort fönster');
         setIsMobileView(false);
       } else {
-        console.log('litet fönster');
         setIsMobileView(true);
       }
     }
@@ -161,7 +158,7 @@ function Nav() {
   let menuDisplay;
   if (isMobileView === false) {
     menuDisplay = (
-      <React.Fragment>
+      <div className={bgVisible === true ? styles.navActive : styles.nav}>
         <div className={styles.topRow}>
           <div className={styles.leftCol}>
             <ul>{callToActionMenuDisplay}</ul>
@@ -186,7 +183,7 @@ function Nav() {
         <div className={styles.bottomRow}>
           <ul>{mainMenuDisplay}</ul>
         </div>
-      </React.Fragment>
+      </div>
     );
   } else {
     menuDisplay = (
@@ -228,10 +225,7 @@ function Nav() {
   }
 
   return (
-    <nav
-      className={bgVisible === true ? styles.navActive : styles.nav}
-      data-testid='nav'
-    >
+    <nav data-testid='nav'>
       <Head>
         <div>
           <link
@@ -254,6 +248,7 @@ function Nav() {
           <link rel='manifest' href='/site.webmanifest' />
         </div>
       </Head>
+      <div className={styles.blur}></div>
       {menuDisplay}
     </nav>
   );

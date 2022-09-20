@@ -12,7 +12,6 @@ const stripePromise = loadStripe(
 
 function PaymentForm({ products }) {
   const [productIndex, setProductIndex] = useState(1);
-  console.log(productIndex, 'index');
 
   const handleSubmit = async (values) => {
     const recurring = products[productIndex].find(

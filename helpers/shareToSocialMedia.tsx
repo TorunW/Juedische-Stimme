@@ -5,7 +5,6 @@ interface ShareProps {
 export default function Share({ description }: ShareProps) {
   let url;
   if (typeof window !== 'undefined') {
-    console.log(window.location.href);
     url = window.location.href;
   }
 

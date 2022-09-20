@@ -12,7 +12,7 @@ const SearchFilter = ({ phrase }: SearchFilterProps) => {
 
   const [searchPhrase, setSearchPhrase] = useState(phrase ? phrase : '');
   const [dropDownIsVisible, setDropDownIsVisible] = useState(false);
-  console.log(dropDownIsVisible);
+
   function handleClick() {
     if (dropDownIsVisible === false) {
       setDropDownIsVisible(true);
