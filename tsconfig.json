@@ -28,7 +28,10 @@
     "pages/register.tsx",
     "firebaseConfig.tsx",
     "components/nav/Nav.tsx",
-    "components/facebook/FacebookEvents.tsx"
+    "components/facebook/FacebookEvents.tsx",
+    "hooks/use-local-storage-reducer.js",
+    "hooks/use-shopping-cart.js",
+    "pages/cart/index.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -143,7 +143,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
   const postsResponse = await excuteQuery({
     query: selectPosts({
       numberOfPosts: 6,
-      slug:'aktuelles',
+      slug: 'aktuelles',
       pageNum: 0,
       showUnpublished: false,
       postType: 'post',
@@ -180,7 +180,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
   const headerGalleryResponse = await excuteQuery({
     query: selectGalleryById(6),
   });
-  
+
   const headerGallery = JSON.stringify(headerGalleryResponse);
 
   const headerImageUri = `http://${context.req.headers.host}/${generateImageUrl(

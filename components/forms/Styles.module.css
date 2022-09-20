@@ -136,41 +136,19 @@
   width: 500px;
   padding: 48px 32px;
 }
-.donationsForm .formContainer {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
+.donationsForm .active {
+  color: white;
+  border-bottom: solid 3px #8179a6 !important;
 }
-.donationsForm .formContainer .box {
-  width: 22%;
-  color: #fff;
-  font-size: 24px;
-  padding: 8px;
+.donationsForm .btn {
+  border: none;
+}
+.donationsForm .btn,
+.donationsForm .active {
+  font-family: inherit;
+  text-transform: capitalize;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  text-align: center;
-  text-shadow: -1px -1px 1px rgba(38, 116, 52, 0.1);
-  position: relative;
-  z-index: 1;
-}
-.donationsForm .formContainer .box input {
-  position: absolute !important;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
-  width: 100% !important;
-  height: 50px;
-  outline: none;
-}
-.donationsForm .formContainer .box a {
-  position: absolute;
-  top: 0;
-  right: 0;
-  height: 50px;
-  left: 0;
-  background-color: #8179a6;
-  border-radius: 4px;
-  z-index: -1;
+  font-size: 1.1rem;
+  color: white;
+  background: none;
 }
