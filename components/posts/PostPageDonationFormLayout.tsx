@@ -8,6 +8,8 @@ import { getPostContentFields } from 'helpers/getPostContentFields';
 const PostPageDonationFormLayout = ({ post, locale }) => {
   const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } = getPostContentFields(post, locale)
   
+  console.log(postContent)
+
   return (
     <React.Fragment>
       <div className={styles.donationFormLayout}>
