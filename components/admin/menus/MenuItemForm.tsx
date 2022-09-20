@@ -86,7 +86,6 @@ const MenuItemForm: FC<MenuItemProps> = ({menuItem}) => {
         },
     });
 
-
     function onTermImageChange(event){
         // read file as data uri for preview, upload it on onSubmit
         

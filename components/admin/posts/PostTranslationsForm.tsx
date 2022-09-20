@@ -56,7 +56,7 @@ const PostTranslationsForm = ({post,language}) => {
                 </div>
 
                 <div className={styles['form-row']}>
-                    <label htmlFor='post_content'>Post Summary ({language})</label>
+                    <label htmlFor='post_content'>Post EXCERPT ({language})</label>
                     <Suspense>
                         <TipTapEditor
                             onChange={(val:string)  => formik.setFieldValue('excerpt',val,true)}
@@ -70,15 +70,45 @@ const PostTranslationsForm = ({post,language}) => {
                 </div>
 
                 <div className={styles['form-row']}>
-                    <label htmlFor='description'>Post Content ({language})</label>
+                    <label htmlFor='content'>Post Content ({language})</label>
                     <Suspense fallback={"LOADING..."}>
                         <TipTapEditor
                             onChange={val => formik.setFieldValue('content',val,true)}
                             value={formik.values.content}
+                            itemType={'post'}
+                            itemId={post.postId}
                         />
                     </Suspense>
                     {errors && errors.content ? <div className={styles.error}>{errors.content.toString()}</div> : ""}
                 </div>
+
+                <div className={styles['form-row']}>
+                    <label htmlFor='excerpt_2'>Post EXCERPT 2 ({language})</label>
+                    <Suspense>
+                        <TipTapEditor
+                            onChange={(val:string)  => formik.setFieldValue('excerpt_2',val,true)}
+                            value={formik.values.excerpt_2}
+                            itemType={'post'}
+                            itemId={post.postId}
+                            height={150}
+                        />
+                    </Suspense>
+                    {errors && errors.excerpt_2 ? <div className={styles.error}>{errors.excerpt_2.toString()}</div> : ""}
+                </div>
+
+                <div className={styles['form-row']}>
+                    <label htmlFor='content_2'>Post Content 2 ({language})</label>
+                    <Suspense fallback={"LOADING..."}>
+                        <TipTapEditor
+                            onChange={val => formik.setFieldValue('content_2',val,true)}
+                            value={formik.values.content_2}
+                            itemType={'post'}
+                            itemId={post.postId}
+                        />
+                    </Suspense>
+                    {errors && errors.content_2 ? <div className={styles.error}>{errors.content_2.toString()}</div> : ""}
+                </div>
+
                 <div className={styles['form-row']}>
                     <button type="submit">Submit</button>
                 </div>

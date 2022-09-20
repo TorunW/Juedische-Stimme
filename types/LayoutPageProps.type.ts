@@ -25,4 +25,7 @@ export type LayoutPageProps = {
   headerImage: string;
   slug?: string;
   pageNum?: number;
+  users?: string;
+  user?: any;
+  loggedUser?: any;
 };

@@ -1,5 +1,6 @@
 .container {
   background-color: gray;
+  display: flex;
 }
 .tabsMenu {
   background-color: black;
@@ -9,6 +10,7 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
+  flex: 1;
 }
 .form-row {
   width: 100%;
@@ -17,8 +19,20 @@
   background-color: cadetblue;
   padding: 5px;
 }
+.form-row input[type="text"],
+.form-row input[type="password"],
+.form-row input[type="email"],
+.form-row textarea,
+.form-row select,
+.form-row .inputContainer {
+  flex: 5;
+}
+.form-row label {
+  flex: 1;
+}
 .form-row .inputContainer {
   width: 100%;
+  flex-direction: column;
 }
 .form-row .inputContainer .input {
   width: 100%;

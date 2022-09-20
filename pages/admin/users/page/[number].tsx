@@ -1,38 +1,27 @@
 import { useEffect } from 'react'
 import styles from 'styles/Home.module.css'
 import excuteQuery from 'lib/db'
-import { selectUsers } from 'lib/queries'
-import { useDispatch, useSelector } from 'react-redux'
+import { selectUsers } from 'lib/queries/users'
+import { useDispatch } from 'store/hooks'
 import { setUsers } from 'store/users/usersSlice'
+import { LayoutPage } from 'types/LayoutPage.type'
+import { LayoutPageProps } from 'types/LayoutPageProps.type'
+import Users from 'components/admin/users/Users'
 
-export default function AdminUserPage(props) {
-    
+const AdminUsersPage: LayoutPage = (props:LayoutPageProps) => {
   const dispatch = useDispatch();
-  const {users} = useSelector(state => state.users)
-
   useEffect(() => {
     dispatch(setUsers(JSON.parse(props.users)))
   },[props.users])
-
-  let usersDisplay;
-  if (users){
-      usersDisplay = users.map((user,index) => (
-          <li key={Date.now()}>{user.user_login}</li>
-      ))
-  }
-
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
         <h2>Users</h2>
-        <hr/>
-        <ul>
-            {usersDisplay}
-        </ul>
-    </div>
+        <Users/>        
+    </section>
   )
 }
 
-AdminUserPage.layout = "admin"
+AdminUsersPage.layout = "admin"
 
 export const getServerSideProps = async (context) => {
     const usersResponse = await excuteQuery({
@@ -44,4 +33,6 @@ export const getServerSideProps = async (context) => {
         users:users
       }
     }
-  }
+}
+
+export default AdminUsersPage

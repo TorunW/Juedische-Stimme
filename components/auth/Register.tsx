@@ -4,6 +4,7 @@ import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import styles from './Styles.module.css';
+import { useFormik } from 'formik';
 
 function SignupForm() {
   const auth = getAuth(app);
@@ -17,6 +18,17 @@ function SignupForm() {
   //     router.push('/admin/register');
   //   }
   // }, []);
+
+
+  // const formik = useFormik({
+  //   initialValues: {
+  //     ID: user ? user
+  //   },
+  //   onSubmit: values => {
+  //     values
+  //   },
+  // });
+
 
   const signUp = () => {
     createUserWithEmailAndPassword(auth, email, password).then(
