@@ -26,23 +26,26 @@ const MembershipForm = () => {
       firstname: Yup.string().min(2, '* too short!').required('* required!'),
       lastname: Yup.string().min(2, '* too short!').required('* required!'),
 
-      birthdateDay: Yup.number()
-        .min(2, '* too short!')
-        .max(2, '* too long!')
-        .required('* required!'),
-      birthdateMonth: Yup.number()
-        .min(2, '* too short!')
-        .max(2, '* too long!')
-        .required('* required!'),
-      birthdateYear: Yup.number()
-        .min(4, '* too short!')
-        .max(4, '* too long!')
-        .required('* required!'),
+      birthdateDay: Yup.string()
+        .required()
+        .matches(/^[0-9]+$/, 'Must be only digits')
+        .min(2, 'too short')
+        .max(2, 'too long'),
+      birthdateMonth: Yup.string()
+        .required()
+        .matches(/^[0-9]+$/, 'Must be only digits')
+        .min(2, 'too short')
+        .max(2, 'too long'),
+      birthdateYear: Yup.string()
+        .required()
+        .matches(/^[0-9]+$/, 'Must be only digits')
+        .min(4, 'too short')
+        .max(4, 'too long'),
 
-      street: Yup.string().min(3, '* too short!').required('* required!'),
+      street: Yup.string().min(1, '* too short!').required('* required!'),
       streetNr: Yup.number().min(1, '* too short!').required('* required!'),
       zipcode: Yup.string().min(5, '* too short!').required('* required!'),
-      city: Yup.string().min(3, '* too short!').required('* required!'),
+      city: Yup.string().min(1, '* too short!').required('* required!'),
 
       tel: Yup.number().min(7, '* too short!').required('* required!'),
       email: Yup.string().email().required('* required!'),
