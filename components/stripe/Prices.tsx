@@ -13,7 +13,7 @@ function Prices({ product }) {
   return (
     <div>
       {product.map((price) => (
-        <label className={styles.box} title='500€'>
+        <label key={price.id} className={styles.box} title='500€'>
           <Field
             className={styles.radio}
             type='radio'
