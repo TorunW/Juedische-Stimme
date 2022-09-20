@@ -11,21 +11,10 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
-function PaymentForm() {
-  const [products, setProducts] = useState([]);
+function PaymentForm({products}) {
+  
   const [productIndex, setProductIndex] = useState(null);
   console.log(productIndex);
-
-  const getProducts = async () => {
-    const response = await fetch('/api/stripeproducts');
-    const data = await response.json();
-    console.table(products);
-    setProducts(data);
-  };
-
-  useEffect(() => {
-    getProducts();
-  }, []);
 
   const handleSubmit = async (values) => {
     console.log(values);

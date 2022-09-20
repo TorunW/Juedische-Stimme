@@ -1,5 +1,5 @@
 import React from 'react';
-import DonationsForm from '../forms/DonationsForm';
+import DonationsForm from 'components/forms/DonationsForm';
 import Image from 'next/image';
 import styles from './ListStyles.module.css';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
@@ -8,6 +8,8 @@ import { getPostContentFields } from 'helpers/getPostContentFields';
 const PostPageDonationFormLayout = ({ post, locale }) => {
   const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } = getPostContentFields(post, locale)
   
+  console.log(postContent)
+
   return (
     <React.Fragment>
       <div className={styles.donationFormLayout}>
@@ -27,7 +29,9 @@ const PostPageDonationFormLayout = ({ post, locale }) => {
           ></div>
         </div>
         <div className={styles.form}>
-          <DonationsForm />
+          <DonationsForm
+            stripeProducts={post.stripeProducts}
+          />
         </div>
       </div>
     </React.Fragment>
