@@ -298,103 +298,6 @@
     margin: 16px 0;
   }
 }
-@media (max-width: 844px) {
-  .articleLayout {
-    height: 100%;
-  }
-  .articleLayout .header {
-    height: 350px;
-    background: #696388;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-  }
-  .articleLayout .header .contentWrapper {
-    width: 100%;
-    display: flex;
-    margin-top: 88px;
-  }
-  .articleLayout .header .contentWrapper h2 {
-    display: flex;
-    align-items: center;
-    position: relative;
-    margin: 0 auto;
-    padding: 0 32px;
-    color: white;
-    z-index: 5;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
-  .articleLayout .header .contentWrapper .imageWrapper {
-    width: 50%;
-    height: 300px;
-    position: absolute;
-    z-index: 1;
-    right: 0;
-    filter: brightness(80%);
-    background: #696388;
-  }
-  .articleLayout .header .contentWrapper .imageWrapper img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-  .articleLayout .linksContainer {
-    margin: 32px auto;
-    padding: 0 64px;
-    color: #626262;
-  }
-  .articleLayout .contentContainer {
-    margin: 64px auto;
-    padding: 0 64px;
-    color: #2e2e2e;
-  }
-  .articleLayout .contentContainer .topWrapper {
-    margin-bottom: 32px;
-  }
-  .articleLayout .contentContainer .topWrapper .topContent {
-    width: 800px;
-    height: 600px;
-    background-color: #22e;
-  }
-  .articleLayout .contentContainer .topWrapper .topContent .topExcerpt {
-    float: left;
-    width: 100px;
-    height: 100px;
-    background: red;
-    margin: 0 10px 10px 0;
-  }
-  .articleLayout .contentContainer .middleWrapper {
-    display: flex;
-    align-items: center;
-    gap: 64px;
-    margin-bottom: 32px;
-  }
-  .articleLayout .contentContainer .middleWrapper .image {
-    min-width: 50%;
-    position: relative;
-    overflow: hidden;
-    aspect-ratio: auto 1.86333333;
-  }
-  .articleLayout .contentContainer .middleWrapper .image img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-  }
-  .articleLayout .contentContainer .middleWrapper .bottomExcerpt {
-    width: 50%;
-  }
-  .articleLayout .contentContainer .excerpt p {
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-  .articleLayout .contentContainer .content {
-    font-size: 1rem;
-  }
-  .articleLayout .contentContainer .content p {
-    line-height: 1.5rem;
-    margin: 16px 0;
-  }
-}
 .navigationContainer {
   display: flex;
   justify-content: space-between;
@@ -455,7 +358,6 @@
   width: 50%;
   padding: 32px;
   overflow-y: scroll;
-  overflow-x: hidden;
 }
 .memberFormLayout .pageContainer .contentContainer h2,
 .donationFormLayout .pageContainer .contentContainer h2 {
