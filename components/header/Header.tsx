@@ -40,10 +40,10 @@ const Header = () => {
           }
         
           return (
-            <React.Fragment>
+            <React.Fragment key={Date.now() + index}>
               {blurredBgImage}
               <div
-                key={Date.now() + index}
+                
                 className={
                   slideIndex === index
                     ? styles.slideActive
