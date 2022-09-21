@@ -2,16 +2,19 @@ import React, { useState, useRef } from 'react';
 import styles from './Styles.module.css';
 import GalleryImage from './GalleryImage';
 
-const Gallery = ({ gallery }) => {
-  let slideShow = gallery.imageSrcs
-    .split(',')
-    .map((imgSrc: string, index: number) => (
+const Gallery = ({ images }) => {
+
+  console.log(images, " IMAGES ")
+
+  let slideShow = images.map((image, index: number) => (
       <div
         key={Date.now() + index}
         data-testid={`slide-${index}`}
         className={styles.imageWrapper}
       >
-        <GalleryImage image={imgSrc} />
+        <GalleryImage 
+          image={image} 
+        />
       </div>
     ));
 

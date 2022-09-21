@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 import { useSelector } from 'store/hooks';
 import Image from 'next/image';
 import Gallery from '../gallery/Gallery';
@@ -6,6 +6,21 @@ import styles from './Styles.module.css';
 import containerBackground from 'styles/images/about.jpg';
 
 const AboutInfo = ({gallery,aboutInfo}) => {
+
+  let [ galleryImages, setGalleryImages ] = useState([])
+  console.log(gallery)
+  console.log(galleryImages)
+
+  useEffect(()=>{
+    if (gallery !== null) getGalleryImages()
+  },[])
+
+  async function getGalleryImages(){
+    const res = await fetch(`/api/galleryimage/${gallery.gallery_id}`)
+    const data = await res.json()
+    console.log(res)
+    setGalleryImages(data)
+  }
 
   let aboutInfoDisplay: ReactElement;
   if (aboutInfo && aboutInfo !== null) {
@@ -15,7 +30,7 @@ const AboutInfo = ({gallery,aboutInfo}) => {
           dangerouslySetInnerHTML={{ __html: aboutInfo.text_top }}
           className={styles.text}
         ></div>
-        { gallery && gallery !== null ? <div data-testid="about-info-gallery"><Gallery gallery={gallery} /></div> : ""}
+        {galleryImages.length > 0 ? <Gallery images={galleryImages} /> : ""}
         <div
           dangerouslySetInnerHTML={{ __html: aboutInfo.text_bottom }}
           className={styles.text}
