@@ -1,11 +1,4 @@
 @media (min-width: 845px) {
-  .blur {
-    position: fixed;
-    width: 100%;
-    height: 119px;
-    z-index: 50;
-    filter: blur(3px);
-  }
   .nav,
   .navActive {
     position: fixed;
@@ -165,6 +158,7 @@
     width: 100%;
     z-index: 100;
     font-size: 1.3rem;
+    background: #d1cedf;
     transition: all 0.4s ease-in-out;
   }
   .nav .mobileNav,
@@ -173,7 +167,6 @@
     display: flex;
     justify-content: space-between;
     padding: 16px;
-    border-bottom: solid;
   }
   .nav .mobileNav .leftCol:hover,
   .navActive .mobileNav .leftCol:hover {
@@ -194,64 +187,86 @@
     font-weight: 500;
     cursor: pointer;
   }
+  .nav .mobileNav .rightCol svg,
+  .navActive .mobileNav .rightCol svg {
+    cursor: pointer;
+  }
   .nav .mobileMenu,
   .navActive .mobileMenu {
-    padding: 16px;
-    height: 100%;
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+    background: #d1cedf;
+    position: absolute;
+    top: 60px;
+    padding: 15px 15px 60px;
+    left: 0;
+    width: 100%;
+    z-index: 1;
   }
   .nav .mobileMenu ul,
   .navActive .mobileMenu ul {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    list-style: none;
     padding: 0;
+    margin: 0;
   }
   .nav .mobileMenu ul li,
   .navActive .mobileMenu ul li {
-    border: #2e2e2e solid 1px;
-    background-color: #635d80;
-    padding: 8px;
+    list-style: none;
+    margin-top: 5px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  .nav .mobileMenu ul li a,
+  .navActive .mobileMenu ul li a {
+    background: #635d80;
+    font-size: 1.3rem;
+    padding: 16px;
+    color: #fff;
+    display: block;
+    text-transform: capitalize;
+    transition: all 0.3s ease-in-out;
+  }
+  .nav .mobileMenu ul li a:hover,
+  .navActive .mobileMenu ul li a:hover {
+    background: #635d80e0;
   }
   .nav .mobileMenu .socialmediaMenu,
   .navActive .mobileMenu .socialmediaMenu {
     display: flex;
+    justify-content: center;
     gap: 8px;
+    margin-top: 16px;
   }
   .nav .mobileMenu .socialmediaMenu svg,
   .navActive .mobileMenu .socialmediaMenu svg {
     cursor: pointer;
-  }
-  .navActive {
-    background: #d1cedf;
-    transition: all 0.4s ease-in-out;
-  }
-  .navActive svg {
     fill: #2e2e2e;
     transition: fill 0.3s ease-in-out;
+    height: 40px;
+    width: 40px;
   }
-  .navActive svg:hover {
+  .nav .mobileMenu .socialmediaMenu svg:hover,
+  .navActive .mobileMenu .socialmediaMenu svg:hover {
     fill: #635d80;
   }
-  .navActive .rightCol .languageMenu {
-    color: #2e2e2e;
-    transition: color 0.3s ease-in-out;
+  .nav .mobileMenuClose,
+  .navActive .mobileMenuClose {
+    opacity: 0;
   }
-  .navActive .rightCol .languageMenu a {
-    transition: color 0.3s ease-in-out;
+  .nav .mobileMenuOpen,
+  .navActive .mobileMenuOpen {
+    transition: opacity 0.3s ease-in-out;
+    visibility: visible;
+    opacity: 1;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
   }
-  .navActive .rightCol .languageMenu a:hover {
-    color: #635d80;
-  }
-  .navActive li a {
-    color: white;
-    transition: color 0.3s ease-in-out;
-  }
-  .navActive li a:hover {
-    color: #635d80;
-  }
+}
+.rightCol .languageMenu {
+  color: #2e2e2e;
+  transition: color 0.3s ease-in-out;
+}
+.rightCol .languageMenu a {
+  transition: color 0.3s ease-in-out;
+}
+.rightCol .languageMenu a:hover {
+  color: #635d80;
 }

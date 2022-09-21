@@ -18,6 +18,9 @@ function Nav() {
   const [mobileDropDownIsVisibile, setMobileDropDownIsVisibile] =
     useState(false);
 
+  console.log(bgVisible, 'scroll');
+  console.log(isMobileView, 'mobiles');
+
   useEffect(() => {
     if (locale !== null) {
       let newPathName = window.location.pathname;
@@ -68,7 +71,7 @@ function Nav() {
       : setMobileDropDownIsVisibile(false);
   }
   let mainMenuDisplay = mainMenu.map((item, index) => (
-    <li key={Date.now() + index}>
+    <li key={Date.now() + index} onClick={handleClick}>
       <Link
         href={
           '/' + (item.link && item.link !== null ? item.link : item.post_name)
@@ -80,7 +83,7 @@ function Nav() {
   ));
 
   let callToActionMenuDisplay = callToActionMenu.map((item, index) => (
-    <li key={Date.now() + index}>
+    <li key={Date.now() + index} onClick={handleClick}>
       <Link
         href={
           '/' + (item.link && item.link !== null ? item.link : item.post_name)
@@ -142,23 +145,10 @@ function Nav() {
     </div>
   );
 
-  let mobileMenuDropDownDisplay;
-  if (mobileDropDownIsVisibile === true) {
-    mobileMenuDropDownDisplay = (
-      <div className={styles.mobileMenu}>
-        <ul>{mainMenuDisplay}</ul>
-        <ul>{callToActionMenuDisplay}</ul>
-        {socialmediaMenuDisplay}
-      </div>
-    );
-  } else {
-    mobileMenuDropDownDisplay = '';
-  }
-
   let menuDisplay;
   if (isMobileView === false) {
     menuDisplay = (
-      <div className={bgVisible === true ? styles.navActive : styles.nav}>
+      <React.Fragment>
         <div className={styles.topRow}>
           <div className={styles.leftCol}>
             <ul>{callToActionMenuDisplay}</ul>
@@ -183,7 +173,7 @@ function Nav() {
         <div className={styles.bottomRow}>
           <ul>{mainMenuDisplay}</ul>
         </div>
-      </div>
+      </React.Fragment>
     );
   } else {
     menuDisplay = (
@@ -219,13 +209,26 @@ function Nav() {
             </svg>
           </div>
         </div>
-        {mobileMenuDropDownDisplay}
+        <div
+          className={
+            mobileDropDownIsVisibile === true
+              ? styles.mobileMenu + ' ' + styles.mobileMenuOpen
+              : styles.mobileMenu + ' ' + styles.mobileMenuClose
+          }
+        >
+          <ul>{mainMenuDisplay}</ul>
+          <ul>{callToActionMenuDisplay}</ul>
+          {socialmediaMenuDisplay}
+        </div>{' '}
       </React.Fragment>
     );
   }
 
   return (
-    <nav data-testid='nav'>
+    <nav
+      data-testid='nav'
+      className={bgVisible === true ? styles.navActive : styles.nav}
+    >
       <Head>
         <div>
           <link
@@ -248,7 +251,6 @@ function Nav() {
           <link rel='manifest' href='/site.webmanifest' />
         </div>
       </Head>
-      {isMobileView === false ? <div className={styles.blur}></div> : ''}{' '}
       {menuDisplay}
     </nav>
   );
