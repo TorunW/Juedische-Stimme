@@ -18,6 +18,7 @@ const AboutInfo = ({gallery,aboutInfo}) => {
   async function getGalleryImages(){
     const res = await fetch(`/api/galleryimage/${gallery.gallery_id}`)
     const data = await res.json()
+    console.log(res)
     setGalleryImages(data)
   }
 
@@ -29,7 +30,7 @@ const AboutInfo = ({gallery,aboutInfo}) => {
           dangerouslySetInnerHTML={{ __html: aboutInfo.text_top }}
           className={styles.text}
         ></div>
-        <Gallery images={galleryImages} />
+        {galleryImages.length > 0 ? <Gallery images={galleryImages} /> : ""}
         <div
           dangerouslySetInnerHTML={{ __html: aboutInfo.text_bottom }}
           className={styles.text}

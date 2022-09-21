@@ -3,6 +3,9 @@ import styles from './Styles.module.css';
 import GalleryImage from './GalleryImage';
 
 const Gallery = ({ images }) => {
+
+  console.log(images, " IMAGES ")
+
   let slideShow = images.map((image, index: number) => (
       <div
         key={Date.now() + index}

@@ -77,7 +77,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
     const fbTokenResult = await fetch('/api/fbtoken');
     const fbToken = await fbTokenResult.json();
     setFbt(fbToken[0].token)
-    dispatch(setToken(fbToken[0].token));
+    // dispatch(setToken(fbToken[0].token));
   }
 
   async function getNewsletterPosts() {
