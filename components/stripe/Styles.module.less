@@ -45,6 +45,11 @@
           z-index: -1;
         }
       }
+      .boxSelected {
+        a {
+          background-color: darken(#8179a6,25%)
+        }
+      }
     }
 
     .btn {
@@ -56,6 +61,7 @@
       cursor: pointer;
       color: white;
       font-weight: 500;
+      max-width: 100%;
     }
   }
 
@@ -80,4 +86,11 @@
       cursor: pointer;
     }
   }
+}
+
+
+.btnInActive {
+  color:  gray !important;
+  border-color: gray !important;
+  border-style: solid;
 }

@@ -52,16 +52,22 @@ function PaymentForm({ products }) {
           onSubmit={handleSubmit}
         >
           {({ values }) => {
+
+            console.log(values, " VALUSE ")
+
             return (
               <Form>
                 <div>
-                  <Prices product={product} />
+                  <Prices 
+                    product={product}
+                    selectedPrice={values.price}
+                  />
                   <button
                     type='submit'
                     className={
                       values.price.length > 1
-                        ? styles.btn + ' ' + styles.active
-                        : styles.btn
+                        ? styles.btn
+                        : styles.btn + ' ' + styles.btnInActive
                     }
                   >
                     Click here to donate

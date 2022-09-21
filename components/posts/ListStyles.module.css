@@ -228,6 +228,7 @@
   width: 50%;
   padding: 32px;
   height: 100%;
+  z-index: 1;
 }
 .embededCodeContainer {
   margin-top: 50px;

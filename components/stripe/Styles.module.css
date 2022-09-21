@@ -45,6 +45,9 @@
   border-radius: 4px;
   z-index: -1;
 }
+.formContainer .bottomRow .priceContainer .boxSelected a {
+  background-color: #454060;
+}
 .formContainer .bottomRow .btn {
   width: 400px;
   height: 40px;
@@ -54,6 +57,7 @@
   cursor: pointer;
   color: white;
   font-weight: 500;
+  max-width: 100%;
 }
 .formContainer .topRow {
   margin-bottom: 16px;
@@ -73,4 +77,9 @@
   color: white;
   background: none;
   cursor: pointer;
+}
+.btnInActive {
+  color: gray !important;
+  border-color: gray !important;
+  border-style: solid;
 }
