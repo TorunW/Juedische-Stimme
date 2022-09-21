@@ -8,10 +8,10 @@ const HeaderGalleryControllers = ({
   slideshowLength,
 }) => {
   const [buttonHidden, setButtonHidden] = useState(false);
-
+  // useref slider use ref
   useEffect(() => {
     // setInterval(nextSlide, 1000);
-  },[])
+  }, []);
 
   // if (slideIndex !== slideshowLength) {
   //   // setTimeout(() => {

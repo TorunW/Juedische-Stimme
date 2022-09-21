@@ -248,7 +248,7 @@ function Nav() {
           <link rel='manifest' href='/site.webmanifest' />
         </div>
       </Head>
-      <div className={styles.blur}></div>
+      {isMobileView === false ? <div className={styles.blur}></div> : ''}{' '}
       {menuDisplay}
     </nav>
   );
