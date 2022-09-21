@@ -79,7 +79,7 @@ const Header = () => {
         <HeaderGalleryControllers
           slideIndex={slideIndex}
           setSlideIndex={setSlideIndex}
-          slideshowLength={headerGalleryDisplay.length}
+          slideshowLength={headerGalleryDisplay}
         />
       </div>
       {/* <div

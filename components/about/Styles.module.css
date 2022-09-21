@@ -7,7 +7,8 @@
   margin: 0 auto 48px;
 }
 .aboutPage .aboutContainer p {
-  margin: 16px 0;
+  margin: 16px auto;
+  max-width: 1200px;
 }
 .aboutPage .contentContainer {
   height: 400px;
@@ -45,7 +46,6 @@
 }
 @media (min-width: 1201px) {
   .aboutContainer {
-    max-width: 1200px;
     padding: 0 60px;
     margin: 0 auto 48px;
   }

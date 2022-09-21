@@ -10,7 +10,8 @@ const GalleryImage = ({ image }) => {
         src={generateImageUrl(image)}
         alt='gallery image'
         title='gallery image'
-        layout='fill'
+        width='340'
+        height='340'
         objectFit='cover'
       />
     </div>
