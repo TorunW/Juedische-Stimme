@@ -10,11 +10,7 @@ import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
 import { setPost } from 'store/posts/postsSlice';
-import dynamic from 'next/dynamic'
-
-const PostPage = dynamic(() => import('@/components/posts/PostPage'), {
-  ssr: false,
-});
+import PostPage from 'components/posts/PostPage';
 
 const ContentPage: LayoutPage = (props: LayoutPageProps) => {
 
