@@ -16,8 +16,10 @@ const Header = () => {
   const [slideIndex, setSlideIndex] = useState(0);
   const prevSlideIndex = usePrevious(slideIndex);
 
-  let headerGalleryDisplay: ReactElement[];
+  let headerGalleryDisplay: ReactElement[],
+      headerGalleryControllersDisplay: ReactElement;
   if (headerGallery !== null) {
+
     headerGalleryDisplay = headerGallery.imageSrcs
       .split(',')
       .map((imgSrc, index) => {
@@ -64,7 +66,16 @@ const Header = () => {
         //     </div>
         // );
         // }
-      });
+    });
+
+    headerGalleryControllersDisplay = (
+      <HeaderGalleryControllers
+        slideIndex={slideIndex}
+        setSlideIndex={setSlideIndex}
+        slideshowLength={headerGallery.imageSrcs.split(',').length - 1}
+      />
+    )
+
   }
 
   // console.log(headerGalleryDisplay.length);
@@ -76,11 +87,7 @@ const Header = () => {
     <header id='main-header' role='main-header' className={styles.header}>
       <div className={styles.containerSlider}>
         {headerGalleryDisplay}
-        <HeaderGalleryControllers
-          slideIndex={slideIndex}
-          setSlideIndex={setSlideIndex}
-          slideshowLength={headerGalleryDisplay}
-        />
+        {headerGalleryControllersDisplay}
       </div>
       {/* <div
         className={styles.container}

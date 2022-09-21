@@ -9,16 +9,20 @@ const HeaderGalleryControllers = ({
 }) => {
   const [buttonHidden, setButtonHidden] = useState(false);
 
-  if (slideIndex !== slideshowLength) {
-    setTimeout(() => {
-      nextSlide();
-    }, 5000);
-  } else {
-    slideIndex = 0;
-    setTimeout(() => {
-      nextSlide();
-    }, 3000);
-  }
+  useEffect(() => {
+    // setInterval(nextSlide, 1000);
+  },[])
+
+  // if (slideIndex !== slideshowLength) {
+  //   // setTimeout(() => {
+  //     nextSlide();
+  //   // }, 5000);
+  // } else {
+  //   slideIndex = 0;
+  //   // setTimeout(() => {
+  //     nextSlide();
+  //   // }, 3000);
+  // }
 
   function nextSlide() {
     if (buttonHidden === false) {
