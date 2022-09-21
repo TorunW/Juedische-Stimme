@@ -15,8 +15,7 @@ export default async (req, res) => {
             res.json(result)
         } else  {
             // Handle any other HTTP method
-            console.log('not post request')
-            res.json({message:'no GET here!'})
+            res.json({message:'no PUT / POST here!'})
         }
     } catch ( error ) {
         console.log(error );
