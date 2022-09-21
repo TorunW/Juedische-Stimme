@@ -4,7 +4,7 @@
     position: fixed;
     width: 100%;
     height: 119px;
-    padding: 0 40px;
+    padding: 0 32px;
     z-index: 99;
     font-size: 18px;
     transition: all 0.4s ease-in-out;
@@ -26,15 +26,15 @@
     display: flex;
     gap: 16px;
     list-style: none;
-    padding: none;
+    padding: 0;
   }
   .nav .topRow .leftCol ul a,
   .navActive .topRow .leftCol ul a {
-    padding: 8px 16px;
+    padding: 4px 8px;
     background-color: #635d80;
     color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 3px;
+    border-radius: 2px;
   }
   .nav .topRow .leftCol ul a:active,
   .navActive .topRow .leftCol ul a:active {

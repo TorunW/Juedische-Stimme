@@ -2,7 +2,13 @@ import React from 'react';
 import styles from './Styles.module.css';
 import { Field } from 'formik';
 
-function Prices({ product, selectedPrice }: { product:any,selectedPrice?:any}) {
+function Prices({
+  product,
+  selectedPrice,
+}: {
+  product: any;
+  selectedPrice?: any;
+}) {
   let pricesDisplay = product.map((price) => {
     let priceFormattedDisplay;
     if (price.active === true) {
@@ -18,7 +24,15 @@ function Prices({ product, selectedPrice }: { product:any,selectedPrice?:any}) {
       }
     }
     return (
-      <label key={price.id} className={styles.box + ' ' + (selectedPrice === price.id ? styles.boxSelected : "")} title='500€'>
+      <label
+        key={price.id}
+        className={
+          styles.box +
+          ' ' +
+          (selectedPrice === price.id ? styles.boxSelected : '')
+        }
+        title='500€'
+      >
         <Field
           className={styles.radio}
           type='radio'

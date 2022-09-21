@@ -5,22 +5,29 @@
   flex-direction: column;
   gap: 32px;
 
-  .topRow {
+  .bottomRow {
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     justify-content: center;
-    height: 50%;
+    align-items: center;
+    margin: 0 auto;
+    height: 60%;
+    p {
+      color: white;
+      margin-bottom: 32px;
+      text-align: center;
+    }
     .priceContainer {
       display: flex;
+      flex-direction: row;
       flex-wrap: wrap;
-      column-gap: 16px;
+      justify-content: center;
+      gap: 16px;
       .box {
         width: 78px;
         color: #fff;
         font-size: 24px;
         padding: 8px;
-        margin-bottom: 16px;
         cursor: pointer;
         -webkit-user-select: none;
         -moz-user-select: none;
@@ -59,49 +66,56 @@
     }
 
     .btnWrapper {
-      width: 100%;
-      display: flex;
-      margin: 32px 0;
+      margin: 32px auto;
+      width: 300px;
+
       .btn {
-        width: 300px;
-        height: 40px;
-        margin: 0 auto;
-        font-size: 1.1rem;
-        font-family: inherit;
-        background: none;
+        border: 5px solid #8179a6;
+        padding: 8px 16px;
+        font-family: 'Raleway' !important;
+        font-size: 1.4rem;
+        font-weight: 600;
+        border-radius: 2px;
+        text-transform: capitalize;
+        height: 56px;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0);
         cursor: pointer;
+        transition: all 0.2s ease-in-out;
         color: white;
-        font-weight: 500;
-        max-width: 100%;
+      }
+
+      .btnActive .btnInactive {
+        color: gray;
+        border-color: gray;
+        border-style: solid;
       }
     }
   }
 
-  //   .topRow {
-  //     margin-bottom: 16px;
-  //     .active {
-  //       color: white;
-  //       border-bottom: solid 3px #8179a6 !important;
-  //     }
+  .topRow {
+    display: flex;
+    justify-content: space-evenly;
+    .wrapper {
+      margin-bottom: 8px;
+      .active {
+        color: white;
+        border-bottom: solid 3px #8179a6 !important;
+      }
 
-  //     .btn {
-  //       border: none;
-  //     }
+      .btn {
+        border: none;
+      }
 
-  //     .btn,
-  //     .active {
-  //       font-family: inherit;
-  //       text-transform: capitalize;
-  //       font-size: 1.1rem;
-  //       color: white;
-  //       background: none;
-  //       cursor: pointer;
-  //     }
-  //   }
-}
-
-.btnInActive {
-  color: gray !important;
-  border-color: gray !important;
-  border-style: solid;
+      .btn,
+      .active {
+        font-family: inherit;
+        text-transform: capitalize;
+        font-size: 1.1rem;
+        color: white;
+        background: none;
+        cursor: pointer;
+      }
+    }
+  }
 }
