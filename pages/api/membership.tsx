@@ -22,7 +22,7 @@ export default async (req, res) => {
           address: 'info@juedische-stimme.com',
         },
         replyTo: req.body.email,
-        to: 'info@juedische-stimme.com',
+        to: ['info@juedische-stimme.com','mail@juedische-stimme.de'],
         subject: `Membership application`,
         text: req.body.firstname,
         html: `<div>
