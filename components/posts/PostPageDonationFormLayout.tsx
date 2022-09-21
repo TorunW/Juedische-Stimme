@@ -12,13 +12,13 @@ const PostPageDonationFormLayout = ({ post, locale }) => {
   return (
     <React.Fragment>
       <div className={styles.donationFormLayout}>
-        {/* <Image
+        <Image
           src={generateImageUrl(post.post_image)}
           alt='donations-page-background'
           title='donations-page-background'
           layout='fill'
           objectFit='cover'
-        /> */}
+        />
         <div className={styles.pageContainer}>
           <div className={styles.contentContainer}>
             <h2>Spenden</h2>
