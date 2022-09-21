@@ -8,6 +8,7 @@ import { getPostLaoyut } from 'helpers/getPostLayout';
 import PostPageMemberFormLayout from './PostPageMemberFormLayout';
 import PostPageDonationFormLayout from './PostPageDonationFormLayout';
 import dynamic from 'next/dynamic';
+import { getPostContentFields } from 'helpers/getPostContentFields';
 
 const PostPageEmbededContent = dynamic(
   () => import('./PostPageEmbededContent'),
@@ -19,6 +20,7 @@ const PostPageEmbededContent = dynamic(
 
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
+  const { postExcerpt, postContent, postExcerpt2 , postContent2 } = getPostContentFields(post, locale)
 
   // useEffect(() => {
   //   if (post && post.post_embed_script !== null){
@@ -32,12 +34,18 @@ function Post({ post }) {
      - MAKE A BETTER NO POST FOUND PAGE! maybe even split to a different compoent -> show suggested posts? show helpful links?
     */
 
+  function isEmpty(val){
+    let isEmpty = false;
+    if (!val || val === null || val.length === 0 ) isEmpty = true
+    return isEmpty
+  }
+
   let postDisplay: ReactElement;
   if (post && post !== null) {
     const postLayout = getPostLaoyut(post);
     let postLayoutDisplay: ReactElement,
         postNavigationDisplay: ReactElement;
-    if (postLayout === 'newsletter') {
+    if (postLayout === 'newsletter' || isEmpty(postContent) || isEmpty(postExcerpt2) || isEmpty(postContent2)) {
       postLayoutDisplay = (
         <PostPageNewsletterLayout post={post} locale={locale} />
       );
