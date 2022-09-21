@@ -7,10 +7,11 @@ import { getPostContentFields } from 'helpers/getPostContentFields';
 import PostPageEmbededContent from './PostPageEmbededContent';
 
 const PostPageArticleLayout = ({ post, locale }) => {
-  const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } = getPostContentFields(post, locale)
+  const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } =
+    getPostContentFields(post, locale);
 
-  function onSecondImageErrorCapture(arrgs){
-    console.log(arrgs, " ERROR ")
+  function onSecondImageErrorCapture(arrgs) {
+    console.log(arrgs, ' ERROR ');
   }
 
   let tagsDisplay: ReactElement[];
@@ -75,8 +76,7 @@ const PostPageArticleLayout = ({ post, locale }) => {
                   layout='fill'
                   objectFit='cover'
                   onErrorCapture={onSecondImageErrorCapture}
-
-                  />
+                />
               </div>
             </div>
 
@@ -105,7 +105,6 @@ const PostPageArticleLayout = ({ post, locale }) => {
           ) : (
             ''
           )}
-
         </div>
       </div>
     </React.Fragment>

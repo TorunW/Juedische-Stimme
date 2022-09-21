@@ -69,8 +69,8 @@ const MembershipForm = () => {
   });
 
   return (
-    <div id='membership' className={styles.membershipFormContainer}>
-      <form onSubmit={formik.handleSubmit} className={styles.membershipForm}>
+    <div id='membership' className={styles.membershipForm}>
+      <form onSubmit={formik.handleSubmit} className={styles.form}>
         <h3>Dein Info Ausfüllen</h3>
         <div className={styles.formRow}>
           <input

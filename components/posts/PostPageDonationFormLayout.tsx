@@ -27,6 +27,7 @@ const PostPageDonationFormLayout = ({ post, locale }) => {
               className={styles.content}
             ></div>
           </div>
+
           <div className={styles.formContainer}>
             <DonationsForm stripeProducts={post.stripeProducts} />
           </div>

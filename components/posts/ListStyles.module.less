@@ -409,21 +409,25 @@
 
       .topWrapper {
         margin-bottom: 32px;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: flex-end;
-        gap: 32px;
-
-        .topExcerpt {
-          width: 50%;
-          padding-right: 16px;
-        }
+        // width: 100%;
+        // display: flex;
+        // flex-direction: row;
+        // align-items: flex-end;
+        // gap: 32px;
 
         .topContent {
-          width: 100%;
-          display: flex;
-          flex-direction: column;
+          width: 800px;
+          height: 600px;
+          background-color: #22e;
+          .topExcerpt {
+            // width: 50%;
+            // padding-right: 16px;
+            float: left;
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 0 10px 10px 0;
+          }
         }
       }
 
@@ -454,7 +458,6 @@
         p {
           font-size: 1.1rem;
           font-weight: 700;
-          line-height: 1.6rem;
         }
       }
 
@@ -529,6 +532,7 @@
       width: 50%;
       padding: 32px;
       overflow-y: scroll;
+      overflow-x: hidden;
 
       h2 {
         text-transform: uppercase;
