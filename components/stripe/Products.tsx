@@ -10,8 +10,19 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
-function PaymentForm({ products }) {
+function PaymentForm() {
+  const [ products, setProducts ] = useState(null)
   const [productIndex, setProductIndex] = useState(1);
+
+  useEffect(() => {
+    getProducts()
+  },[])
+
+  async function getProducts(){
+    const res = await fetch('/api/stripeproducts')
+    const data = await res.json()
+    setProducts(data)
+  }
 
   const handleSubmit = async (values) => {
     const recurring = products[productIndex].find(
@@ -41,63 +52,66 @@ function PaymentForm({ products }) {
     });
   };
 
-  let productsDisplay = products.map((product, index) => {
-    let priceDisplay;
-    if (productIndex === index) {
-      priceDisplay = (
-        <Formik
-          initialValues={{
-            price: '',
-          }}
-          onSubmit={handleSubmit}
-        >
-          {({ values }) => {
-
-            console.log(values, " VALUSE ")
-
-            return (
-              <Form>
-                <div>
-                  <Prices 
-                    product={product}
-                    selectedPrice={values.price}
-                  />
-                  <button
-                    type='submit'
-                    className={
-                      values.price.length > 1
-                        ? styles.btn
-                        : styles.btn + ' ' + styles.btnInActive
-                    }
-                  >
-                    Click here to donate
-                  </button>
-                </div>
-              </Form>
-            );
-          }}
-        </Formik>
-      );
-    }
-    return (
-      <div key={index}>
-        <div className={styles.topRow}>
-          <button
-            onClick={() => setProductIndex(index)}
-            className={
-              productIndex === index
-                ? styles.btn + ' ' + styles.active
-                : styles.btn
-            }
+  let productsDisplay = <p>...</p>
+  if (products !== null){
+    productsDisplay = products.map((product, index) => {
+      let priceDisplay;
+      if (productIndex === index) {
+        priceDisplay = (
+          <Formik
+            initialValues={{
+              price: '',
+            }}
+            onSubmit={handleSubmit}
           >
-            {product[0].name}
-          </button>
+            {({ values }) => {
+  
+              console.log(values, " VALUSE ")
+  
+              return (
+                <Form>
+                  <div>
+                    <Prices 
+                      product={product}
+                      selectedPrice={values.price}
+                    />
+                    <button
+                      type='submit'
+                      className={
+                        values.price.length > 1
+                          ? styles.btn
+                          : styles.btn + ' ' + styles.btnInActive
+                      }
+                    >
+                      Click here to donate
+                    </button>
+                  </div>
+                </Form>
+              );
+            }}
+          </Formik>
+        );
+      }
+      return (
+        <div key={index}>
+          <div className={styles.topRow}>
+            <button
+              onClick={() => setProductIndex(index)}
+              className={
+                productIndex === index
+                  ? styles.btn + ' ' + styles.active
+                  : styles.btn
+              }
+            >
+              {product[0].name}
+            </button>
+          </div>
+  
+          <div className={styles.bottomRow}>{priceDisplay}</div>
         </div>
-
-        <div className={styles.bottomRow}>{priceDisplay}</div>
-      </div>
-    );
-  });
+      );
+    });
+  }
 
   return <div className={styles.formContainer}>{productsDisplay}</div>;
 }

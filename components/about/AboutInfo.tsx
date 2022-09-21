@@ -8,17 +8,15 @@ import containerBackground from 'styles/images/about.jpg';
 const AboutInfo = ({gallery,aboutInfo}) => {
 
   let [ galleryImages, setGalleryImages ] = useState([])
-  console.log(gallery)
-  console.log(galleryImages)
 
   useEffect(()=>{
     if (gallery !== null) getGalleryImages()
-  },[])
+  },[gallery])
 
   async function getGalleryImages(){
     const res = await fetch(`/api/galleryimage/${gallery.gallery_id}`)
     const data = await res.json()
-    console.log(res)
+    console.log(res, " RES ")
     setGalleryImages(data)
   }
 
