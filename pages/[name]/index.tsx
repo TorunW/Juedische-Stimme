@@ -10,17 +10,12 @@ import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import { NextPageContext } from 'next';
 import { setLanguages } from 'store/languages/languagesSlice';
 import { setPost } from 'store/posts/postsSlice';
-import dynamic from 'next/dynamic'
-
-const PostPage = dynamic(() => import('@/components/posts/PostPage'), {
-  ssr: false,
-});
+import PostPage from 'components/posts/PostPage';
 
 const ContentPage: LayoutPage = (props: LayoutPageProps) => {
 
   let page = {
-    ...JSON.parse(props.page)[0],
-    stripeProducts: props.stripeProducts ? JSON.parse(props.stripeProducts) : null
+    ...JSON.parse(props.page)[0]
   }
   const dispatch = useDispatch();
   useEffect(() => {
@@ -72,13 +67,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
       locale: context.locale,
     }),
   });
-
-  let stripeProducts = null;
-  if (context.query.name === "spenden"){
-    const stripeProductsResponse = await fetch(`http://${context.req.headers.host}/api/stripeproducts`);
-    stripeProducts = JSON.stringify(await stripeProductsResponse.json()) ;
-  }
-
   const page = JSON.stringify(pageResponse);
 
   return {
@@ -87,7 +75,6 @@ export const getServerSideProps = async (context: NextPageContext) => {
       navItems,
       locale: context.locale,
       defaultLocale: context.defaultLocale,
-      stripeProducts
     },
   };
 };

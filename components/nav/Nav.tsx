@@ -18,8 +18,8 @@ function Nav() {
   const [mobileDropDownIsVisibile, setMobileDropDownIsVisibile] =
     useState(false);
 
-  console.log(bgVisible, 'scroll');
-  console.log(isMobileView, 'mobiles');
+  // console.log(bgVisible, 'scroll');
+  // console.log(isMobileView, 'mobiles');
 
   useEffect(() => {
     if (locale !== null) {
