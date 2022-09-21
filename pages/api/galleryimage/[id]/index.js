@@ -1,14 +1,14 @@
 import excuteQuery from 'lib/db'
-import { deleteGalleryImage } from 'lib/queries';
+import { deleteGalleryImage, selectGalleryImagesByGalleryId } from 'lib/queries';
 
 export default async (req, res) => {
     try {
-        if (req.method === 'PUT') {
-            // const result = await excuteQuery({
-            //     query: inserGalleryImage(req.body)
-            // });
-            // // console.log(result,"result")
-            // res.json(result)
+        if (req.method === 'GET'){
+            const result = await excuteQuery({
+                query: selectGalleryImagesByGalleryId(req.query.id)
+            });
+            console.log(result,"result")
+            res.json(result)
         } else if (req.method === 'DELETE') {
             const result = await excuteQuery({
                 query: deleteGalleryImage(req.query.id)

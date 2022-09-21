@@ -13,17 +13,13 @@ const Result: LayoutPage = (props: LayoutPageProps) => {
     () => `/api/checkout_sessions/${session_id}`,
     (url) => axios.get(url).then((res) => res.data)
   );
-
+    console.log(error)
   return (
-    <div>
-      <h1>Payment Result</h1>
-      <h1>RESULT</h1>
-      <h1>RESULT</h1>
-      <h1>RESULT</h1>
-      <h1>RESULT</h1>
+    <main>
       {error ? (
         <div>
-          <p>Sorry, something went wrong!</p>
+          <h2>Sorry, something went wrong!</h2>
+          <p>{error.message}</p>
         </div>
       ) : !data ? (
         <div>
@@ -37,7 +33,7 @@ const Result: LayoutPage = (props: LayoutPageProps) => {
           <p>Check your inbox for the receipt.</p>
         </div>
       )}
-    </div>
+    </main>
   );
 };
 
