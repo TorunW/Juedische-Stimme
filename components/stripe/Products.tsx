@@ -11,17 +11,18 @@ const stripePromise = loadStripe(
 );
 
 function PaymentForm() {
-  const [ products, setProducts ] = useState(null)
+  const [products, setProducts] = useState(null);
   const [productIndex, setProductIndex] = useState(1);
+  console.log(productIndex);
 
   useEffect(() => {
-    getProducts()
-  },[])
+    getProducts();
+  }, []);
 
-  async function getProducts(){
-    const res = await fetch('/api/stripeproducts')
-    const data = await res.json()
-    setProducts(data)
+  async function getProducts() {
+    const res = await fetch('/api/stripeproducts');
+    const data = await res.json();
+    setProducts(data);
   }
 
   const handleSubmit = async (values) => {
@@ -51,73 +52,87 @@ function PaymentForm() {
       sessionId,
     });
   };
-
-  let productsDisplay = (
-    <div className="lds-rings-container">
-      <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
-    </div>
-  )
-  if (products !== null){
-    productsDisplay = products.map((product, index) => {
-      let priceDisplay;
+  let priceDisplay;
+  if (products !== null) {
+    products.map((product, index) => {
       if (productIndex === index) {
         priceDisplay = (
-          <Formik
-            initialValues={{
-              price: '',
-            }}
-            onSubmit={handleSubmit}
-          >
-            {({ values }) => {
-  
-              console.log(values, " VALUSE ")
-  
-              return (
-                <Form>
-                  <div>
-                    <Prices 
-                      product={product}
-                      selectedPrice={values.price}
-                    />
-                    <button
-                      type='submit'
-                      className={
-                        values.price.length > 1
-                          ? styles.btn
-                          : styles.btn + ' ' + styles.btnInActive
-                      }
-                    >
-                      Click here to donate
-                    </button>
-                  </div>
-                </Form>
-              );
-            }}
-          </Formik>
+          <React.Fragment key={index}>
+            <Formik
+              initialValues={{
+                price: '',
+              }}
+              onSubmit={handleSubmit}
+            >
+              {({ values }) => {
+                console.log(values, ' VALUSE ');
+                console.log(productIndex === index ? productIndex : 'not');
+                return (
+                  <Form>
+                    <Prices product={product} selectedPrice={values.price} />
+                    <div className={styles.btnWrapper}>
+                      <button
+                        type='submit'
+                        className={
+                          values.price.length > 1
+                            ? styles.btn
+                            : styles.btn + ' ' + styles.btnInActive
+                        }
+                      >
+                        Click here to donate
+                      </button>
+                    </div>
+                  </Form>
+                );
+              }}
+            </Formik>
+          </React.Fragment>
         );
       }
-      return (
-        <div key={index}>
-          <div className={styles.topRow}>
-            <button
-              onClick={() => setProductIndex(index)}
-              className={
-                productIndex === index
-                  ? styles.btn + ' ' + styles.active
-                  : styles.btn
-              }
-            >
-              {product[0].name}
-            </button>
-          </div>
-  
-          <div className={styles.bottomRow}>{priceDisplay}</div>
-        </div>
-      );
     });
   }
 
-  return <div className={styles.formContainer}>{productsDisplay}</div>;
+  let productsDisplay;
+  if (products !== null) {
+    productsDisplay = products.map((product, index) => {
+      return (
+        <div key={index}>
+          <button
+            onClick={() => setProductIndex(index)}
+            className={
+              productIndex === index
+                ? styles.btn + ' ' + styles.active
+                : styles.btn
+            }
+          >
+            {product[0].name}
+          </button>
+        </div>
+      );
+    });
+  } else {
+    productsDisplay = (
+      <div className='lds-rings-container'>
+        <div className='lds-roller'>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.formContainer}>
+      <div className={styles.topRow}> {priceDisplay}</div>
+      <div className={styles.bottomRow}>{productsDisplay}</div>
+    </div>
+  );
 }
 
 export default PaymentForm;

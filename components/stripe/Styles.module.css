@@ -5,12 +5,19 @@
   flex-direction: column;
   gap: 32px;
 }
-.formContainer .bottomRow .priceContainer {
+.formContainer .topRow {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 50%;
+}
+.formContainer .topRow .priceContainer {
   display: flex;
   flex-wrap: wrap;
-  gap: 16px;
+  column-gap: 16px;
 }
-.formContainer .bottomRow .priceContainer .box {
+.formContainer .topRow .priceContainer .box {
   width: 78px;
   color: #fff;
   font-size: 24px;
@@ -26,7 +33,7 @@
   position: relative;
   z-index: 1;
 }
-.formContainer .bottomRow .priceContainer .box .radio {
+.formContainer .topRow .priceContainer .box .radio {
   position: absolute !important;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
@@ -34,7 +41,7 @@
   height: 50px;
   outline: none;
 }
-.formContainer .bottomRow .priceContainer .box a {
+.formContainer .topRow .priceContainer .box a {
   position: absolute;
   top: 0;
   right: 0;
@@ -45,12 +52,18 @@
   border-radius: 4px;
   z-index: -1;
 }
-.formContainer .bottomRow .priceContainer .boxSelected a {
+.formContainer .topRow .priceContainer .boxSelected a {
   background-color: #454060;
 }
-.formContainer .bottomRow .btn {
-  width: 400px;
+.formContainer .topRow .btnWrapper {
+  width: 100%;
+  display: flex;
+  margin: 32px 0;
+}
+.formContainer .topRow .btnWrapper .btn {
+  width: 300px;
   height: 40px;
+  margin: 0 auto;
   font-size: 1.1rem;
   font-family: inherit;
   background: none;
@@ -58,25 +71,6 @@
   color: white;
   font-weight: 500;
   max-width: 100%;
-}
-.formContainer .topRow {
-  margin-bottom: 16px;
-}
-.formContainer .topRow .active {
-  color: white;
-  border-bottom: solid 3px #8179a6 !important;
-}
-.formContainer .topRow .btn {
-  border: none;
-}
-.formContainer .topRow .btn,
-.formContainer .topRow .active {
-  font-family: inherit;
-  text-transform: capitalize;
-  font-size: 1.1rem;
-  color: white;
-  background: none;
-  cursor: pointer;
 }
 .btnInActive {
   color: gray !important;

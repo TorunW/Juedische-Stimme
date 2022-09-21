@@ -4,11 +4,17 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  .bottomRow {
+
+  .topRow {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 50%;
     .priceContainer {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
+      column-gap: 16px;
       .box {
         width: 78px;
         color: #fff;
@@ -47,50 +53,55 @@
       }
       .boxSelected {
         a {
-          background-color: darken(#8179a6,25%)
+          background-color: darken(#8179a6, 25%);
         }
       }
     }
 
-    .btn {
-      width: 400px;
-      height: 40px;
-      font-size: 1.1rem;
-      font-family: inherit;
-      background: none;
-      cursor: pointer;
-      color: white;
-      font-weight: 500;
-      max-width: 100%;
+    .btnWrapper {
+      width: 100%;
+      display: flex;
+      margin: 32px 0;
+      .btn {
+        width: 300px;
+        height: 40px;
+        margin: 0 auto;
+        font-size: 1.1rem;
+        font-family: inherit;
+        background: none;
+        cursor: pointer;
+        color: white;
+        font-weight: 500;
+        max-width: 100%;
+      }
     }
   }
 
-  .topRow {
-    margin-bottom: 16px;
-    .active {
-      color: white;
-      border-bottom: solid 3px #8179a6 !important;
-    }
+  //   .topRow {
+  //     margin-bottom: 16px;
+  //     .active {
+  //       color: white;
+  //       border-bottom: solid 3px #8179a6 !important;
+  //     }
 
-    .btn {
-      border: none;
-    }
+  //     .btn {
+  //       border: none;
+  //     }
 
-    .btn,
-    .active {
-      font-family: inherit;
-      text-transform: capitalize;
-      font-size: 1.1rem;
-      color: white;
-      background: none;
-      cursor: pointer;
-    }
-  }
+  //     .btn,
+  //     .active {
+  //       font-family: inherit;
+  //       text-transform: capitalize;
+  //       font-size: 1.1rem;
+  //       color: white;
+  //       background: none;
+  //       cursor: pointer;
+  //     }
+  //   }
 }
 
-
 .btnInActive {
-  color:  gray !important;
+  color: gray !important;
   border-color: gray !important;
   border-style: solid;
 }
