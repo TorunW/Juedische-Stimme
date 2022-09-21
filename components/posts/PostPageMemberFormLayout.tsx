@@ -10,20 +10,20 @@ const PostPageMemberFormLayout = ({ post, locale }) => {
   const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } = getPostContentFields(post, locale)
   return (
     <React.Fragment>
-      <div className={styles.memberFormLayout}>
+      <div style={{position:"relative",minHeight:"700px",zIndex:1}}>
         <Image src={generateImageUrl(post.post_image)} layout='fill' objectFit='cover' />
-
-        <div className={styles.contentContainer}>
-          <h2>Mitgliedsantrag</h2>
-          <div
-            dangerouslySetInnerHTML={{ __html: postContent }}
-            className={styles.content}
-          ></div>
-        </div>
-
-        <div className={styles.form}>
-          <MembershipForm />
-        </div>
+      </div>
+      <div className={styles.memberFormLayout} style={{position:"absolute",zIndex:2, top:100,left:0,width:"100%", display:"flex"}}>
+          <div className={styles.contentContainer}>
+            <h2>Mitgliedsantrag</h2>
+            <div
+              dangerouslySetInnerHTML={{ __html: postContent }}
+              className={styles.content}
+            ></div>
+          </div>
+          <div className={styles.form}>
+            <MembershipForm />
+          </div>
       </div>
     </React.Fragment>
   );
