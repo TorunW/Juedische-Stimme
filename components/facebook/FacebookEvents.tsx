@@ -9,9 +9,8 @@ import { useDispatch, useSelector } from 'store/hooks';
 import styles from './StylesEvents.module.css';
 import { isUpdatedToday } from 'helpers/checkIfUpdatedToday';
 
-const FacebookEvents = () => {
+const FacebookEvents = ({fbt}) => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.fbData.token);
   const events = useSelector((state) => state.fbData.events);
 
   useEffect(() => {
@@ -19,10 +18,10 @@ const FacebookEvents = () => {
   },[])
 
   useEffect(() => {
-    if (token) {
+    if (fbt && fbt !== null) {
       initFacebookEvents();
     }
-  }, [token]);
+  }, [fbt]);
 
   async function fetchFacebookEventsFromDb() {
     const res = await fetch('/api/fbevents')
@@ -36,7 +35,7 @@ const FacebookEvents = () => {
 
   async function fetchFacebookEvents() {
     const res = await fetch(
-      `https://graph.facebook.com/998665673528998/events?limit=3&access_token=${token}`
+      `https://graph.facebook.com/998665673528998/events?limit=3&access_token=${fbt}`
     );
     const fetchedEvents = await res.json();
     if (fetchedEvents.data && fetchedEvents.data.length > 0) {

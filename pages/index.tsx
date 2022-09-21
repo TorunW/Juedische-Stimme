@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NextPageContext } from 'next';
 import { hasCookie } from 'cookies-next';
 
@@ -33,6 +33,9 @@ import { setHeaderGallery } from 'store/galleries/galleriesSlice';
 import Head from 'next/head';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
+
+  const [ fbt, setFbt ] = useState()
+
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
   const { gallery, aboutInfo, headerImage } = useSelector(
@@ -73,6 +76,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   async function getFbToken() {
     const fbTokenResult = await fetch('/api/fbtoken');
     const fbToken = await fbTokenResult.json();
+    setFbt(fbToken[0].token)
     dispatch(setToken(fbToken[0].token));
   }
 
@@ -118,11 +122,11 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       </Head>
       <Header />
       <Posts posts={posts} title={'Aktuelles'} />
-      <FacebookEvents />
+      <FacebookEvents fbt={fbt} />
       <AboutInfo gallery={gallery} aboutInfo={aboutInfo} />
       <Posts posts={newsletter} title={'Newsletter'} />
       <CallToAction />
-      <FacebookFeed />
+      <FacebookFeed fbt={fbt}  />
     </main>
   );
 };

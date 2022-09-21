@@ -11,9 +11,8 @@ import styles from './StylesFeed.module.css';
 import { isUpdatedToday } from 'helpers/checkIfUpdatedToday';
 import FacebookPosts from './FacbookPosts';
 
-const FacebookFeed = () => {
+const FacebookFeed = ({fbt}) => {
   const dispatch = useDispatch();
-  const token = useSelector((state) => state.fbData.token);
   const feed = useSelector((state) => state.fbData.feed);
 
   useEffect(() => {
@@ -22,10 +21,10 @@ const FacebookFeed = () => {
   },[])
 
   useEffect(() => {
-    if (token && token !== null) {
+    if (fbt && fbt !== null) {
       if (!feed || !isUpdatedToday(feed.date_updated)) fetchFacebookFeedFromFb();
     }
-  }, [token]);
+  }, [fbt]);
 
   async function fetchFacebookFeedFromDb(){
     const res = await fetch('/api/fbfeed')
@@ -37,7 +36,7 @@ const FacebookFeed = () => {
   async function fetchFacebookFeedFromFb() {
     const fields =
       'id,likes.summary(true).limit(0),comments.summary(true).limit(0),reactions,shares,attachments,full_picture,message,from,permalink_url,created_time';
-    const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=8&fields=${fields}&access_token=${token}`;
+    const fbFetchUrl = `https://graph.facebook.com/998665673528998/feed?limit=8&fields=${fields}&access_token=${fbt}`;
     const res = await fetch(fbFetchUrl);
     const fetchedFeed = await res.json();
 
