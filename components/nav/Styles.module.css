@@ -120,7 +120,7 @@
     transition: color 0.3s ease-in-out;
   }
   .nav .bottomRow li a:hover {
-    color: #2e2e2e;
+    color: #d1cedf;
   }
   .navActive {
     background: #d1cedf;
