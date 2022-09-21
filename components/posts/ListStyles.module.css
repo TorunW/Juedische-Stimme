@@ -74,7 +74,7 @@
   min-width: 50%;
   position: relative;
   overflow: hidden;
-  aspect-ratio: auto 1.86333333;
+  aspect-ratio: auto 559 / 300;
 }
 .articleLayout .contentContainer .middleWrapper .image img {
   height: 100%;
@@ -118,7 +118,7 @@
 }
 .newsletterLayout .header .imageWrapper {
   max-width: 1220px;
-  aspect-ratio: auto 2.9495549;
+  aspect-ratio: auto 994 / 337;
   margin: 32px auto;
   overflow: hidden;
   cursor: pointer;
@@ -138,7 +138,7 @@
 .newsletterLayout .contentContainer .image {
   margin: 48px auto;
   max-width: 749px;
-  aspect-ratio: auto 2.43558282;
+  aspect-ratio: auto 794 / 326;
   overflow: hidden;
   position: relative;
 }
@@ -228,4 +228,10 @@
   width: 50%;
   padding: 32px;
   height: 100%;
+}
+.embededCodeContainer {
+  margin-top: 50px;
+  padding: 50px;
+  background-color: #f1f0f0;
+  border-radius: 25px;
 }

@@ -158,6 +158,9 @@ p {
 main {
   padding-top: 115px;
 }
+main.proca-MuiContainer-root {
+  padding-top: 0;
+}
 #main-layout {
   overflow: hidden;
 }

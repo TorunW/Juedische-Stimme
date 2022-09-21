@@ -45,12 +45,7 @@ function Post({ post }) {
     const postLayout = getPostLaoyut(post);
     let postLayoutDisplay: ReactElement,
         postNavigationDisplay: ReactElement;
-    if (postLayout === 'newsletter' || isEmpty(postContent) || isEmpty(postExcerpt2) || isEmpty(postContent2)) {
-      postLayoutDisplay = (
-        <PostPageNewsletterLayout post={post} locale={locale} />
-      );
-      postNavigationDisplay = <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
-    } else if (postLayout === 'member_form') {
+    if (postLayout === 'member_form') {
       postLayoutDisplay = (
         <PostPageMemberFormLayout post={post} locale={locale} />
       );
@@ -58,21 +53,18 @@ function Post({ post }) {
       postLayoutDisplay = (
         <PostPageDonationFormLayout post={post} locale={locale} />
       );
-    } else {
+    } else if (postLayout === 'newsletter' || isEmpty(postContent) || isEmpty(postExcerpt2) || isEmpty(postContent2)) {
+      postLayoutDisplay = (
+        <PostPageNewsletterLayout post={post} locale={locale} />
+      );
+      postNavigationDisplay = <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
+    }  else {
       postLayoutDisplay = <PostPageArticleLayout post={post} locale={locale} />;
       postNavigationDisplay = <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
     }
     postDisplay = (
       <React.Fragment>
         {postLayoutDisplay}
-        {post.post_embed_script ? (
-          <PostPageEmbededContent
-            script={post.post_embed_script}
-            html={post.post_embed_html}
-          />
-        ) : (
-          ''
-        )}
         {postNavigationDisplay}
       </React.Fragment>
     );

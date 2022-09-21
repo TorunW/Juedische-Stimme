@@ -4,7 +4,7 @@ import Script from 'next/script';
 
 const PostPageEmbededContent = ({script,html}) => {
     return (
-        <div className={styles.contentContainer}>
+        <div className={styles.embededCodeContainer}>
             <Script strategy='lazyOnload' src={script}></Script>
             <div dangerouslySetInnerHTML={{__html:html}}></div>
         </div>
