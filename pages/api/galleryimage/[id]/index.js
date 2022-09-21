@@ -7,13 +7,11 @@ export default async (req, res) => {
             const result = await excuteQuery({
                 query: selectGalleryImagesByGalleryId(req.query.id)
             });
-            console.log(result,"result")
             res.json(result)
         } else if (req.method === 'DELETE') {
             const result = await excuteQuery({
                 query: deleteGalleryImage(req.query.id)
             });
-            console.log(result,"result")
             res.json(result)
         } else  {
             // Handle any other HTTP method
