@@ -37,7 +37,7 @@ function BlurringImage({
           ))}
         </Svg>
       </div>
-      <Image
+      {/* <Image
         {...img}
         {...props}
         className={styles.img}
@@ -45,7 +45,7 @@ function BlurringImage({
         alt={alt}
         priority={true}
         onLoadingComplete={() => props.onLoadingComplete()}
-      />
+      /> */}
     </div>
   );
 }

@@ -23,49 +23,40 @@ const Header = () => {
     headerGalleryDisplay = headerGallery.imageSrcs
       .split(',')
       .map((imgSrc, index) => {
-        return (
-          <div
-            key={Date.now() + index}
-            className={
-              slideIndex === index
-                ? styles.slideActive
-                : prevSlideIndex === index
-                ? styles.prevSlide
-                : styles.slide
-            }
-          >
-            <Image layout='fill' src={generateImageUrl(imgSrc)} />
-          </div>
-        );
-        // if (index == 0) {
-        //   return (
-        //     <BlurringImage
-        //       key={imgSrc}
-        //       svg={svg}
-        //       img={img}
-        //       alt={undefined}
-        //       style={undefined}
-        //       height={img.height}
-        //       onLoadingComplete={() => dispatch(setHeaderImageLoaded(true))}
-        //     />
-        //   );
-        // } else {
-        //   return (
-        //     <div key={imgSrc}>
-        //       <Image
-        //         layout='fill'
-        //         src={generateImageUrl(imgSrc)}
-        //         className={
-        //           slideIndex === index
-        //             ? styles.slideActive
-        //             : prevSlideIndex === index
-        //             ? styles.prevSlide
-        //             : styles.slide
-        //         }
-        //       />
-        //     </div>
-        // );
-        // }
+        // return (
+          let blurredBgImage;
+          if (index === 0){
+            blurredBgImage = (
+              <BlurringImage
+                key={imgSrc}
+                svg={svg}
+                img={img}
+                alt={undefined}
+                style={undefined}
+                height={img.height}
+                onLoadingComplete={() => dispatch(setHeaderImageLoaded(true))}
+              />
+            );
+          }
+        
+          return (
+            <React.Fragment key={Date.now() + index}>
+              {blurredBgImage}
+              <div
+                
+                className={
+                  slideIndex === index
+                    ? styles.slideActive
+                    : prevSlideIndex === index
+                    ? styles.prevSlide
+                    : styles.slide
+                }
+              >
+                <Image layout='fill' src={generateImageUrl(imgSrc)} />
+              </div>
+            </React.Fragment>
+          );
+        
     });
 
     headerGalleryControllersDisplay = (

@@ -4,7 +4,7 @@ import { useSelector } from 'store/hooks';
 import formateDate from 'helpers/formateDate';
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
 import styles from './Styles.module.css';
-import axios from 'axios';
+// import axios from 'axios';
 import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,9 +13,10 @@ import { getPostContentFields } from 'helpers/getPostContentFields';
 type Props = {
   post: any;
   phrase?: string;
+  imageDimensions: any;
 };
 
-const Post: React.FC<Props> = ({ post, phrase }) => {
+const Post: React.FC<Props> = ({ post, phrase, imageDimensions }) => {
 
   const { locale } = useSelector((state) => state.languages);
   const { postTitle, postExcerpt, postContent } = getPostContentFields(post, locale)
@@ -33,8 +34,10 @@ const Post: React.FC<Props> = ({ post, phrase }) => {
           src={generateImageUrl(post.post_image)}
           alt={post.post_title}
           title={post.post_title}
-          layout='fill'
-          objectFit='cover'
+          width={imageDimensions.width}
+          height={imageDimensions.height}
+          // objectFit={'cover'}
+          // layout={'fill'}
         />
       </div>
 
