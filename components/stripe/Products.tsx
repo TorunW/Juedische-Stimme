@@ -52,7 +52,11 @@ function PaymentForm() {
     });
   };
 
-  let productsDisplay = <p>...</p>
+  let productsDisplay = (
+    <div className="lds-rings-container">
+      <div className="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+  )
   if (products !== null){
     productsDisplay = products.map((product, index) => {
       let priceDisplay;
