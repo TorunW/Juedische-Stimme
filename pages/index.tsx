@@ -44,10 +44,10 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   }, []);
 
   useEffect(() => {
-    if (headerImage.isLoaded === true) {
+    // if (headerImage.isLoaded === true) {
       getFbToken();
       getNewsletterPosts();
-    }
+    // }
   }, [headerImage.isLoaded]);
 
   function initHomePage() {
