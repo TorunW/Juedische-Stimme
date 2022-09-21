@@ -18,8 +18,9 @@ function Nav() {
   const [mobileDropDownIsVisibile, setMobileDropDownIsVisibile] =
     useState(false);
 
-  // console.log(bgVisible, 'scroll');
-  // console.log(isMobileView, 'mobiles');
+  console.log(bgVisible, 'scroll');
+  console.log(isMobileView, 'mobiles');
+  console.log(mobileDropDownIsVisibile, 'dropdown');
 
   useEffect(() => {
     if (locale !== null) {
@@ -191,7 +192,7 @@ function Nav() {
       <React.Fragment>
         <div className={styles.mobileNav}>
           <Link href={'/'}>
-            <div className={styles.leftCol}>
+            <div className={styles.leftCol} onClick={handleClick}>
               <Image src={logo1} title='home' alt='home-logo' />
               <Image src={logo2} title='home' alt='home-logo' />
             </div>

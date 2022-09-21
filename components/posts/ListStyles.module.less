@@ -352,122 +352,123 @@
   }
 }
 
-// @media (max-width: 844px) {
-//   .articleLayout {
-//     height: 100%;
+@media (max-width: 844px) {
+  .articleLayout {
+    height: 100%;
 
-//     .header {
-//       height: 350px;
-//       background: #696388;
-//       width: 100%;
-//       display: flex;
-//       justify-content: flex-end;
-//       .contentWrapper {
-//         width: 100%;
-//         display: flex;
-//         margin-top: 88px;
+    .header {
+      height: 350px;
+      background: #696388;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      .contentWrapper {
+        width: 100%;
+        display: flex;
+        margin-top: 88px;
 
-//         h2 {
-//           display: flex;
-//           align-items: center;
-//           position: relative;
-//           margin: 0 auto;
-//           padding: 0 32px;
-//           color: white;
-//           z-index: 5;
-//           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-//         }
+        h2 {
+          display: flex;
+          align-items: center;
+          position: relative;
+          margin: 0 auto;
+          padding: 0 32px;
+          color: white;
+          z-index: 5;
+          text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
 
-//         .imageWrapper {
-//           width: 50%;
-//           height: 300px;
-//           position: absolute;
-//           z-index: 1;
-//           right: 0;
-//           filter: brightness(80%);
-//           background: #696388;
+        .imageWrapper {
+          width: 60%;
+          height: 300px;
+          position: absolute;
+          z-index: 1;
+          right: 0;
+          filter: brightness(80%);
+          background: #696388;
 
-//           img {
-//             height: 100%;
-//             width: 100%;
-//             object-fit: cover;
-//           }
-//         }
-//       }
-//     }
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
 
-//     .linksContainer {
-//       margin: 32px auto;
-//       padding: 0 64px;
-//       color: #626262;
-//     }
+    .linksContainer {
+      margin: 32px auto;
+      padding: 0 16px;
+      color: #626262;
 
-//     .contentContainer {
-//       margin: 64px auto;
-//       padding: 0 64px;
-//       color: #2e2e2e;
+      p {
+        width: 200px;
+        font-size: 0.9rem;
+      }
+    }
 
-//       .topWrapper {
-//         margin-bottom: 32px;
-//         width: 100%;
-//         display: flex;
-//         flex-direction: row;
-//         align-items: flex-end;
-//         gap: 32px;
+    .contentContainer {
+      margin: 32px auto;
+      padding: 0 16px;
+      color: #2e2e2e;
 
-//         .topExcerpt {
-//           width: 30%;
-//           padding-right: 16px;
-//         }
+      .topWrapper {
+        display: block;
 
-//         .topContent {
-//           width: 70%;
-//           display: flex;
-//           flex-direction: column;
-//         }
-//       }
+        .topExcerpt {
+          padding: 0;
+          display: inline;
+          float: left;
+          width: 230px;
+          height: 160px;
+        }
 
-//       .middleWrapper {
-//         display: flex;
-//         align-items: center;
-//         gap: 64px;
-//         margin-bottom: 32px;
-//         .image {
-//           min-width: 50%;
-//           position: relative;
-//           overflow: hidden;
-//           aspect-ratio: auto 559 / 300;
+        .topContent {
+          display: inline;
+        }
+      }
 
-//           img {
-//             height: 100%;
-//             width: 100%;
-//             object-fit: cover;
-//           }
-//         }
+      .middleWrapper {
+        display: flex;
+        align-items: center;
+        gap: 64px;
+        margin-bottom: 32px;
+        .image {
+          min-width: 50%;
+          position: relative;
+          overflow: hidden;
+          aspect-ratio: auto 559 / 300;
 
-//         .bottomExcerpt {
-//           width: 50%;
-//         }
-//       }
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
 
-//       .excerpt {
-//         p {
-//           font-size: 1.1rem;
-//           font-weight: 700;
-//           line-height: 1.6rem;
-//         }
-//       }
+        .bottomExcerpt {
+          width: 50%;
+        }
+      }
 
-//       .content {
-//         font-size: 1rem;
-//         p {
-//           line-height: 1.5rem;
-//           margin: 16px 0;
-//         }
-//       }
-//     }
-//   }
-// }
+      .excerpt {
+        p {
+          font-size: 1rem;
+          font-weight: 700;
+          line-height: 1.6rem;
+        }
+      }
+
+      .content {
+        font-size: 0.9rem;
+        p {
+          line-height: 1.5rem;
+          margin: 16px 0;
+        }
+      }
+    }
+  }
+}
 
 .navigationContainer {
   display: flex;
