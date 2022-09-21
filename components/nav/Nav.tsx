@@ -145,6 +145,17 @@ function Nav() {
     </div>
   );
 
+  let mobileMenuDisplay;
+  if (mobileDropDownIsVisibile === true) {
+    mobileMenuDisplay = (
+      <>
+        <ul>{mainMenuDisplay}</ul>
+        <ul>{callToActionMenuDisplay}</ul>
+        {socialmediaMenuDisplay}
+      </>
+    );
+  }
+
   let menuDisplay;
   if (isMobileView === false) {
     menuDisplay = (
@@ -216,10 +227,8 @@ function Nav() {
               : styles.mobileMenu + ' ' + styles.mobileMenuClose
           }
         >
-          <ul>{mainMenuDisplay}</ul>
-          <ul>{callToActionMenuDisplay}</ul>
-          {socialmediaMenuDisplay}
-        </div>{' '}
+          {mobileMenuDisplay}
+        </div>
       </React.Fragment>
     );
   }
