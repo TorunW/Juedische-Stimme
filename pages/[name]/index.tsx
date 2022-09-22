@@ -14,13 +14,11 @@ import PostPage from 'components/posts/PostPage';
 
 const ContentPage: LayoutPage = (props: LayoutPageProps) => {
 
-  let page = {
-    ...JSON.parse(props.page)[0]
-  }
+  let page = null
+  if (JSON.parse(props.page)[0]) page = JSON.parse(props.page)[0]
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
-    dispatch(setPost(JSON.parse(props.page)[0]))
     dispatch(
       setLanguages({
         locales: props.locales,
@@ -28,6 +26,9 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
         defaultLocale: props.defaultLocale,
       })
     );
+    if (page){
+      dispatch(setPost(JSON.parse(props.page)[0]))
+    }
   }, [props.page]);
 
   let headDisplay: ReactElement;
@@ -37,7 +38,7 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
         <title>{page.post_title}</title>
         <meta property="og:title" content={page.post_title} key="title" />
         <meta property="og:keywords" key="keywords" name="keywords" content={page.tagNames !== null ? page.tagNames : page.post_title}/>
-        <meta property="og:description" key="description" name="description" content={page.post_content.substring(0,200)}/>
+        <meta property="og:description" key="description" name="description" content={page.post_content?.substring(0,200)}/>
       </Head>
     )
   }

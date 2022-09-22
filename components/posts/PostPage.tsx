@@ -10,17 +10,8 @@ import PostPageDonationFormLayout from './PostPageDonationFormLayout';
 import dynamic from 'next/dynamic';
 import { getPostContentFields } from 'helpers/getPostContentFields';
 
-const PostPageEmbededContent = dynamic(
-  () => import('./PostPageEmbededContent'),
-  {
-    suspense: true,
-    ssr: false,
-  }
-);
-
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
-  const { postExcerpt, postContent, postExcerpt2 , postContent2 } = getPostContentFields(post, locale)
 
   // useEffect(() => {
   //   if (post && post.post_embed_script !== null){
@@ -42,6 +33,9 @@ function Post({ post }) {
 
   let postDisplay: ReactElement;
   if (post && post !== null) {
+
+    const { postExcerpt, postContent, postExcerpt2 , postContent2 } = getPostContentFields(post, locale)
+
     const postLayout = getPostLaoyut(post);
     let postLayoutDisplay: ReactElement,
         postNavigationDisplay: ReactElement;
@@ -71,7 +65,14 @@ function Post({ post }) {
   } else {
     postDisplay = (
       <React.Fragment>
-        <h4>No Post Found!</h4>
+        <div className={styles.newsletterLayout}>
+          <h1>No Post Found!</h1>
+          <article>
+            <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            </p>
+          </article>
+        </div>
       </React.Fragment>
     );
   }
