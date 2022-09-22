@@ -19,7 +19,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     ],
 
     mode,
-    // billing_address_collection: 'required',
+    billing_address_collection: 'required',
     // customer_email: 'required',
     success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${req.headers.origin}/spenden`,
