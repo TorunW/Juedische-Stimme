@@ -42,6 +42,7 @@ const Galleries = (props) => {
           none of the pages should have data - render logic. 
           mapping of galleries should be handled by a dedicated Galleries or AdminGalleries component 
         */
+       console.log(props.galleries)
           galleriesDisplay = props.galleries.map((gallery,index) => (
               <li key={index}>
                 <Link href={`/admin/galleries/${gallery.gallery_id}`}>{gallery.gallery_name}</Link>

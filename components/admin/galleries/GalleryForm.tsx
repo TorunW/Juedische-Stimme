@@ -81,17 +81,10 @@ function GalleryForm({ gallery }: GalleryFromProps) {
     if (gallery.images) {
       galleryImagesDisplay = gallery.images.map(
         (galleryImage: Image, index: number) => (
-          <div key={index} className='gallery-form-image'>
-            <a
-              href={`/admin/galleries/${gallery.gallery_id}/${galleryImage.image_id}`}
-            >
-              <img
-                src={`/wp-content/uploads/${galleryImage.image_src}`}
-                width='300'
-              />
-            </a>
-            <button onClick={() => deleteImage(galleryImage)}>DELETE</button>
-          </div>
+          <GalleryImageForm 
+            galleryImage={galleryImage}
+            galleryId={gallery.gallery_id}
+          />
         )
       );
     }

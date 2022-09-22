@@ -95,20 +95,22 @@ function PaymentForm() {
   let productsDisplay;
   if (products !== null) {
     productsDisplay = products.map((product, index) => {
-      return (
-        <div key={index}>
-          <button
-            onClick={() => setProductIndex(index)}
-            className={
-              productIndex === index
-                ? styles.btn + ' ' + styles.active
-                : styles.btn
-            }
-          >
-            {product[0].name}
-          </button>
-        </div>
-      );
+      if (product[0].name){
+        return (
+          <div key={index}>
+            <button
+              onClick={() => setProductIndex(index)}
+              className={
+                productIndex === index
+                  ? styles.btn + ' ' + styles.active
+                  : styles.btn
+              }
+            >
+              {product[0].name}
+            </button>
+          </div>
+        );
+      }
     });
   } else {
     productsDisplay = (
