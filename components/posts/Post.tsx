@@ -29,10 +29,10 @@ const Post: React.FC<Props> = ({ post, phrase, imageDimensions }) => {
 
   return (
     <article className={styles.post} data-testid='post-container'>
-      <div className={styles.imageWrapper}>
+      
         {
           post.post_image !== null 
-          ? <Image
+          ? <div className={styles.imageWrapper}><Image
             src={generateImageUrl(post.post_image)}
             alt={post.post_title}
             title={post.post_title}
@@ -40,10 +40,10 @@ const Post: React.FC<Props> = ({ post, phrase, imageDimensions }) => {
             height={imageDimensions.height}
             // objectFit={'cover'}
             // layout={'fill'}
-          /> 
+          /> </div>
           : ""
         }
-      </div>
+      
 
       <div className={styles.date}>
         {post.post_date ? formateDate(post.post_date) : ''}
