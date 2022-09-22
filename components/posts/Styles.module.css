@@ -22,6 +22,7 @@
   cursor: pointer;
   display: block;
   position: relative;
+  background-color: #ebebeb;
   width: 100%;
 }
 .twoColPage .postsContainer .post .imageWrapper img,
@@ -93,7 +94,7 @@
     width: calc(50% - 32px);
   }
   .twoColPage .postsContainer .post .imageWrapper {
-    aspect-ratio: auto 2.22413793;
+    aspect-ratio: auto 645 / 290;
   }
 }
 @media (max-width: 991px) {
@@ -101,7 +102,7 @@
     width: 100%;
   }
   .twoColPage .post .imageWrapper {
-    aspect-ratio: auto 2.22413793;
+    aspect-ratio: auto 645 / 290;
   }
 }
 @media (min-width: 991px) {
@@ -109,7 +110,7 @@
     width: calc(33.3333% - 32px);
   }
   .threeColPage .postsContainer .post .imageWrapper {
-    aspect-ratio: auto 1.64285714;
+    aspect-ratio: auto 460 / 280;
   }
 }
 @media (max-width: 990px) {
@@ -117,7 +118,7 @@
     width: calc(50% - 32px);
   }
   .threeColPage .postsContainer .post .imageWrapper {
-    aspect-ratio: auto 1.64285714;
+    aspect-ratio: auto 460 / 280;
   }
 }
 @media (max-width: 600px) {
@@ -125,7 +126,7 @@
     width: 100%;
   }
   .threeColPage .postsContainer .post .imageWrapper {
-    aspect-ratio: auto 1.64285714;
+    aspect-ratio: auto 460 / 280;
   }
 }
 .header {

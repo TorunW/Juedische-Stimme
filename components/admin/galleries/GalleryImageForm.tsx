@@ -63,6 +63,7 @@ function GalleryImageForm({ galleryId, galleryImage }:GalleryImageFormProps) {
       image_title: galleryImage ? galleryImage.image_title : '',
       image_description: galleryImage ? galleryImage.image_description : '',
       image_gallery: galleryImage ? galleryImage.image_gallery : galleryId,
+      image_order: galleryImage ? galleryImage.image_order : galleryImage
     },
     onSubmit: (values) => {
       console.log(values, ' VALJUES ON SUBMIT');
@@ -109,11 +110,23 @@ function GalleryImageForm({ galleryId, galleryImage }:GalleryImageFormProps) {
           <input
             id='image_title'
             name='image_title'
-            type='image_title'
+            type='text'
             onChange={formik.handleChange}
             value={formik.values.image_title}
           />
         </div>
+
+        <div className={styles['form-row']}>
+          <label htmlFor='image_order'>IMAGE ORDER</label>
+          <input
+            id='image_order'
+            name='image_order'
+            type='text'
+            onChange={formik.handleChange}
+            value={formik.values.image_order}
+          />
+        </div>
+
         <div className={styles['form-row']}>
           <label htmlFor='image_description'>IMAGE DESCRIPTION</label>
           <Suspense fallback={'LOADING...'}>

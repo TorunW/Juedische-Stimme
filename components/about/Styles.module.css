@@ -2,6 +2,10 @@
   text-align: center;
   margin: 120px auto;
   color: #2e2e2e;
+  margin-top: 0;
+}
+.aboutPage h1 {
+  padding-top: 120px;
 }
 .aboutPage .aboutContainer {
   margin: 0 auto 48px;

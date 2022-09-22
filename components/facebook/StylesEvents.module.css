@@ -1,9 +1,11 @@
 .eventsPage {
   margin: 0 auto;
+  margin-top: -120px;
 }
 .eventsPage h2 {
   text-transform: uppercase;
   text-align: center;
+  padding-top: 120px;
 }
 .eventsPage .contentContainer {
   padding: 0 70px;
