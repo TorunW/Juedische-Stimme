@@ -70,7 +70,7 @@
       width: 300px;
 
       .btn {
-        border: 5px solid #8179a6;
+        border: 5px solid;
         padding: 8px 16px;
         font-family: 'Raleway' !important;
         font-size: 1.4rem;
@@ -82,13 +82,16 @@
         background-color: rgba(0, 0, 0, 0);
         cursor: pointer;
         transition: all 0.2s ease-in-out;
+      }
+
+      .btnActive {
+        border-color: #8179a6;
         color: white;
       }
 
-      .btnActive .btnInactive {
+      .btnInactive {
         color: gray;
         border-color: gray;
-        border-style: solid;
       }
     }
   }

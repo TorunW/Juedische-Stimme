@@ -67,7 +67,7 @@
   width: 300px;
 }
 .formContainer .bottomRow .btnWrapper .btn {
-  border: 5px solid #8179a6;
+  border: 5px solid;
   padding: 8px 16px;
   font-family: 'Raleway' !important;
   font-size: 1.4rem;
@@ -79,12 +79,14 @@
   background-color: rgba(0, 0, 0, 0);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+}
+.formContainer .bottomRow .btnWrapper .btnActive {
+  border-color: #8179a6;
   color: white;
 }
-.formContainer .bottomRow .btnWrapper .btnActive .btnInactive {
+.formContainer .bottomRow .btnWrapper .btnInactive {
   color: gray;
   border-color: gray;
-  border-style: solid;
 }
 .formContainer .topRow {
   display: flex;
