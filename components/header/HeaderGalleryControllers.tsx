@@ -9,20 +9,9 @@ const HeaderGalleryControllers = ({
 }) => {
   const [buttonHidden, setButtonHidden] = useState(false);
   // useref slider use ref
-  useEffect(() => {
-    // setInterval(nextSlide, 1000);
-  }, []);
-
-  // if (slideIndex !== slideshowLength) {
-  //   // setTimeout(() => {
-  //     nextSlide();
-  //   // }, 5000);
-  // } else {
-  //   slideIndex = 0;
-  //   // setTimeout(() => {
-  //     nextSlide();
-  //   // }, 3000);
-  // }
+  // useEffect(() => {
+  //   // setInterval(nextSlide, 3000);
+  // }, []);
 
   function nextSlide() {
     if (buttonHidden === false) {
@@ -55,7 +44,7 @@ const HeaderGalleryControllers = ({
   }
 
   return (
-    <div>
+    <div className={styles.galleryControllers}>
       <button
         className={styles.prev}
         onClick={prevSlide}

@@ -1,23 +1,31 @@
 .header {
-  height: 550px;
+  height: 650px;
+  position: relative;
   width: 100%;
 }
-.header .containerSlider {
-  aspect-ratio: 2.25;
+.header .blurredImg {
   height: 100%;
   width: 100%;
-  margin: 0 auto;
-  position: relative;
+  position: absolute;
   overflow: hidden;
 }
-.header .slide {
+.header .galleryWrapper {
+  position: absolute;
+  aspect-ratio: auto 2;
+  width: 1000px;
+  height: 500px;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+}
+.header .galleryWrapper .slide {
   width: 100%;
   height: 100%;
   position: absolute;
   opacity: 0;
   z-index: 0;
 }
-.header .slideActive {
+.header .galleryWrapper .slideActive {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -29,7 +37,7 @@
   animation-iteration-count: 1;
   z-index: 2;
 }
-.header .prevSlide {
+.header .galleryWrapper .prevSlide {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -57,37 +65,37 @@
     opacity: 1;
   }
 }
-.header img {
+.header .galleryWrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.header .prev,
-.header .next {
-  width: 60px;
-  height: 431px;
+.header .galleryWrapper .prev,
+.header .galleryWrapper .next {
+  width: 50%;
+  height: 100%;
   border: none;
   position: absolute;
   display: flex;
-  justify-content: center;
   align-items: center;
   cursor: pointer;
   z-index: 20;
-  bottom: 0;
+  top: 50%;
+  transform: translateY(-50%);
   opacity: 0;
   transition: all 0.4s ease-in-out;
 }
-.header .prev:hover,
-.header .next:hover {
+.header .galleryWrapper .prev:hover,
+.header .galleryWrapper .next:hover {
   opacity: 1;
 }
-.header .prev {
+.header .galleryWrapper .prev {
   left: 0;
-  background: #000000;
-  background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0.62) 60%, rgba(0, 0, 0, 0.3) 90%);
+  background: rgba(0, 0, 0, 0);
+  justify-content: left;
 }
-.header .next {
+.header .galleryWrapper .next {
   right: 0;
-  background: #000000;
-  background: linear-gradient(270deg, #000000 0%, rgba(0, 0, 0, 0.62) 60%, rgba(0, 0, 0, 0.3) 90%);
+  background: rgba(0, 0, 0, 0);
+  justify-content: right;
 }

@@ -3,15 +3,15 @@
   .navActive {
     position: fixed;
     width: 100%;
-    height: 119px;
     padding: 0 32px;
     z-index: 99;
     font-size: 18px;
+    font-weight: 500;
     transition: all 0.4s ease-in-out;
   }
   .nav .topRow,
   .navActive .topRow {
-    margin: 16px 0 16px;
+    margin: 8px 0 16px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
@@ -30,11 +30,12 @@
   }
   .nav .topRow .leftCol ul a,
   .navActive .topRow .leftCol ul a {
-    padding: 4px 8px;
+    padding: 6px 8px;
     background-color: #635d80;
     color: white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 2px;
+    font-weight: 400;
   }
   .nav .topRow .leftCol ul a:active,
   .navActive .topRow .leftCol ul a:active {
@@ -77,14 +78,13 @@
   }
   .nav .topRow .rightCol .languageMenu,
   .navActive .topRow .rightCol .languageMenu {
-    font-weight: 500;
     cursor: pointer;
   }
   .nav .bottomRow,
   .navActive .bottomRow {
     display: flex;
     justify-content: center;
-    margin: 8px 0 16px;
+    margin: 8px 0 8px;
     text-transform: capitalize;
   }
   .nav .bottomRow ul,
@@ -106,14 +106,14 @@
     transition: color 0.3s ease-in-out;
   }
   .nav .rightCol .languageMenu a:hover {
-    color: #2e2e2e;
+    color: #d1cedf;
   }
   .nav svg {
     fill: white;
     transition: fill 0.3s ease-in-out;
   }
   .nav svg:hover {
-    fill: #2e2e2e;
+    fill: #d1cedf;
   }
   .nav .bottomRow li a {
     color: white;

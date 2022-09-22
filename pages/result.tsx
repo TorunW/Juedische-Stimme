@@ -16,13 +16,10 @@ const Result: LayoutPage = (props: LayoutPageProps) => {
     () => `/api/checkout_sessions/${session_id}`,
     (url) => axios.get(url).then((res) => res.data)
   );
-  console.log(error);
+  console.log(data);
 
-  // background
-  // box with text
-  //thank you for your donation! (or membershipfee)
-  // dont forger to subscribe to out newsletter
-  // take me back to homepepage
+  // add order number
+  // add signupp for newsletter or follow social media???
 
   return (
     <main className={styles.resultsPage}>

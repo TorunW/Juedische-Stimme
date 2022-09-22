@@ -17,33 +17,39 @@ const Header = () => {
   const prevSlideIndex = usePrevious(slideIndex);
 
   let headerGalleryDisplay: ReactElement[],
-      headerGalleryControllersDisplay: ReactElement;
+    headerGalleryControllersDisplay: ReactElement;
   if (headerGallery !== null) {
-
     headerGalleryDisplay = headerGallery.imageSrcs
       .split(',')
       .map((imgSrc, index) => {
         // return (
-          let blurredBgImage;
-          if (index === 0){
-            blurredBgImage = (
-              <BlurringImage
-                key={imgSrc}
-                svg={svg}
-                img={img}
-                alt={undefined}
-                style={undefined}
-                height={img.height}
-                onLoadingComplete={() => dispatch(setHeaderImageLoaded(true))}
-              />
-            );
-          }
-        
-          return (
-            <React.Fragment key={Date.now() + index}>
-              {blurredBgImage}
+        let blurredBgImage;
+        if (index === 0) {
+          blurredBgImage = (
+            <BlurringImage
+              key={imgSrc}
+              svg={svg}
+              img={img}
+              alt={undefined}
+              style={undefined}
+              height={img.height}
+              onLoadingComplete={() => dispatch(setHeaderImageLoaded(true))}
+            />
+          );
+        }
+
+        headerGalleryControllersDisplay = (
+          <HeaderGalleryControllers
+            slideIndex={slideIndex}
+            setSlideIndex={setSlideIndex}
+            slideshowLength={headerGallery.imageSrcs.split(',').length - 1}
+          />
+        );
+        return (
+          <React.Fragment key={Date.now() + index}>
+            <div className={styles.blurredImg}>{blurredBgImage}</div>
+            <div className={styles.galleryWrapper}>
               <div
-                
                 className={
                   slideIndex === index
                     ? styles.slideActive
@@ -54,32 +60,16 @@ const Header = () => {
               >
                 <Image layout='fill' src={generateImageUrl(imgSrc)} />
               </div>
-            </React.Fragment>
-          );
-        
-    });
-
-    headerGalleryControllersDisplay = (
-      <HeaderGalleryControllers
-        slideIndex={slideIndex}
-        setSlideIndex={setSlideIndex}
-        slideshowLength={headerGallery.imageSrcs.split(',').length - 1}
-      />
-    )
-
+              {headerGalleryControllersDisplay}
+            </div>
+          </React.Fragment>
+        );
+      });
   }
 
-  // console.log(headerGalleryDisplay.length);
-
-  let headerSlogan: any;
-  if (aboutInfo && aboutInfo.header_slogan)
-    headerSlogan = aboutInfo.header_slogan;
   return (
     <header id='main-header' role='main-header' className={styles.header}>
-      <div className={styles.containerSlider}>
-        {headerGalleryDisplay}
-        {headerGalleryControllersDisplay}
-      </div>
+      {headerGalleryDisplay}
       {/* <div
         className={styles.container}
         dangerouslySetInnerHTML={{ __html: headerSlogan }}
@@ -89,17 +79,3 @@ const Header = () => {
 };
 
 export default Header;
-
-// let blurringImageDisplay: ReactElement;
-// if (svg.length > 0 && img && img !== null) {
-//   blurringImageDisplay = (
-//     <BlurringImage
-//       svg={svg}
-//       img={img}
-//       alt={undefined}
-//       style={undefined}
-//       height={img.height}
-//       onLoadingComplete={() => dispatch(setHeaderImageLoaded(true))}
-//     />
-//   );
-// }
