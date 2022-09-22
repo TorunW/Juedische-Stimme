@@ -3,6 +3,9 @@ import { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import useSWR from 'swr';
 import axios from 'axios';
+import Image from 'next/image';
+import Link from 'next/link';
+import styles from '../styles/Result.module.css';
 
 const Result: LayoutPage = (props: LayoutPageProps) => {
   const {
@@ -13,26 +16,51 @@ const Result: LayoutPage = (props: LayoutPageProps) => {
     () => `/api/checkout_sessions/${session_id}`,
     (url) => axios.get(url).then((res) => res.data)
   );
-    console.log(error)
+  console.log(error);
+
+  // background
+  // box with text
+  //thank you for your donation! (or membershipfee)
+  // dont forger to subscribe to out newsletter
+  // take me back to homepepage
+
   return (
-    <main>
-      {error ? (
-        <div>
-          <h2>Sorry, something went wrong!</h2>
-          <p>{error.message}</p>
+    <main className={styles.resultsPage}>
+      <Image
+        src='/spenden.jpg'
+        alt='donations-page-background'
+        title='donations-page-background'
+        layout='fill'
+        objectFit='cover'
+      />
+
+      <div className={styles.container}>
+        <div className={styles.topRow}>
+          {error ? (
+            <div>
+              <h2>Sorry, something went wrong!</h2>
+              <p>{error.message}</p>
+            </div>
+          ) : !data ? (
+            <div>
+              <p>Loading...</p>
+            </div>
+          ) : (
+            <div>
+              <h2>
+                <span>Thanks for your donation!</span>
+              </h2>
+              <p>Check your inbox for the receipt.</p>
+            </div>
+          )}
         </div>
-      ) : !data ? (
-        <div>
-          <p>Loading...</p>
+
+        <div className={styles.bottomRow}>
+          <Link href='/'>
+            <button> Take me back to the main page</button>
+          </Link>
         </div>
-      ) : (
-        <div>
-          <h2>
-            <span>Thanks for your order!</span>
-          </h2>
-          <p>Check your inbox for the receipt.</p>
-        </div>
-      )}
+      </div>
     </main>
   );
 };

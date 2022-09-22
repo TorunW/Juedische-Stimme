@@ -1,0 +1,34 @@
+.resultsPage {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.resultsPage .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 400px;
+  width: 700px;
+  padding: 64px 32px;
+  background-color: rgba(0, 0, 0, 0.884);
+  position: relative;
+  border-radius: 3px;
+  color: white;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.resultsPage .container button {
+  border: 5px solid #8179a6;
+  padding: 8px 16px;
+  font-family: 'Raleway' !important;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: 2px;
+  text-transform: capitalize;
+  height: 56px;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: white;
+}

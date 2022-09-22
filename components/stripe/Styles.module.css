@@ -5,24 +5,31 @@
   flex-direction: column;
   gap: 32px;
 }
-.formContainer .topRow {
+.formContainer .bottomRow {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: 60%;
+}
+.formContainer .bottomRow p {
+  color: white;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.formContainer .bottomRow .priceContainer {
+  display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  height: 50%;
+  gap: 16px;
 }
-.formContainer .topRow .priceContainer {
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 16px;
-}
-.formContainer .topRow .priceContainer .box {
+.formContainer .bottomRow .priceContainer .box {
   width: 78px;
   color: #fff;
   font-size: 24px;
   padding: 8px;
-  margin-bottom: 16px;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -33,7 +40,7 @@
   position: relative;
   z-index: 1;
 }
-.formContainer .topRow .priceContainer .box .radio {
+.formContainer .bottomRow .priceContainer .box .radio {
   position: absolute !important;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
@@ -41,7 +48,7 @@
   height: 50px;
   outline: none;
 }
-.formContainer .topRow .priceContainer .box a {
+.formContainer .bottomRow .priceContainer .box a {
   position: absolute;
   top: 0;
   right: 0;
@@ -52,28 +59,53 @@
   border-radius: 4px;
   z-index: -1;
 }
-.formContainer .topRow .priceContainer .boxSelected a {
+.formContainer .bottomRow .priceContainer .boxSelected a {
   background-color: #454060;
 }
-.formContainer .topRow .btnWrapper {
-  width: 100%;
-  display: flex;
-  margin: 32px 0;
-}
-.formContainer .topRow .btnWrapper .btn {
+.formContainer .bottomRow .btnWrapper {
+  margin: 32px auto;
   width: 300px;
-  height: 40px;
-  margin: 0 auto;
-  font-size: 1.1rem;
+}
+.formContainer .bottomRow .btnWrapper .btn {
+  border: 5px solid #8179a6;
+  padding: 8px 16px;
+  font-family: 'Raleway' !important;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-radius: 2px;
+  text-transform: capitalize;
+  height: 56px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  color: white;
+}
+.formContainer .bottomRow .btnWrapper .btnActive .btnInactive {
+  color: gray;
+  border-color: gray;
+  border-style: solid;
+}
+.formContainer .topRow {
+  display: flex;
+  justify-content: space-evenly;
+}
+.formContainer .topRow .wrapper {
+  margin-bottom: 8px;
+}
+.formContainer .topRow .wrapper .active {
+  color: white;
+  border-bottom: solid 3px #8179a6 !important;
+}
+.formContainer .topRow .wrapper .btn {
+  border: none;
+}
+.formContainer .topRow .wrapper .btn,
+.formContainer .topRow .wrapper .active {
   font-family: inherit;
+  text-transform: capitalize;
+  font-size: 1.1rem;
+  color: white;
   background: none;
   cursor: pointer;
-  color: white;
-  font-weight: 500;
-  max-width: 100%;
-}
-.btnInActive {
-  color: gray !important;
-  border-color: gray !important;
-  border-style: solid;
 }

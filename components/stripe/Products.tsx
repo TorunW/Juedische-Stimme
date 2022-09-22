@@ -12,7 +12,7 @@ const stripePromise = loadStripe(
 
 function PaymentForm() {
   const [products, setProducts] = useState(null);
-  const [productIndex, setProductIndex] = useState(1);
+  const [productIndex, setProductIndex] = useState(0);
   console.log(productIndex);
 
   useEffect(() => {
@@ -75,8 +75,8 @@ function PaymentForm() {
                         type='submit'
                         className={
                           values.price.length > 1
-                            ? styles.btn
-                            : styles.btn + ' ' + styles.btnInActive
+                            ? styles.btn + ' ' + styles.btnActive
+                            : styles.btn + ' ' + styles.btnInactive
                         }
                       >
                         Click here to donate
@@ -95,9 +95,9 @@ function PaymentForm() {
   let productsDisplay;
   if (products !== null) {
     productsDisplay = products.map((product, index) => {
-      if (product[0].name){
+      if (product[0].name) {
         return (
-          <div key={index}>
+          <div key={index} className={styles.wrapper}>
             <button
               onClick={() => setProductIndex(index)}
               className={
@@ -108,6 +108,7 @@ function PaymentForm() {
             >
               {product[0].name}
             </button>
+            {/* {product[0].name === 'Membership fee' ? 'hello' : ''} */}
           </div>
         );
       }
@@ -131,8 +132,11 @@ function PaymentForm() {
 
   return (
     <div className={styles.formContainer}>
-      <div className={styles.topRow}> {priceDisplay}</div>
-      <div className={styles.bottomRow}>{productsDisplay}</div>
+      <div className={styles.topRow}> {productsDisplay}</div>
+      <div className={styles.bottomRow}>
+        <p>Select an amout you would like to donate</p>
+        {priceDisplay}
+      </div>
     </div>
   );
 }
