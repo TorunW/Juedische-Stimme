@@ -33,8 +33,7 @@ import { setHeaderGallery } from 'store/galleries/galleriesSlice';
 import Head from 'next/head';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
-
-  const [ fbt, setFbt ] = useState()
+  const [fbt, setFbt] = useState();
 
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
@@ -48,8 +47,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 
   useEffect(() => {
     // if (headerImage.isLoaded === true) {
-      getFbToken();
-      getNewsletterPosts();
+    getFbToken();
+    getNewsletterPosts();
     // }
   }, [headerImage.isLoaded]);
 
@@ -76,7 +75,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   async function getFbToken() {
     const fbTokenResult = await fetch('/api/fbtoken');
     const fbToken = await fbTokenResult.json();
-    setFbt(fbToken[0].token)
+    setFbt(fbToken[0].token);
     // dispatch(setToken(fbToken[0].token));
   }
 
@@ -126,7 +125,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <AboutInfo gallery={gallery} aboutInfo={aboutInfo} />
       <Posts posts={newsletter} title={'Newsletter'} />
       <CallToAction />
-      <FacebookFeed fbt={fbt}  />
+      <FacebookFeed fbt={fbt} />
     </main>
   );
 };
@@ -134,8 +133,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
-  if (!hasCookie('Token', { req: context.req, res: context.res }))
-    return { redirect: { destination: '/login', permanent: false } };
+  // if (!hasCookie('Token', { req: context.req, res: context.res }))
+  //   return { redirect: { destination: '/login', permanent: false } };
 
   // NAVIGATION
   const navItemsResponse = await excuteQuery({

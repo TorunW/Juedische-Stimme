@@ -8,10 +8,10 @@ import { Image } from 'types/Image.type';
 import { Gallery } from 'types/Gallery.type';
 import galleryTypes from 'lib/galleryTypes.json';
 
-const TipTapEditor =  dynamic(() => import('components/tiptap/TipTapEditor'), {
-  suspense:true,
-  loading: () => <p>Loading...</p>
-})
+const TipTapEditor = dynamic(() => import('components/tiptap/TipTapEditor'), {
+  suspense: true,
+  loading: () => <p>Loading...</p>,
+});
 
 interface GalleryFromProps {
   gallery: Gallery;
@@ -81,7 +81,8 @@ function GalleryForm({ gallery }: GalleryFromProps) {
     if (gallery.images) {
       galleryImagesDisplay = gallery.images.map(
         (galleryImage: Image, index: number) => (
-          <GalleryImageForm 
+          <GalleryImageForm
+            key={galleryImage.image_id}
             galleryImage={galleryImage}
             galleryId={gallery.gallery_id}
           />

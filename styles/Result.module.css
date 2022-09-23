@@ -1,10 +1,8 @@
-.resultsPage {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .resultsPage .container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -12,7 +10,6 @@
   width: 700px;
   padding: 64px 32px;
   background-color: rgba(0, 0, 0, 0.884);
-  position: relative;
   border-radius: 3px;
   color: white;
   text-align: center;

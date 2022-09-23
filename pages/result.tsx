@@ -62,6 +62,6 @@ const Result: LayoutPage = (props: LayoutPageProps) => {
   );
 };
 
-Result.layout = 'main';
+Result.layout = 'result';
 
 export default Result;
