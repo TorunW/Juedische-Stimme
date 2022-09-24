@@ -41,10 +41,11 @@
   .navActive .topRow .leftCol ul a:active {
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.45);
     transform: translateY(4px);
+    background-color: #454060;
   }
   .nav .topRow .leftCol ul a:hover,
   .navActive .topRow .leftCol ul a:hover {
-    background-color: #635d80e7;
+    background-color: #454060;
   }
   .nav .topRow .middleCol,
   .navActive .topRow .middleCol {
@@ -131,7 +132,7 @@
     transition: fill 0.3s ease-in-out;
   }
   .navActive svg:hover {
-    fill: #635d80;
+    fill: #454060;
   }
   .navActive .rightCol .languageMenu {
     color: #2e2e2e;
@@ -141,14 +142,15 @@
     transition: color 0.3s ease-in-out;
   }
   .navActive .rightCol .languageMenu a:hover {
-    color: #635d80;
+    color: #454060;
   }
   .navActive li a {
     color: #2e2e2e;
-    transition: color 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
   .navActive li a:hover {
-    color: #635d80;
+    color: #454060;
+    border-bottom: 1px solid;
   }
 }
 @media (max-width: 844px) {

@@ -84,6 +84,14 @@
   border-color: #8179a6;
   color: white;
 }
+.formContainer .bottomRow .btnWrapper .btnActive:hover {
+  background-color: #8179a6;
+  color: white;
+}
+.formContainer .bottomRow .btnWrapper .btnActive:active {
+  background-color: #454060;
+  border-color: #454060;
+}
 .formContainer .bottomRow .btnWrapper .btnInactive {
   color: gray;
   border-color: gray;

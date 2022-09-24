@@ -104,6 +104,10 @@ a {
   color: #fff;
   background: #8179a6;
 }
+.link .link-button:active {
+  background-color: #454060;
+  border: 5px solid #454060;
+}
 .whiteBg .link-button {
   color: #2e2e2e;
 }
@@ -133,6 +137,10 @@ a {
 .submitBtn button:hover {
   background-color: #8179a6;
   color: white;
+}
+.submitBtn button:active {
+  background-color: #454060;
+  border: 5px solid #454060;
 }
 input,
 textarea {

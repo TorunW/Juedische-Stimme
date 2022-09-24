@@ -3,7 +3,6 @@
   .navActive {
     position: fixed;
     width: 100%;
-    // height: 100px;
     padding: 0 32px;
     z-index: 99;
     font-size: 18px;
@@ -33,10 +32,11 @@
             &:active {
               box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.45);
               transform: translateY(4px);
+              background-color: darken(#8179a6, 25%);
             }
 
             &:hover {
-              background-color: #635d80e7;
+              background-color: darken(#8179a6, 25%);
             }
           }
         }
@@ -137,7 +137,7 @@
       transition: fill 0.3s ease-in-out;
 
       &:hover {
-        fill: #635d80;
+        fill: darken(#8179a6, 25%);
       }
     }
 
@@ -149,7 +149,7 @@
         a {
           transition: color 0.3s ease-in-out;
           &:hover {
-            color: #635d80;
+            color: darken(#8179a6, 25%);
           }
         }
       }
@@ -158,10 +158,11 @@
     li {
       a {
         color: #2e2e2e;
-        transition: color 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
 
         &:hover {
-          color: #635d80;
+          color: darken(#8179a6, 25%);
+          border-bottom: 1px solid;
         }
       }
     }
