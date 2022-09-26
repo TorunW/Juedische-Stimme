@@ -32,7 +32,7 @@ const Result: LayoutPage = (props: LayoutPageProps) => {
 
   let socialMediaDisplay = (
     <div className={styles.socialmediaMenu}>
-      <p>Don't forget to follow us on socialmedia</p>
+      <p>{`Don't forget to follow us on socialmedia`}</p>
       <a
         href={'https://www.facebook.com/12juedischestimme'}
         target='_blank'

@@ -41,8 +41,9 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/material": "^5.10.6",
     "@stripe/react-stripe-js": "^1.10.0",
     "@stripe/stripe-js": "^1.36.0",
     "@testing-library/jest-dom": "^5.16.4",
