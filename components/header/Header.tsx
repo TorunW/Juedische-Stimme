@@ -39,7 +39,8 @@ const Header = () => {
 
         return (
           <React.Fragment key={Date.now() + index}>
-            {blurredBgImage}
+            <div className={styles.blurredImageContainer}>{blurredBgImage}</div>
+
             <div
               className={
                 slideIndex === index
@@ -68,30 +69,12 @@ const Header = () => {
 
   return (
     <header id='main-header' role='main-header' className={styles.header}>
-      <div className={styles.containerSlider}>
-        {headerGalleryDisplay}
+      <div className={styles.sliderWrapper}>{headerGalleryDisplay}</div>
+      <div className={styles.controllersWrapper}>
         {headerGalleryControllersDisplay}
       </div>
-      {/* <div
-        className={styles.container}
-        dangerouslySetInnerHTML={{ __html: headerSlogan }}
-      ></div>  */}
     </header>
   );
 };
 
 export default Header;
-
-// let blurringImageDisplay: ReactElement;
-// if (svg.length > 0 && img && img !== null) {
-//   blurringImageDisplay = (
-//     <BlurringImage
-//       svg={svg}
-//       img={img}
-//       alt={undefined}
-//       style={undefined}
-//       height={img.height}
-//       onLoadingComplete={() => dispatch(setHeaderImageLoaded(true))}
-//     />
-//   );
-// }

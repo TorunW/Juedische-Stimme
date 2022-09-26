@@ -3,30 +3,19 @@
     height: 650px;
     position: relative;
     width: 100%;
-    .blurredImg {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      overflow: hidden;
-    }
 
-    .galleryWrapper {
-      position: absolute;
-      aspect-ratio: auto 950/500;
-      width: 1000px;
-      height: 500px;
-      left: 50%;
-      top: 55%;
-      transform: translate(-50%, -50%);
+    .sliderWrapper {
       .slide {
         width: 100%;
         height: 100%;
         position: absolute;
+        top: 103px;
         opacity: 0;
         z-index: 0;
       }
 
       .slideActive {
+        top: 103px;
         width: 100%;
         height: 100%;
         position: absolute;
@@ -41,6 +30,8 @@
       }
 
       .prevSlide {
+        top: 103px;
+
         width: 100%;
         height: 100%;
         position: absolute;
@@ -76,35 +67,37 @@
         height: 100%;
         object-fit: cover;
       }
+    }
 
-      .prev,
-      .next {
-        width: 50%;
-        height: 100%;
-        border: none;
-        position: absolute;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        z-index: 20;
-        bottom: 0;
-        opacity: 0;
-        transition: all 0.4s ease-in-out;
+    .controllersWrapper {
+      .galleryControllers {
+        .prev,
+        .next {
+          position: absolute;
+          z-index: 20;
+          background: none;
+          border: none;
+          width: 50%;
+          height: 120%;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          opacity: 0;
+          transition: all 0.4s ease-in-out;
 
-        &:hover {
-          opacity: 1;
+          &:hover {
+            opacity: 1;
+          }
         }
-      }
 
-      .prev {
-        left: 0;
-        background: none;
-        justify-content: left;
-      }
-      .next {
-        right: 0;
-        background: none;
-        justify-content: right;
+        .prev {
+          left: 0;
+          justify-content: left;
+        }
+        .next {
+          right: 0;
+          justify-content: right;
+        }
       }
     }
   }
@@ -116,21 +109,13 @@
     height: 370px;
     position: relative;
     width: 100%;
-    .blurredImg {
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      overflow: hidden;
-    }
 
-    .galleryWrapper {
-      position: absolute;
-      aspect-ratio: 700/300;
-      max-width: 85%;
-      height: 300px;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+    .sliderWrapper {
+      .blurredImageContainer {
+        height: 370px;
+        position: absolute;
+      }
+
       .slide {
         width: 100%;
         height: 100%;
@@ -185,34 +170,39 @@
       }
 
       img {
-        width: 100%;
-        height: 100%;
         object-fit: cover;
       }
+    }
 
-      .prev,
-      .next {
-        width: 60px;
-        height: 100%;
-        border: none;
-        position: absolute;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        z-index: 20;
-        transition: all 0.4s ease-in-out;
-        padding: 0;
-      }
+    .controllersWrapper {
+      .galleryControllers {
+        .prev,
+        .next {
+          position: absolute;
+          z-index: 20;
+          background: none;
+          border: none;
+          width: auto;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+          opacity: 0.6;
+          transition: all 0.4s ease-in-out;
 
-      .prev {
-        left: 0;
-        justify-content: left;
-        background: none;
-      }
-      .next {
-        right: 0;
-        justify-content: right;
-        background: none;
+          &:active {
+            opacity: 1;
+          }
+        }
+
+        .prev {
+          left: 0;
+          justify-content: left;
+        }
+        .next {
+          right: 0;
+          justify-content: right;
+        }
       }
     }
   }
