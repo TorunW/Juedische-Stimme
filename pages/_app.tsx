@@ -7,6 +7,9 @@ import { store } from 'store/store';
 import { Provider } from 'react-redux';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import 'styles/globals.css';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from '../config/theme';
 
 const layouts = {
   main: Layout,
@@ -15,7 +18,11 @@ const layouts = {
   result: ResultLayout,
 };
 
-function MyApp({ Component, pageProps }: LayoutAppProps) {
+function MyApp({
+  Component,
+  pageProps,
+}: // clientSideEmotionCache: emotionCache,
+LayoutAppProps) {
   const Layout = layouts[Component.layout] || ((children) => <>{children}</>);
   return (
     <Provider store={store}>
@@ -28,9 +35,12 @@ function MyApp({ Component, pageProps }: LayoutAppProps) {
           nonce: undefined,
         }}
       > */}
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
       {/* </GoogleReCaptchaProvider> */}
     </Provider>
   );

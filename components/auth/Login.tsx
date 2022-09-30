@@ -22,6 +22,8 @@ function LoginForm() {
   const signUp = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((response: any) => {
+        console.log(auth, email, 'auth email');
+        console.log(response, 'res');
         setLoading(true);
         sessionStorage.setItem('Token', response.user.accessToken);
         setCookie('Token', response.user.accessToken);
