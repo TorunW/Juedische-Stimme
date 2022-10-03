@@ -21,12 +21,16 @@ const TipTapEditor =  dynamic(() => import('components/tiptap/TipTapEditor'), {
 interface PostFormProps {
   post?: any;
   nextPostId?: string | number;
+  categories?: any[]
 }
 
 const PostForm = ({post,nextPostId}: PostFormProps) => {
   
   const tabs = ['post','translations']
+  
   const { categories } = useSelector(state => state.categories);
+  const { loggedUser } = useSelector(state => state.users)
+
   const { locales, defaultLocale } = useSelector(state => state.languages)
 
   const [ currentTab, setCurrentTab ] = useState('post')
@@ -42,7 +46,7 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
 
   const formik = useFormik({
     initialValues: {
-        post_author: post ? post.post_author : 2, // '' --> CHANGE THIS BACK!!!!,
+        post_author: post ? post.post_author : loggedUser !== null ? loggedUser.ID : '', // '' --> CHANGE THIS BACK!!!!,
         post_date: post ? post.post_date : '',
         post_date_gmt:post ? post.post_date_gmt : '',
         post_content:post ? post.post_content.replace(/(?:\r\n|\r|\n)/g, '<br>') : '',
@@ -72,7 +76,9 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
         post_layout: post ? post.post_layout : 'article'
     },
     onSubmit: values => {
-        const requestsArray = [];
+      const requestsArray = [];
+
+        let postAuthor = post ? post.post_author : loggedUser.ID
 
         // POST
         const postUrl = `/api/posts${post ? "/" + post.postId : ''}`
@@ -84,8 +90,10 @@ const PostForm = ({post,nextPostId}: PostFormProps) => {
             post_modified: dateTimeHelper(new Date()),
             previousCategoryId: post ? post.categoryId : null,
             post_content:values.post_content.replaceAll(`'`, `"`),
-            nextPostId
+            nextPostId,
+            post_author:postAuthor
         }
+        console.log(postData)
         const postRequest = post ? axios.put(postUrl,postData) : axios.post(postUrl,postData);
         requestsArray.push(postRequest)
         

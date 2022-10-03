@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'store/hooks'
 import { setPosts, setPostsPagination } from 'store/posts/postsSlice';
 import { selectCategories, selectCategory } from 'lib/queries';
 import { setCategory, setCategoryName, setCatgories } from 'store/categories/categoriesSlice';
+import { getCookie, hasCookie } from 'cookies-next';
+import { selectUserByEmail } from 'lib/queries/users';
 
 
 export default function AdminPostsPage(props) {
@@ -53,6 +55,22 @@ export default function AdminPostsPage(props) {
 AdminPostsPage.layout = "admin"
 
 export const getServerSideProps = async (context) => {
+
+    let userEmail : string;
+    if (!hasCookie('Token', { req: context.req, res: context.res })){
+      return { redirect: { destination: '/login', permanent: false } };
+    } else {
+      userEmail = getCookie('UserEmail', { req: context.req, res: context.res }).toString()
+    }
+
+    let loggedUser: string;
+    if (userEmail){
+      const userResponse = await excuteQuery({
+        query: selectUserByEmail(userEmail)
+      })
+      loggedUser = JSON.stringify(userResponse)
+    }
+  
     const categoryResponse = await excuteQuery({
       query: selectCategory({categoryName:context.query.name})
     });
@@ -81,7 +99,8 @@ export const getServerSideProps = async (context) => {
         pageNum:context.query.number,
         postsCount:categoryResponse[0].count,
         postsPerPage:50,
-        categoryName:context.query.name
+        categoryName:context.query.name,
+        loggedUser
       }
     }
   }

@@ -12,6 +12,9 @@ import { setGalleries } from 'store/galleries/galleriesSlice';
 import { LayoutPage } from 'types/LayoutPage.type'
 import { LayoutPageProps } from 'types/LayoutPageProps.type'
 import { setLanguages } from 'store/languages/languagesSlice'
+import { getCookie, hasCookie } from 'cookies-next'
+import { selectUserByEmail } from 'lib/queries/users'
+import { setLoggedUser } from 'store/users/usersSlice'
 
 const EditPostPage: LayoutPage = (props: LayoutPageProps) => {
 
@@ -19,6 +22,7 @@ const EditPostPage: LayoutPage = (props: LayoutPageProps) => {
   const { post } = useSelector(state => state.posts)
 
   useEffect(() => {
+    if (props.loggedUser) dispatch(setLoggedUser(JSON.parse(props.loggedUser)[0]))
     dispatch(setPost(JSON.parse(props.post)[0]))
     dispatch(setCatgories(JSON.parse(props.categories)))
     dispatch(setGalleries(JSON.parse(props.galleries)))
@@ -40,6 +44,22 @@ const EditPostPage: LayoutPage = (props: LayoutPageProps) => {
 EditPostPage.layout = "admin";
 
 export const getServerSideProps = async (context) => {
+
+  let userEmail : string;
+  if (!hasCookie('Token', { req: context.req, res: context.res })){
+    return { redirect: { destination: '/login', permanent: false } };
+  } else {
+    userEmail = getCookie('UserEmail', { req: context.req, res: context.res }).toString()
+  }
+
+  let loggedUser: string;
+  if (userEmail){
+    const userResponse = await excuteQuery({
+      query: selectUserByEmail(userEmail)
+    })
+    loggedUser = JSON.stringify(userResponse)
+  }
+
   const postsResponse = await excuteQuery({
     query: selectPostByName({name:context.query.name.toString().split(':__--__:').join('#'),showUnpublished:true,locales:context.locales.filter((l:string) => l !== context.defaultLocale)})
   });
@@ -60,7 +80,8 @@ export const getServerSideProps = async (context) => {
       galleries,
       locales:context.locales,
       locale:context.locale,
-      defaultLocale:context.defaultLocale
+      defaultLocale:context.defaultLocale,
+      loggedUser
     }
   }
 }
