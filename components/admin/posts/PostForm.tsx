@@ -31,7 +31,7 @@ import {
   CircularProgress,
   Alert,
 } from '@mui/material';
-import Grid from '@mui/material/Grid'; // Grid version 1
+import Grid from '@mui/material/Grid';
 
 const TipTapEditor = dynamic(() => import('components/tiptap/TipTapEditor'), {
   suspense: true,
@@ -46,18 +46,28 @@ interface PostFormProps {
 
 const PostForm = ({ post, nextPostId }: PostFormProps) => {
   const tabs = ['post', 'translations'];
+
   const { categories } = useSelector((state) => state.categories);
+  const { loggedUser } = useSelector((state) => state.users);
+
   const { locales, defaultLocale } = useSelector((state) => state.languages);
+
+  const [currentTab, setCurrentTab] = useState('post');
+  const [previewImage, setPreviewImage] = useState(null);
+  const [previewImageFile, setPreviewImageFile] = useState(null);
 
   const [previewImage2, setPreviewImage2] = useState(null);
   const [previewImage2File, setPreviewImage2File] = useState(null);
 
-  console.log(post, 'post');
   useEffect(() => {}, []);
 
   const formik = useFormik({
     initialValues: {
-      post_author: post ? post.post_author : 2, // '' --> CHANGE THIS BACK!!!!,
+      post_author: post
+        ? post.post_author
+        : loggedUser !== null
+        ? loggedUser.ID
+        : '', // '' --> CHANGE THIS BACK!!!!,
       post_date: post ? post.post_date : '',
       post_date_gmt: post ? post.post_date_gmt : '',
       post_content: post
@@ -91,8 +101,41 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       post_embed_html: post ? post.post_embed_html : '',
       post_layout: post ? post.post_layout : 'article',
     },
+    validationSchema: Yup.object().shape({
+      categoryId: Yup.number().when('post_type', {
+        is: 'post',
+        then: Yup.number().required('Choose a category'),
+      }),
+      post_layout: Yup.string().when('post_type', {
+        is: 'post',
+        then: Yup.string().min(2).required('Choose a layout for the post'),
+      }),
+      post_title: Yup.string().min(3).required('Add a title to the post'),
+      post_image: Yup.string().when('post_type', {
+        is: 'post',
+        then: Yup.string().required('Add an Image'),
+      }),
+      post_excerpt: Yup.string().when('post_type', {
+        is: 'post',
+        then: Yup.string()
+          .min(160)
+          .max(200)
+          .required('Add an excerpt from the Post'),
+      }),
+      post_excerpt_2: Yup.string().when('post_type', {
+        is: 'post',
+        then: Yup.string().min(160).max(200),
+      }),
+      post_content: Yup.string()
+        .min(700)
+        .max(900)
+        .required('Add some text to the post'),
+    }),
+
     onSubmit: (values) => {
       const requestsArray = [];
+
+      let postAuthor = post ? post.post_author : loggedUser.ID;
 
       // POST
       const postUrl = `/api/posts${post ? '/' + post.postId : ''}`;
@@ -108,7 +151,9 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
         previousCategoryId: post ? post.categoryId : null,
         post_content: values.post_content.replaceAll(`'`, `"`),
         nextPostId,
+        post_author: postAuthor,
       };
+      console.log(postData);
       const postRequest = post
         ? axios.put(postUrl, postData)
         : axios.post(postUrl, postData);
@@ -266,26 +311,78 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
 
   let formDisplay: ReactElement;
   if (currentTab === 'post') {
-    if (post && post.post_title === 'Spenden') {
-      formDisplay = (
-        <div className={styles.postFormTab} id='post-form'>
-          <form onSubmit={formik.handleSubmit}>
-            <FormControl fullWidth margin='normal'>
-              {post ? (
-                <Button variant='outlined'>
-                  <a
-                    target={'_blank'}
-                    rel='noreferrer'
-                    href={'/' + GeneratePostUrl(post.post_name)}
+    formDisplay = (
+      <div className={styles.postFormTab} id='post-form'>
+        <form onSubmit={formik.handleSubmit}>
+          <FormControl fullWidth margin='normal'>
+            {post ? (
+              <Button variant='outlined'>
+                <a
+                  target={'_blank'}
+                  rel='noreferrer'
+                  href={'/' + GeneratePostUrl(post.post_name)}
+                >
+                  view post on live site
+                </a>
+              </Button>
+            ) : (
+              ''
+            )}
+          </FormControl>
+
+          <Card sx={{ paddingX: 4, paddingY: 2 }}>
+            <Grid container spacing={2} display='flex' alignItems={'center'}>
+              <Grid item xs={5}>
+                <FormControl fullWidth margin='normal'>
+                  <InputLabel>Category</InputLabel>
+                  <Select
+                    id='categoryId'
+                    name='categoryId'
+                    value={formik.values.categoryId}
+                    onChange={formik.handleChange}
+                    label='Post Category'
                   >
-                    view post on live site
-                  </a>
-                </Button>
-              ) : (
-                ''
-              )}
-            </FormControl>
-            <Card sx={{ paddingX: 4, paddingY: 2 }}>
+                    {selectCategoriesDisplay}
+                  </Select>
+                  {formik.errors && formik.errors.categoryId ? (
+                    <Alert severity='error'>
+                      {formik.errors.categoryId.toString()}
+                    </Alert>
+                  ) : (
+                    ''
+                  )}
+                </FormControl>
+              </Grid>
+              <Grid item xs={5}>
+                <FormControl fullWidth margin='normal'>
+                  <InputLabel>Layout</InputLabel>
+                  <Select
+                    id='post_layout'
+                    name='post_layout'
+                    label='Post Layout'
+                    value={formik.values.post_layout}
+                    onChange={formik.handleChange}
+                    placeholder='Layout'
+                  >
+                    <MenuItem value={'article'}>Article</MenuItem>
+                    <MenuItem value={'newsletter'}>Newsletter</MenuItem>
+                    {/* <MenuItem value={'member_form'}>Membership Page</MenuItem> */}
+                    {/* <MenuItem value={'donation'}>Donation Page</MenuItem> */}
+                  </Select>
+                  {formik.errors && formik.errors.post_layout ? (
+                    <Alert severity='error'>{formik.errors.post_layout}</Alert>
+                  ) : (
+                    ''
+                  )}
+                </FormControl>
+              </Grid>
+              <Grid
+                item
+                xs={2}
+                sx={{ display: 'flex', justifyContent: 'center' }}
+              >
+                <FormHelp text={``} />
+              </Grid>
               <Grid item container xs={10}>
                 <FormControl fullWidth sx={{ marginBottom: 4 }}>
                   <TextField
@@ -305,6 +402,82 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   )}
                 </FormControl>
               </Grid>
+
+              <Grid container item>
+                <Grid container item xs={10}>
+                  <FormControl fullWidth>
+                    <TextField
+                      label='Post header image'
+                      focused
+                      id='post_image'
+                      name='post_image'
+                      type='file'
+                      onChange={onPostImageChange}
+                    />
+                    {formik.errors && formik.errors.post_image ? (
+                      <Alert severity='error'>{formik.errors.post_image}</Alert>
+                    ) : (
+                      ''
+                    )}
+                  </FormControl>
+                </Grid>
+                <Grid
+                  item
+                  xs={2}
+                  sx={{ display: 'flex', justifyContent: 'center' }}
+                >
+                  <FormHelp text={``} />
+                </Grid>
+                {previewImage !== null ? (
+                  <Grid xs={10} sx={{ marginTop: 2, textAlign: 'center' }}>
+                    <Image
+                      layout='fixed'
+                      width={320}
+                      height={180}
+                      src={previewImage}
+                    />
+                  </Grid>
+                ) : post && post.post_image ? (
+                  <Grid xs={10} sx={{ marginTop: 2, textAlign: 'center' }}>
+                    <Image
+                      layout='fixed'
+                      width={320}
+                      height={180}
+                      src={generateImageUrl(post.post_image)}
+                    />
+                  </Grid>
+                ) : (
+                  ''
+                )}
+              </Grid>
+
+              <Grid container item sx={{ marginY: 2 }}>
+                <Suspense>
+                  <TipTapEditor
+                    onChange={(val: string) =>
+                      formik.setFieldValue('post_excerpt', val, true)
+                    }
+                    value={formik.values.post_excerpt}
+                    itemType={'post'}
+                    itemId={post ? post.postId : nextPostId}
+                    height={150}
+                    title={'Post Excerp/Quote'}
+                  />
+                </Suspense>
+                {formik.errors && formik.errors.post_excerpt ? (
+                  <Alert severity='error'>{formik.errors.post_excerpt}</Alert>
+                ) : (
+                  ''
+                )}
+                <Grid
+                  item
+                  xs={2}
+                  sx={{ display: 'flex', justifyContent: 'center' }}
+                >
+                  <FormHelp text={``} />
+                </Grid>
+              </Grid>
+
               <Grid container item sx={{ marginY: 2 }}>
                 <Suspense>
                   <TipTapEditor
@@ -331,79 +504,20 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   ''
                 )}
               </Grid>
-            </Card>
-            <Button variant='outlined' type='submit'>
-              {post ? 'update post' : 'create post'}
-            </Button>
-          </form>
-        </div>
-      );
-    } else {
-      formDisplay = (
-        <div className={styles.postFormTab} id='post-form'>
-          <form onSubmit={formik.handleSubmit}>
-            <FormControl fullWidth margin='normal'>
-              {post ? (
-                <Button variant='outlined'>
-                  <a
-                    target={'_blank'}
-                    rel='noreferrer'
-                    href={'/' + GeneratePostUrl(post.post_name)}
-                  >
-                    view post on live site
-                  </a>
-                </Button>
-              ) : (
-                ''
-              )}
-            </FormControl>
 
-            <Card sx={{ paddingX: 4, paddingY: 2 }}>
-              <Grid container spacing={2} display='flex' alignItems={'center'}>
-                <Grid item xs={5}>
-                  <FormControl fullWidth margin='normal'>
-                    <InputLabel>Category</InputLabel>
-                    <Select
-                      id='categoryId'
-                      name='categoryId'
-                      value={formik.values.categoryId}
-                      onChange={formik.handleChange}
-                      label='Post Category'
-                    >
-                      {selectCategoriesDisplay}
-                    </Select>
-                    {formik.errors && formik.errors.categoryId ? (
-                      <Alert severity='error'>
-                        {formik.errors.categoryId.toString()}
-                      </Alert>
-                    ) : (
-                      ''
-                    )}
-                  </FormControl>
-                </Grid>
-                <Grid item xs={5}>
-                  <FormControl fullWidth margin='normal'>
-                    <InputLabel>Layout</InputLabel>
-                    <Select
-                      id='post_layout'
-                      name='post_layout'
-                      label='Post Layout'
-                      value={formik.values.post_layout}
-                      onChange={formik.handleChange}
-                      placeholder='Layout'
-                    >
-                      <MenuItem value={'article'}>Article</MenuItem>
-                      <MenuItem value={'newsletter'}>Newsletter</MenuItem>
-                      {/* <MenuItem value={'member_form'}>Membership Page</MenuItem> */}
-                      {/* <MenuItem value={'donation'}>Donation Page</MenuItem> */}
-                    </Select>
-                    {formik.errors && formik.errors.post_layout ? (
-                      <Alert severity='error'>
-                        {formik.errors.post_layout}
-                      </Alert>
-                    ) : (
-                      ''
-                    )}
+              <Grid container item>
+                <Grid container item xs={10}>
+                  <FormControl fullWidth>
+                    <TextField
+                      label='Post second image'
+                      focused
+                      fullWidth={true}
+                      color='secondary'
+                      id='post_image_2'
+                      name='post_image_2'
+                      type='file'
+                      onChange={onPostImage2Change}
+                    />
                   </FormControl>
                 </Grid>
                 <Grid
@@ -413,243 +527,96 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                 >
                   <FormHelp text={``} />
                 </Grid>
-                <Grid item container xs={10}>
-                  <FormControl fullWidth sx={{ marginBottom: 4 }}>
-                    <TextField
-                      id='post_title'
-                      name='post_title'
-                      label='Title'
-                      margin='normal'
-                      focused
-                      placeholder='Title'
-                      onChange={formik.handleChange}
-                      value={formik.values.post_title}
+                {previewImage2 !== null ? (
+                  <Grid xs={10} sx={{ marginTop: 2, textAlign: 'center' }}>
+                    <Image
+                      layout='fixed'
+                      width={320}
+                      height={180}
+                      src={previewImage2}
                     />
-                    {formik.errors && formik.errors.post_title ? (
-                      <Alert severity='error'>{formik.errors.post_title}</Alert>
-                    ) : (
-                      ''
-                    )}
-                  </FormControl>
-                </Grid>
-
-                <Grid container item>
-                  <Grid container item xs={10}>
-                    <FormControl fullWidth>
-                      <TextField
-                        label='Post header image'
-                        focused
-                        id='post_image'
-                        name='post_image'
-                        type='file'
-                        onChange={onPostImageChange}
-                      />
-                      {formik.errors && formik.errors.post_image ? (
-                        <Alert severity='error'>
-                          {formik.errors.post_image}
-                        </Alert>
-                      ) : (
-                        ''
-                      )}
-                    </FormControl>
                   </Grid>
-                  <Grid
-                    item
-                    xs={2}
-                    sx={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    <FormHelp text={``} />
-                  </Grid>
-                  {previewImage !== null ? (
-                    <Grid xs={10} sx={{ marginTop: 2, textAlign: 'center' }}>
-                      <Image
-                        layout='fixed'
-                        width={320}
-                        height={180}
-                        src={previewImage}
-                      />
-                    </Grid>
-                  ) : post && post.post_image ? (
-                    <Grid xs={10} sx={{ marginTop: 2, textAlign: 'center' }}>
-                      <Image
-                        layout='fixed'
-                        width={320}
-                        height={180}
-                        src={generateImageUrl(post.post_image)}
-                      />
-                    </Grid>
-                  ) : (
-                    ''
-                  )}
-                </Grid>
-
-                <Grid container item sx={{ marginY: 2 }}>
-                  <Suspense>
-                    <TipTapEditor
-                      onChange={(val: string) =>
-                        formik.setFieldValue('post_excerpt', val, true)
-                      }
-                      value={formik.values.post_excerpt}
-                      itemType={'post'}
-                      itemId={post ? post.postId : nextPostId}
-                      height={150}
-                      title={'Post Excerp/Quote'}
+                ) : post && post.post_image_2 ? (
+                  <Grid xs={10} sx={{ marginTop: 2, textAlign: 'center' }}>
+                    <Image
+                      layout='fixed'
+                      width={320}
+                      height={180}
+                      src={generateImageUrl(post.post_image_2)}
                     />
-                  </Suspense>
-                  {formik.errors && formik.errors.post_excerpt ? (
-                    <Alert severity='error'>{formik.errors.post_excerpt}</Alert>
-                  ) : (
-                    ''
-                  )}
-                  <Grid
-                    item
-                    xs={2}
-                    sx={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    <FormHelp text={``} />
                   </Grid>
-                </Grid>
-
-                <Grid container item sx={{ marginY: 2 }}>
-                  <Suspense>
-                    <TipTapEditor
-                      onChange={(val: string) =>
-                        formik.setFieldValue('post_content', val, true)
-                      }
-                      value={formik.values.post_content}
-                      itemType={'post'}
-                      itemId={post ? post.postId : nextPostId}
-                      height={150}
-                      title={'Post top content'}
-                    />
-                  </Suspense>
-                  <Grid
-                    item
-                    xs={2}
-                    sx={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    <FormHelp text={``} />
-                  </Grid>
-                  {formik.errors && formik.errors.post_content ? (
-                    <Alert severity='error'>{formik.errors.post_content}</Alert>
-                  ) : (
-                    ''
-                  )}
-                </Grid>
-
-                <Grid container item>
-                  <Grid container item xs={10}>
-                    <FormControl fullWidth>
-                      <TextField
-                        label='Post second image'
-                        focused
-                        fullWidth={true}
-                        color='secondary'
-                        id='post_image_2'
-                        name='post_image_2'
-                        type='file'
-                        onChange={onPostImage2Change}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid
-                    item
-                    xs={2}
-                    sx={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    <FormHelp text={``} />
-                  </Grid>
-                  {previewImage2 !== null ? (
-                    <Grid xs={10} sx={{ marginTop: 2, textAlign: 'center' }}>
-                      <Image
-                        layout='fixed'
-                        width={320}
-                        height={180}
-                        src={previewImage2}
-                      />
-                    </Grid>
-                  ) : post && post.post_image_2 ? (
-                    <Grid xs={10} sx={{ marginTop: 2, textAlign: 'center' }}>
-                      <Image
-                        layout='fixed'
-                        width={320}
-                        height={180}
-                        src={generateImageUrl(post.post_image_2)}
-                      />
-                    </Grid>
-                  ) : (
-                    ''
-                  )}
-                </Grid>
-
-                <Grid container item sx={{ marginY: 2 }}>
-                  <Suspense>
-                    <TipTapEditor
-                      onChange={(val: string) =>
-                        formik.setFieldValue('post_excerpt_2', val, true)
-                      }
-                      value={formik.values.post_excerpt_2}
-                      itemType={'post'}
-                      itemId={post ? post.postId : nextPostId}
-                      height={150}
-                      title={'Second post excerpt'}
-                    />
-                  </Suspense>
-                  <Grid
-                    item
-                    xs={2}
-                    sx={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    <FormHelp text={``} />
-                  </Grid>
-                </Grid>
-
-                <Grid container item sx={{ marginY: 2 }}>
-                  <Suspense>
-                    <TipTapEditor
-                      onChange={(val: string) =>
-                        formik.setFieldValue('post_content_2', val, true)
-                      }
-                      value={formik.values.post_content_2}
-                      itemType={'post'}
-                      itemId={post ? post.postId : nextPostId}
-                      height={150}
-                      title={'Bottom Post Content'}
-                    />
-                  </Suspense>
-                  <Grid
-                    item
-                    xs={2}
-                    sx={{ display: 'flex', justifyContent: 'center' }}
-                  >
-                    <FormHelp text={``} />
-                  </Grid>
-                </Grid>
-
-                <PostTagForm postId={post ? post.postId : nextPostId} />
+                ) : (
+                  ''
+                )}
               </Grid>
-            </Card>
-            <FormControl fullWidth margin='normal'>
-              <InputLabel>Post Status</InputLabel>
-              <Select
-                id='post_status'
-                name='post_status'
-                label='Post Status'
-                value={formik.values.post_status}
-                onChange={formik.handleChange}
-              >
-                <MenuItem value={'publish'}>Publish post</MenuItem>
-                <MenuItem value={'draft'}>Save to drafts</MenuItem>
-              </Select>
-            </FormControl>
 
-            <Button variant='outlined' type='submit'>
-              {post ? 'update post' : 'create post'}
-            </Button>
-          </form>
-        </div>
-      );
-    }
+              <Grid container item sx={{ marginY: 2 }}>
+                <Suspense>
+                  <TipTapEditor
+                    onChange={(val: string) =>
+                      formik.setFieldValue('post_excerpt_2', val, true)
+                    }
+                    value={formik.values.post_excerpt_2}
+                    itemType={'post'}
+                    itemId={post ? post.postId : nextPostId}
+                    height={150}
+                    title={'Second post excerpt'}
+                  />
+                </Suspense>
+                <Grid
+                  item
+                  xs={2}
+                  sx={{ display: 'flex', justifyContent: 'center' }}
+                >
+                  <FormHelp text={``} />
+                </Grid>
+              </Grid>
+
+              <Grid container item sx={{ marginY: 2 }}>
+                <Suspense>
+                  <TipTapEditor
+                    onChange={(val: string) =>
+                      formik.setFieldValue('post_content_2', val, true)
+                    }
+                    value={formik.values.post_content_2}
+                    itemType={'post'}
+                    itemId={post ? post.postId : nextPostId}
+                    height={150}
+                    title={'Bottom Post Content'}
+                  />
+                </Suspense>
+                <Grid
+                  item
+                  xs={2}
+                  sx={{ display: 'flex', justifyContent: 'center' }}
+                >
+                  <FormHelp text={``} />
+                </Grid>
+              </Grid>
+
+              <PostTagForm postId={post ? post.postId : nextPostId} />
+            </Grid>
+          </Card>
+          <FormControl fullWidth margin='normal'>
+            <InputLabel>Post Status</InputLabel>
+            <Select
+              id='post_status'
+              name='post_status'
+              label='Post Status'
+              value={formik.values.post_status}
+              onChange={formik.handleChange}
+            >
+              <MenuItem value={'publish'}>Publish post</MenuItem>
+              <MenuItem value={'draft'}>Save to drafts</MenuItem>
+            </Select>
+          </FormControl>
+
+          <Button variant='outlined' type='submit'>
+            {post ? 'update post' : 'create post'}
+          </Button>
+        </form>
+      </div>
+    );
   } else if (currentTab === 'translations') {
     formDisplay = (
       <div className='post-form-tab' id='translations-form'>
@@ -686,3 +653,73 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
 };
 
 export default PostForm;
+
+// <div className={styles.postFormTab} id='post-form'>
+//   <form onSubmit={formik.handleSubmit}>
+//     <FormControl fullWidth margin='normal'>
+//       {post ? (
+//         <Button variant='outlined'>
+//           <a
+//             target={'_blank'}
+//             rel='noreferrer'
+//             href={'/' + GeneratePostUrl(post.post_name)}
+//           >
+//             view post on live site
+//           </a>
+//         </Button>
+//       ) : (
+//         ''
+//       )}
+//     </FormControl>
+//     <Card sx={{ paddingX: 4, paddingY: 2 }}>
+//       <Grid item container xs={10}>
+//         <FormControl fullWidth sx={{ marginBottom: 4 }}>
+//           <TextField
+//             id='post_title'
+//             name='post_title'
+//             label='Title'
+//             margin='normal'
+//             focused
+//             placeholder='Title'
+//             onChange={formik.handleChange}
+//             value={formik.values.post_title}
+//           />
+//           {formik.errors && formik.errors.post_title ? (
+//             <Alert severity='error'>{formik.errors.post_title}</Alert>
+//           ) : (
+//             ''
+//           )}
+//         </FormControl>
+//       </Grid>
+//       <Grid container item sx={{ marginY: 2 }}>
+//         <Suspense>
+//           <TipTapEditor
+//             onChange={(val: string) =>
+//               formik.setFieldValue('post_content', val, true)
+//             }
+//             value={formik.values.post_content}
+//             itemType={'post'}
+//             itemId={post ? post.postId : nextPostId}
+//             height={150}
+//             title={'Post top content'}
+//           />
+//         </Suspense>
+//         <Grid
+//           item
+//           xs={2}
+//           sx={{ display: 'flex', justifyContent: 'center' }}
+//         >
+//           <FormHelp text={``} />
+//         </Grid>
+//         {formik.errors && formik.errors.post_content ? (
+//           <Alert severity='error'>{formik.errors.post_content}</Alert>
+//         ) : (
+//           ''
+//         )}
+//       </Grid>
+//     </Card>
+//     <Button variant='outlined' type='submit'>
+//       {post ? 'update post' : 'create post'}
+//     </Button>
+//   </form>
+// </div>

@@ -23,7 +23,7 @@ function LoginForm() {
     setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((response: any) => {
-        console.log(response.user)
+        console.log(response.user);
         sessionStorage.setItem('Token', response.user.accessToken);
         setCookie('Token', response.user.accessToken);
         sessionStorage.setItem('UserEmail', response.user.email);
@@ -32,7 +32,7 @@ function LoginForm() {
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false)
+        setLoading(false);
         if (err.code === 'auth/wrong-password') {
           alert('Wrong password');
         } else if (err.code === 'auth/user-not-found') {
