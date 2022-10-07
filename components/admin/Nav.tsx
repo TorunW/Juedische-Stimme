@@ -34,6 +34,7 @@ function AdminNav() {
       <Box sx={{ textAlign: 'center', marginTop: 3, marginBottom: 3 }}>
         <h3>Admin Menu</h3>
       </Box>
+      <Link href={'/admin'}>Go to Dashboard</Link>
       <Divider />
       <Accordion disableGutters elevation={0}>
         <AccordionSummary
