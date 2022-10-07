@@ -26,6 +26,8 @@ function AdminNav() {
   function logout() {
     deleteCookie('Token');
     sessionStorage.removeItem('Token');
+    deleteCookie('UserEmail');
+    sessionStorage.removeItem('UserEmail');
     router.push('/login');
   }
 

@@ -66,6 +66,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
     query: selectPostByName({
       name: context.query.name.toString().split(':__--__:').join('#'),
       locale: context.locale,
+      showUnpublished:true
     }),
   });
   const page = JSON.stringify(pageResponse);

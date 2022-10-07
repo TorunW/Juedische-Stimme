@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { NextPageContext } from 'next';
-import { hasCookie } from 'cookies-next';
+import { hasCookie, getCookies, getCookie } from 'cookies-next';
 
 import type { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
@@ -31,6 +31,9 @@ import { generateImageUrl } from 'helpers/imageUrlHelper';
 import { setHeaderGallery } from 'store/galleries/galleriesSlice';
 
 import Head from 'next/head';
+import { User } from 'types/User.type';
+import { selectUserByEmail } from 'lib/queries/users';
+import { setLoggedUser, setUser } from 'store/users/usersSlice';
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const [fbt, setFbt] = useState();
@@ -53,6 +56,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   }, [headerImage.isLoaded]);
 
   function initHomePage() {
+    if (props.loggedUser) dispatch(setLoggedUser(JSON.parse(props.loggedUser)[0]))
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setHeaderGallery(JSON.parse(props.headerGallery)[0]));
     dispatch(setPosts(JSON.parse(props.posts)));
@@ -133,8 +137,21 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
-  if (!hasCookie('Token', { req: context.req, res: context.res }))
+
+  let userEmail : string;
+  if (!hasCookie('Token', { req: context.req, res: context.res })){
     return { redirect: { destination: '/login', permanent: false } };
+  } else {
+    userEmail = getCookie('UserEmail', { req: context.req, res: context.res }).toString()
+  }
+
+  let loggedUser: string;
+  if (userEmail){
+    const userResponse = await excuteQuery({
+      query: selectUserByEmail(userEmail)
+    })
+    loggedUser = JSON.stringify(userResponse)
+  }
 
   // NAVIGATION
   const navItemsResponse = await excuteQuery({
@@ -209,6 +226,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       defaultLocale: context.defaultLocale,
       headerGallery,
       headerImage,
+      loggedUser
     },
   };
 };

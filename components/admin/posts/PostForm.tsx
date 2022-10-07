@@ -41,16 +41,13 @@ const TipTapEditor = dynamic(() => import('components/tiptap/TipTapEditor'), {
 interface PostFormProps {
   post?: any;
   nextPostId?: string | number;
+  categories?: any[];
 }
 
 const PostForm = ({ post, nextPostId }: PostFormProps) => {
   const tabs = ['post', 'translations'];
   const { categories } = useSelector((state) => state.categories);
   const { locales, defaultLocale } = useSelector((state) => state.languages);
-
-  const [currentTab, setCurrentTab] = useState('post');
-  const [previewImage, setPreviewImage] = useState(null);
-  const [previewImageFile, setPreviewImageFile] = useState(null);
 
   const [previewImage2, setPreviewImage2] = useState(null);
   const [previewImage2File, setPreviewImage2File] = useState(null);
@@ -87,44 +84,13 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       menu_order: post ? post.menu_order : '',
       post_type: post ? post.post_type : '',
       post_mime_type: post ? post.post_mime_type : '',
-      categoryId: post ? post.categoryId : undefined,
+      categoryId: post ? post.categoryId : 2,
       post_image: post ? post.post_image : '',
       post_image_2: post ? post.post_image_2 : '',
       post_embed_script: post ? post.post_embed_script : '',
       post_embed_html: post ? post.post_embed_html : '',
-      post_layout: post ? post.post_layout : '',
+      post_layout: post ? post.post_layout : 'article',
     },
-    validationSchema: Yup.object().shape({
-      categoryId: Yup.number().when('post_type', {
-        is: 'post',
-        then: Yup.number().required('Choose a category'),
-      }),
-      post_layout: Yup.string().when('post_type', {
-        is: 'post',
-        then: Yup.string().min(2).required('Choose a layout for the post'),
-      }),
-      post_title: Yup.string().min(3).required('Add a title to the post'),
-      post_image: Yup.string().when('post_type', {
-        is: 'post',
-        then: Yup.string().required('Add an Image'),
-      }),
-      post_excerpt: Yup.string().when('post_type', {
-        is: 'post',
-        then: Yup.string()
-          .min(160)
-          .max(200)
-          .required('Add an excerpt from the Post'),
-      }),
-      post_excerpt_2: Yup.string().when('post_type', {
-        is: 'post',
-        then: Yup.string().min(160).max(200),
-      }),
-      post_content: Yup.string()
-        .min(700)
-        .max(900)
-        .required('Add some text to the post'),
-    }),
-
     onSubmit: (values) => {
       const requestsArray = [];
 

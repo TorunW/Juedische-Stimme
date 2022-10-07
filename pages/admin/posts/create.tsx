@@ -5,8 +5,11 @@ import excuteQuery from 'lib/db'
 import PostForm from 'components/admin/posts/PostForm'
 import { selectCategories } from 'lib/queries'
 
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'store/hooks'
 import { setCatgories } from 'store/categories/categoriesSlice'
+import { getCookie, hasCookie } from 'cookies-next'
+import { selectUserByEmail } from 'lib/queries/users'
+import { setLoggedUser } from 'store/users/usersSlice'
 
 export default function CreatePostPage(props) {
     
@@ -14,6 +17,7 @@ export default function CreatePostPage(props) {
   const { categories } = useSelector(state => state.categories)
 
   useEffect(() => {
+    if (props.loggedUser) dispatch(setLoggedUser(JSON.parse(props.loggedUser)[0]))
     dispatch(setCatgories(JSON.parse(props.categories)))
   },[])
 
@@ -33,6 +37,22 @@ export default function CreatePostPage(props) {
 CreatePostPage.layout = "admin";
 
 export const getServerSideProps = async (context) => {
+
+  let userEmail : string;
+  if (!hasCookie('Token', { req: context.req, res: context.res })){
+    return { redirect: { destination: '/login', permanent: false } };
+  } else {
+    userEmail = getCookie('UserEmail', { req: context.req, res: context.res }).toString()
+  }
+
+  let loggedUser: string;
+  if (userEmail){
+    const userResponse = await excuteQuery({
+      query: selectUserByEmail(userEmail)
+    })
+    loggedUser = JSON.stringify(userResponse)
+  }
+
   const nextPostIdResponse = await excuteQuery({
     query: ` SELECT max_id FROM js_maxids WHERE js_maxids.table='posts'`
   });
@@ -45,7 +65,8 @@ export const getServerSideProps = async (context) => {
   return {
     props:{
       nextPostId,
-      categories
+      categories,
+      loggedUser
     }
   }
 }

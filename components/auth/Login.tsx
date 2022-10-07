@@ -20,18 +20,19 @@ function LoginForm() {
   }, []);
 
   const signUp = () => {
+    setLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((response: any) => {
-        console.log(auth, email, 'auth email');
-        console.log(response, 'res');
-        setLoading(true);
+        console.log(response.user)
         sessionStorage.setItem('Token', response.user.accessToken);
         setCookie('Token', response.user.accessToken);
+        sessionStorage.setItem('UserEmail', response.user.email);
+        setCookie('UserEmail', response.user.email);
         router.push('/');
       })
       .catch((err) => {
         console.log(err);
-
+        setLoading(false)
         if (err.code === 'auth/wrong-password') {
           alert('Wrong password');
         } else if (err.code === 'auth/user-not-found') {
