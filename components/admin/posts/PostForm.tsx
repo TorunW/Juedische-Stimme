@@ -32,6 +32,7 @@ import {
   Alert,
 } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import FormError from '@/components/atoms/FormError';
 
 const TipTapEditor = dynamic(() => import('components/tiptap/TipTapEditor'), {
   suspense: true,
@@ -345,9 +346,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                     {selectCategoriesDisplay}
                   </Select>
                   {formik.errors && formik.errors.categoryId ? (
-                    <Alert severity='error'>
-                      {formik.errors.categoryId.toString()}
-                    </Alert>
+                    <FormError message={formik.errors.categoryId}/>
                   ) : (
                     ''
                   )}
@@ -370,7 +369,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                     {/* <MenuItem value={'donation'}>Donation Page</MenuItem> */}
                   </Select>
                   {formik.errors && formik.errors.post_layout ? (
-                    <Alert severity='error'>{formik.errors.post_layout}</Alert>
+                <FormError message={formik.errors.post_layout}/>
                   ) : (
                     ''
                   )}
@@ -396,7 +395,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                     value={formik.values.post_title}
                   />
                   {formik.errors && formik.errors.post_title ? (
-                    <Alert severity='error'>{formik.errors.post_title}</Alert>
+<FormError message={formik.errors.post_title}/>
                   ) : (
                     ''
                   )}
@@ -415,7 +414,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                       onChange={onPostImageChange}
                     />
                     {formik.errors && formik.errors.post_image ? (
-                      <Alert severity='error'>{formik.errors.post_image}</Alert>
+                      <FormError message={formik.errors.post_image}/>
                     ) : (
                       ''
                     )}
@@ -465,7 +464,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   />
                 </Suspense>
                 {formik.errors && formik.errors.post_excerpt ? (
-                  <Alert severity='error'>{formik.errors.post_excerpt}</Alert>
+                 <FormError message={formik.errors.post_excerpt}/>
                 ) : (
                   ''
                 )}
@@ -499,7 +498,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   <FormHelp text={``} />
                 </Grid>
                 {formik.errors && formik.errors.post_content ? (
-                  <Alert severity='error'>{formik.errors.post_content}</Alert>
+                 <FormError message={formik.errors.post_content}/>
                 ) : (
                   ''
                 )}
