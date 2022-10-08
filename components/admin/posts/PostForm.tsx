@@ -100,7 +100,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       post_image_2: post ? post.post_image_2 : '',
       post_embed_script: post ? post.post_embed_script : '',
       post_embed_html: post ? post.post_embed_html : '',
-      post_layout: post ? post.post_layout : 'article',
+      post_layout: post ? post.post_layout ? post.post_layout : 'legacy' : '',
     },
     validationSchema: Yup.object().shape({
       categoryId: Yup.number().when('post_type', {
@@ -365,6 +365,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   >
                     <MenuItem value={'article'}>Article</MenuItem>
                     <MenuItem value={'newsletter'}>Newsletter</MenuItem>
+                    <MenuItem value={'legacy'}>Legacy</MenuItem>
                     {/* <MenuItem value={'member_form'}>Membership Page</MenuItem> */}
                     {/* <MenuItem value={'donation'}>Donation Page</MenuItem> */}
                   </Select>

@@ -9,6 +9,7 @@ import PostPageMemberFormLayout from './PostPageMemberFormLayout';
 import PostPageDonationFormLayout from './PostPageDonationFormLayout';
 import dynamic from 'next/dynamic';
 import { getPostContentFields } from 'helpers/getPostContentFields';
+import PostPageLegacyLayout from './PostPageLegacyLayout';
 
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
@@ -47,12 +48,14 @@ function Post({ post }) {
       postLayoutDisplay = (
         <PostPageDonationFormLayout post={post} locale={locale} />
       );
-    } else if (postLayout === 'newsletter' || isEmpty(postContent) || isEmpty(postExcerpt2) || isEmpty(postContent2)) {
+    } else if (postLayout === 'newsletter' ) {
       postLayoutDisplay = (
         <PostPageNewsletterLayout post={post} locale={locale} />
       );
       postNavigationDisplay = <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
-    }  else {
+    } else if ( isEmpty(postContent) || isEmpty(postExcerpt2) || isEmpty(postContent2)){
+     postLayoutDisplay = <PostPageLegacyLayout post={post} locale={locale} />
+    } else {
       postLayoutDisplay = <PostPageArticleLayout post={post} locale={locale} />;
       postNavigationDisplay = <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
     }
