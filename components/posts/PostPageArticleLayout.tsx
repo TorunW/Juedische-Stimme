@@ -97,7 +97,7 @@ const PostPageArticleLayout = ({ post, locale }) => {
             ></div>
           </div>
 
-          {post.post_embed_script ? (
+          {post.post_embed_script && post.post_embed_script !== "null"  ? (
             <PostPageEmbededContent
               script={post.post_embed_script}
               html={post.post_embed_html}

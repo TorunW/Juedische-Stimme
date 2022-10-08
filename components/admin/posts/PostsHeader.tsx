@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import { useSelector } from 'store/hooks';
 import {
   AppBar,
@@ -24,8 +24,9 @@ const PostsHeader = () => {
     >
       <Tabs
         value={categoryName}
-        onClick={(e) =>
-          (window.location.href = `/admin/posts/category/${e.target.value}/page/1`)
+          onChange={(value, newValue) => {
+            (window.location.href = `/admin/posts/category/${newValue}/page/1`)
+          }
         }
         textColor='secondary'
         indicatorColor='secondary'

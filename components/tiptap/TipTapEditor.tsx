@@ -14,7 +14,7 @@ interface TipTapEditorProps {
   itemType?: string;
   showMenu?: boolean;
   height?: number;
-  title: string;
+  title?: string;
 }
 
 const TipTapEditor = (props: TipTapEditorProps) => {
