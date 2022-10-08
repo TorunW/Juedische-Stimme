@@ -1,4 +1,4 @@
-import React, { ReactElement, Suspense } from 'react';
+import React, { useState, ReactElement, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { useFormik } from 'formik';
 import axios from 'axios';
@@ -18,6 +18,9 @@ interface GalleryFromProps {
 }
 
 function GalleryForm({ gallery }: GalleryFromProps) {
+
+  const [ selectedImages, setSelectedImages] = useState<Image[]>([]) 
+
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
   const formik = useFormik({
@@ -47,6 +50,19 @@ function GalleryForm({ gallery }: GalleryFromProps) {
     },
   });
 
+  function handleSelectImage(galleryImage: Image){
+
+    let newSelectedImages = [];
+    const selectedImageIndex = selectedImages.findIndex(sImg => sImg.image_src === galleryImage.image_src);
+    if (selectedImageIndex === -1){
+      newSelectedImages = [ ...selectedImages, galleryImage ]
+    } else {
+      newSelectedImages = [...selectedImages]
+      newSelectedImages.splice(selectedImageIndex,1)
+    }
+    setSelectedImages(newSelectedImages)
+  }
+
   function deleteImage(galleryImage: Image) {
     console.log(galleryImage, ' GALLERY IMAGE');
     const deleteFileUrl = `http://${window.location.hostname}${
@@ -72,6 +88,38 @@ function GalleryForm({ gallery }: GalleryFromProps) {
         console.log(errors, ' ERRORS');
         // react on errors.
       });
+  
+    }
+
+  function deleteSelectedImages(){
+    
+    console.log(selectedImages)
+    
+    let deleteRequests = [];
+    
+    if (selectedImages.length > 0){
+
+      console.log('FAAAAACKCKCKCKCKCKKC')
+
+      selectedImages.forEach(function(img:Image,index:number){
+        const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== "80" ? ':'+window.location.port : ""}/media/${img.image_src.split('/').join('+++')}`;
+        const deleteFileRequest = axios.delete(deleteFileUrl)
+        deleteRequests.push(deleteFileRequest)
+        const deleteGalleryImageUrl = `/api/galleryimage/${img.image_id}`
+        const deleteGalleryImageRequest = axios.delete(deleteGalleryImageUrl)
+        deleteRequests.push(deleteGalleryImageRequest)
+      })
+
+      axios.all([...deleteRequests]).then(axios.spread((...responses) => {
+          console.log(responses)
+          window.location.reload()
+          // use/access the results 
+      })).catch(errors => {
+          console.log(errors, " ERRORS")
+          // react on errors.
+      })
+    
+    }
   }
 
   let galleryImagesSectionDisplay: ReactElement;
@@ -80,11 +128,13 @@ function GalleryForm({ gallery }: GalleryFromProps) {
       'no images in gallery, upload something!';
     if (gallery.images) {
       galleryImagesDisplay = gallery.images.map(
-        (galleryImage: Image, index: number) => (
+        (galleryImage: Image) => (
           <GalleryImageForm
             key={galleryImage.image_id}
             galleryImage={galleryImage}
             galleryId={gallery.gallery_id}
+            handleSelectImage={() => handleSelectImage(galleryImage)}
+            isSelected={selectedImages.findIndex(sImg => sImg.image_src === galleryImage.image_src) > -1}
           />
         )
       );
@@ -149,6 +199,7 @@ function GalleryForm({ gallery }: GalleryFromProps) {
           </div>
         </form>
       </div>
+      <button onClick={() => deleteSelectedImages()}>DELETE SELECTED IMAGES</button>
       {galleryImagesSectionDisplay}
     </React.Fragment>
   );

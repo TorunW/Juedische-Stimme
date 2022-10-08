@@ -12,9 +12,13 @@ const TiptapEditor = dynamic(() => import('components/tiptap/TipTapEditor'), {
 interface GalleryImageFormProps {
   galleryId:number | string;
   galleryImage?:any;
+  handleSelectImage?: Function;
+  isSelected?: boolean;
 }
 
-function GalleryImageForm({ galleryId, galleryImage }:GalleryImageFormProps) {
+function GalleryImageForm({ galleryId, galleryImage, handleSelectImage, isSelected }:GalleryImageFormProps) {
+
+  // console.log(isSelected, " IS SELECTED ")
 
   const fileInputRef: any = useRef();
 
@@ -103,6 +107,7 @@ function GalleryImageForm({ galleryId, galleryImage }:GalleryImageFormProps) {
 
   return (
     <div className={styles.container}>
+      { galleryImage ? <a onClick={() => handleSelectImage()}>SELECT ME</a> : ""}
       {imageDisplay}
       <form onSubmit={formik.handleSubmit}>
         <div className={styles['form-row']}>
