@@ -4,7 +4,15 @@ import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import styles from './Styles.module.css';
 import MenuBar from './MenuBar';
-import { TextField, Button, Box, Divider } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Box,
+  Divider,
+  FormGroup,
+  FormControlLabel,
+  Switch,
+} from '@mui/material';
 import Grid from '@mui/material/Grid'; // Grid version 1
 
 interface TipTapEditorProps {
@@ -37,14 +45,15 @@ const TipTapEditor = (props: TipTapEditorProps) => {
         sx={{
           border: 2,
           borderRadius: 1,
+
           borderColor: '#8179A6',
         }}
       >
         {menuDispaly}
         <Divider sx={{ borderColor: '#8179A6' }} />
-        <div className={styles.body} style={{ height: height ? height : '' }}>
+        <Box sx={{ height: '100%', paddingY: 2, paddingX: 4 }}>
           <EditorContent editor={editor} />
-        </div>
+        </Box>
       </Box>
     </div>
   );
@@ -72,7 +81,7 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
       />
     );
   }
-
+  console.log(showEditor);
   return (
     <Grid item xs={10}>
       <Grid container sx={{ marginBottom: 2 }}>
@@ -80,13 +89,20 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
           <h3>{props.title}</h3>
         </Grid>
         <Grid item xs={5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-          <Button variant='outlined'>
-            <a
-              onClick={() => setShowEditor(showEditor === true ? false : true)}
-            >
-              {showEditor === true ? 'Show html' : 'Show editor'}
-            </a>
-          </Button>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  defaultChecked
+                  color='secondary'
+                  onClick={() =>
+                    setShowEditor(showEditor === true ? false : true)
+                  }
+                />
+              }
+              label={showEditor === true ? 'Show html' : 'Show editor'}
+            />
+          </FormGroup>
         </Grid>
       </Grid>
 

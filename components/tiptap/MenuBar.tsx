@@ -9,10 +9,13 @@ import FormatClearIcon from '@mui/icons-material/FormatClear';
 import FormatTextdirectionLToRIcon from '@mui/icons-material/FormatTextdirectionLToR';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
+import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
+import FormatColorFillIcon from '@mui/icons-material/FormatColorFill';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import UndoIcon from '@mui/icons-material/Undo';
 import RedoIcon from '@mui/icons-material/Redo';
-import { Link, Box } from '@mui/material';
+import { Link, Box, ToggleButton, ToggleButtonGroup } from '@mui/material';
 
 const MenuBar = ({ editor }) => {
   if (!editor) {
@@ -24,7 +27,8 @@ const MenuBar = ({ editor }) => {
       sx={{
         display: 'flex',
         columnGap: 2,
-        padding: 1,
+        paddingX: 2,
+        paddingTop: 1,
         alignItems: 'center',
       }}
     >
@@ -32,6 +36,7 @@ const MenuBar = ({ editor }) => {
         onClick={() => editor.chain().focus().toggleBold().run()}
         title='bold'
         sx={{
+          color: editor.isActive('bold') ? '#8179A6' : 'black',
           cursor: 'pointer',
           '&:hover': { color: '#8179A6' },
         }}
@@ -41,79 +46,146 @@ const MenuBar = ({ editor }) => {
       <Link
         onClick={() => editor.chain().focus().toggleItalic().run()}
         title='italic'
+        sx={{
+          cursor: 'pointer',
+          color: editor.isActive('italic') ? '#8179A6' : 'black',
+          '&:hover': { color: '#8179A6' },
+        }}
       >
         <FormatItalicIcon />
       </Link>
       <Link
         onClick={() => editor.chain().focus().toggleStrike().run()}
         title='strike'
+        sx={{
+          color: editor.isActive('strike') ? '#8179A6' : 'black',
+          cursor: 'pointer',
+          '&:hover': { color: '#8179A6' },
+        }}
       >
         <FormatStrikethroughIcon />
       </Link>
-
       <Link
         onClick={() => editor.chain().focus().unsetAllMarks().run()}
         title='clear formating'
+        sx={{
+          color: editor.isActive('clear formatting') ? '#8179A6' : 'black',
+
+          cursor: 'pointer',
+          '&:hover': { color: '#8179A6' },
+        }}
       >
         <FormatClearIcon />
       </Link>
-
       <Link
         onClick={() => editor.chain().focus().setParagraph().run()}
         title='paragraph'
+        sx={{
+          color: editor.isActive('paragraph') ? '#8179A6' : 'black',
+          cursor: 'pointer',
+          '&:hover': { color: '#8179A6' },
+        }}
       >
         <FormatTextdirectionLToRIcon />
       </Link>
-
-      <a
+      <Link
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         title='h2'
-        className={
-          editor.isActive('heading', { level: 2 }) ? styles.isActive : ''
-        }
+        sx={{
+          color: editor.isActive('h2') ? '#8179A6' : 'black',
+          cursor: 'pointer',
+          fontWeight: 800,
+          fontSize: 18,
+          marginBottom: 1,
+          textDecoration: 'none',
+          '&:hover': { color: '#8179A6' },
+        }}
       >
-        h2
-      </a>
-      <a
+        H2
+      </Link>
+      <Link
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
         title='h3'
-        className={
-          editor.isActive('heading', { level: 3 }) ? styles.isActive : ''
-        }
+        sx={{
+          color: editor.isActive('h3') ? '#8179A6' : 'black',
+          cursor: 'pointer',
+          fontWeight: 800,
+          fontSize: 18,
+          marginBottom: 1,
+          textDecoration: 'none',
+          '&:hover': { color: '#8179A6' },
+        }}
       >
-        h3
-      </a>
-      <a
+        H3
+      </Link>
+      <Link
         onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
         title='h4'
-        className={
-          editor.isActive('heading', { level: 4 }) ? styles.isActive : ''
-        }
+        sx={{
+          color: editor.isActive('h4') ? '#8179A6' : 'black',
+          cursor: 'pointer',
+          fontWeight: 800,
+          fontSize: 18,
+          marginBottom: 1,
+          textDecoration: 'none',
+          '&:hover': { color: '#8179A6' },
+        }}
       >
-        h4
-      </a>
+        H4
+      </Link>
       <Link
         onClick={() => editor.chain().focus().toggleBulletList().run()}
         title='bullet list'
+        sx={{
+          color: editor.isActive('bullet list') ? '#8179A6' : 'black',
+          cursor: 'pointer',
+          '&:hover': { color: '#8179A6' },
+        }}
       >
         <FormatListBulletedIcon />
       </Link>
       <Link
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
         title='ordered list'
+        sx={{
+          color: editor.isActive('ordered list') ? '#8179A6' : 'black',
+          cursor: 'pointer',
+          '&:hover': { color: '#8179A6' },
+        }}
       >
         <FormatListNumberedIcon />
       </Link>
       <Link
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
         title='block quote'
+        sx={{
+          color: editor.isActive('block quote') ? '#8179A6' : 'black',
+          cursor: 'pointer',
+          '&:hover': { color: '#8179A6' },
+        }}
       >
         <FormatQuoteIcon />
       </Link>
-      <Link onClick={() => editor.chain().focus().undo().run()} title='undo'>
+      <Link
+        onClick={() => editor.chain().focus().undo().run()}
+        title='undo'
+        sx={{
+          color: editor.isActive('undo') ? '#8179A6' : 'black',
+          cursor: 'pointer',
+          '&:hover': { color: '#8179A6' },
+        }}
+      >
         <UndoIcon />
       </Link>
-      <Link onClick={() => editor.chain().focus().redo().run()} title='redo'>
+      <Link
+        onClick={() => editor.chain().focus().redo().run()}
+        title='redo'
+        sx={{
+          color: editor.isActive('redo') ? '#8179A6' : 'black',
+          cursor: 'pointer',
+          '&:hover': { color: '#8179A6' },
+        }}
+      >
         <RedoIcon />
       </Link>
     </Box>
