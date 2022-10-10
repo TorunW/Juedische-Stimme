@@ -126,97 +126,171 @@ a {
   margin: 0;
 }
 
-.link {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  .link-button {
-    font-size: 1.2rem;
-    border: 5px solid #8179a6;
-    padding: 8px 16px;
-    transition: all 0.2s ease-in-out;
-    font-family: 'Raleway', Arial, san-serif;
-    text-transform: capitalize;
+#main-layout {
+  .link {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    .link-button {
+      font-size: 1.2rem;
+      border: 5px solid #8179a6;
+      padding: 8px 16px;
+      transition: all 0.2s ease-in-out;
+      font-family: 'Raleway', Arial, san-serif;
+      text-transform: capitalize;
 
-    &:hover {
-      color: #fff;
-      background: #8179a6;
-    }
-    &:active {
-      background-color: darken(#8179a6, 25%);
-      border: 5px solid darken(#8179a6, 25%);
+      &:hover {
+        color: #fff;
+        background: #8179a6;
+      }
+      &:active {
+        background-color: darken(#8179a6, 25%);
+        border: 5px solid darken(#8179a6, 25%);
+      }
     }
   }
-}
 
-.whiteBg {
-  .link-button {
+  .whiteBg {
+    .link-button {
+      color: #2e2e2e;
+    }
+  }
+
+  .blackBg {
+    color: #fff;
+    button {
+      color: #fff;
+    }
+  }
+
+  .submitBtn {
+    width: 100%;
+
+    button {
+      border: 5px solid #8179a6;
+      padding: 8px 16px;
+      font-family: 'Raleway' !important;
+      font-size: 1.6rem;
+      font-weight: 600;
+      border-radius: 2px;
+      text-transform: uppercase;
+      height: 56px;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+      &:hover {
+        background-color: #8179a6;
+        color: white;
+      }
+
+      &:active {
+        background-color: darken(#8179a6, 25%);
+        border: 5px solid darken(#8179a6, 25%);
+      }
+    }
+  }
+
+  input,
+  textarea {
+    font-size: 1.4rem;
+    border: 1px solid #2e2e2e;
+    font-family: 'Raleway';
+    width: 100%;
+    padding: 8px;
     color: #2e2e2e;
   }
-}
 
-.blackBg {
-  color: #fff;
-  button {
-    color: #fff;
-  }
-}
-
-.submitBtn {
-  width: 100%;
-
-  button {
-    border: 5px solid #8179a6;
-    padding: 8px 16px;
-    font-family: 'Raleway' !important;
-    font-size: 1.6rem;
-    font-weight: 600;
-    border-radius: 2px;
-    text-transform: uppercase;
+  input {
     height: 56px;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0);
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    &:hover {
-      background-color: #8179a6;
-      color: white;
-    }
 
-    &:active {
-      background-color: darken(#8179a6, 25%);
-      border: 5px solid darken(#8179a6, 25%);
+    &:focus-visible {
+      border: 1px solid #2e2e2e;
+      outline: none;
     }
   }
-}
 
-input,
-textarea {
-  font-size: 1.4rem;
-  border: 1px solid #2e2e2e;
-  font-family: 'Raleway';
-  width: 100%;
-  padding: 8px;
-  color: #2e2e2e;
-}
-
-input {
-  height: 56px;
-
-  &:focus-visible {
-    border: 1px solid #2e2e2e;
-    outline: none;
+  textarea {
+    &:focus-visible {
+      outline: none;
+    }
   }
-}
 
-textarea {
-  &:focus-visible {
-    outline: none;
+  p {
+    line-height: 1.5rem;
   }
-}
 
-p {
-  line-height: 1.5rem;
+  @media (min-width: 1201px) {
+    // Aktuelles, About, Newsletter
+    h1 {
+      font-size: 5.5rem;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 48px;
+      color: #2e2e2e;
+    }
+
+    h2 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    // Aktuelles, About, Newsletter
+    h1 {
+      font-size: 4.5rem;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 48px;
+      color: #2e2e2e;
+    }
+
+    h2 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+
+    // h3 {
+    //   font-size: 1.25rem;
+    //   text-transform: uppercase;
+    //   font-weight: 600;
+    // }
+  }
+
+  @media (max-width: 991px) {
+    // Aktuelles, About, Newsletter
+    h1 {
+      font-size: 3.5rem;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 48px;
+      color: #2e2e2e;
+    }
+
+    h2 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  }
 }
 
 main {
@@ -235,78 +309,6 @@ main {
 #admin-content,
 #login-page {
   padding-top: 0;
-}
-
-@media (min-width: 1201px) {
-  // Aktuelles, About, Newsletter
-  h1 {
-    font-size: 5.5rem;
-    text-transform: uppercase;
-    font-weight: 900;
-    text-align: center;
-    margin-bottom: 48px;
-    color: #2e2e2e;
-  }
-
-  h2 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 32px;
-  }
-
-  h3 {
-    font-size: 1.25rem;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-}
-
-@media (max-width: 1200px) {
-  // Aktuelles, About, Newsletter
-  h1 {
-    font-size: 4.5rem;
-    text-transform: uppercase;
-    font-weight: 900;
-    text-align: center;
-    margin-bottom: 48px;
-    color: #2e2e2e;
-  }
-
-  h2 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 32px;
-  }
-
-  // h3 {
-  //   font-size: 1.25rem;
-  //   text-transform: uppercase;
-  //   font-weight: 600;
-  // }
-}
-
-@media (max-width: 991px) {
-  // Aktuelles, About, Newsletter
-  h1 {
-    font-size: 3.5rem;
-    text-transform: uppercase;
-    font-weight: 900;
-    text-align: center;
-    margin-bottom: 48px;
-    color: #2e2e2e;
-  }
-
-  h2 {
-    font-size: 2.4rem;
-    font-weight: 700;
-    margin-bottom: 32px;
-  }
-
-  h3 {
-    font-size: 1.25rem;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
 }
 
 .lds-rings-container {

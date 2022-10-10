@@ -19,11 +19,11 @@ function AdminDashboard(props) {
       <hr />
       <p>
         Hi{' '}
-        {loggedUser !== null
+        {/* {loggedUser !== null
           ? loggedUser.user_nicename.length > 0
             ? loggedUser.user_nicename
             : loggedUser.user_email
-          : ''}
+          : ''} */}
         ! <br />
         quick overview of things in the admin, things that need attention etc
       </p>

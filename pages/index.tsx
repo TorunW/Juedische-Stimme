@@ -56,7 +56,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   }, [headerImage.isLoaded]);
 
   function initHomePage() {
-    if (props.loggedUser) dispatch(setLoggedUser(JSON.parse(props.loggedUser)[0]))
+    if (props.loggedUser)
+      dispatch(setLoggedUser(JSON.parse(props.loggedUser)[0]));
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(setHeaderGallery(JSON.parse(props.headerGallery)[0]));
     dispatch(setPosts(JSON.parse(props.posts)));
@@ -137,20 +138,22 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 Home.layout = 'main';
 
 export const getServerSideProps = async (context: NextPageContext) => {
-
-  let userEmail : string;
-  if (!hasCookie('Token', { req: context.req, res: context.res })){
+  let userEmail: string;
+  if (!hasCookie('Token', { req: context.req, res: context.res })) {
     return { redirect: { destination: '/login', permanent: false } };
   } else {
-    userEmail = getCookie('UserEmail', { req: context.req, res: context.res }).toString()
+    userEmail = getCookie('UserEmail', {
+      req: context.req,
+      res: context.res,
+    }).toString();
   }
 
   let loggedUser: string;
-  if (userEmail){
+  if (userEmail) {
     const userResponse = await excuteQuery({
-      query: selectUserByEmail(userEmail)
-    })
-    loggedUser = JSON.stringify(userResponse)
+      query: selectUserByEmail(userEmail),
+    });
+    loggedUser = JSON.stringify(userResponse);
   }
 
   // NAVIGATION
@@ -226,7 +229,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       defaultLocale: context.defaultLocale,
       headerGallery,
       headerImage,
-      loggedUser
+      loggedUser,
     },
   };
 };

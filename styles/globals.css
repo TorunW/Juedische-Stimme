@@ -87,12 +87,12 @@ a {
   box-sizing: border-box;
   margin: 0;
 }
-.link {
+#main-layout .link {
   display: flex;
   justify-content: center;
   gap: 32px;
 }
-.link .link-button {
+#main-layout .link .link-button {
   font-size: 1.2rem;
   border: 5px solid #8179a6;
   padding: 8px 16px;
@@ -100,27 +100,27 @@ a {
   font-family: 'Raleway', Arial, san-serif;
   text-transform: capitalize;
 }
-.link .link-button:hover {
+#main-layout .link .link-button:hover {
   color: #fff;
   background: #8179a6;
 }
-.link .link-button:active {
+#main-layout .link .link-button:active {
   background-color: #454060;
   border: 5px solid #454060;
 }
-.whiteBg .link-button {
+#main-layout .whiteBg .link-button {
   color: #2e2e2e;
 }
-.blackBg {
+#main-layout .blackBg {
   color: #fff;
 }
-.blackBg button {
+#main-layout .blackBg button {
   color: #fff;
 }
-.submitBtn {
+#main-layout .submitBtn {
   width: 100%;
 }
-.submitBtn button {
+#main-layout .submitBtn button {
   border: 5px solid #8179a6;
   padding: 8px 16px;
   font-family: 'Raleway' !important;
@@ -134,16 +134,16 @@ a {
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
-.submitBtn button:hover {
+#main-layout .submitBtn button:hover {
   background-color: #8179a6;
   color: white;
 }
-.submitBtn button:active {
+#main-layout .submitBtn button:active {
   background-color: #454060;
   border: 5px solid #454060;
 }
-input,
-textarea {
+#main-layout input,
+#main-layout textarea {
   font-size: 1.4rem;
   border: 1px solid #2e2e2e;
   font-family: 'Raleway';
@@ -151,18 +151,73 @@ textarea {
   padding: 8px;
   color: #2e2e2e;
 }
-input {
+#main-layout input {
   height: 56px;
 }
-input:focus-visible {
+#main-layout input:focus-visible {
   border: 1px solid #2e2e2e;
   outline: none;
 }
-textarea:focus-visible {
+#main-layout textarea:focus-visible {
   outline: none;
 }
-p {
+#main-layout p {
   line-height: 1.5rem;
+}
+@media (min-width: 1201px) {
+  #main-layout h1 {
+    font-size: 5.5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 48px;
+    color: #2e2e2e;
+  }
+  #main-layout h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+  #main-layout h3 {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+@media (max-width: 1200px) {
+  #main-layout h1 {
+    font-size: 4.5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 48px;
+    color: #2e2e2e;
+  }
+  #main-layout h2 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+}
+@media (max-width: 991px) {
+  #main-layout h1 {
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 48px;
+    color: #2e2e2e;
+  }
+  #main-layout h2 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 32px;
+  }
+  #main-layout h3 {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
 }
 main {
   padding-top: 115px;
@@ -178,61 +233,6 @@ main.proca-MuiContainer-root {
 #admin-content,
 #login-page {
   padding-top: 0;
-}
-@media (min-width: 1201px) {
-  h1 {
-    font-size: 5.5rem;
-    text-transform: uppercase;
-    font-weight: 900;
-    text-align: center;
-    margin-bottom: 48px;
-    color: #2e2e2e;
-  }
-  h2 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 32px;
-  }
-  h3 {
-    font-size: 1.25rem;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-}
-@media (max-width: 1200px) {
-  h1 {
-    font-size: 4.5rem;
-    text-transform: uppercase;
-    font-weight: 900;
-    text-align: center;
-    margin-bottom: 48px;
-    color: #2e2e2e;
-  }
-  h2 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    margin-bottom: 32px;
-  }
-}
-@media (max-width: 991px) {
-  h1 {
-    font-size: 3.5rem;
-    text-transform: uppercase;
-    font-weight: 900;
-    text-align: center;
-    margin-bottom: 48px;
-    color: #2e2e2e;
-  }
-  h2 {
-    font-size: 2.4rem;
-    font-weight: 700;
-    margin-bottom: 32px;
-  }
-  h3 {
-    font-size: 1.25rem;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
 }
 .lds-rings-container {
   text-align: center;
