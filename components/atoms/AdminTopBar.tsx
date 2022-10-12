@@ -10,38 +10,27 @@ import { generateFileName } from 'helpers/generateFileName';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
 import dateTimeHelper from 'helpers/dateTimeHelper';
-import {
-  Box,
-  Button,
-  Card,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControl,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-  CircularProgress,
-} from '@mui/material';
-import Grid from '@mui/material/Grid';
-import { Container } from '@mui/system';
+import { Box } from '@mui/material';
+import { shadows } from '@mui/system';
 
 interface Props {
   title?: string;
   tabs?: any;
 }
 const AdminTopBar: React.FC<Props> = ({ title, tabs }) => {
+  console.log(tabs, 'halllihallo');
   return (
     <Box
       sx={{
+        position: 'relative',
         background: '#2e2e2e',
         color: 'white',
         width: '100%',
-        minHeight: '10px',
+        boxShadow: 4,
+        zIndex: 3,
       }}
     >
-      <Box sx={{ marginX: 3 }}>
+      <Box sx={{ marginX: 3, paddingBottom: tabs === undefined ? 1 : 0 }}>
         <h1>{title}</h1>
       </Box>
       {tabs}

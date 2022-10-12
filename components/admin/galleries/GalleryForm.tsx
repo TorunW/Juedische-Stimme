@@ -14,12 +14,11 @@ const TipTapEditor = dynamic(() => import('components/tiptap/TipTapEditor'), {
 });
 
 interface GalleryFromProps {
-  gallery: Gallery;
+  gallery?: Gallery;
 }
 
 function GalleryForm({ gallery }: GalleryFromProps) {
-
-  const [ selectedImages, setSelectedImages] = useState<Image[]>([]) 
+  const [selectedImages, setSelectedImages] = useState<Image[]>([]);
 
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
@@ -50,17 +49,18 @@ function GalleryForm({ gallery }: GalleryFromProps) {
     },
   });
 
-  function handleSelectImage(galleryImage: Image){
-
+  function handleSelectImage(galleryImage: Image) {
     let newSelectedImages = [];
-    const selectedImageIndex = selectedImages.findIndex(sImg => sImg.image_src === galleryImage.image_src);
-    if (selectedImageIndex === -1){
-      newSelectedImages = [ ...selectedImages, galleryImage ]
+    const selectedImageIndex = selectedImages.findIndex(
+      (sImg) => sImg.image_src === galleryImage.image_src
+    );
+    if (selectedImageIndex === -1) {
+      newSelectedImages = [...selectedImages, galleryImage];
     } else {
-      newSelectedImages = [...selectedImages]
-      newSelectedImages.splice(selectedImageIndex,1)
+      newSelectedImages = [...selectedImages];
+      newSelectedImages.splice(selectedImageIndex, 1);
     }
-    setSelectedImages(newSelectedImages)
+    setSelectedImages(newSelectedImages);
   }
 
   function deleteImage(galleryImage: Image) {
@@ -88,37 +88,40 @@ function GalleryForm({ gallery }: GalleryFromProps) {
         console.log(errors, ' ERRORS');
         // react on errors.
       });
-  
-    }
+  }
 
-  function deleteSelectedImages(){
-    
-    console.log(selectedImages)
-    
+  function deleteSelectedImages() {
+    console.log(selectedImages);
+
     let deleteRequests = [];
-    
-    if (selectedImages.length > 0){
 
-      console.log('FAAAAACKCKCKCKCKCKKC')
+    if (selectedImages.length > 0) {
+      console.log('FAAAAACKCKCKCKCKCKKC');
 
-      selectedImages.forEach(function(img:Image,index:number){
-        const deleteFileUrl = `http://${window.location.hostname}${window.location.port !== "80" ? ':'+window.location.port : ""}/media/${img.image_src.split('/').join('+++')}`;
-        const deleteFileRequest = axios.delete(deleteFileUrl)
-        deleteRequests.push(deleteFileRequest)
-        const deleteGalleryImageUrl = `/api/galleryimage/${img.image_id}`
-        const deleteGalleryImageRequest = axios.delete(deleteGalleryImageUrl)
-        deleteRequests.push(deleteGalleryImageRequest)
-      })
+      selectedImages.forEach(function (img: Image, index: number) {
+        const deleteFileUrl = `http://${window.location.hostname}${
+          window.location.port !== '80' ? ':' + window.location.port : ''
+        }/media/${img.image_src.split('/').join('+++')}`;
+        const deleteFileRequest = axios.delete(deleteFileUrl);
+        deleteRequests.push(deleteFileRequest);
+        const deleteGalleryImageUrl = `/api/galleryimage/${img.image_id}`;
+        const deleteGalleryImageRequest = axios.delete(deleteGalleryImageUrl);
+        deleteRequests.push(deleteGalleryImageRequest);
+      });
 
-      axios.all([...deleteRequests]).then(axios.spread((...responses) => {
-          console.log(responses)
-          window.location.reload()
-          // use/access the results 
-      })).catch(errors => {
-          console.log(errors, " ERRORS")
+      axios
+        .all([...deleteRequests])
+        .then(
+          axios.spread((...responses) => {
+            console.log(responses);
+            window.location.reload();
+            // use/access the results
+          })
+        )
+        .catch((errors) => {
+          console.log(errors, ' ERRORS');
           // react on errors.
-      })
-    
+        });
     }
   }
 
@@ -127,17 +130,19 @@ function GalleryForm({ gallery }: GalleryFromProps) {
     let galleryImagesDisplay: ReactElement[] | string =
       'no images in gallery, upload something!';
     if (gallery.images) {
-      galleryImagesDisplay = gallery.images.map(
-        (galleryImage: Image) => (
-          <GalleryImageForm
-            key={galleryImage.image_id}
-            galleryImage={galleryImage}
-            galleryId={gallery.gallery_id}
-            handleSelectImage={() => handleSelectImage(galleryImage)}
-            isSelected={selectedImages.findIndex(sImg => sImg.image_src === galleryImage.image_src) > -1}
-          />
-        )
-      );
+      galleryImagesDisplay = gallery.images.map((galleryImage: Image) => (
+        <GalleryImageForm
+          key={galleryImage.image_id}
+          galleryImage={galleryImage}
+          galleryId={gallery.gallery_id}
+          handleSelectImage={() => handleSelectImage(galleryImage)}
+          isSelected={
+            selectedImages.findIndex(
+              (sImg) => sImg.image_src === galleryImage.image_src
+            ) > -1
+          }
+        />
+      ));
     }
 
     galleryImagesSectionDisplay = (
@@ -199,7 +204,9 @@ function GalleryForm({ gallery }: GalleryFromProps) {
           </div>
         </form>
       </div>
-      <button onClick={() => deleteSelectedImages()}>DELETE SELECTED IMAGES</button>
+      <button onClick={() => deleteSelectedImages()}>
+        DELETE SELECTED IMAGES
+      </button>
       {galleryImagesSectionDisplay}
     </React.Fragment>
   );

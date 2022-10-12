@@ -1,12 +1,43 @@
 import React, { FC } from 'react';
 import axios from 'axios';
 import { Tag } from 'types/Tag.type';
+import {
+  Button,
+  IconButton,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  DialogContentText,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
+import EditIcon from '@mui/icons-material/Edit';
+import Link from 'next/link';
 
 interface AdminTagsProps {
   tags?: Tag[];
 }
 
 const AdminTags: FC<AdminTagsProps> = ({ tags }) => {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   function onDeleteTag(tag: Tag) {
     // console.log('now delete the tag + ALL OF ITS RELATIONSHIP, TAXONOMY USW')
     axios.delete(`/api/tags/tag/${tag.term_id}`).then(
@@ -23,20 +54,72 @@ const AdminTags: FC<AdminTagsProps> = ({ tags }) => {
   }
 
   return (
-    <div>
-      {tags.map((tag, index) => (
-        <li key={tag.term_id}>
-          <h3>
-            {tag.name} <small>({tag.count})</small>
-          </h3>
-          <a href={`/admin/tags/${tag.term_id}`}>edit</a>
-          <br />
-          <a href={`/tag/${tag.slug}/page/1`}>view on live site</a>
-          <br />
-          <a onClick={() => onDeleteTag(tag)}>DELETE TAG</a>
-        </li>
-      ))}
-    </div>
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 740 }}>
+        <Table sx={{ minWidth: 650 }} stickyHeader>
+          <TableHead>
+            <TableRow>
+              <TableCell>Tag name</TableCell>
+              <TableCell align='right'>Count</TableCell>
+              <TableCell align='right'>Edit</TableCell>
+              <TableCell align='right'>View on the Website</TableCell>
+              <TableCell align='right'>Delete</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+            {tags.map((tag, index) => (
+              <TableRow hover tabIndex={-1} key={tag.term_id}>
+                <TableCell>
+                  <Typography>{tag.name}</Typography>
+                </TableCell>
+                <TableCell align='right'>{tag.count}</TableCell>
+                <TableCell align='right'>
+                  <IconButton>
+                    <Link href={`/admin/tags/${tag.term_id}`}>
+                      <EditIcon />
+                    </Link>
+                  </IconButton>
+                </TableCell>
+                <TableCell align='right'>
+                  <IconButton>
+                    <a href={`/tag/${tag.slug}/page/1`} target='_blank'>
+                      <SubdirectoryArrowRightIcon />
+                    </a>
+                  </IconButton>
+                </TableCell>
+
+                <TableCell align='right'>
+                  <IconButton onClick={handleClickOpen}>
+                    <DeleteIcon />
+                  </IconButton>
+
+                  <Dialog open={open} onClose={handleClose}>
+                    <DialogTitle>{'Delete Tag?'}</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText>
+                        Once the tag is delete it can't be retrived again
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button
+                        variant='outlined'
+                        onClick={() => onDeleteTag(tag)}
+                        autoFocus
+                      >
+                        Delete
+                      </Button>
+                      <Button variant='outlined' onClick={handleClose}>
+                        Cancel
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 };
 

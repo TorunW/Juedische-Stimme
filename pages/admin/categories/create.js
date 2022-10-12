@@ -1,13 +1,13 @@
-import styles from 'styles/Home.module.css'
-import CategoryForm from 'components/admin/CategoryForm'
+import CategoryForm from 'components/admin/CategoryForm';
+import AdminTopBar from '@/components/atoms/AdminTopBar';
 
-export default function CreateCategoryPage({maxId}) {
+export default function CreateCategoryPage() {
   return (
-    <div className={styles.container}>
-      <h2>NEW CATEGORY</h2>
-        <CategoryForm />
+    <div>
+      <AdminTopBar title='Create new Category' />
+      <CategoryForm />
     </div>
-  )
+  );
 }
 
-CreateCategoryPage.layout = "admin";
+CreateCategoryPage.layout = 'admin';

@@ -797,18 +797,26 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
   let tabMenuDisplay: ReactElement;
   if (post) {
     const tabMenu: ReactElement[] = tabs.map((tab, index) => {
-      return <Tab key={Date.now() + index} value={tab} label={tab} />;
+      return (
+        <Tab
+          key={Date.now() + index}
+          value={tab}
+          label={tab}
+          sx={{ color: 'white !important' }}
+        />
+      );
     });
     tabMenuDisplay = (
       <>
         <Tabs
           value={currentTab}
           onChange={handleChange}
-          textColor='disabled'
           indicatorColor='secondary'
+          sx={{ color: 'white !important' }}
           TabIndicatorProps={{
             style: {
               height: '4px',
+              color: 'white !important',
             },
           }}
         >

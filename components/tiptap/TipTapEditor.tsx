@@ -50,7 +50,7 @@ const TipTapEditor = (props: TipTapEditorProps) => {
       >
         {menuDispaly}
         <Divider />
-        <Box sx={{ height: '100%', paddingY: 2, paddingX: 4 }}>
+        <Box sx={{ height: '100%', marginY: 1, marginX: 1 }}>
           <EditorContent editor={editor} />
         </Box>
       </Box>

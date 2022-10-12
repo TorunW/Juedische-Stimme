@@ -18,14 +18,13 @@ import {
   Divider,
   IconButton,
   Button,
+  Dialog,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  DialogActions,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
 
 interface PostsProps {
   posts: any[];
@@ -48,7 +47,7 @@ function Posts({
 }: PostsProps) {
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (post) => {
     setOpen(true);
   };
 
@@ -124,21 +123,29 @@ function Posts({
             />
           </TableCell>
           <TableCell align='right'>
-            <IconButton color='primary' onClick={handleClickOpen}>
+            <IconButton onClick={() => handleClickOpen(post)}>
               <DeleteIcon />
             </IconButton>
 
             <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>{'Delete?'}</DialogTitle>
+              <DialogTitle>{'Delete Post?'}</DialogTitle>
               <DialogContent>
                 <DialogContentText>
                   Once the post is delete it can't be retrived again
                 </DialogContentText>
               </DialogContent>
-              <Button onClick={handleClose}>Cancel</Button>
-              <Button onClick={() => deletePost(post)} autoFocus>
-                Delete
-              </Button>
+              <DialogActions>
+                <Button
+                  variant='outlined'
+                  onClick={() => deletePost(post)}
+                  autoFocus
+                >
+                  Delete
+                </Button>
+                <Button variant='outlined' onClick={handleClose}>
+                  Cancel
+                </Button>
+              </DialogActions>
             </Dialog>
           </TableCell>
         </TableRow>
@@ -164,7 +171,7 @@ function Posts({
       <PostsHeader />
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 740 }}>
-          <Table sx={{ minWidth: 650 }} stickyHeader aria-label='sticky table'>
+          <Table sx={{ minWidth: 650 }} stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>Title</TableCell>
