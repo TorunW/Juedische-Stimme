@@ -127,6 +127,17 @@ a {
 }
 
 #main-layout {
+  ::-moz-selection {
+    /* Code for Firefox */
+    color: white;
+    background: #5a5474;
+  }
+
+  ::selection {
+    color: white;
+    background: #5a5474;
+  }
+
   .link {
     display: flex;
     justify-content: center;
