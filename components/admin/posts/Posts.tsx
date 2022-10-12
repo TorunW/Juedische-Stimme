@@ -6,16 +6,7 @@ import { generateImageUrl } from 'helpers/imageUrlHelper';
 import Pagination from 'components/pagination/Pagination';
 import PostsHeader from './PostsHeader';
 import {
-  AppBar,
   Box,
-  Button,
-  Card,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControl,
-  Tab,
-  Tabs,
   TableContainer,
   Table,
   TableHead,
@@ -25,7 +16,16 @@ import {
   Paper,
   Link,
   Divider,
+  IconButton,
+  Button,
 } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 interface PostsProps {
   posts: any[];
@@ -46,6 +46,16 @@ function Posts({
   pageNum,
   type,
 }: PostsProps) {
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   function deletePost(post) {
     let deleteRequests = [];
     if (post.tagIds !== null) {
@@ -114,7 +124,22 @@ function Posts({
             />
           </TableCell>
           <TableCell align='right'>
-            <button onClick={() => deletePost(post)}>DELETE POST</button>
+            <IconButton color='primary' onClick={handleClickOpen}>
+              <DeleteIcon />
+            </IconButton>
+
+            <Dialog open={open} onClose={handleClose}>
+              <DialogTitle>{'Delete?'}</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Once the post is delete it can't be retrived again
+                </DialogContentText>
+              </DialogContent>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button onClick={() => deletePost(post)} autoFocus>
+                Delete
+              </Button>
+            </Dialog>
           </TableCell>
         </TableRow>
       </TableBody>
@@ -153,8 +178,8 @@ function Posts({
           </Table>
         </TableContainer>
         <Divider />
-        {paginationDisplay}
       </Paper>
+      <Box sx={{ marginTop: 3 }}>{paginationDisplay}</Box>
     </div>
   );
 }

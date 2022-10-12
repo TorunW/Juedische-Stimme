@@ -12,38 +12,42 @@ import {
   Tab,
   Tabs,
 } from '@mui/material';
+import AdminTopBar from '@/components/atoms/AdminTopBar';
 const PostsHeader = () => {
   const { categories, categoryName } = useSelector((state) => state.categories);
 
-  console.log(categories, categoryName);
+  let tabsDisplay = (
+    <Tabs
+      value={categoryName}
+      onChange={(value, newValue) => {
+        window.location.href = `/admin/posts/category/${newValue}/page/1`;
+      }}
+      textColor='disabled'
+      indicatorColor='secondary'
+      TabIndicatorProps={{
+        style: {
+          height: '4px',
+        },
+      }}
+    >
+      {categories && categories !== null
+        ? categories.map((category, index) => (
+            <Tab
+              key={category.term_id}
+              value={category.name}
+              label={category.name}
+            >
+              {category.name}
+            </Tab>
+          ))
+        : ''}
+    </Tabs>
+  );
 
   return (
-    <Box
-      id='admin-posts-header'
-      sx={{ borderBottom: 1, borderColor: 'divider' }}
-    >
-      <Tabs
-        value={categoryName}
-          onChange={(value, newValue) => {
-            (window.location.href = `/admin/posts/category/${newValue}/page/1`)
-          }
-        }
-        textColor='secondary'
-        indicatorColor='secondary'
-      >
-        {categories && categories !== null
-          ? categories.map((category, index) => (
-              <Tab
-                key={category.term_id}
-                value={category.name}
-                label={category.name}
-              >
-                {category.name}
-              </Tab>
-            ))
-          : ''}
-      </Tabs>
-    </Box>
+    <>
+      <AdminTopBar tabs={tabsDisplay} />
+    </>
   );
 };
 

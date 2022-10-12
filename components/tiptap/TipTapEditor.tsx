@@ -45,12 +45,11 @@ const TipTapEditor = (props: TipTapEditorProps) => {
         sx={{
           border: 2,
           borderRadius: 1,
-
-          borderColor: '#8179A6',
+          borderColor: 'black',
         }}
       >
         {menuDispaly}
-        <Divider sx={{ borderColor: '#8179A6' }} />
+        <Divider />
         <Box sx={{ height: '100%', paddingY: 2, paddingX: 4 }}>
           <EditorContent editor={editor} />
         </Box>
@@ -74,19 +73,17 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
         multiline
         sx={{
           width: '100%',
-          // minHeight: 70,
         }}
         value={props.value}
         onChange={(e) => props.onChange(e.target.value)}
       />
     );
   }
-  console.log(showEditor);
   return (
-    <Grid item xs={10}>
+    <Grid item xs={11}>
       <Grid container sx={{ marginBottom: 2 }}>
         <Grid item xs={7}>
-          <h3>{props.title}</h3>
+          {props.title ? <h3>{props.title}</h3> : ''}
         </Grid>
         <Grid item xs={5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <FormGroup>

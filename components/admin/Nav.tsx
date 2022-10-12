@@ -17,9 +17,11 @@ import {
   AccordionDetails,
   Typography,
   Button,
+  Toolbar,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+//
 function AdminNav() {
   const router = useRouter();
 
@@ -32,61 +34,65 @@ function AdminNav() {
   }
 
   return (
-    <Box id='admin-sidebar'>
-      <Box sx={{ textAlign: 'center', marginTop: 3, marginBottom: 3 }}>
-        <h3>Admin Menu</h3>
+    <div>
+      <Box sx={{ textAlign: 'center', marginY: 1 }}>
+        <h2>Admin Menu</h2>
       </Box>
       <Divider />
       <Accordion disableGutters elevation={0}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls='panel1a-content'
-          id='panel1a-header'
-        >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Post</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Divider />
-          <Box sx={{ marginTop: 1, marginBottom: 1 }}>
+          <Box sx={{ marginY: 1 }}>
             <Link href={`/admin/posts/create`}>Create new post</Link>
           </Box>
           <Divider />
-          <Link href={`/admin/posts`}>Edit posts</Link>
+          <Box sx={{ marginY: 1 }}>
+            <Link href={`/admin/posts`}>Edit posts</Link>
+          </Box>
           <Divider />
-          <Link href={`/admin/tags/create`}>Add new post tag</Link>
+          <Box sx={{ marginY: 1 }}>
+            <Link href={`/admin/tags/create`}>Add new post tag</Link>
+          </Box>
           <Divider />
-          <Link href={`/admin/tags`}>Edit post tag</Link>
+          <Box sx={{ marginY: 1 }}>
+            <Link href={`/admin/tags`}>Edit post tag</Link>
+          </Box>
           <Divider />
-          <Link href={`/admin/categories/create`}>Add new post category</Link>
+          <Box sx={{ marginY: 1 }}>
+            <Link href={`/admin/categories/create`}>Add new post category</Link>
+          </Box>
           <Divider />
-          <Link href={`/admin/categories`}>Edit post categories</Link>
-          <Divider />
-          <Link href={`/admin/media/`}>Edit post media</Link>
+          <Box sx={{ marginY: 1 }}>
+            <Link href={`/admin/categories`}>Edit post categories</Link>
+          </Box>
         </AccordionDetails>
       </Accordion>
       <Accordion disableGutters elevation={0}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls='panel2a-content'
-          id='panel2a-header'
-        >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Sections</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Link href={`/admin/about`}>Edit about section</Link>
+          <Box sx={{ marginY: 1 }}>
+            <Link href={`/admin/about`}>Edit about section</Link>
+          </Box>
           <Divider />
-          <Typography>Edit Spenden section</Typography>
+          <Box sx={{ marginY: 1 }}>
+            <Link href={`/admin/posts/spenden`}>Edit Donation section</Link>
+          </Box>
           <Divider />
-          <Typography>Edit Mitglieds section</Typography>
+          <Box sx={{ marginY: 1 }}>
+            <Link href={`/admin/posts/mitgliedsantrag`}>
+              Edit Membership section
+            </Link>
+          </Box>
         </AccordionDetails>
       </Accordion>
       <Accordion disableGutters elevation={0}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls='panel2a-content'
-          id='panel2a-header'
-        >
-          <Typography>Website navigation/menu</Typography>
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Website Menus</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Link href={`/admin/menus/create`}>Add new link to menu</Link>
@@ -136,7 +142,7 @@ function AdminNav() {
           Logout
         </Button>
       </Box>
-    </Box>
+    </div>
   );
 }
 

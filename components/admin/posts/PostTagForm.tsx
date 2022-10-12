@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import FormHelp from './FormHelp';
+import FormHelp from '../../atoms/FormHelp';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
@@ -119,8 +119,8 @@ const PostTagForm = (props) => {
   if (searchPhrase.length > 0) {
     if (searchPhrase.length < 2) {
       suggestedTagsDisplay = (
-        <Grid item xs={12}>
-          <Box sx={{ width: '100%' }}>
+        <Grid item xs={11}>
+          <Box sx={{ width: 'auto', marginLeft: 3 }}>
             <LinearProgress color='secondary' />
           </Box>
         </Grid>
@@ -131,21 +131,23 @@ const PostTagForm = (props) => {
           onClick={() => createNewTag()}
           title='Create new tag and add to post'
         >
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              border: 1,
-              borderRadius: 10,
-              paddingY: 1,
-              paddingX: 2,
-              minWidth: 100,
-              '&:hover': { color: '#8179A6', cursor: 'pointer' },
-            }}
-          >
-            {searchPhrase} <AddCircleOutlineIcon sx={{ marginLeft: 2 }} />
-          </Box>
+          <Grid item spacing={2}>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                border: 1,
+                borderRadius: 10,
+                paddingY: 1,
+                paddingX: 2,
+                minWidth: 100,
+                '&:hover': { color: '#8179A6', cursor: 'pointer' },
+              }}
+            >
+              {searchPhrase} <AddCircleOutlineIcon sx={{ marginLeft: 2 }} />
+            </Box>
+          </Grid>
         </a>
       );
       if (suggestedTags.length > 0) {
@@ -154,25 +156,27 @@ const PostTagForm = (props) => {
           if (!tagNames || tagNames.indexOf(tag.name) === -1) {
             return (
               <a key={tag.term_id} onClick={() => addTagToPost(tag, index)}>
-                <Box
-                  title='Add tag to post'
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    border: 1,
-                    borderRadius: 10,
-                    paddingY: 1,
-                    paddingX: 2,
-                    marginX: 1,
-                    minWidth: 100,
+                <Grid item spacing={2}>
+                  <Box
+                    title='Add tag to post'
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      border: 1,
+                      borderRadius: 10,
+                      paddingY: 1,
+                      paddingX: 2,
+                      marginX: 1,
+                      minWidth: 100,
 
-                    '&:hover': { color: '#8179A6', cursor: 'pointer' },
-                  }}
-                >
-                  {tag.name}
-                  <CheckCircleOutlineIcon sx={{ marginLeft: 2 }} />
-                </Box>
+                      '&:hover': { color: '#8179A6', cursor: 'pointer' },
+                    }}
+                  >
+                    {tag.name}
+                    <CheckCircleOutlineIcon sx={{ marginLeft: 2 }} />
+                  </Box>
+                </Grid>
               </a>
             );
           }
@@ -212,10 +216,10 @@ const PostTagForm = (props) => {
   return (
     <>
       <Grid container item spacing={2}>
-        <Grid container item xs={10}>
+        <Grid container item xs={11}>
           <h3>Tags</h3>
         </Grid>
-        <Grid item xs={2} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid item xs={1} sx={{ display: 'flex', justifyContent: 'center' }}>
           <FormHelp
             text={`Use the field below to search for the tag you want to add to the post. 
             If the tag has a plus icon next to it it means that the tag doesn't exsist yet.
@@ -224,7 +228,7 @@ const PostTagForm = (props) => {
              You can add several tags to your post, all added tags will appear under "Added tags:" to remove a tag simply click on it.`}
           />
         </Grid>
-        <Grid container item xs={10}>
+        <Grid container item xs={11}>
           <TextField
             fullWidth
             type='text'
@@ -238,16 +242,18 @@ const PostTagForm = (props) => {
       </Grid>
 
       <Grid container spacing={1}>
-        <Grid item sx={{ marginTop: 2 }}>
+        <Grid item sx={{ marginTop: 2, marginX: 3 }}>
           {newTagDisplay}
         </Grid>
-        <Grid container sx={{ marginTop: 1, marginBottom: 2 }}>
+        <Grid container sx={{ marginTop: 1, marginBottom: 2, marginX: 3 }}>
           {suggestedTagsDisplay}
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} sx={{ marginX: 2 }}>
           <h4>Added tags:</h4>
         </Grid>
-        {tagsDisplay}
+        <Grid item container xs={11} spacing={2} sx={{ marginX: 0 }}>
+          {tagsDisplay}
+        </Grid>
       </Grid>
     </>
   );
