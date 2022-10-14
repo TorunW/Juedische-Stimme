@@ -6,11 +6,10 @@ import AdminTopBar from '@/components/atoms/AdminTopBar';
 
 export default function AdminMenuItemsPage(props) {
   return (
-    <div className={styles.container}>
+    <>
       <AdminTopBar title='Menu Items' />
-      <hr />
       <MenuItems menuItems={JSON.parse(props.menuItems)} />
-    </div>
+    </>
   );
 }
 

@@ -71,11 +71,11 @@ const AdminCategories = ({ categories }: AdminCategoriesProps) => {
           />
         </TableCell>
         <TableCell align='right'>
-          <IconButton>
-            <Link href={`/admin/categories/${category.term_id}`}>
+          <Link href={`/admin/categories/${category.term_id}`}>
+            <IconButton>
               <EditIcon />
-            </Link>
-          </IconButton>
+            </IconButton>
+          </Link>
         </TableCell>
         <TableCell align='right'>
           {category.term_id !== 66 &&
@@ -85,7 +85,7 @@ const AdminCategories = ({ categories }: AdminCategoriesProps) => {
               <DeleteIcon />
             </IconButton>
           ) : (
-            <IconButton disabled onClick={handleClickOpen}>
+            <IconButton disabled>
               <DeleteIcon />
             </IconButton>
           )}
