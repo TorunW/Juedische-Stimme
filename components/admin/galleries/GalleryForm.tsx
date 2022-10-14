@@ -7,6 +7,23 @@ import GalleryImageForm from './GalleryImageForm';
 import { Image } from 'types/Image.type';
 import { Gallery } from 'types/Gallery.type';
 import galleryTypes from 'lib/galleryTypes.json';
+import FormHelp from '../../atoms/FormHelp';
+import {
+  Box,
+  Button,
+  Card,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControl,
+  Tab,
+  Tabs,
+  TextField,
+  Typography,
+  CircularProgress,
+} from '@mui/material';
+import Grid from '@mui/material/Grid';
+import FormError from '@/components/atoms/FormError';
 
 const TipTapEditor = dynamic(() => import('components/tiptap/TipTapEditor'), {
   suspense: true,
@@ -96,8 +113,6 @@ function GalleryForm({ gallery }: GalleryFromProps) {
     let deleteRequests = [];
 
     if (selectedImages.length > 0) {
-      console.log('FAAAAACKCKCKCKCKCKKC');
-
       selectedImages.forEach(function (img: Image, index: number) {
         const deleteFileUrl = `http://${window.location.hostname}${
           window.location.port !== '80' ? ':' + window.location.port : ''

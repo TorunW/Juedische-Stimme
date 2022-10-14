@@ -5,6 +5,7 @@ import { selectUserByEmail } from 'lib/queries/users';
 import excuteQuery from 'lib/db';
 import { useDispatch, useSelector } from 'store/hooks';
 import { setLoggedUser } from 'store/users/usersSlice';
+import AdminTopBar from '@/components/atoms/AdminTopBar';
 
 function AdminDashboard(props) {
   const dispatch = useDispatch();
@@ -15,8 +16,7 @@ function AdminDashboard(props) {
   }, []);
   return (
     <section id='admin-dashboard'>
-      <h2>Dashboard</h2>
-      <hr />
+      <AdminTopBar title='Dashboard' />
       <p>
         Hi{' '}
         {/* {loggedUser !== null

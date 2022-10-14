@@ -32,9 +32,6 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
   const [previewImage, setPreviewImage] = useState(null);
   const [previewImageFile, setPreviewImageFile] = useState(null);
 
-  const re =
-    /^((ftp|http|https):\/\/)?(www.)?(?!.*(ftp|http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+((\/)[\w#]+)*(\/\w+\?[a-zA-Z0-9_]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/gm;
-
   const formik = useFormik({
     initialValues: {
       term_id: menuItem ? menuItem.term_id : '',
@@ -48,11 +45,10 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
     validationSchema: Yup.object().shape({
       taxonomy: Yup.string().required('Choose a menu'),
       title: Yup.string().min(2).required('Add a title'),
-      link: Yup.string().matches(re, 'URL is not valid'),
+      link: Yup.string(),
     }),
     onSubmit: (values) => {
       console.log(values, ' values ');
-
       let requestsArray = [];
 
       const menuItemUrl = `/api/menus${menuItem ? '/' + menuItem.term_id : ''}`;
@@ -146,6 +142,22 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
     }
   }
 
+  function linkInputValue(value) {
+    const string = value;
+    let newString;
+
+    if (
+      string.includes('https://juedische-stimme.com') === true ||
+      string.includes('https://juedische-stimme.de') === true
+    ) {
+      return (newString = string.split('/')[3]);
+    } else {
+      return (newString = string);
+    }
+  }
+
+  console.log(menuTypes);
+
   return (
     <Box>
       <form onSubmit={formik.handleSubmit}>
@@ -167,8 +179,12 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                   onChange={formik.handleChange}
                 >
                   {menuTypes.map((mt, index) => (
-                    <MenuItem key={index + Date.now()} value={mt}>
-                      {mt.split('_').join(' ').toLocaleUpperCase()}
+                    <MenuItem
+                      key={index + Date.now()}
+                      value={mt}
+                      sx={{ textTransform: 'capitalize' }}
+                    >
+                      {mt.split('_').join(' ')}
                     </MenuItem>
                   ))}
                 </Select>
@@ -186,11 +202,11 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
               <FormControl fullWidth margin='normal'>
                 <TextField
                   id='title'
-                  label='Title'
+                  label='Name'
                   focused
                   name='title'
                   type='title'
-                  placeholder='Menu Item Title...'
+                  placeholder='Menu Item Name...'
                   onChange={formik.handleChange}
                   value={formik.values.title}
                 />
@@ -214,7 +230,7 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                   type='link'
                   placeholder='Menu Item link...'
                   onChange={formik.handleChange}
-                  value={formik.values.link}
+                  value={linkInputValue(formik.values.link)}
                 />
                 {formik.errors && formik.errors.link ? (
                   <FormError message={formik.errors.link} />

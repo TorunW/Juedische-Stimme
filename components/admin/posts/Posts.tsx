@@ -131,7 +131,7 @@ function Posts({
               <DialogTitle>{'Delete Post?'}</DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                  Once the post is delete it can't be retrived again
+                  {`Once the post is delete it can't be retrived again`}
                 </DialogContentText>
               </DialogContent>
               <DialogActions>

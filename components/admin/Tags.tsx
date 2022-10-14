@@ -82,7 +82,11 @@ const AdminTags: FC<AdminTagsProps> = ({ tags }) => {
                 </TableCell>
                 <TableCell align='right'>
                   <IconButton>
-                    <a href={`/tag/${tag.slug}/page/1`} target='_blank'>
+                    <a
+                      href={`/tag/${tag.slug}/page/1`}
+                      target='_blank'
+                      rel='noreferrer'
+                    >
                       <SubdirectoryArrowRightIcon />
                     </a>
                   </IconButton>
@@ -97,7 +101,7 @@ const AdminTags: FC<AdminTagsProps> = ({ tags }) => {
                     <DialogTitle>{'Delete Tag?'}</DialogTitle>
                     <DialogContent>
                       <DialogContentText>
-                        Once the tag is delete it can't be retrived again
+                        {`Once the tag is delete it can't be retrived again`}
                       </DialogContentText>
                     </DialogContent>
                     <DialogActions>

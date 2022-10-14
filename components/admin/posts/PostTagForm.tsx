@@ -188,7 +188,7 @@ const PostTagForm = (props) => {
   let tagsDisplay;
   if (tags) {
     tagsDisplay = tags.map((tag, index) => (
-      <Grid item>
+      <Grid item key={tag}>
         <Box
           key={tag.term_id}
           title='Remove tag from post'

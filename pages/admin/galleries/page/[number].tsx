@@ -4,7 +4,7 @@ import { selectGalleries } from 'lib/queries';
 import styles from 'styles/Home.module.css';
 import Galleries from 'components/admin/galleries/Galleries';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'store/hooks';
 import { setGalleries } from 'store/galleries/galleriesSlice';
 import AdminTopBar from '@/components/atoms/AdminTopBar';
 

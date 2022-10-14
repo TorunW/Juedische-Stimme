@@ -2,13 +2,17 @@ import { useEffect } from 'react';
 import excuteQuery from 'lib/db';
 import { countPostsByTag, selectPosts } from 'lib/queries/posts';
 import { selectCategories, selectCategory } from 'lib/queries';
-import {selectMenuItems} from 'lib/queries/menuItems'
+import { selectMenuItems } from 'lib/queries/menuItems';
 import Posts from '@/components/posts/Posts';
 import styles from 'styles/Home.module.css';
 
 import { useDispatch, useSelector } from 'store/hooks';
 import { setPosts, setPostsPagination } from 'store/posts/postsSlice';
-import { setCatgories, setCategoryName, setCategory } from 'store/categories/categoriesSlice';
+import {
+  setCatgories,
+  setCategoryName,
+  setCategory,
+} from 'store/categories/categoriesSlice';
 import { setMenuItems } from 'store/nav/navSlice';
 import { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
@@ -16,7 +20,9 @@ import { setLanguages } from 'store/languages/languagesSlice';
 
 const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
-  const { posts, postsCount, postsPerPage, pageNum } = useSelector((state) => state.posts);
+  const { posts, postsCount, postsPerPage, pageNum } = useSelector(
+    (state) => state.posts
+  );
 
   useEffect(() => {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
@@ -28,22 +34,28 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
       })
     );
     dispatch(setPosts(JSON.parse(props.posts)));
-    dispatch(setPostsPagination({postsPerPage:props.postsPerPage,postsCount:props.postsCount, pageNum:props.pageNum}))
+    dispatch(
+      setPostsPagination({
+        postsPerPage: props.postsPerPage,
+        postsCount: props.postsCount,
+        pageNum: props.pageNum,
+      })
+    );
     dispatch(setCatgories(JSON.parse(props.categories)));
     dispatch(setCategory(JSON.parse(props.category)[0]));
     dispatch(setCategoryName(props.categoryName));
   }, [props.posts]);
 
   return (
-    <main id="category-posts-page">
+    <main id='category-posts-page'>
       <section className={styles.container + ' ' + styles.postsContainer}>
-        <Posts 
+        <Posts
           posts={posts}
-          type={"category"} 
-          title={props.categoryName} 
-          pageNum={pageNum} 
-          postsCount={postsCount} 
-          postsPerPage={postsPerPage} 
+          type={'category'}
+          title={props.categoryName}
+          pageNum={pageNum}
+          postsCount={postsCount}
+          postsPerPage={postsPerPage}
         />
       </section>
     </main>
@@ -59,7 +71,7 @@ export const getServerSideProps = async (context) => {
   const navItems = JSON.stringify(navItemsResponse);
 
   const categoryResponse = await excuteQuery({
-    query: selectCategory({categoryName:context.query.name})
+    query: selectCategory({ categoryName: context.query.name }),
   });
   const category = JSON.stringify(categoryResponse);
 
@@ -73,7 +85,7 @@ export const getServerSideProps = async (context) => {
     }),
   });
   const posts = JSON.stringify(postsResponse);
-  console.log(postsResponse)
+  console.log(postsResponse);
   const categoriesResponse = await excuteQuery({
     query: selectCategories(100),
   });
@@ -82,11 +94,11 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       posts,
-      postsCount:categoryResponse[0].count,
-      postsPerPage:10,
+      postsCount: categoryResponse[0].count,
+      postsPerPage: 10,
       categories,
       categoryName: context.query.name,
-      category:category,
+      category: category,
       pageNum: parseInt(context.query.number),
       navItems,
       locales: context.locales,

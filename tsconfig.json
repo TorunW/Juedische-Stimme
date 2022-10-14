@@ -31,7 +31,8 @@
     "components/facebook/FacebookEvents.tsx",
     "hooks/use-local-storage-reducer.js",
     "hooks/use-shopping-cart.js",
-    "pages/cart/index.js"
+    "pages/cart/index.js",
+    "pages/admin/categories/create.tsx"
   ],
   "exclude": ["node_modules"]
 }

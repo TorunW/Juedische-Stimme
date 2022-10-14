@@ -94,7 +94,7 @@ const MenuItems = ({ menuItems }) => {
                 <DialogTitle>{'Delete Tag?'}</DialogTitle>
                 <DialogContent>
                   <DialogContentText>
-                    Once the tag is delete it can't be retrived again
+                    {` Once the tag is delete it can't be retrived again`}
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>

@@ -34,8 +34,8 @@ function AdminNav() {
   }
 
   return (
-    <div>
-      <Box sx={{ textAlign: 'center', marginY: 1 }}>
+    <Box sx={{ height: '100%' }}>
+      <Box sx={{ textAlign: 'center' }}>
         <h2>Admin Menu</h2>
       </Box>
       <Divider />
@@ -76,17 +76,15 @@ function AdminNav() {
         </AccordionSummary>
         <AccordionDetails>
           <Box sx={{ marginY: 1 }}>
-            <Link href={`/admin/about`}>Edit about section</Link>
+            <Link href={`/admin/about`}>Edit About Us section</Link>
           </Box>
           <Divider />
           <Box sx={{ marginY: 1 }}>
-            <Link href={`/admin/posts/spenden`}>Edit Donation section</Link>
+            <a href={`/admin/posts/spenden`}>Edit Donation section</a>
           </Box>
           <Divider />
           <Box sx={{ marginY: 1 }}>
-            <Link href={`/admin/posts/mitgliedsantrag`}>
-              Edit Membership section
-            </Link>
+            <a href={`/admin/posts/mitgliedsantrag`}>Edit Membership section</a>
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -142,7 +140,7 @@ function AdminNav() {
           Logout
         </Button>
       </Box>
-    </div>
+    </Box>
   );
 }
 

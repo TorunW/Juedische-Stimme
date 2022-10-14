@@ -4,7 +4,7 @@ import { selectGalleryById, selectGalleryImagesByGalleryId } from 'lib/queries';
 import GalleryForm from 'components/admin/galleries/GalleryForm';
 import styles from 'styles/Home.module.css';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'store/hooks';
 import { setGallery } from 'store/galleries/galleriesSlice';
 import AdminTopBar from '@/components/atoms/AdminTopBar';
 

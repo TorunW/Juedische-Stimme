@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from 'react';
+import React, { useState, Suspense, FC } from 'react';
 import dynamic from 'next/dynamic';
 import { useFormik } from 'formik';
 import axios from 'axios';
@@ -12,12 +12,17 @@ import { uuidv4 } from '@firebase/util';
 import FormError from '../atoms/FormError';
 import { Button, Card, FormControl, Grid, TextField } from '@mui/material';
 import FormHelp from '../atoms/FormHelp';
+import { Category } from 'types/Category.type';
 
 const DynamicTiptapEditor = dynamic(() => import('../tiptap/TipTapEditor'), {
   suspense: true,
 });
 
-const CategoryForm = ({ category }) => {
+interface TypeProps {
+  category?: Category;
+}
+
+const CategoryForm: FC<TypeProps> = ({ category }) => {
   const [previewImage, setPreviewImage] = useState(null);
   const [previewImageFile, setPreviewImageFile] = useState(null);
 

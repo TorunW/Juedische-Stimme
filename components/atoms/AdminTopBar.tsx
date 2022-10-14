@@ -10,19 +10,18 @@ import { generateFileName } from 'helpers/generateFileName';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
 import dateTimeHelper from 'helpers/dateTimeHelper';
-import { Box } from '@mui/material';
-import { shadows } from '@mui/system';
+import { Box, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 interface Props {
   title?: string;
   tabs?: any;
 }
 const AdminTopBar: React.FC<Props> = ({ title, tabs }) => {
-  console.log(tabs, 'halllihallo');
   return (
     <Box
       sx={{
-        position: 'relative',
+        // position: 'relative',
         background: '#2e2e2e',
         color: 'white',
         width: '100%',
@@ -30,10 +29,12 @@ const AdminTopBar: React.FC<Props> = ({ title, tabs }) => {
         zIndex: 3,
       }}
     >
-      <Box sx={{ marginX: 3, paddingBottom: tabs === undefined ? 1 : 0 }}>
-        <h1>{title}</h1>
+      <Box>
+        <Box sx={{ marginX: 3, paddingBottom: tabs === undefined ? 1 : 0 }}>
+          <h1>{title}</h1>
+        </Box>
+        {tabs}
       </Box>
-      {tabs}
     </Box>
   );
 };

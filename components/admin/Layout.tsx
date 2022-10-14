@@ -11,7 +11,7 @@ function AdminLayout({ children }) {
   // log out button
   return (
     <Box id='admin-layout' sx={{ display: 'flex' }}>
-      <Box>
+      <Box sx={{ backgroundColor: 'black' }}>
         <Drawer
           sx={{
             width: drawerWidth,

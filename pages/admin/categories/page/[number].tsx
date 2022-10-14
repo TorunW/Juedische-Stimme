@@ -4,7 +4,7 @@ import excuteQuery from 'lib/db';
 import { selectCategories } from 'lib/queries';
 import AdminCategories from 'components/admin/Categories';
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'store/hooks';
 import { setCatgories } from 'store/categories/categoriesSlice';
 import AdminTopBar from '@/components/atoms/AdminTopBar';
 

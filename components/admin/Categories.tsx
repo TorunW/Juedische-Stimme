@@ -93,7 +93,7 @@ const AdminCategories = ({ categories }: AdminCategoriesProps) => {
             <DialogTitle>{'Delete Category?'}</DialogTitle>
             <DialogContent>
               <DialogContentText>
-                Once the category is delete it can't be retrived again
+                {` Once the category is delete it can't be retrived again`}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
