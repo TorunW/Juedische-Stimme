@@ -12,6 +12,7 @@ import {
   FormGroup,
   FormControlLabel,
   Switch,
+  Typography,
 } from '@mui/material';
 import Grid from '@mui/material/Grid'; // Grid version 1
 
@@ -83,7 +84,11 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
     <Grid item xs={11}>
       <Grid container sx={{ marginBottom: 2 }}>
         <Grid item xs={7}>
-          {props.title ? <h3>{props.title}</h3> : ''}
+          {props.title ? (
+            <Typography variant='h6'>{props.title}</Typography>
+          ) : (
+            ''
+          )}
         </Grid>
         <Grid item xs={5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
           <FormGroup>

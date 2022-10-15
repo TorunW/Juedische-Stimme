@@ -96,8 +96,6 @@ function Posts({
       });
   }
 
-  let listHeaderDisplay: ReactElement;
-
   let postsDisplay: ReactElement[];
   if (posts) {
     postsDisplay = posts.map((post, index) => (
@@ -123,10 +121,12 @@ function Posts({
             />
           </TableCell>
           <TableCell align='right'>
-            <IconButton onClick={() => handleClickOpen(post)}>
+            <IconButton
+              // onClick={handleClickOpen}
+              onClick={() => deletePost(post)}
+            >
               <DeleteIcon />
             </IconButton>
-
             <Dialog open={open} onClose={handleClose}>
               <DialogTitle>{'Delete Post?'}</DialogTitle>
               <DialogContent>

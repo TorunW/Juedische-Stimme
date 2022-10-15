@@ -6,28 +6,45 @@ import excuteQuery from 'lib/db';
 import { useDispatch, useSelector } from 'store/hooks';
 import { setLoggedUser } from 'store/users/usersSlice';
 import AdminTopBar from '@/components/atoms/AdminTopBar';
+import { Typography, Card, Box } from '@mui/material';
+import FacebookTokenForm from '@/components/admin/FacebookTokenForm';
 
 function AdminDashboard(props) {
   const dispatch = useDispatch();
   const { loggedUser } = useSelector((state) => state.users);
+
   useEffect(() => {
     if (props.loggedUser)
       dispatch(setLoggedUser(JSON.parse(props.loggedUser)[0]));
   }, []);
+
   return (
-    <section id='admin-dashboard'>
+    <Box>
       <AdminTopBar title='Dashboard' />
-      <p>
-        Hi{' '}
-        {/* {loggedUser !== null
-          ? loggedUser.user_nicename.length > 0
-            ? loggedUser.user_nicename
-            : loggedUser.user_email
-          : ''} */}
-        ! <br />
-        quick overview of things in the admin, things that need attention etc
-      </p>
-    </section>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          flexDirection: 'column',
+          alignItems: 'center',
+          marginTop: 4,
+          minHeight: '50vh',
+        }}
+      >
+        <Typography variant='h4'>
+          Hello
+          {loggedUser !== null
+            ? loggedUser.display_name.length > 0
+              ? ' ' + loggedUser.display_name
+              : ' ' + loggedUser.user_email
+            : ''}
+          !
+        </Typography>
+        <Card sx={{ marginTop: 2, padding: 4 }}>
+          <FacebookTokenForm />
+        </Card>
+      </Box>
+    </Box>
   );
 }
 

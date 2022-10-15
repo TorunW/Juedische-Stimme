@@ -7,7 +7,6 @@ import GalleryImageForm from './GalleryImageForm';
 import { Image } from 'types/Image.type';
 import { Gallery } from 'types/Gallery.type';
 import galleryTypes from 'lib/galleryTypes.json';
-import FormHelp from '../../atoms/FormHelp';
 import {
   Box,
   Button,
@@ -16,14 +15,11 @@ import {
   Select,
   MenuItem,
   FormControl,
-  Tab,
-  Tabs,
   TextField,
   Typography,
-  CircularProgress,
+  Divider,
 } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import FormError from '@/components/atoms/FormError';
 
 const TipTapEditor = dynamic(() => import('components/tiptap/TipTapEditor'), {
   suspense: true,
@@ -108,8 +104,6 @@ function GalleryForm({ gallery }: GalleryFromProps) {
   }
 
   function deleteSelectedImages() {
-    console.log(selectedImages);
-
     let deleteRequests = [];
 
     if (selectedImages.length > 0) {
@@ -159,69 +153,161 @@ function GalleryForm({ gallery }: GalleryFromProps) {
         />
       ));
     }
-
-    galleryImagesSectionDisplay = (
-      <div>
-        <h2>Add Image</h2>
-        <GalleryImageForm galleryId={gallery.gallery_id} />
-        <h2>Gallery Images</h2>
-        {galleryImagesDisplay}
-      </div>
-    );
+    if (gallery.gallery_type !== 'single') {
+      galleryImagesSectionDisplay = (
+        <>
+          <Card
+            sx={{
+              paddingX: 4,
+              paddingY: 2,
+              margin: 2,
+            }}
+          >
+            <Grid container spacing={2} display='flex' alignItems={'center'}>
+              <Grid item xs={12} sx={{ textAlign: 'center' }}>
+                <Typography variant='h4'>{`Add Image to ${gallery.gallery_name}`}</Typography>
+              </Grid>
+              <GalleryImageForm galleryId={gallery.gallery_id} />
+            </Grid>
+          </Card>
+          <Card
+            sx={{
+              paddingX: 4,
+              paddingY: 2,
+            }}
+          >
+            {galleryImagesDisplay}
+            <FormControl margin='normal'>
+              <Button
+                onClick={() => deleteSelectedImages()}
+                variant='contained'
+                color='secondary'
+              >
+                DELETE SELECTED IMAGES
+              </Button>
+            </FormControl>
+          </Card>
+        </>
+      );
+    } else if (gallery.gallery_type === 'single' && gallery.images.length > 0) {
+      galleryImagesSectionDisplay = (
+        <>
+          <Card
+            sx={{
+              paddingX: 4,
+              paddingY: 2,
+              margin: 2,
+            }}
+          >
+            {galleryImagesDisplay}
+            <Button
+              onClick={() => deleteSelectedImages()}
+              variant='contained'
+              color='secondary'
+            >
+              DELETE SELECTED IMAGES
+            </Button>
+          </Card>
+        </>
+      );
+    } else if (
+      gallery.gallery_type === 'single' &&
+      gallery.images.length === 0
+    ) {
+      galleryImagesSectionDisplay = (
+        <>
+          <Card
+            sx={{
+              paddingX: 4,
+              paddingY: 2,
+              margin: 2,
+            }}
+          >
+            <Grid container spacing={2} display='flex' alignItems={'center'}>
+              <Grid item xs={12} sx={{ textAlign: 'center' }}>
+                <Typography variant='h4'>{`Add Image to ${gallery.gallery_name}`}</Typography>
+              </Grid>
+              <GalleryImageForm galleryId={gallery.gallery_id} />
+            </Grid>
+          </Card>
+          {galleryImagesDisplay}
+        </>
+      );
+    }
   }
   return (
     <React.Fragment>
-      <div className={styles.container}>
+      <div>
         <form onSubmit={formik.handleSubmit}>
-          <div className={styles['form-row']}>
-            <label htmlFor='gallery_name'>GALLERY NAME</label>
-            <input
-              id='gallery_name'
-              name='gallery_name'
-              type='text'
-              onChange={formik.handleChange}
-              value={formik.values.gallery_name}
-            />
-          </div>
-
-          <div className={styles['form-row']}>
-            <label htmlFor='gallery_type'>GALLERY TYPE</label>
-            <select
-              id='gallery_type'
-              name='gallery_type'
-              value={formik.values.gallery_type}
-              onChange={formik.handleChange}
-            >
-              <option>select type</option>
-              {galleryTypes.map((gt: string, index: number) => (
-                <option value={gt} key={index + Date.now()}>
-                  {gt}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className={styles['form-row']}>
-            <label htmlFor='gallery_description'>GALLERY DESCRIPTION</label>
-            <Suspense fallback={'LOADING...'}>
-              <TipTapEditor
-                onChange={(val) =>
-                  formik.setFieldValue('gallery_description', val, true)
-                }
-                value={formik.values.gallery_description}
-              />
-            </Suspense>
-          </div>
-          <div className={styles['form-row']}>
-            <button type='submit'>
-              {gallery ? 'update gallery' : 'create gallery'}
-            </button>
-          </div>
+          <Card
+            sx={{
+              paddingX: 4,
+              paddingY: 2,
+              margin: 2,
+            }}
+          >
+            <Grid container spacing={2} display='flex' alignItems={'center'}>
+              <Grid item container xs={11}>
+                <FormControl fullWidth margin='normal'>
+                  <TextField
+                    id='gallery_name'
+                    name='gallery_name'
+                    label='Gallery Title'
+                    onChange={formik.handleChange}
+                    value={formik.values.gallery_name}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item container xs={11}>
+                <FormControl fullWidth margin='normal'>
+                  <InputLabel>Gallery Type</InputLabel>
+                  <Select
+                    id='gallery_type'
+                    name='gallery_type'
+                    label='Gallery Type'
+                    value={formik.values.gallery_type}
+                    onChange={formik.handleChange}
+                    sx={{ textTransform: 'capitalize' }}
+                  >
+                    {galleryTypes.map((gt: string, index: number) => (
+                      <MenuItem
+                        value={gt}
+                        key={index + Date.now()}
+                        sx={{ textTransform: 'capitalize' }}
+                      >
+                        {gt}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item container xs={11}>
+                <FormControl fullWidth margin='normal'></FormControl>
+              </Grid>
+              <Grid item container xs={11}>
+                <Button
+                  fullWidth
+                  variant='contained'
+                  color='secondary'
+                  type='submit'
+                >
+                  {gallery ? 'update gallery' : 'create gallery'}
+                </Button>
+              </Grid>
+              {/* 
+              <label htmlFor='gallery_description'>GALLERY DESCRIPTION</label>
+              <Suspense fallback={'LOADING...'}>
+                <TipTapEditor
+                  onChange={(val) =>
+                    formik.setFieldValue('gallery_description', val, true)
+                  }
+                  value={formik.values.gallery_description}
+                />
+              </Suspense> */}
+            </Grid>
+          </Card>
         </form>
       </div>
-      <button onClick={() => deleteSelectedImages()}>
-        DELETE SELECTED IMAGES
-      </button>
       {galleryImagesSectionDisplay}
     </React.Fragment>
   );

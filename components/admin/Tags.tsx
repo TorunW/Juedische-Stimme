@@ -39,7 +39,6 @@ const AdminTags: FC<AdminTagsProps> = ({ tags }) => {
   };
 
   function onDeleteTag(tag: Tag) {
-    // console.log('now delete the tag + ALL OF ITS RELATIONSHIP, TAXONOMY USW')
     axios.delete(`/api/tags/tag/${tag.term_id}`).then(
       (response) => {
         window.location.reload();
@@ -62,7 +61,7 @@ const AdminTags: FC<AdminTagsProps> = ({ tags }) => {
               <TableCell>Tag name</TableCell>
               <TableCell align='right'>Count</TableCell>
               <TableCell align='right'>Edit</TableCell>
-              <TableCell align='right'>View on the Website</TableCell>
+              <TableCell align='right'>View Live</TableCell>
               <TableCell align='right'>Delete</TableCell>
             </TableRow>
           </TableHead>

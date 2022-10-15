@@ -1,29 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { deleteCookie } from 'cookies-next';
 import ListSubheader from '@mui/material/ListSubheader';
 import {
   Box,
-  ListItem,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Collapse,
   Divider,
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Typography,
   Button,
-  Toolbar,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { useDispatch, useSelector } from 'store/hooks';
+import { setLoggedUser } from 'store/users/usersSlice';
 
 //
-function AdminNav() {
+function AdminNav(props) {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { loggedUser } = useSelector((state) => state.users);
+
+  useEffect(() => {
+    if (props.loggedUser)
+      dispatch(setLoggedUser(JSON.parse(props.loggedUser)[0]));
+  }, []);
 
   function logout() {
     deleteCookie('Token');
@@ -35,8 +38,10 @@ function AdminNav() {
 
   return (
     <Box sx={{ height: '100%' }}>
-      <Box sx={{ textAlign: 'center' }}>
-        <h2>Admin Menu</h2>
+      <Box sx={{ textAlign: 'center', marginY: 2 }}>
+        <Link href={'/admin'}>
+          <Typography variant='h5'>Admin Menu</Typography>
+        </Link>
       </Box>
       <Divider />
       <Accordion disableGutters elevation={0}>
@@ -45,27 +50,27 @@ function AdminNav() {
         </AccordionSummary>
         <AccordionDetails>
           <Divider />
-          <Box sx={{ marginY: 1 }}>
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <Link href={`/admin/posts/create`}>Create new post</Link>
           </Box>
           <Divider />
-          <Box sx={{ marginY: 1 }}>
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <Link href={`/admin/posts`}>Edit posts</Link>
           </Box>
           <Divider />
-          <Box sx={{ marginY: 1 }}>
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <Link href={`/admin/tags/create`}>Add new post tag</Link>
           </Box>
           <Divider />
-          <Box sx={{ marginY: 1 }}>
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <Link href={`/admin/tags`}>Edit post tag</Link>
           </Box>
           <Divider />
-          <Box sx={{ marginY: 1 }}>
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <Link href={`/admin/categories/create`}>Add new post category</Link>
           </Box>
           <Divider />
-          <Box sx={{ marginY: 1 }}>
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <Link href={`/admin/categories`}>Edit post categories</Link>
           </Box>
         </AccordionDetails>
@@ -75,15 +80,16 @@ function AdminNav() {
           <Typography>Sections</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Box sx={{ marginY: 1 }}>
+          <Divider />
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <Link href={`/admin/about`}>Edit About Us section</Link>
           </Box>
           <Divider />
-          <Box sx={{ marginY: 1 }}>
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <a href={`/admin/posts/spenden`}>Edit Donation section</a>
           </Box>
           <Divider />
-          <Box sx={{ marginY: 1 }}>
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <a href={`/admin/posts/mitgliedsantrag`}>Edit Membership section</a>
           </Box>
         </AccordionDetails>
@@ -93,44 +99,66 @@ function AdminNav() {
           <Typography>Website Menus</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Link href={`/admin/menus/create`}>Add new link to menu</Link>
           <Divider />
-          <Link href={`/admin/menus`}>Edit menus and links</Link>
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
+            <Link href={`/admin/menus/create`}>Add new link to menu</Link>
+          </Box>
+          <Divider />
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
+            <Link href={`/admin/menus`}>Edit menus and links</Link>
+          </Box>
         </AccordionDetails>
       </Accordion>
       <Accordion disableGutters elevation={0}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls='panel2a-content'
-          id='panel2a-header'
-        >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Gallery</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Link href={`/admin/galleries/create`}>Add new gallery</Link>
           <Divider />
-          <Link href={`/admin/galleries`}>Edit Gallery</Link>
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
+            <Link href={`/admin/galleries/create`}>Add new gallery</Link>
+          </Box>
           <Divider />
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
+            <Link href={`/admin/galleries`}>Edit Gallery</Link>
+          </Box>
         </AccordionDetails>
       </Accordion>
       <Accordion disableGutters elevation={0}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls='panel2a-content'
-          id='panel2a-header'
-        >
+        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Users</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Link href={`/admin/users/register`}>Register new user</Link>
           <Divider />
-          <Link href={`/admin/users`}>See/Edit users</Link>
+
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
+            <Link href={`/admin/users/register`}>Register new user</Link>
+          </Box>
           <Divider />
-          <Link href={`/admin/fbtoken`}>Edit fbToken</Link>
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
+            <Link href={`/admin/users`}>See/Edit users</Link>
+          </Box>
         </AccordionDetails>
       </Accordion>
       <Divider />
-      <Box sx={{ textAlign: 'center' }}>
+      <Box sx={{ textAlign: 'center', marginTop: 2 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 2,
+            alignItems: 'center',
+          }}
+        >
+          <AccountCircleIcon />
+          <Typography variant='h6'>
+            {loggedUser !== null
+              ? loggedUser.display_name.length > 0
+                ? ' ' + loggedUser.display_name
+                : ' ' + loggedUser.user_email
+              : ''}
+          </Typography>
+        </Box>
         <Button
           variant='contained'
           onClick={logout}

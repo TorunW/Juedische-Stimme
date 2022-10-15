@@ -10,24 +10,24 @@ function AdminLayout({ children }) {
   // display what user is logged in
   // log out button
   return (
-    <Box id='admin-layout' sx={{ display: 'flex' }}>
-      <Box sx={{ backgroundColor: 'black' }}>
-        <Drawer
-          sx={{
+    <Box id='admin-layout' sx={{ display: 'flex', height: '100%' }}>
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
             width: drawerWidth,
-            flexShrink: 0,
-            '& .MuiDrawer-paper': {
-              width: drawerWidth,
-              boxSizing: 'border-box',
-            },
-          }}
-          variant='permanent'
-          anchor='left'
-        >
-          <AdminNav />
-        </Drawer>
+            boxSizing: 'border-box',
+          },
+        }}
+        variant='permanent'
+        anchor='left'
+      >
+        <AdminNav />
+      </Drawer>
+      <Box sx={{ width: '100%', overflowX: 'hidden', height: '100%' }}>
+        {children}
       </Box>
-      <Box sx={{ width: '100%', overflowX: 'hidden' }}>{children}</Box>
     </Box>
   );
 }

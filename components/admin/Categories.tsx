@@ -41,9 +41,6 @@ const AdminCategories = ({ categories }: AdminCategoriesProps) => {
   };
 
   const deleteCategory = (category: Category) => {
-    const confirmDelete = confirm(
-      `are you sure you want to delete ${category.name}?`
-    );
     axios
       .delete(`/api/categories/${category.term_id}`)
       .then((response) => {
@@ -81,34 +78,36 @@ const AdminCategories = ({ categories }: AdminCategoriesProps) => {
           {category.term_id !== 66 &&
           category.term_id !== 2 &&
           category.term_id !== 1 ? (
-            <IconButton onClick={handleClickOpen}>
-              <DeleteIcon />
-            </IconButton>
+            <>
+              <IconButton onClick={handleClickOpen}>
+                <DeleteIcon />
+              </IconButton>
+              <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>{'Delete Category?'}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    {` Once the category is delete it can't be retrived again`}
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    variant='outlined'
+                    onClick={() => deleteCategory(category)}
+                    autoFocus
+                  >
+                    Delete
+                  </Button>
+                  <Button variant='outlined' onClick={handleClose}>
+                    Cancel
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </>
           ) : (
             <IconButton disabled>
               <DeleteIcon />
             </IconButton>
           )}
-          <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>{'Delete Category?'}</DialogTitle>
-            <DialogContent>
-              <DialogContentText>
-                {` Once the category is delete it can't be retrived again`}
-              </DialogContentText>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                variant='outlined'
-                onClick={() => deleteCategory(category)}
-                autoFocus
-              >
-                Delete
-              </Button>
-              <Button variant='outlined' onClick={handleClose}>
-                Cancel
-              </Button>
-            </DialogActions>
-          </Dialog>
         </TableCell>
       </TableRow>
     ));

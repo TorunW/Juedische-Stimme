@@ -2,7 +2,6 @@ import React, { useState, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { useFormik } from 'formik';
 import axios from 'axios';
-import styles from 'components/admin/Forms.module.css';
 import { useDispatch, useSelector } from 'store/hooks';
 import {
   Box,
@@ -32,6 +31,7 @@ const AboutInfoForm = ({ aboutInfo }) => {
   const [selectedGalleryId, setSelectedGalleryId] = useState(
     aboutInfo.about_gallery_id
   );
+  const tabs = ['post', 'translations'];
 
   const formik = useFormik({
     initialValues: {
@@ -56,7 +56,7 @@ const AboutInfoForm = ({ aboutInfo }) => {
   });
 
   return (
-    <div className={styles.container}>
+    <div>
       <form onSubmit={formik.handleSubmit}>
         <Card
           sx={{
