@@ -16,13 +16,10 @@ export default function HeaderPage(props) {
   // slogan translation
   // gallery, if 1 image single gallery, if several slider
   return (
-    <>
-      <AdminTopBar title="Edit Header Section" />
-      <HeaderForm
-        aboutInfo={JSON.parse(props.aboutInfo)[0]}
-        gallery={JSON.parse(props.gallery)}
-      />
-    </>
+    <HeaderForm
+      aboutInfo={JSON.parse(props.aboutInfo)[0]}
+      gallery={JSON.parse(props.gallery)}
+    />
   );
 }
 

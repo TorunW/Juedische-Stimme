@@ -89,11 +89,15 @@ function AdminNav(props) {
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <a href={`/admin/posts/spenden`}>Edit Donation section</a>
           </Box>
+          <Divider />
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
+            <a href={`/admin/posts/mitgliedsantrag`}>Edit Membership section</a>
+          </Box>
+          <Divider />
+          <Box sx={{ marginY: 1, marginLeft: 1 }}>
+            <Link href={`/admin/header`}>Edit Header section</Link>
+          </Box>
         </AccordionDetails>
-        <Divider />
-        <Box sx={{ marginY: 1, marginLeft: 1 }}>
-          <a href={`/admin/header`}>Edit Header section</a>^
-        </Box>
       </Accordion>
       <Accordion
         disableGutters
