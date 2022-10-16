@@ -13,6 +13,10 @@ import { setLoggedUser } from 'store/users/usersSlice';
 import AdminTopBar from '@/components/atoms/AdminTopBar';
 
 export default function CreatePostPage(props) {
+
+
+  console.log(props, " PROPS ")
+
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
 
@@ -57,7 +61,7 @@ export const getServerSideProps = async (context) => {
   }
 
   const nextPostIdResponse = await excuteQuery({
-    query: ` SELECT max_id FROM js_maxids WHERE js_maxids.table='posts'`,
+    query: ` SELECT max_id FROM js_maxids WHERE js_maxids.table='posts' ORDER BY js_maxids.ID DESC LIMIT 1`,
   });
   const nextPostId = JSON.stringify(nextPostIdResponse);
 

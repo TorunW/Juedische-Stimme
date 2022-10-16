@@ -1,8 +1,6 @@
 import React, { ReactElement } from 'react';
-import Image from 'next/image';
 import axios from 'axios';
-import { GeneratePostUrl } from 'helpers/generatePostUrl';
-import { generateImageUrl } from 'helpers/imageUrlHelper';
+
 import Pagination from 'components/pagination/Pagination';
 import PostsHeader from './PostsHeader';
 import {
@@ -25,6 +23,7 @@ import {
   DialogActions,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import PostTableItem from './PostTableItem';
 
 interface PostsProps {
   posts: any[];
@@ -45,17 +44,10 @@ function Posts({
   pageNum,
   type,
 }: PostsProps) {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = (post) => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  
 
   function deletePost(post) {
+
     let deleteRequests = [];
     if (post.tagIds !== null) {
       let tagIds = post.tagIds.split(',');
@@ -86,7 +78,7 @@ function Posts({
       .all([...deleteRequests])
       .then(
         axios.spread((...responses) => {
-          // console.log(responses)
+          console.log(responses)
           window.location.reload();
         })
       )
@@ -99,57 +91,7 @@ function Posts({
   let postsDisplay: ReactElement[];
   if (posts) {
     postsDisplay = posts.map((post, index) => (
-      <TableBody
-        key={index}
-        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-      >
-        <TableRow hover role='checkbox' tabIndex={-1}>
-          <TableCell>
-            <Link href={'/admin/posts/' + GeneratePostUrl(post.post_name)}>
-              {post.post_title}
-            </Link>
-          </TableCell>
-          <TableCell align='right'>{post.username}</TableCell>
-          <TableCell align='right'>
-            {new Date(post.post_date).toLocaleString('de')}
-          </TableCell>
-          <TableCell align='right'>
-            <Image
-              height='100'
-              width='100'
-              src={generateImageUrl(post.post_image)}
-            />
-          </TableCell>
-          <TableCell align='right'>
-            <IconButton
-              // onClick={handleClickOpen}
-              onClick={() => deletePost(post)}
-            >
-              <DeleteIcon />
-            </IconButton>
-            <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>{'Delete Post?'}</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  {`Once the post is delete it can't be retrived again`}
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  variant='outlined'
-                  onClick={() => deletePost(post)}
-                  autoFocus
-                >
-                  Delete
-                </Button>
-                <Button variant='outlined' onClick={handleClose}>
-                  Cancel
-                </Button>
-              </DialogActions>
-            </Dialog>
-          </TableCell>
-        </TableRow>
-      </TableBody>
+      <PostTableItem key={index} post={post} deletePost={deletePost}/>
     ));
   }
 
@@ -181,7 +123,10 @@ function Posts({
                 <TableCell align='right'>Delete</TableCell>
               </TableRow>
             </TableHead>
+            <TableBody>
             {postsDisplay}
+            </TableBody>
+
           </Table>
         </TableContainer>
         <Divider />

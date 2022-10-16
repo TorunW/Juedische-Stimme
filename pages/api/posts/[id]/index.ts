@@ -43,7 +43,7 @@ export default async (req, res) => {
             
         }
         else if (req.method === 'DELETE'){
-            
+
             const result = await excuteQuery({
                 query: deletePost(req.query.id)
             });
@@ -53,10 +53,7 @@ export default async (req, res) => {
             const decreaseCategoryCountResult = await excuteQuery({
                 query:`UPDATE wp_term_taxonomy SET count=count-1 WHERE term_id=${req.body.categoryId}`
             })
-            console.log(decreaseCategoryCountResult, " DECREASE CATEGORY COuNT RESUTL")
-
-            // console.log(result,"result")
-
+            
             res.json(result)
         }
         else {

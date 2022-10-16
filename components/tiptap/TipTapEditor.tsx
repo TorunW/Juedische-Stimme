@@ -31,7 +31,7 @@ const TipTapEditor = (props: TipTapEditorProps) => {
   const editor = useEditor({
     extensions: [StarterKit, Image],
     content: value,
-    onUpdate: ({ editor }) => {
+    onBlur: ({ editor }) => {
       let rawHtml = editor.getHTML();
       onChange(rawHtml);
     },
@@ -51,7 +51,20 @@ const TipTapEditor = (props: TipTapEditorProps) => {
       >
         {menuDispaly}
         <Divider />
-        <Box sx={{ height: '100%', marginY: 1, marginX: 1 }}>
+        <Box sx={{ 
+          height: height ? height : "auto", 
+          overflowY: 'scroll' ,
+          marginY: 1, 
+          marginX: 1, 
+          '> div':{ 
+            height:"100%", 
+            '> div': {
+              height:"100%",
+              '&:focus': {
+                outline:'none'
+              }
+            }} 
+          }}>
           <EditorContent editor={editor} />
         </Box>
       </Box>

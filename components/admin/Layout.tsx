@@ -7,6 +7,7 @@ import { Box, Drawer } from '@mui/material';
 const drawerWidth = 240;
 
 function AdminLayout({ children }) {
+
   // display what user is logged in
   // log out button
   return (

@@ -14,19 +14,18 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useDispatch, useSelector } from 'store/hooks';
-import { setLoggedUser } from 'store/users/usersSlice';
+import { useSelector } from 'store/hooks';
+
 
 //
 function AdminNav(props) {
   const router = useRouter();
-  const dispatch = useDispatch();
-  const { loggedUser } = useSelector((state) => state.users);
+  const {loggedUser} = useSelector(state => state.users)
+  
+  console.log(loggedUser)
 
-  useEffect(() => {
-    if (props.loggedUser)
-      dispatch(setLoggedUser(JSON.parse(props.loggedUser)[0]));
-  }, []);
+
+
 
   function logout() {
     deleteCookie('Token');

@@ -248,12 +248,12 @@ const PostTagForm = (props) => {
         <Grid container sx={{ marginTop: 1, marginBottom: 2, marginX: 3 }}>
           {suggestedTagsDisplay}
         </Grid>
-        <Grid item xs={12} sx={{ marginX: 2 }}>
+      { tags.length > 0  ? ( <><Grid item xs={12} sx={{ marginX: 2 }}>
           <h4>Added tags:</h4>
         </Grid>
         <Grid item container xs={11} spacing={2} sx={{ marginX: 0 }}>
           {tagsDisplay}
-        </Grid>
+        </Grid></> ): ''}
       </Grid>
     </>
   );
