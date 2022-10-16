@@ -1,14 +1,16 @@
-import UserForm from '@/components/admin/users/UserForm';
-import styles from 'styles/Home.module.css'
+import UserForm from "@/components/admin/users/UserForm";
+import AdminTopBar from "@/components/atoms/AdminTopBar";
+import styles from "styles/Home.module.css";
 
 function Register() {
   return (
-    <section className={styles.container}>
+    <section>
+      <AdminTopBar title="Register new User" />
       <UserForm />
     </section>
   );
 }
 
-Register.layout = 'admin';
+Register.layout = "admin";
 
 export default Register;

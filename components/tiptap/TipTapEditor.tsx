@@ -1,20 +1,18 @@
-import React, { ReactElement, useState } from 'react';
-import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
-import styles from './Styles.module.css';
-import MenuBar from './MenuBar';
+import React, { ReactElement, useState } from "react";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Image from "@tiptap/extension-image";
+import MenuBar from "./MenuBar";
 import {
   TextField,
-  Button,
   Box,
   Divider,
   FormGroup,
   FormControlLabel,
   Switch,
   Typography,
-} from '@mui/material';
-import Grid from '@mui/material/Grid'; // Grid version 1
+} from "@mui/material";
+import Grid from "@mui/material/Grid"; // Grid version 1
 
 interface TipTapEditorProps {
   value: string;
@@ -46,25 +44,28 @@ const TipTapEditor = (props: TipTapEditorProps) => {
         sx={{
           border: 2,
           borderRadius: 1,
-          borderColor: 'black',
+          borderColor: "black",
         }}
       >
         {menuDispaly}
         <Divider />
-        <Box sx={{ 
-          height: height ? height : "auto", 
-          overflowY: 'scroll' ,
-          marginY: 1, 
-          marginX: 1, 
-          '> div':{ 
-            height:"100%", 
-            '> div': {
-              height:"100%",
-              '&:focus': {
-                outline:'none'
-              }
-            }} 
-          }}>
+        <Box
+          sx={{
+            height: height ? height : "auto",
+            overflowY: "scroll",
+            marginY: 1,
+            marginX: 1,
+            "> div": {
+              height: "100%",
+              "> div": {
+                height: "100%",
+                "&:focus": {
+                  outline: "none",
+                },
+              },
+            },
+          }}
+        >
           <EditorContent editor={editor} />
         </Box>
       </Box>
@@ -81,12 +82,12 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
   } else {
     editorDisplay = (
       <TextField
-        margin='normal'
-        variant='outlined'
+        margin="normal"
+        variant="outlined"
         focused
         multiline
         sx={{
-          width: '100%',
+          width: "100%",
         }}
         value={props.value}
         onChange={(e) => props.onChange(e.target.value)}
@@ -94,28 +95,41 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
     );
   }
   return (
-    <Grid item xs={11}>
-      <Grid container sx={{ marginBottom: 2 }}>
-        <Grid item xs={7}>
+    <Grid
+      item
+      xs={11}
+    >
+      <Grid
+        container
+        sx={{ marginBottom: 2 }}
+      >
+        <Grid
+          item
+          xs={7}
+        >
           {props.title ? (
-            <Typography variant='h6'>{props.title}</Typography>
+            <Typography variant="h6">{props.title}</Typography>
           ) : (
-            ''
+            ""
           )}
         </Grid>
-        <Grid item xs={5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Grid
+          item
+          xs={5}
+          sx={{ display: "flex", justifyContent: "flex-end" }}
+        >
           <FormGroup>
             <FormControlLabel
               control={
                 <Switch
                   defaultChecked
-                  color='secondary'
+                  color="secondary"
                   onClick={() =>
                     setShowEditor(showEditor === true ? false : true)
                   }
                 />
               }
-              label={showEditor === true ? 'Show html' : 'Show editor'}
+              label={showEditor === true ? "Show html" : "Show editor"}
             />
           </FormGroup>
         </Grid>
