@@ -1,19 +1,32 @@
 // import styles from 'styles/Home.module.css'
 import AdminTopBar from "@/components/atoms/AdminTopBar";
-import AboutInfoForm from "components/admin/AboutInfoForm";
+import HeaderForm from "components/admin/HeaderForm";
 import excuteQuery from "lib/db";
-import { selectGalleryById, selectGalleryImagesByGalleryId } from "lib/queries";
+import {
+  selectGalleries,
+  selectGalleryById,
+  selectGalleryImagesByGalleryId,
+} from "lib/queries";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setGalleries } from "store/galleries/galleriesSlice";
 
-export default function AboutInfoPage(props) {
+export default function HeaderPage(props) {
+  // header slogan
+  // slogan translation
+  // gallery, if 1 image single gallery, if several slider
   return (
-    <AboutInfoForm
-      aboutInfo={JSON.parse(props.aboutInfo)[0]}
-      gallery={JSON.parse(props.gallery)}
-    />
+    <>
+      <AdminTopBar title="Edit Header Section" />
+      <HeaderForm
+        aboutInfo={JSON.parse(props.aboutInfo)[0]}
+        gallery={JSON.parse(props.gallery)}
+      />
+    </>
   );
 }
 
-AboutInfoPage.layout = "admin";
+HeaderPage.layout = "admin";
 
 export const getServerSideProps = async (context) => {
   const aboutInfoResponse = await excuteQuery({
@@ -21,7 +34,7 @@ export const getServerSideProps = async (context) => {
   });
   const aboutInfo = JSON.stringify(aboutInfoResponse);
 
-  const GALLERY_ID = 5;
+  const GALLERY_ID = 6;
   const galleryResponse = await excuteQuery({
     query: selectGalleryById(GALLERY_ID),
   });

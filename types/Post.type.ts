@@ -13,4 +13,5 @@ export type Post = {
   post_type: string;
   post_layout: string;
   post_status: string;
+  categoryId: number | string;
 };

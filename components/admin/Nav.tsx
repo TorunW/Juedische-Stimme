@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { deleteCookie } from 'cookies-next';
-import ListSubheader from '@mui/material/ListSubheader';
+import React, { useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { deleteCookie } from "cookies-next";
+import ListSubheader from "@mui/material/ListSubheader";
 import {
   Box,
   Divider,
@@ -11,39 +11,38 @@ import {
   AccordionDetails,
   Typography,
   Button,
-} from '@mui/material';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useSelector } from 'store/hooks';
-
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useSelector } from "store/hooks";
 
 //
 function AdminNav(props) {
   const router = useRouter();
-  const {loggedUser} = useSelector(state => state.users)
-  
-  console.log(loggedUser)
+  const { loggedUser } = useSelector((state) => state.users);
 
-
-
+  console.log(loggedUser);
 
   function logout() {
-    deleteCookie('Token');
-    sessionStorage.removeItem('Token');
-    deleteCookie('UserEmail');
-    sessionStorage.removeItem('UserEmail');
-    router.push('/login');
+    deleteCookie("Token");
+    sessionStorage.removeItem("Token");
+    deleteCookie("UserEmail");
+    sessionStorage.removeItem("UserEmail");
+    router.push("/login");
   }
 
   return (
-    <Box sx={{ height: '100%' }}>
-      <Box sx={{ textAlign: 'center', marginY: 2 }}>
-        <Link href={'/admin'}>
-          <Typography variant='h5'>Admin Menu</Typography>
+    <Box sx={{ height: "100%" }}>
+      <Box sx={{ textAlign: "center", marginY: 2 }}>
+        <Link href={"/admin"}>
+          <Typography variant="h5">Admin Menu</Typography>
         </Link>
       </Box>
       <Divider />
-      <Accordion disableGutters elevation={0}>
+      <Accordion
+        disableGutters
+        elevation={0}
+      >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Post</Typography>
         </AccordionSummary>
@@ -74,7 +73,10 @@ function AdminNav(props) {
           </Box>
         </AccordionDetails>
       </Accordion>
-      <Accordion disableGutters elevation={0}>
+      <Accordion
+        disableGutters
+        elevation={0}
+      >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Sections</Typography>
         </AccordionSummary>
@@ -87,13 +89,16 @@ function AdminNav(props) {
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <a href={`/admin/posts/spenden`}>Edit Donation section</a>
           </Box>
-          <Divider />
-          <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <a href={`/admin/posts/mitgliedsantrag`}>Edit Membership section</a>
-          </Box>
         </AccordionDetails>
+        <Divider />
+        <Box sx={{ marginY: 1, marginLeft: 1 }}>
+          <a href={`/admin/header`}>Edit Header section</a>^
+        </Box>
       </Accordion>
-      <Accordion disableGutters elevation={0}>
+      <Accordion
+        disableGutters
+        elevation={0}
+      >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Website Menus</Typography>
         </AccordionSummary>
@@ -108,7 +113,10 @@ function AdminNav(props) {
           </Box>
         </AccordionDetails>
       </Accordion>
-      <Accordion disableGutters elevation={0}>
+      <Accordion
+        disableGutters
+        elevation={0}
+      >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Gallery</Typography>
         </AccordionSummary>
@@ -123,7 +131,10 @@ function AdminNav(props) {
           </Box>
         </AccordionDetails>
       </Accordion>
-      <Accordion disableGutters elevation={0}>
+      <Accordion
+        disableGutters
+        elevation={0}
+      >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Users</Typography>
         </AccordionSummary>
@@ -140,28 +151,28 @@ function AdminNav(props) {
         </AccordionDetails>
       </Accordion>
       <Divider />
-      <Box sx={{ textAlign: 'center', marginTop: 2 }}>
+      <Box sx={{ textAlign: "center", marginTop: 2 }}>
         <Box
           sx={{
-            display: 'flex',
-            justifyContent: 'center',
+            display: "flex",
+            justifyContent: "center",
             gap: 2,
-            alignItems: 'center',
+            alignItems: "center",
           }}
         >
           <AccountCircleIcon />
-          <Typography variant='h6'>
+          <Typography variant="h6">
             {loggedUser !== null
               ? loggedUser.display_name.length > 0
-                ? ' ' + loggedUser.display_name
-                : ' ' + loggedUser.user_email
-              : ''}
+                ? " " + loggedUser.display_name
+                : " " + loggedUser.user_email
+              : ""}
           </Typography>
         </Box>
         <Button
-          variant='contained'
+          variant="contained"
           onClick={logout}
-          color='secondary'
+          color="secondary"
           sx={{ marginTop: 3 }}
         >
           Logout

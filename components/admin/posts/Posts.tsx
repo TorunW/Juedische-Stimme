@@ -1,8 +1,8 @@
-import React, { ReactElement } from 'react';
-import axios from 'axios';
+import React, { ReactElement } from "react";
+import axios from "axios";
 
-import Pagination from 'components/pagination/Pagination';
-import PostsHeader from './PostsHeader';
+import Pagination from "components/pagination/Pagination";
+import PostsHeader from "./PostsHeader";
 import {
   Box,
   TableContainer,
@@ -21,9 +21,9 @@ import {
   DialogContentText,
   DialogTitle,
   DialogActions,
-} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import PostTableItem from './PostTableItem';
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import PostTableItem from "./PostTableItem";
 
 interface PostsProps {
   posts: any[];
@@ -44,13 +44,10 @@ function Posts({
   pageNum,
   type,
 }: PostsProps) {
-  
-
   function deletePost(post) {
-
     let deleteRequests = [];
     if (post.tagIds !== null) {
-      let tagIds = post.tagIds.split(',');
+      let tagIds = post.tagIds.split(",");
       tagIds.forEach(function (tagId, index) {
         const deleteTagPostRelationshipUrl = `/api/tags/${post.postId}/${tagId}`;
         const deleteTagPostRelationshipRequest = axios.delete(
@@ -60,10 +57,10 @@ function Posts({
       });
     }
 
-    if (post.post_image !== null && post.post_image.indexOf('null') === -1) {
+    if (post.post_image !== null && post.post_image.indexOf("null") === -1) {
       const deleteFileUrl = `http://${window.location.hostname}${
-        window.location.port !== '80' ? ':' + window.location.port : ''
-      }/media/${post.post_image.split('/').join('+++')}`;
+        window.location.port !== "80" ? ":" + window.location.port : ""
+      }/media/${post.post_image.split("/").join("+++")}`;
       const deleteFileRequest = axios.delete(deleteFileUrl);
       deleteRequests.push(deleteFileRequest);
     }
@@ -78,12 +75,12 @@ function Posts({
       .all([...deleteRequests])
       .then(
         axios.spread((...responses) => {
-          console.log(responses)
+          console.log(responses);
           window.location.reload();
         })
       )
       .catch((errors) => {
-        console.log(errors, ' ERRORS');
+        console.log(errors, " ERRORS");
         // react on errors.
       });
   }
@@ -91,7 +88,11 @@ function Posts({
   let postsDisplay: ReactElement[];
   if (posts) {
     postsDisplay = posts.map((post, index) => (
-      <PostTableItem key={index} post={post} deletePost={deletePost}/>
+      <PostTableItem
+        key={index}
+        post={post}
+        deletePost={deletePost}
+      />
     ));
   }
 
@@ -109,24 +110,24 @@ function Posts({
   }
 
   return (
-    <div id='admin-posts'>
+    <div id="admin-posts">
       <PostsHeader />
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 740 }}>
-          <Table sx={{ minWidth: 650 }} stickyHeader>
+          <Table
+            sx={{ minWidth: 650 }}
+            stickyHeader
+          >
             <TableHead>
               <TableRow>
                 <TableCell>Title</TableCell>
-                <TableCell align='right'>Author</TableCell>
-                <TableCell align='right'>Date published</TableCell>
-                <TableCell align='right'>Image</TableCell>
-                <TableCell align='right'>Delete</TableCell>
+                <TableCell align="right">Author</TableCell>
+                <TableCell align="right">Date published</TableCell>
+                <TableCell align="right">Image</TableCell>
+                <TableCell align="right">Delete</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
-            {postsDisplay}
-            </TableBody>
-
+            <TableBody>{postsDisplay}</TableBody>
           </Table>
         </TableContainer>
         <Divider />

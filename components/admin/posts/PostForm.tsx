@@ -290,41 +290,33 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
     setCurrentTab(newValue);
   };
 
-  let tabMenuDisplay: ReactElement;
-  if (post) {
-    const tabMenu: ReactElement[] = tabs.map((tab, index) => {
-      return (
-        <Tab
-          key={Date.now() + index}
-          value={tab}
-          label={tab}
-          sx={{ color: "white !important" }}
-        />
-      );
-    });
-    tabMenuDisplay = (
-      <>
-        <Tabs
-          value={currentTab}
-          onChange={handleChange}
-          indicatorColor="secondary"
-          sx={{ color: "white !important" }}
-          TabIndicatorProps={{
-            style: {
-              height: "4px",
-              color: "white !important",
-            },
-          }}
-        >
-          {tabMenu}
-        </Tabs>
-      </>
-    );
-  }
-
   return (
     <Box sx={{ width: "100%" }}>
-      <AdminTopBar tabs={tabMenuDisplay} />
+      <AdminTopBar
+        tabs={
+          <Tabs
+            value={currentTab}
+            onChange={handleChange}
+            indicatorColor="secondary"
+            sx={{ color: "white !important" }}
+            TabIndicatorProps={{
+              style: {
+                height: "4px",
+                color: "white !important",
+              },
+            }}
+          >
+            {tabs.map((tab, index) => (
+              <Tab
+                key={Date.now() + index}
+                value={tab}
+                label={tab}
+                sx={{ color: "white !important" }}
+              />
+            ))}
+          </Tabs>
+        }
+      />
       <Box>
         <Formik
           initialValues={initialValues}

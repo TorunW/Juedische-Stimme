@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Typography, Popover, Box, IconButton } from '@mui/material';
-import HelpOutline from '@mui/icons-material/HelpOutline';
+import React, { useState } from "react";
+import { Typography, Popover, Box, IconButton } from "@mui/material";
+import HelpOutline from "@mui/icons-material/HelpOutline";
 
 interface Props {
   text: string;
@@ -20,12 +20,16 @@ const FormHelp: React.FC<Props> = ({ text }) => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
+  const id = open ? "simple-popover" : undefined;
 
   return (
     <Box>
-      <IconButton aria-describedby={id} onClick={handleClick} color='secondary'>
-        <HelpOutline color='secondary' />
+      <IconButton
+        aria-describedby={id}
+        onClick={handleClick}
+        color="secondary"
+      >
+        <HelpOutline color="secondary" />
       </IconButton>
       <Popover
         id={id}
@@ -33,14 +37,13 @@ const FormHelp: React.FC<Props> = ({ text }) => {
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'center',
-          horizontal: 'right',
+          vertical: "center",
+          horizontal: "right",
         }}
         transformOrigin={{
-          vertical: 'center',
-          horizontal: 'right',
+          vertical: "center",
+          horizontal: "right",
         }}
-        sx={{ marginLeft: 20, marginRight: 5 }}
       >
         <Typography sx={{ margin: 3 }}>{text}</Typography>
       </Popover>
