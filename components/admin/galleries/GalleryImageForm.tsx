@@ -128,15 +128,12 @@ function GalleryImageForm({
           >
             <Grid
               item
-              xs={galleryType === "list" ? 6 : 12}
+              xs={6}
             >
               <Box>{imageDisplay}</Box>
             </Grid>
 
-            <Grid
-              item
-              xs={galleryType === "list" ? 6 : 12}
-            >
+            <Grid xs={6}>
               {galleryType === "list" ? (
                 <TextField
                   id="image_title"
@@ -200,14 +197,16 @@ function GalleryImageForm({
             ) : (
               ""
             )}
-
             <Grid
               item
-              xs={12}
-              margin="0 auto"
+              xs={6}
+            ></Grid>
+            <Grid
+              xs={6}
+              item
               display="flex"
+              gap={1}
               justifyContent={"flex-end"}
-              gap={2}
             >
               {galleryImage ? (
                 <a onClick={() => handleSelectImage()}>
@@ -225,6 +224,7 @@ function GalleryImageForm({
               ) : (
                 ""
               )}
+
               <Button
                 variant="contained"
                 type="submit"
