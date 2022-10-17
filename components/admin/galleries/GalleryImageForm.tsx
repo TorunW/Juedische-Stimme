@@ -101,6 +101,8 @@ function GalleryImageForm({
     },
   });
 
+  let pathname = typeof window !== "undefined" ? window.location.pathname : "";
+
   let imageDisplay;
   if (formik.values.image_src) {
     imageDisplay = (
@@ -244,17 +246,21 @@ function GalleryImageForm({
           >
             <Grid
               item
-              xs={12}
+              xs={6}
             >
               <Box
                 display={"flex"}
                 justifyContent="center"
+                alignItems={"center"}
                 border={1}
-                width={"300px"}
-                height={"300px"}
+                width={"100%"}
+                height={"100%"}
               >
                 {formik.values.image_src === "" ? (
-                  <ImageIcon />
+                  <ImageIcon
+                    fontSize="large"
+                    sx={{ color: "gray" }}
+                  />
                 ) : (
                   <>{imageDisplay}</>
                 )}
@@ -262,15 +268,14 @@ function GalleryImageForm({
             </Grid>
             <Grid
               item
-              xs={12}
+              xs={6}
             >
               <a onClick={onUpladImageClick}>
                 <Button
                   variant="outlined"
                   fullWidth
-                  sx={{ height: "70px" }}
                 >
-                  Add a new Image
+                  Upload Image
                 </Button>
                 <input
                   accept={".*"}
@@ -282,28 +287,20 @@ function GalleryImageForm({
                   type="file"
                 />
               </a>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
-              <FormControl
-                fullWidth
-                margin="normal"
-              >
-                <TextField
-                  id="image_title"
-                  label="Image Title"
-                  type="text"
-                  onChange={formik.handleChange}
-                  value={formik.values.image_title}
-                />
-              </FormControl>
-            </Grid>
-            <Grid
-              item
-              xs={12}
-            >
+              {pathname === "/admin/about" ? (
+                <FormControl
+                  fullWidth
+                  margin="normal"
+                >
+                  <TextField
+                    id="image_title"
+                    label="Image Title"
+                    type="text"
+                    onChange={formik.handleChange}
+                    value={formik.values.image_title}
+                  />
+                </FormControl>
+              ) : null}
               <FormControl
                 fullWidth
                 margin="normal"
@@ -317,27 +314,32 @@ function GalleryImageForm({
                 />
               </FormControl>
             </Grid>
-            <Grid
-              item
-              xs={12}
-            >
-              <FormControl
-                fullWidth
-                margin="normal"
+
+            {pathname === "/admin/about" ? (
+              <Grid
+                item
+                xs={12}
               >
-                <Suspense fallback={"LOADING..."}>
-                  <TiptapEditor
-                    onChange={(val) =>
-                      formik.setFieldValue("image_description", val, true)
-                    }
-                    value={formik.values.image_description}
-                    showMenu={false}
-                    height={200}
-                    title="Image Description"
-                  />
-                </Suspense>
-              </FormControl>
-            </Grid>
+                <FormControl
+                  fullWidth
+                  margin="normal"
+                >
+                  <Suspense fallback={"LOADING..."}>
+                    <TiptapEditor
+                      onChange={(val) =>
+                        formik.setFieldValue("image_description", val, true)
+                      }
+                      value={formik.values.image_description}
+                      showMenu={false}
+                      height={200}
+                      title="Image Description"
+                    />
+                  </Suspense>
+                </FormControl>
+              </Grid>
+            ) : (
+              ""
+            )}
             <Grid
               item
               xs={12}
