@@ -290,34 +290,44 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
     setCurrentTab(newValue);
   };
 
+  let pathname;
+  if (typeof window !== "undefined") {
+    pathname = window.location.pathname;
+  }
+
   return (
     <Box sx={{ width: "100%" }}>
       <AdminTopBar
+        title={
+          pathname === "/admin/posts/create" ? "Create new Post" : "Edit Post"
+        }
         tabs={
-          <Tabs
-            value={currentTab}
-            onChange={handleChange}
-            indicatorColor="secondary"
-            sx={{ color: "white !important" }}
-            TabIndicatorProps={{
-              style: {
-                height: "4px",
-                color: "white !important",
-              },
-            }}
-          >
-            {tabs.map((tab, index) => (
-              <Tab
-                key={Date.now() + index}
-                value={tab}
-                label={tab}
-                sx={{ color: "white !important" }}
-              />
-            ))}
-          </Tabs>
+          pathname !== "/admin/posts/create" ? (
+            <Tabs
+              value={currentTab}
+              onChange={handleChange}
+              indicatorColor="secondary"
+              sx={{ color: "white !important" }}
+              TabIndicatorProps={{
+                style: {
+                  height: "4px",
+                  color: "white !important",
+                },
+              }}
+            >
+              {tabs.map((tab, index) => (
+                <Tab
+                  key={Date.now() + index}
+                  value={tab}
+                  label={tab}
+                  sx={{ color: "white !important" }}
+                />
+              ))}
+            </Tabs>
+          ) : null
         }
       />
-      <Box>
+      <Box sx={{ maxWidth: "1067px", margin: "0 auto" }}>
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
@@ -327,101 +337,88 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
             <Form>
               <Card
                 sx={{
-                  paddingLeft: 4,
-                  paddingRight: 2,
+                  paddingX: 4,
                   paddingY: 2,
+                  margin: 2,
                 }}
               >
                 {currentTab === "post" ? (
                   (post && post.post_layout === "donation") ||
                   (post && post.post_layout === "member_form") ? (
                     <Form>
-                      <Card
-                        sx={{
-                          paddingX: 4,
-                          paddingY: 2,
-                        }}
+                      <FormControl
+                        fullWidth
+                        margin="normal"
+                      >
+                        {post ? (
+                          <Button variant="outlined">
+                            <a
+                              target={"_blank"}
+                              rel="noreferrer"
+                              href={"/" + GeneratePostUrl(post.post_name)}
+                            >
+                              view on live site
+                            </a>
+                          </Button>
+                        ) : (
+                          ""
+                        )}
+                      </FormControl>
+                      <Grid
+                        item
+                        container
+                        xs={12}
                       >
                         <FormControl
                           fullWidth
-                          margin="normal"
+                          sx={{ marginBottom: 4 }}
                         >
-                          {post ? (
-                            <Button variant="outlined">
-                              <a
-                                target={"_blank"}
-                                rel="noreferrer"
-                                href={"/" + GeneratePostUrl(post.post_name)}
-                              >
-                                view on live site
-                              </a>
-                            </Button>
+                          <PerformantTextField
+                            id="post_title"
+                            name="post_title"
+                            label="Title"
+                            margin="normal"
+                            placeholder="Title"
+                            onChange={props.handleChange}
+                            value={props.values.post_title}
+                          />
+                          {props.errors && props.errors.post_title ? (
+                            <FormError message={props.errors.post_title} />
                           ) : (
                             ""
                           )}
                         </FormControl>
-                        <Grid
-                          item
-                          container
-                          xs={11}
-                        >
-                          <FormControl
-                            fullWidth
-                            sx={{ marginBottom: 4 }}
-                          >
-                            <PerformantTextField
-                              id="post_title"
-                              name="post_title"
-                              label="Title"
-                              margin="normal"
-                              placeholder="Title"
-                              onChange={props.handleChange}
-                              value={props.values.post_title}
-                            />
-                            {props.errors && props.errors.post_title ? (
-                              <FormError message={props.errors.post_title} />
-                            ) : (
-                              ""
-                            )}
-                          </FormControl>
-                        </Grid>
-                        <Grid
-                          container
-                          item
-                          sx={{ marginY: 2 }}
-                        >
-                          <Suspense>
-                            <TipTapEditor
-                              onChange={(val: string) =>
-                                props.setFieldValue("post_content", val, true)
-                              }
-                              value={props.values.post_content}
-                              itemType={"post"}
-                              itemId={post ? post.postId : nextPostId}
-                              height={150}
-                              title={"Page content"}
-                            />
-                          </Suspense>
-                          <Grid
-                            item
-                            xs={1}
-                            sx={{ display: "flex", justifyContent: "center" }}
-                          >
-                            <FormHelp text={``} />
-                          </Grid>
-                          {props.errors && props.errors.post_content ? (
-                            <FormError message={props.errors.post_content} />
-                          ) : (
-                            ""
-                          )}
-                        </Grid>
-                        <Button
-                          variant="outlined"
-                          type="submit"
-                        >
-                          update page
-                        </Button>
-                      </Card>
+                      </Grid>
+                      <Grid
+                        container
+                        item
+                        sx={{ marginY: 2 }}
+                      >
+                        <Suspense>
+                          <TipTapEditor
+                            onChange={(val: string) =>
+                              props.setFieldValue("post_content", val, true)
+                            }
+                            value={props.values.post_content}
+                            itemType={"post"}
+                            itemId={post ? post.postId : nextPostId}
+                            height={150}
+                            title={"Page content"}
+                          />
+                        </Suspense>
+
+                        {props.errors && props.errors.post_content ? (
+                          <FormError message={props.errors.post_content} />
+                        ) : (
+                          ""
+                        )}
+                      </Grid>
+                      <Button
+                        variant="outlined"
+                        type="submit"
+                      >
+                        update page
+                      </Button>
                     </Form>
                   ) : (
                     <Grid
@@ -432,7 +429,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                     >
                       <Grid
                         item
-                        xs={11}
+                        xs={12}
                       >
                         <FormControl
                           fullWidth
@@ -455,7 +452,8 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                       </Grid>
                       <Grid
                         item
-                        xs={6}
+                        xs={12}
+                        md={6}
                       >
                         <FormControl
                           fullWidth
@@ -480,7 +478,8 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                       </Grid>
                       <Grid
                         item
-                        xs={5}
+                        md={6}
+                        xs={12}
                       >
                         <FormControl
                           fullWidth
@@ -508,17 +507,11 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                           )}
                         </FormControl>
                       </Grid>
-                      <Grid
-                        item
-                        xs={1}
-                        sx={{ display: "flex", justifyContent: "flex-end" }}
-                      >
-                        <FormHelp text={``} />
-                      </Grid>
+
                       <Grid
                         item
                         container
-                        xs={11}
+                        xs={12}
                       >
                         <FormControl
                           fullWidth
@@ -548,7 +541,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         <Grid
                           container
                           item
-                          xs={11}
+                          xs={12}
                           sx={{
                             height: "215px",
                             position: "relative",
@@ -577,7 +570,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                           </Button>
                           {previewImage !== null ? (
                             <Grid
-                              xs={11}
+                              xs={12}
                               sx={{ marginTop: 2, textAlign: "center" }}
                             >
                               <Image
@@ -589,7 +582,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             </Grid>
                           ) : post && post.post_image ? (
                             <Grid
-                              xs={11}
+                              xs={12}
                               sx={{ marginTop: 2, textAlign: "center" }}
                             >
                               <Image
@@ -616,13 +609,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             }}
                           />
                         </Grid>
-                        <Grid
-                          item
-                          xs={1}
-                          sx={{ display: "flex", justifyContent: "center" }}
-                        >
-                          <FormHelp text={``} />
-                        </Grid>
+
                         {props.errors && props.errors.post_image ? (
                           <FormError message={props.errors.post_image} />
                         ) : (
@@ -652,13 +639,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         ) : (
                           ""
                         )}
-                        <Grid
-                          item
-                          xs={1}
-                          sx={{ display: "flex", justifyContent: "center" }}
-                        >
-                          <FormHelp text={``} />
-                        </Grid>
                       </Grid>
 
                       <Grid
@@ -678,13 +658,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             title={"Post top content"}
                           />
                         </Suspense>
-                        <Grid
-                          item
-                          xs={1}
-                          sx={{ display: "flex", justifyContent: "center" }}
-                        >
-                          <FormHelp text={``} />
-                        </Grid>
+
                         {props.errors && props.errors.post_content ? (
                           <FormError message={props.errors.post_content} />
                         ) : (
@@ -699,7 +673,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         <Grid
                           container
                           item
-                          xs={11}
+                          xs={12}
                           sx={{
                             height: "215px",
                             position: "relative",
@@ -728,7 +702,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                           </Button>
                           {previewImage2 !== null ? (
                             <Grid
-                              xs={11}
+                              xs={12}
                               sx={{ marginTop: 2, textAlign: "center" }}
                             >
                               <Image
@@ -740,7 +714,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             </Grid>
                           ) : post && post.post_image_2 ? (
                             <Grid
-                              xs={10}
+                              xs={12}
                               sx={{ marginTop: 2, textAlign: "center" }}
                             >
                               <Image
@@ -769,13 +743,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             }}
                           />
                         </Grid>
-                        <Grid
-                          item
-                          xs={1}
-                          sx={{ display: "flex", justifyContent: "center" }}
-                        >
-                          <FormHelp text={``} />
-                        </Grid>
+
                         {props.errors && props.errors.post_image ? (
                           <FormError message={props.errors.post_image} />
                         ) : (
@@ -800,13 +768,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             title={"Second post excerpt"}
                           />
                         </Suspense>
-                        <Grid
-                          item
-                          xs={1}
-                          sx={{ display: "flex", justifyContent: "center" }}
-                        >
-                          <FormHelp text={``} />
-                        </Grid>
                       </Grid>
 
                       <Grid
@@ -826,20 +787,13 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             title={"Bottom Post Content"}
                           />
                         </Suspense>
-                        <Grid
-                          item
-                          xs={1}
-                          sx={{ display: "flex", justifyContent: "center" }}
-                        >
-                          <FormHelp text={``} />
-                        </Grid>
                       </Grid>
 
                       <PostTagForm postId={post ? post.postId : nextPostId} />
                       <Grid
                         item
                         sx={{ marginY: 2 }}
-                        xs={11}
+                        xs={12}
                       >
                         <FormControl
                           fullWidth

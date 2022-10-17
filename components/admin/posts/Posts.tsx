@@ -12,17 +12,8 @@ import {
   TableCell,
   TableBody,
   Paper,
-  Link,
   Divider,
-  IconButton,
-  Button,
-  Dialog,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  DialogActions,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
 import PostTableItem from "./PostTableItem";
 
 interface PostsProps {
@@ -112,7 +103,14 @@ function Posts({
   return (
     <div id="admin-posts">
       <PostsHeader />
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <Paper
+        sx={{
+          maxWidth: "1067px",
+          margin: "0 auto",
+          width: "100%",
+          overflow: "hidden",
+        }}
+      >
         <TableContainer sx={{ maxHeight: 740 }}>
           <Table
             sx={{ minWidth: 650 }}

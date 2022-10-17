@@ -1,22 +1,22 @@
-import { ReactElement, useEffect } from 'react';
+import { ReactElement, useEffect } from "react";
 
-import styles from 'styles/Home.module.css';
-import excuteQuery from 'lib/db';
+import styles from "styles/Home.module.css";
+import excuteQuery from "lib/db";
 
-import Posts from '@/components/admin/posts/Posts';
-import { countPostsByTag, selectPosts } from 'lib/queries/posts';
+import Posts from "@/components/admin/posts/Posts";
+import { countPostsByTag, selectPosts } from "lib/queries/posts";
 
-import { useDispatch, useSelector } from 'store/hooks';
-import { setPosts, setPostsPagination } from 'store/posts/postsSlice';
-import { selectCategories, selectCategory } from 'lib/queries';
+import { useDispatch, useSelector } from "store/hooks";
+import { setPosts, setPostsPagination } from "store/posts/postsSlice";
+import { selectCategories, selectCategory } from "lib/queries";
 import {
   setCategory,
   setCategoryName,
   setCatgories,
-} from 'store/categories/categoriesSlice';
-import { getCookie, hasCookie } from 'cookies-next';
-import { selectUserByEmail } from 'lib/queries/users';
-import AdminTopBar from '@/components/atoms/AdminTopBar';
+} from "store/categories/categoriesSlice";
+import { getCookie, hasCookie } from "cookies-next";
+import { selectUserByEmail } from "lib/queries/users";
+import AdminTopBar from "@/components/atoms/AdminTopBar";
 
 export default function AdminPostsPage(props) {
   // const { state, dispatch } = useContext(Context);
@@ -47,28 +47,23 @@ export default function AdminPostsPage(props) {
         pageNum={pageNum}
         postsPerPage={postsPerPage}
         postsCount={postsCount}
-        type={'admin/posts/category'}
+        type={"admin/posts/category"}
         title={props.categoryName}
       />
     );
   }
 
-  return (
-    <div id='admin-posts-page' className={styles.container}>
-      <AdminTopBar title='Posts List' />
-      {postsDisplay}
-    </div>
-  );
+  return <>{postsDisplay}</>;
 }
 
-AdminPostsPage.layout = 'admin';
+AdminPostsPage.layout = "admin";
 
 export const getServerSideProps = async (context) => {
   let userEmail: string;
-  if (!hasCookie('Token', { req: context.req, res: context.res })) {
-    return { redirect: { destination: '/login', permanent: false } };
+  if (!hasCookie("Token", { req: context.req, res: context.res })) {
+    return { redirect: { destination: "/login", permanent: false } };
   } else {
-    userEmail = getCookie('UserEmail', {
+    userEmail = getCookie("UserEmail", {
       req: context.req,
       res: context.res,
     }).toString();
@@ -89,12 +84,12 @@ export const getServerSideProps = async (context) => {
   const postsResponse = await excuteQuery({
     query: selectPosts({
       numberOfPosts: 50,
-      slug: context.query.name.split(' ').join('-').toLowerCase(),
+      slug: context.query.name.split(" ").join("-").toLowerCase(),
       isCategory: true,
       pageNum: context.query.number,
       showUnpublished: true,
-      postType: 'post',
-      locale: context.locale !== context.defaultLocale ? context.locale : '',
+      postType: "post",
+      locale: context.locale !== context.defaultLocale ? context.locale : "",
     }),
   });
   const posts = JSON.stringify(postsResponse);

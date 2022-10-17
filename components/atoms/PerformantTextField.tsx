@@ -18,10 +18,9 @@ export type PerformantTextFieldProps = Omit<TextFieldProps, "name"> & {
  */
 export const PerformantTextField: React.FC<PerformantTextFieldProps> = memo(
   (props) => {
-
     const [field, meta] = useField(props.name);
     const error = !!meta.error && meta.touched;
-/**
+    /**
      * For performance reasons (possible due to CSS in JS issues), heavy views
      * affect re-renders (Formik changes state in every re-render), bringing keyboard
      * input to its knees. To control this, we create a setState that handles the field's inner
@@ -35,7 +34,7 @@ export const PerformantTextField: React.FC<PerformantTextFieldProps> = memo(
       name: props.name,
       value: field.value,
     });
-/**
+    /**
      * Using this useEffect guarantees us that pre-filled forms
      * such as passwords work.
      */
@@ -43,12 +42,12 @@ export const PerformantTextField: React.FC<PerformantTextFieldProps> = memo(
       if (meta.touched) {
         return;
       }
-if (field.value !== fieldValue) {
+      if (field.value !== fieldValue) {
         setFieldValue(field.value);
       }
       // eslint-disable-next-line
     }, [field.value]);
-const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
       setFieldValue(evt.target.value);
     };
     const onBlur = (evt: React.FocusEvent<HTMLInputElement>) => {
@@ -62,7 +61,7 @@ const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
         });
       }, 0);
     };
-// Will set depending on the performance props
+    // Will set depending on the performance props
     const performanceProps = disablePerformance
       ? {
           ...field,
@@ -75,10 +74,11 @@ const onChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
           onBlur,
           onFocus: onBlur,
         };
-return (
+    return (
       <>
         <TextField
-          {...otherProps}
+          // {...otherProps}
+          label={props.label}
           InputProps={{
             ...((props.type === "number" && {
               inputProps: { min: props?.min, max: props?.max },
@@ -93,3 +93,4 @@ return (
     );
   }
 );
+PerformantTextField.displayName = "PerformantTextField";

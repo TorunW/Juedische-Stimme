@@ -1,10 +1,12 @@
 import React, { Suspense, useRef } from "react";
 import dynamic from "next/dynamic";
 import { useFormik } from "formik";
+import Image from "next/image";
 import axios from "axios";
 import { generateFileName } from "helpers/generateFileName";
 import { Box, Button, FormControl, TextField, Divider } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import ImageIcon from "@mui/icons-material/Image";
 
 const TiptapEditor = dynamic(() => import("components/tiptap/TipTapEditor"), {
   suspense: true,
@@ -103,7 +105,7 @@ function GalleryImageForm({
   if (formik.values.image_src) {
     imageDisplay = (
       <img
-        style={{ maxWidth: "100%" }}
+        style={{ width: 250 }}
         src={`/wp-content/uploads/${formik.values.image_src}`}
       />
     );
@@ -112,12 +114,23 @@ function GalleryImageForm({
   let galleryFormDisplay;
   if (galleryImage !== undefined) {
     galleryFormDisplay = (
-      <Box>
+      <Box
+        display="flex"
+        sx={{ borderBottom: 1 }}
+      >
         <form onSubmit={formik.handleSubmit}>
           <Grid
             container
             spacing={2}
+            padding={2}
           >
+            <Grid
+              item
+              xs={galleryType === "list" ? 6 : 12}
+            >
+              <Box>{imageDisplay}</Box>
+            </Grid>
+
             <Grid
               item
               xs={galleryType === "list" ? 6 : 12}
@@ -142,23 +155,12 @@ function GalleryImageForm({
                 onChange={formik.handleChange}
                 value={formik.values.image_order}
               />
-            </Grid>
-            <Grid
-              item
-              xs={galleryType === "list" ? 6 : 12}
-            >
-              <FormControl
-                margin="normal"
-                // fullWidth
-              >
-                {imageDisplay}
-              </FormControl>
               <FormControl
                 margin="normal"
                 fullWidth
               >
                 <Button
-                  style={{ border: "1px solid black", cursor: "pointer" }}
+                  variant="outlined"
                   onClick={onUpladImageClick}
                 >
                   change image
@@ -174,37 +176,37 @@ function GalleryImageForm({
                 </Button>
               </FormControl>
             </Grid>
-          </Grid>
-          {galleryType === "list" ? (
-            <FormControl margin="normal">
-              <Suspense fallback={"LOADING..."}>
-                <TiptapEditor
-                  onChange={(val) =>
-                    formik.setFieldValue("image_description", val, true)
-                  }
-                  value={formik.values.image_description}
-                  showMenu={false}
-                  height={200}
-                  title="Image Description"
-                />
-              </Suspense>
-            </FormControl>
-          ) : (
-            ""
-          )}
-          <Grid
-            container
-            spacing={2}
-          >
-            <Grid item>
-              <Button
-                variant="contained"
-                type="submit"
+
+            {galleryType === "list" ? (
+              <Grid
+                item
+                xs={12}
+                margin="0 auto"
               >
-                Save changes
-              </Button>
-            </Grid>
-            <Grid item>
+                <Suspense fallback={"LOADING..."}>
+                  <TiptapEditor
+                    onChange={(val) =>
+                      formik.setFieldValue("image_description", val, true)
+                    }
+                    value={formik.values.image_description}
+                    showMenu={false}
+                    height={200}
+                    title="Image Description"
+                  />
+                </Suspense>
+              </Grid>
+            ) : (
+              ""
+            )}
+
+            <Grid
+              item
+              xs={12}
+              margin="0 auto"
+              display="flex"
+              justifyContent={"flex-end"}
+              gap={2}
+            >
               {galleryImage ? (
                 <a onClick={() => handleSelectImage()}>
                   {isSelected === false ? (
@@ -221,126 +223,141 @@ function GalleryImageForm({
               ) : (
                 ""
               )}
+              <Button
+                variant="contained"
+                type="submit"
+              >
+                Save changes
+              </Button>
             </Grid>
           </Grid>
         </form>
-        <Divider sx={{ marginY: 6 }} />
       </Box>
     );
   } else {
     galleryFormDisplay = (
-      <form onSubmit={formik.handleSubmit}>
-        <Grid
-          container
-          spacing={2}
-          sx={{ display: "flex", justifyContent: "center" }}
-        >
+      <Box padding={4}>
+        <form onSubmit={formik.handleSubmit}>
           <Grid
-            item
-            xs={12}
+            container
+            spacing={2}
           >
-            <FormControl
-              margin="normal"
-              fullWidth
+            <Grid
+              item
+              xs={12}
             >
-              {imageDisplay}
-            </FormControl>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-          >
-            <a onClick={onUpladImageClick}>
-              <Button variant="outlined">Add a new Image</Button>
-              <input
-                accept={".*"}
-                multiple={false}
-                name={"theFiles"}
-                onChange={onImageInputChangeHanlder}
-                ref={fileInputRef}
-                style={{ display: "none" }}
-                type="file"
-              />
-            </a>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-          >
-            <FormControl
-              fullWidth
-              margin="normal"
+              <Box
+                display={"flex"}
+                justifyContent="center"
+                border={1}
+                width={"300px"}
+                height={"300px"}
+              >
+                {formik.values.image_src === "" ? (
+                  <ImageIcon />
+                ) : (
+                  <>{imageDisplay}</>
+                )}
+              </Box>
+            </Grid>
+            <Grid
+              item
+              xs={12}
             >
-              <TextField
-                id="image_title"
-                label="Image Title"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.image_title}
-              />
-            </FormControl>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-          >
-            <FormControl
-              fullWidth
-              margin="normal"
-            >
-              <TextField
-                id="image_order"
-                label="Image Order"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.image_order}
-              />
-            </FormControl>
-          </Grid>
-          <Grid
-            item
-            xs={12}
-          >
-            <FormControl
-              fullWidth
-              margin="normal"
-            >
-              <Suspense fallback={"LOADING..."}>
-                <TiptapEditor
-                  onChange={(val) =>
-                    formik.setFieldValue("image_description", val, true)
-                  }
-                  value={formik.values.image_description}
-                  showMenu={false}
-                  height={200}
-                  title="Image Description"
+              <a onClick={onUpladImageClick}>
+                <Button
+                  variant="outlined"
+                  fullWidth
+                  sx={{ height: "70px" }}
+                >
+                  Add a new Image
+                </Button>
+                <input
+                  accept={".*"}
+                  multiple={false}
+                  name={"theFiles"}
+                  onChange={onImageInputChangeHanlder}
+                  ref={fileInputRef}
+                  style={{ display: "none" }}
+                  type="file"
                 />
-              </Suspense>
-            </FormControl>
-          </Grid>
-          <Grid
-            item
-            xs={10}
-          >
-            <Button
-              fullWidth
-              variant="contained"
-              color="secondary"
-              type="submit"
+              </a>
+            </Grid>
+            <Grid
+              item
+              xs={12}
             >
-              Add to gallery
-            </Button>
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <TextField
+                  id="image_title"
+                  label="Image Title"
+                  type="text"
+                  onChange={formik.handleChange}
+                  value={formik.values.image_title}
+                />
+              </FormControl>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <TextField
+                  id="image_order"
+                  label="Image Order"
+                  type="text"
+                  onChange={formik.handleChange}
+                  value={formik.values.image_order}
+                />
+              </FormControl>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <Suspense fallback={"LOADING..."}>
+                  <TiptapEditor
+                    onChange={(val) =>
+                      formik.setFieldValue("image_description", val, true)
+                    }
+                    value={formik.values.image_description}
+                    showMenu={false}
+                    height={200}
+                    title="Image Description"
+                  />
+                </Suspense>
+              </FormControl>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+            >
+              <Button
+                fullWidth
+                variant="contained"
+                color="secondary"
+                type="submit"
+              >
+                Add to gallery
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
-      </form>
+        </form>
+      </Box>
     );
   }
 
-  return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
-      {galleryFormDisplay}
-    </Box>
-  );
+  return <Box>{galleryFormDisplay}</Box>;
 }
 
 export default GalleryImageForm;

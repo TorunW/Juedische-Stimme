@@ -43,7 +43,7 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box>
       <AdminTopBar
         title="Edit About Us Section"
         tabs={
@@ -72,95 +72,98 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
       />
 
       {currentTab === "About" ? (
-        <form onSubmit={formik.handleSubmit}>
-          <Card
-            sx={{
-              paddingLeft: 4,
-              paddingRight: 2,
-              paddingY: 2,
-              margin: 2,
-            }}
-          >
-            <Grid
-              container
-              spacing={2}
-              display="flex"
-              alignItems={"center"}
+        <Box sx={{ width: "100%", maxWidth: "1067px", margin: "0 auto" }}>
+          {" "}
+          <form onSubmit={formik.handleSubmit}>
+            <Card
+              sx={{
+                paddingLeft: 4,
+                paddingRight: 2,
+                paddingY: 2,
+                margin: 2,
+              }}
             >
               <Grid
                 container
-                item
-                sx={{ marginY: 2 }}
+                spacing={2}
+                display="flex"
+                alignItems={"center"}
               >
-                <Suspense fallback={"LOADING..."}>
-                  <TiptapEditor
-                    onChange={(val) =>
-                      formik.setFieldValue("text_top", val, true)
-                    }
-                    value={formik.values.text_top}
-                    height={150}
-                    title={"Top Text"}
-                  />
-                </Suspense>
                 <Grid
+                  container
                   item
-                  xs={1}
-                  sx={{ display: "flex", justifyContent: "center" }}
-                >
-                  <FormHelp text={`hello i am her to help you`} />
-                </Grid>
-              </Grid>
-              <Grid
-                container
-                item
-                sx={{ marginY: 2 }}
-              >
-                <Suspense fallback={"LOADING..."}>
-                  <TiptapEditor
-                    onChange={(val) =>
-                      formik.setFieldValue("text_bottom", val, true)
-                    }
-                    value={formik.values.text_bottom}
-                    height={150}
-                    title={"Bottom Text"}
-                  />
-                </Suspense>
-                <Grid
-                  item
-                  xs={1}
-                  sx={{ display: "flex", justifyContent: "center" }}
-                >
-                  <FormHelp text={``} />
-                </Grid>
-                {/* {formik.errors && formik.errors.post_content ? (
-                    <FormError message={formik.errors.post_content} />
-                  ) : (
-                    ''
-                  )} */}
-              </Grid>
-
-              <Grid
-                item
-                sx={{ marginY: 2 }}
-                xs={11}
-              >
-                <Grid
                   sx={{ marginY: 2 }}
-                  xs={12}
                 >
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="secondary"
-                    type="submit"
+                  <Suspense fallback={"LOADING..."}>
+                    <TiptapEditor
+                      onChange={(val) =>
+                        formik.setFieldValue("text_top", val, true)
+                      }
+                      value={formik.values.text_top}
+                      height={150}
+                      title={"Top Text"}
+                    />
+                  </Suspense>
+                  <Grid
+                    item
+                    xs={1}
+                    sx={{ display: "flex", justifyContent: "center" }}
                   >
-                    Save Changes
-                  </Button>
+                    <FormHelp text={`hello i am her to help you`} />
+                  </Grid>
+                </Grid>
+                <Grid
+                  container
+                  item
+                  sx={{ marginY: 2 }}
+                >
+                  <Suspense fallback={"LOADING..."}>
+                    <TiptapEditor
+                      onChange={(val) =>
+                        formik.setFieldValue("text_bottom", val, true)
+                      }
+                      value={formik.values.text_bottom}
+                      height={150}
+                      title={"Bottom Text"}
+                    />
+                  </Suspense>
+                  <Grid
+                    item
+                    xs={1}
+                    sx={{ display: "flex", justifyContent: "center" }}
+                  >
+                    <FormHelp text={``} />
+                  </Grid>
+                  {/* {formik.errors && formik.errors.post_content ? (
+                  <FormError message={formik.errors.post_content} />
+                ) : (
+                  ''
+                )} */}
+                </Grid>
+
+                <Grid
+                  item
+                  sx={{ marginY: 2 }}
+                  xs={11}
+                >
+                  <Grid
+                    sx={{ marginY: 2 }}
+                    xs={12}
+                  >
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      color="secondary"
+                      type="submit"
+                    >
+                      Save Changes
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
-            </Grid>
-          </Card>
-        </form>
+            </Card>
+          </form>
+        </Box>
       ) : (
         ""
       )}

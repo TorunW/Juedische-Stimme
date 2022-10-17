@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import FormHelp from '../../atoms/FormHelp';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import FormHelp from "../../atoms/FormHelp";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import {
   FormControl,
   TextField,
@@ -14,15 +14,15 @@ import {
   Box,
   LinearProgress,
   Card,
-} from '@mui/material';
-import Grid from '@mui/material/Grid'; // Grid version 1
-import Grid2 from '@mui/material/Unstable_Grid2'; // Grid version 2
+} from "@mui/material";
+import Grid from "@mui/material/Grid"; // Grid version 1
+import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 
 const PostTagForm = (props) => {
   const [tags, setTags] = useState([]);
   const [tagNames, setTagNames] = useState(props.tagNames);
   const [suggestedTags, setSuggestedTags] = useState([]);
-  const [searchPhrase, setSearchPhrase] = useState('');
+  const [searchPhrase, setSearchPhrase] = useState("");
 
   useEffect(() => {
     getPostTags();
@@ -30,7 +30,7 @@ const PostTagForm = (props) => {
 
   useEffect(() => {
     if (tags) {
-      let newTagNames = '';
+      let newTagNames = "";
       tags.forEach(function (tag, index) {
         if (newTagNames.length === 0) newTagNames = tag.name;
         else newTagNames += `,${tag.name}`;
@@ -41,7 +41,7 @@ const PostTagForm = (props) => {
 
   useEffect(() => {
     setSuggestedTags([]);
-    if (searchPhrase.length >= 3) {
+    if (searchPhrase.length > 0) {
       getTagsBySearchPhrase();
     }
   }, [searchPhrase]);
@@ -63,54 +63,54 @@ const PostTagForm = (props) => {
 
     const values = {
       name: searchPhrase,
-      slug: searchPhrase.toLowerCase().split(' ').join('-'),
+      slug: searchPhrase.toLowerCase().split(" ").join("-"),
     };
-    console.log(values, ' VALUES ');
+    console.log(values, " VALUES ");
     axios({
-      method: 'post',
+      method: "post",
       url: `/api/tags/${props.postId}`,
       data: {
         ...values,
       },
     }).then(
       (response) => {
-        console.log(response, 'response on add tag to post');
-        setSearchPhrase('');
+        console.log(response, "response on add tag to post");
+        setSearchPhrase("");
         getPostTags();
       },
       (error) => {
-        console.log(error, 'ERROR on add tag to post');
+        console.log(error, "ERROR on add tag to post");
       }
     );
   }
 
   async function addTagToPost(tag, tagIndex) {
     axios({
-      method: 'post',
+      method: "post",
       url: `/api/tags/${props.postId}/${tag.term_id}`,
     }).then(
       (response) => {
-        console.log(response, 'response on add tag to post');
-        setSearchPhrase('');
+        console.log(response, "response on add tag to post");
+        setSearchPhrase("");
         getPostTags();
       },
       (error) => {
-        console.log(error, 'ERROR on add tag to post');
+        console.log(error, "ERROR on add tag to post");
       }
     );
   }
 
   async function removeTagFromPost(tag) {
     axios({
-      method: 'delete',
+      method: "delete",
       url: `/api/tags/${props.postId}/${tag.term_id}`,
     }).then(
       (response) => {
-        console.log(response, 'response on remove tag from post');
+        console.log(response, "response on remove tag from post");
         getPostTags();
       },
       (error) => {
-        console.log(error, 'ERROR on remove tag from post');
+        console.log(error, "ERROR on remove tag from post");
       }
     );
   }
@@ -119,9 +119,12 @@ const PostTagForm = (props) => {
   if (searchPhrase.length > 0) {
     if (searchPhrase.length < 2) {
       suggestedTagsDisplay = (
-        <Grid item xs={11}>
-          <Box sx={{ width: 'auto', marginLeft: 3 }}>
-            <LinearProgress color='secondary' />
+        <Grid
+          item
+          xs={11}
+        >
+          <Box sx={{ width: "auto", marginLeft: 3 }}>
+            <LinearProgress color="secondary" />
           </Box>
         </Grid>
       );
@@ -129,20 +132,23 @@ const PostTagForm = (props) => {
       newTagDisplay = (
         <a
           onClick={() => createNewTag()}
-          title='Create new tag and add to post'
+          title="Create new tag and add to post"
         >
-          <Grid item spacing={2}>
+          <Grid
+            item
+            spacing={2}
+          >
             <Box
               sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
                 border: 1,
                 borderRadius: 10,
                 paddingY: 1,
                 paddingX: 2,
                 minWidth: 100,
-                '&:hover': { color: '#8179A6', cursor: 'pointer' },
+                "&:hover": { color: "#8179A6", cursor: "pointer" },
               }}
             >
               {searchPhrase} <AddCircleOutlineIcon sx={{ marginLeft: 2 }} />
@@ -155,14 +161,20 @@ const PostTagForm = (props) => {
           // ONLY SHOW TAGS THAT THE POST DOESNT HAVE!
           if (!tagNames || tagNames.indexOf(tag.name) === -1) {
             return (
-              <a key={tag.term_id} onClick={() => addTagToPost(tag, index)}>
-                <Grid item spacing={2}>
+              <a
+                key={tag.term_id}
+                onClick={() => addTagToPost(tag, index)}
+              >
+                <Grid
+                  item
+                  spacing={2}
+                >
                   <Box
-                    title='Add tag to post'
+                    title="Add tag to post"
                     sx={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
                       border: 1,
                       borderRadius: 10,
                       paddingY: 1,
@@ -170,7 +182,7 @@ const PostTagForm = (props) => {
                       marginX: 1,
                       minWidth: 100,
 
-                      '&:hover': { color: '#8179A6', cursor: 'pointer' },
+                      "&:hover": { color: "#8179A6", cursor: "pointer" },
                     }}
                   >
                     {tag.name}
@@ -188,22 +200,25 @@ const PostTagForm = (props) => {
   let tagsDisplay;
   if (tags) {
     tagsDisplay = tags.map((tag, index) => (
-      <Grid item key={tag}>
+      <Grid
+        item
+        key={tag}
+      >
         <Box
           key={tag.term_id}
-          title='Remove tag from post'
+          title="Remove tag from post"
           onClick={() => removeTagFromPost(tag)}
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
             border: 1,
             borderRadius: 10,
             paddingY: 1,
             paddingX: 2,
             minWidth: 100,
 
-            '&:hover': { color: '#8179A6', cursor: 'pointer' },
+            "&:hover": { color: "#8179A6", cursor: "pointer" },
           }}
         >
           {tag.name}
@@ -215,11 +230,23 @@ const PostTagForm = (props) => {
 
   return (
     <>
-      <Grid container item spacing={2}>
-        <Grid container item xs={11}>
+      <Grid
+        container
+        item
+        spacing={2}
+      >
+        <Grid
+          container
+          item
+          xs={11}
+        >
           <h3>Tags</h3>
         </Grid>
-        <Grid item xs={1} sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Grid
+          item
+          xs={1}
+          sx={{ display: "flex", justifyContent: "center" }}
+        >
           <FormHelp
             text={`Use the field below to search for the tag you want to add to the post. 
             If the tag has a plus icon next to it it means that the tag doesn't exsist yet.
@@ -228,32 +255,61 @@ const PostTagForm = (props) => {
              You can add several tags to your post, all added tags will appear under "Added tags:" to remove a tag simply click on it.`}
           />
         </Grid>
-        <Grid container item xs={11}>
+        <Grid
+          container
+          item
+          xs={11}
+        >
           <TextField
             fullWidth
-            type='text'
+            type="text"
             value={searchPhrase}
-            label='Search or add a new tag'
+            label="Search or add a new tag"
             focused
             onChange={(e) => setSearchPhrase(e.target.value)}
-            placeholder={'Search or add a new tag'}
+            placeholder={"Search or add a new tag"}
           />
         </Grid>
       </Grid>
 
-      <Grid container spacing={1}>
-        <Grid item sx={{ marginTop: 2, marginX: 3 }}>
+      <Grid
+        container
+        spacing={1}
+      >
+        <Grid
+          item
+          sx={{ marginTop: 2, marginX: 3 }}
+        >
           {newTagDisplay}
         </Grid>
-        <Grid container sx={{ marginTop: 1, marginBottom: 2, marginX: 3 }}>
+        <Grid
+          container
+          sx={{ marginTop: 1, marginBottom: 2, marginX: 3 }}
+        >
           {suggestedTagsDisplay}
         </Grid>
-      { tags.length > 0  ? ( <><Grid item xs={12} sx={{ marginX: 2 }}>
-          <h4>Added tags:</h4>
-        </Grid>
-        <Grid item container xs={11} spacing={2} sx={{ marginX: 0 }}>
-          {tagsDisplay}
-        </Grid></> ): ''}
+        {tags.length > 0 ? (
+          <>
+            <Grid
+              item
+              xs={12}
+              sx={{ marginX: 2 }}
+            >
+              <h4>Added tags:</h4>
+            </Grid>
+            <Grid
+              item
+              container
+              xs={11}
+              spacing={2}
+              sx={{ marginX: 0 }}
+            >
+              {tagsDisplay}
+            </Grid>
+          </>
+        ) : (
+          ""
+        )}
       </Grid>
     </>
   );

@@ -2,29 +2,11 @@ import React, { useState, ReactElement, Suspense } from "react";
 import dynamic from "next/dynamic";
 import { useFormik } from "formik";
 import axios from "axios";
-import styles from "components/admin/Forms.module.css";
 import GalleryImageForm from "./GalleryImageForm";
 import { Image } from "types/Image.type";
 import { Gallery } from "types/Gallery.type";
-import galleryTypes from "lib/galleryTypes.json";
-import {
-  Box,
-  Button,
-  Card,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControl,
-  TextField,
-  Typography,
-  Divider,
-} from "@mui/material";
+import { Button, Card, FormControl, Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
-
-const TipTapEditor = dynamic(() => import("components/tiptap/TipTapEditor"), {
-  suspense: true,
-  loading: () => <p>Loading...</p>,
-});
 
 interface GalleryFromProps {
   gallery?: Gallery;
@@ -33,14 +15,11 @@ interface GalleryFromProps {
 function GalleryForm({ gallery }: GalleryFromProps) {
   const [selectedImages, setSelectedImages] = useState<Image[]>([]);
 
-  console.log(gallery);
-
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
   const formik = useFormik({
     initialValues: {
       gallery_name: gallery ? gallery.gallery_name : "",
-      gallery_description: gallery ? gallery.gallery_description : "",
       gallery_type: gallery ? gallery.gallery_type : "",
     },
     onSubmit: (values) => {
@@ -110,53 +89,50 @@ function GalleryForm({ gallery }: GalleryFromProps) {
   }
 
   return (
-    <React.Fragment>
-      <>
-        <Card
-          sx={{
-            paddingX: 4,
-            paddingY: 2,
-            margin: 2,
-          }}
+    <Box sx={{ width: "100%", maxWidth: "1067px", margin: "0 auto" }}>
+      <Card
+        sx={{
+          paddingX: 4,
+          paddingY: 2,
+          margin: 2,
+        }}
+      >
+        <Grid
+          container
+          spacing={2}
+          display="flex"
+          alignItems={"center"}
         >
-          <Grid
-            container
-            spacing={2}
-            display="flex"
-            alignItems={"center"}
-          >
-            <Grid
-              item
-              xs={12}
-              sx={{ textAlign: "center" }}
-            >
-              <Typography variant="h4">{`Add Image to ${gallery.gallery_name}`}</Typography>
-            </Grid>
-            <GalleryImageForm galleryId={gallery.gallery_id} />
-          </Grid>
-        </Card>
-        <Card
-          sx={{
-            paddingX: 4,
-            paddingY: 2,
-          }}
+          <GalleryImageForm galleryId={gallery.gallery_id} />
+        </Grid>
+      </Card>
+      <Card
+        sx={{
+          paddingX: 4,
+          paddingY: 2,
+          margin: 2,
+        }}
+      >
+        {gallery.images
+          ? gallery.images.map((galleryImage: Image) => (
+              <GalleryImageForm
+                key={galleryImage.image_id}
+                galleryImage={galleryImage}
+                galleryId={gallery.gallery_id}
+                galleryType={gallery.gallery_type}
+                handleSelectImage={() => handleSelectImage(galleryImage)}
+                isSelected={
+                  selectedImages.findIndex(
+                    (sImg) => sImg.image_src === galleryImage.image_src
+                  ) > -1
+                }
+              />
+            ))
+          : ""}
+        <Box
+          sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
         >
-          {gallery.images
-            ? gallery.images.map((galleryImage: Image) => (
-                <GalleryImageForm
-                  key={galleryImage.image_id}
-                  galleryImage={galleryImage}
-                  galleryId={gallery.gallery_id}
-                  galleryType={gallery.gallery_type}
-                  handleSelectImage={() => handleSelectImage(galleryImage)}
-                  isSelected={
-                    selectedImages.findIndex(
-                      (sImg) => sImg.image_src === galleryImage.image_src
-                    ) > -1
-                  }
-                />
-              ))
-            : ""}
+          {" "}
           <FormControl margin="normal">
             <Button
               onClick={() => deleteSelectedImages()}
@@ -166,9 +142,9 @@ function GalleryForm({ gallery }: GalleryFromProps) {
               DELETE SELECTED IMAGES
             </Button>
           </FormControl>
-        </Card>
-      </>
-    </React.Fragment>
+        </Box>
+      </Card>
+    </Box>
   );
 }
 

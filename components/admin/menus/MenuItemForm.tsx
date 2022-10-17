@@ -1,15 +1,14 @@
-import React, { useState, useEffect, FC } from 'react';
-import { useFormik } from 'formik';
-import axios from 'axios';
-import styles from 'components/admin/Forms.module.css';
-import Image from 'next/image';
-import { generateImageUrl } from 'helpers/imageUrlHelper';
-import menuTypes from 'lib/menuTypes.json';
-import { uuidv4 } from '@firebase/util';
-import { generateFileName } from 'helpers/generateFileName';
-import * as Yup from 'yup';
-import FormHelp from '../../atoms/FormHelp';
-import FormError from '@/components/atoms/FormError';
+import React, { useState, useEffect, FC } from "react";
+import { useFormik } from "formik";
+import axios from "axios";
+import Image from "next/image";
+import { generateImageUrl } from "helpers/imageUrlHelper";
+import menuTypes from "lib/menuTypes.json";
+import { uuidv4 } from "@firebase/util";
+import { generateFileName } from "helpers/generateFileName";
+import * as Yup from "yup";
+import FormHelp from "../../atoms/FormHelp";
+import FormError from "@/components/atoms/FormError";
 
 import {
   Box,
@@ -20,9 +19,8 @@ import {
   MenuItem,
   FormControl,
   TextField,
-  CircularProgress,
-} from '@mui/material';
-import Grid from '@mui/material/Grid';
+} from "@mui/material";
+import Grid from "@mui/material/Grid";
 
 interface MenuItemProps {
   menuItem?: any;
@@ -34,27 +32,28 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
 
   const formik = useFormik({
     initialValues: {
-      term_id: menuItem ? menuItem.term_id : '',
-      taxonomy: menuItem ? menuItem.taxonomy : '',
-      previousTaxonomy: menuItem ? menuItem.taxonomy : '',
-      title: menuItem ? menuItem.title : '',
-      link: menuItem ? menuItem.link : '',
-      term_order: menuItem ? menuItem.term_order : '',
-      term_image: menuItem ? menuItem.term_image : '',
+      term_id: menuItem ? menuItem.term_id : "",
+      taxonomy: menuItem ? menuItem.taxonomy : "",
+      previousTaxonomy: menuItem ? menuItem.taxonomy : "",
+      title: menuItem ? menuItem.title : "",
+      link: menuItem ? menuItem.link : "",
+      term_order: menuItem ? menuItem.term_order : "",
+      term_image: menuItem ? menuItem.term_image : "",
     },
     validationSchema: Yup.object().shape({
-      taxonomy: Yup.string().required('Choose a menu'),
-      title: Yup.string().min(2).required('Add a title'),
+      taxonomy: Yup.string().required("Choose a menu"),
+      title: Yup.string().min(2).required("Add a title"),
       link: Yup.string(),
     }),
     onSubmit: (values) => {
-      console.log(values, ' values ');
       let requestsArray = [];
 
-      const menuItemUrl = `/api/menus${menuItem ? '/' + menuItem.term_id : ''}`;
+      const menuItemUrl = `/api/menus${menuItem ? "/" + menuItem.term_id : ""}`;
       const menuItemData = {
         ...values,
+        link: linkInputValue(values.link),
       };
+
       const menuItemRequest = menuItem
         ? axios.put(menuItemUrl, menuItemData)
         : axios.post(menuItemUrl, menuItemData);
@@ -63,7 +62,7 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
       if (previewImageFile !== null) {
         // POST IMAGE FILE ( FILE UPLOAD )
         const config = {
-          headers: { 'content-type': 'multipart/form-data' },
+          headers: { "content-type": "multipart/form-data" },
           onUploadProgress: (event) => {
             console.log(
               `Current progress:`,
@@ -72,9 +71,9 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
           },
         };
         const formData = new FormData();
-        formData.append('theFiles', previewImageFile, values.term_image);
+        formData.append("theFiles", previewImageFile, values.term_image);
         const termImageFileRequest = axios.post(
-          '/api/uploads',
+          "/api/uploads",
           formData,
           config
         );
@@ -82,8 +81,8 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
 
         if (menuItem && menuItem.term_image) {
           const deleteFileUrl = `http://${window.location.hostname}${
-            window.location.port !== '80' ? ':' + window.location.port : ''
-          }/media/${menuItem.term_image.split('/').join('+++')}`;
+            window.location.port !== "80" ? ":" + window.location.port : ""
+          }/media/${menuItem.term_image.split("/").join("+++")}`;
           const deleteFileRequest = axios.delete(deleteFileUrl);
           requestsArray.push(deleteFileRequest);
         }
@@ -93,28 +92,15 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
         .all([...requestsArray])
         .then(
           axios.spread((...responses) => {
-            console.log(responses, ' RESPONSES');
+            console.log(responses, " RESPONSES");
             if (menuItem) window.location.reload();
             else
               window.location.href = `/admin/menus/${responses[0].data.insertId}`;
           })
         )
         .catch((errors) => {
-          console.log(errors, ' ERRORS');
+          console.log(errors, " ERRORS");
         });
-
-      // axios({
-      //     method: menuItem ? 'put' : 'post',
-      //     url: `/api/menus${menuItem ? "/" + menuItem.term_id : ''}`,
-      //     data: {
-      //         ...values
-      //     }
-      // }).then((response) => {
-      //     console.log(response,"response on menuItem (put or post)");
-      //     window.location.href = '/admin/menus'
-      // }, (error) => {
-      //     console.log(error, "ERROR on post / put menuItem");
-      // });
     },
   });
 
@@ -125,7 +111,7 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
     const reader = new FileReader();
 
     reader.addEventListener(
-      'load',
+      "load",
       () => {
         setPreviewImage(reader.result);
       },
@@ -134,29 +120,28 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
 
     if (file) {
       setPreviewImageFile(file);
-      let fileType = file.name.split('.')[file.name.split.length - 1];
+      let fileType = file.name.split(".")[file.name.split.length - 1];
       let fileName =
         file.name.split(`.${fileType}`)[0] + `__${uuidv4()}.${fileType}`;
-      formik.setFieldValue('term_image', generateFileName(fileName), true);
+      formik.setFieldValue("term_image", generateFileName(fileName), true);
       reader.readAsDataURL(file);
     }
   }
 
-  function linkInputValue(value) {
-    const string = value;
-    let newString;
-
+  function linkInputValue(string) {
     if (
-      string.includes('https://juedische-stimme.com') === true ||
-      string.includes('https://juedische-stimme.de') === true
+      string.includes("juedische-stimme.com") === true ||
+      string.includes("juedische-stimme.de") === true
     ) {
-      return (newString = string.split('/')[3]);
+      let domain = string.includes("juedische-stimme.com")
+        ? "juedische-stimme.com"
+        : "juedische-stimme.de";
+
+      return string.split(`${domain}/`)[1];
     } else {
-      return (newString = string);
+      return string;
     }
   }
-
-  console.log(menuTypes);
 
   return (
     <Box>
@@ -167,166 +152,226 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
             paddingY: 2,
           }}
         >
-          <Grid container spacing={2} display='flex' alignItems={'center'}>
-            <Grid item xs={11}>
-              <FormControl fullWidth margin='normal'>
+          <Grid
+            container
+            spacing={2}
+            display="flex"
+            alignItems={"center"}
+          >
+            <Grid
+              item
+              xs={11}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <InputLabel>Choose a Menu</InputLabel>
                 <Select
-                  id='taxonomy'
-                  name='taxonomy'
-                  label='Choose Menu'
+                  id="taxonomy"
+                  name="taxonomy"
+                  label="Choose Menu"
                   value={formik.values.taxonomy}
                   onChange={formik.handleChange}
                 >
-                  {menuTypes.map((mt, index) => (
-                    <MenuItem
-                      key={index + Date.now()}
-                      value={mt}
-                      sx={{ textTransform: 'capitalize' }}
-                    >
-                      {mt.split('_').join(' ')}
-                    </MenuItem>
-                  ))}
+                  {menuTypes
+                    .filter(
+                      (menu) =>
+                        menu !== "call_to_action_menu" &&
+                        menu !== "socials_menu"
+                    )
+                    .map((mt, index) => (
+                      <MenuItem
+                        key={index + Date.now()}
+                        value={mt}
+                        sx={{ textTransform: "capitalize" }}
+                      >
+                        {mt.split("_").join(" ")}
+                      </MenuItem>
+                    ))}
                 </Select>
                 {formik.errors && formik.errors.taxonomy ? (
                   <FormError message={formik.errors.taxonomy} />
                 ) : (
-                  ''
+                  ""
                 )}
               </FormControl>
             </Grid>
-            <Grid xs={1} display='flex' justifyContent={'flex-end'}>
-              <FormHelp text='Choose a menu, to which you want to add a new Menu Item.' />
+            <Grid
+              xs={1}
+              display="flex"
+              justifyContent={"flex-end"}
+            >
+              <FormHelp text="Choose a menu, to which you want to add a new Menu Item." />
             </Grid>
-            <Grid item xs={11}>
-              <FormControl fullWidth margin='normal'>
+            <Grid
+              item
+              xs={11}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <TextField
-                  id='title'
-                  label='Name'
+                  id="title"
+                  label="Name"
                   focused
-                  name='title'
-                  type='title'
-                  placeholder='Menu Item Name...'
+                  name="title"
+                  type="title"
+                  placeholder="Menu Item Name..."
                   onChange={formik.handleChange}
                   value={formik.values.title}
                 />
                 {formik.errors && formik.errors.title ? (
                   <FormError message={formik.errors.title} />
                 ) : (
-                  ''
+                  ""
                 )}
               </FormControl>
             </Grid>
-            <Grid xs={1} display='flex' justifyContent={'flex-end'}>
-              <FormHelp text='' />
+            <Grid
+              xs={1}
+              display="flex"
+              justifyContent={"flex-end"}
+            >
+              <FormHelp text="" />
             </Grid>
-            <Grid item xs={11}>
-              <FormControl fullWidth margin='normal'>
+            <Grid
+              item
+              xs={11}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <TextField
-                  id='link'
-                  label='Link'
+                  id="link"
+                  label="Link"
                   focused
-                  name='link'
-                  type='link'
-                  placeholder='Menu Item link...'
+                  name="link"
+                  type="link"
+                  placeholder="Menu Item link..."
                   onChange={formik.handleChange}
                   value={linkInputValue(formik.values.link)}
                 />
                 {formik.errors && formik.errors.link ? (
                   <FormError message={formik.errors.link} />
                 ) : (
-                  ''
+                  ""
                 )}
               </FormControl>
             </Grid>
-            <Grid xs={1} display='flex' justifyContent={'flex-end'}>
+            <Grid
+              xs={1}
+              display="flex"
+              justifyContent={"flex-end"}
+            >
               <FormHelp text={``} />
             </Grid>
-            <Grid item xs={11}>
-              <FormControl fullWidth margin='normal'>
+            <Grid
+              item
+              xs={11}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <TextField
-                  id='term_order'
-                  label='Order'
+                  id="term_order"
+                  label="Order"
                   focused
-                  name='term_order'
-                  type='term_order'
-                  placeholder='Menu Item Order...'
+                  name="term_order"
+                  type="term_order"
+                  placeholder="Menu Item Order..."
                   onChange={formik.handleChange}
                   value={formik.values.term_order}
                 />
               </FormControl>
             </Grid>
-            <Grid xs={1} display='flex' justifyContent={'flex-end'}>
-              <FormHelp text='Here you can decide where in the menu this item will appear. If not choosen, the item will appear last in order' />
+            <Grid
+              xs={1}
+              display="flex"
+              justifyContent={"flex-end"}
+            >
+              <FormHelp text="Here you can decide where in the menu this item will appear. If not choosen, the item will appear last in order" />
             </Grid>
 
-            {formik.values.taxonomy === 'partner_menu' ? (
-              <Grid container item>
+            {formik.values.taxonomy === "partner_menu" ? (
+              <Grid
+                container
+                item
+              >
                 <Grid
                   container
                   item
                   xs={11}
                   sx={{
-                    height: '215px',
-                    position: 'relative',
+                    height: "215px",
+                    position: "relative",
                   }}
                 >
                   <TextField
-                    label='Logo'
+                    label="Logo"
                     focused
                     multiline
                     minRows={8}
                     sx={{
-                      position: 'absolute',
-                      width: '100%',
+                      position: "absolute",
+                      width: "100%",
                     }}
                   />
                   <Button
-                    variant='contained'
-                    color='secondary'
+                    variant="contained"
+                    color="secondary"
                     sx={{
-                      width: '200px',
-                      position: 'absolute',
-                      left: '50%',
-                      top: '50%',
-                      transform: 'translate(-50%,-50%)',
+                      width: "200px",
+                      position: "absolute",
+                      left: "50%",
+                      top: "50%",
+                      transform: "translate(-50%,-50%)",
                     }}
                   >
                     Upload an image
                   </Button>
                   {previewImage !== null ? (
-                    <Grid xs={10} sx={{ marginTop: 2, textAlign: 'center' }}>
+                    <Grid
+                      xs={10}
+                      sx={{ marginTop: 2, textAlign: "center" }}
+                    >
                       <Image
-                        layout='fixed'
+                        layout="fixed"
                         width={320}
                         height={180}
                         src={previewImage}
                       />
                     </Grid>
                   ) : menuItem && menuItem.term_image ? (
-                    <Grid xs={10} sx={{ marginTop: 2, textAlign: 'center' }}>
+                    <Grid
+                      xs={10}
+                      sx={{ marginTop: 2, textAlign: "center" }}
+                    >
                       <Image
-                        layout='fixed'
+                        layout="fixed"
                         width={320}
                         height={180}
                         src={generateImageUrl(menuItem.term_image)}
                       />
                     </Grid>
                   ) : (
-                    ''
+                    ""
                   )}
 
                   <input
-                    id='term_image'
-                    name='term_image'
-                    type='file'
+                    id="term_image"
+                    name="term_image"
+                    type="file"
                     onChange={onTermImageChange}
                     style={{
-                      position: 'absolute',
-                      width: '100%',
-                      cursor: 'pointer',
-                      background: 'blue',
-                      height: '215px',
+                      position: "absolute",
+                      width: "100%",
+                      cursor: "pointer",
+                      background: "blue",
+                      height: "215px",
                       opacity: 0,
                     }}
                   />
@@ -334,7 +379,7 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                 <Grid
                   item
                   xs={1}
-                  sx={{ display: 'flex', justifyContent: 'center' }}
+                  sx={{ display: "flex", justifyContent: "center" }}
                 >
                   <FormHelp text={``} />
                 </Grid>
@@ -345,12 +390,19 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                 )} */}
               </Grid>
             ) : (
-              ''
+              ""
             )}
-            <Grid item xs={12}>
-              <Button type='submit' variant='contained' color='secondary'>
-                {' '}
-                {menuItem ? 'update menu item' : 'create menu item'}
+            <Grid
+              item
+              xs={12}
+            >
+              <Button
+                type="submit"
+                variant="contained"
+                color="secondary"
+              >
+                {" "}
+                {menuItem ? "update menu item" : "create menu item"}
               </Button>
             </Grid>
           </Grid>

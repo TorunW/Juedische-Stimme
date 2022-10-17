@@ -1,21 +1,21 @@
-import { useEffect } from 'react';
-import styles from 'styles/Home.module.css';
-import excuteQuery from 'lib/db';
-import PostForm from '@/components/admin/posts/PostForm';
-import { selectPostByName } from 'lib/queries/posts';
-import { selectCategories, selectGalleries } from 'lib/queries';
+import { useEffect } from "react";
+import styles from "styles/Home.module.css";
+import excuteQuery from "lib/db";
+import PostForm from "@/components/admin/posts/PostForm";
+import { selectPostByName } from "lib/queries/posts";
+import { selectCategories, selectGalleries } from "lib/queries";
 
-import { useDispatch, useSelector } from 'store/hooks';
-import { setPost } from 'store/posts/postsSlice';
-import { setCatgories } from 'store/categories/categoriesSlice';
-import { setGalleries } from 'store/galleries/galleriesSlice';
-import { LayoutPage } from 'types/LayoutPage.type';
-import { LayoutPageProps } from 'types/LayoutPageProps.type';
-import { setLanguages } from 'store/languages/languagesSlice';
-import { getCookie, hasCookie } from 'cookies-next';
-import { selectUserByEmail } from 'lib/queries/users';
-import { setLoggedUser } from 'store/users/usersSlice';
-import AdminTopBar from '@/components/atoms/AdminTopBar';
+import { useDispatch, useSelector } from "store/hooks";
+import { setPost } from "store/posts/postsSlice";
+import { setCatgories } from "store/categories/categoriesSlice";
+import { setGalleries } from "store/galleries/galleriesSlice";
+import { LayoutPage } from "types/LayoutPage.type";
+import { LayoutPageProps } from "types/LayoutPageProps.type";
+import { setLanguages } from "store/languages/languagesSlice";
+import { getCookie, hasCookie } from "cookies-next";
+import { selectUserByEmail } from "lib/queries/users";
+import { setLoggedUser } from "store/users/usersSlice";
+import AdminTopBar from "@/components/atoms/AdminTopBar";
 
 const EditPostPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -38,20 +38,19 @@ const EditPostPage: LayoutPage = (props: LayoutPageProps) => {
 
   return (
     <div className={styles.container}>
-      <AdminTopBar title={'Edit Post'} />
-      {post ? <PostForm post={post} /> : ''}
+      {post ? <PostForm post={post} /> : ""}
     </div>
   );
 };
 
-EditPostPage.layout = 'admin';
+EditPostPage.layout = "admin";
 
 export const getServerSideProps = async (context) => {
   let userEmail: string;
-  if (!hasCookie('Token', { req: context.req, res: context.res })) {
-    return { redirect: { destination: '/login', permanent: false } };
+  if (!hasCookie("Token", { req: context.req, res: context.res })) {
+    return { redirect: { destination: "/login", permanent: false } };
   } else {
-    userEmail = getCookie('UserEmail', {
+    userEmail = getCookie("UserEmail", {
       req: context.req,
       res: context.res,
     }).toString();
@@ -67,7 +66,7 @@ export const getServerSideProps = async (context) => {
 
   const postsResponse = await excuteQuery({
     query: selectPostByName({
-      name: context.query.name.toString().split(':__--__:').join('#'),
+      name: context.query.name.toString().split(":__--__:").join("#"),
       showUnpublished: true,
       locales: context.locales.filter(
         (l: string) => l !== context.defaultLocale

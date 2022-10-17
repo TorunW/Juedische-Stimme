@@ -83,19 +83,19 @@ function AdminNav(props) {
         <AccordionDetails>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/about`}>Edit About Us section</Link>
+            <Link href={`/admin/about`}>About Us</Link>
           </Box>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <a href={`/admin/posts/spenden`}>Edit Donation section</a>
+            <a href={`/admin/posts/spenden`}>Donation</a>
           </Box>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <a href={`/admin/posts/mitgliedsantrag`}>Edit Membership section</a>
+            <a href={`/admin/posts/mitgliedsantrag`}>Membership</a>
           </Box>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/header`}>Edit Header section</Link>
+            <Link href={`/admin/header`}>Header</Link>
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -104,37 +104,16 @@ function AdminNav(props) {
         elevation={0}
       >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Website Menus</Typography>
+          <Typography>Menus</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/menus/create`}>Add new link to menu</Link>
-          </Box>
-          <Divider />
-          <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/menus`}>Edit menus and links</Link>
+            <Link href={`/admin/menus`}>Edit Menus and Links</Link>
           </Box>
         </AccordionDetails>
       </Accordion>
-      <Accordion
-        disableGutters
-        elevation={0}
-      >
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Gallery</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Divider />
-          <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/galleries/create`}>Add new gallery</Link>
-          </Box>
-          <Divider />
-          <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/galleries`}>Edit Gallery</Link>
-          </Box>
-        </AccordionDetails>
-      </Accordion>
+
       <Accordion
         disableGutters
         elevation={0}

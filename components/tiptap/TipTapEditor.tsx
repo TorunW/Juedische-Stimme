@@ -97,7 +97,7 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
   return (
     <Grid
       item
-      xs={11}
+      xs={12}
     >
       <Grid
         container
@@ -118,20 +118,18 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
           xs={5}
           sx={{ display: "flex", justifyContent: "flex-end" }}
         >
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch
-                  defaultChecked
-                  color="secondary"
-                  onClick={() =>
-                    setShowEditor(showEditor === true ? false : true)
-                  }
-                />
-              }
-              label={showEditor === true ? "Show html" : "Show editor"}
-            />
-          </FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                defaultChecked
+                color="secondary"
+                onClick={() =>
+                  setShowEditor(showEditor === true ? false : true)
+                }
+              />
+            }
+            label={showEditor === true ? "Show html" : "Show editor"}
+          />
         </Grid>
       </Grid>
 
