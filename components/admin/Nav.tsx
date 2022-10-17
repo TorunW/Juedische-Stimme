@@ -13,6 +13,7 @@ import {
   Button,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import TagIcon from "@mui/icons-material/Tag";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useSelector } from "store/hooks";
 
@@ -55,21 +56,15 @@ function AdminNav(props) {
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
             <Link href={`/admin/posts`}>Edit posts</Link>
           </Box>
+
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/tags/create`}>Add new post tag</Link>
+            <Link href={`/admin/tags`}>Tag</Link>
           </Box>
+
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/tags`}>Edit post tag</Link>
-          </Box>
-          <Divider />
-          <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/categories/create`}>Add new post category</Link>
-          </Box>
-          <Divider />
-          <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/categories`}>Edit post categories</Link>
+            <Link href={`/admin/categories`}>Categories</Link>
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -109,7 +104,7 @@ function AdminNav(props) {
         <AccordionDetails>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/menus`}>Edit Menus and Links</Link>
+            <Link href={`/admin/menus`}>Menus and Links</Link>
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -129,7 +124,7 @@ function AdminNav(props) {
           </Box>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/users`}>See/Edit users</Link>
+            <Link href={`/admin/users`}>User List</Link>
           </Box>
         </AccordionDetails>
       </Accordion>
