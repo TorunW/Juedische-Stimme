@@ -1,10 +1,9 @@
-import React, { useState, Suspense, ReactElement, useEffect } from "react";
-import dynamic from "next/dynamic";
+import React, { useState, ReactElement } from "react";
 import Image from "next/image";
-import { Form, Formik, FormikProps, useFormik } from "formik";
+import { Form, Formik, FormikProps } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
-import { useDispatch, useSelector } from "store/hooks";
+import { useSelector } from "store/hooks";
 import { v4 as uuidv4 } from "uuid";
 import { generateFileName } from "helpers/generateFileName";
 import { generateImageUrl } from "helpers/imageUrlHelper";
@@ -12,7 +11,6 @@ import { GeneratePostUrl } from "helpers/generatePostUrl";
 import dateTimeHelper from "helpers/dateTimeHelper";
 import PostTagForm from "./PostTagForm";
 import PostTranslations from "./PostTranslations";
-import FormHelp from "../../atoms/FormHelp";
 import {
   Box,
   Button,
@@ -24,8 +22,6 @@ import {
   Tab,
   Tabs,
   TextField,
-  Typography,
-  CircularProgress,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import FormError from "@/components/atoms/FormError";
@@ -33,10 +29,7 @@ import AdminTopBar from "@/components/atoms/AdminTopBar";
 import { PerformantTextField } from "@/components/atoms/PerformantTextField";
 import { Post } from "types/Post.type";
 
-const TipTapEditor = dynamic(() => import("components/tiptap/TipTapEditor"), {
-  suspense: true,
-  loading: () => <CircularProgress color="secondary" />,
-});
+import TipTapEditor from "components/tiptap/TipTapEditor";
 
 interface PostFormProps {
   post?: any;
@@ -394,18 +387,16 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         item
                         sx={{ marginY: 2 }}
                       >
-                        <Suspense>
-                          <TipTapEditor
-                            onChange={(val: string) =>
-                              props.setFieldValue("post_content", val, true)
-                            }
-                            value={props.values.post_content}
-                            itemType={"post"}
-                            itemId={post ? post.postId : nextPostId}
-                            height={150}
-                            title={"Page content"}
-                          />
-                        </Suspense>
+                        <TipTapEditor
+                          onChange={(val: string) =>
+                            props.setFieldValue("post_content", val, true)
+                          }
+                          value={props.values.post_content}
+                          itemType={"post"}
+                          itemId={post ? post.postId : nextPostId}
+                          height={150}
+                          title={"Page content"}
+                        />
 
                         {props.errors && props.errors.post_content ? (
                           <FormError message={props.errors.post_content} />
@@ -622,18 +613,16 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         item
                         sx={{ marginY: 2 }}
                       >
-                        <Suspense>
-                          <TipTapEditor
-                            onChange={(val: string) =>
-                              props.setFieldValue("post_excerpt", val, true)
-                            }
-                            value={props.values.post_excerpt}
-                            itemType={"post"}
-                            itemId={post ? post.postId : nextPostId}
-                            height={150}
-                            title={"Post Excerp/Quote"}
-                          />
-                        </Suspense>
+                        <TipTapEditor
+                          onChange={(val: string) =>
+                            props.setFieldValue("post_excerpt", val, true)
+                          }
+                          value={props.values.post_excerpt}
+                          itemType={"post"}
+                          itemId={post ? post.postId : nextPostId}
+                          height={150}
+                          title={"Post Excerp/Quote"}
+                        />
                         {props.errors && props.errors.post_excerpt ? (
                           <FormError message={props.errors.post_excerpt} />
                         ) : (
@@ -646,18 +635,16 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         item
                         sx={{ marginY: 2 }}
                       >
-                        <Suspense>
-                          <TipTapEditor
-                            onChange={(val: string) =>
-                              props.setFieldValue("post_content", val, true)
-                            }
-                            value={props.values.post_content}
-                            itemType={"post"}
-                            itemId={post ? post.postId : nextPostId}
-                            height={150}
-                            title={"Post top content"}
-                          />
-                        </Suspense>
+                        <TipTapEditor
+                          onChange={(val: string) =>
+                            props.setFieldValue("post_content", val, true)
+                          }
+                          value={props.values.post_content}
+                          itemType={"post"}
+                          itemId={post ? post.postId : nextPostId}
+                          height={150}
+                          title={"Post top content"}
+                        />
 
                         {props.errors && props.errors.post_content ? (
                           <FormError message={props.errors.post_content} />
@@ -756,18 +743,16 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         item
                         sx={{ marginY: 2 }}
                       >
-                        <Suspense>
-                          <TipTapEditor
-                            onChange={(val: string) =>
-                              props.setFieldValue("post_excerpt_2", val, true)
-                            }
-                            value={props.values.post_excerpt_2}
-                            itemType={"post"}
-                            itemId={post ? post.postId : nextPostId}
-                            height={150}
-                            title={"Second post excerpt"}
-                          />
-                        </Suspense>
+                        <TipTapEditor
+                          onChange={(val: string) =>
+                            props.setFieldValue("post_excerpt_2", val, true)
+                          }
+                          value={props.values.post_excerpt_2}
+                          itemType={"post"}
+                          itemId={post ? post.postId : nextPostId}
+                          height={150}
+                          title={"Second post excerpt"}
+                        />
                       </Grid>
 
                       <Grid
@@ -775,18 +760,16 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         item
                         sx={{ marginY: 2 }}
                       >
-                        <Suspense>
-                          <TipTapEditor
-                            onChange={(val: string) =>
-                              props.setFieldValue("post_content_2", val, true)
-                            }
-                            value={props.values.post_content_2}
-                            itemType={"post"}
-                            itemId={post ? post.postId : nextPostId}
-                            height={150}
-                            title={"Bottom Post Content"}
-                          />
-                        </Suspense>
+                        <TipTapEditor
+                          onChange={(val: string) =>
+                            props.setFieldValue("post_content_2", val, true)
+                          }
+                          value={props.values.post_content_2}
+                          itemType={"post"}
+                          itemId={post ? post.postId : nextPostId}
+                          height={150}
+                          title={"Bottom Post Content"}
+                        />
                       </Grid>
 
                       <PostTagForm postId={post ? post.postId : nextPostId} />

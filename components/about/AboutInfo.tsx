@@ -1,29 +1,30 @@
-import React, { ReactElement, useEffect, useState } from 'react';
-import { useSelector } from 'store/hooks';
-import Image from 'next/image';
-import Gallery from '../gallery/Gallery';
-import styles from './Styles.module.css';
-import containerBackground from 'styles/images/about.jpg';
+import React, { ReactElement, useEffect, useState } from "react";
+import { useSelector } from "store/hooks";
+import Image from "next/image";
+import Gallery from "../gallery/Gallery";
+import styles from "./Styles.module.css";
+import containerBackground from "styles/images/about.jpg";
 
-const AboutInfo = ({gallery,aboutInfo}) => {
+const AboutInfo = ({ gallery, aboutInfo }) => {
+  let [galleryImages, setGalleryImages] = useState([]);
 
-  let [ galleryImages, setGalleryImages ] = useState([])
+  useEffect(() => {
+    if (gallery !== null) getGalleryImages();
+  }, [gallery]);
 
-  useEffect(()=>{
-    if (gallery !== null) getGalleryImages()
-  },[gallery])
-
-  async function getGalleryImages(){
-    const res = await fetch(`/api/galleryimage/${gallery.gallery_id}`)
-    const data = await res.json()
-    console.log(res, " RES ")
-    setGalleryImages(data)
+  async function getGalleryImages() {
+    const res = await fetch(`/api/galleryimage/${gallery.gallery_id}`);
+    const data = await res.json();
+    setGalleryImages(data);
   }
 
   let aboutInfoDisplay: ReactElement;
   if (aboutInfo && aboutInfo !== null) {
     aboutInfoDisplay = (
-      <div data-testid="about-info-container" className={styles.aboutContainer}>
+      <div
+        data-testid="about-info-container"
+        className={styles.aboutContainer}
+      >
         <div
           dangerouslySetInnerHTML={{ __html: aboutInfo.text_top }}
           className={styles.text}
@@ -38,20 +39,29 @@ const AboutInfo = ({gallery,aboutInfo}) => {
   }
 
   return (
-    <section id='about-info' className={styles.aboutPage}>
+    <section
+      id="about-info"
+      className={styles.aboutPage}
+    >
       <h1>Über Uns</h1>
       {aboutInfoDisplay}
       <div className={styles.contentContainer}>
-        <Image src={containerBackground} className={styles.img} />
+        <Image
+          src={containerBackground}
+          className={styles.img}
+        />
         <div className={styles.linkContainer}>
           <h4>Grundlagen unserer Arbeit sind:</h4>
-          <div className='link blackBg'>
-            <a href={'/selbstverstaendnis'} className='link-button'>
+          <div className="link blackBg">
+            <a
+              href={"/selbstverstaendnis"}
+              className="link-button"
+            >
               Selbsverständnis der Jüdischen Stimme
             </a>
             <a
-              href={'/wp-content/uploads/2011/11/Satzung_2011.pdf'}
-              className='link-button'
+              href={"/wp-content/uploads/2011/11/Satzung_2011.pdf"}
+              className="link-button"
             >
               Satzung der Jüdischen Stimme
             </a>

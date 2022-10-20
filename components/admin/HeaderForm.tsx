@@ -1,16 +1,11 @@
-import React, { Suspense, useState } from "react";
+import React, { useState } from "react";
 import { Form, Formik, FormikProps } from "formik";
-import dynamic from "next/dynamic";
-import { Card, Tab, Tabs, CircularProgress, Box } from "@mui/material";
+import { Card, Tab, Tabs, Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import GalleryForm from "./galleries/GalleryForm";
 import AdminTopBar from "../atoms/AdminTopBar";
-
-const TipTapEditor = dynamic(() => import("components/tiptap/TipTapEditor"), {
-  suspense: true,
-  loading: () => <CircularProgress color="secondary" />,
-});
+import TipTapEditor from "../tiptap/TipTapEditor";
 
 type HeaderProps = {
   header_slogan: string;
@@ -98,16 +93,14 @@ const HeaderForm = ({ aboutInfo, gallery }) => {
                     item
                     xs={12}
                   >
-                    <Suspense>
-                      <TipTapEditor
-                        onChange={(val: string) =>
-                          props.setFieldValue("header_slogan", val, true)
-                        }
-                        value={props.values.header_slogan}
-                        height={150}
-                        title="Header Slogan"
-                      />
-                    </Suspense>
+                    <TipTapEditor
+                      onChange={(val: string) =>
+                        props.setFieldValue("header_slogan", val, true)
+                      }
+                      value={props.values.header_slogan}
+                      height={150}
+                      title="Header Slogan"
+                    />
                   </Grid>
                 </Grid>
               </Card>

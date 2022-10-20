@@ -13,6 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import Grid from "@mui/material/Grid"; // Grid version 1
+import FormHelp from "../atoms/FormHelp";
 
 interface TipTapEditorProps {
   value: string;
@@ -22,6 +23,7 @@ interface TipTapEditorProps {
   showMenu?: boolean;
   height?: number;
   title?: string;
+  help?: string;
 }
 
 const TipTapEditor = (props: TipTapEditorProps) => {
@@ -107,11 +109,14 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
           item
           xs={7}
         >
-          {props.title ? (
-            <Typography variant="h6">{props.title}</Typography>
-          ) : (
-            ""
-          )}
+          <Box
+            flexDirection="row"
+            display="flex"
+            alignItems="center"
+          >
+            {props.title && <Typography variant="h6">{props.title}</Typography>}
+            {props.help && <FormHelp text={props.help}></FormHelp>}
+          </Box>
         </Grid>
         <Grid
           item

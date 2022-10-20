@@ -44,12 +44,9 @@ const AdminCategories = ({ categories }: AdminCategoriesProps) => {
     axios
       .delete(`/api/categories/${category.term_id}`)
       .then((response) => {
-        console.log(response, " REPONSE ON DELETE CATEGORY ");
         window.location.reload();
       })
-      .catch((error) => {
-        console.log(error, " ERROR ON DELETE CATEGORY");
-      });
+      .catch((error) => {});
   };
 
   let categoriesDisplay: ReactElement[];

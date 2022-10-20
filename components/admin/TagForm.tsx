@@ -1,7 +1,6 @@
-import React, { FC, Suspense } from "react";
+import React, { FC } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
-import dynamic from "next/dynamic";
 import { Tag } from "types/Tag.type";
 import { Card, Button, FormControl, TextField, Box } from "@mui/material";
 import Grid from "@mui/material/Grid";

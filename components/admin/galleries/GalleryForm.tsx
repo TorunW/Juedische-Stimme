@@ -1,6 +1,4 @@
-import React, { useState, ReactElement, Suspense } from "react";
-import dynamic from "next/dynamic";
-import { useFormik } from "formik";
+import React, { useState } from "react";
 import axios from "axios";
 import GalleryImageForm from "./GalleryImageForm";
 import { Image } from "types/Image.type";
@@ -14,34 +12,6 @@ interface GalleryFromProps {
 
 function GalleryForm({ gallery }: GalleryFromProps) {
   const [selectedImages, setSelectedImages] = useState<Image[]>([]);
-
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
-  const formik = useFormik({
-    initialValues: {
-      gallery_name: gallery ? gallery.gallery_name : "",
-      gallery_type: gallery ? gallery.gallery_type : "",
-    },
-    onSubmit: (values) => {
-      axios({
-        method: gallery ? "put" : "post",
-        url: `/api/galleries/${gallery ? "/" + gallery.gallery_id : ""}`,
-        data: { ...values },
-      }).then(
-        (response) => {
-          console.log(response, "response on gallery (put or post)");
-          if (response.data) {
-            window.location.href = `/admin/galleries/${
-              gallery ? gallery.gallery_id : response.data.insertId
-            }`; // BETTER FETCH THE POSTS THEN REFRESH PAGE
-          }
-        },
-        (error) => {
-          console.log(error, "ERROR ON POST GALLERY");
-        }
-      );
-    },
-  });
 
   function handleSelectImage(galleryImage: Image) {
     let newSelectedImages = [];

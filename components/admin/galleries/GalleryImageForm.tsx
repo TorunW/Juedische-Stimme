@@ -1,16 +1,12 @@
-import React, { Suspense, useRef } from "react";
-import dynamic from "next/dynamic";
+import React, { useRef } from "react";
 import { useFormik } from "formik";
-import Image from "next/image";
 import axios from "axios";
 import { generateFileName } from "helpers/generateFileName";
-import { Box, Button, FormControl, TextField, Divider } from "@mui/material";
+import { Box, Button, FormControl, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import ImageIcon from "@mui/icons-material/Image";
 
-const TiptapEditor = dynamic(() => import("components/tiptap/TipTapEditor"), {
-  suspense: true,
-});
+import TiptapEditor from "components/tiptap/TipTapEditor";
 
 interface GalleryImageFormProps {
   galleryId: number | string;
@@ -182,17 +178,15 @@ function GalleryImageForm({
                 xs={12}
                 margin="0 auto"
               >
-                <Suspense fallback={"LOADING..."}>
-                  <TiptapEditor
-                    onChange={(val) =>
-                      formik.setFieldValue("image_description", val, true)
-                    }
-                    value={formik.values.image_description}
-                    showMenu={false}
-                    height={200}
-                    title="Image Description"
-                  />
-                </Suspense>
+                <TiptapEditor
+                  onChange={(val) =>
+                    formik.setFieldValue("image_description", val, true)
+                  }
+                  value={formik.values.image_description}
+                  showMenu={false}
+                  height={200}
+                  title="Image Description"
+                />
               </Grid>
             ) : (
               ""
@@ -324,17 +318,15 @@ function GalleryImageForm({
                   fullWidth
                   margin="normal"
                 >
-                  <Suspense fallback={"LOADING..."}>
-                    <TiptapEditor
-                      onChange={(val) =>
-                        formik.setFieldValue("image_description", val, true)
-                      }
-                      value={formik.values.image_description}
-                      showMenu={false}
-                      height={200}
-                      title="Image Description"
-                    />
-                  </Suspense>
+                  <TiptapEditor
+                    onChange={(val) =>
+                      formik.setFieldValue("image_description", val, true)
+                    }
+                    value={formik.values.image_description}
+                    showMenu={false}
+                    height={200}
+                    title="Image Description"
+                  />
                 </FormControl>
               </Grid>
             ) : (

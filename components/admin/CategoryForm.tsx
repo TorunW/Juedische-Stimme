@@ -1,5 +1,4 @@
-import React, { useState, Suspense, FC } from "react";
-import dynamic from "next/dynamic";
+import React, { useState, FC } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
@@ -9,12 +8,8 @@ import { generateFileName } from "helpers/generateFileName";
 import { uuidv4 } from "@firebase/util";
 import FormError from "../atoms/FormError";
 import { Button, Card, FormControl, Grid, TextField, Box } from "@mui/material";
-import FormHelp from "../atoms/FormHelp";
 import { Category } from "types/Category.type";
-
-const DynamicTiptapEditor = dynamic(() => import("../tiptap/TipTapEditor"), {
-  suspense: true,
-});
+import TipTapEditor from "../tiptap/TipTapEditor";
 
 interface TypeProps {
   category?: Category;
@@ -99,7 +94,6 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
         .then(
           axios.spread((...responses) => {
             let response = responses[responses.length - 1];
-            console.log(response, "response on category (put or post)");
             if (response.data) {
               window.location.href = `/admin/categories/${
                 category ? category.term_id : response.data.insertId
@@ -150,8 +144,7 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
           >
             <Grid
               item
-              container
-              xs={10}
+              xs={12}
             >
               <FormControl
                 fullWidth
@@ -177,24 +170,22 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
 
             <Grid
               item
-              xs={10}
+              xs={12}
               sx={{ marginY: 2 }}
             >
-              <Suspense fallback={"LOADING..."}>
-                <DynamicTiptapEditor
-                  onChange={(val) =>
-                    formik.setFieldValue("description", val, true)
-                  }
-                  value={formik.values.description}
-                  height={150}
-                  title={"Category Description"}
-                />
-              </Suspense>
+              <TipTapEditor
+                onChange={(val) =>
+                  formik.setFieldValue("description", val, true)
+                }
+                value={formik.values.description}
+                height={150}
+                title={"Category Description"}
+              />
             </Grid>
 
             <Grid
               item
-              xs={10}
+              xs={12}
               sx={{
                 height: "215px",
                 position: "relative",
@@ -268,11 +259,6 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
               />
             </Grid>
 
-            {/* {formik.errors && formik.errors.post_image ? (
-                <FormError message={formik.errors.post_image} />
-              ) : (
-                ''
-              )} */}
             <Grid
               item
               sx={{ marginY: 2 }}

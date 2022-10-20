@@ -1,29 +1,12 @@
-import React, { Suspense } from "react";
-import dynamic from "next/dynamic";
+import React from "react";
 import { Form, useFormik } from "formik";
 import axios from "axios";
 import styles from "components/admin/Forms.module.css";
 import FormError from "@/components/atoms/FormError";
-import {
-  Box,
-  Button,
-  Card,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControl,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-  CircularProgress,
-} from "@mui/material";
+import { Button, FormControl, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
-const TipTapEditor = dynamic(() => import("components/tiptap/TipTapEditor"), {
-  suspense: true,
-  loading: () => <p>Loading...</p>,
-});
+import TipTapEditor from "components/tiptap/TipTapEditor";
 
 const PostTranslationsForm = ({ post, language }) => {
   const formik = useFormik({
@@ -87,15 +70,13 @@ const PostTranslationsForm = ({ post, language }) => {
         />
         {errors && errors.title ? <FormError message={errors.title} /> : ""}
 
-        <Suspense fallback={"LOADING..."}>
-          <TipTapEditor
-            onChange={(val) => formik.setFieldValue("content", val, true)}
-            value={formik.values.content}
-            itemType={"post"}
-            itemId={post.postId}
-            title={`Post Content`}
-          />
-        </Suspense>
+        <TipTapEditor
+          onChange={(val) => formik.setFieldValue("content", val, true)}
+          value={formik.values.content}
+          itemType={"post"}
+          itemId={post.postId}
+          title={`Post Content`}
+        />
         {errors && errors.content ? <FormError message={errors.content} /> : ""}
 
         <Button type="submit">Submit</Button>
@@ -135,18 +116,16 @@ const PostTranslationsForm = ({ post, language }) => {
           fullWidth
           margin="normal"
         >
-          <Suspense>
-            <TipTapEditor
-              onChange={(val: string) =>
-                formik.setFieldValue("excerpt", val, true)
-              }
-              value={formik.values.excerpt}
-              itemType={"post"}
-              itemId={post.postId}
-              height={150}
-              title={`Excerpt`}
-            />
-          </Suspense>
+          <TipTapEditor
+            onChange={(val: string) =>
+              formik.setFieldValue("excerpt", val, true)
+            }
+            value={formik.values.excerpt}
+            itemType={"post"}
+            itemId={post.postId}
+            height={150}
+            title={`Excerpt`}
+          />
           {errors && errors.excerpt ? (
             <FormError message={errors.excerpt} />
           ) : (
@@ -157,15 +136,13 @@ const PostTranslationsForm = ({ post, language }) => {
           fullWidth
           margin="normal"
         >
-          <Suspense fallback={"LOADING..."}>
-            <TipTapEditor
-              onChange={(val) => formik.setFieldValue("content", val, true)}
-              value={formik.values.content}
-              itemType={"post"}
-              itemId={post.postId}
-              title={`Content`}
-            />
-          </Suspense>
+          <TipTapEditor
+            onChange={(val) => formik.setFieldValue("content", val, true)}
+            value={formik.values.content}
+            itemType={"post"}
+            itemId={post.postId}
+            title={`Content`}
+          />
           {errors && errors.content ? (
             <FormError message={errors.content} />
           ) : (
@@ -177,18 +154,16 @@ const PostTranslationsForm = ({ post, language }) => {
           fullWidth
           margin="normal"
         >
-          <Suspense>
-            <TipTapEditor
-              onChange={(val: string) =>
-                formik.setFieldValue("excerpt_2", val, true)
-              }
-              value={formik.values.excerpt_2}
-              itemType={"post"}
-              itemId={post.postId}
-              height={150}
-              title={`Second Excerpt`}
-            />
-          </Suspense>
+          <TipTapEditor
+            onChange={(val: string) =>
+              formik.setFieldValue("excerpt_2", val, true)
+            }
+            value={formik.values.excerpt_2}
+            itemType={"post"}
+            itemId={post.postId}
+            height={150}
+            title={`Second Excerpt`}
+          />
           {errors && errors.excerpt_2 ? (
             <FormError message={errors.excerpt_2} />
           ) : (
@@ -199,15 +174,13 @@ const PostTranslationsForm = ({ post, language }) => {
           fullWidth
           margin="normal"
         >
-          <Suspense fallback={"LOADING..."}>
-            <TipTapEditor
-              onChange={(val) => formik.setFieldValue("content_2", val, true)}
-              value={formik.values.content_2}
-              itemType={"post"}
-              itemId={post.postId}
-              title={`Bottom Content`}
-            />
-          </Suspense>
+          <TipTapEditor
+            onChange={(val) => formik.setFieldValue("content_2", val, true)}
+            value={formik.values.content_2}
+            itemType={"post"}
+            itemId={post.postId}
+            title={`Bottom Content`}
+          />
           {errors && errors.content_2 ? (
             <FormError message={errors.content_2} />
           ) : (

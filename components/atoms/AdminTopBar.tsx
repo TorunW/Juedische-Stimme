@@ -1,13 +1,11 @@
-import React, { useState, Suspense, ReactElement, useEffect } from "react";
-import { Box, IconButton, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import { Container } from "@mui/system";
+import React from "react";
+import { Box, Typography } from "@mui/material";
 
 interface Props {
   title?: string;
-  tabs?: JSX.Element | JSX.Element[];
-  // this is an object but if not jsx elemement ts be mad yo
+  tabs?: JSX.Element | JSX.Element[]; // this is an object but if not jsx elemement ts be mad yo
 }
+
 const AdminTopBar: React.FC<Props> = ({ title, tabs }) => {
   return (
     <Box
