@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 function getRequestParams({ email, name }) {
   // get env variables
@@ -8,7 +8,7 @@ function getRequestParams({ email, name }) {
   // mailchimp datacenter - mailchimp api keys always look like this:
   // fe4f064432e4684878063s83121e4971-us6
   // We need the us6 part
-  const DATACENTER = process.env.MAILCHIMP_API_KEY.split('-')[1];
+  const DATACENTER = process.env.MAILCHIMP_API_KEY.split("-")[1];
 
   const url = `https://${DATACENTER}.api.mailchimp.com/3.0/lists/${LIST_ID}/members`;
 
@@ -17,13 +17,13 @@ function getRequestParams({ email, name }) {
   const data = {
     email_address: email,
     name: name,
-    status: 'subscribed',
+    status: "subscribed",
   };
 
   // Api key needs to be encoded in base 64 format
-  const base64ApiKey = Buffer.from(`anystring:${API_KEY}`).toString('base64');
+  const base64ApiKey = Buffer.from(`anystring:${API_KEY}`).toString("base64");
   const headers = {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
     Authorization: `Basic ${base64ApiKey}`,
   };
 
@@ -36,12 +36,10 @@ function getRequestParams({ email, name }) {
 
 export default async (req, res) => {
   const { email, name } = req.body;
-  // console.log('hello');
-  // console.log(email, name);
 
   if (!email || !email.length) {
     return res.status(400).json({
-      error: 'Forgot to add your email?',
+      error: "Forgot to add your email?",
     });
   }
 
@@ -49,11 +47,9 @@ export default async (req, res) => {
     const { url, data, headers } = getRequestParams({ email, name });
 
     const response = await axios.post(url, data, { headers });
-    // console.log(response);
     // Success
     return res.status(201).json({ error: null });
   } catch (error) {
-    console.log(error);
     return res.status(400).json({
       error: `Oops, something went wrong... Send us an email at mail@juedische-stimme.de and we'll add you to the list.`,
     });

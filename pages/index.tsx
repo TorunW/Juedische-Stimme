@@ -87,9 +87,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       .then(function (response) {
         dispatch(setNewsletter(response.data));
       })
-      .catch(function (error) {
-        console.log(error, " ERROR ON FETCHING NEWSLETTER ");
-      });
+      .catch(function (error) {});
   }
 
   return (

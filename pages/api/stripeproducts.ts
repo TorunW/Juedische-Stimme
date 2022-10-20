@@ -1,13 +1,13 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import Stripe from 'stripe';
+import { NextApiRequest, NextApiResponse } from "next";
+import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-  apiVersion: '2022-08-01',
+  apiVersion: "2022-08-01",
 });
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    if (req.method === 'GET') {
+    if (req.method === "GET") {
       const prices = await stripe.prices.list({
         limit: 100,
       });
@@ -16,8 +16,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         limit: 100,
         active: true,
       });
-
-      console.log(products.data);
 
       const groups = prices.data.reduce((groups, item) => {
         if (item.active === true) {
@@ -39,10 +37,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       res.json(groupsArray);
     } else {
-      res.json({ message: 'ONLY GET HERE!' });
+      res.json({ message: "ONLY GET HERE!" });
     }
   } catch (error) {
-    console.log(error);
     res.json(error);
   }
 };

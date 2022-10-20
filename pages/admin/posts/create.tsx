@@ -13,8 +13,6 @@ import { setLoggedUser } from "store/users/usersSlice";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
 
 export default function CreatePostPage(props) {
-  console.log(props, " PROPS ");
-
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
 

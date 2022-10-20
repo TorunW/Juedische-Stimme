@@ -1,9 +1,9 @@
-import excuteQuery from 'lib/db';
+import excuteQuery from "lib/db";
 
 export default async (req, res) => {
   try {
-    if (req.method === 'POST') {
-      let nodemailer = require('nodemailer');
+    if (req.method === "POST") {
+      let nodemailer = require("nodemailer");
       const transporter = nodemailer.createTransport({
         port: 465,
         host: process.env.SMTP_HOST,
@@ -19,10 +19,10 @@ export default async (req, res) => {
 
       const mailData = {
         from: {
-          address: 'info@juedische-stimme.com',
+          address: "info@juedische-stimme.com",
         },
         replyTo: req.body.email,
-        to: ['info@juedische-stimme.com','mail@juedische-stimme.de'],
+        to: ["info@juedische-stimme.com", "mail@juedische-stimme.de"],
         subject: `Membership application`,
         text: req.body.firstname,
         html: `<div>
@@ -40,19 +40,16 @@ export default async (req, res) => {
 
       transporter.sendMail(mailData, function (err, info) {
         if (err) {
-          console.log(err);
-          res.json({ type: 'error', error: err });
+          res.json({ type: "error", error: err });
         } else {
-          console.log(info);
-          res.json({ type: 'success', info: info });
+          res.json({ type: "success", info: info });
         }
       });
       // res.json({ message: 'membership form sent!' });
     } else {
-      res.json({ message: 'NO GET HERE!' });
+      res.json({ message: "NO GET HERE!" });
     }
   } catch (error) {
-    console.log(error);
     res.json(error);
   }
 };
