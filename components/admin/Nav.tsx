@@ -14,8 +14,22 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useSelector } from "store/hooks";
+import ArticleIcon from "@mui/icons-material/Article";
+import WebIcon from "@mui/icons-material/Web";
+import MenuIcon from "@mui/icons-material/Menu";
+import NoteAddIcon from "@mui/icons-material/NoteAdd";
+import EditIcon from "@mui/icons-material/Edit";
+import TagIcon from "@mui/icons-material/Tag";
+import CategoryIcon from "@mui/icons-material/Category";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
+import InfoIcon from "@mui/icons-material/Info";
+import CardMembershipIcon from "@mui/icons-material/CardMembership";
+import ViewCarouselIcon from "@mui/icons-material/ViewCarousel";
+import GroupIcon from "@mui/icons-material/Group";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import ListIcon from "@mui/icons-material/List";
 
-//
 function AdminNav(props) {
   const router = useRouter();
   const { loggedUser } = useSelector((state) => state.users);
@@ -41,26 +55,59 @@ function AdminNav(props) {
         elevation={0}
       >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Post</Typography>
+          <ArticleIcon sx={{ marginRight: 1 }} />
+          <Typography>Posts</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/posts/create`}>Create new post</Link>
+            <Link href={`/admin/posts/create`}>
+              <Box
+                display="flex"
+                sx={{ cursor: "pointer" }}
+              >
+                <NoteAddIcon sx={{ marginRight: 1 }} />
+                <Typography>Create new post</Typography>
+              </Box>
+            </Link>
           </Box>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/posts`}>Edit posts</Link>
+            <Link href={`/admin/posts`}>
+              <Box
+                display="flex"
+                sx={{ cursor: "pointer" }}
+              >
+                <EditIcon sx={{ marginRight: 1 }} />
+                <Typography>Edit posts</Typography>
+              </Box>
+            </Link>
           </Box>
 
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/tags`}>Tag</Link>
+            <Link href={`/admin/tags`}>
+              <Box
+                display="flex"
+                sx={{ cursor: "pointer" }}
+              >
+                <TagIcon sx={{ marginRight: 1 }} />
+                <Typography>Tags</Typography>
+              </Box>
+            </Link>
           </Box>
 
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/categories`}>Categories</Link>
+            <Link href={`/admin/categories`}>
+              <Box
+                display="flex"
+                sx={{ cursor: "pointer" }}
+              >
+                <CategoryIcon sx={{ marginRight: 1 }} />
+                <Typography>Categories</Typography>
+              </Box>
+            </Link>
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -69,24 +116,57 @@ function AdminNav(props) {
         elevation={0}
       >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <WebIcon sx={{ marginRight: 1 }} />
           <Typography>Sections</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/about`}>About Us</Link>
+            <Link href={`/admin/about`}>
+              <Box
+                display="flex"
+                sx={{ cursor: "pointer" }}
+              >
+                <InfoIcon sx={{ marginRight: 1 }} />
+                <Typography>About</Typography>
+              </Box>
+            </Link>
           </Box>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <a href={`/admin/posts/spenden`}>Donation</a>
+            <a href={`/admin/posts/spenden`}>
+              <Box
+                display="flex"
+                sx={{ cursor: "pointer" }}
+              >
+                <VolunteerActivismIcon sx={{ marginRight: 1 }} />
+                <Typography>Donations</Typography>
+              </Box>
+            </a>
           </Box>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <a href={`/admin/posts/mitgliedsantrag`}>Membership</a>
+            <a href={`/admin/posts/mitgliedsantrag`}>
+              <Box
+                display="flex"
+                sx={{ cursor: "pointer" }}
+              >
+                <CardMembershipIcon sx={{ marginRight: 1 }} />
+                <Typography>Membership</Typography>
+              </Box>
+            </a>
           </Box>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/header`}>Header</Link>
+            <Link href={`/admin/header`}>
+              <Box
+                display="flex"
+                sx={{ cursor: "pointer" }}
+              >
+                <ViewCarouselIcon sx={{ marginRight: 1 }} />
+                <Typography>Header</Typography>
+              </Box>
+            </Link>
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -95,12 +175,21 @@ function AdminNav(props) {
         elevation={0}
       >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <MenuIcon sx={{ marginRight: 1 }} />
           <Typography>Menus</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/menus`}>Menus and Links</Link>
+            <Link href={`/admin/menus`}>
+              <Box
+                display="flex"
+                sx={{ cursor: "pointer" }}
+              >
+                <ListIcon sx={{ marginRight: 1 }} />
+                <Typography>Menus & Links</Typography>
+              </Box>
+            </Link>
           </Box>
         </AccordionDetails>
       </Accordion>
@@ -110,17 +199,34 @@ function AdminNav(props) {
         elevation={0}
       >
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+          <GroupIcon sx={{ marginRight: 1 }} />
           <Typography>Users</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Divider />
 
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/users/register`}>Register new user</Link>
+            <Link href={`/admin/users/register`}>
+              <Box
+                display="flex"
+                sx={{ cursor: "pointer" }}
+              >
+                <GroupAddIcon sx={{ marginRight: 1 }} />
+                <Typography>Register User</Typography>
+              </Box>
+            </Link>
           </Box>
           <Divider />
           <Box sx={{ marginY: 1, marginLeft: 1 }}>
-            <Link href={`/admin/users`}>User List</Link>
+            <Link href={`/admin/users`}>
+              <Box
+                display="flex"
+                sx={{ cursor: "pointer" }}
+              >
+                <PeopleOutlineIcon sx={{ marginRight: 1 }} />
+                <Typography>Register User</Typography>
+              </Box>
+            </Link>
           </Box>
         </AccordionDetails>
       </Accordion>
