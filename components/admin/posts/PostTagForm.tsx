@@ -240,7 +240,7 @@ const PostTagForm = (props) => {
           item
           xs={11}
         >
-          <h3>Tags</h3>
+          <Typography variant="h6">Tags</Typography>
         </Grid>
         <Grid
           item

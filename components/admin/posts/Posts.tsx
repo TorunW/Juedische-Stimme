@@ -15,6 +15,7 @@ import {
   Divider,
 } from "@mui/material";
 import PostTableItem from "./PostTableItem";
+import { Container } from "@/components/atoms/Container";
 
 interface PostsProps {
   posts: any[];
@@ -103,33 +104,33 @@ function Posts({
   return (
     <div id="admin-posts">
       <PostsHeader />
-      <Paper
-        sx={{
-          maxWidth: "1067px",
-          margin: "0 auto",
-          width: "100%",
-          overflow: "hidden",
-        }}
-      >
-        <TableContainer sx={{ maxHeight: 740 }}>
-          <Table
-            sx={{ minWidth: 650 }}
-            stickyHeader
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell>Title</TableCell>
-                <TableCell align="right">Author</TableCell>
-                <TableCell align="right">Date published</TableCell>
-                <TableCell align="right">Image</TableCell>
-                <TableCell align="right">Delete</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>{postsDisplay}</TableBody>
-          </Table>
-        </TableContainer>
-        <Divider />
-      </Paper>
+      <Container>
+        <Paper
+          sx={{
+            width: "100%",
+            overflow: "hidden",
+          }}
+        >
+          <TableContainer sx={{ maxHeight: 740 }}>
+            <Table
+              sx={{ minWidth: 650 }}
+              stickyHeader
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell>Title</TableCell>
+                  <TableCell align="right">Author</TableCell>
+                  <TableCell align="right">Date published</TableCell>
+                  <TableCell align="right">Image</TableCell>
+                  <TableCell align="right">Delete</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{postsDisplay}</TableBody>
+            </Table>
+          </TableContainer>
+          <Divider />
+        </Paper>
+      </Container>
       <Box sx={{ marginTop: 3 }}>{paginationDisplay}</Box>
     </div>
   );

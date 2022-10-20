@@ -22,6 +22,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
+import { Container } from "@/components/atoms/Container";
 
 const MenuItems = ({ menuItems }) => {
   const [currentMenu, setCurrentMenu] = useState("main_menu");
@@ -160,23 +161,25 @@ const MenuItems = ({ menuItems }) => {
           </Tabs>
         }
       />
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <Table
-          sx={{ minWidth: 650 }}
-          stickyHeader
-        >
-          <TableHead>
-            <TableRow>
-              <TableCell>Title</TableCell>
-              <TableCell align="right">Link</TableCell>
-              <TableCell align="right">Order</TableCell>
-              <TableCell align="right">Edit</TableCell>
-              <TableCell align="right">Delete</TableCell>
-            </TableRow>
-          </TableHead>
-          {menuItemsDisplay}
-        </Table>
-      </Paper>
+      <Container>
+        <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <Table
+            sx={{ minWidth: 650 }}
+            stickyHeader
+          >
+            <TableHead>
+              <TableRow>
+                <TableCell>Title</TableCell>
+                <TableCell align="right">Link</TableCell>
+                <TableCell align="right">Order</TableCell>
+                <TableCell align="right">Edit</TableCell>
+                <TableCell align="right">Delete</TableCell>
+              </TableRow>
+            </TableHead>
+            {menuItemsDisplay}
+          </Table>
+        </Paper>
+      </Container>
     </>
   );
 };

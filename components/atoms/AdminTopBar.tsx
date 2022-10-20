@@ -4,7 +4,7 @@ import { Container } from "./Container";
 
 interface Props {
   title?: string;
-  tabs?: JSX.Element | JSX.Element[]; // this is an object but if not jsx elemement ts be mad yo
+  tabs?: React.ReactElement | React.ReactElement[]; // this is an object but if not jsx elemement ts be mad yo
 }
 
 const AdminTopBar: React.FC<Props> = ({ title, tabs }) => {
@@ -25,10 +25,12 @@ const AdminTopBar: React.FC<Props> = ({ title, tabs }) => {
           paddingX: 2,
         }}
       >
-        <Box sx={{ paddingBottom: 1 }}>
-          <Typography variant="h4">{title}</Typography>
-        </Box>
-        {tabs}
+        <>
+          <Box sx={{ paddingBottom: 1 }}>
+            <Typography variant="h4">{title}</Typography>
+          </Box>
+          {tabs}
+        </>
       </Container>
     </Box>
   );

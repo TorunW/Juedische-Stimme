@@ -425,7 +425,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         container
                         item
                         xs={12}
-                        sx={{ paddingRight: 0 }}
                       >
                         <Grid
                           container
