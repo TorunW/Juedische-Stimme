@@ -22,6 +22,7 @@ import {
   Tab,
   Tabs,
   TextField,
+  Link,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import FormError from "@/components/atoms/FormError";
@@ -30,6 +31,8 @@ import { PerformantTextField } from "@/components/atoms/PerformantTextField";
 import { Post } from "types/Post.type";
 
 import TipTapEditor from "components/tiptap/TipTapEditor";
+import { ImageUploadField } from "../ImageUploadField";
+import { Container } from "@/components/atoms/Container";
 
 interface PostFormProps {
   post?: any;
@@ -320,7 +323,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
           ) : null
         }
       />
-      <Box sx={{ maxWidth: "1067px", margin: "0 auto" }}>
+      <Container>
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
@@ -419,193 +422,157 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                       alignItems={"center"}
                     >
                       <Grid
-                        item
-                        xs={12}
-                      >
-                        <FormControl
-                          fullWidth
-                          margin="normal"
-                        >
-                          {post ? (
-                            <Button variant="outlined">
-                              <a
-                                target={"_blank"}
-                                rel="noreferrer"
-                                href={"/" + GeneratePostUrl(post.post_name)}
-                              >
-                                View Post in Livemode
-                              </a>
-                            </Button>
-                          ) : (
-                            ""
-                          )}
-                        </FormControl>
-                      </Grid>
-                      <Grid
-                        item
-                        xs={12}
-                        md={6}
-                      >
-                        <FormControl
-                          fullWidth
-                          margin="normal"
-                        >
-                          <InputLabel>Category</InputLabel>
-                          <Select
-                            id="categoryId"
-                            name="categoryId"
-                            value={props.values.categoryId}
-                            onChange={props.handleChange}
-                            label="Post Category"
-                          >
-                            {selectCategoriesDisplay}
-                          </Select>
-                          {props.errors && props.errors.categoryId ? (
-                            <FormError message={props.errors.categoryId} />
-                          ) : (
-                            ""
-                          )}
-                        </FormControl>
-                      </Grid>
-                      <Grid
-                        item
-                        md={6}
-                        xs={12}
-                      >
-                        <FormControl
-                          fullWidth
-                          margin="normal"
-                        >
-                          <InputLabel>Layout</InputLabel>
-                          <Select
-                            id="post_layout"
-                            name="post_layout"
-                            label="Post Layout"
-                            value={props.values.post_layout}
-                            onChange={props.handleChange}
-                            placeholder="Layout"
-                          >
-                            <MenuItem value={"article"}>Article</MenuItem>
-                            <MenuItem value={"newsletter"}>Newsletter</MenuItem>
-                            <MenuItem value={"legacy"}>Legacy</MenuItem>
-                            {/* <MenuItem value={'member_form'}>Membership Page</MenuItem> */}
-                            {/* <MenuItem value={'donation'}>Donation Page</MenuItem> */}
-                          </Select>
-                          {props.errors && props.errors.post_layout ? (
-                            <FormError message={props.errors.post_layout} />
-                          ) : (
-                            ""
-                          )}
-                        </FormControl>
-                      </Grid>
-
-                      <Grid
-                        item
-                        container
-                        xs={12}
-                      >
-                        <FormControl
-                          fullWidth
-                          sx={{ marginBottom: 4 }}
-                        >
-                          <PerformantTextField
-                            id="post_title"
-                            name="post_title"
-                            label="Title"
-                            margin="normal"
-                            placeholder="Title"
-                            onChange={props.handleChange}
-                            value={props.values.post_title}
-                          />
-                          {props.errors && props.errors.post_title ? (
-                            <FormError message={props.errors.post_title} />
-                          ) : (
-                            ""
-                          )}
-                        </FormControl>
-                      </Grid>
-
-                      <Grid
                         container
                         item
+                        xs={12}
+                        sx={{ paddingRight: 0 }}
                       >
                         <Grid
                           container
-                          item
+                          md={post ? 9 : 12}
                           xs={12}
-                          sx={{
-                            height: "215px",
-                            position: "relative",
-                          }}
+                          spacing={2}
                         >
-                          <TextField
-                            label="Post Header Image"
-                            focused
-                            multiline
-                            minRows={8}
-                            sx={{
-                              position: "absolute",
-                              width: "100%",
-                            }}
-                          />
-                          <Button
-                            sx={{
-                              width: "200px",
-                              position: "absolute",
-                              left: "50%",
-                              top: "50%",
-                              transform: "translate(-50%,-50%)",
-                            }}
+                          <Grid
+                            item
+                            md={6}
+                            xs={12}
                           >
-                            Upload an image
-                          </Button>
-                          {previewImage !== null ? (
-                            <Grid
-                              xs={12}
-                              sx={{ marginTop: 2, textAlign: "center" }}
+                            <FormControl
+                              fullWidth
+                              margin="normal"
                             >
-                              <Image
-                                layout="fixed"
-                                width={320}
-                                height={180}
-                                src={previewImage}
-                              />
-                            </Grid>
-                          ) : post && post.post_image ? (
-                            <Grid
-                              xs={12}
-                              sx={{ marginTop: 2, textAlign: "center" }}
+                              <InputLabel>Category</InputLabel>
+                              <Select
+                                id="categoryId"
+                                name="categoryId"
+                                value={props.values.categoryId}
+                                onChange={props.handleChange}
+                                label="Post Category"
+                              >
+                                {selectCategoriesDisplay}
+                              </Select>
+                              {props.errors && props.errors.categoryId ? (
+                                <FormError message={props.errors.categoryId} />
+                              ) : (
+                                ""
+                              )}
+                            </FormControl>
+                          </Grid>
+                          <Grid
+                            item
+                            md={6}
+                            xs={12}
+                          >
+                            <FormControl
+                              fullWidth
+                              margin="normal"
                             >
-                              <Image
-                                layout="fixed"
-                                width={320}
-                                height={180}
-                                src={generateImageUrl(post.post_image)}
+                              <InputLabel>Layout</InputLabel>
+                              <Select
+                                id="post_layout"
+                                name="post_layout"
+                                label="Post Layout"
+                                value={props.values.post_layout}
+                                onChange={props.handleChange}
+                                placeholder="Layout"
+                              >
+                                <MenuItem value={"article"}>Article</MenuItem>
+                                <MenuItem value={"newsletter"}>
+                                  Newsletter
+                                </MenuItem>
+                                <MenuItem value={"legacy"}>Legacy</MenuItem>
+                                {/* <MenuItem value={'member_form'}>Membership Page</MenuItem> */}
+                                {/* <MenuItem value={'donation'}>Donation Page</MenuItem> */}
+                              </Select>
+                              {props.errors && props.errors.post_layout ? (
+                                <FormError message={props.errors.post_layout} />
+                              ) : (
+                                ""
+                              )}
+                            </FormControl>
+                          </Grid>
+                          <Grid
+                            item
+                            container
+                            xs={12}
+                          >
+                            <FormControl
+                              fullWidth
+                              sx={{ marginBottom: 4 }}
+                            >
+                              <PerformantTextField
+                                id="post_title"
+                                name="post_title"
+                                label="Title"
+                                margin="normal"
+                                placeholder="Title"
+                                onChange={props.handleChange}
+                                value={props.values.post_title}
                               />
-                            </Grid>
-                          ) : (
-                            ""
-                          )}
-                          <input
-                            id="post_image"
-                            name="post_image"
-                            type="file"
-                            onChange={onPostImageChange}
-                            style={{
-                              position: "absolute",
-                              width: "100%",
-                              cursor: "pointer",
-                              height: "215px",
-                              opacity: 0,
-                            }}
-                          />
+                              {props.errors && props.errors.post_title ? (
+                                <FormError message={props.errors.post_title} />
+                              ) : (
+                                ""
+                              )}
+                            </FormControl>
+                          </Grid>
                         </Grid>
-
-                        {props.errors && props.errors.post_image ? (
-                          <FormError message={props.errors.post_image} />
-                        ) : (
-                          ""
+                        {post && (
+                          <Grid
+                            item
+                            xs={12}
+                            md={3}
+                            sx={{ paddingRight: 0 }}
+                          >
+                            <FormControl
+                              fullWidth
+                              margin="normal"
+                              sx={{
+                                padding: 2,
+                                paddingTop: 0,
+                                height: "calc(100% - 32px)",
+                              }}
+                            >
+                              <Link
+                                target={"_blank"}
+                                rel="noreferrer"
+                                href={"/" + GeneratePostUrl(post.post_name)}
+                                sx={{ width: "100%", height: "100%" }}
+                              >
+                                <Button
+                                  variant="contained"
+                                  sx={{ height: "100%", width: "100%" }}
+                                >
+                                  View Post in Livemode
+                                </Button>
+                              </Link>
+                            </FormControl>
+                          </Grid>
                         )}
+                      </Grid>
+
+                      <Grid
+                        container
+                        item
+                        xs={12}
+                      >
+                        <ImageUploadField
+                          image={
+                            post?.post_image
+                              ? generateImageUrl(post.post_image)
+                              : null
+                          }
+                          previewImage={previewImage}
+                          onChange={onPostImageChange}
+                          error={
+                            props.errors && props.errors.post_image ? (
+                              <FormError message={props.errors.post_image} />
+                            ) : (
+                              ""
+                            )
+                          }
+                        />
                       </Grid>
 
                       <Grid
@@ -657,85 +624,22 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         container
                         item
                       >
-                        <Grid
-                          container
-                          item
-                          xs={12}
-                          sx={{
-                            height: "215px",
-                            position: "relative",
-                          }}
-                        >
-                          <TextField
-                            label="Post Second Image"
-                            focused
-                            multiline
-                            minRows={8}
-                            sx={{
-                              position: "absolute",
-                              width: "100%",
-                            }}
-                          />
-                          <Button
-                            sx={{
-                              width: "200px",
-                              position: "absolute",
-                              left: "50%",
-                              top: "50%",
-                              transform: "translate(-50%,-50%)",
-                            }}
-                          >
-                            Upload an image
-                          </Button>
-                          {previewImage2 !== null ? (
-                            <Grid
-                              xs={12}
-                              sx={{ marginTop: 2, textAlign: "center" }}
-                            >
-                              <Image
-                                layout="fixed"
-                                width={320}
-                                height={180}
-                                src={previewImage2}
-                              />
-                            </Grid>
-                          ) : post && post.post_image_2 ? (
-                            <Grid
-                              xs={12}
-                              sx={{ marginTop: 2, textAlign: "center" }}
-                            >
-                              <Image
-                                layout="fixed"
-                                width={320}
-                                height={180}
-                                src={generateImageUrl(post.post_image_2)}
-                              />
-                            </Grid>
-                          ) : (
-                            ""
-                          )}
-
-                          <input
-                            id="post_image_2"
-                            name="post_image_2"
-                            type="file"
-                            onChange={onPostImage2Change}
-                            style={{
-                              position: "absolute",
-                              width: "100%",
-                              cursor: "pointer",
-                              background: "blue",
-                              height: "215px",
-                              opacity: 0,
-                            }}
-                          />
-                        </Grid>
-
-                        {props.errors && props.errors.post_image ? (
-                          <FormError message={props.errors.post_image} />
-                        ) : (
-                          ""
-                        )}
+                        <ImageUploadField
+                          image={
+                            post?.post_image
+                              ? generateImageUrl(post.post_image)
+                              : null
+                          }
+                          previewImage={previewImage2}
+                          onChange={onPostImage2Change}
+                          error={
+                            props.errors && props.errors.post_image_2 ? (
+                              <FormError message={props.errors.post_image_2} />
+                            ) : (
+                              ""
+                            )
+                          }
+                        />
                       </Grid>
 
                       <Grid
@@ -821,7 +725,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
             </Form>
           )}
         </Formik>
-      </Box>
+      </Container>
     </Box>
   );
 };

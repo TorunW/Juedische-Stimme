@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
+import { Container } from "./Container";
 
 interface Props {
   title?: string;
@@ -19,10 +20,16 @@ const AdminTopBar: React.FC<Props> = ({ title, tabs }) => {
         paddingTop: 1,
       }}
     >
-      <Box sx={{ marginX: 3, paddingBottom: 1 }}>
-        <Typography variant="h4">{title}</Typography>
-      </Box>
-      {tabs}
+      <Container
+        sx={{
+          paddingX: 2,
+        }}
+      >
+        <Box sx={{ paddingBottom: 1 }}>
+          <Typography variant="h4">{title}</Typography>
+        </Box>
+        {tabs}
+      </Container>
     </Box>
   );
 };

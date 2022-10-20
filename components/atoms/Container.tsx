@@ -1,5 +1,14 @@
 import React from "react";
+import { Box } from "@mui/material";
+import { SxProps } from "@mui/material/styles";
 
-export const Container = ({ children }) => {
-  return <div style={{ maxWidth: "1067px", margin: "0 auto" }}>{children}</div>;
+type Props = {
+  sx?: SxProps;
+  children: React.ReactElement;
+};
+
+export const Container: FC<Props> = ({ children, sx }) => {
+  return (
+    <Box sx={{ ...sx, maxWidth: "1067px", margin: "0 auto" }}>{children}</Box>
+  );
 };
