@@ -1,5 +1,7 @@
 import React, { ReactElement, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
+import Link from "@tiptap/extension-link";
+
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import MenuBar from "./MenuBar";
@@ -29,7 +31,15 @@ interface TipTapEditorProps {
 const TipTapEditor = (props: TipTapEditorProps) => {
   const { value, onChange, showMenu, height, title } = props;
   const editor = useEditor({
-    extensions: [StarterKit, Image],
+    extensions: [
+      StarterKit,
+      Image,
+      Link.configure({
+        HTMLAttributes: {
+          class: "tiptap-link",
+        },
+      }),
+    ],
     content: value,
     onBlur: ({ editor }) => {
       let rawHtml = editor.getHTML();

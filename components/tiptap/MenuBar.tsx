@@ -9,11 +9,18 @@ import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import UndoIcon from "@mui/icons-material/Undo";
 import RedoIcon from "@mui/icons-material/Redo";
+import AddLinkIcon from "@mui/icons-material/AddLink";
+import LinkOffIcon from "@mui/icons-material/LinkOff";
 import { Link, Box } from "@mui/material";
 
 const MenuBar = ({ editor }) => {
   if (!editor) {
     return null;
+  }
+
+  function setLinkHandler() {
+    const href = prompt("Enter a Url to link:");
+    editor.commands.setLink({ href });
   }
 
   return (
@@ -181,6 +188,28 @@ const MenuBar = ({ editor }) => {
         }}
       >
         <RedoIcon />
+      </Link>
+      <Link
+        onClick={() => setLinkHandler()}
+        title="add link"
+        sx={{
+          color: editor.isActive("link") ? "#8179A6" : "black",
+          cursor: "pointer",
+          "&:hover": { color: "#8179A6" },
+        }}
+      >
+        <AddLinkIcon />
+      </Link>
+      <Link
+        onClick={() => editor.commands.unsetLink()}
+        title="remove link"
+        sx={{
+          color: "black",
+          cursor: "pointer",
+          "&:hover": { color: "#8179A6" },
+        }}
+      >
+        <LinkOffIcon />
       </Link>
     </Box>
   );
