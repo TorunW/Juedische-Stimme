@@ -1,3 +1,28 @@
+.container {
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 520px;
+  height: 240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: 325px;
+  z-index: 2;
+  position: absolute;
+  left: 50vw;
+  margin-left: -260px;
+  margin-top: 0px;
+  color: white;
+  text-align: center;
+}
+.container p {
+  font-weight: 700;
+  font-size: 20px;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+}
 @media (min-width: 844px) {
   .header {
     height: 650px;

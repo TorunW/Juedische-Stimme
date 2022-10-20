@@ -16,15 +16,29 @@ const Header = () => {
   const [slideIndex, setSlideIndex] = useState(0);
   const prevSlideIndex = usePrevious(slideIndex);
 
+  // const headerGallery = {
+  //   gallery_id: 6,
+  //   gallery_name: "Header Gallery",
+  //   gallery_description: "gallery of the header",
+  //   gallery_type: "slide",
+  //   imageSrcs: "2022/09/ZYX1164_korr.jpg.jpeg",
+  // };
+
+  const imageSrcs =
+    headerGallery?.imageSrcs.indexOf(",") > -1
+      ? headerGallery.imageSrcs.split(",")
+      : [headerGallery?.imageSrcs];
+
   return (
     <header
       id="main-header"
       role="main-header"
       className={styles.header}
     >
-      <div className={styles.sliderWrapper}>
-        {headerGallery !== null
-          ? headerGallery.imageSrcs.split(",").map((imgSrc, index) => {
+      {headerGallery !== null && img !== null ? (
+        <>
+          <div className={styles.sliderWrapper}>
+            {imageSrcs.map((imgSrc, index) => {
               let blurredBgImage;
               if (index === 0) {
                 blurredBgImage = (
@@ -64,16 +78,26 @@ const Header = () => {
                   </div>
                 </React.Fragment>
               );
-            })
-          : ""}
-      </div>
-      <div className={styles.controllersWrapper}>
-        <HeaderGalleryControllers
-          slideIndex={slideIndex}
-          setSlideIndex={setSlideIndex}
-          slideshowLength={headerGallery.imageSrcs.split(",").length - 1}
-        />
-      </div>
+            })}
+          </div>
+          {imageSrcs.length > 1 ? (
+            <div className={styles.controllersWrapper}>
+              <HeaderGalleryControllers
+                slideIndex={slideIndex}
+                setSlideIndex={setSlideIndex}
+                slideshowLength={headerGallery.imageSrcs.split(",").length - 1}
+              />
+            </div>
+          ) : (
+            <div
+              className={styles.container}
+              dangerouslySetInnerHTML={{ __html: aboutInfo?.header_slogan }}
+            ></div>
+          )}
+        </>
+      ) : (
+        ""
+      )}
     </header>
   );
 };
