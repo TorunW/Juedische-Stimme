@@ -1,12 +1,13 @@
+import { getCookie, hasCookie } from "cookies-next";
 import React, { useEffect } from "react";
 import { NextPageContext } from "next";
+import { selectUserByEmail } from "lib/queries/users";
 import excuteQuery from "lib/db";
 import { useDispatch, useSelector } from "store/hooks";
 import { setLoggedUser } from "store/users/usersSlice";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
 import { Typography, Card, Box } from "@mui/material";
 import FacebookTokenForm from "@/components/admin/FacebookTokenForm";
-import { useLoggedUserCookie } from "pages/hooks/useLoggedUser";
 
 function AdminDashboard(props) {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ function AdminDashboard(props) {
       >
         <Typography variant="h4">
           Hello
-          {loggedUser
+          {loggedUser !== null
             ? loggedUser.display_name.length > 0
               ? " " + loggedUser.display_name
               : " " + loggedUser.user_email
@@ -51,20 +52,24 @@ AdminDashboard.layout = "admin";
 export default AdminDashboard;
 
 export const getServerSideProps = async (context: NextPageContext) => {
-  const loggedUser = await useLoggedUserCookie({
-    req: context.req,
-    res: context.res,
-  });
-  if (!loggedUser) {
-    return {
-      redirect: { destination: "/login", permanent: false },
-    };
+  let userEmail: string;
+  if (!hasCookie("Token", { req: context.req, res: context.res })) {
+    return { redirect: { destination: "/login", permanent: false } };
+  } else {
+    userEmail = getCookie("UserEmail", {
+      req: context.req,
+      res: context.res,
+    }).toString();
   }
+
+  const userResponse = await excuteQuery({
+    query: selectUserByEmail(userEmail),
+  });
+  const loggedUser = JSON.stringify(userResponse);
   const fbTokenResponse = await excuteQuery({
     query: `SELECT * FROM fb_token LIMIT 1`,
   });
   const fbToken = JSON.stringify(fbTokenResponse);
-
   return {
     props: {
       loggedUser,
