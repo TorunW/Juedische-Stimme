@@ -80,7 +80,6 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
                 alignItems={"center"}
               >
                 <Grid
-                  container
                   item
                   sx={{ marginY: 2 }}
                 >
@@ -91,27 +90,17 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
                     value={formik.values.text_top}
                     height={150}
                     title={"About Us Text"}
-                    help={`hello i am her to help you`}
                   />
                 </Grid>
-                <Grid
-                  item
-                  sx={{ marginY: 2 }}
-                  xs={11}
-                >
-                  <Grid
-                    sx={{ marginY: 2 }}
-                    xs={12}
+                <Grid item>
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    color="secondary"
+                    type="submit"
                   >
-                    <Button
-                      fullWidth
-                      variant="contained"
-                      color="secondary"
-                      type="submit"
-                    >
-                      Save Changes
-                    </Button>
-                  </Grid>
+                    Save Changes
+                  </Button>
                 </Grid>
               </Grid>
             </Card>

@@ -1,19 +1,49 @@
-import { useEffect } from 'react';
-import excuteQuery from 'lib/db';
-import { selectPostsBySearchPhrase } from 'lib/queries/posts';
-import { selectCategories } from 'lib/queries';
-import { selectMenuItems } from 'lib/queries/menuItems';
+import { useEffect } from "react";
+import excuteQuery from "lib/db";
+import { selectPostsBySearchPhrase } from "lib/queries/posts";
+import { selectCategories } from "lib/queries";
+import { selectMenuItems } from "lib/queries/menuItems";
 
-import Posts from '@/components/posts/Posts';
-import styles from 'styles/Home.module.css';
-import { useDispatch, useSelector } from 'store/hooks';
-import { setPosts } from 'store/posts/postsSlice';
-import { setMenuItems } from 'store/nav/navSlice';
-import SearchFilter from 'components/SearchFilter';
-import { setCatgories } from 'store/categories/categoriesSlice';
-import { LayoutPage } from 'types/LayoutPage.type';
-import { LayoutPageProps } from 'types/LayoutPageProps.type';
-import { setLanguages } from 'store/languages/languagesSlice';
+import Posts from "@/components/posts/Posts";
+import styles from "styles/Home.module.css";
+import { useDispatch, useSelector } from "store/hooks";
+import { setPosts } from "store/posts/postsSlice";
+import { setMenuItems } from "store/nav/navSlice";
+import { setCatgories } from "store/categories/categoriesSlice";
+import { LayoutPage } from "types/LayoutPage.type";
+import { LayoutPageProps } from "types/LayoutPageProps.type";
+import { setLanguages } from "store/languages/languagesSlice";
+import { createServerSideProps } from "page/server-side-props";
+import { HomePageProps } from "pages";
+
+export const getServerSideProps = createServerSideProps<HomePageProps>(
+  async ({ context, data: { navItems } }) => {
+    const postsResponse = await excuteQuery({
+      query: selectPostsBySearchPhrase({
+        phrase: context.query.phrase,
+        numberOfPosts: 10,
+        number: context.query.number,
+        locale: context.locale !== context.defaultLocale ? context.locale : "",
+      }),
+    });
+    const posts = JSON.stringify(postsResponse);
+
+    const categoriesResponse = await excuteQuery({
+      query: selectCategories(100),
+    });
+    const categories = JSON.stringify(categoriesResponse);
+
+    return {
+      props: {
+        posts: posts,
+        phrase: context.query.phrase,
+        pageNum: context.query.number,
+        navItems,
+        categories,
+      },
+    };
+  }
+);
 
 const SearchPhrasePostsPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
@@ -35,44 +65,18 @@ const SearchPhrasePostsPage: LayoutPage = (props: LayoutPageProps) => {
 
   return (
     <main id="search-page">
-    <section className={styles.container}>
-      <Posts posts={posts} title={"Search"} phrase={props.phrase} pageNum={props.pageNum} />
-    </section>
+      <section className={styles.container}>
+        <Posts
+          posts={posts}
+          title={"Search"}
+          phrase={props.phrase}
+          pageNum={props.pageNum}
+        />
+      </section>
     </main>
   );
 };
 
-SearchPhrasePostsPage.layout = 'main';
-
-export const getServerSideProps = async (context) => {
-  const navItemsResponse = await excuteQuery({
-    query: selectMenuItems(),
-  });
-  const navItems = JSON.stringify(navItemsResponse);
-  const postsResponse = await excuteQuery({
-    query: selectPostsBySearchPhrase({
-      phrase: context.query.phrase,
-      numberOfPosts: 10,
-      number: context.query.number,
-      locale: context.locale !== context.defaultLocale ? context.locale : '',
-    }),
-  });
-  const posts = JSON.stringify(postsResponse);
-
-  const categoriesResponse = await excuteQuery({
-    query: selectCategories(100),
-  });
-  const categories = JSON.stringify(categoriesResponse);
-
-  return {
-    props: {
-      posts: posts,
-      phrase: context.query.phrase,
-      pageNum: context.query.number,
-      navItems,
-      categories,
-    },
-  };
-};
+SearchPhrasePostsPage.layout = "main";
 
 export default SearchPhrasePostsPage;

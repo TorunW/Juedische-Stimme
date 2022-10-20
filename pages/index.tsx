@@ -27,8 +27,87 @@ import { getPlaiceholder } from "plaiceholder";
 import axios from "axios";
 import { generateImageUrl } from "helpers/imageUrlHelper";
 import { setHeaderGallery } from "store/galleries/galleriesSlice";
+import { Page, PageProps } from "page/page";
+import { createServerSideProps } from "page/server-side-props";
 
 import Head from "next/head";
+
+export interface HomePageProps extends PageProps {
+  someCustomParameter: string;
+}
+
+export const getServerSideProps = createServerSideProps<HomePageProps>(
+  async ({ context, data: { navItems } }) => {
+    // POSTS
+    const postsResponse = await excuteQuery({
+      query: selectPosts({
+        numberOfPosts: 6,
+        slug: "aktuelles",
+        pageNum: 0,
+        showUnpublished: false,
+        postType: "post",
+        fieldsList: [
+          "ID",
+          "post_date",
+          "post_excerpt",
+          "post_content",
+          "post_title",
+          "post_name",
+          "categoryId",
+          "categoryName",
+          "postImage",
+        ],
+        exclude: {
+          category: 66,
+        },
+        locale: context.locale !== context.defaultLocale ? context.locale : "",
+      }),
+    });
+    const posts = JSON.stringify(postsResponse);
+
+    // ABOUT INFO ( texts & gallery)
+    const aboutInfoResponse = await excuteQuery({
+      query: `SELECT * FROM js_about_info LIMIT 1`,
+    });
+    const aboutInfo = JSON.stringify(aboutInfoResponse);
+    const galleryId = await aboutInfoResponse[0].about_gallery_id;
+    const galleryResponse = await excuteQuery({
+      query: selectGalleryById(galleryId),
+    });
+    const gallery = JSON.stringify(galleryResponse);
+    const headerGalleryResponse = await excuteQuery({
+      query: selectGalleryById(6),
+    });
+
+    const headerGallery = JSON.stringify(headerGalleryResponse);
+
+    const headerImageUri = `http://${
+      context.req.headers.host
+    }/${generateImageUrl(headerGalleryResponse[0].imageSrcs.split(",")[0])}`;
+    let { img, svg } = await getPlaiceholder(headerImageUri, {
+      size: 32,
+    });
+    const headerImage = JSON.stringify({
+      uri: headerImageUri,
+      img,
+      svg,
+    });
+
+    return {
+      props: {
+        navItems,
+        posts,
+        aboutInfo,
+        gallery,
+        locales: context.locales,
+        locale: context.locale,
+        defaultLocale: context.defaultLocale,
+        headerGallery,
+        headerImage,
+      },
+    };
+  }
+);
 
 const Home: LayoutPage = (props: LayoutPageProps) => {
   const [fbt, setFbt] = useState();
@@ -139,83 +218,5 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 };
 
 Home.layout = "main";
-
-export const getServerSideProps = async (context: NextPageContext) => {
-  // NAVIGATION
-  const navItemsResponse = await excuteQuery({
-    query: selectMenuItems(),
-  });
-  const navItems = JSON.stringify(navItemsResponse);
-
-  // POSTS
-  const postsResponse = await excuteQuery({
-    query: selectPosts({
-      numberOfPosts: 6,
-      slug: "aktuelles",
-      pageNum: 0,
-      showUnpublished: false,
-      postType: "post",
-      fieldsList: [
-        "ID",
-        "post_date",
-        "post_excerpt",
-        "post_content",
-        "post_title",
-        "post_name",
-        "categoryId",
-        "categoryName",
-        "postImage",
-      ],
-      exclude: {
-        category: 66,
-      },
-      locale: context.locale !== context.defaultLocale ? context.locale : "",
-    }),
-  });
-  const posts = JSON.stringify(postsResponse);
-
-  // ABOUT INFO ( texts & gallery)
-  const aboutInfoResponse = await excuteQuery({
-    query: `SELECT * FROM js_about_info LIMIT 1`,
-  });
-  const aboutInfo = JSON.stringify(aboutInfoResponse);
-  const galleryId = await aboutInfoResponse[0].about_gallery_id;
-  const galleryResponse = await excuteQuery({
-    query: selectGalleryById(galleryId),
-  });
-  const gallery = JSON.stringify(galleryResponse);
-
-  const headerGalleryResponse = await excuteQuery({
-    query: selectGalleryById(6),
-  });
-
-  const headerGallery = JSON.stringify(headerGalleryResponse);
-
-  const headerImageUri = `http://${context.req.headers.host}/${generateImageUrl(
-    headerGalleryResponse[0].imageSrcs.split(",")[0]
-  )}`;
-  let { img, svg } = await getPlaiceholder(headerImageUri, {
-    size: 32,
-  });
-  const headerImage = JSON.stringify({
-    uri: headerImageUri,
-    img,
-    svg,
-  });
-
-  return {
-    props: {
-      navItems,
-      posts,
-      aboutInfo,
-      gallery,
-      locales: context.locales,
-      locale: context.locale,
-      defaultLocale: context.defaultLocale,
-      headerGallery,
-      headerImage,
-    },
-  };
-};
 
 export default Home;

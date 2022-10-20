@@ -291,6 +291,10 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
     pathname = window.location.pathname;
   }
 
+  const isMinimalLayout =
+    (post && post.post_layout === "donation") ||
+    (post && post.post_layout === "member_form");
+
   return (
     <Box sx={{ width: "100%" }}>
       <AdminTopBar
@@ -339,218 +343,143 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                 }}
               >
                 {currentTab === "post" ? (
-                  (post && post.post_layout === "donation") ||
-                  (post && post.post_layout === "member_form") ? (
-                    <Form>
-                      <FormControl
-                        fullWidth
-                        margin="normal"
+                  <>
+                    <Grid
+                      container
+                      item
+                      xs={12}
+                    >
+                      <Grid
+                        container
+                        md={post ? 9 : 12}
+                        xs={12}
+                        spacing={2}
                       >
-                        {post ? (
-                          <Button variant="outlined">
-                            <a
+                        <Grid
+                          item
+                          md={6}
+                          xs={12}
+                        >
+                          <FormControl
+                            fullWidth
+                            margin="normal"
+                          >
+                            <InputLabel>Category</InputLabel>
+                            <Select
+                              id="categoryId"
+                              name="categoryId"
+                              value={props.values.categoryId}
+                              onChange={props.handleChange}
+                              label="Post Category"
+                            >
+                              {selectCategoriesDisplay}
+                            </Select>
+                            {props.errors && props.errors.categoryId ? (
+                              <FormError message={props.errors.categoryId} />
+                            ) : (
+                              ""
+                            )}
+                          </FormControl>
+                        </Grid>
+                        <Grid
+                          item
+                          md={6}
+                          xs={12}
+                        >
+                          <FormControl
+                            fullWidth
+                            margin="normal"
+                          >
+                            <InputLabel>Layout</InputLabel>
+                            <Select
+                              id="post_layout"
+                              name="post_layout"
+                              label="Post Layout"
+                              value={props.values.post_layout}
+                              onChange={props.handleChange}
+                              placeholder="Layout"
+                            >
+                              <MenuItem value={"article"}>Article</MenuItem>
+                              <MenuItem value={"newsletter"}>
+                                Newsletter
+                              </MenuItem>
+                              <MenuItem value={"legacy"}>Legacy</MenuItem>
+                              {/* <MenuItem value={'member_form'}>Membership Page</MenuItem> */}
+                              {/* <MenuItem value={'donation'}>Donation Page</MenuItem> */}
+                            </Select>
+                            {props.errors && props.errors.post_layout ? (
+                              <FormError message={props.errors.post_layout} />
+                            ) : (
+                              ""
+                            )}
+                          </FormControl>
+                        </Grid>
+                        <Grid
+                          item
+                          container
+                          xs={12}
+                        >
+                          <FormControl
+                            fullWidth
+                            sx={{ marginBottom: 4 }}
+                          >
+                            <PerformantTextField
+                              id="post_title"
+                              name="post_title"
+                              label="Title"
+                              margin="normal"
+                              placeholder="Title"
+                              onChange={props.handleChange}
+                              value={props.values.post_title}
+                            />
+                            {props.errors && props.errors.post_title ? (
+                              <FormError message={props.errors.post_title} />
+                            ) : (
+                              ""
+                            )}
+                          </FormControl>
+                        </Grid>
+                      </Grid>
+                      {post && (
+                        <Grid
+                          item
+                          xs={12}
+                          md={3}
+                          sx={{ paddingRight: 0 }}
+                        >
+                          <FormControl
+                            fullWidth
+                            margin="normal"
+                            sx={{
+                              padding: 2,
+                              paddingTop: 0,
+                              height: "calc(100% - 32px)",
+                            }}
+                          >
+                            <Link
                               target={"_blank"}
                               rel="noreferrer"
                               href={"/" + GeneratePostUrl(post.post_name)}
+                              sx={{ width: "100%", height: "100%" }}
                             >
-                              view on live site
-                            </a>
-                          </Button>
-                        ) : (
-                          ""
-                        )}
-                      </FormControl>
-                      <Grid
-                        item
-                        container
-                        xs={12}
-                      >
-                        <FormControl
-                          fullWidth
-                          sx={{ marginBottom: 4 }}
-                        >
-                          <PerformantTextField
-                            id="post_title"
-                            name="post_title"
-                            label="Title"
-                            margin="normal"
-                            placeholder="Title"
-                            onChange={props.handleChange}
-                            value={props.values.post_title}
-                          />
-                          {props.errors && props.errors.post_title ? (
-                            <FormError message={props.errors.post_title} />
-                          ) : (
-                            ""
-                          )}
-                        </FormControl>
-                      </Grid>
-                      <Grid
-                        container
-                        item
-                        sx={{ marginY: 2 }}
-                      >
-                        <TipTapEditor
-                          onChange={(val: string) =>
-                            props.setFieldValue("post_content", val, true)
-                          }
-                          value={props.values.post_content}
-                          itemType={"post"}
-                          itemId={post ? post.postId : nextPostId}
-                          height={150}
-                          title={"Page content"}
-                        />
+                              <Button
+                                variant="contained"
+                                sx={{ height: "100%", width: "100%" }}
+                              >
+                                View Post in Livemode
+                              </Button>
+                            </Link>
+                          </FormControl>
+                        </Grid>
+                      )}
+                    </Grid>
 
-                        {props.errors && props.errors.post_content ? (
-                          <FormError message={props.errors.post_content} />
-                        ) : (
-                          ""
-                        )}
-                      </Grid>
-                      <Button
-                        variant="outlined"
-                        type="submit"
-                      >
-                        update page
-                      </Button>
-                    </Form>
-                  ) : (
                     <Grid
                       container
                       spacing={2}
                       display="flex"
                       alignItems={"center"}
                     >
-                      <Grid
-                        container
-                        item
-                        xs={12}
-                      >
-                        <Grid
-                          container
-                          md={post ? 9 : 12}
-                          xs={12}
-                          spacing={2}
-                        >
-                          <Grid
-                            item
-                            md={6}
-                            xs={12}
-                          >
-                            <FormControl
-                              fullWidth
-                              margin="normal"
-                            >
-                              <InputLabel>Category</InputLabel>
-                              <Select
-                                id="categoryId"
-                                name="categoryId"
-                                value={props.values.categoryId}
-                                onChange={props.handleChange}
-                                label="Post Category"
-                              >
-                                {selectCategoriesDisplay}
-                              </Select>
-                              {props.errors && props.errors.categoryId ? (
-                                <FormError message={props.errors.categoryId} />
-                              ) : (
-                                ""
-                              )}
-                            </FormControl>
-                          </Grid>
-                          <Grid
-                            item
-                            md={6}
-                            xs={12}
-                          >
-                            <FormControl
-                              fullWidth
-                              margin="normal"
-                            >
-                              <InputLabel>Layout</InputLabel>
-                              <Select
-                                id="post_layout"
-                                name="post_layout"
-                                label="Post Layout"
-                                value={props.values.post_layout}
-                                onChange={props.handleChange}
-                                placeholder="Layout"
-                              >
-                                <MenuItem value={"article"}>Article</MenuItem>
-                                <MenuItem value={"newsletter"}>
-                                  Newsletter
-                                </MenuItem>
-                                <MenuItem value={"legacy"}>Legacy</MenuItem>
-                                {/* <MenuItem value={'member_form'}>Membership Page</MenuItem> */}
-                                {/* <MenuItem value={'donation'}>Donation Page</MenuItem> */}
-                              </Select>
-                              {props.errors && props.errors.post_layout ? (
-                                <FormError message={props.errors.post_layout} />
-                              ) : (
-                                ""
-                              )}
-                            </FormControl>
-                          </Grid>
-                          <Grid
-                            item
-                            container
-                            xs={12}
-                          >
-                            <FormControl
-                              fullWidth
-                              sx={{ marginBottom: 4 }}
-                            >
-                              <PerformantTextField
-                                id="post_title"
-                                name="post_title"
-                                label="Title"
-                                margin="normal"
-                                placeholder="Title"
-                                onChange={props.handleChange}
-                                value={props.values.post_title}
-                              />
-                              {props.errors && props.errors.post_title ? (
-                                <FormError message={props.errors.post_title} />
-                              ) : (
-                                ""
-                              )}
-                            </FormControl>
-                          </Grid>
-                        </Grid>
-                        {post && (
-                          <Grid
-                            item
-                            xs={12}
-                            md={3}
-                            sx={{ paddingRight: 0 }}
-                          >
-                            <FormControl
-                              fullWidth
-                              margin="normal"
-                              sx={{
-                                padding: 2,
-                                paddingTop: 0,
-                                height: "calc(100% - 32px)",
-                              }}
-                            >
-                              <Link
-                                target={"_blank"}
-                                rel="noreferrer"
-                                href={"/" + GeneratePostUrl(post.post_name)}
-                                sx={{ width: "100%", height: "100%" }}
-                              >
-                                <Button
-                                  variant="contained"
-                                  sx={{ height: "100%", width: "100%" }}
-                                >
-                                  View Post in Livemode
-                                </Button>
-                              </Link>
-                            </FormControl>
-                          </Grid>
-                        )}
-                      </Grid>
-
                       <Grid
                         container
                         item
@@ -574,27 +503,29 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         />
                       </Grid>
 
-                      <Grid
-                        container
-                        item
-                        sx={{ marginY: 2 }}
-                      >
-                        <TipTapEditor
-                          onChange={(val: string) =>
-                            props.setFieldValue("post_excerpt", val, true)
-                          }
-                          value={props.values.post_excerpt}
-                          itemType={"post"}
-                          itemId={post ? post.postId : nextPostId}
-                          height={150}
-                          title={"Post Excerp/Quote"}
-                        />
-                        {props.errors && props.errors.post_excerpt ? (
-                          <FormError message={props.errors.post_excerpt} />
-                        ) : (
-                          ""
-                        )}
-                      </Grid>
+                      {!isMinimalLayout && (
+                        <Grid
+                          container
+                          item
+                          sx={{ marginY: 2 }}
+                        >
+                          <TipTapEditor
+                            onChange={(val: string) =>
+                              props.setFieldValue("post_excerpt", val, true)
+                            }
+                            value={props.values.post_excerpt}
+                            itemType={"post"}
+                            itemId={post ? post.postId : nextPostId}
+                            height={150}
+                            title={"Post Excerp/Quote"}
+                          />
+                          {props.errors && props.errors.post_excerpt ? (
+                            <FormError message={props.errors.post_excerpt} />
+                          ) : (
+                            ""
+                          )}
+                        </Grid>
+                      )}
 
                       <Grid
                         container
@@ -619,100 +550,115 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         )}
                       </Grid>
 
-                      <Grid
-                        container
-                        item
-                      >
-                        <ImageUploadField
-                          image={
-                            post?.post_image
-                              ? generateImageUrl(post.post_image)
-                              : null
-                          }
-                          previewImage={previewImage2}
-                          onChange={onPostImage2Change}
-                          error={
-                            props.errors && props.errors.post_image_2 ? (
-                              <FormError message={props.errors.post_image_2} />
-                            ) : (
-                              ""
-                            )
-                          }
-                        />
-                      </Grid>
+                      {!isMinimalLayout && (
+                        <>
+                          <Grid
+                            container
+                            item
+                          >
+                            <ImageUploadField
+                              image={
+                                post?.post_image_2
+                                  ? generateImageUrl(post.post_image_2)
+                                  : null
+                              }
+                              previewImage={previewImage2}
+                              onChange={onPostImage2Change}
+                              error={
+                                props.errors && props.errors.post_image_2 ? (
+                                  <FormError
+                                    message={props.errors.post_image_2}
+                                  />
+                                ) : (
+                                  ""
+                                )
+                              }
+                            />
+                          </Grid>
 
-                      <Grid
-                        container
-                        item
-                        sx={{ marginY: 2 }}
-                      >
-                        <TipTapEditor
-                          onChange={(val: string) =>
-                            props.setFieldValue("post_excerpt_2", val, true)
-                          }
-                          value={props.values.post_excerpt_2}
-                          itemType={"post"}
-                          itemId={post ? post.postId : nextPostId}
-                          height={150}
-                          title={"Second post excerpt"}
-                        />
-                      </Grid>
+                          <Grid
+                            container
+                            item
+                            sx={{ marginY: 2 }}
+                          >
+                            <TipTapEditor
+                              onChange={(val: string) =>
+                                props.setFieldValue("post_excerpt_2", val, true)
+                              }
+                              value={props.values.post_excerpt_2}
+                              itemType={"post"}
+                              itemId={post ? post.postId : nextPostId}
+                              height={150}
+                              title={"Second post excerpt"}
+                            />
+                          </Grid>
 
-                      <Grid
-                        container
-                        item
-                        sx={{ marginY: 2 }}
-                      >
-                        <TipTapEditor
-                          onChange={(val: string) =>
-                            props.setFieldValue("post_content_2", val, true)
-                          }
-                          value={props.values.post_content_2}
-                          itemType={"post"}
-                          itemId={post ? post.postId : nextPostId}
-                          height={150}
-                          title={"Bottom Post Content"}
-                        />
-                      </Grid>
+                          <Grid
+                            container
+                            item
+                            sx={{ marginY: 2 }}
+                          >
+                            <TipTapEditor
+                              onChange={(val: string) =>
+                                props.setFieldValue("post_content_2", val, true)
+                              }
+                              value={props.values.post_content_2}
+                              itemType={"post"}
+                              itemId={post ? post.postId : nextPostId}
+                              height={150}
+                              title={"Bottom Post Content"}
+                            />
+                          </Grid>
 
-                      <PostTagForm postId={post ? post.postId : nextPostId} />
+                          <PostTagForm
+                            postId={post ? post.postId : nextPostId}
+                          />
+
+                          <Grid
+                            item
+                            sx={{ marginY: 2 }}
+                            xs={12}
+                          >
+                            <FormControl
+                              fullWidth
+                              margin="normal"
+                            >
+                              <InputLabel>Post Status</InputLabel>
+                              <Select
+                                id="post_status"
+                                name="post_status"
+                                label="Post Status"
+                                value={props.values.post_status}
+                                onChange={props.handleChange}
+                              >
+                                <MenuItem value={"publish"}>
+                                  Publish post
+                                </MenuItem>
+                                <MenuItem value={"draft"}>
+                                  Save to drafts
+                                </MenuItem>
+                              </Select>
+                            </FormControl>
+                          </Grid>
+                        </>
+                      )}
+
                       <Grid
                         item
                         sx={{ marginY: 2 }}
                         xs={12}
                       >
-                        <FormControl
+                        <Button
                           fullWidth
-                          margin="normal"
+                          variant="contained"
+                          color="secondary"
+                          type="submit"
                         >
-                          <InputLabel>Post Status</InputLabel>
-                          <Select
-                            id="post_status"
-                            name="post_status"
-                            label="Post Status"
-                            value={props.values.post_status}
-                            onChange={props.handleChange}
-                          >
-                            <MenuItem value={"publish"}>Publish post</MenuItem>
-                            <MenuItem value={"draft"}>Save to drafts</MenuItem>
-                          </Select>
-                        </FormControl>
-                        <Grid
-                          sx={{ marginY: 2 }}
-                          xs={12}
-                        >
-                          <Button
-                            fullWidth
-                            variant="contained"
-                            color="secondary"
-                            type="submit"
-                          >
-                            {post ? "update post" : "create post"}
-                          </Button>
-                        </Grid>
+                          {post ? "update post" : "create post"}
+                        </Button>
                       </Grid>
                     </Grid>
-                  )
+                  </>
                 ) : currentTab === "translations" ? (
                   <PostTranslations
                     post={post}

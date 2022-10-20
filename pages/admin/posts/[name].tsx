@@ -12,14 +12,52 @@ import { setGalleries } from "store/galleries/galleriesSlice";
 import { LayoutPage } from "types/LayoutPage.type";
 import { LayoutPageProps } from "types/LayoutPageProps.type";
 import { setLanguages } from "store/languages/languagesSlice";
-import { getCookie, hasCookie } from "cookies-next";
-import { selectUserByEmail } from "lib/queries/users";
+
 import { setLoggedUser } from "store/users/usersSlice";
-import AdminTopBar from "@/components/atoms/AdminTopBar";
+
+import { useLoggedUser } from "hooks/useLoggedUser";
+import { createAdminServerSideProps } from "page/admin-server-side-props";
+import { HomePageProps } from "pages";
+
+export const getServerSideProps = createAdminServerSideProps<HomePageProps>(
+  async ({ context, data: { loggedUser } }) => {
+    const postsResponse = await excuteQuery({
+      query: selectPostByName({
+        name: context.query.name.toString().split(":__--__:").join("#"),
+        showUnpublished: true,
+        locales: context.locales.filter(
+          (l: string) => l !== context.defaultLocale
+        ),
+      }),
+    });
+    const post = JSON.stringify(postsResponse);
+    const categoriesResponse = await excuteQuery({
+      query: selectCategories(50, context.query.number),
+    });
+    const categories = JSON.stringify(categoriesResponse);
+    const galleriesResponse = await excuteQuery({
+      query: selectGalleries(50, context.query.number),
+    });
+    const galleries = JSON.stringify(galleriesResponse);
+
+    return {
+      props: {
+        post,
+        categories,
+        galleries,
+        locales: context.locales,
+        locale: context.locale,
+        defaultLocale: context.defaultLocale,
+        loggedUser,
+      },
+    };
+  }
+);
 
 const EditPostPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   const { post } = useSelector((state) => state.posts);
+  const {} = useLoggedUser(props);
 
   useEffect(() => {
     if (props.loggedUser)
@@ -44,56 +82,5 @@ const EditPostPage: LayoutPage = (props: LayoutPageProps) => {
 };
 
 EditPostPage.layout = "admin";
-
-export const getServerSideProps = async (context) => {
-  let userEmail: string;
-  if (!hasCookie("Token", { req: context.req, res: context.res })) {
-    return { redirect: { destination: "/login", permanent: false } };
-  } else {
-    userEmail = getCookie("UserEmail", {
-      req: context.req,
-      res: context.res,
-    }).toString();
-  }
-
-  let loggedUser: string;
-  if (userEmail) {
-    const userResponse = await excuteQuery({
-      query: selectUserByEmail(userEmail),
-    });
-    loggedUser = JSON.stringify(userResponse);
-  }
-
-  const postsResponse = await excuteQuery({
-    query: selectPostByName({
-      name: context.query.name.toString().split(":__--__:").join("#"),
-      showUnpublished: true,
-      locales: context.locales.filter(
-        (l: string) => l !== context.defaultLocale
-      ),
-    }),
-  });
-  const post = JSON.stringify(postsResponse);
-  const categoriesResponse = await excuteQuery({
-    query: selectCategories(50, context.query.number),
-  });
-  const categories = JSON.stringify(categoriesResponse);
-  const galleriesResponse = await excuteQuery({
-    query: selectGalleries(50, context.query.number),
-  });
-  const galleries = JSON.stringify(galleriesResponse);
-
-  return {
-    props: {
-      post,
-      categories,
-      galleries,
-      locales: context.locales,
-      locale: context.locale,
-      defaultLocale: context.defaultLocale,
-      loggedUser,
-    },
-  };
-};
 
 export default EditPostPage;
