@@ -1,20 +1,9 @@
-// import styles from 'styles/Home.module.css'
-import AdminTopBar from "@/components/atoms/AdminTopBar";
 import HeaderForm from "components/admin/HeaderForm";
 import excuteQuery from "lib/db";
-import {
-  selectGalleries,
-  selectGalleryById,
-  selectGalleryImagesByGalleryId,
-} from "lib/queries";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setGalleries } from "store/galleries/galleriesSlice";
+import { selectGalleryById, selectGalleryImagesByGalleryId } from "lib/queries";
+import { useLoggedUserCookie } from "pages/hooks/useLoggedUser";
 
 export default function HeaderPage(props) {
-  // header slogan
-  // slogan translation
-  // gallery, if 1 image single gallery, if several slider
   return (
     <HeaderForm
       aboutInfo={JSON.parse(props.aboutInfo)[0]}
@@ -26,6 +15,16 @@ export default function HeaderPage(props) {
 HeaderPage.layout = "admin";
 
 export const getServerSideProps = async (context) => {
+  const loggedUser = await useLoggedUserCookie({
+    req: context.req,
+    res: context.res,
+  });
+  if (!loggedUser) {
+    return {
+      redirect: { destination: "/login", permanent: false },
+    };
+  }
+
   const aboutInfoResponse = await excuteQuery({
     query: `SELECT * FROM js_about_info LIMIT 1`,
   });
@@ -45,6 +44,7 @@ export const getServerSideProps = async (context) => {
 
   return {
     props: {
+      loggedUser,
       aboutInfo,
       gallery,
     },

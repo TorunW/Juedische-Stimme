@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "store/hooks";
 import styles from "./Styles.module.css";
 import BlurringImage from "../blurringImage/BlurringImage";

@@ -94,8 +94,7 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
           axios.spread((...responses) => {
             console.log(responses, " RESPONSES");
             if (menuItem) window.location.reload();
-            else
-              window.location.href = `/admin/menus/${responses[0].data.insertId}`;
+            else window.location.href = `/admin/menus/#${values.taxonomy}`;
           })
         )
         .catch((errors) => {
