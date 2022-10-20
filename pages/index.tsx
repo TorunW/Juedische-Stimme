@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { NextPageContext } from "next";
-import { hasCookie, getCookies, getCookie } from "cookies-next";
 
 import type { LayoutPage } from "types/LayoutPage.type";
 import { LayoutPageProps } from "types/LayoutPageProps.type";
@@ -11,7 +10,6 @@ import { selectGalleryById } from "lib/queries";
 import { selectMenuItems } from "lib/queries/menuItems";
 
 import { useDispatch, useSelector } from "store/hooks";
-import { setToken, setEvents, setFeed } from "store/fbdata/fbDataSlice";
 import { setPosts, setNewsletter } from "store/posts/postsSlice";
 import { setMenuItems } from "store/nav/navSlice";
 import { setLanguages } from "store/languages/languagesSlice";
