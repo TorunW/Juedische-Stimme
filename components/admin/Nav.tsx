@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { deleteCookie } from "cookies-next";
-import ListSubheader from "@mui/material/ListSubheader";
 import {
   Box,
   Divider,
@@ -13,7 +12,6 @@ import {
   Button,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import TagIcon from "@mui/icons-material/Tag";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useSelector } from "store/hooks";
 
@@ -21,8 +19,6 @@ import { useSelector } from "store/hooks";
 function AdminNav(props) {
   const router = useRouter();
   const { loggedUser } = useSelector((state) => state.users);
-
-  console.log(loggedUser);
 
   function logout() {
     deleteCookie("Token");

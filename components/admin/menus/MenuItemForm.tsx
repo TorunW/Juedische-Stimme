@@ -154,8 +154,6 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
           <Grid
             container
             spacing={2}
-            display="flex"
-            alignItems={"center"}
           >
             <Grid
               item
@@ -196,16 +194,31 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                 )}
               </FormControl>
             </Grid>
-            <Grid
-              xs={1}
-              display="flex"
-              justifyContent={"flex-end"}
-            >
-              <FormHelp text="Choose a menu, to which you want to add a new Menu Item." />
-            </Grid>
+
             <Grid
               item
-              xs={11}
+              xs={1}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <TextField
+                  id="term_order"
+                  label="Order"
+                  focused
+                  name="term_order"
+                  type="text"
+                  placeholder="Menu Item Order..."
+                  onChange={formik.handleChange}
+                  value={formik.values.term_order}
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid
+              item
+              xs={6}
             >
               <FormControl
                 fullWidth
@@ -228,16 +241,10 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                 )}
               </FormControl>
             </Grid>
-            <Grid
-              xs={1}
-              display="flex"
-              justifyContent={"flex-end"}
-            >
-              <FormHelp text="" />
-            </Grid>
+
             <Grid
               item
-              xs={11}
+              xs={6}
             >
               <FormControl
                 fullWidth
@@ -260,137 +267,85 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                 )}
               </FormControl>
             </Grid>
-            <Grid
-              xs={1}
-              display="flex"
-              justifyContent={"flex-end"}
-            >
-              <FormHelp text={``} />
-            </Grid>
-            <Grid
-              item
-              xs={11}
-            >
-              <FormControl
-                fullWidth
-                margin="normal"
+
+            {formik.values.taxonomy === "partner_menu" && (
+              <Grid
+                item
+                xs={12}
+                sx={{
+                  height: "215px",
+                  position: "relative",
+                  marginBottom: "24px",
+                }}
               >
                 <TextField
-                  id="term_order"
-                  label="Order"
+                  label="Logo"
                   focused
-                  name="term_order"
-                  type="term_order"
-                  placeholder="Menu Item Order..."
-                  onChange={formik.handleChange}
-                  value={formik.values.term_order}
-                />
-              </FormControl>
-            </Grid>
-            <Grid
-              xs={1}
-              display="flex"
-              justifyContent={"flex-end"}
-            >
-              <FormHelp text="Here you can decide where in the menu this item will appear. If not choosen, the item will appear last in order" />
-            </Grid>
-
-            {formik.values.taxonomy === "partner_menu" ? (
-              <Grid
-                container
-                item
-              >
-                <Grid
-                  container
-                  item
-                  xs={11}
+                  multiline
+                  minRows={8}
                   sx={{
-                    height: "215px",
-                    position: "relative",
+                    position: "absolute",
+                    width: "100%",
+                  }}
+                />
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{
+                    width: "200px",
+                    position: "absolute",
+                    left: "50%",
+                    top: "50%",
+                    transform: "translate(-50%,-50%)",
                   }}
                 >
-                  <TextField
-                    label="Logo"
-                    focused
-                    multiline
-                    minRows={8}
-                    sx={{
-                      position: "absolute",
-                      width: "100%",
-                    }}
-                  />
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    sx={{
-                      width: "200px",
-                      position: "absolute",
-                      left: "50%",
-                      top: "50%",
-                      transform: "translate(-50%,-50%)",
-                    }}
+                  Upload an image
+                </Button>
+                {previewImage !== null ? (
+                  <Grid
+                    xs={10}
+                    sx={{ marginTop: 2, textAlign: "center" }}
                   >
-                    Upload an image
-                  </Button>
-                  {previewImage !== null ? (
-                    <Grid
-                      xs={10}
-                      sx={{ marginTop: 2, textAlign: "center" }}
-                    >
-                      <Image
-                        layout="fixed"
-                        width={320}
-                        height={180}
-                        src={previewImage}
-                      />
-                    </Grid>
-                  ) : menuItem && menuItem.term_image ? (
-                    <Grid
-                      xs={10}
-                      sx={{ marginTop: 2, textAlign: "center" }}
-                    >
-                      <Image
-                        layout="fixed"
-                        width={320}
-                        height={180}
-                        src={generateImageUrl(menuItem.term_image)}
-                      />
-                    </Grid>
-                  ) : (
-                    ""
-                  )}
-
-                  <input
-                    id="term_image"
-                    name="term_image"
-                    type="file"
-                    onChange={onTermImageChange}
-                    style={{
-                      position: "absolute",
-                      width: "100%",
-                      cursor: "pointer",
-                      background: "blue",
-                      height: "215px",
-                      opacity: 0,
-                    }}
-                  />
-                </Grid>
-                <Grid
-                  item
-                  xs={1}
-                  sx={{ display: "flex", justifyContent: "center" }}
-                >
-                  <FormHelp text={``} />
-                </Grid>
-                {/* {formik.errors && formik.errors.post_image ? (
-                  <FormError message={formik.errors.post_image} />
+                    <Image
+                      layout="fixed"
+                      width={320}
+                      height={180}
+                      src={previewImage}
+                    />
+                  </Grid>
+                ) : menuItem && menuItem.term_image ? (
+                  <Grid
+                    xs={10}
+                    sx={{ marginTop: 2, textAlign: "center" }}
+                  >
+                    <Image
+                      layout="fixed"
+                      width={320}
+                      height={180}
+                      src={generateImageUrl(menuItem.term_image)}
+                    />
+                  </Grid>
                 ) : (
-                  ''
-                )} */}
+                  ""
+                )}
+
+                <input
+                  id="term_image"
+                  name="term_image"
+                  type="file"
+                  onChange={onTermImageChange}
+                  style={{
+                    position: "absolute",
+                    width: "100%",
+                    cursor: "pointer",
+                    background: "blue",
+                    height: "215px",
+                    opacity: 0,
+                  }}
+                />
               </Grid>
-            ) : (
-              ""
             )}
+
             <Grid
               item
               xs={12}

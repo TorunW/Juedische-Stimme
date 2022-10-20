@@ -1,8 +1,21 @@
 import UserForm from "@/components/admin/users/UserForm";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
-import styles from "styles/Home.module.css";
+import { useLoggedUser } from "hooks/useLoggedUser";
+import { createAdminServerSideProps } from "page/admin-server-side-props";
+import { HomePageProps } from "pages";
 
-function Register() {
+export const getServerSideProps = createAdminServerSideProps<HomePageProps>(
+  async ({ context, data: { loggedUser } }) => {
+    return {
+      props: {
+        loggedUser,
+      },
+    };
+  }
+);
+
+function Register(props) {
+  const {} = useLoggedUser(props);
   return (
     <section>
       <AdminTopBar title="Register new User" />

@@ -6,9 +6,29 @@ import { useDispatch, useSelector } from "store/hooks";
 import { setTag } from "store/tags/tagsSlice";
 import TagForm from "components/admin/TagForm";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
+import { createAdminServerSideProps } from "page/admin-server-side-props";
+import { HomePageProps } from "pages";
+import { useLoggedUser } from "hooks/useLoggedUser";
+
+export const getServerSideProps = createAdminServerSideProps<HomePageProps>(
+  async ({ context, data: { loggedUser } }) => {
+    const tagResponse = await excuteQuery({
+      query: selectTag({ tagId: context.query.id }),
+    });
+    const tag = JSON.stringify(tagResponse);
+    return {
+      props: {
+        tag,
+        loggedUser,
+      },
+    };
+  }
+);
 
 export default function EditTagPage(props) {
   const dispatch = useDispatch();
+  const {} = useLoggedUser(props);
+
   const { tag } = useSelector((state) => state.tags);
   useEffect(() => {
     dispatch(setTag(JSON.parse(props.tag)[0]));
@@ -23,15 +43,3 @@ export default function EditTagPage(props) {
 }
 
 EditTagPage.layout = "admin";
-
-export const getServerSideProps = async (context) => {
-  const tagResponse = await excuteQuery({
-    query: selectTag({ tagId: context.query.id }),
-  });
-  const tag = JSON.stringify(tagResponse);
-  return {
-    props: {
-      tag,
-    },
-  };
-};
