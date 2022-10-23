@@ -28,6 +28,8 @@ const MenuItems = ({ menuItems }) => {
   const [currentMenu, setCurrentMenu] = useState("main_menu");
   const [open, setOpen] = React.useState(false);
 
+  console.log(menuItems);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -67,11 +69,7 @@ const MenuItems = ({ menuItems }) => {
           key={index}
           sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
         >
-          <TableRow
-            hover
-            role="checkbox"
-            tabIndex={-1}
-          >
+          <TableRow hover role="checkbox" tabIndex={-1}>
             <TableCell>
               <Link href={`/admin/menus/${menuItem.term_id}`}>
                 {menuItem.title}
@@ -94,10 +92,7 @@ const MenuItems = ({ menuItems }) => {
                 <DeleteIcon />
               </IconButton>
 
-              <Dialog
-                open={open}
-                onClose={handleClose}
-              >
+              <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>{"Delete Tag?"}</DialogTitle>
                 <DialogContent>
                   <DialogContentText>
@@ -112,10 +107,7 @@ const MenuItems = ({ menuItems }) => {
                   >
                     Delete
                   </Button>
-                  <Button
-                    variant="outlined"
-                    onClick={handleClose}
-                  >
+                  <Button variant="outlined" onClick={handleClose}>
                     Cancel
                   </Button>
                 </DialogActions>
@@ -163,10 +155,7 @@ const MenuItems = ({ menuItems }) => {
       />
       <Container>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <Table
-            sx={{ minWidth: 650 }}
-            stickyHeader
-          >
+          <Table sx={{ minWidth: 650 }} stickyHeader>
             <TableHead>
               <TableRow>
                 <TableCell>Title</TableCell>

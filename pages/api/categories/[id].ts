@@ -13,7 +13,6 @@ export default async (req, res) => {
   try {
     if (req.method === "PUT") {
       const termId = req.query.id;
-
       const updateCategoryResult = await excuteQuery({
         query: updateTerm({ name: req.body.name, slug: req.body.slug, termId }),
       });
@@ -37,6 +36,48 @@ export default async (req, res) => {
           }),
         });
       }
+
+      if (req.body.name_en_US){
+        if (req.body.has_translation_name){
+          const updateCatNameTranslationResult = await excuteQuery({
+            query: updateTermMeta({
+              term_id: termId,
+              meta_key: "_category_name_en_US",
+              meta_value: req.body.name_en_US,
+            }),
+          });
+        } else {
+          const insertCatNameTranslationResult = await excuteQuery({
+            query: insertTermMeta({
+              term_id: termId,
+              meta_key: "_category_name_en_US",
+              meta_value: req.body.name_en_US,
+            }),
+          });
+        }
+      }
+
+
+      if (req.body.description_en_US){
+        if (req.body.has_translation_description){
+          const updateCatDescriptionTranslationResult = await excuteQuery({
+            query: updateTermMeta({
+              term_id: termId,
+              meta_key: "_category_description_en_US",
+              meta_value: req.body.description_en_US,
+            }),
+          });
+        } else {
+          const insertCatDescriptionTranslationResult = await excuteQuery({
+            query: insertTermMeta({
+              term_id: termId,
+              meta_key: "_category_description_en_US",
+              meta_value: req.body.description_en_US,
+            }),
+          });
+        }
+      }
+
       res.json({ message: "category updated!" });
     } else if (req.method === "DELETE") {
       const termId = req.query.id;
