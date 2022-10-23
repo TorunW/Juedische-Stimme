@@ -6,6 +6,7 @@ import {
   deleteTermRelationship,
   deleteTermTaxonomy,
   deleteTermMeta,
+  insertTermMeta,
 } from "lib/queries";
 
 export default async (req, res) => {
@@ -20,7 +21,10 @@ export default async (req, res) => {
         count: "0",
         term_image: req.body.term_image,
         link: req.body.link,
+        has_translation: req.body.has_translation,
+        title_en_US: req.body.title_en_US,
       };
+      console.log(body);
       // update term taxonomy
       const updateTermTaxonomyResult = await excuteQuery({
         query: updateTermTaxonomy(body),
@@ -40,6 +44,24 @@ export default async (req, res) => {
           meta_value: body.term_image,
         }),
       });
+
+      if (body.has_translation) {
+        const updateTermMetaTranslationResult = await excuteQuery({
+          query: updateTermMeta({
+            term_id: termId,
+            meta_key: "_menuitem_translation_en_US",
+            meta_value: body.title_en_US,
+          }),
+        });
+      } else {
+        const insertTermTranslationResult = await excuteQuery({
+          query: insertTermMeta({
+            term_id: termId,
+            meta_key: "_menuitem_translation_en_US",
+            meta_value: body.title_en_US,
+          }),
+        });
+      }
       res.json({ message: "MENU ITEM UPDATED" });
     } else if (req.method === "DELETE") {
       // delete term
@@ -59,6 +81,9 @@ export default async (req, res) => {
       });
       const deleteTermImageResult = await excuteQuery({
         query: deleteTermMeta(req.body.term_id, "_menuitem_image"),
+      });
+      const deleteTermTranslationResult = await excuteQuery({
+        query: deleteTermMeta(req.body.term_id, "_menuitem_translation_en_US"),
       });
       res.json({ message: "MENU ITEM DELETED" });
     } else {

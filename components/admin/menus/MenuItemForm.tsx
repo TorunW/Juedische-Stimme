@@ -36,9 +36,11 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
       taxonomy: menuItem ? menuItem.taxonomy : "",
       previousTaxonomy: menuItem ? menuItem.taxonomy : "",
       title: menuItem ? menuItem.title : "",
+      title_en_US: menuItem ? menuItem.title_en_US : "",
       link: menuItem ? menuItem.link : "",
       term_order: menuItem ? menuItem.term_order : "",
       term_image: menuItem ? menuItem.term_image : "",
+      has_translation: menuItem?.title_en_US ? true : false,
     },
     validationSchema: Yup.object().shape({
       taxonomy: Yup.string().required("Choose a menu"),
@@ -151,18 +153,9 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
             paddingY: 2,
           }}
         >
-          <Grid
-            container
-            spacing={2}
-          >
-            <Grid
-              item
-              xs={11}
-            >
-              <FormControl
-                fullWidth
-                margin="normal"
-              >
+          <Grid container spacing={2}>
+            <Grid item xs={11}>
+              <FormControl fullWidth margin="normal">
                 <InputLabel>Choose a Menu</InputLabel>
                 <Select
                   id="taxonomy"
@@ -195,14 +188,8 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
               </FormControl>
             </Grid>
 
-            <Grid
-              item
-              xs={1}
-            >
-              <FormControl
-                fullWidth
-                margin="normal"
-              >
+            <Grid item xs={1}>
+              <FormControl fullWidth margin="normal">
                 <TextField
                   id="term_order"
                   label="Order"
@@ -216,20 +203,14 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
               </FormControl>
             </Grid>
 
-            <Grid
-              item
-              xs={6}
-            >
-              <FormControl
-                fullWidth
-                margin="normal"
-              >
+            <Grid item xs={6}>
+              <FormControl fullWidth margin="normal">
                 <TextField
                   id="title"
-                  label="Name"
+                  label="Title"
                   focused
                   name="title"
-                  type="title"
+                  type="text"
                   placeholder="Menu Item Name..."
                   onChange={formik.handleChange}
                   value={formik.values.title}
@@ -241,15 +222,27 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                 )}
               </FormControl>
             </Grid>
-
-            <Grid
-              item
-              xs={6}
-            >
-              <FormControl
-                fullWidth
-                margin="normal"
-              >
+            <Grid item xs={6}>
+              <FormControl fullWidth margin="normal">
+                <TextField
+                  id="title_en_US"
+                  label="Title ( English )"
+                  focused
+                  name="title_en_US"
+                  type="text"
+                  placeholder="Menu Item Title (English)..."
+                  onChange={formik.handleChange}
+                  value={formik.values.title_en_US}
+                />
+                {formik.errors && formik.errors.title_en_US ? (
+                  <FormError message={formik.errors.title_en_US} />
+                ) : (
+                  ""
+                )}
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl fullWidth margin="normal">
                 <TextField
                   id="link"
                   label="Link"
@@ -302,10 +295,7 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                   Upload an image
                 </Button>
                 {previewImage !== null ? (
-                  <Grid
-                    xs={10}
-                    sx={{ marginTop: 2, textAlign: "center" }}
-                  >
+                  <Grid xs={10} sx={{ marginTop: 2, textAlign: "center" }}>
                     <Image
                       layout="fixed"
                       width={320}
@@ -314,10 +304,7 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                     />
                   </Grid>
                 ) : menuItem && menuItem.term_image ? (
-                  <Grid
-                    xs={10}
-                    sx={{ marginTop: 2, textAlign: "center" }}
-                  >
+                  <Grid xs={10} sx={{ marginTop: 2, textAlign: "center" }}>
                     <Image
                       layout="fixed"
                       width={320}
@@ -346,15 +333,8 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
               </Grid>
             )}
 
-            <Grid
-              item
-              xs={12}
-            >
-              <Button
-                type="submit"
-                variant="contained"
-                color="secondary"
-              >
+            <Grid item xs={12}>
+              <Button type="submit" variant="contained" color="secondary">
                 {" "}
                 {menuItem ? "update menu item" : "create menu item"}
               </Button>
