@@ -9,7 +9,6 @@ import {
   TextField,
   Box,
   Divider,
-  FormGroup,
   FormControlLabel,
   Switch,
   Typography,
@@ -28,6 +27,7 @@ interface TipTapEditorProps {
   title?: string;
   help?: string;
   min?: number;
+  error?: string | ReactElement;
 }
 
 const TipTapEditor = (props: TipTapEditorProps) => {

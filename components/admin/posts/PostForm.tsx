@@ -1,5 +1,4 @@
 import React, { useState, ReactElement } from "react";
-import Image from "next/image";
 import { Form, Formik, FormikProps } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
@@ -33,6 +32,7 @@ import { Post } from "types/Post.type";
 import TipTapEditor from "components/tiptap/TipTapEditor";
 import { ImageUploadField } from "../ImageUploadField";
 import { Container } from "@/components/atoms/Container";
+import { generatePostImgRequests } from "helpers/generatePostImgRequests";
 
 interface PostFormProps {
   post?: any;
@@ -89,7 +89,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
     .required("Add an excerpt from the Post");
   const postContentValidation = Yup.string()
     .min(700, "Post content should be a least 700 characters")
-    .max(900)
     .required("Add some text to the post");
 
   const validationSchema = Yup.object().shape({
@@ -112,15 +111,10 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
         then: imageValidation,
       }),
     post_content: postContentValidation,
-    post_excerpt: Yup.string()
-      .when("post_layout", {
-        is: "article",
-        then: postExcerptValidation,
-      })
-      .when("post_layout", {
-        is: "newsletter",
-        then: postExcerptValidation,
-      }),
+    post_excerpt: Yup.string().when("post_layout", {
+      is: "article",
+      then: postExcerptValidation,
+    }),
     post_excerpt_2: Yup.string().when("post_layout", {
       is: "article",
       then: postExcerptValidation,
@@ -153,6 +147,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
     const postRequest = post
       ? axios.put(postUrl, postData)
       : axios.post(postUrl, postData);
+
     requestsArray.push(postRequest);
 
     // POST IMAGE FILE ( FILE UPLOAD )
@@ -166,76 +161,10 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       },
     };
 
-    if (previewImageFile !== null) {
-      if (post) {
-        if (post.post_image && post.post_image !== null) {
-          const deleteFileUrl = `http://${window.location.hostname}${
-            window.location.port !== "80" ? ":" + window.location.port : ""
-          }/media/${post.post_image.split("/").join("+++")}`;
-          const deleteFileRequest = axios.delete(deleteFileUrl);
-          requestsArray.push(deleteFileRequest);
-        }
-      }
-      let fileType =
-        previewImageFile.name.split(".")[
-          previewImageFile.name.split.length - 1
-        ];
-      let fileName =
-        previewImageFile.name.split(`.${fileType}`)[0] +
-        `__${uuidv4()}.${fileType}`;
-      const postImageUrl = `/api/posts/${
-        post ? +post.postId : nextPostId
-      }/image`;
-      const postImageData = {
-        meta_value: generateFileName(fileName),
-        image_number: 1,
-      };
-
-      const postImageRequest =
-        post && post.post_image
-          ? axios.put(postImageUrl, postImageData)
-          : axios.post(postImageUrl, postImageData);
-      requestsArray.push(postImageRequest);
-      const formData = new FormData();
-      formData.append("theFiles", previewImageFile, fileName);
-      const postImageFileRequest = axios.post("/api/uploads", formData, config);
-      requestsArray.push(postImageFileRequest);
-    }
-
-    if (previewImage2File !== null) {
-      if (post) {
-        if (post.post_image_2 && post.post_image_2 !== null) {
-          const deleteFileUrl = `http://${window.location.hostname}${
-            window.location.port !== "80" ? ":" + window.location.port : ""
-          }/media/${post.post_image_2.split("/").join("+++")}`;
-          const deleteFileRequest = axios.delete(deleteFileUrl);
-          requestsArray.push(deleteFileRequest);
-        }
-      }
-      let fileType =
-        previewImage2File.name.split(".")[
-          previewImage2File.name.split.length - 1
-        ];
-      let fileName =
-        previewImage2File.name.split(`.${fileType}`)[0] +
-        `__${uuidv4()}.${fileType}`;
-      const postImageUrl = `/api/posts/${
-        post ? +post.postId : nextPostId
-      }/image`;
-      const postImageData = {
-        meta_value: generateFileName(fileName),
-        image_number: 2,
-      };
-      const postImageRequest =
-        post && post.post_image_2
-          ? axios.put(postImageUrl, postImageData)
-          : axios.post(postImageUrl, postImageData);
-      requestsArray.push(postImageRequest);
-      const formData = new FormData();
-      formData.append("theFiles", previewImage2File, fileName);
-      const postImageFileRequest = axios.post("/api/uploads", formData, config);
-      requestsArray.push(postImageFileRequest);
-    }
+    requestsArray.push(
+      ...generatePostImgRequests(post, previewImageFile, nextPostId, config),
+      ...generatePostImgRequests(post, previewImage2File, nextPostId, config)
+    );
 
     axios
       .all([...requestsArray])
@@ -253,40 +182,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
         console.log(errors, " ERRORS");
       });
   };
-
-  function onPostImageChange(event) {
-    // read file as data uri for preview, upload it on onSubmit
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.addEventListener(
-      "load",
-      () => {
-        setPreviewImage(reader.result);
-      },
-      false
-    );
-    if (file) {
-      setPreviewImageFile(file);
-      reader.readAsDataURL(file);
-    }
-  }
-
-  function onPostImage2Change(event) {
-    // read file as data uri for preview, upload it on onSubmit
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.addEventListener(
-      "load",
-      () => {
-        setPreviewImage2(reader.result);
-      },
-      false
-    );
-    if (file) {
-      setPreviewImage2File(file);
-      reader.readAsDataURL(file);
-    }
-  }
 
   let selectCategoriesDisplay: ReactElement[];
   if (categories) {
@@ -360,6 +255,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   margin: 2,
                 }}
               >
+                {console.log(props.errors)}
                 {currentTab === "post" ? (
                   <>
                     <Grid
@@ -511,7 +407,8 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                                 : null
                             }
                             previewImage={previewImage}
-                            onChange={onPostImageChange}
+                            setPreviewImage={setPreviewImage}
+                            setPreviewImageFile={setPreviewImageFile}
                             error={
                               props?.errors?.post_image ? (
                                 <FormError message={props.errors.post_image} />
@@ -582,7 +479,8 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                                     : null
                                 }
                                 previewImage={previewImage2}
-                                onChange={onPostImage2Change}
+                                setPreviewImage={setPreviewImage2}
+                                setPreviewImageFile={setPreviewImage2File}
                                 error={
                                   props?.errors?.post_image_2 ? (
                                     <FormError

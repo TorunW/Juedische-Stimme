@@ -5,16 +5,35 @@ import Image from "next/image";
 type Props = {
   previewImage: string;
   image: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
+  setPreviewImage: Function;
+  setPreviewImageFile: Function;
   error?: string | ReactElement;
 };
 
 export const ImageUploadField: FC<Props> = ({
   previewImage,
   image,
-  onChange,
+  setPreviewImage,
+  setPreviewImageFile,
   error,
 }) => {
+  const onImageChange = (event) => {
+    // read file as data uri for preview, upload it on onSubmit
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.addEventListener(
+      "load",
+      () => {
+        setPreviewImage(reader.result);
+      },
+      false
+    );
+    if (file) {
+      setPreviewImageFile(file);
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <>
       <Grid
@@ -78,7 +97,7 @@ export const ImageUploadField: FC<Props> = ({
           id="post_image"
           name="post_image"
           type="file"
-          onChange={onChange}
+          onChange={onImageChange}
           style={{
             position: "absolute",
             width: "100%",

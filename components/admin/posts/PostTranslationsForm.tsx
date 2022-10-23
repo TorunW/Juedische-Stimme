@@ -50,12 +50,12 @@ const PostTranslationsForm = ({ post, language }) => {
 
   const { errors } = formik;
 
-  let postTranslationsFormDisplay;
-  if (
+  const isMinimalLayout =
     (post && post.post_layout === "donation") ||
-    (post && post.post_layout === "member_form")
-  ) {
-    postTranslationsFormDisplay = (
+    (post && post.post_layout === "member_form");
+
+  return (
+    <>
       <form
         className={styles.form}
         onSubmit={formik.handleSubmit}
@@ -75,135 +75,101 @@ const PostTranslationsForm = ({ post, language }) => {
           value={formik.values.content}
           itemType={"post"}
           itemId={post.postId}
-          title={`Post Content`}
+          title={`Post Content ( English )`}
         />
-        {errors && errors.content ? <FormError message={errors.content} /> : ""}
+        {errors?.content ? <FormError message={errors.content} /> : ""}
 
-        <Button type="submit">Submit</Button>
+        {!isMinimalLayout && (
+          <>
+            {(post.post_layout === "article" ||
+              post.post_layout === "newsletter") && (
+              <>
+                <FormControl
+                  fullWidth
+                  margin="normal"
+                >
+                  <TipTapEditor
+                    onChange={(val: string) =>
+                      formik.setFieldValue("excerpt", val, true)
+                    }
+                    value={formik.values.excerpt}
+                    itemType={"post"}
+                    itemId={post.postId}
+                    height={150}
+                    title={`Post Summary ( English )`}
+                    error={
+                      errors && errors.excerpt ? (
+                        <FormError message={errors.excerpt} />
+                      ) : (
+                        ""
+                      )
+                    }
+                  />
+                </FormControl>
+                <FormControl
+                  fullWidth
+                  margin="normal"
+                >
+                  <TipTapEditor
+                    onChange={(val: string) =>
+                      formik.setFieldValue("excerpt_2", val, true)
+                    }
+                    value={formik.values.excerpt_2}
+                    itemType={"post"}
+                    itemId={post.postId}
+                    height={150}
+                    title={`Second Summary ( English )`}
+                    error={
+                      errors && errors.excerpt_2 ? (
+                        <FormError message={errors.excerpt_2} />
+                      ) : (
+                        ""
+                      )
+                    }
+                  />
+                </FormControl>
+                <FormControl
+                  fullWidth
+                  margin="normal"
+                >
+                  <TipTapEditor
+                    onChange={(val) =>
+                      formik.setFieldValue("content_2", val, true)
+                    }
+                    value={formik.values.content_2}
+                    itemType={"post"}
+                    itemId={post.postId}
+                    title={`Bottom Content ( English )`}
+                    error={
+                      errors && errors.content_2 ? (
+                        <FormError message={errors.content_2} />
+                      ) : (
+                        ""
+                      )
+                    }
+                  />
+                </FormControl>
+              </>
+            )}
+
+            <Grid
+              xs={11}
+              sx={{ marginY: 3 }}
+            >
+              <Button
+                color="secondary"
+                fullWidth
+                variant="contained"
+                type="submit"
+              >
+                Submit Translation
+              </Button>
+            </Grid>
+          </>
+        )}
       </form>
-    );
-  } else {
-    postTranslationsFormDisplay = (
-      <form
-        className={styles.form}
-        onSubmit={formik.handleSubmit}
-      >
-        <Grid
-          container
-          item
-          xs={11}
-        >
-          <FormControl
-            fullWidth
-            margin="normal"
-          >
-            <TextField
-              id={"title"}
-              name={"title"}
-              label={`Title`}
-              margin="normal"
-              focused
-              placeholder="Title"
-              onChange={formik.handleChange}
-              value={formik.values.title}
-            />
-
-            {errors && errors.title ? <FormError message={errors.title} /> : ""}
-          </FormControl>
-        </Grid>
-
-        <FormControl
-          fullWidth
-          margin="normal"
-        >
-          <TipTapEditor
-            onChange={(val: string) =>
-              formik.setFieldValue("excerpt", val, true)
-            }
-            value={formik.values.excerpt}
-            itemType={"post"}
-            itemId={post.postId}
-            height={150}
-            title={`Excerpt`}
-          />
-          {errors && errors.excerpt ? (
-            <FormError message={errors.excerpt} />
-          ) : (
-            ""
-          )}
-        </FormControl>
-        <FormControl
-          fullWidth
-          margin="normal"
-        >
-          <TipTapEditor
-            onChange={(val) => formik.setFieldValue("content", val, true)}
-            value={formik.values.content}
-            itemType={"post"}
-            itemId={post.postId}
-            title={`Content`}
-          />
-          {errors && errors.content ? (
-            <FormError message={errors.content} />
-          ) : (
-            ""
-          )}
-        </FormControl>
-
-        <FormControl
-          fullWidth
-          margin="normal"
-        >
-          <TipTapEditor
-            onChange={(val: string) =>
-              formik.setFieldValue("excerpt_2", val, true)
-            }
-            value={formik.values.excerpt_2}
-            itemType={"post"}
-            itemId={post.postId}
-            height={150}
-            title={`Second Excerpt`}
-          />
-          {errors && errors.excerpt_2 ? (
-            <FormError message={errors.excerpt_2} />
-          ) : (
-            ""
-          )}
-        </FormControl>
-        <FormControl
-          fullWidth
-          margin="normal"
-        >
-          <TipTapEditor
-            onChange={(val) => formik.setFieldValue("content_2", val, true)}
-            value={formik.values.content_2}
-            itemType={"post"}
-            itemId={post.postId}
-            title={`Bottom Content`}
-          />
-          {errors && errors.content_2 ? (
-            <FormError message={errors.content_2} />
-          ) : (
-            ""
-          )}
-        </FormControl>
-        <Grid
-          xs={11}
-          sx={{ marginY: 3 }}
-        >
-          <Button
-            color="secondary"
-            fullWidth
-            variant="contained"
-            type="submit"
-          >
-            Submit Translation
-          </Button>
-        </Grid>
-      </form>
-    );
-  }
-  return <>{postTranslationsFormDisplay}</>;
+    </>
+  );
 };
 
 export default PostTranslationsForm;
