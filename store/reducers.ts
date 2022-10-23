@@ -10,6 +10,7 @@ import nav from './nav/navSlice'
 import tags from './tags/tagsSlice'
 import aboutinfo from './aboutinfo/aboutinfoSlice'
 import languages from './languages/languagesSlice'
+import labels from './labels/labelsSlice'
 
 const reducers = combineReducers({ 
   fbData,
@@ -21,7 +22,8 @@ const reducers = combineReducers({
   nav,
   tags,
   aboutinfo,
-  languages
+  languages,
+  labels
 })
 
 export default reducers;

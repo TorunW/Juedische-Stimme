@@ -11,9 +11,11 @@ import { setPost } from "store/posts/postsSlice";
 import PostPage from "components/posts/PostPage";
 import { createServerSideProps } from "page/server-side-props";
 import { HomePageProps } from "pages";
+import { useSelector } from "store/hooks";
+import { setLabels } from "store/labels/labelsSlice";
 
 export const getServerSideProps = createServerSideProps<HomePageProps>(
-  async ({ context, data: { navItems } }) => {
+  async ({ context, data: { navItems, labels } }) => {
     const pageResponse = await excuteQuery({
       query: selectPostByName({
         name: context.query.name.toString().split(":__--__:").join("#"),
@@ -29,6 +31,7 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
         navItems,
         locale: context.locale,
         defaultLocale: context.defaultLocale,
+        labels,
       },
     };
   }
@@ -47,6 +50,8 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
         defaultLocale: props.defaultLocale,
       })
     );
+    dispatch(setLabels(JSON.parse(props.labels)));
+
     if (page) {
       dispatch(setPost(JSON.parse(props.page)[0]));
     }
@@ -57,11 +62,7 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
     headDisplay = (
       <Head>
         <title>{page.post_title}</title>
-        <meta
-          property="og:title"
-          content={page.post_title}
-          key="title"
-        />
+        <meta property="og:title" content={page.post_title} key="title" />
         <meta
           property="og:keywords"
           key="keywords"

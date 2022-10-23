@@ -1,4 +1,5 @@
 import excuteQuery from "lib/db";
+import { getLabels } from "lib/queries/labels";
 import { selectMenuItems } from "lib/queries/menuItems";
 import { GetServerSideProps } from "next";
 import { PageProps } from "./page";
@@ -8,6 +9,7 @@ import { PageProps } from "./page";
 export interface ServerSideData {
   dataForSSR: string;
   navItems: string;
+  labels: string;
 }
 
 // utility type
@@ -38,6 +40,12 @@ export const createServerSideProps = <T extends PageProps>(
       });
       const navItems = JSON.stringify(navItemsResponse);
 
+      const labelsResponse = await excuteQuery({
+        query: getLabels()
+      })
+
+      const labels = JSON.stringify(labelsResponse)
+
       const props = {
         page: {
           serverSideData:
@@ -53,6 +61,7 @@ export const createServerSideProps = <T extends PageProps>(
           data: {
             dataForSSR: "data for custom serverSideProps",
             navItems,
+            labels
           },
           context,
         });

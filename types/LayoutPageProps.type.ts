@@ -1,4 +1,5 @@
 export type LayoutPageProps = {
+  labels: string;
   navItems: string;
   gallery?: string;
   galleryImages?: string;
