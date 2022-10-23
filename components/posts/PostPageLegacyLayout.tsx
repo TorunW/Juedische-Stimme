@@ -5,6 +5,8 @@ import { generateImageUrl } from 'helpers/imageUrlHelper';
 import Image from 'next/image';
 import { getPostContentFields } from 'helpers/getPostContentFields';
 import PostPageEmbededContent from './PostPageEmbededContent';
+import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
+import Share from 'helpers/shareToSocialMedia';
 
 export default function PostPageLegacyLayout({ post, locale }) {
   const { postTitle, postContent } = getPostContentFields(post, locale);
@@ -46,14 +48,6 @@ export default function PostPageLegacyLayout({ post, locale }) {
             __html: postContent.replace(/(?:\r\n|\r|\n)/g, '<br>'),
           }}
         ></div>
-        {post.post_embed_script && post.post_embed_script !== 'null' ? (
-          <PostPageEmbededContent
-            script={post.post_embed_script}
-            html={post.post_embed_html}
-          />
-        ) : (
-          ''
-        )}
       </div>
     </React.Fragment>
   );
