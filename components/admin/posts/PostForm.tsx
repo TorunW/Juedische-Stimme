@@ -100,26 +100,26 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       is: "post",
       then: Yup.string().min(2).required("Choose a layout for the post"),
     }),
-    post_image: Yup.string()
-      .nullable()
-      .when("post_layout", {
-        is: "article",
-        then: imageValidation,
-      })
-      .when("post_layout", {
-        is: "newsletter",
-        then: imageValidation,
-      }),
+    // post_image: Yup.string()
+    //   .nullable()
+    //   .when("post_layout", {
+    //     is: "article",
+    //     then: imageValidation,
+    //   })
+    //   .when("post_layout", {
+    //     is: "newsletter",
+    //     then: imageValidation,
+    //   }),
     post_content: postContentValidation,
-    post_excerpt: Yup.string().when("post_layout", {
-      is: "article",
-      then: postExcerptValidation,
-    }),
-    post_excerpt_2: Yup.string().when(["post_layout", "post_content_2"], {
-      is: (post_layout, post_content_2) =>
-        post_layout === "article" && post_content_2?.length > 0,
-      then: postExcerptValidation,
-    }),
+    // post_excerpt: Yup.string().when("post_layout", {
+    //   is: "article",
+    //   then: postExcerptValidation,
+    // }),
+    // post_excerpt_2: Yup.string().when(["post_layout", "post_content_2"], {
+    //   is: (post_layout, post_content_2) =>
+    //     post_layout === "article" && post_content_2?.length > 0,
+    //   then: postExcerptValidation,
+    // }),
   });
 
   const onSubmit = (values) => {
