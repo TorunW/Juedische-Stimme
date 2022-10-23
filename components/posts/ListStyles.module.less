@@ -56,8 +56,8 @@
       color: #2e2e2e;
 
       .topWrapper {
-       display: block;
-       height: auto;
+        display: block;
+        height: auto;
 
         .topExcerpt {
           padding: 0 8px 8px 0;
@@ -69,7 +69,7 @@
         }
 
         .topContent {
-            display: inline;
+          display: inline;
         }
       }
 
@@ -167,7 +167,7 @@
       margin: 32px auto;
       padding: 0 64px;
       color: #626262;
-      font-size: .9rem;
+      font-size: 0.9rem;
     }
 
     .contentContainer {
@@ -216,7 +216,6 @@
         .bottomExcerpt {
           width: 50%;
           word-break: break-word;
-
         }
       }
 
@@ -439,17 +438,17 @@
 }
 
 .embededCodeContainer {
-  margin-top: 50px;
+  margin: 50px auto 0;
   padding: 50px;
   background-color: rgb(241, 240, 240);
   border-radius: 25px;
+  max-width: 1067px;
 }
 
 @media (min-width: 1025px) {
   .newsletterLayout {
     max-width: 1067px;
     margin: 48px auto;
-    // padding: 0 32px;
     .header {
       text-align: center;
 
@@ -643,7 +642,6 @@
           height: 100%;
           width: 100%;
           object-fit: cover;
-
         }
       }
       .bottomExcerpt {
@@ -657,42 +655,50 @@
   }
 }
 
-
-
-  .legacyLayout {
-    height: 100%;
-
-    .header {
-      background: #696388;
-      width: 100%;
-      text-align: center;
-        h2 {
-          color: white;
-          text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-          padding-top: 48px;
-        }
-      
-    }
-
-    .linksContainer {
-      margin: 32px auto;
-      padding: 0 48px;
+.legacyLayout {
+  .header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #696388;
+    padding: 32px 48px;
+    color: white;
+    .headerContainer {
       max-width: 1067px;
-      color: #626262;
-    }
+      h2 {
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
 
-    .content {
-      margin: 48px auto;
-      padding: 0 48px;
-      max-width: 1067px;
-      color: #2e2e2e;
-
-      .content {
-        font-size: 1.2rem;
-        p {
-          line-height: 1.5rem;
-          margin: 16px 0;
-        }
+      .socialMediaLinks {
+        margin-top: 16px;
       }
     }
   }
+
+  .content {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    margin: 48px auto;
+    padding: 0 48px;
+    max-width: 1067px;
+    color: #2e2e2e;
+
+    p {
+      line-height: 1.5rem;
+      margin: 16px 0;
+    }
+
+    img {
+      margin: 0 auto;
+      width: 100%;
+      object-fit: contain;
+    }
+
+    iframe {
+      margin: 0 auto;
+    }
+  }
+}

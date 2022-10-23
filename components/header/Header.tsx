@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "store/hooks";
-import styles from "./Styles.module.css";
-import BlurringImage from "../blurringImage/BlurringImage";
-import { setHeaderImageLoaded } from "store/aboutinfo/aboutinfoSlice";
-import Image from "next/image";
-import { generateImageUrl } from "helpers/imageUrlHelper";
-import HeaderGalleryControllers from "./HeaderGalleryControllers";
-import { usePrevious } from "helpers/usePreviousHelper";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'store/hooks';
+import styles from './Styles.module.css';
+import BlurringImage from '../blurringImage/BlurringImage';
+import { setHeaderImageLoaded } from 'store/aboutinfo/aboutinfoSlice';
+import Image from 'next/image';
+import { generateImageUrl } from 'helpers/imageUrlHelper';
+import HeaderGalleryControllers from './HeaderGalleryControllers';
+import { usePrevious } from 'helpers/usePreviousHelper';
 
 const Header = () => {
   const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
@@ -17,15 +17,20 @@ const Header = () => {
   const prevSlideIndex = usePrevious(slideIndex);
 
   const imageSrcs =
-    headerGallery?.imageSrcs.indexOf(",") > -1
-      ? headerGallery.imageSrcs.split(",")
+    headerGallery?.imageSrcs.indexOf(',') > -1
+      ? headerGallery.imageSrcs.split(',')
       : [headerGallery?.imageSrcs];
+  const [isSlideShow, setIsSlideShow] = useState(
+    imageSrcs.length > 1 ? true : false
+  );
 
   return (
     <header
-      id="main-header"
-      role="main-header"
-      className={styles.header}
+      id='main-header'
+      role='main-header'
+      className={
+        isSlideShow === true ? styles.headerSlideShow : styles.headerStill
+      }
     >
       {headerGallery !== null && img !== null ? (
         <>
@@ -63,10 +68,7 @@ const Header = () => {
                         : styles.slide
                     }
                   >
-                    <Image
-                      layout="fill"
-                      src={generateImageUrl(imgSrc)}
-                    />
+                    <Image layout='fill' src={generateImageUrl(imgSrc)} />
                   </div>
                 </React.Fragment>
               );
@@ -77,7 +79,7 @@ const Header = () => {
               <HeaderGalleryControllers
                 slideIndex={slideIndex}
                 setSlideIndex={setSlideIndex}
-                slideshowLength={headerGallery.imageSrcs.split(",").length - 1}
+                slideshowLength={headerGallery.imageSrcs.split(',').length - 1}
               />
             </div>
           ) : (
@@ -88,7 +90,7 @@ const Header = () => {
           )}
         </>
       ) : (
-        ""
+        ''
       )}
     </header>
   );

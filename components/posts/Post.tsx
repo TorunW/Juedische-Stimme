@@ -1,14 +1,14 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import { generateImageUrl } from "helpers/imageUrlHelper";
-import { useSelector } from "store/hooks";
-import formateDate from "helpers/formateDate";
-import { GeneratePostUrl } from "helpers/generatePostUrl";
-import styles from "./Styles.module.css";
+import React, { ReactElement, useEffect, useState } from 'react';
+import { generateImageUrl } from 'helpers/imageUrlHelper';
+import { useSelector } from 'store/hooks';
+import formateDate from 'helpers/formateDate';
+import { GeneratePostUrl } from 'helpers/generatePostUrl';
+import styles from './Styles.module.css';
 // import axios from 'axios';
-import trimStringToLastSpace from "helpers/trimStringToLastSpace";
-import Image from "next/image";
-import Link from "next/link";
-import { getPostContentFields } from "helpers/getPostContentFields";
+import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
+import Image from 'next/image';
+import Link from 'next/link';
+import { getPostContentFields } from 'helpers/getPostContentFields';
 
 type Props = {
   post: any;
@@ -32,12 +32,12 @@ const Post: React.FC<Props> = ({ post, phrase, imageDimensions }) => {
   return (
     <article
       className={styles.post}
-      data-testid="post-container"
+      data-testid='post-container'
       onClick={() =>
         (window.location.href = `/${post.post_name
           .toString()
-          .split("#")
-          .join(":__--__:")}`)
+          .split('#')
+          .join(':__--__:')}`)
       }
     >
       {post.post_image !== null ? (
@@ -50,33 +50,30 @@ const Post: React.FC<Props> = ({ post, phrase, imageDimensions }) => {
             height={imageDimensions.height}
             // objectFit={'cover'}
             // layout={'fill'}
-          />{" "}
+          />{' '}
         </div>
       ) : (
-        ""
+        ''
       )}
 
       <div className={styles.date}>
-        {post.post_date ? formateDate(post.post_date) : ""}
+        {post.post_date ? formateDate(post.post_date) : ''}
       </div>
 
-      <Link href={"/" + GeneratePostUrl(post.post_name)}>
+      <Link href={'/' + GeneratePostUrl(post.post_name)}>
         <a className={styles.postTitle}>
-          <h4>{postTitle} </h4>
+          <h4>{postTitle}</h4>
         </a>
       </Link>
 
-      <a
-        href={`/category/${post.categoryName}`}
-        className={styles.tags}
-      >
+      <a href={`/category/${post.categoryName}`} className={styles.tags}>
         #{post.categoryName}
       </a>
       <div
         className={styles.postPreview}
         dangerouslySetInnerHTML={{
           __html: `${trimStringToLastSpace(
-            postContent.substring(0, 600)
+            postContent.substring(0, 400)
           )} [...]`,
         }}
       ></div>

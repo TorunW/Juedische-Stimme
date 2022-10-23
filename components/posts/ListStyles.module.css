@@ -78,7 +78,7 @@
     min-width: 50%;
     position: relative;
     overflow: hidden;
-    aspect-ratio: auto 559 / 300;
+    aspect-ratio: auto 1.86333333;
   }
   .articleLayout .contentContainer .middleWrapper .image img {
     height: 100%;
@@ -181,7 +181,7 @@
     min-width: 50%;
     position: relative;
     overflow: hidden;
-    aspect-ratio: auto 559 / 300;
+    aspect-ratio: auto 1.86333333;
   }
   .articleLayout .contentContainer .middleWrapper .image img {
     height: 100%;
@@ -283,7 +283,7 @@
     width: 100%;
     position: relative;
     overflow: hidden;
-    aspect-ratio: auto 559 / 300;
+    aspect-ratio: auto 1.86333333;
   }
   .articleLayout .contentContainer .middleWrapper .image img {
     height: 100%;
@@ -384,10 +384,11 @@
   z-index: 1;
 }
 .embededCodeContainer {
-  margin-top: 50px;
+  margin: 50px auto 0;
   padding: 50px;
   background-color: #f1f0f0;
   border-radius: 25px;
+  max-width: 1067px;
 }
 @media (min-width: 1025px) {
   .newsletterLayout {
@@ -416,7 +417,7 @@
   }
   .newsletterLayout .header .imageWrapper {
     width: 80%;
-    aspect-ratio: auto 994 / 337;
+    aspect-ratio: auto 2.9495549;
     margin: 32px auto;
     overflow: hidden;
     cursor: pointer;
@@ -436,7 +437,7 @@
   .newsletterLayout .contentContainer .image {
     margin: 48px auto;
     max-width: 749px;
-    aspect-ratio: auto 794 / 326;
+    aspect-ratio: auto 2.43558282;
     overflow: hidden;
     position: relative;
   }
@@ -478,7 +479,7 @@
     margin: 0 8px;
   }
   .newsletterLayout .header .imageWrapper {
-    aspect-ratio: auto 994 / 337;
+    aspect-ratio: auto 2.9495549;
     margin: 32px auto;
     overflow: hidden;
     cursor: pointer;
@@ -498,7 +499,7 @@
   .newsletterLayout .contentContainer .image {
     margin: 48px auto;
     min-width: 100%;
-    aspect-ratio: auto 794 / 326;
+    aspect-ratio: auto 2.43558282;
     overflow: hidden;
     position: relative;
   }
@@ -543,7 +544,7 @@
   .newsletterLayout .header .imageWrapper {
     max-width: 100%;
     min-height: 200px;
-    aspect-ratio: auto 994 / 337;
+    aspect-ratio: auto 2.9495549;
     margin: 16px auto;
     overflow: hidden;
     position: relative;
@@ -562,7 +563,7 @@
   .newsletterLayout .contentContainer .image {
     max-width: 100%;
     min-height: 200px;
-    aspect-ratio: auto 994 / 337;
+    aspect-ratio: auto 2.9495549;
     margin: 16px auto;
     overflow: hidden;
     position: relative;
@@ -580,35 +581,43 @@
     width: 600px;
   }
 }
-.legacyLayout {
-  height: 100%;
-}
 .legacyLayout .header {
-  background: #696388;
   width: 100%;
-  text-align: center;
-}
-.legacyLayout .header h2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #696388;
+  padding: 32px 48px;
   color: white;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  padding-top: 48px;
 }
-.legacyLayout .linksContainer {
-  margin: 32px auto;
-  padding: 0 48px;
+.legacyLayout .header .headerContainer {
   max-width: 1067px;
-  color: #626262;
+}
+.legacyLayout .header .headerContainer h2 {
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.legacyLayout .header .headerContainer .socialMediaLinks {
+  margin-top: 16px;
 }
 .legacyLayout .content {
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
   margin: 48px auto;
   padding: 0 48px;
   max-width: 1067px;
   color: #2e2e2e;
 }
-.legacyLayout .content .content {
-  font-size: 1.2rem;
-}
-.legacyLayout .content .content p {
+.legacyLayout .content p {
   line-height: 1.5rem;
   margin: 16px 0;
+}
+.legacyLayout .content img {
+  margin: 0 auto;
+  width: 100%;
+  object-fit: contain;
+}
+.legacyLayout .content iframe {
+  margin: 0 auto;
 }
