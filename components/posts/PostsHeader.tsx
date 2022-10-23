@@ -27,7 +27,9 @@ const PostsHeader = () => {
         <div className={styles.backgroundOverlay}></div>
         <Image
           src={
-            category && category.category_image
+            category &&
+            category.category_image &&
+            category.category_image != null
               ? generateImageUrl(category.category_image)
               : postHeader
           }
