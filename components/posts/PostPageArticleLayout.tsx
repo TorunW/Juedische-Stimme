@@ -4,7 +4,6 @@ import formateDate from "helpers/formateDate";
 import { generateImageUrl } from "helpers/imageUrlHelper";
 import Image from "next/image";
 import { getPostContentFields } from "helpers/getPostContentFields";
-import PostPageEmbededContent from "./PostPageEmbededContent";
 
 const PostPageArticleLayout = ({ post, locale }) => {
   const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } =
@@ -109,15 +108,6 @@ const PostPageArticleLayout = ({ post, locale }) => {
               }}
             ></div>
           </div>
-
-          {post.post_embed_script && post.post_embed_script !== "null" ? (
-            <PostPageEmbededContent
-              script={post.post_embed_script}
-              html={post.post_embed_html}
-            />
-          ) : (
-            ""
-          )}
         </div>
       </div>
     </React.Fragment>

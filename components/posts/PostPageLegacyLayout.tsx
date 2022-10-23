@@ -1,10 +1,10 @@
 import React, { ReactElement } from 'react';
 import styles from '../posts/ListStyles.module.css';
 import formateDate from 'helpers/formateDate';
+import { generateImageUrl } from 'helpers/imageUrlHelper';
+import Image from 'next/image';
 import { getPostContentFields } from 'helpers/getPostContentFields';
 import PostPageEmbededContent from './PostPageEmbededContent';
-import Share from 'helpers/shareToSocialMedia';
-import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
 
 export default function PostPageLegacyLayout({ post, locale }) {
   const { postTitle, postContent } = getPostContentFields(post, locale);

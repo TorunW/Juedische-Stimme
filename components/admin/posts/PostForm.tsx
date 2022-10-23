@@ -437,11 +437,11 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                               height: "calc(100% - 32px)",
                             }}
                           >
-                            <Link
+                            <a
                               target={"_blank"}
                               rel="noreferrer"
                               href={"/" + GeneratePostUrl(post.post_name)}
-                              sx={{ width: "100%", height: "100%" }}
+                              style={{ width: "100%", height: "100%" }}
                             >
                               <Button
                                 variant="contained"
@@ -449,7 +449,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                               >
                                 View Post in Livemode
                               </Button>
-                            </Link>
+                            </a>
                           </FormControl>
                         </Grid>
                       )}
