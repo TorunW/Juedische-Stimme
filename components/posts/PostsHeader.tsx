@@ -29,7 +29,8 @@ const PostsHeader = () => {
           src={
             category &&
             category.category_image &&
-            category.category_image != null
+            category.category_image !== null &&
+            category.category_image.indexOf("null") === -1
               ? generateImageUrl(category.category_image)
               : postHeader
           }
