@@ -33,6 +33,7 @@ import TipTapEditor from "components/tiptap/TipTapEditor";
 import { ImageUploadField } from "../ImageUploadField";
 import { Container } from "@/components/atoms/Container";
 import { generatePostImgRequests } from "helpers/generatePostImgRequests";
+import FormHelp from "@/components/atoms/FormHelp";
 
 interface PostFormProps {
   post?: any;
@@ -81,14 +82,16 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
     post_type: post ? post.post_type : "post",
     post_layout: post ? post.post_layout : "",
   };
-
   const imageValidation = Yup.string().required("Add an Image");
   const postExcerptValidation = Yup.string()
     .min(160)
     .max(200)
-    .required("Add an excerpt from the Post");
+    .required("Add a summary sentence from the Post");
   const postContentValidation = Yup.string()
-    .min(700, "Post content should be a least 700 characters")
+    .min(
+      700,
+      "Post content should be a least 700 characters (recommended max 900)"
+    )
     .required("Add some text to the post");
 
   const validationSchema = Yup.object().shape({
@@ -115,8 +118,9 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       is: "article",
       then: postExcerptValidation,
     }),
-    post_excerpt_2: Yup.string().when("post_layout", {
-      is: "article",
+    post_excerpt_2: Yup.string().when(["post_layout", "post_content_2"], {
+      is: (post_layout, post_content_2) =>
+        post_layout === "article" && post_content_2?.length > 0,
       then: postExcerptValidation,
     }),
     post_content_2: Yup.string().when("post_layout", {
@@ -220,11 +224,9 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
               value={currentTab}
               onChange={handleChange}
               indicatorColor="secondary"
-              sx={{ color: "white !important" }}
               TabIndicatorProps={{
                 style: {
-                  height: "4px",
-                  color: "white !important",
+                  height: "5px",
                 },
               }}
             >
@@ -233,7 +235,12 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   key={Date.now() + index}
                   value={tab}
                   label={tab}
-                  sx={{ color: "white !important" }}
+                  sx={{
+                    color: "white !important",
+                    "&[aria-selected=false]": {
+                      color: "gray !important",
+                    },
+                  }}
                 />
               ))}
             </Tabs>
@@ -244,6 +251,8 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
         <Formik
           initialValues={initialValues}
           onSubmit={onSubmit}
+          validateOnChange={false}
+          validateOnBlur={false}
           validationSchema={validationSchema}
         >
           {(props: FormikProps<Post>) => (
@@ -283,7 +292,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                               name="categoryId"
                               value={props.values.categoryId}
                               onChange={props.handleChange}
-                              label="Post Category"
+                              label="Category"
                             >
                               {selectCategoriesDisplay}
                             </Select>
@@ -307,7 +316,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             <Select
                               id="post_layout"
                               name="post_layout"
-                              label="Post Layout"
+                              label="Layout"
                               value={props.values.post_layout}
                               onChange={props.handleChange}
                               placeholder="Layout"
@@ -317,8 +326,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                                 Newsletter
                               </MenuItem>
                               <MenuItem value={"legacy"}>Legacy</MenuItem>
-                              {/* <MenuItem value={'member_form'}>Membership Page</MenuItem> */}
-                              {/* <MenuItem value={'donation'}>Donation Page</MenuItem> */}
                             </Select>
                             {props?.errors?.post_layout ? (
                               <FormError message={props.errors.post_layout} />
@@ -418,28 +425,27 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                           />
                         </>
                       </Grid>
-                      {props.values.post_layout === "article" ||
-                        (props.values.post_layout === "newsletter" && (
-                          <Grid
-                            container
-                            item
-                            sx={{ marginY: 2 }}
-                          >
-                            <TipTapEditor
-                              onChange={(val: string) =>
-                                props.setFieldValue("post_excerpt", val, true)
-                              }
-                              value={props.values.post_excerpt}
-                              itemType={"post"}
-                              itemId={post ? post.postId : nextPostId}
-                              height={150}
-                              title={"Post Summary"}
-                            />
-                            {props?.errors?.post_excerpt && (
-                              <FormError message={props.errors.post_excerpt} />
-                            )}
-                          </Grid>
-                        ))}
+                      {props.values.post_layout !== "legacy" && (
+                        <Grid
+                          container
+                          item
+                          sx={{ marginY: 2 }}
+                        >
+                          <TipTapEditor
+                            onChange={(val: string) =>
+                              props.setFieldValue("post_excerpt", val, true)
+                            }
+                            value={props.values.post_excerpt}
+                            itemType={"post"}
+                            itemId={post ? post.postId : nextPostId}
+                            height={150}
+                            title="Summary Sentence"
+                          />
+                          {props?.errors?.post_excerpt && (
+                            <FormError message={props.errors.post_excerpt} />
+                          )}
+                        </Grid>
+                      )}
 
                       <Grid
                         container
@@ -454,10 +460,18 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                           itemType={"post"}
                           itemId={post ? post.postId : nextPostId}
                           height={150}
-                          title={"Post top content"}
+                          title={"Content"}
                           min={700}
                         />
-
+                        {props.values.post_layout === "article" ? (
+                          <FormHelp
+                            text={
+                              "Recommended for the layout is 700 to 900 characters"
+                            }
+                          />
+                        ) : (
+                          ""
+                        )}
                         {props?.errors?.post_content ? (
                           <FormError message={props.errors.post_content} />
                         ) : (
@@ -509,7 +523,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                                 itemType={"post"}
                                 itemId={post ? post.postId : nextPostId}
                                 height={150}
-                                title={"Second post summary"}
+                                title={"Summary Sentence (2)"}
                               />
                               {props?.errors?.post_excerpt_2 && (
                                 <FormError
@@ -538,7 +552,10 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                                 title={"Bottom Post Content"}
                               />
                             </Grid>
-
+                            {console.log(
+                              props.values.post_content_2,
+                              "content"
+                            )}
                             <PostTagForm
                               postId={post ? post.postId : nextPostId}
                             />

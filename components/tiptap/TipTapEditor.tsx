@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, useEffect } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
 import Link from "@tiptap/extension-link";
 
@@ -50,9 +50,15 @@ const TipTapEditor = (props: TipTapEditorProps) => {
     },
     onBlur: ({ editor }) => {
       let rawHtml = editor.getHTML();
-      onChange(rawHtml);
+      if (editor.getText().length > 0) onChange(rawHtml);
+      else onChange("");
     },
   });
+
+  useEffect(() => {
+    if (editor) setCharLength(editor.getText().length);
+  }, [editor]);
+
   let menuDispaly: ReactElement;
   if (showMenu !== false) {
     menuDispaly = <MenuBar editor={editor} />;
