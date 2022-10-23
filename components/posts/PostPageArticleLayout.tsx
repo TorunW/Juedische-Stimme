@@ -10,6 +10,8 @@ const PostPageArticleLayout = ({ post, locale }) => {
   const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } =
     getPostContentFields(post, locale);
 
+  console.log(post);
+
   function onSecondImageErrorCapture(arrgs) {
     console.log(arrgs, " ERROR ");
   }

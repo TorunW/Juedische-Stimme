@@ -56,6 +56,8 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
   const [previewImage2, setPreviewImage2] = useState(null);
   const [previewImage2File, setPreviewImage2File] = useState(null);
 
+  console.log(post);
+
   const initialValues = {
     post_author: post
       ? post.post_author
