@@ -16,14 +16,6 @@ const Header = () => {
   const [slideIndex, setSlideIndex] = useState(0);
   const prevSlideIndex = usePrevious(slideIndex);
 
-  // const headerGallery = {
-  //   gallery_id: 6,
-  //   gallery_name: "Header Gallery",
-  //   gallery_description: "gallery of the header",
-  //   gallery_type: "slide",
-  //   imageSrcs: "2022/09/ZYX1164_korr.jpg.jpeg",
-  // };
-
   const imageSrcs =
     headerGallery?.imageSrcs.indexOf(",") > -1
       ? headerGallery.imageSrcs.split(",")

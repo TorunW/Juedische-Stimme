@@ -10,6 +10,13 @@ const HeaderGalleryControllers = ({
   const [buttonHidden, setButtonHidden] = useState(false);
 
   useEffect(() => {
+    const interval = setInterval(() => {
+      document.getElementById("next-button").click();
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
     if (buttonHidden === true) {
       setTimeout(() => {
         setButtonHidden(false);
@@ -65,6 +72,7 @@ const HeaderGalleryControllers = ({
         className={styles.next}
         onClick={nextSlide}
         data-testid="next-button"
+        id="next-button"
       >
         <svg
           width="70"
