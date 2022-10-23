@@ -274,7 +274,7 @@ function GalleryImageForm({
                     value={formik.values.image_description}
                     showMenu={false}
                     height={200}
-                    title="Board member aboutf"
+                    title="Board member about"
                   />
                 </FormControl>
               </Grid>
