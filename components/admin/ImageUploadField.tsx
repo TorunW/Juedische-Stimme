@@ -8,6 +8,7 @@ type Props = {
   setPreviewImage: Function;
   setPreviewImageFile: Function;
   error?: string | ReactElement;
+  onChange: any;
 };
 
 export const ImageUploadField: FC<Props> = ({
@@ -15,9 +16,11 @@ export const ImageUploadField: FC<Props> = ({
   image,
   setPreviewImage,
   setPreviewImageFile,
+  onChange,
   error,
 }) => {
   const onImageChange = (event) => {
+    onChange(event.target.files[0]);
     // read file as data uri for preview, upload it on onSubmit
     const file = event.target.files[0];
     const reader = new FileReader();

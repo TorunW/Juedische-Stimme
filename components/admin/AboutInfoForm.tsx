@@ -44,11 +44,9 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
             value={currentTab}
             onChange={handleChange}
             indicatorColor="secondary"
-            sx={{ color: "white !important" }}
             TabIndicatorProps={{
               style: {
                 height: "4px",
-                color: "white !important",
               },
             }}
           >
@@ -57,7 +55,12 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
                 key={Date.now() + index}
                 value={tab}
                 label={tab}
-                sx={{ color: "white !important" }}
+                sx={{
+                  color: "white !important",
+                  "&[aria-selected=false]": {
+                    color: "gray !important",
+                  },
+                }}
               />
             ))}
           </Tabs>

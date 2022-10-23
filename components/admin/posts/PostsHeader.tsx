@@ -16,7 +16,6 @@ const PostsHeader = () => {
       TabIndicatorProps={{
         style: {
           height: "4px",
-          color: "white !important",
         },
       }}
     >
@@ -26,7 +25,12 @@ const PostsHeader = () => {
               key={category.term_id}
               value={category.name}
               label={category.name}
-              sx={{ color: "white !important" }}
+              sx={{
+                color: "white !important",
+                "&[aria-selected=false]": {
+                  color: "gray !important",
+                },
+              }}
             >
               {category.name}
             </Tab>
