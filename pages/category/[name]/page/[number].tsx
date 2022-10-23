@@ -19,9 +19,10 @@ import { LayoutPageProps } from "types/LayoutPageProps.type";
 import { setLanguages } from "store/languages/languagesSlice";
 import { createServerSideProps } from "page/server-side-props";
 import { HomePageProps } from "pages";
+import { setLabels } from "store/labels/labelsSlice";
 
 export const getServerSideProps = createServerSideProps<HomePageProps>(
-  async ({ context, data: { navItems } }) => {
+  async ({ context, data: { navItems, labels } }) => {
     const categoryResponse = await excuteQuery({
       query: selectCategory({ categoryName: context.query.name }),
     });
@@ -55,6 +56,7 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
         locales: context.locales,
         locale: context.locale,
         defaultLocale: context.defaultLocale,
+        labels,
       },
     };
   }
@@ -67,6 +69,8 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
   );
 
   useEffect(() => {
+    dispatch(setLabels(JSON.parse(props.labels)));
+
     dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(
       setLanguages({

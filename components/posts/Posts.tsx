@@ -10,6 +10,8 @@ import Placeholder from "../placeholder/Placeholder";
 import PostsHeader from "./PostsHeader";
 import getImageDimensions from "helpers/getImageDimensions";
 import { Container } from "../atoms/Container";
+import { useSelector } from "store/hooks";
+import { getLabel } from "helpers/getLabelHelper";
 
 interface PostsProps {
   posts: any[];
@@ -34,6 +36,8 @@ function Posts({
     typeof window !== "undefined" ? window.innerWidth : null
   );
 
+  const { labels } = useSelector((state) => state.labels);
+  const { locale } = useSelector((state) => state.languages);
   useEffect(() => {
     window.addEventListener("resize", () => {
       setWindowWidth(window.innerWidth);
@@ -72,7 +76,7 @@ function Posts({
     <div className="link whiteBg">
       <Link href={`/category/${title}`}>
         <a className="link-button">
-          Weitere {title === "Aktuelles" ? "Artikeln" : title} lesen
+          {getLabel(labels, locale, "read_more", "Weiter Lesen")}
         </a>
       </Link>
     </div>

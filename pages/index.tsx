@@ -32,13 +32,14 @@ import { createServerSideProps } from "page/server-side-props";
 
 import Head from "next/head";
 import { Container } from "@/components/atoms/Container";
+import { setLabels } from "store/labels/labelsSlice";
 
 export interface HomePageProps extends PageProps {
   someCustomParameter: string;
 }
 
 export const getServerSideProps = createServerSideProps<HomePageProps>(
-  async ({ context, data: { navItems } }) => {
+  async ({ context, data: { navItems, labels } }) => {
     // POSTS
     const postsResponse = await excuteQuery({
       query: selectPosts({
@@ -105,6 +106,7 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
         defaultLocale: context.defaultLocale,
         headerGallery,
         headerImage,
+        labels,
       },
     };
   }
@@ -148,6 +150,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
         defaultLocale: props.defaultLocale,
       })
     );
+    dispatch(setLabels(JSON.parse(props.labels)));
   }
 
   async function getFbToken() {
@@ -192,26 +195,14 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
             sizes="16x16"
             href="/favicon-16x16.png"
           />
-          <link
-            rel="manifest"
-            href="/site.webmanifest"
-          />
+          <link rel="manifest" href="/site.webmanifest" />
         </div>
       </Head>
       <Header />
-      <Posts
-        posts={posts}
-        title={"Aktuelles"}
-      />
+      <Posts posts={posts} title={"Aktuelles"} />
       <FacebookEvents fbt={fbt} />
-      <AboutInfo
-        gallery={gallery}
-        aboutInfo={aboutInfo}
-      />
-      <Posts
-        posts={newsletter}
-        title={"Newsletter"}
-      />
+      <AboutInfo gallery={gallery} aboutInfo={aboutInfo} />
+      <Posts posts={newsletter} title={"Newsletter"} />
       <CallToAction />
       <Container>
         <iframe
