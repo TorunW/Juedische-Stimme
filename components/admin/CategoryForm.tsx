@@ -22,6 +22,10 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
   const formik = useFormik({
     initialValues: {
       name: category ? category.name : "",
+      name_en_US: category ? category.name_en_US : "",
+      has_translation_name: category?.name_en_US ? true : false,
+      description_en_US: category ? category.description_en_US : "",
+      has_translation_description: category?.description_en_US ? true : false,
       description: category ? category.description : "",
       parent: category ? category.parent : "",
       count: category ? category.count : "",
@@ -136,27 +140,16 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
             margin: 2,
           }}
         >
-          <Grid
-            container
-            spacing={2}
-            display="flex"
-            justifyContent="center"
-          >
-            <Grid
-              item
-              xs={12}
-            >
-              <FormControl
-                fullWidth
-                sx={{ marginBottom: 1 }}
-              >
+          <Grid container spacing={2} display="flex" justifyContent="center">
+            <Grid item xs={6}>
+              <FormControl fullWidth sx={{ marginBottom: 1 }}>
                 <TextField
                   id="name"
                   name="name"
                   label="Category Name"
                   margin="normal"
                   focused
-                  placeholder="Category Name"
+                  placeholder="Enter Category Name"
                   onChange={formik.handleChange}
                   value={formik.values.name}
                 />
@@ -167,28 +160,32 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
                 )}
               </FormControl>
             </Grid>
-
-            <Grid
-              item
-              xs={12}
-              sx={{ marginY: 2 }}
-            >
-              <TipTapEditor
-                onChange={(val) =>
-                  formik.setFieldValue("description", val, true)
-                }
-                value={formik.values.description}
-                height={150}
-                title={"Category Description"}
-              />
+            <Grid item xs={6}>
+              <FormControl fullWidth sx={{ marginBottom: 1 }}>
+                <TextField
+                  id="name_en_US"
+                  name="name_en_US"
+                  label="Category Name ( English )"
+                  margin="normal"
+                  focused
+                  placeholder="Enter Category Name ( English )"
+                  onChange={formik.handleChange}
+                  value={formik.values.name_en_US}
+                />
+                {formik.errors && formik.errors.name_en_US ? (
+                  <FormError message={formik.errors.name_en_US} />
+                ) : (
+                  ""
+                )}
+              </FormControl>
             </Grid>
-
             <Grid
               item
               xs={12}
               sx={{
                 height: "215px",
                 position: "relative",
+                paddingRight: "32px",
               }}
             >
               <TextField
@@ -214,11 +211,7 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
               </Button>
 
               {previewImage !== null ? (
-                <Grid
-                  xs={10}
-                  item
-                  sx={{ marginTop: 2, textAlign: "center" }}
-                >
+                <Grid xs={10} item sx={{ marginTop: 2, textAlign: "center" }}>
                   <Image
                     layout="fixed"
                     width={320}
@@ -227,11 +220,7 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
                   />{" "}
                 </Grid>
               ) : category && category.category_image ? (
-                <Grid
-                  item
-                  xs={10}
-                  sx={{ marginTop: 2, textAlign: "center" }}
-                >
+                <Grid item xs={10} sx={{ marginTop: 2, textAlign: "center" }}>
                   <Image
                     layout="fixed"
                     width={320}
@@ -259,11 +248,29 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
               />
             </Grid>
 
-            <Grid
-              item
-              sx={{ marginY: 2 }}
-              xs={10}
-            >
+            <Grid item xs={12} sx={{ marginY: 2 }}>
+              <TipTapEditor
+                onChange={(val) =>
+                  formik.setFieldValue("description", val, true)
+                }
+                value={formik.values.description}
+                height={150}
+                title={"Category Description"}
+              />
+            </Grid>
+
+            <Grid item xs={12} sx={{ marginY: 2 }}>
+              <TipTapEditor
+                onChange={(val) =>
+                  formik.setFieldValue("description_en_US", val, true)
+                }
+                value={formik.values.description_en_US}
+                height={150}
+                title={"Category Description (English)"}
+              />
+            </Grid>
+
+            <Grid item sx={{ marginY: 2 }} xs={10}>
               <Button
                 fullWidth
                 variant="contained"

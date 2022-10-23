@@ -7,7 +7,6 @@ export default async (req, res) => {
       const insertTermResult = await excuteQuery({
         query: insertTerm({ name: req.body.name, slug: req.body.slug }),
       });
-
       const termId = insertTermResult.insertId;
       const insertTermTaxonomyResult = await excuteQuery({
         query: insertTermTaxonomy({
@@ -27,6 +26,24 @@ export default async (req, res) => {
         }),
       });
 
+      if (req.body.name_en_US){
+        const insertCatNameTranslationResult = await excuteQuery({
+          query: insertTermMeta({
+            term_id: termId,
+            meta_key: "_category_name_en_US",
+            meta_value: req.body.name_en_US,
+          })
+        });
+      }
+      if (req.body.description_en_US){
+        const insertCatDescriptionTranslationResult = await excuteQuery({
+          query: insertTermMeta({
+            term_id: termId,
+            meta_key: "_category_description_en_US",
+            meta_value: req.body.description_en_US,
+          }),
+        });
+      }
       res.json(insertTermResult);
     } else {
       // Handle any other HTTP method
