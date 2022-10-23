@@ -11,7 +11,6 @@ export const getServerSideProps = createAdminServerSideProps<HomePageProps>(
       query: `SELECT * FROM js_about_info LIMIT 1`,
     });
     const aboutInfo = JSON.stringify(aboutInfoResponse);
-
     const GALLERY_ID = 5;
     const galleryResponse = await excuteQuery({
       query: selectGalleryById(GALLERY_ID),

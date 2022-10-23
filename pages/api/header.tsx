@@ -5,7 +5,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === "PUT") {
       const result = await excuteQuery({
-        query: `UPDATE js_about_info SET text_top='${req.body.text_top}', text_top_en_US='${req.body.text_top_en_US}', text_bottom='${req.body.text_bottom}', header_slogan='${req.body.header_slogan}', about_gallery_id='${req.body.about_gallery_id}'`,
+        query: `UPDATE js_about_info SET header_slogan='${req.body.header_slogan}', header_slogan_en_US='${req.body.header_slogan_en_US}'`,
       });
       res.json(result);
     } else {

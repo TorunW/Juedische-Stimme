@@ -7,6 +7,9 @@ import containerBackground from "styles/images/about.jpg";
 
 const AboutInfo = ({ gallery, aboutInfo }) => {
   let [galleryImages, setGalleryImages] = useState([]);
+  const { locale } = useSelector((state) => state.languages);
+  console.log(locale, "LOCALE ");
+  console.log(aboutInfo, " ABOUT INFO");
 
   useEffect(() => {
     if (gallery !== null) getGalleryImages();
@@ -18,33 +21,29 @@ const AboutInfo = ({ gallery, aboutInfo }) => {
     setGalleryImages(data);
   }
 
-  let aboutInfoDisplay: ReactElement;
-  if (aboutInfo && aboutInfo !== null) {
-    aboutInfoDisplay = (
-      <div
-        data-testid="about-info-container"
-        className={styles.aboutContainer}
-      >
-        <div
-          dangerouslySetInnerHTML={{ __html: aboutInfo.text_top }}
-          className={styles.text}
-        ></div>
-        {galleryImages.length > 0 ? <Gallery images={galleryImages} /> : ""}
-        <div
-          dangerouslySetInnerHTML={{ __html: aboutInfo.text_bottom }}
-          className={styles.text}
-        ></div>
-      </div>
-    );
-  }
-
   return (
     <section
       id="about-info"
       className={styles.aboutPage}
     >
       <h1>Über Uns</h1>
-      {aboutInfoDisplay}
+      {aboutInfo && aboutInfo !== null && (
+        <div
+          data-testid="about-info-container"
+          className={styles.aboutContainer}
+        >
+          <div
+            dangerouslySetInnerHTML={{
+              __html:
+                locale === "en_US"
+                  ? aboutInfo.text_top_en_US
+                  : aboutInfo.text_top,
+            }}
+            className={styles.text}
+          ></div>
+          {galleryImages.length > 0 ? <Gallery images={galleryImages} /> : ""}
+        </div>
+      )}
       <div className={styles.contentContainer}>
         <Image
           src={containerBackground}

@@ -46,9 +46,7 @@ function GalleryForm({ gallery }: GalleryFromProps) {
         .all([...deleteRequests])
         .then(
           axios.spread((...responses) => {
-            console.log(responses);
             window.location.reload();
-            // use/access the results
           })
         )
         .catch((errors) => {

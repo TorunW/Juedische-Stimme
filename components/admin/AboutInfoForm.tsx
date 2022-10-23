@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
 import GalleryForm from "./galleries/GalleryForm";
 import TipTapEditor from "../tiptap/TipTapEditor";
+import { Container } from "../atoms/Container";
 
 const AboutInfoForm = ({ aboutInfo, gallery }) => {
   const tabs = ["About", "Gallery", "Translations"];
@@ -22,7 +23,9 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
           ...values,
         },
       }).then(
-        (response) => {},
+        (response) => {
+          window.location.reload();
+        },
         (error) => {}
       );
     },
@@ -61,62 +64,80 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
         }
       />
 
-      {currentTab === "About" ? (
-        <Box sx={{ width: "100%", maxWidth: "1067px", margin: "0 auto" }}>
-          {" "}
-          <form onSubmit={formik.handleSubmit}>
-            <Card
-              sx={{
-                paddingLeft: 4,
-                paddingRight: 2,
-                paddingY: 2,
-                margin: 2,
-              }}
-            >
-              <Grid
-                container
-                spacing={2}
-                display="flex"
-                alignItems={"center"}
+      {currentTab === "About" || currentTab === "Translations" ? (
+        <form onSubmit={formik.handleSubmit}>
+          <Container>
+            <>
+              <Card
+                sx={{
+                  paddingLeft: 4,
+                  paddingRight: 2,
+                  paddingY: 2,
+                  margin: 2,
+                }}
               >
                 <Grid
-                  item
-                  sx={{ marginY: 2 }}
+                  container
+                  spacing={2}
+                  display="flex"
+                  alignItems={"center"}
                 >
-                  <TipTapEditor
-                    onChange={(val) =>
-                      formik.setFieldValue("text_top", val, true)
-                    }
-                    value={formik.values.text_top}
-                    height={150}
-                    title={"About Us Text"}
-                  />
-                </Grid>
-                <Grid item>
-                  <Button
-                    fullWidth
-                    variant="contained"
-                    color="secondary"
-                    type="submit"
+                  {currentTab === "About" ? (
+                    <>
+                      <Grid
+                        item
+                        sx={{ marginY: 2 }}
+                      >
+                        <TipTapEditor
+                          onChange={(val) =>
+                            formik.setFieldValue("text_top", val, true)
+                          }
+                          value={formik.values.text_top}
+                          height={150}
+                          title={"About Us Text"}
+                        />
+                      </Grid>
+                    </>
+                  ) : currentTab === "Translations" ? (
+                    <Grid
+                      item
+                      xs={12}
+                      sx={{ marginY: 2 }}
+                    >
+                      <TipTapEditor
+                        onChange={(val) =>
+                          formik.setFieldValue("text_top_en_US", val, true)
+                        }
+                        value={formik.values.text_top_en_US}
+                        height={150}
+                        title={"About Us Text ( English )"}
+                      />
+                    </Grid>
+                  ) : (
+                    ""
+                  )}
+                  <Grid
+                    item
+                    xs={12}
                   >
-                    Save Changes
-                  </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      type="submit"
+                    >
+                      Save Changes
+                    </Button>
+                  </Grid>
                 </Grid>
-              </Grid>
-            </Card>
-          </form>
-        </Box>
+              </Card>
+            </>
+          </Container>
+        </form>
       ) : (
         ""
       )}
 
       {currentTab === "Gallery" ? <GalleryForm gallery={gallery} /> : ""}
-
-      {currentTab === "Translations" ? (
-        <Card sx={{ margin: 2, padding: 2 }}>Hello</Card>
-      ) : (
-        ""
-      )}
     </Box>
   );
 };

@@ -23,7 +23,6 @@ function GalleryImageForm({
   isSelected,
   galleryType,
 }: GalleryImageFormProps) {
-  console.log(isSelected, "is sele");
   const fileInputRef: any = useRef();
 
   function onUpladImageClick() {
@@ -129,7 +128,10 @@ function GalleryImageForm({
               <Box>{imageDisplay}</Box>
             </Grid>
 
-            <Grid xs={6}>
+            <Grid
+              item
+              xs={6}
+            >
               {galleryType === "list" ? (
                 <TextField
                   id="image_title"

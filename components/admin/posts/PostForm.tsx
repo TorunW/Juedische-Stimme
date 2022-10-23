@@ -78,11 +78,22 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
     categoryId: post ? post.categoryId : 2,
     post_image: post ? post.post_image : "",
     post_image_2: post ? post.post_image_2 : "",
-    post_type: post ? post.post_type : "",
+    post_type: post ? post.post_type : "post",
     post_layout: post ? post.post_layout : "",
   };
 
+  const imageValidation = Yup.string().required("Add an Image");
+  const postExcerptValidation = Yup.string()
+    .min(160)
+    .max(200)
+    .required("Add an excerpt from the Post");
+  const postContentValidation = Yup.string()
+    .min(700, "Post content should be a least 700 characters")
+    .max(900)
+    .required("Add some text to the post");
+
   const validationSchema = Yup.object().shape({
+    post_title: Yup.string().min(3).required("Add a title to the post"),
     categoryId: Yup.number().when("post_type", {
       is: "post",
       then: Yup.number().required("Choose a category"),
@@ -91,26 +102,33 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       is: "post",
       then: Yup.string().min(2).required("Choose a layout for the post"),
     }),
-    post_title: Yup.string().min(3).required("Add a title to the post"),
-    post_image: Yup.string().when("post_type", {
-      is: "post",
-      then: Yup.string().required("Add an Image"),
+    post_image: Yup.string()
+      .when("post_layout", {
+        is: "article",
+        then: imageValidation,
+      })
+      .when("post_layout", {
+        is: "newsletter",
+        then: imageValidation,
+      }),
+    post_content: postContentValidation,
+    post_excerpt: Yup.string()
+      .when("post_layout", {
+        is: "article",
+        then: postExcerptValidation,
+      })
+      .when("post_layout", {
+        is: "newsletter",
+        then: postExcerptValidation,
+      }),
+    post_excerpt_2: Yup.string().when("post_layout", {
+      is: "article",
+      then: postExcerptValidation,
     }),
-    post_excerpt: Yup.string().when("post_type", {
-      is: "post",
-      then: Yup.string()
-        .min(160)
-        .max(200)
-        .required("Add an excerpt from the Post"),
+    post_content_2: Yup.string().when("post_layout", {
+      is: "article",
+      then: postContentValidation,
     }),
-    post_excerpt_2: Yup.string().when("post_type", {
-      is: "post",
-      then: Yup.string().min(160).max(200),
-    }),
-    post_content: Yup.string()
-      .min(700)
-      .max(900)
-      .required("Add some text to the post"),
   });
 
   const onSubmit = (values) => {
@@ -374,7 +392,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             >
                               {selectCategoriesDisplay}
                             </Select>
-                            {props.errors && props.errors.categoryId ? (
+                            {props?.errors?.categoryId ? (
                               <FormError message={props.errors.categoryId} />
                             ) : (
                               ""
@@ -407,7 +425,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                               {/* <MenuItem value={'member_form'}>Membership Page</MenuItem> */}
                               {/* <MenuItem value={'donation'}>Donation Page</MenuItem> */}
                             </Select>
-                            {props.errors && props.errors.post_layout ? (
+                            {props?.errors?.post_layout ? (
                               <FormError message={props.errors.post_layout} />
                             ) : (
                               ""
@@ -432,7 +450,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                               onChange={props.handleChange}
                               value={props.values.post_title}
                             />
-                            {props.errors && props.errors.post_title ? (
+                            {props?.errors?.post_title ? (
                               <FormError message={props.errors.post_title} />
                             ) : (
                               ""
@@ -485,47 +503,47 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         item
                         xs={12}
                       >
-                        <ImageUploadField
-                          image={
-                            post?.post_image
-                              ? generateImageUrl(post.post_image)
-                              : null
-                          }
-                          previewImage={previewImage}
-                          onChange={onPostImageChange}
-                          error={
-                            props.errors && props.errors.post_image ? (
-                              <FormError message={props.errors.post_image} />
-                            ) : (
-                              ""
-                            )
-                          }
-                        />
-                      </Grid>
-
-                      {!isMinimalLayout && (
-                        <Grid
-                          container
-                          item
-                          sx={{ marginY: 2 }}
-                        >
-                          <TipTapEditor
-                            onChange={(val: string) =>
-                              props.setFieldValue("post_excerpt", val, true)
+                        <>
+                          <ImageUploadField
+                            image={
+                              post?.post_image
+                                ? generateImageUrl(post.post_image)
+                                : null
                             }
-                            value={props.values.post_excerpt}
-                            itemType={"post"}
-                            itemId={post ? post.postId : nextPostId}
-                            height={150}
-                            title={"Post Excerp/Quote"}
+                            previewImage={previewImage}
+                            onChange={onPostImageChange}
+                            error={
+                              props?.errors?.post_image ? (
+                                <FormError message={props.errors.post_image} />
+                              ) : (
+                                ""
+                              )
+                            }
                           />
-                          {props.errors && props.errors.post_excerpt ? (
-                            <FormError message={props.errors.post_excerpt} />
-                          ) : (
-                            ""
-                          )}
-                        </Grid>
-                      )}
+                        </>
+                      </Grid>
+                      {props.values.post_layout === "article" ||
+                        (props.values.post_layout === "newsletter" && (
+                          <Grid
+                            container
+                            item
+                            sx={{ marginY: 2 }}
+                          >
+                            <TipTapEditor
+                              onChange={(val: string) =>
+                                props.setFieldValue("post_excerpt", val, true)
+                              }
+                              value={props.values.post_excerpt}
+                              itemType={"post"}
+                              itemId={post ? post.postId : nextPostId}
+                              height={150}
+                              title={"Post Summary"}
+                            />
+                            {props?.errors?.post_excerpt && (
+                              <FormError message={props.errors.post_excerpt} />
+                            )}
+                          </Grid>
+                        ))}
 
                       <Grid
                         container
@@ -541,107 +559,121 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                           itemId={post ? post.postId : nextPostId}
                           height={150}
                           title={"Post top content"}
+                          min={700}
                         />
 
-                        {props.errors && props.errors.post_content ? (
+                        {props?.errors?.post_content ? (
                           <FormError message={props.errors.post_content} />
                         ) : (
                           ""
                         )}
                       </Grid>
-
-                      {!isMinimalLayout && (
-                        <>
-                          <Grid
-                            container
-                            item
-                          >
-                            <ImageUploadField
-                              image={
-                                post?.post_image_2
-                                  ? generateImageUrl(post.post_image_2)
-                                  : null
-                              }
-                              previewImage={previewImage2}
-                              onChange={onPostImage2Change}
-                              error={
-                                props.errors && props.errors.post_image_2 ? (
-                                  <FormError
-                                    message={props.errors.post_image_2}
-                                  />
-                                ) : (
-                                  ""
-                                )
-                              }
-                            />
-                          </Grid>
-
-                          <Grid
-                            container
-                            item
-                            sx={{ marginY: 2 }}
-                          >
-                            <TipTapEditor
-                              onChange={(val: string) =>
-                                props.setFieldValue("post_excerpt_2", val, true)
-                              }
-                              value={props.values.post_excerpt_2}
-                              itemType={"post"}
-                              itemId={post ? post.postId : nextPostId}
-                              height={150}
-                              title={"Second post excerpt"}
-                            />
-                          </Grid>
-
-                          <Grid
-                            container
-                            item
-                            sx={{ marginY: 2 }}
-                          >
-                            <TipTapEditor
-                              onChange={(val: string) =>
-                                props.setFieldValue("post_content_2", val, true)
-                              }
-                              value={props.values.post_content_2}
-                              itemType={"post"}
-                              itemId={post ? post.postId : nextPostId}
-                              height={150}
-                              title={"Bottom Post Content"}
-                            />
-                          </Grid>
-
-                          <PostTagForm
-                            postId={post ? post.postId : nextPostId}
-                          />
-
-                          <Grid
-                            item
-                            sx={{ marginY: 2 }}
-                            xs={12}
-                          >
-                            <FormControl
-                              fullWidth
-                              margin="normal"
+                      {!isMinimalLayout &&
+                        props.values.post_layout !== "legacy" && (
+                          <>
+                            <Grid
+                              container
+                              item
                             >
-                              <InputLabel>Post Status</InputLabel>
-                              <Select
-                                id="post_status"
-                                name="post_status"
-                                label="Post Status"
-                                value={props.values.post_status}
-                                onChange={props.handleChange}
+                              <ImageUploadField
+                                image={
+                                  post?.post_image_2
+                                    ? generateImageUrl(post.post_image_2)
+                                    : null
+                                }
+                                previewImage={previewImage2}
+                                onChange={onPostImage2Change}
+                                error={
+                                  props?.errors?.post_image_2 ? (
+                                    <FormError
+                                      message={props.errors.post_image_2}
+                                    />
+                                  ) : (
+                                    ""
+                                  )
+                                }
+                              />
+                            </Grid>
+
+                            <Grid
+                              container
+                              item
+                              sx={{ marginY: 2 }}
+                            >
+                              <TipTapEditor
+                                onChange={(val: string) =>
+                                  props.setFieldValue(
+                                    "post_excerpt_2",
+                                    val,
+                                    true
+                                  )
+                                }
+                                value={props.values.post_excerpt_2}
+                                itemType={"post"}
+                                itemId={post ? post.postId : nextPostId}
+                                height={150}
+                                title={"Second post summary"}
+                              />
+                              {props?.errors?.post_excerpt_2 && (
+                                <FormError
+                                  message={props.errors.post_excerpt_2}
+                                />
+                              )}
+                            </Grid>
+
+                            <Grid
+                              container
+                              item
+                              sx={{ marginY: 2 }}
+                            >
+                              <TipTapEditor
+                                onChange={(val: string) =>
+                                  props.setFieldValue(
+                                    "post_content_2",
+                                    val,
+                                    true
+                                  )
+                                }
+                                value={props.values.post_content_2}
+                                itemType={"post"}
+                                itemId={post ? post.postId : nextPostId}
+                                height={150}
+                                title={"Bottom Post Content"}
+                              />
+                            </Grid>
+
+                            <PostTagForm
+                              postId={post ? post.postId : nextPostId}
+                            />
+
+                            <Grid
+                              item
+                              sx={{ marginY: 2 }}
+                              xs={12}
+                            >
+                              <FormControl
+                                fullWidth
+                                margin="normal"
                               >
-                                <MenuItem value={"publish"}>
-                                  Publish post
-                                </MenuItem>
-                                <MenuItem value={"draft"}>
-                                  Save to drafts
-                                </MenuItem>
-                              </Select>
-                            </FormControl>
-                          </Grid>
-                        </>
-                      )}
+                                <InputLabel>Post Status</InputLabel>
+                                <Select
+                                  id="post_status"
+                                  name="post_status"
+                                  label="Post Status"
+                                  value={props.values.post_status}
+                                  onChange={props.handleChange}
+                                >
+                                  <MenuItem value={"publish"}>
+                                    Publish post
+                                  </MenuItem>
+                                  <MenuItem value={"draft"}>
+                                    Save to drafts
+                                  </MenuItem>
+                                </Select>
+                              </FormControl>
+                            </Grid>
+                          </>
+                        )}
 
                       <Grid
                         item

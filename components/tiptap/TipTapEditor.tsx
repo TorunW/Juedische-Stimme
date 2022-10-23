@@ -13,6 +13,7 @@ import {
   FormControlLabel,
   Switch,
   Typography,
+  Chip,
 } from "@mui/material";
 import Grid from "@mui/material/Grid"; // Grid version 1
 import FormHelp from "../atoms/FormHelp";
@@ -26,10 +27,13 @@ interface TipTapEditorProps {
   height?: number;
   title?: string;
   help?: string;
+  min?: number;
 }
 
 const TipTapEditor = (props: TipTapEditorProps) => {
   const { value, onChange, showMenu, height, title } = props;
+  const [charLength, setCharLength] = useState(0);
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -41,6 +45,9 @@ const TipTapEditor = (props: TipTapEditorProps) => {
       }),
     ],
     content: value,
+    onUpdate: ({ editor }) => {
+      setCharLength(editor.getText().length);
+    },
     onBlur: ({ editor }) => {
       let rawHtml = editor.getHTML();
       onChange(rawHtml);
@@ -51,7 +58,7 @@ const TipTapEditor = (props: TipTapEditorProps) => {
     menuDispaly = <MenuBar editor={editor} />;
   }
   return (
-    <div>
+    <>
       <Box
         sx={{
           border: 2,
@@ -81,7 +88,19 @@ const TipTapEditor = (props: TipTapEditorProps) => {
           <EditorContent editor={editor} />
         </Box>
       </Box>
-    </div>
+      <Chip
+        sx={{
+          fontSize: "16px",
+          marginTop: "8px",
+          borderRadius: "4px",
+        }}
+        label={
+          <>
+            {charLength} {props.min && `/ ${props.min}`}
+          </>
+        }
+      ></Chip>
+    </>
   );
 };
 
@@ -147,7 +166,6 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
           />
         </Grid>
       </Grid>
-
       {editorDisplay}
     </Grid>
   );
