@@ -13,12 +13,21 @@ import PostPageLegacyLayout from "./PostPageLegacyLayout";
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
 
+  // useEffect(() => {
+  //   if (post && post.post_embed_script !== null){
+  //     var s = document.createElement('script');
+  //     s.setAttribute('src', post.post_embed_script);
+  //     (document.body || document.head).appendChild(s);
+  //   }
+  // }, []);
+
+  /* TO DO'S
+     - MAKE A BETTER NO POST FOUND PAGE! maybe even split to a different compoent -> show suggested posts? show helpful links?
+    */
+
   function isEmpty(val) {
     let isEmpty = false;
-
-    console.log(val.innerText);
-
-    if (!val || val === null || !val.innerText) isEmpty = true;
+    if (!val || val === null || val.length === 0) isEmpty = true;
     return isEmpty;
   }
 
@@ -26,6 +35,7 @@ function Post({ post }) {
   if (post && post !== null) {
     const { postExcerpt, postContent, postExcerpt2, postContent2 } =
       getPostContentFields(post, locale);
+
     const postLayout = getPostLaoyut(post);
     let postLayoutDisplay: ReactElement, postNavigationDisplay: ReactElement;
     if (postLayout === "member_form") {
@@ -36,13 +46,6 @@ function Post({ post }) {
       postLayoutDisplay = (
         <PostPageDonationFormLayout post={post} locale={locale} />
       );
-    } else if (
-      isEmpty(postContent) ||
-      isEmpty(postExcerpt) ||
-      isEmpty(postExcerpt2) ||
-      isEmpty(postContent2)
-    ) {
-      postLayoutDisplay = <PostPageLegacyLayout post={post} locale={locale} />;
     } else if (postLayout === "newsletter") {
       postLayoutDisplay = (
         <PostPageNewsletterLayout post={post} locale={locale} />
@@ -50,6 +53,12 @@ function Post({ post }) {
       postNavigationDisplay = (
         <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
       );
+    } else if (
+      isEmpty(postContent) ||
+      isEmpty(postExcerpt2) ||
+      isEmpty(postContent2)
+    ) {
+      postLayoutDisplay = <PostPageLegacyLayout post={post} locale={locale} />;
     } else {
       postLayoutDisplay = <PostPageArticleLayout post={post} locale={locale} />;
       postNavigationDisplay = (
