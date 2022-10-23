@@ -68,8 +68,7 @@ function Post({ post }) {
     } else if (
       post.post_image == null ||
       isEmpty(postContent) ||
-      isEmpty(postExcerpt2) ||
-      isEmpty(postContent2)
+      isEmpty(postExcerpt)
     ) {
       postLayoutDisplay = (
         <PostPageLegacyLayout
