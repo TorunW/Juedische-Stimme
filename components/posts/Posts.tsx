@@ -11,6 +11,7 @@ import PostsHeader from "./PostsHeader";
 import getImageDimensions from "helpers/getImageDimensions";
 import { Container } from "../atoms/Container";
 import { useSelector } from "store/hooks";
+import { getLabel } from "helpers/getLabelHelper";
 
 interface PostsProps {
   posts: any[];
@@ -75,11 +76,7 @@ function Posts({
     <div className="link whiteBg">
       <Link href={`/category/${title}`}>
         <a className="link-button">
-          {
-            labels.find((label) => label.label_name === "read_more")[
-              locale === "en_US" ? "label_title_en_US" : "label_title"
-            ]
-          }
+          {getLabel(labels, locale, "read_more", "Weiter Lesen")}
         </a>
       </Link>
     </div>
