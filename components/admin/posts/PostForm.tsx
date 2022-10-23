@@ -85,13 +85,9 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
   const imageValidation = Yup.string().required("Add an Image");
   const postExcerptValidation = Yup.string()
     .min(160)
-    .max(200)
     .required("Add a summary sentence from the Post");
   const postContentValidation = Yup.string()
-    .min(
-      700,
-      "Post content should be a least 700 characters (recommended max 900)"
-    )
+    .min(700, "Post content should be a least 700 characters")
     .required("Add some text to the post");
 
   const validationSchema = Yup.object().shape({
@@ -105,6 +101,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       then: Yup.string().min(2).required("Choose a layout for the post"),
     }),
     post_image: Yup.string()
+      .nullable()
       .when("post_layout", {
         is: "article",
         then: imageValidation,
@@ -326,7 +323,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   margin: 2,
                 }}
               >
-                {console.log(props.errors)}
                 {currentTab === "post" ? (
                   <>
                     <Grid
@@ -491,28 +487,29 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                           />
                         </>
                       </Grid>
-                      {props.values.post_layout !== "legacy" && (
-                        <Grid
-                          container
-                          item
-                          sx={{ marginY: 2 }}
-                        >
-                          <TipTapEditor
-                            onChange={(val: string) =>
-                              props.setFieldValue("post_excerpt", val, true)
-                            }
-                            value={props.values.post_excerpt}
-                            itemType={"post"}
-                            itemId={post ? post.postId : nextPostId}
-                            height={150}
-                            title="Summary Sentence"
-                            min={160}
-                          />
-                          {props?.errors?.post_excerpt && (
-                            <FormError message={props.errors.post_excerpt} />
-                          )}
-                        </Grid>
-                      )}
+                      {props.values.post_layout !== "legacy" &&
+                        !isMinimalLayout && (
+                          <Grid
+                            container
+                            item
+                            sx={{ marginY: 2 }}
+                          >
+                            <TipTapEditor
+                              onChange={(val: string) =>
+                                props.setFieldValue("post_excerpt", val, true)
+                              }
+                              value={props.values.post_excerpt}
+                              itemType={"post"}
+                              itemId={post ? post.postId : nextPostId}
+                              height={150}
+                              title="Summary Sentence"
+                              min={160}
+                            />
+                            {props?.errors?.post_excerpt && (
+                              <FormError message={props.errors.post_excerpt} />
+                            )}
+                          </Grid>
+                        )}
 
                       <Grid
                         container
@@ -630,36 +627,31 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             <PostTagForm
                               postId={post ? post.postId : nextPostId}
                             />
-
-                            <Grid
-                              item
-                              sx={{ marginY: 2 }}
-                              xs={12}
-                            >
-                              <FormControl
-                                fullWidth
-                                margin="normal"
-                              >
-                                <InputLabel>Post Status</InputLabel>
-                                <Select
-                                  id="post_status"
-                                  name="post_status"
-                                  label="Post Status"
-                                  value={props.values.post_status}
-                                  onChange={props.handleChange}
-                                >
-                                  <MenuItem value={"publish"}>
-                                    Publish post
-                                  </MenuItem>
-                                  <MenuItem value={"draft"}>
-                                    Save to drafts
-                                  </MenuItem>
-                                </Select>
-                              </FormControl>
-                            </Grid>
                           </>
                         )}
 
+                      <Grid
+                        item
+                        sx={{ marginY: 2 }}
+                        xs={12}
+                      >
+                        <FormControl
+                          fullWidth
+                          margin="normal"
+                        >
+                          <InputLabel>Post Status</InputLabel>
+                          <Select
+                            id="post_status"
+                            name="post_status"
+                            label="Post Status"
+                            value={props.values.post_status}
+                            onChange={props.handleChange}
+                          >
+                            <MenuItem value={"publish"}>Publish post</MenuItem>
+                            <MenuItem value={"draft"}>Save to drafts</MenuItem>
+                          </Select>
+                        </FormControl>
+                      </Grid>
                       <Grid
                         item
                         sx={{ marginY: 2 }}

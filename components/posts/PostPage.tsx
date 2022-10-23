@@ -40,35 +40,64 @@ function Post({ post }) {
     let postLayoutDisplay: ReactElement, postNavigationDisplay: ReactElement;
     if (postLayout === "member_form") {
       postLayoutDisplay = (
-        <PostPageMemberFormLayout post={post} locale={locale} />
+        <PostPageMemberFormLayout
+          post={post}
+          locale={locale}
+        />
       );
     } else if (postLayout === "donation") {
       postLayoutDisplay = (
-        <PostPageDonationFormLayout post={post} locale={locale} />
+        <PostPageDonationFormLayout
+          post={post}
+          locale={locale}
+        />
       );
     } else if (postLayout === "newsletter") {
       postLayoutDisplay = (
-        <PostPageNewsletterLayout post={post} locale={locale} />
+        <PostPageNewsletterLayout
+          post={post}
+          locale={locale}
+        />
       );
       postNavigationDisplay = (
-        <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
+        <PostPageNavigation
+          postId={post.postId}
+          categoryId={post.categoryId}
+        />
       );
     } else if (
+      post.post_image == null ||
       isEmpty(postContent) ||
       isEmpty(postExcerpt2) ||
       isEmpty(postContent2)
     ) {
-      postLayoutDisplay = <PostPageLegacyLayout post={post} locale={locale} />;
+      postLayoutDisplay = (
+        <PostPageLegacyLayout
+          post={post}
+          locale={locale}
+        />
+      );
     } else {
-      postLayoutDisplay = <PostPageArticleLayout post={post} locale={locale} />;
+      postLayoutDisplay = (
+        <PostPageArticleLayout
+          post={post}
+          locale={locale}
+        />
+      );
       postNavigationDisplay = (
-        <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
+        <PostPageNavigation
+          postId={post.postId}
+          categoryId={post.categoryId}
+        />
       );
     }
     postDisplay = (
       <React.Fragment>
         {postLayoutDisplay}
-        {postNavigationDisplay}
+        <PostPageNavigation
+          postId={post.postId}
+          categoryId={post.categoryId}
+        />
       </React.Fragment>
     );
   } else {
@@ -90,7 +119,10 @@ function Post({ post }) {
   }
 
   return (
-    <div id="post-view" className={styles.postPage}>
+    <div
+      id="post-view"
+      className={styles.postPage}
+    >
       {postDisplay}
     </div>
   );

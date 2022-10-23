@@ -232,12 +232,23 @@ a {
     font-weight: 600;
   }
 }
-main {
-  padding-top: 115px;
-  min-height: 400px;
+@media (max-width: 844px) {
+  main {
+    padding-top: 79px;
+    min-height: 400px;
+  }
+  main.proca-MuiContainer-root {
+    padding-top: 0;
+  }
 }
-main.proca-MuiContainer-root {
-  padding-top: 0;
+@media (min-width: 845px) {
+  main {
+    padding-top: 109px;
+    min-height: 400px;
+  }
+  main.proca-MuiContainer-root {
+    padding-top: 0;
+  }
 }
 #main-layout {
   overflow: hidden;

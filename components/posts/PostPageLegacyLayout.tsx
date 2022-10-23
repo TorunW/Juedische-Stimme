@@ -14,7 +14,10 @@ export default function PostPageLegacyLayout({ post, locale }) {
     let tagsArray = [post.tagNames];
     if (post.tagNames.indexOf(",") > -1) tagsArray = post.tagNames.split(",");
     tagsDisplay = tagsArray.map((tag, index) => (
-      <a key={index} href={"/tag/" + tag}>
+      <a
+        key={index}
+        href={"/tag/" + tag}
+      >
         {" #" + tag}
       </a>
     ));
@@ -22,11 +25,9 @@ export default function PostPageLegacyLayout({ post, locale }) {
 
   return (
     <React.Fragment>
-      <div className={styles.articleLayout}>
+      <div className={styles.legacyLayout}>
         <div className={styles.header}>
-          <div className={styles.contentWrapper}>
-            <h2>{postTitle}</h2>
-          </div>
+          <h2>{postTitle}</h2>
           <div className={styles.linksContainer}>
             <p>Published {post.post_date ? formateDate(post.post_date) : ""}</p>
             <p>
@@ -39,24 +40,20 @@ export default function PostPageLegacyLayout({ post, locale }) {
           </div>
         </div>
 
-        <div className={styles.contentContainer}>
-          <div className={styles.topWrapper}>
-            <div
-              className={styles.topContent + " " + styles.content}
-              dangerouslySetInnerHTML={{
-                __html: postContent.replace(/(?:\r\n|\r|\n)/g, "<br>"),
-              }}
-            ></div>
-          </div>
-          {post.post_embed_script && post.post_embed_script !== "null" ? (
-            <PostPageEmbededContent
-              script={post.post_embed_script}
-              html={post.post_embed_html}
-            />
-          ) : (
-            ""
-          )}
-        </div>
+        <div
+          className={styles.content}
+          dangerouslySetInnerHTML={{
+            __html: postContent.replace(/(?:\r\n|\r|\n)/g, "<br>"),
+          }}
+        ></div>
+        {post.post_embed_script && post.post_embed_script !== "null" ? (
+          <PostPageEmbededContent
+            script={post.post_embed_script}
+            html={post.post_embed_html}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </React.Fragment>
   );

@@ -1,10 +1,10 @@
-@media (min-width: 1440px) {
+@media (min-width: 1025px) {
   .articleLayout {
     height: 100%;
 
     .header {
       height: 350px;
-      background: #8179a6;
+      background: #696388;
       width: 100%;
       display: flex;
       justify-content: flex-end;
@@ -21,7 +21,6 @@
           width: 800px;
           color: white;
           z-index: 5;
-          // margin-top: 32px;
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
 
@@ -45,40 +44,43 @@
 
     .linksContainer {
       margin: 32px auto;
-      max-width: 1440px;
+      padding: 0 48px;
+      max-width: 1067px;
       color: #626262;
     }
 
     .contentContainer {
-      margin: 64px auto;
-      max-width: 1440px;
+      margin: 48px auto;
+      padding: 0 48px;
+      max-width: 1067px;
       color: #2e2e2e;
 
       .topWrapper {
-        margin-bottom: 32px;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 32px;
+       display: block;
+       height: auto;
 
         .topExcerpt {
-          width: 35%;
-          padding-right: 94px;
+          padding: 0 8px 8px 0;
+          display: inline;
+          float: left;
+          width: 300px;
+          height: auto;
+          word-break: break-word;
         }
 
         .topContent {
-          width: 65%;
-          display: flex;
-          flex-direction: column;
+            display: inline;
         }
       }
 
       .middleWrapper {
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 64px;
         margin-bottom: 32px;
+        padding-top: 32px;
+        clear: both;
         .image {
           min-width: 50%;
           position: relative;
@@ -99,7 +101,7 @@
 
       .excerpt {
         p {
-          font-size: 2rem;
+          font-size: 1.6rem;
           font-weight: 700;
           line-height: 2rem;
         }
@@ -116,138 +118,21 @@
   }
 }
 
-@media (max-width: 1439px) {
+@media (max-width: 1024px) {
   .articleLayout {
     height: 100%;
 
     .header {
-      height: 350px;
-      background: #8179a6;
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      .contentWrapper {
-        width: 100%;
-        display: flex;
-        margin-top: 88px;
-
-        h2 {
-          display: flex;
-          align-items: center;
-          position: relative;
-          margin: 0 auto;
-          width: 800px;
-          color: white;
-          z-index: 5;
-          // margin-top: 32px;
-          text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        }
-
-        .imageWrapper {
-          width: 60%;
-          height: 300px;
-          position: absolute;
-          z-index: 1;
-          right: 0;
-          filter: brightness(80%);
-          background: #696388;
-
-          img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-          }
-        }
-      }
-    }
-
-    .linksContainer {
-      margin: 32px auto;
-      padding: 0 64px;
-      color: #626262;
-    }
-
-    .contentContainer {
-      margin: 64px auto;
-      padding: 0 64px;
-      color: #2e2e2e;
-
-      .topWrapper {
-        margin-bottom: 32px;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 32px;
-
-        .topExcerpt {
-          width: 40%;
-          padding-right: 94px;
-        }
-
-        .topContent {
-          width: 65%;
-          display: flex;
-          flex-direction: column;
-        }
-      }
-
-      .middleWrapper {
-        display: flex;
-        align-items: center;
-        gap: 64px;
-        margin-bottom: 32px;
-        .image {
-          min-width: 50%;
-          position: relative;
-          overflow: hidden;
-          aspect-ratio: auto 559 / 300;
-
-          img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-          }
-        }
-
-        .bottomExcerpt {
-          width: 50%;
-        }
-      }
-
-      .excerpt {
-        p {
-          font-size: 1.9rem;
-          font-weight: 700;
-          line-height: 1.6rem;
-        }
-      }
-
-      .content {
-        font-size: 1.1rem;
-        p {
-          line-height: 1.5rem;
-          margin: 16px 0;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1090px) {
-  .articleLayout {
-    height: 100%;
-
-    .header {
-      height: 350px;
+      height: 300px;
       background: #696388;
+      padding-left: 48px;
       width: 100%;
       display: flex;
       justify-content: flex-end;
       .contentWrapper {
         width: 100%;
         display: flex;
-        margin-top: 88px;
+        margin-top: 64px;
 
         h2 {
           display: flex;
@@ -257,12 +142,11 @@
           width: 800px;
           color: white;
           z-index: 5;
-          // margin-top: 32px;
           text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         }
 
         .imageWrapper {
-          width: 70%;
+          width: 65%;
           height: 300px;
           position: absolute;
           z-index: 1;
@@ -283,38 +167,39 @@
       margin: 32px auto;
       padding: 0 64px;
       color: #626262;
+      font-size: .9rem;
     }
 
     .contentContainer {
       margin: 32px auto;
       padding: 0 64px;
       color: #2e2e2e;
-
       .topWrapper {
-        margin-bottom: 32px;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 32px;
+        display: block;
+        height: auto;
 
         .topExcerpt {
-          width: 40%;
-          padding-right: 48px;
+          display: inline;
+          float: left;
+          width: 270px;
+          padding: 0 8px 8px 0;
+          height: auto;
+          word-break: break-word;
         }
 
         .topContent {
-          width: 70%;
-          display: flex;
-          flex-direction: column;
+          display: inline;
         }
       }
 
       .middleWrapper {
+        padding-top: 32px;
         display: flex;
         align-items: center;
+        justify-content: center;
         gap: 64px;
         margin-bottom: 32px;
+        clear: both;
         .image {
           min-width: 50%;
           position: relative;
@@ -330,12 +215,14 @@
 
         .bottomExcerpt {
           width: 50%;
+          word-break: break-word;
+
         }
       }
 
       .excerpt {
         p {
-          font-size: 1.5rem;
+          font-size: 1.3rem;
           font-weight: 700;
           line-height: 1.6rem;
         }
@@ -352,12 +239,12 @@
   }
 }
 
-@media (max-width: 844px) {
+@media (max-width: 768px) {
   .articleLayout {
     height: 100%;
 
     .header {
-      height: 350px;
+      height: 200px;
       background: #696388;
       width: 100%;
       display: flex;
@@ -365,7 +252,7 @@
       .contentWrapper {
         width: 100%;
         display: flex;
-        margin-top: 88px;
+        margin-top: 32px;
 
         h2 {
           display: flex;
@@ -380,7 +267,7 @@
 
         .imageWrapper {
           width: 60%;
-          height: 300px;
+          height: 200px;
           position: absolute;
           z-index: 1;
           right: 0;
@@ -403,7 +290,7 @@
 
       p {
         width: 200px;
-        font-size: 0.9rem;
+        font-size: 0.8rem;
       }
     }
 
@@ -414,13 +301,15 @@
 
       .topWrapper {
         display: block;
+        height: auto;
 
         .topExcerpt {
-          padding: 0;
+          padding: 0 8px 8px 0;
           display: inline;
           float: left;
           width: 230px;
-          height: 160px;
+          height: auto;
+          word-break: break-word;
         }
 
         .topContent {
@@ -430,11 +319,10 @@
 
       .middleWrapper {
         display: flex;
-        align-items: center;
-        gap: 64px;
-        margin-bottom: 32px;
+        flex-direction: column;
+        margin-bottom: 16px;
         .image {
-          min-width: 50%;
+          width: 100%;
           position: relative;
           overflow: hidden;
           aspect-ratio: auto 559 / 300;
@@ -447,7 +335,7 @@
         }
 
         .bottomExcerpt {
-          width: 50%;
+          width: 100%;
         }
       }
 
@@ -474,6 +362,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0 32px;
+  max-width: 1067px;
   margin: 0 auto 48px;
 
   a {
@@ -556,15 +445,16 @@
   border-radius: 25px;
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1025px) {
   .newsletterLayout {
-    width: 1220px;
+    max-width: 1067px;
     margin: 48px auto;
+    // padding: 0 32px;
     .header {
       text-align: center;
 
       h2 {
-        max-width: 1220px;
+        max-width: 1067px;
         margin: 16px auto 0;
       }
       p {
@@ -598,7 +488,8 @@
     }
 
     .contentContainer {
-      margin-top: 48px;
+      margin: 48px;
+
       p {
         margin: 16px auto;
       }
@@ -626,7 +517,7 @@
   }
 }
 
-@media (max-width: 1439px) {
+@media (max-width: 1024px) and (min-width: 770px) {
   .newsletterLayout {
     padding: 0 120px;
     margin: 48px auto;
@@ -634,7 +525,6 @@
       text-align: center;
 
       h2 {
-        max-width: 1220px;
         margin: 16px auto 0;
       }
       p {
@@ -653,7 +543,6 @@
         }
       }
       .imageWrapper {
-        width: 80%;
         aspect-ratio: auto 994 / 337;
         margin: 32px auto;
         overflow: hidden;
@@ -675,7 +564,7 @@
 
       .image {
         margin: 48px auto;
-        max-width: 749px;
+        min-width: 100%;
         aspect-ratio: auto 794 / 326;
         overflow: hidden;
         position: relative;
@@ -696,7 +585,7 @@
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 769px) {
   .newsletterLayout {
     padding: 0 48px;
     margin: 48px auto;
@@ -704,8 +593,8 @@
       text-align: center;
 
       h2 {
-        max-width: 1220px;
         margin: 16px auto 0;
+        font-size: 1.6rem !important;
       }
       p {
         color: #626262;
@@ -723,11 +612,11 @@
         }
       }
       .imageWrapper {
-        width: 80%;
+        max-width: 100%;
+        min-height: 200px;
         aspect-ratio: auto 994 / 337;
-        margin: 32px auto;
+        margin: 16px auto;
         overflow: hidden;
-        cursor: pointer;
         position: relative;
         img {
           height: 100%;
@@ -744,15 +633,17 @@
       }
 
       .image {
-        margin: 48px auto;
-        max-width: 749px;
-        aspect-ratio: auto 794 / 326;
+        max-width: 100%;
+        min-height: 200px;
+        aspect-ratio: auto 994 / 337;
+        margin: 16px auto;
         overflow: hidden;
         position: relative;
         img {
           height: 100%;
           width: 100%;
           object-fit: cover;
+
         }
       }
       .bottomExcerpt {
@@ -765,3 +656,43 @@
     }
   }
 }
+
+
+
+  .legacyLayout {
+    height: 100%;
+
+    .header {
+      background: #696388;
+      width: 100%;
+      text-align: center;
+        h2 {
+          color: white;
+          text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          padding-top: 48px;
+        }
+      
+    }
+
+    .linksContainer {
+      margin: 32px auto;
+      padding: 0 48px;
+      max-width: 1067px;
+      color: #626262;
+    }
+
+    .content {
+      margin: 48px auto;
+      padding: 0 48px;
+      max-width: 1067px;
+      color: #2e2e2e;
+
+      .content {
+        font-size: 1.2rem;
+        p {
+          line-height: 1.5rem;
+          margin: 16px 0;
+        }
+      }
+    }
+  }
