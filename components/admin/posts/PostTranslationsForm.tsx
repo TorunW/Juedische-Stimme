@@ -7,6 +7,7 @@ import { Button, FormControl, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 import TipTapEditor from "components/tiptap/TipTapEditor";
+import { PerformantTextField } from "@/components/atoms/PerformantTextField";
 
 const PostTranslationsForm = ({ post, language }) => {
   const formik = useFormik({
@@ -60,15 +61,21 @@ const PostTranslationsForm = ({ post, language }) => {
         className={styles.form}
         onSubmit={formik.handleSubmit}
       >
-        <label htmlFor="name">Post Title (English)</label>
-        <input
-          id={"title"}
-          name={"title"}
-          type="text"
+        <PerformantTextField
+          fullWidth
+          id="title"
+          name="title"
+          label="Post Title (English)"
+          margin="normal"
+          placeholder="Title"
           onChange={formik.handleChange}
           value={formik.values.title}
         />
-        {errors && errors.title ? <FormError message={errors.title} /> : ""}
+        {formik?.errors?.title ? (
+          <FormError message={formik.errors.title} />
+        ) : (
+          ""
+        )}
 
         <TipTapEditor
           onChange={(val) => formik.setFieldValue("content", val, true)}

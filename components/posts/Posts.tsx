@@ -9,6 +9,7 @@ import postHeader from "public/post-header.jpg";
 import Placeholder from "../placeholder/Placeholder";
 import PostsHeader from "./PostsHeader";
 import getImageDimensions from "helpers/getImageDimensions";
+import { Container } from "../atoms/Container";
 
 interface PostsProps {
   posts: any[];
@@ -107,10 +108,14 @@ function Posts({
         (title === "Newsletter" ? styles.threeColPage : styles.twoColPage)
       }
     >
-      {headerDisplay}
-      {searchDisplay}
-      {postsTemplateDisplay}
-      {paginationDisplay}
+      <Container>
+        <>
+          {headerDisplay}
+          {searchDisplay}
+          {postsTemplateDisplay}
+          {paginationDisplay}
+        </>
+      </Container>
     </section>
   );
 }

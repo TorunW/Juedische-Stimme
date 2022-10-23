@@ -255,7 +255,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   margin: 2,
                 }}
               >
-                {console.log(props.errors)}
                 {currentTab === "post" ? (
                   <>
                     <Grid

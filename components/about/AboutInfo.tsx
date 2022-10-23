@@ -4,13 +4,11 @@ import Image from "next/image";
 import Gallery from "../gallery/Gallery";
 import styles from "./Styles.module.css";
 import containerBackground from "styles/images/about.jpg";
+import { Container } from "../atoms/Container";
 
 const AboutInfo = ({ gallery, aboutInfo }) => {
   let [galleryImages, setGalleryImages] = useState([]);
   const { locale } = useSelector((state) => state.languages);
-  console.log(locale, "LOCALE ");
-  console.log(aboutInfo, " ABOUT INFO");
-
   useEffect(() => {
     if (gallery !== null) getGalleryImages();
   }, [gallery]);
@@ -27,23 +25,31 @@ const AboutInfo = ({ gallery, aboutInfo }) => {
       className={styles.aboutPage}
     >
       <h1>Über Uns</h1>
-      {aboutInfo && aboutInfo !== null && (
-        <div
-          data-testid="about-info-container"
-          className={styles.aboutContainer}
-        >
-          <div
-            dangerouslySetInnerHTML={{
-              __html:
-                locale === "en_US"
-                  ? aboutInfo.text_top_en_US
-                  : aboutInfo.text_top,
-            }}
-            className={styles.text}
-          ></div>
-          {galleryImages.length > 0 ? <Gallery images={galleryImages} /> : ""}
-        </div>
-      )}
+      <Container>
+        <>
+          {aboutInfo && aboutInfo !== null && (
+            <div
+              data-testid="about-info-container"
+              className={styles.aboutContainer}
+            >
+              <div
+                dangerouslySetInnerHTML={{
+                  __html:
+                    locale === "en_US"
+                      ? aboutInfo.text_top_en_US
+                      : aboutInfo.text_top,
+                }}
+                className={styles.text}
+              ></div>
+              {galleryImages.length > 0 ? (
+                <Gallery images={galleryImages} />
+              ) : (
+                ""
+              )}
+            </div>
+          )}
+        </>
+      </Container>
       <div className={styles.contentContainer}>
         <Image
           src={containerBackground}
