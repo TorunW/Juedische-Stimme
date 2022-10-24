@@ -84,10 +84,6 @@ function LoginForm() {
             Login
           </button>
         )}
-
-        <button className={styles.forgotButton + " " + styles.button}>
-          Forgot password?
-        </button>
       </div>
     </div>
   );

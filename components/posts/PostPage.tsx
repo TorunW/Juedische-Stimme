@@ -93,10 +93,12 @@ function Post({ post }) {
     postDisplay = (
       <React.Fragment>
         {postLayoutDisplay}
-        <PostPageNavigation
-          postId={post.postId}
-          categoryId={post.categoryId}
-        />
+        {postLayout === "donation" || postLayout === "membership" ? (
+          <PostPageNavigation
+            postId={post.postId}
+            categoryId={post.categoryId}
+          />
+        ) : null}
       </React.Fragment>
     );
   } else {
