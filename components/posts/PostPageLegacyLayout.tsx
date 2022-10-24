@@ -45,13 +45,15 @@ export default function PostPageLegacyLayout({ post, locale }) {
           </div>
         </div>
         {post.post_image && post.post_image.indexOf("null") === -1 ? (
-          <Image
-            src={generateImageUrl(post.post_image)}
-            alt={post.post_title}
-            title={post.post_title}
-            layout="fill"
-            objectFit="cover"
-          />
+          <div style={{ maxWidth: "100%" }}>
+            <Image
+              src={generateImageUrl(post.post_image)}
+              alt={post.post_title}
+              title={post.post_title}
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
         ) : null}
         <div
           className={styles.content}
