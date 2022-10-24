@@ -86,13 +86,12 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
     const headerImageUri = `http://${
       context.req.headers.host
     }/${generateImageUrl(headerGalleryResponse[0].imageSrcs.split(",")[0])}`;
-    let { img, svg } = await getPlaiceholder(headerImageUri, {
+    let { img } = await getPlaiceholder(headerImageUri, {
       size: 32,
     });
     const headerImage = JSON.stringify({
       uri: headerImageUri,
       img,
-      svg,
     });
 
     return {
@@ -195,14 +194,26 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
             sizes="16x16"
             href="/favicon-16x16.png"
           />
-          <link rel="manifest" href="/site.webmanifest" />
+          <link
+            rel="manifest"
+            href="/site.webmanifest"
+          />
         </div>
       </Head>
       <Header />
-      <Posts posts={posts} title={"Aktuelles"} />
+      <Posts
+        posts={posts}
+        title={"Aktuelles"}
+      />
       <FacebookEvents fbt={fbt} />
-      <AboutInfo gallery={gallery} aboutInfo={aboutInfo} />
-      <Posts posts={newsletter} title={"Newsletter"} />
+      <AboutInfo
+        gallery={gallery}
+        aboutInfo={aboutInfo}
+      />
+      <Posts
+        posts={newsletter}
+        title={"Newsletter"}
+      />
       <CallToAction />
       <Container>
         <iframe
