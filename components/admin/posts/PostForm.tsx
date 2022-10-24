@@ -174,12 +174,15 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
         previewImageFile.name.split(".")[
           previewImageFile.name.split.length - 1
         ];
+
       let fileName =
         previewImageFile.name.split(`.${fileType}`)[0] +
         `__${uuidv4()}.${fileType}`;
+
       const postImageUrl = `/api/posts/${
         post ? +post.postId : nextPostId
       }/image`;
+
       const postImageData = {
         meta_value: generateFileName(fileName),
         image_number: 1,
@@ -327,6 +330,8 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   }}
                 >
                   <>
+                    {console.log(props.values)}
+
                     <Grid
                       container
                       item
@@ -469,8 +474,8 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         <>
                           <ImageUploadField
                             image={
-                              post?.post_image
-                                ? generateImageUrl(post.post_image)
+                              props.values?.post_image
+                                ? generateImageUrl(props.values.post_image)
                                 : null
                             }
                             previewImage={previewImage}
@@ -479,6 +484,11 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             onChange={(val) =>
                               props.setFieldValue("post_image", val)
                             }
+                            onDelete={(val) => {
+                              props.setFieldValue("post_image", null);
+                              setPreviewImage(null);
+                              setPreviewImageFile(null);
+                            }}
                             error={
                               props?.errors?.post_image ? (
                                 <FormError message={props.errors.post_image} />

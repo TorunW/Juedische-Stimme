@@ -37,35 +37,25 @@ const Header = () => {
         <>
           <div className={styles.sliderWrapper}>
             {imageSrcs.map((imgSrc, index) => {
-              let blurredBgImage;
-              if (index === 0) {
-                blurredBgImage = (
-                  <BlurringImage
-                    key={imgSrc}
-                    svg={svg}
-                    img={img}
-                    alt={undefined}
-                    style={undefined}
-                    height={img.height}
-                    onLoadingComplete={() =>
-                      dispatch(setHeaderImageLoaded(true))
-                    }
-                  />
-                );
-              }
+              // let blurredBgImage;
+              // if (index === 0) {
+              //   blurredBgImage = (
+              //     <BlurringImage
+              //       key={imgSrc}
+              //       svg={svg}
+              //       img={img}
+              //       alt={undefined}
+              //       style={undefined}
+              //       height={img.height}
+              //       onLoadingComplete={() =>
+              //         dispatch(setHeaderImageLoaded(true))
+              //       }
+              //     />
+              //   );
+              // }
 
               return (
                 <React.Fragment key={Date.now() + index}>
-                  <div className={styles.blurredImageContainer}>
-                    <Skeleton
-                      sx={{
-                        width: "100vw",
-                        height: "1080px",
-                        marginTop: "-240px",
-                      }}
-                    />
-                  </div>
-
                   <div
                     className={
                       slideIndex === index
