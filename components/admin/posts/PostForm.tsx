@@ -309,23 +309,23 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
         }
       />
       <Container>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-          validateOnChange={false}
-          validateOnBlur={false}
-          validationSchema={validationSchema}
-        >
-          {(props: FormikProps<Post>) => (
-            <Form>
-              <Card
-                sx={{
-                  paddingX: 4,
-                  paddingY: 2,
-                  margin: 2,
-                }}
-              >
-                {currentTab === "post" ? (
+        {currentTab === "post" ? (
+          <Formik
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            validateOnChange={false}
+            validateOnBlur={false}
+            validationSchema={validationSchema}
+          >
+            {(props: FormikProps<Post>) => (
+              <Form>
+                <Card
+                  sx={{
+                    paddingX: 4,
+                    paddingY: 2,
+                    margin: 2,
+                  }}
+                >
                   <>
                     <Grid
                       container
@@ -670,17 +670,19 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                       </Grid>
                     </Grid>
                   </>
-                ) : currentTab === "translations" ? (
-                  <PostTranslations
-                    post={post}
-                    locales={locales}
-                    defaultLocale={defaultLocale}
-                  />
-                ) : null}
-              </Card>
-            </Form>
-          )}
-        </Formik>
+                </Card>
+              </Form>
+            )}
+          </Formik>
+        ) : null}
+
+        {currentTab === "translations" ? (
+          <PostTranslations
+            post={post}
+            locales={locales}
+            defaultLocale={defaultLocale}
+          />
+        ) : null}
       </Container>
     </Box>
   );

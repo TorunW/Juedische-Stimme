@@ -12,6 +12,8 @@ import { Container } from "../atoms/Container";
 export default function PostPageLegacyLayout({ post, locale }) {
   const { postTitle, postContent } = getPostContentFields(post, locale);
 
+  console.log(post);
+
   let tagsDisplay: ReactElement[];
   if (post.tagNames && post.tagNames.length > 0) {
     let tagsArray = [post.tagNames];
