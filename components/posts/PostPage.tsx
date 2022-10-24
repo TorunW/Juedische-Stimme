@@ -93,7 +93,7 @@ function Post({ post }) {
     postDisplay = (
       <React.Fragment>
         {postLayoutDisplay}
-        {postLayout === "donation" || postLayout === "membership" ? (
+        {postLayout !== "donation" && postLayout !== "membership" ? (
           <PostPageNavigation
             postId={post.postId}
             categoryId={post.categoryId}
