@@ -108,7 +108,7 @@
 }
 .membershipForm input {
   background: none;
-  color: white;
+  color: white !important;
   border: none;
   border-bottom: #8179a6 2px solid;
   margin-bottom: 16px;
