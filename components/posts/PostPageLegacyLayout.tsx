@@ -7,6 +7,7 @@ import { getPostContentFields } from "helpers/getPostContentFields";
 import PostPageEmbededContent from "./PostPageEmbededContent";
 import trimStringToLastSpace from "helpers/trimStringToLastSpace";
 import Share from "helpers/shareToSocialMedia";
+import { Container } from "../atoms/Container";
 
 export default function PostPageLegacyLayout({ post, locale }) {
   const { postTitle, postContent } = getPostContentFields(post, locale);
@@ -44,16 +45,18 @@ export default function PostPageLegacyLayout({ post, locale }) {
             <h2>{postTitle}</h2>
           </div>
         </div>
+
         {post.post_image && post.post_image.indexOf("null") === -1 ? (
-          <div style={{ maxWidth: "100%" }}>
-            <Image
-              src={generateImageUrl(post.post_image)}
-              alt={post.post_title}
-              title={post.post_title}
-              layout="fill"
-              objectFit="cover"
-            />
-          </div>
+          <Container>
+            <div style={{ width: "100%", textAlign: "center" }}>
+              <img
+                src={generateImageUrl(post.post_image)}
+                alt={post.post_title}
+                title={post.post_title}
+                style={{ margin: "20px auto" }}
+              />
+            </div>
+          </Container>
         ) : null}
         <div
           className={styles.content}
