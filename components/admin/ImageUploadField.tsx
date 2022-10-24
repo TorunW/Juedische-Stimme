@@ -24,26 +24,26 @@ export const ImageUploadField: FC<Props> = ({
   error,
 }) => {
   function deleteImage() {
-    const requestsArray = [];
-    const deleteFileUrl = `http://${window.location.hostname}${
-      window.location.port !== "80" ? ":" + window.location.port : ""
-    }/media/${image.split("/wp-content/uploads/")[1].split("/").join("+++")}`;
-    const deleteFileRequest = axios.delete(deleteFileUrl);
+    // const requestsArray = [];
+    // const deleteFileUrl = `http://${window.location.hostname}${
+    //   window.location.port !== "80" ? ":" + window.location.port : ""
+    // }/media/${image.split("/wp-content/uploads/")[1].split("/").join("+++")}`;
+    // const deleteFileRequest = axios.delete(deleteFileUrl);
 
-    const imageDeleteRequest = axios.delete(`/api/posts/${postId}/image`, {});
+    // const imageDeleteRequest = axios.delete(`/api/posts/${postId}/image`, {});
 
-    requestsArray.push(deleteFileRequest);
-    axios
-      .all([...requestsArray])
-      .then(
-        axios.spread((...responses) => {
-          console.log(responses, " RESPONSES");
-          onDelete();
-        })
-      )
-      .catch((errors) => {
-        console.log(errors, " ERRORS");
-      });
+    // requestsArray.push(deleteFileRequest);
+    // axios
+    //   .all([...requestsArray])
+    //   .then(
+    //     axios.spread((...responses) => {
+    //       console.log(responses, " RESPONSES");
+    //       onDelete();
+    //     })
+    //   )
+    //   .catch((errors) => {
+    //     console.log(errors, " ERRORS");
+    //   });
     onDelete();
   }
 
