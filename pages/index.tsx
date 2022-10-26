@@ -86,7 +86,7 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
     const headerImageUri = `http://${
       context.req.headers.host
     }/${generateImageUrl(headerGalleryResponse[0].imageSrcs.split(',')[0])}`;
-    let { img, svg } = await getPlaiceholder(headerImageUri, {
+    let { img } = await getPlaiceholder(headerImageUri, {
       size: 32,
     });
     const headerImage = JSON.stringify({
