@@ -28,7 +28,7 @@ function LoginForm() {
         setCookie("Token", response.user.accessToken);
         sessionStorage.setItem("UserEmail", response.user.email);
         setCookie("UserEmail", response.user.email);
-        router.push("/");
+        router.push("/admin/");
       })
       .catch((err) => {
         console.log(err);
@@ -84,10 +84,6 @@ function LoginForm() {
             Login
           </button>
         )}
-
-        <button className={styles.forgotButton + " " + styles.button}>
-          Forgot password?
-        </button>
       </div>
     </div>
   );

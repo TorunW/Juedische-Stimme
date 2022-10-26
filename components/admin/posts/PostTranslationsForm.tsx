@@ -3,11 +3,10 @@ import { Form, useFormik } from "formik";
 import axios from "axios";
 import styles from "components/admin/Forms.module.css";
 import FormError from "@/components/atoms/FormError";
-import { Button, FormControl, TextField } from "@mui/material";
+import { Button, FormControl, TextField, Card } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
 import TipTapEditor from "components/tiptap/TipTapEditor";
-import { PerformantTextField } from "@/components/atoms/PerformantTextField";
 
 const PostTranslationsForm = ({ post, language }) => {
   const formik = useFormik({
@@ -56,33 +55,44 @@ const PostTranslationsForm = ({ post, language }) => {
     (post && post.post_layout === "member_form");
 
   return (
-    <>
+    <Card
+      sx={{
+        paddingX: 4,
+        paddingY: 2,
+        margin: 2,
+      }}
+    >
       <form
         className={styles.form}
         onSubmit={formik.handleSubmit}
       >
-        <PerformantTextField
+        <FormControl
           fullWidth
-          id="title"
-          name="title"
-          label="Post Title (English)"
-          margin="normal"
-          placeholder="Title"
-          onChange={formik.handleChange}
-          value={formik.values.title}
-        />
-        {formik?.errors?.title ? (
-          <FormError message={formik.errors.title} />
-        ) : (
-          ""
-        )}
-
+          sx={{ marginBottom: "16px" }}
+        >
+          <TextField
+            fullWidth
+            id="title"
+            name="title"
+            label="Post Title (English)"
+            margin="normal"
+            placeholder="Title"
+            onChange={formik.handleChange}
+            value={formik.values.title}
+          />
+          {formik?.errors?.title ? (
+            <FormError message={formik.errors.title} />
+          ) : (
+            ""
+          )}
+        </FormControl>
         <TipTapEditor
           onChange={(val) => formik.setFieldValue("content", val, true)}
           value={formik.values.content}
           itemType={"post"}
           itemId={post.postId}
           title={`Post Content ( English )`}
+          height={300}
         />
         {errors?.content ? <FormError message={errors.content} /> : ""}
 
@@ -175,7 +185,7 @@ const PostTranslationsForm = ({ post, language }) => {
           </>
         )}
       </form>
-    </>
+    </Card>
   );
 };
 

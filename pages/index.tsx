@@ -92,7 +92,6 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
     const headerImage = JSON.stringify({
       uri: headerImageUri,
       img,
-      svg,
     });
 
     return {

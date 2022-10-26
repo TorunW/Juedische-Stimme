@@ -56,8 +56,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
   const [previewImage2, setPreviewImage2] = useState(null);
   const [previewImage2File, setPreviewImage2File] = useState(null);
 
-  console.log(post);
-
   const initialValues = {
     post_author: post
       ? post.post_author
@@ -174,12 +172,15 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
         previewImageFile.name.split(".")[
           previewImageFile.name.split.length - 1
         ];
+
       let fileName =
         previewImageFile.name.split(`.${fileType}`)[0] +
         `__${uuidv4()}.${fileType}`;
+
       const postImageUrl = `/api/posts/${
         post ? +post.postId : nextPostId
       }/image`;
+
       const postImageData = {
         meta_value: generateFileName(fileName),
         image_number: 1,
@@ -235,7 +236,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       .all([...requestsArray])
       .then(
         axios.spread((...responses) => {
-          console.log(responses, " RESPONSES");
           window.location.href = `/admin/posts/${values.post_title
             .replace(/\s+/g, "-")
             .toLowerCase()
@@ -309,23 +309,23 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
         }
       />
       <Container>
-        <Formik
-          initialValues={initialValues}
-          onSubmit={onSubmit}
-          validateOnChange={false}
-          validateOnBlur={false}
-          validationSchema={validationSchema}
-        >
-          {(props: FormikProps<Post>) => (
-            <Form>
-              <Card
-                sx={{
-                  paddingX: 4,
-                  paddingY: 2,
-                  margin: 2,
-                }}
-              >
-                {currentTab === "post" ? (
+        {currentTab === "post" ? (
+          <Formik
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+            validateOnChange={false}
+            validateOnBlur={false}
+            validationSchema={validationSchema}
+          >
+            {(props: FormikProps<Post>) => (
+              <Form>
+                <Card
+                  sx={{
+                    paddingX: 4,
+                    paddingY: 2,
+                    margin: 2,
+                  }}
+                >
                   <>
                     <Grid
                       container
@@ -469,16 +469,23 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         <>
                           <ImageUploadField
                             image={
-                              post?.post_image
-                                ? generateImageUrl(post.post_image)
+                              props.values?.post_image
+                                ? props.values.post_image
                                 : null
                             }
+                            postId={post ? post.postId : null}
+                            imageNumber={1}
                             previewImage={previewImage}
                             setPreviewImage={setPreviewImage}
                             setPreviewImageFile={setPreviewImageFile}
                             onChange={(val) =>
                               props.setFieldValue("post_image", val)
                             }
+                            onDelete={(val) => {
+                              props.setFieldValue("post_image", null);
+                              setPreviewImage(null);
+                              setPreviewImageFile(null);
+                            }}
                             error={
                               props?.errors?.post_image ? (
                                 <FormError message={props.errors.post_image} />
@@ -553,16 +560,23 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             >
                               <ImageUploadField
                                 image={
-                                  post?.post_image_2
-                                    ? generateImageUrl(post.post_image_2)
+                                  props.values?.post_image_2
+                                    ? props.values.post_image_2
                                     : null
                                 }
+                                postId={post ? post.postId : null}
+                                imageNumber={1}
                                 previewImage={previewImage2}
                                 setPreviewImage={setPreviewImage2}
                                 setPreviewImageFile={setPreviewImage2File}
                                 onChange={(val) =>
                                   props.setFieldValue("post_image_2", val)
                                 }
+                                onDelete={(val) => {
+                                  props.setFieldValue("post_image_2", null);
+                                  setPreviewImage2(null);
+                                  setPreviewImage2File(null);
+                                }}
                                 error={
                                   props?.errors?.post_image_2 ? (
                                     <FormError
@@ -622,10 +636,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                                 title={"Bottom Post Content"}
                               />
                             </Grid>
-                            {console.log(
-                              props.values.post_content_2,
-                              "content"
-                            )}
+
                             <PostTagForm
                               postId={post ? post.postId : nextPostId}
                             />
@@ -670,17 +681,19 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                       </Grid>
                     </Grid>
                   </>
-                ) : currentTab === "translations" ? (
-                  <PostTranslations
-                    post={post}
-                    locales={locales}
-                    defaultLocale={defaultLocale}
-                  />
-                ) : null}
-              </Card>
-            </Form>
-          )}
-        </Formik>
+                </Card>
+              </Form>
+            )}
+          </Formik>
+        ) : null}
+
+        {currentTab === "translations" ? (
+          <PostTranslations
+            post={post}
+            locales={locales}
+            defaultLocale={defaultLocale}
+          />
+        ) : null}
       </Container>
     </Box>
   );

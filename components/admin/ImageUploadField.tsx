@@ -1,24 +1,63 @@
 import React, { ReactElement, FC, ChangeEventHandler } from "react";
 import { Button, TextField, Grid } from "@mui/material";
 import Image from "next/image";
+import axios from "axios";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { generateImageUrl } from "helpers/imageUrlHelper";
 
 type Props = {
   previewImage: string;
+  postId: any;
+  imageNumber: any;
   image: string;
   setPreviewImage: Function;
   setPreviewImageFile: Function;
   error?: string | ReactElement;
   onChange: any;
+  onDelete?: any;
 };
 
 export const ImageUploadField: FC<Props> = ({
   previewImage,
+  postId,
+  imageNumber,
   image,
   setPreviewImage,
   setPreviewImageFile,
   onChange,
+  onDelete,
   error,
 }) => {
+  function deleteImage() {
+    if (postId) {
+      const requestsArray = [];
+      const imageDeleteRequest = axios.delete(`/api/posts/${postId}/image`, {
+        data: {
+          image_number: imageNumber,
+        },
+      });
+      requestsArray.push(imageDeleteRequest);
+      const deleteFileUrl = `http://${window.location.hostname}${
+        window.location.port !== "80" ? ":" + window.location.port : ""
+      }/media/${image}`;
+      const deleteFileRequest = axios.delete(deleteFileUrl);
+      requestsArray.push(deleteFileRequest);
+
+      axios
+        .all([...requestsArray])
+        .then(
+          axios.spread((...responses) => {
+            console.log(responses, " RESPONSES");
+            onDelete();
+          })
+        )
+        .catch((errors) => {
+          console.log(errors, " ERRORS");
+        });
+    }
+    onDelete();
+  }
+
   const onImageChange = (event) => {
     onChange(event.target.files[0]);
     // read file as data uri for preview, upload it on onSubmit
@@ -81,7 +120,7 @@ export const ImageUploadField: FC<Props> = ({
               src={previewImage}
             />
           </Grid>
-        ) : image ? (
+        ) : image !== "" && image != null ? (
           <Grid
             xs={12}
             sx={{ marginTop: 2, textAlign: "center" }}
@@ -90,12 +129,24 @@ export const ImageUploadField: FC<Props> = ({
               layout="fixed"
               width={320}
               height={180}
-              src={image}
+              src={generateImageUrl(image)}
             />
           </Grid>
         ) : (
           ""
         )}
+
+        {image ? (
+          <Button
+            onClick={() => deleteImage()}
+            sx={{ position: "absolute", bottom: 0, right: 0, zIndex: 10 }}
+          >
+            <DeleteForeverIcon sx={{ fontSize: "50px" }} />
+          </Button>
+        ) : (
+          ""
+        )}
+
         <input
           id="post_image"
           name="post_image"
