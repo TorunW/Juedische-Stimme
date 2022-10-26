@@ -56,8 +56,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
   const [previewImage2, setPreviewImage2] = useState(null);
   const [previewImage2File, setPreviewImage2File] = useState(null);
 
-  console.log(post);
-
   const initialValues = {
     post_author: post
       ? post.post_author
@@ -238,7 +236,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       .all([...requestsArray])
       .then(
         axios.spread((...responses) => {
-          console.log(responses, " RESPONSES");
           window.location.href = `/admin/posts/${values.post_title
             .replace(/\s+/g, "-")
             .toLowerCase()
@@ -330,8 +327,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   }}
                 >
                   <>
-                    {console.log(props.values)}
-
                     <Grid
                       container
                       item
@@ -475,9 +470,11 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                           <ImageUploadField
                             image={
                               props.values?.post_image
-                                ? generateImageUrl(props.values.post_image)
+                                ? props.values.post_image
                                 : null
                             }
+                            postId={post ? post.postId : null}
+                            imageNumber={1}
                             previewImage={previewImage}
                             setPreviewImage={setPreviewImage}
                             setPreviewImageFile={setPreviewImageFile}
@@ -563,16 +560,23 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             >
                               <ImageUploadField
                                 image={
-                                  post?.post_image_2
-                                    ? generateImageUrl(post.post_image_2)
+                                  props.values?.post_image_2
+                                    ? props.values.post_image_2
                                     : null
                                 }
+                                postId={post ? post.postId : null}
+                                imageNumber={1}
                                 previewImage={previewImage2}
                                 setPreviewImage={setPreviewImage2}
                                 setPreviewImageFile={setPreviewImage2File}
                                 onChange={(val) =>
                                   props.setFieldValue("post_image_2", val)
                                 }
+                                onDelete={(val) => {
+                                  props.setFieldValue("post_image_2", null);
+                                  setPreviewImage2(null);
+                                  setPreviewImage2File(null);
+                                }}
                                 error={
                                   props?.errors?.post_image_2 ? (
                                     <FormError
@@ -632,10 +636,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                                 title={"Bottom Post Content"}
                               />
                             </Grid>
-                            {console.log(
-                              props.values.post_content_2,
-                              "content"
-                            )}
+
                             <PostTagForm
                               postId={post ? post.postId : nextPostId}
                             />

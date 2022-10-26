@@ -3,9 +3,12 @@ import { Button, TextField, Grid } from "@mui/material";
 import Image from "next/image";
 import axios from "axios";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { generateImageUrl } from "helpers/imageUrlHelper";
 
 type Props = {
   previewImage: string;
+  postId: any;
+  imageNumber: any;
   image: string;
   setPreviewImage: Function;
   setPreviewImageFile: Function;
@@ -16,6 +19,8 @@ type Props = {
 
 export const ImageUploadField: FC<Props> = ({
   previewImage,
+  postId,
+  imageNumber,
   image,
   setPreviewImage,
   setPreviewImageFile,
@@ -24,26 +29,32 @@ export const ImageUploadField: FC<Props> = ({
   error,
 }) => {
   function deleteImage() {
-    // const requestsArray = [];
-    // const deleteFileUrl = `http://${window.location.hostname}${
-    //   window.location.port !== "80" ? ":" + window.location.port : ""
-    // }/media/${image.split("/wp-content/uploads/")[1].split("/").join("+++")}`;
-    // const deleteFileRequest = axios.delete(deleteFileUrl);
+    if (postId) {
+      const requestsArray = [];
+      const imageDeleteRequest = axios.delete(`/api/posts/${postId}/image`, {
+        data: {
+          image_number: imageNumber,
+        },
+      });
+      requestsArray.push(imageDeleteRequest);
+      const deleteFileUrl = `http://${window.location.hostname}${
+        window.location.port !== "80" ? ":" + window.location.port : ""
+      }/media/${image}`;
+      const deleteFileRequest = axios.delete(deleteFileUrl);
+      requestsArray.push(deleteFileRequest);
 
-    // const imageDeleteRequest = axios.delete(`/api/posts/${postId}/image`, {});
-
-    // requestsArray.push(deleteFileRequest);
-    // axios
-    //   .all([...requestsArray])
-    //   .then(
-    //     axios.spread((...responses) => {
-    //       console.log(responses, " RESPONSES");
-    //       onDelete();
-    //     })
-    //   )
-    //   .catch((errors) => {
-    //     console.log(errors, " ERRORS");
-    //   });
+      axios
+        .all([...requestsArray])
+        .then(
+          axios.spread((...responses) => {
+            console.log(responses, " RESPONSES");
+            onDelete();
+          })
+        )
+        .catch((errors) => {
+          console.log(errors, " ERRORS");
+        });
+    }
     onDelete();
   }
 
@@ -114,24 +125,27 @@ export const ImageUploadField: FC<Props> = ({
             xs={12}
             sx={{ marginTop: 2, textAlign: "center" }}
           >
-            {image}
             <Image
               layout="fixed"
               width={320}
               height={180}
-              src={image}
+              src={generateImageUrl(image)}
             />
           </Grid>
         ) : (
           ""
         )}
 
-        <Button
-          onClick={() => deleteImage()}
-          sx={{ position: "absolute", bottom: 0, right: 0, zIndex: 10 }}
-        >
-          <DeleteForeverIcon sx={{ fontSize: "50px" }} />
-        </Button>
+        {image ? (
+          <Button
+            onClick={() => deleteImage()}
+            sx={{ position: "absolute", bottom: 0, right: 0, zIndex: 10 }}
+          >
+            <DeleteForeverIcon sx={{ fontSize: "50px" }} />
+          </Button>
+        ) : (
+          ""
+        )}
 
         <input
           id="post_image"
