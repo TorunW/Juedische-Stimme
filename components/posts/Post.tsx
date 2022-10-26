@@ -62,7 +62,7 @@ const Post: React.FC<Props> = ({ post, phrase, imageDimensions }) => {
 
       <Link href={'/' + GeneratePostUrl(post.post_name)}>
         <a className={styles.postTitle}>
-          <h4>{postTitle}</h4>
+          <h3>{postTitle}</h3>
         </a>
       </Link>
 

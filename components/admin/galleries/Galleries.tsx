@@ -94,7 +94,7 @@ const Galleries = (props) => {
         </ListItemButton>
       </ListItem>
     ));
-  } else galleriesDisplay = <h3>NO GALLERIES FOUND</h3>;
+  } else galleriesDisplay = <h4>NO GALLERIES FOUND</h4>;
 
   return <div>{galleriesDisplay}</div>;
 };

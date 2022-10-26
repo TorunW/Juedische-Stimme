@@ -65,9 +65,6 @@
     color: white;
     padding: 32px 80px;
   }
-  #footer .footerBottomMenu p {
-    line-height: 2;
-  }
 }
 @media (max-width: 920px) {
   #footer {

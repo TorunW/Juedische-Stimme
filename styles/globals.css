@@ -1,28 +1,3 @@
-/* latin */
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 100;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptug8zYS_SKggPNyC0ITw.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 200;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptug8zYS_SKggPNyC0ITw.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 300;
-  font-display: swap;
-  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptug8zYS_SKggPNyC0ITw.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
 @font-face {
   font-family: 'Raleway';
   font-style: normal;
@@ -174,10 +149,7 @@ a {
 #main-layout textarea:focus-visible {
   outline: none;
 }
-#main-layout p {
-  line-height: 1.5rem;
-}
-@media (min-width: 1201px) {
+@media (min-width: 1025px) {
   #main-layout h1 {
     font-size: 5.5rem;
     text-transform: uppercase;
@@ -188,16 +160,26 @@ a {
   }
   #main-layout h2 {
     font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 32px;
+    font-weight: 900;
+    margin-bottom: 48px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #2e2e2e;
   }
   #main-layout h3 {
-    font-size: 1.25rem;
-    text-transform: uppercase;
+    font-size: 1.5rem;
     font-weight: 600;
   }
+  #main-layout h4 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+  }
+  #main-layout p {
+    font-size: 1.1rem;
+  }
 }
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   #main-layout h1 {
     font-size: 4.5rem;
     text-transform: uppercase;
@@ -208,11 +190,24 @@ a {
   }
   #main-layout h2 {
     font-size: 2.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+  #main-layout h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  #main-layout h4 {
+    font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: 32px;
+    text-align: center;
+  }
+  #main-layout p {
+    font-size: 1.1rem;
   }
 }
-@media (max-width: 991px) {
+@media (max-width: 769px) {
   #main-layout h1 {
     font-size: 3.5rem;
     text-transform: uppercase;
@@ -222,14 +217,17 @@ a {
     color: #2e2e2e;
   }
   #main-layout h2 {
-    font-size: 2.4rem;
-    font-weight: 700;
+    font-size: 2.5rem;
+    font-weight: 900;
     margin-bottom: 32px;
   }
   #main-layout h3 {
     font-size: 1.25rem;
     text-transform: uppercase;
     font-weight: 600;
+  }
+  #main-layout p {
+    font-size: 1rem;
   }
 }
 @media (max-width: 844px) {

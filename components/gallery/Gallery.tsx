@@ -3,21 +3,20 @@ import styles from './Styles.module.css';
 import GalleryImage from './GalleryImage';
 
 const Gallery = ({ images }) => {
-  let slideShow = images.map((image, index: number) => (
-      <div
-        key={Date.now() + index}
-        data-testid={`slide-${index}`}
-        className={styles.imageWrapper}
-      >
-        <GalleryImage 
-          image={image} 
-        />
-      </div>
-    ));
+  let imageDisplay = images.map((image, index: number) => (
+    <div
+      key={Date.now() + index}
+      data-testid={`slide-${index}`}
+      className={styles.container}
+    >
+      <GalleryImage image={image} />
+    </div>
+  ));
 
   return (
     <div data-testid='gallery-container' className={styles.gallery}>
-      <div className={styles.containerSlider}>{slideShow}</div>
+      <h2>Meet our Board Members</h2>
+      {imageDisplay}
     </div>
   );
 };

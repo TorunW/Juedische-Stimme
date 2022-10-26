@@ -31,17 +31,11 @@
   margin-bottom: 16px;
 }
 .eventsPage .contentContainer .eventContainer .title {
-  line-height: 1.5rem;
   font-size: 1.2rem;
   text-align: left;
   font-weight: 600;
   margin-bottom: 16px;
   transition: color 0.3s;
-}
-.eventsPage .contentContainer .eventContainer p {
-  line-height: 1.5rem;
-  font-size: 1rem;
-  padding: 0;
 }
 .eventsPage .contentContainer .eventContainer:hover {
   background-image: linear-gradient(to top, #8179a6 51%, transparent 50%);

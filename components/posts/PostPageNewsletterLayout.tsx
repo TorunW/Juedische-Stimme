@@ -7,7 +7,8 @@ import Image from 'next/image';
 import { getPostContentFields } from 'helpers/getPostContentFields';
 
 const PostPageNewsletterLayout = ({ post, locale }) => {
-  const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } = getPostContentFields(post, locale)
+  const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } =
+    getPostContentFields(post, locale);
 
   let tagsDisplay: ReactElement[];
   if (post.tagNames && post.tagNames.length > 0) {

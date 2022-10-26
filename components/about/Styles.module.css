@@ -1,54 +1,4 @@
-.aboutPage {
-  text-align: center;
-  margin: 120px auto;
-  color: #2e2e2e;
-  margin-top: 0;
-}
-.aboutPage h1 {
-  padding-top: 120px;
-}
-.aboutPage .aboutContainer {
-  margin: 0 auto 48px;
-}
-.aboutPage .aboutContainer p {
-  margin: 16px auto;
-  max-width: 1200px;
-}
-.aboutPage .contentContainer {
-  height: 400px;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-.aboutPage .contentContainer .img {
-  position: absolute !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-}
-.aboutPage .contentContainer .linkContainer {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.7);
-  z-index: 2;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 32px 48px;
-  min-width: 950px;
-  height: 272px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.aboutPage .contentContainer .linkContainer h4 {
-  font-size: 1.6rem;
-  line-height: 1.5rem;
-  font-weight: 400;
-  text-align: center;
-  color: #ffffff;
-  margin-bottom: 32px;
-}
-@media (min-width: 1201px) {
+@media (min-width: 1025px) {
   .aboutContainer {
     padding: 0 60px;
     margin: 0 auto 48px;
@@ -57,12 +7,68 @@
     font-size: 1.2rem;
   }
 }
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
   .aboutContainer {
     padding: 0 40px;
     margin: 0 auto 48px;
   }
   .aboutContainer .text p {
     font-size: 1.1rem;
+  }
+}
+@media (max-width: 769px) {
+  .aboutPage {
+    color: #2e2e2e;
+  }
+  .aboutPage .aboutContainer p {
+    margin: 16px auto;
+  }
+  .aboutPage .contentContainer {
+    height: 380px;
+    position: relative;
+  }
+  .aboutPage .contentContainer img {
+    position: relative;
+    min-height: 380px;
+  }
+  .aboutPage .contentContainer .linkContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 95%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2;
+    padding: 32px 48px;
+  }
+  .aboutPage .contentContainer .linkContainer h3 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 32px;
+  }
+  .aboutPage .contentContainer .linkContainer .btnContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 0 16px;
+    gap: 16px;
+  }
+  .aboutPage .contentContainer .linkContainer .btnContainer .linkButton {
+    width: 100%;
+    font-size: 1rem;
+    color: #fff;
+    border: 5px solid #8179a6;
+    padding: 8px 16px;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Raleway', Arial, san-serif;
+    text-transform: capitalize;
+  }
+  .aboutPage .contentContainer .linkContainer .btnContainer .linkButton:hover {
+    color: #fff;
+    background: #8179a6;
+  }
+  .aboutPage .contentContainer .linkContainer .btnContainer .linkButton:active {
+    background-color: #454060;
+    border: 5px solid #454060;
   }
 }

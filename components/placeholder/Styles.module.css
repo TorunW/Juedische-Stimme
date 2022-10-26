@@ -9,7 +9,7 @@
   display: block;
   position: relative;
   width: 100%;
-  aspect-ratio: auto 645 / 290;
+  aspect-ratio: auto 2.22413793;
 }
 .post .imageWrapper img {
   height: 100%;
@@ -41,14 +41,7 @@
   transition: color 0.3s ease-in-out;
 }
 .post .tags:hover {
-  color: #2e2e2e;
-}
-.post .postPreview {
-  color: #2e2e2e;
-  line-height: 1.5rem;
-  font-size: 1rem;
-  font-weight: 400;
-  margin-top: 16px;
+  color: black;
 }
 .skeleton {
   animation: skeleton-loading 1s linear infinite alternate;

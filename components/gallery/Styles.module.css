@@ -1,10 +1,32 @@
 .gallery {
   margin: 48px 0;
 }
-.gallery .containerSlider {
+.gallery h2 {
+  text-align: center;
+}
+.gallery .galleryWrapper {
+  max-width: 1067px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   gap: 32px;
+}
+@media (max-width: 769px) {
+  .gallery {
+    margin: 48px 0;
+  }
+  .gallery h2 {
+    text-align: center;
+  }
+  .gallery .container {
+    display: flex;
+  }
+  .gallery .container .imageWrapper img {
+    min-width: 100%;
+    border-radius: 3px;
+  }
+  .gallery .container .textGrid {
+    max-width: 300px;
+  }
 }
