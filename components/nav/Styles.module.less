@@ -8,7 +8,7 @@
     font-size: 18px;
     font-weight: 500;
     transition: all 0.4s ease-in-out;
-
+    height: 109px;
     .topRow {
       margin: 8px 0 16px;
       display: grid;
@@ -36,7 +36,8 @@
             }
 
             &:hover {
-              background-color: darken(#8179a6, 25%);
+              filter: brightness(80%);
+              transition: all 0.4s ease-in-out;
             }
           }
         }
@@ -48,6 +49,8 @@
         align-items: center;
         &:hover {
           cursor: pointer;
+          filter: brightness(90%);
+          transition: all 0.4s ease-in-out;
         }
         img {
           height: 50px !important;
@@ -65,11 +68,21 @@
           gap: 8px;
           svg {
             cursor: pointer;
+            &:hover {
+              filter: brightness(20%);
+              transition: all 0.8s ease-in-out;
+            }
           }
         }
 
         .languageMenu {
           cursor: pointer;
+          a {
+            &:hover {
+              filter: brightness(20%);
+              transition: all 0.8s ease-in-out;
+            }
+          }
         }
       }
     }
@@ -85,6 +98,13 @@
         list-style: none;
         gap: 16px;
         padding: 0;
+
+        .navItem {
+          &:hover {
+            filter: brightness(20%);
+            transition: all 0.8s ease-in-out;
+          }
+        }
       }
     }
   }
@@ -162,7 +182,6 @@
 
         &:hover {
           color: darken(#8179a6, 25%);
-          border-bottom: 1px solid;
         }
       }
     }

@@ -8,6 +8,7 @@
     font-size: 18px;
     font-weight: 500;
     transition: all 0.4s ease-in-out;
+    height: 109px;
   }
   .nav .topRow,
   .navActive .topRow {
@@ -45,7 +46,8 @@
   }
   .nav .topRow .leftCol ul a:hover,
   .navActive .topRow .leftCol ul a:hover {
-    background-color: #454060;
+    filter: brightness(80%);
+    transition: all 0.4s ease-in-out;
   }
   .nav .topRow .middleCol,
   .navActive .topRow .middleCol {
@@ -56,6 +58,8 @@
   .nav .topRow .middleCol:hover,
   .navActive .topRow .middleCol:hover {
     cursor: pointer;
+    filter: brightness(90%);
+    transition: all 0.4s ease-in-out;
   }
   .nav .topRow .middleCol img,
   .navActive .topRow .middleCol img {
@@ -77,9 +81,19 @@
   .navActive .topRow .rightCol .socialmediaMenu svg {
     cursor: pointer;
   }
+  .nav .topRow .rightCol .socialmediaMenu svg:hover,
+  .navActive .topRow .rightCol .socialmediaMenu svg:hover {
+    filter: brightness(20%);
+    transition: all 0.8s ease-in-out;
+  }
   .nav .topRow .rightCol .languageMenu,
   .navActive .topRow .rightCol .languageMenu {
     cursor: pointer;
+  }
+  .nav .topRow .rightCol .languageMenu a:hover,
+  .navActive .topRow .rightCol .languageMenu a:hover {
+    filter: brightness(20%);
+    transition: all 0.8s ease-in-out;
   }
   .nav .bottomRow,
   .navActive .bottomRow {
@@ -94,6 +108,11 @@
     list-style: none;
     gap: 16px;
     padding: 0;
+  }
+  .nav .bottomRow ul .navItem:hover,
+  .navActive .bottomRow ul .navItem:hover {
+    filter: brightness(20%);
+    transition: all 0.8s ease-in-out;
   }
   .nav {
     background: rgba(0, 0, 0, 0);
@@ -150,7 +169,6 @@
   }
   .navActive li a:hover {
     color: #454060;
-    border-bottom: 1px solid;
   }
 }
 @media (max-width: 844px) {

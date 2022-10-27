@@ -29,9 +29,9 @@ function Nav() {
   const [mobileDropDownIsVisibile, setMobileDropDownIsVisibile] =
     useState(false);
 
-  // console.log(bgVisible, 'scroll');
-  // console.log(isMobileView, 'mobiles');
-  // console.log(mobileDropDownIsVisibile, 'dropdown');
+  if (typeof window !== 'undefined') {
+    console.log(pathName, 'patha');
+  }
 
   useEffect(() => {
     if (locale !== null) {
@@ -84,17 +84,25 @@ function Nav() {
       ? setMobileDropDownIsVisibile(true)
       : setMobileDropDownIsVisibile(false);
   }
-  let mainMenuDisplay = mainMenu.map((item, index) => (
-    <li key={Date.now() + index} onClick={handleClick}>
-      <Link
-        href={
-          '/' + (item.link && item.link !== null ? item.link : item.post_name)
-        }
+  let mainMenuDisplay = mainMenu.map((item, index) => {
+    return (
+      <li
+        key={Date.now() + index}
+        onClick={handleClick}
+        className={styles.navItem}
       >
-        {locale === 'en_US' && item.title_en_US ? item.title_en_US : item.title}
-      </Link>
-    </li>
-  ));
+        <Link
+          href={
+            '/' + (item.link && item.link !== null ? item.link : item.post_name)
+          }
+        >
+          {locale === 'en_US' && item.title_en_US
+            ? item.title_en_US
+            : item.title}
+        </Link>
+      </li>
+    );
+  });
 
   let callToActionMenuDisplay = callToActionMenu.map((item, index) => (
     <li key={Date.now() + index} onClick={handleClick}>
@@ -126,7 +134,7 @@ function Nav() {
         </svg>
       </a>
       <a
-        href={'https://twitter.com/JNahost'}
+        href={'https://www.instagram.com/juedischestimme/'}
         target='_blank'
         rel='noopener noreferrer'
       >
@@ -142,7 +150,7 @@ function Nav() {
       </a>
 
       <a
-        href={'https://www.instagram.com/juedischestimme/'}
+        href={'https://twitter.com/JNahost'}
         target='_blank'
         rel='noopener noreferrer'
       >
@@ -188,7 +196,7 @@ function Nav() {
             {socialmediaMenuDisplay}
             <div className={styles.languageMenu}>
               <a href={`${pathName}`}>DE</a>
-              <b> | </b>
+              <span> | </span>
               <a href={`/en_US${pathName}`} data-testid='english-button'>
                 EN
               </a>
