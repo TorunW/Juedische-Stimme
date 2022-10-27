@@ -4,7 +4,6 @@ import { useSelector } from 'store/hooks';
 import formateDate from 'helpers/formateDate';
 import { GeneratePostUrl } from 'helpers/generatePostUrl';
 import styles from './Styles.module.css';
-// import axios from 'axios';
 import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -48,9 +47,7 @@ const Post: React.FC<Props> = ({ post, phrase, imageDimensions }) => {
             title={post.post_title}
             width={imageDimensions.width}
             height={imageDimensions.height}
-            // objectFit={'cover'}
-            // layout={'fill'}
-          />{' '}
+          />
         </div>
       ) : (
         ''

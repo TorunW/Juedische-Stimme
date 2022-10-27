@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import styles from './Styles.module.css';
 import GalleryImage from './GalleryImage';
 

@@ -1,6 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import Post from './Post';
 import Pagination from 'components/pagination/Pagination';
 import SearchFilter from 'components/SearchFilter';

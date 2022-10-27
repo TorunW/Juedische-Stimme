@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import Image from 'next/image';
 import styles from './Styles.module.css';

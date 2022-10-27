@@ -23,23 +23,23 @@ const SearchFilter = ({ phrase }: SearchFilterProps) => {
       setDropDownIsVisible(false);
     }
   }
-  // function onCategorySelectChange(val: string) {
-  //   window.location.href = `/category/${val}`;
-  // }
-  // let categoryOptionsDisplay: ReactElement[];
-  // if (categories) {
-  //   categoryOptionsDisplay = categories.map((cat, index) => (
-  //     <a key={index} href={`/category/${cat.name}`}>
-  //       {cat.name}
-  //     </a>
-  //   ));
-  // }
+  function onCategorySelectChange(val: string) {
+    window.location.href = `/category/${val}`;
+  }
+  let categoryOptionsDisplay: ReactElement[];
+  if (categories) {
+    categoryOptionsDisplay = categories.map((cat, index) => (
+      <a key={index} href={`/category/${cat.name}`}>
+        {cat.name}
+      </a>
+    ));
+  }
 
   return (
     <div className={styles.filterContainer}>
       <h4>Filter by:</h4>
       <div className={styles.searchContainer}>
-        <Box sx={{ minWidth: 120 }}>
+        {/* <Box sx={{ minWidth: 120 }}>
           <FormControl fullWidth>
             <InputLabel id='Choose-Category'>Choose Category</InputLabel>
             <Select
@@ -66,7 +66,7 @@ const SearchFilter = ({ phrase }: SearchFilterProps) => {
                 : ''}
             </Select>
           </FormControl>
-        </Box>
+        </Box> */}
 
         <div className={styles.inputSearch}>
           <input

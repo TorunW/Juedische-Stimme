@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'store/hooks';
 import Image from 'next/image';
 import Gallery from '../gallery/Gallery';

@@ -7,9 +7,7 @@ import renderToString from 'helpers/renderToString';
 import { setFeed } from 'store/fbdata/fbDataSlice';
 import { useDispatch, useSelector } from 'store/hooks';
 
-import styles from './StylesFeed.module.css';
 import { isUpdatedToday } from 'helpers/checkIfUpdatedToday';
-import FacebookPosts from './FacbookPosts';
 import { Container } from '../atoms/Container';
 
 const FacebookFeed = ({ fbt }) => {
@@ -18,7 +16,6 @@ const FacebookFeed = ({ fbt }) => {
 
   useEffect(() => {
     fetchFacebookFeedFromDb();
-    // fetchFacebookFeedFromFb()
   }, []);
 
   useEffect(() => {
@@ -83,7 +80,6 @@ const FacebookFeed = ({ fbt }) => {
         allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
       ></iframe>
     </Container>
-    // <FacebookPosts feed={feed} />
   );
 };
 

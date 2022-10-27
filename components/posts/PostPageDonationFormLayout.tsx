@@ -6,8 +6,7 @@ import { generateImageUrl } from 'helpers/imageUrlHelper';
 import { getPostContentFields } from 'helpers/getPostContentFields';
 
 const PostPageDonationFormLayout = ({ post, locale }) => {
-  const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } =
-    getPostContentFields(post, locale);
+  const { postTitle, postContent } = getPostContentFields(post, locale);
 
   return (
     <React.Fragment>
@@ -21,7 +20,7 @@ const PostPageDonationFormLayout = ({ post, locale }) => {
         />
         <div className={styles.pageContainer}>
           <div className={styles.contentContainer}>
-            <h2>Spenden</h2>
+            <h2>{postTitle}</h2>
             <div
               dangerouslySetInnerHTML={{ __html: postContent }}
               className={styles.content}

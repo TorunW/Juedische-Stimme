@@ -1,11 +1,11 @@
 import React from 'react';
-import { useEffect, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
 import styles from './Styles.module.css';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { TextField, Button, FormControl } from '@mui/material';
+import { TextField, Button } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
 const NewsletterForm = () => {
@@ -36,8 +36,6 @@ const NewsletterForm = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        // name: name,
-        // email: email,
         gRecaptchaToken: gReCaptchaToken,
       }),
     })
