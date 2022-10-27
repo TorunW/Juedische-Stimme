@@ -1,71 +1,171 @@
-.gallery {
-  margin: 48px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+@media (min-width: 770px) {
+  .gallery {
+    margin: 48px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .gallery h2 {
+    text-align: center;
+    width: 100%;
+  }
+  .gallery .container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    max-width: 1067px;
+    flex-wrap: wrap;
+  }
+  .gallery .container .card {
+    position: relative;
+    width: 430px;
+    margin: 32px 20px;
+  }
+  .gallery .container .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .gallery .container .card .imageWrapper {
+    display: flex;
+    gap: 32px;
+    align-items: flex-end;
+  }
+  .gallery .container .card .imageWrapper img {
+    border-radius: 50%;
+  }
+  .gallery .container .card .contentOpen {
+    margin: 16px 0;
+    height: auto;
+    transition: all 4s ease-in-out;
+  }
+  .gallery .container .card .contentOpen::before {
+    display: none;
+  }
+  .gallery .container .card .content {
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+    margin: 16px 0;
+    transition: all 4s ease-in-out;
+  }
+  .gallery .container .card .content::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(transparent, #eeeeee);
+  }
+  .gallery .container .card .more {
+    position: relative;
+    padding: 4px 8px;
+    border: 3px solid #8179a6;
+    margin-top: 16px;
+    display: inline-block;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Raleway', Arial, san-serif;
+  }
+  .gallery .container .card .more:hover {
+    color: #fff;
+    background: #8179a6;
+  }
+  .gallery .container .card .more:active {
+    background-color: #454060;
+    border: 5px solid #454060;
+  }
+  .gallery .container .card .more::before {
+    content: '';
+  }
 }
-.gallery h2 {
-  text-align: center;
-  width: 100%;
-}
-.gallery .container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  max-width: 1067px;
-  flex-wrap: wrap;
-}
-.gallery .container .card {
-  position: relative;
-  width: 430px;
-  margin: 32px 20px;
-}
-.gallery .container .card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-.gallery .container .card .imageWrapper {
-  display: flex;
-  gap: 32px;
-  align-items: flex-end;
-}
-.gallery .container .card .imageWrapper img {
-  border-radius: 50%;
-}
-.gallery .container .card .content {
-  position: relative;
-  height: 150px;
-  overflow: hidden;
-  margin: 16px 0;
-}
-.gallery .container .card .content::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100px;
-  background: linear-gradient(transparent, #eeeeee);
-}
-.gallery .container .card .more {
-  font-size: 0.9rem;
-  border: 3px solid #8179a6;
-  padding: 8px 16px;
-  transition: all 0.2s ease-in-out;
-  font-family: 'Raleway', Arial, san-serif;
-  text-transform: capitalize;
-  cursor: pointer;
-}
-.gallery .container .card .more:hover {
-  color: #fff;
-  background: #8179a6;
-}
-.gallery .container .card .more:active {
-  background-color: #454060;
-  border: 5px solid #454060;
-}
-.gallery .container .card .more::before {
-  content: '';
+@media (max-width: 769px) {
+  .gallery {
+    margin: 48px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .gallery h2 {
+    text-align: center;
+    width: 100%;
+  }
+  .gallery .container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    max-width: 1067px;
+    flex-wrap: wrap;
+  }
+  .gallery .container .card {
+    position: relative;
+    width: 100%;
+    margin: 32px;
+  }
+  .gallery .container .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .gallery .container .card .imageWrapper {
+    display: flex;
+    gap: 32px;
+    align-items: flex-end;
+  }
+  .gallery .container .card .imageWrapper img {
+    border-radius: 50%;
+  }
+  .gallery .container .card .contentOpen {
+    margin: 8px 0;
+    height: auto;
+    transition: all 4s ease-in-out;
+  }
+  .gallery .container .card .contentOpen::before {
+    display: none;
+  }
+  .gallery .container .card .content {
+    position: relative;
+    height: 120px;
+    overflow: hidden;
+    margin: 8px 0;
+  }
+  .gallery .container .card .content::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(transparent, #eeeeee);
+  }
+  .gallery .container .card .more {
+    position: relative;
+    padding: 4px 8px;
+    border: 3px solid #8179a6;
+    margin-top: 4px;
+    display: inline-block;
+    cursor: pointer;
+    text-transform: capitalize;
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
+    font-family: 'Raleway', Arial, san-serif;
+  }
+  .gallery .container .card .more:hover {
+    color: #fff;
+    background: #8179a6;
+  }
+  .gallery .container .card .more:active {
+    background-color: #454060;
+    border: 5px solid #454060;
+  }
+  .gallery .container .card .more::before {
+    content: '';
+  }
 }

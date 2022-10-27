@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import Image from 'next/image';
 import styles from './Styles.module.css';
 
-const GalleryImage = ({ image, isActive }) => {
-  console.log(isActive);
+const GalleryImage = ({ image }) => {
+  const [open, setOpen] = React.useState(false);
+
+  function handleClick() {
+    open === false ? setOpen(true) : setOpen(false);
+  }
+
   return (
     <>
       <div className={styles.imageWrapper}>
@@ -19,11 +24,19 @@ const GalleryImage = ({ image, isActive }) => {
         <h3>{image.image_title}</h3>
       </div>
 
-      <div className={isActive === false ? styles.content : styles.contentOpen}>
+      <div className={open === false ? styles.content : styles.contentOpen}>
         <div
           dangerouslySetInnerHTML={{ __html: image.image_description }}
         ></div>
       </div>
+      <a
+        onClick={handleClick}
+        className={
+          open === false ? styles.more : styles.more + ' ' + styles.active
+        }
+      >
+        {open === false ? 'Read more...' : 'Read Less...'}
+      </a>
     </>
   );
 };

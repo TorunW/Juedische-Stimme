@@ -1,7 +1,7 @@
-import React from "react";
-import { GeneratePostUrl } from "helpers/generatePostUrl";
-import { generateImageUrl } from "helpers/imageUrlHelper";
-import Image from "next/image";
+import React from 'react';
+import { GeneratePostUrl } from 'helpers/generatePostUrl';
+import { generateImageUrl } from 'helpers/imageUrlHelper';
+import Image from 'next/image';
 
 import {
   TableRow,
@@ -14,8 +14,8 @@ import {
   DialogContentText,
   DialogTitle,
   DialogActions,
-} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function PostTableItem({ post, deletePost }) {
   const [open, setOpen] = React.useState(false);
@@ -28,41 +28,34 @@ function PostTableItem({ post, deletePost }) {
     setOpen(false);
   };
 
-  console.log(post, "post");
   return (
     <TableRow
       hover
-      role="checkbox"
+      role='checkbox'
       tabIndex={-1}
-      sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
     >
       <TableCell>
-        <Link href={"/admin/posts/" + GeneratePostUrl(post.post_name)}>
+        <Link href={'/admin/posts/' + GeneratePostUrl(post.post_name)}>
           {post.post_title}
         </Link>
       </TableCell>
-      <TableCell align="right">{post.username}</TableCell>
-      <TableCell align="right">
-        {new Date(post.post_date).toLocaleString("de")}
+      <TableCell align='right'>{post.username}</TableCell>
+      <TableCell align='right'>
+        {new Date(post.post_date).toLocaleString('de')}
       </TableCell>
-      <TableCell align="right">
+      <TableCell align='right'>
         <Image
-          height="100"
-          width="100"
+          height='100'
+          width='100'
           src={generateImageUrl(post.post_image)}
         />
       </TableCell>
-      <TableCell align="right">
-        <IconButton
-          onClick={handleClickOpen}
-          // onClick={() => deletePost(post)}
-        >
+      <TableCell align='right'>
+        <IconButton onClick={handleClickOpen}>
           <DeleteIcon />
         </IconButton>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-        >
+        <Dialog open={open} onClose={handleClose}>
           <DialogTitle>{`Delete ${post.post_title}`}</DialogTitle>
           <DialogContent>
             <DialogContentText>
@@ -71,16 +64,13 @@ function PostTableItem({ post, deletePost }) {
           </DialogContent>
           <DialogActions>
             <Button
-              variant="outlined"
+              variant='outlined'
               onClick={() => deletePost(post)}
               autoFocus
             >
               Delete
             </Button>
-            <Button
-              variant="outlined"
-              onClick={handleClose}
-            >
+            <Button variant='outlined' onClick={handleClose}>
               Cancel
             </Button>
           </DialogActions>
