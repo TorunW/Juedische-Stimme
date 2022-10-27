@@ -7,12 +7,14 @@ import logo1 from 'styles/images/Logo-img.png';
 import logo2 from 'styles/images/Logo-text.png';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import formateDate from 'helpers/formateDate';
 
 function Nav() {
   const router = useRouter();
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
   const { locale } = useSelector((state) => state.languages);
   const { headerGallery } = useSelector((state) => state.galleries);
+  const events = useSelector((state) => state.fbData.events);
 
   const imageSrcs =
     headerGallery?.imageSrcs.indexOf(',') > -1
@@ -28,6 +30,7 @@ function Nav() {
   const [isMobileView, setIsMobileView] = useState(false);
   const [mobileDropDownIsVisibile, setMobileDropDownIsVisibile] =
     useState(false);
+  const [upcomingEvents, setUpcomingEvents] = React.useState(false);
 
   if (typeof window !== 'undefined') {
     console.log(pathName, 'patha');
@@ -84,25 +87,43 @@ function Nav() {
       ? setMobileDropDownIsVisibile(true)
       : setMobileDropDownIsVisibile(false);
   }
-  let mainMenuDisplay = mainMenu.map((item, index) => {
-    return (
-      <li
-        key={Date.now() + index}
-        onClick={handleClick}
-        className={styles.navItem}
-      >
-        <Link
-          href={
-            '/' + (item.link && item.link !== null ? item.link : item.post_name)
-          }
+
+  // if (events !== null && events.content && events.content.length > 0) {
+  //   const eventsArray = JSON.parse(events.content);
+  //   eventsArray.map((event, index) => {
+  //     let eventDate = formateDate(event.start_time);
+  //     let currentDate = formateDate(new Date(Date.now()));
+
+  //     eventDate === currentDate
+  //       ? setUpcomingEvents(true)
+  //       : setUpcomingEvents(false);
+  //   });
+  // }
+
+  let mainMenuDisplay = mainMenu
+    // .filter((item) =>
+    //   upcomingEvents === false ? item !== 'aktivitäten' : item === 'aktivitäten'
+    // )
+    .map((item, index) => {
+      return (
+        <li
+          key={Date.now() + index}
+          onClick={handleClick}
+          className={styles.navItem}
         >
-          {locale === 'en_US' && item.title_en_US
-            ? item.title_en_US
-            : item.title}
-        </Link>
-      </li>
-    );
-  });
+          <Link
+            href={
+              '/' +
+              (item.link && item.link !== null ? item.link : item.post_name)
+            }
+          >
+            {locale === 'en_US' && item.title_en_US
+              ? item.title_en_US
+              : item.title}
+          </Link>
+        </li>
+      );
+    });
 
   let callToActionMenuDisplay = callToActionMenu.map((item, index) => (
     <li key={Date.now() + index} onClick={handleClick}>
