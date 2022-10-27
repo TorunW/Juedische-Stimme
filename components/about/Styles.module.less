@@ -1,112 +1,34 @@
-// .aboutPage {
-//   text-align: center;
-//   margin: 120px auto;
-//   color: #2e2e2e;
-//   margin-top: 0;
-
-//   h1 {
-//     padding-top: 120px;
-//   }
-
-//   .aboutContainer {
-//     margin: 0 auto 48px;
-//     p {
-//       margin: 16px auto;
-//       max-width: 1200px;
-//     }
-//   }
-
-//   .contentContainer {
-//     height: 400px;
-//     position: relative;
-//     overflow: hidden;
-//     z-index: 1;
-
-//     .img {
-//       position: absolute !important;
-//       top: 50% !important;
-//       left: 50% !important;
-//       transform: translate(-50%, -50%) !important;
-//     }
-
-//     .linkContainer {
-//       position: absolute;
-//       background-color: rgba(0, 0, 0, 0.7);
-//       z-index: 2;
-//       top: 50%;
-//       left: 50%;
-//       transform: translate(-50%, -50%);
-//       padding: 32px 48px;
-//       min-width: 950px;
-//       height: 272px;
-//       display: flex;
-//       flex-direction: column;
-//       justify-content: center;
-//       h3 {
-//         font-weight: 400;
-//         text-align: center;
-//         color: #ffffff;
-//         margin-bottom: 32px;
-//       }
-//     }
-//   }
-// }
-
 @media (min-width: 1025px) {
-  .aboutContainer {
-    padding: 0 60px;
-    margin: 0 auto 48px;
-
-    .text {
-      p {
-        font-size: 1.2rem;
-      }
-    }
-  }
-}
-
-@media (max-width: 1024px) {
-  .aboutContainer {
-    padding: 0 40px;
-    margin: 0 auto 48px;
-
-    .text {
-      p {
-        font-size: 1.1rem;
-      }
-    }
-  }
-}
-
-@media (max-width: 769px) {
   .aboutPage {
-    color: #2e2e2e;
-
+    margin-top: 120px;
     .aboutContainer {
-      p {
-        margin: 16px auto;
-      }
+      max-width: 1067px;
     }
-
     .contentContainer {
-      height: 380px;
+      height: 400px;
       position: relative;
+      overflow: hidden;
 
       img {
         position: relative;
-        min-height: 380px;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%);
       }
 
       .linkContainer {
         position: absolute;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 2;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 95%;
-        height: auto;
-        background-color: rgba(0, 0, 0, 0.7);
-        z-index: 2;
         padding: 32px 48px;
+        min-width: 950px;
+        height: 272px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         h3 {
           text-align: center;
           color: #ffffff;
@@ -115,12 +37,10 @@
 
         .btnContainer {
           display: flex;
-          flex-direction: column;
-          padding: 0 16px;
+          flex-direction: row;
+          justify-content: center;
           gap: 16px;
           .linkButton {
-            width: 100%;
-            font-size: 1rem;
             color: #fff;
             border: 5px solid #8179a6;
             padding: 8px 16px;
@@ -128,6 +48,139 @@
             font-family: 'Raleway', Arial, san-serif;
             text-transform: capitalize;
             cursor: pointer;
+
+            &:hover {
+              color: #fff;
+              background: #8179a6;
+            }
+            &:active {
+              background-color: darken(#8179a6, 25%);
+              border: 5px solid darken(#8179a6, 25%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) and (min-width: 770px) {
+  .aboutPage {
+    margin-top: 120px;
+
+    .aboutContainer {
+      padding: 0 40px;
+    }
+    .contentContainer {
+      height: 350px;
+      position: relative;
+      overflow: hidden;
+
+      img {
+        position: relative;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%);
+      }
+
+      .linkContainer {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 2;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 48px 32px;
+        min-width: 750px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h3 {
+          text-align: center;
+          color: #ffffff;
+          margin-bottom: 32px;
+        }
+
+        .btnContainer {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          gap: 16px;
+          .linkButton {
+            color: #fff;
+            border: 5px solid #8179a6;
+            padding: 8px 16px;
+            transition: all 0.2s ease-in-out;
+            font-family: 'Raleway', Arial, san-serif;
+            text-transform: capitalize;
+            cursor: pointer;
+
+            &:hover {
+              color: #fff;
+              background: #8179a6;
+            }
+            &:active {
+              background-color: darken(#8179a6, 25%);
+              border: 5px solid darken(#8179a6, 25%);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 769px) {
+  .aboutPage {
+    color: #2e2e2e;
+    .aboutContainer {
+      p {
+        margin: 16px auto;
+      }
+    }
+
+    .contentContainer {
+      position: relative;
+      height: 300px;
+      overflow: hidden;
+      img {
+        height: 300px;
+      }
+
+      .linkContainer {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        z-index: 2;
+        padding: 32px;
+        width: 90%;
+        h3 {
+          text-align: center;
+          color: #ffffff;
+          margin-bottom: 16px;
+          font-size: 1.1rem !important;
+        }
+
+        .btnContainer {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          .linkButton {
+            font-size: 0.9rem;
+            color: #fff;
+            border: 4px solid #8179a6;
+            padding: 8px 16px;
+            transition: all 0.2s ease-in-out;
+            font-family: 'Raleway', Arial, san-serif;
+            text-transform: capitalize;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
 
             &:hover {
               color: #fff;
