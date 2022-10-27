@@ -3,7 +3,8 @@ import { generateImageUrl } from 'helpers/imageUrlHelper';
 import Image from 'next/image';
 import styles from './Styles.module.css';
 
-const GalleryImage = ({ image }) => {
+const GalleryImage = ({ image, isActive }) => {
+  console.log(isActive);
   return (
     <>
       <div className={styles.imageWrapper}>
@@ -12,13 +13,13 @@ const GalleryImage = ({ image }) => {
           alt={image.image_title}
           title={image.image_title}
           objectFit='cover'
-          height='150'
+          height='160'
           width='150'
         />
+        <h3>{image.image_title}</h3>
       </div>
 
-      <div className={styles.textGrid}>
-        <h3>{image.image_title}</h3>
+      <div className={isActive === false ? styles.content : styles.contentOpen}>
         <div
           dangerouslySetInnerHTML={{ __html: image.image_description }}
         ></div>

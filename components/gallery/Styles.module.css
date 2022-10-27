@@ -1,32 +1,71 @@
 .gallery {
   margin: 48px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .gallery h2 {
   text-align: center;
+  width: 100%;
 }
-.gallery .galleryWrapper {
-  max-width: 1067px;
+.gallery .container {
+  position: relative;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 32px;
+  max-width: 1067px;
+  flex-wrap: wrap;
 }
-@media (max-width: 769px) {
-  .gallery {
-    margin: 48px 0;
-  }
-  .gallery h2 {
-    text-align: center;
-  }
-  .gallery .container {
-    display: flex;
-  }
-  .gallery .container .imageWrapper img {
-    min-width: 100%;
-    border-radius: 3px;
-  }
-  .gallery .container .textGrid {
-    max-width: 300px;
-  }
+.gallery .container .card {
+  position: relative;
+  width: 430px;
+  margin: 32px 20px;
+}
+.gallery .container .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.gallery .container .card .imageWrapper {
+  display: flex;
+  gap: 32px;
+  align-items: flex-end;
+}
+.gallery .container .card .imageWrapper img {
+  border-radius: 50%;
+}
+.gallery .container .card .content {
+  position: relative;
+  height: 150px;
+  overflow: hidden;
+  margin: 16px 0;
+}
+.gallery .container .card .content::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(transparent, #eeeeee);
+}
+.gallery .container .card .more {
+  font-size: 0.9rem;
+  border: 3px solid #8179a6;
+  padding: 8px 16px;
+  transition: all 0.2s ease-in-out;
+  font-family: 'Raleway', Arial, san-serif;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+.gallery .container .card .more:hover {
+  color: #fff;
+  background: #8179a6;
+}
+.gallery .container .card .more:active {
+  background-color: #454060;
+  border: 5px solid #454060;
+}
+.gallery .container .card .more::before {
+  content: '';
 }

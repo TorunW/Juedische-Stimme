@@ -60,7 +60,6 @@
     display: inline;
     float: left;
     width: 300px;
-    height: auto;
     word-break: break-word;
   }
   .articleLayout .contentContainer .topWrapper .topContent {
