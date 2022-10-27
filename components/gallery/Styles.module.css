@@ -205,7 +205,9 @@
     align-items: flex-end;
   }
   .gallery .container .card .imageWrapper img {
-    border-radius: 50%;
+    height: 90px !important;
+    object-fit: fill;
+    border-radius: 100%;
   }
   .gallery .container .card .contentOpen {
     margin: 8px 0;

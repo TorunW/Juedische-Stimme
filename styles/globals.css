@@ -190,20 +190,21 @@ a {
 }
 @media (max-width: 769px) {
   #main-layout h1 {
-    font-size: 3.5rem;
+    font-size: 3rem;
     text-transform: uppercase;
     font-weight: 900;
     text-align: center;
-    margin-bottom: 48px;
+    margin-bottom: 32px;
     color: #2e2e2e;
   }
   #main-layout h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 900;
     margin-bottom: 32px;
+    text-align: center;
   }
   #main-layout h3 {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     text-transform: uppercase;
     font-weight: 600;
   }

@@ -203,21 +203,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <AboutInfo gallery={gallery} aboutInfo={aboutInfo} />
       <Posts posts={newsletter} title={'Newsletter'} />
       <CallToAction />
-      <Container>
-        <h2>Have a look at our social media</h2>
-        <iframe
-          src='https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F12juedischestimme%2F&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=788247842185302'
-          width='500'
-          height='500'
-          style={{
-            border: 'none',
-            overflow: 'hidden',
-            margin: '20px auto',
-            display: 'table',
-          }}
-          allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
-        ></iframe>
-      </Container>
     </main>
   );
 };
