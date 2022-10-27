@@ -29,63 +29,19 @@
   text-align: center;
   width: 300px;
 }
-@media (min-width: 831px) {
+@media (min-width: 769px) {
   .newsletterForm {
-    padding: 48px 120px;
+    max-width: 1067px;
     width: 100%;
     position: absolute;
+    height: 100%;
     bottom: 0;
   }
   .newsletterForm h2 {
     text-transform: uppercase;
-    width: 100%;
-    text-align: left;
-    margin-bottom: 32px;
+    float: left;
+    margin: 32px 0 16px !important;
     color: #2e2e2e;
-  }
-  .newsletterForm form {
-    display: flex;
-    gap: 16px;
-    width: 100%;
-  }
-  .newsletterForm form div {
-    width: calc(33% - 16px);
-  }
-  .newsletterForm form div :focus-visible {
-    border: none;
-  }
-  .newsletterForm form button {
-    color: black;
-  }
-}
-@media (max-width: 830px) {
-  .newsletterForm {
-    padding: 48px 32px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-  }
-  .newsletterForm h2 {
-    text-transform: uppercase;
-    width: 100%;
-    text-align: left;
-    margin-bottom: 32px;
-    color: #2e2e2e;
-    font-size: 2rem;
-  }
-  .newsletterForm form {
-    display: flex;
-    gap: 16px;
-    width: 100%;
-  }
-  .newsletterForm form div {
-    width: calc(33% - 16px);
-  }
-  .newsletterForm form div :focus-visible {
-    border: none;
-  }
-  .newsletterForm form button {
-    color: black;
   }
 }
 .form .error {

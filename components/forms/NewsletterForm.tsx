@@ -5,6 +5,8 @@ import axios from 'axios';
 import * as Yup from 'yup';
 import styles from './Styles.module.css';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { TextField, Button, FormControl } from '@mui/material';
+import Grid from '@mui/material/Grid';
 
 const NewsletterForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -83,44 +85,61 @@ const NewsletterForm = () => {
       className={styles.newsletterForm + ' ' + styles.formContainer}
     >
       <h2>Signup to Newsletter</h2>
-      <form onSubmit={formik.handleSubmit} className={styles.form}>
-        <div className={styles.formCol}>
-          <input
-            id='name'
-            name='name'
-            type='name'
-            onChange={formik.handleChange}
-            value={formik.values.name}
-            placeholder='Name'
-          />
-          {formik.errors && formik.errors.name ? (
-            <div className={styles.error}>{formik.errors.name}</div>
-          ) : (
-            ''
-          )}
-        </div>
+      <form onSubmit={formik.handleSubmit}>
+        <Grid container spacing={2}>
+          <Grid item md={4} xs={12}>
+            <TextField
+              id='name'
+              fullWidth
+              type='name'
+              label='Name'
+              onChange={formik.handleChange}
+              value={formik.values.name}
+              placeholder='Name'
+            />
+          </Grid>
+          <Grid item md={4} xs={12}>
+            <TextField
+              id='email'
+              name='email'
+              type='email'
+              fullWidth
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              placeholder='Email *'
+              label='Email *'
+            />
+            {formik.errors && formik.errors.email ? (
+              <div className={styles.error}>{formik.errors.email}</div>
+            ) : (
+              ''
+            )}{' '}
+          </Grid>
+          <Grid item md={4} xs={12}>
+            <Button
+              type='submit'
+              fullWidth
+              onClick={handleSumitForm}
+              sx={{
+                border: 5,
+                borderRadius: 0,
+                borderColor: '#8179a6',
+                fontSize: '1.6rem',
+                fontWeight: 700,
+                height: '55px',
 
-        <div className={styles.formCol}>
-          <input
-            id='email'
-            name='email'
-            type='email'
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            placeholder='Email *'
-          />
-          {formik.errors && formik.errors.email ? (
-            <div className={styles.error}>{formik.errors.email}</div>
-          ) : (
-            ''
-          )}
-        </div>
-        <div className='button whiteBg submitBtn'>
-          <button type='submit' onClick={handleSumitForm}>
-            Senden
-          </button>
-          {notification && <p>{notification}</p>}
-        </div>
+                '&:hover': {
+                  background: '#8179a6',
+                  color: 'white',
+                  transition: 'all .5s ease-in-out',
+                },
+              }}
+            >
+              Senden
+            </Button>
+            {notification && <p>{notification}</p>}
+          </Grid>
+        </Grid>
       </form>
     </div>
   );

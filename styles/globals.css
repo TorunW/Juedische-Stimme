@@ -130,25 +130,6 @@ a {
   background-color: #454060;
   border: 5px solid #454060;
 }
-#main-layout input,
-#main-layout textarea {
-  font-size: 1.4rem;
-  border: 1px solid #2e2e2e;
-  font-family: 'Raleway';
-  width: 100%;
-  padding: 8px;
-  color: #2e2e2e;
-}
-#main-layout input {
-  height: 56px;
-}
-#main-layout input:focus-visible {
-  border: 1px solid #2e2e2e;
-  outline: none;
-}
-#main-layout textarea:focus-visible {
-  outline: none;
-}
 @media (min-width: 1025px) {
   #main-layout h1 {
     font-size: 5.5rem;
@@ -195,7 +176,7 @@ a {
     margin-bottom: 48px;
   }
   #main-layout h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     font-weight: 600;
   }
   #main-layout h4 {

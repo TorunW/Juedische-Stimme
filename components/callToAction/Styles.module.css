@@ -1,26 +1,9 @@
-@media (min-width: 1251px) {
+@media (min-width: 1025px) {
   .ctaPage {
     height: auto;
   }
-  .ctaPage .drawer {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    height: 0;
-    transition: all 0.5s;
-  }
-  .ctaPage .hidden {
-    transition: all 1s;
-  }
-  .ctaPage .visible {
-    position: relative;
-    height: 215px;
-    width: 100%;
-    z-index: 1;
-    transition: all 1s;
-  }
   .ctaPage .imgWrapper {
-    height: 466px;
+    height: 400px;
     overflow: hidden;
     position: relative;
   }
@@ -30,6 +13,9 @@
     z-index: 10;
   }
   .ctaPage .imgWrapper .boxContainer {
+    max-width: 1067px;
+    padding: 0 20px;
+    width: 100%;
     position: absolute;
     z-index: 20;
     top: 50%;
@@ -49,34 +35,29 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
     padding: 16px;
     text-align: center;
     cursor: pointer;
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.463) 50%, rgba(0, 0, 0, 0.363) 50%);
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 50%);
     background-size: 200% 200%;
     background-position: top;
-    transition: all 0.3s;
-  }
-  .ctaPage .imgWrapper .boxContainer .cta:hover {
-    background-color: rgba(0, 0, 0, 0.463);
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.463) 51%, rgba(0, 0, 0, 0.363) 50%);
-    background-position: 0 100%;
     transition: all 0.3s;
   }
   .ctaPage .imgWrapper .boxContainer .cta svg {
     -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    fill: white;
+  }
+  .ctaPage .imgWrapper .boxContainer .cta:hover {
+    background-color: rgba(0, 0, 0, 0.463);
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 51%, rgba(0, 0, 0, 0.6) 50%);
+    background-position: 0 100%;
+    transition: all 0.7s;
   }
   .ctaPage .imgWrapper .boxContainer .cta a {
     position: fixed;
     height: 338px;
     width: 404px;
-  }
-}
-@media (max-width: 1250px) {
-  .ctaPage {
-    height: auto;
   }
   .ctaPage .drawer {
     position: relative;
@@ -84,19 +65,28 @@
     overflow: hidden;
     height: 0;
     transition: all 0.5s;
+    display: flex;
+    justify-content: center;
   }
   .ctaPage .hidden {
     transition: all 1s;
   }
   .ctaPage .visible {
     position: relative;
-    height: 215px;
+    height: 250px;
     width: 100%;
     z-index: 1;
     transition: all 1s;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (max-width: 1024px) and (min-width: 770px) {
+  .ctaPage {
+    height: auto;
   }
   .ctaPage .imgWrapper {
-    height: 366px;
+    height: 400px;
     overflow: hidden;
     position: relative;
   }
@@ -106,6 +96,8 @@
     z-index: 10;
   }
   .ctaPage .imgWrapper .boxContainer {
+    width: 100%;
+    padding: 0 16px;
     position: absolute;
     z-index: 20;
     top: 50%;
@@ -115,40 +107,41 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
   }
   .ctaPage .imgWrapper .boxContainer .cta {
     color: white;
-    height: 238px;
-    width: 304px;
+    height: 330px;
+    width: 280px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 16px;
-    padding: 16px;
+    padding: 20px;
     text-align: center;
     cursor: pointer;
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.463) 50%, rgba(0, 0, 0, 0.363) 50%);
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 50%);
     background-size: 200% 200%;
     background-position: top;
     transition: all 0.3s;
   }
+  .ctaPage .imgWrapper .boxContainer .cta svg {
+    -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    fill: white;
+    height: 70px;
+  }
   .ctaPage .imgWrapper .boxContainer .cta:hover {
     background-color: rgba(0, 0, 0, 0.463);
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.463) 51%, rgba(0, 0, 0, 0.363) 50%);
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 51%, rgba(0, 0, 0, 0.6) 50%);
     background-position: 0 100%;
-    transition: all 0.3s;
+    transition: all 0.7s;
   }
   .ctaPage .imgWrapper .boxContainer .cta a {
     position: fixed;
     height: 338px;
     width: 404px;
-  }
-}
-@media (max-width: 1010px) {
-  .ctaPage {
-    height: auto;
   }
   .ctaPage .drawer {
     position: relative;
@@ -156,133 +149,107 @@
     overflow: hidden;
     height: 0;
     transition: all 0.5s;
+    display: flex;
+    justify-content: center;
   }
   .ctaPage .hidden {
     transition: all 1s;
   }
   .ctaPage .visible {
     position: relative;
-    height: 215px;
+    height: 250px;
     width: 100%;
     z-index: 1;
     transition: all 1s;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (max-width: 769px) {
+  .ctaPage {
+    height: auto;
   }
   .ctaPage .imgWrapper {
-    height: 316px;
+    height: 600px;
     overflow: hidden;
     position: relative;
+    display: flex;
+    align-items: center;
   }
   .ctaPage .imgWrapper .backgroundImage {
     position: absolute !important;
-    top: -50% !important;
     z-index: 10;
   }
   .ctaPage .imgWrapper .boxContainer {
+    width: 100%;
+    padding: 20px 16px;
     position: absolute;
     z-index: 20;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 32px;
+    gap: 20px;
   }
   .ctaPage .imgWrapper .boxContainer .cta {
     color: white;
-    height: 238px;
-    width: 254px;
+    height: 160px;
+    width: 95%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 16px;
-    padding: 16px;
+    padding: 20px;
     text-align: center;
     cursor: pointer;
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.463) 50%, rgba(0, 0, 0, 0.363) 50%);
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 50%);
     background-size: 200% 200%;
     background-position: top;
     transition: all 0.3s;
   }
+  .ctaPage .imgWrapper .boxContainer .cta div {
+    text-align: left;
+  }
+  .ctaPage .imgWrapper .boxContainer .cta svg {
+    -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    fill: white;
+    height: 70px;
+  }
   .ctaPage .imgWrapper .boxContainer .cta:hover {
     background-color: rgba(0, 0, 0, 0.463);
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.463) 51%, rgba(0, 0, 0, 0.363) 50%);
+    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7) 51%, rgba(0, 0, 0, 0.6) 50%);
     background-position: 0 100%;
-    transition: all 0.3s;
+    transition: all 0.7s;
   }
   .ctaPage .imgWrapper .boxContainer .cta a {
     position: fixed;
-    height: 338px;
-    width: 404px;
+    height: 160px;
+    width: 95%;
+  }
+  .ctaPage .drawer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    height: 0;
+    transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+  }
+  .ctaPage .hidden {
+    transition: all 1s;
+  }
+  .ctaPage .visible {
+    position: relative;
+    height: 250px;
+    width: 100%;
+    z-index: 1;
+    transition: all 1s;
+    display: flex;
+    justify-content: center;
   }
 }
 .ctaPage h3 {
   text-transform: uppercase;
-}
-@media (max-width: 830px) {
-  .ctaPage {
-    height: auto;
-    overflow: hidden;
-  }
-  .ctaPage .drawer {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    height: 0;
-    transition: all 0.5s;
-  }
-  .ctaPage .hidden {
-    transition: all 1s;
-  }
-  .ctaPage .visible {
-    position: relative;
-    height: 215px;
-    width: 100%;
-    z-index: 1;
-    transition: all 1s;
-  }
-  .ctaPage .imgWrapper {
-    height: 798px;
-  }
-  .ctaPage .imgWrapper .backgroundImage {
-    z-index: 10;
-  }
-  .ctaPage .imgWrapper .boxContainer {
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
-  }
-  .ctaPage .imgWrapper .boxContainer .cta {
-    color: white;
-    height: 208px;
-    width: 364px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    padding: 16px;
-    text-align: center;
-    cursor: pointer;
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.463) 50%, rgba(0, 0, 0, 0.363) 50%);
-    background-size: 200% 200%;
-    background-position: top;
-    transition: all 0.3s;
-  }
-  .ctaPage .imgWrapper .boxContainer .cta:hover {
-    background-color: rgba(0, 0, 0, 0.463);
-    background-image: linear-gradient(to top, rgba(0, 0, 0, 0.463) 51%, rgba(0, 0, 0, 0.363) 50%);
-    background-position: 0 100%;
-    transition: all 0.3s;
-  }
-  .ctaPage .imgWrapper .boxContainer .cta a {
-    position: fixed;
-    height: 338px;
-    width: 404px;
-  }
 }
