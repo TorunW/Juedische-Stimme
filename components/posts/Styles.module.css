@@ -114,17 +114,9 @@
     aspect-ratio: auto 1.64285714;
   }
 }
-@media (max-width: 990px) {
+@media (max-width: 990px) and (min-width: 601px) {
   .threeColPage .postsContainer .post {
     width: calc(50% - 32px);
-  }
-  .threeColPage .postsContainer .post .imageWrapper {
-    aspect-ratio: auto 1.64285714;
-  }
-}
-@media (max-width: 600px) {
-  .threeColPage .postsContainer .post {
-    width: 100%;
   }
   .threeColPage .postsContainer .post .imageWrapper {
     aspect-ratio: auto 1.64285714;
