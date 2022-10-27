@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { NextPageContext } from 'next';
 
 import type { LayoutPage } from 'types/LayoutPage.type';
 import { LayoutPageProps } from 'types/LayoutPageProps.type';
@@ -7,7 +6,6 @@ import { LayoutPageProps } from 'types/LayoutPageProps.type';
 import excuteQuery from 'lib/db';
 import { selectPosts } from 'lib/queries/posts';
 import { selectGalleryById } from 'lib/queries';
-import { selectMenuItems } from 'lib/queries/menuItems';
 
 import { useDispatch, useSelector } from 'store/hooks';
 import { setPosts, setNewsletter } from 'store/posts/postsSlice';
@@ -27,11 +25,10 @@ import { getPlaiceholder } from 'plaiceholder';
 import axios from 'axios';
 import { generateImageUrl } from 'helpers/imageUrlHelper';
 import { setHeaderGallery } from 'store/galleries/galleriesSlice';
-import { Page, PageProps } from 'page/page';
+import { PageProps } from 'page/page';
 import { createServerSideProps } from 'page/server-side-props';
 
 import Head from 'next/head';
-import { Container } from '@/components/atoms/Container';
 import { setLabels } from 'store/labels/labelsSlice';
 
 export interface HomePageProps extends PageProps {
@@ -203,6 +200,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       <AboutInfo gallery={gallery} aboutInfo={aboutInfo} />
       <Posts posts={newsletter} title={'Newsletter'} />
       <CallToAction />
+      <FacebookFeed />
     </main>
   );
 };

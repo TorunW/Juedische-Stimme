@@ -10,25 +10,27 @@ import { useDispatch, useSelector } from 'store/hooks';
 import styles from './StylesFeed.module.css';
 import { isUpdatedToday } from 'helpers/checkIfUpdatedToday';
 import FacebookPosts from './FacbookPosts';
+import { Container } from '../atoms/Container';
 
-const FacebookFeed = ({fbt}) => {
+const FacebookFeed = ({ fbt }) => {
   const dispatch = useDispatch();
   const feed = useSelector((state) => state.fbData.feed);
 
   useEffect(() => {
-    fetchFacebookFeedFromDb()
+    fetchFacebookFeedFromDb();
     // fetchFacebookFeedFromFb()
-  },[])
+  }, []);
 
   useEffect(() => {
     if (fbt && fbt !== null) {
-      if (!feed || !isUpdatedToday(feed.date_updated)) fetchFacebookFeedFromFb();
+      if (!feed || !isUpdatedToday(feed.date_updated))
+        fetchFacebookFeedFromFb();
     }
   }, [fbt]);
 
-  async function fetchFacebookFeedFromDb(){
-    const res = await fetch('/api/fbfeed')
-    const feedRes = await res.json()
+  async function fetchFacebookFeedFromDb() {
+    const res = await fetch('/api/fbfeed');
+    const feedRes = await res.json();
     dispatch(setFeed(feedRes[0]));
   }
 
@@ -66,10 +68,22 @@ const FacebookFeed = ({fbt}) => {
   }
 
   return (
-    <section className={styles.facebookPage}>
-      <h2>News from our facebook</h2>
-      <FacebookPosts feed={feed} />
-    </section>
+    <Container sx={{ paddingX: '20px', textAlign: 'center' }}>
+      <h2>Have a look at our social media</h2>
+      <iframe
+        src='https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F12juedischestimme%2F&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=788247842185302'
+        width='500'
+        height='500'
+        style={{
+          border: 'none',
+          overflow: 'hidden',
+          margin: '20px auto',
+          display: 'table',
+        }}
+        allow='autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share'
+      ></iframe>
+    </Container>
+    // <FacebookPosts feed={feed} />
   );
 };
 
