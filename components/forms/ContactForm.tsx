@@ -55,7 +55,13 @@ const ContactForm = () => {
                 placeholder='Name'
                 data-testid='name-input'
                 fullWidth
-                sx={{ background: 'white' }}
+                color='secondary'
+                sx={{
+                  background: 'white',
+                  [`& fieldset`]: {
+                    borderRadius: 0,
+                  },
+                }}
               />
               {formik.errors && formik.errors.name ? (
                 <div data-testid='name-error' className={styles.error}>
@@ -74,7 +80,13 @@ const ContactForm = () => {
                 value={formik.values.email}
                 placeholder='Email'
                 fullWidth
-                sx={{ background: 'white' }}
+                color='secondary'
+                sx={{
+                  background: 'white',
+                  [`& fieldset`]: {
+                    borderRadius: 0,
+                  },
+                }}
               />
               {formik.errors && formik.errors.email ? (
                 <div data-testid='email-error' className={styles.error}>
@@ -95,7 +107,13 @@ const ContactForm = () => {
                 rows={3}
                 fullWidth
                 placeholder='Your messsage...'
-                sx={{ background: 'white' }}
+                color='secondary'
+                sx={{
+                  background: 'white',
+                  [`& fieldset`]: {
+                    borderRadius: 0,
+                  },
+                }}
               />
               {formik.errors.message && formik.touched.message ? (
                 <div data-testid='message-error' className={styles.error}>

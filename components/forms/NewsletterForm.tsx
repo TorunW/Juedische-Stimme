@@ -5,13 +5,15 @@ import axios from 'axios';
 import * as Yup from 'yup';
 import styles from './Styles.module.css';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, useMediaQuery } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import theme from 'config/theme';
 
 const NewsletterForm = () => {
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   const [notification, setNotification] = useState('');
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleSumitForm = useCallback(
     (e) => {
@@ -84,8 +86,8 @@ const NewsletterForm = () => {
     >
       <h2>Signup to Newsletter</h2>
       <form onSubmit={formik.handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item md={4} xs={12}>
+        <Grid container spacing={isSmall ? 4 : 2}>
+          <Grid item sm={4} xs={12}>
             <TextField
               id='name'
               fullWidth
@@ -94,9 +96,15 @@ const NewsletterForm = () => {
               onChange={formik.handleChange}
               value={formik.values.name}
               placeholder='Name'
+              color='secondary'
+              sx={{
+                [`& fieldset`]: {
+                  borderRadius: 0,
+                },
+              }}
             />
           </Grid>
-          <Grid item md={4} xs={12}>
+          <Grid item sm={4} xs={12}>
             <TextField
               id='email'
               name='email'
@@ -106,6 +114,12 @@ const NewsletterForm = () => {
               value={formik.values.email}
               placeholder='Email *'
               label='Email *'
+              color='secondary'
+              sx={{
+                [`& fieldset`]: {
+                  borderRadius: 0,
+                },
+              }}
             />
             {formik.errors && formik.errors.email ? (
               <div className={styles.error}>{formik.errors.email}</div>
@@ -113,7 +127,7 @@ const NewsletterForm = () => {
               ''
             )}{' '}
           </Grid>
-          <Grid item md={4} xs={12}>
+          <Grid item sm={4} xs={12}>
             <Button
               type='submit'
               fullWidth

@@ -245,7 +245,7 @@
   }
   .ctaPage .visible {
     position: relative;
-    height: 250px;
+    height: 360px;
     width: 100%;
     z-index: 1;
     transition: all 1s;

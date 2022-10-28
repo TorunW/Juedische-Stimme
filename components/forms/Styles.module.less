@@ -34,9 +34,10 @@
   }
 }
 
-@media (min-width: 769px) {
+@media (min-width: 770px) {
   .newsletterForm {
     max-width: 1067px;
+    padding: 0 40px;
     width: 100%;
     position: absolute;
     height: 100%;
@@ -49,8 +50,37 @@
       color: #2e2e2e;
     }
   }
-}
 
+  .error {
+    color: red;
+    padding: 5px 10px;
+    width: auto;
+    position: absolute;
+  }
+}
+@media (max-width: 769px) {
+  .newsletterForm {
+    width: 100%;
+    padding: 0 20px;
+    position: absolute;
+    height: 100%;
+    bottom: 0;
+
+    h2 {
+      text-transform: uppercase;
+      float: left;
+      margin: 16px 0 -16px !important;
+      color: #2e2e2e;
+    }
+
+    .error {
+      color: red;
+      padding: 5px 10px;
+      width: auto;
+      position: absolute;
+    }
+  }
+}
 .form {
   .error {
     color: red;
@@ -59,44 +89,17 @@
   }
 }
 
-// .membershipFormContainer {
-//   background: rgba(0, 0, 0, 0.637);
-//   border-radius: 3px;
-//   width: 500px;
-//   padding: 48px 32px;
 .membershipForm {
-  .formRow {
-    display: flex;
-    flex-direction: row;
-    gap: 16px;
-    align-items: baseline;
-  }
-
   h3 {
     color: white;
     margin-bottom: 16px;
     text-transform: capitalize;
   }
 
-  input {
-    background: none;
-    color: white !important;
-    border: none;
-    border-bottom: #8179a6 2px solid;
-    margin-bottom: 16px;
-    height: 40px;
-
-    &:focus-visible {
-      outline: none;
-      border: none;
-      border-bottom: #8179a6 2px solid;
-    }
-  }
   span {
     color: white;
   }
 }
-// }
 
 .donationsForm,
 .membershipForm {
