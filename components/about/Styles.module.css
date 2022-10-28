@@ -4,6 +4,7 @@
   }
   .aboutPage .aboutContainer {
     max-width: 1067px;
+    padding: 0 40px;
   }
   .aboutPage .contentContainer {
     height: 400px;

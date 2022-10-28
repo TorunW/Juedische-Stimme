@@ -5,10 +5,13 @@ import Gallery from '../gallery/Gallery';
 import styles from './Styles.module.css';
 import containerBackground from 'styles/images/about.jpg';
 import { Container } from '../atoms/Container';
+import { generateImageUrl } from 'helpers/imageUrlHelper';
 
 const AboutInfo = ({ gallery, aboutInfo }) => {
-  let [galleryImages, setGalleryImages] = useState([]);
+  let [galleryImages, setGalleryImages] = React.useState([]);
   const { locale } = useSelector((state) => state.languages);
+  const { parterMenu } = useSelector((state) => state.nav);
+
   useEffect(() => {
     if (gallery !== null) getGalleryImages();
   }, [gallery]);
@@ -37,7 +40,25 @@ const AboutInfo = ({ gallery, aboutInfo }) => {
               }}
               className={styles.text}
             ></div>
-            {galleryImages.length > 0 ? <Gallery images={galleryImages} /> : ''}
+            <h3 className={styles.label}>Unsere partner {'&'} freunde</h3>
+            <div className={styles.imgContainer}>
+              {parterMenu.map((menuItem, index) => (
+                <a
+                  key={menuItem.term_id + Date.now()}
+                  href={menuItem.link}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <img
+                    width={100}
+                    src={generateImageUrl(menuItem.term_image)}
+                    alt={menuItem.alt}
+                    title={menuItem.title}
+                  />
+                </a>
+              ))}
+            </div>
+            {/* {galleryImages.length > 0 ? <Gallery images={galleryImages} /> : ''} */}
           </div>
         )}
       </Container>
