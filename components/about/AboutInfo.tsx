@@ -40,24 +40,27 @@ const AboutInfo = ({ gallery, aboutInfo }) => {
               }}
               className={styles.text}
             ></div>
-            <h3 className={styles.label}>Unsere partner {'&'} freunde</h3>
-            <div className={styles.imgContainer}>
-              {parterMenu.map((menuItem, index) => (
-                <a
-                  key={menuItem.term_id + Date.now()}
-                  href={menuItem.link}
-                  target='_blank'
-                  rel='noopener noreferrer'
-                >
-                  <img
-                    width={100}
-                    src={generateImageUrl(menuItem.term_image)}
-                    alt={menuItem.alt}
-                    title={menuItem.title}
-                  />
-                </a>
-              ))}
+            <div className={styles.menuContainer}>
+              <h3 className={styles.label}>Unsere partner {'&'} freunde</h3>
+              <div className={styles.imgContainer}>
+                {parterMenu.map((menuItem, index) => (
+                  <a
+                    key={menuItem.term_id + Date.now()}
+                    href={menuItem.link}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                  >
+                    <img
+                      width={100}
+                      src={generateImageUrl(menuItem.term_image)}
+                      alt={menuItem.alt}
+                      title={menuItem.title}
+                    />
+                  </a>
+                ))}
+              </div>
             </div>
+
             {/* {galleryImages.length > 0 ? <Gallery images={galleryImages} /> : ''} */}
           </div>
         )}
