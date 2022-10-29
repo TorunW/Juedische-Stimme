@@ -15,11 +15,12 @@ import { generateImageUrl } from "helpers/imageUrlHelper";
 
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import { generateFileName } from "helpers/generateFileName";
 
 export const MediaItem = ({ mediaItem }) => {
   const [open, setOpen] = useState(false);
 
-  console.log(open, " DELETE DIALOG OPEN");
+  console.log(mediaItem);
   function deleteMediaItem(mediaItem) {
     const deleteFileUrl = `http://${window.location.hostname}${
       window.location.port !== "80" ? ":" + window.location.port : ""
@@ -107,12 +108,17 @@ export const MediaItem = ({ mediaItem }) => {
           <Button
             variant="contained"
             size="small"
-            onClick={() => console.log(mediaItem)}
             sx={{
               backgroundColor: "dodgerblue",
             }}
           >
-            <CloudDownloadIcon />
+            <a
+              style={{ height: "25px" }}
+              href={`/wp-content/uploads/${mediaItem.meta_value}`}
+              download
+            >
+              <CloudDownloadIcon />
+            </a>
           </Button>
         </Box>
       </Box>
