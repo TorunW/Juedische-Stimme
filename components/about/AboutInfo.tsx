@@ -6,11 +6,14 @@ import styles from "./Styles.module.css";
 import containerBackground from "styles/images/about.jpg";
 import { Container } from "../atoms/Container";
 import { generateImageUrl } from "helpers/imageUrlHelper";
+import { getLabel } from "helpers/getLabelHelper";
 
 const AboutInfo = ({ gallery, aboutInfo }) => {
   let [galleryImages, setGalleryImages] = React.useState([]);
   const { locale } = useSelector((state) => state.languages);
-  const { parterMenu } = useSelector((state) => state.nav);
+  const { labels } = useSelector((state) => state.labels);
+
+  const { parterMenu, grundlagenMenu } = useSelector((state) => state.nav);
 
   useEffect(() => {
     if (gallery !== null) getGalleryImages();
@@ -74,20 +77,25 @@ const AboutInfo = ({ gallery, aboutInfo }) => {
           objectFit="cover"
         />
         <div className={styles.linkContainer}>
-          <h3>Grundlagen unserer Arbeit sind:</h3>
+          <h3>
+            {getLabel(
+              labels,
+              locale,
+              "grundlagen_title",
+              "Grundlagen unserer Arbeit sind:"
+            )}
+          </h3>
           <div className={styles.btnContainer}>
-            <a
-              href={"/selbstverstaendnis"}
-              className={styles.linkButton}
-            >
-              Selbsverständnis der Jüdischen Stimme
-            </a>
-            <a
-              href={"/wp-content/uploads/2011/11/Satzung_2011.pdf"}
-              className={styles.linkButton}
-            >
-              Satzung der Jüdischen Stimme
-            </a>
+            {grundlagenMenu &&
+              grundlagenMenu.map((mi) => (
+                <a
+                  key={mi.title}
+                  href={`/${mi.link}`}
+                  className={styles.linkButton}
+                >
+                  {mi.title}
+                </a>
+              ))}
           </div>
         </div>
       </div>

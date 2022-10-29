@@ -23,12 +23,11 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
 import { Container } from "@/components/atoms/Container";
+import MenuItemForm from "./MenuItemForm";
 
 const MenuItems = ({ menuItems }) => {
   const [currentMenu, setCurrentMenu] = useState("main_menu");
   const [open, setOpen] = React.useState(false);
-
-  console.log(menuItems);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -169,6 +168,7 @@ const MenuItems = ({ menuItems }) => {
       />
       <Container>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
+          <MenuItemForm />
           <Table
             sx={{ minWidth: 650 }}
             stickyHeader

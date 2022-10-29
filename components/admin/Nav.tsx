@@ -29,6 +29,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import ListIcon from "@mui/icons-material/List";
+import LabelIcon from "@mui/icons-material/Label";
 
 function AdminNav(props) {
   const router = useRouter();
@@ -224,12 +225,24 @@ function AdminNav(props) {
                 sx={{ cursor: "pointer" }}
               >
                 <PeopleOutlineIcon sx={{ marginRight: 1 }} />
-                <Typography>Register User</Typography>
+                <Typography>Edit Users</Typography>
               </Box>
             </Link>
           </Box>
         </AccordionDetails>
       </Accordion>
+      <Divider />
+      <Box sx={{ marginY: 1, marginLeft: 1, paddingLeft: 1 }}>
+        <Link href={`/admin/labels`}>
+          <Box
+            display="flex"
+            sx={{ cursor: "pointer" }}
+          >
+            <LabelIcon sx={{ marginRight: 1 }} />
+            <Typography>Labels</Typography>
+          </Box>
+        </Link>
+      </Box>
       <Divider />
       <Box sx={{ textAlign: "center", marginTop: 2 }}>
         <Box

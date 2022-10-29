@@ -153,9 +153,18 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
             paddingY: 2,
           }}
         >
-          <Grid container spacing={2}>
-            <Grid item xs={11}>
-              <FormControl fullWidth margin="normal">
+          <Grid
+            container
+            spacing={2}
+          >
+            <Grid
+              item
+              xs={11}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <InputLabel>Choose a Menu</InputLabel>
                 <Select
                   id="taxonomy"
@@ -188,8 +197,14 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
               </FormControl>
             </Grid>
 
-            <Grid item xs={1}>
-              <FormControl fullWidth margin="normal">
+            <Grid
+              item
+              xs={1}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <TextField
                   id="term_order"
                   label="Order"
@@ -203,8 +218,14 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
               </FormControl>
             </Grid>
 
-            <Grid item xs={6}>
-              <FormControl fullWidth margin="normal">
+            <Grid
+              item
+              xs={6}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <TextField
                   id="title"
                   label="Title"
@@ -222,8 +243,14 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                 )}
               </FormControl>
             </Grid>
-            <Grid item xs={6}>
-              <FormControl fullWidth margin="normal">
+            <Grid
+              item
+              xs={6}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <TextField
                   id="title_en_US"
                   label="Title ( English )"
@@ -241,8 +268,14 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                 )}
               </FormControl>
             </Grid>
-            <Grid item xs={12}>
-              <FormControl fullWidth margin="normal">
+            <Grid
+              item
+              xs={12}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <TextField
                   id="link"
                   label="Link"
@@ -295,7 +328,10 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                   Upload an image
                 </Button>
                 {previewImage !== null ? (
-                  <Grid xs={10} sx={{ marginTop: 2, textAlign: "center" }}>
+                  <Grid
+                    xs={10}
+                    sx={{ marginTop: 2, textAlign: "center" }}
+                  >
                     <Image
                       layout="fixed"
                       width={320}
@@ -304,7 +340,10 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                     />
                   </Grid>
                 ) : menuItem && menuItem.term_image ? (
-                  <Grid xs={10} sx={{ marginTop: 2, textAlign: "center" }}>
+                  <Grid
+                    xs={10}
+                    sx={{ marginTop: 2, textAlign: "center" }}
+                  >
                     <Image
                       layout="fixed"
                       width={320}
@@ -333,8 +372,15 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
               </Grid>
             )}
 
-            <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="secondary">
+            <Grid
+              item
+              xs={12}
+            >
+              <Button
+                type="submit"
+                variant="contained"
+                color="secondary"
+              >
                 {" "}
                 {menuItem ? "update menu item" : "create menu item"}
               </Button>

@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import { Box, Button, Card, FormControl, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
+import { Container } from "@/components/atoms/Container";
 
 interface Props {
   label?: any;
@@ -42,7 +43,7 @@ const LabelForm: FC<Props> = ({ label }) => {
   });
 
   return (
-    <Box>
+    <Container>
       <form onSubmit={formik.handleSubmit}>
         <Card
           sx={{
@@ -50,9 +51,18 @@ const LabelForm: FC<Props> = ({ label }) => {
             paddingY: 2,
           }}
         >
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <FormControl fullWidth margin="normal">
+          <Grid
+            container
+            spacing={2}
+          >
+            <Grid
+              item
+              xs={6}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <TextField
                   id="label_name"
                   label="Label Name"
@@ -65,8 +75,14 @@ const LabelForm: FC<Props> = ({ label }) => {
                 />
               </FormControl>
             </Grid>
-            <Grid item xs={6}>
-              <FormControl fullWidth margin="normal">
+            <Grid
+              item
+              xs={6}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <TextField
                   id="label_type"
                   label="Label Type"
@@ -79,8 +95,14 @@ const LabelForm: FC<Props> = ({ label }) => {
                 />
               </FormControl>
             </Grid>
-            <Grid item xs={6}>
-              <FormControl fullWidth margin="normal">
+            <Grid
+              item
+              xs={6}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <TextField
                   id="label_title"
                   label="Label Title"
@@ -93,8 +115,14 @@ const LabelForm: FC<Props> = ({ label }) => {
                 />
               </FormControl>
             </Grid>
-            <Grid item xs={6}>
-              <FormControl fullWidth margin="normal">
+            <Grid
+              item
+              xs={6}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
                 <TextField
                   id="label_title_en_US"
                   label="Label Title ( English )"
@@ -107,15 +135,22 @@ const LabelForm: FC<Props> = ({ label }) => {
                 />
               </FormControl>
             </Grid>
-            <Grid item xs={12}>
-              <Button type="submit" variant="contained" color="secondary">
+            <Grid
+              item
+              xs={12}
+            >
+              <Button
+                type="submit"
+                variant="contained"
+                color="secondary"
+              >
                 {label ? "update label" : "create label"}
               </Button>
             </Grid>
           </Grid>
         </Card>
       </form>
-    </Box>
+    </Container>
   );
 };
 
