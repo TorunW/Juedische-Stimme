@@ -31,9 +31,11 @@ export default function PostPageLegacyLayout({ post, locale }) {
           <div className={styles.headerContainer}>
             <p>Published {post.post_date ? formateDate(post.post_date) : ""}</p>
             <p>
-              <a href={`/category/${post.categoryName}`}>
-                #{post.categoryName}
-              </a>
+              {!!post.categoryName && (
+                <a href={`/category/${post.categoryName}`}>
+                  #{post.categoryName}
+                </a>
+              )}
               {tagsDisplay}
             </p>
             <div className={styles.socialMediaLinks}>
