@@ -12,13 +12,15 @@ import AdminTopBar from "@/components/atoms/AdminTopBar";
 export const getServerSideProps = createAdminServerSideProps<HomePageProps>(
   async ({ context, data: { loggedUser } }) => {
     const mediaResponse = await excuteQuery({
-      query: selectMediaItems(50, context.query.number),
+      query: selectMediaItems(200, context.query.number),
     });
     const mediaItems = JSON.stringify(mediaResponse);
     return {
       props: {
         mediaItems,
         loggedUser,
+        pageNum: context.query.number,
+        itemsPerPage: 200,
       },
     };
   }
