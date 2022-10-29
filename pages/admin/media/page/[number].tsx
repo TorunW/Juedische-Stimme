@@ -8,6 +8,7 @@ import { createAdminServerSideProps } from "page/admin-server-side-props";
 import { HomePageProps } from "pages";
 import { useDispatch, useSelector } from "store/hooks";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
+import { useLoggedUser } from "hooks/useLoggedUser";
 
 export const getServerSideProps = createAdminServerSideProps<HomePageProps>(
   async ({ context, data: { loggedUser } }) => {
@@ -27,6 +28,7 @@ export const getServerSideProps = createAdminServerSideProps<HomePageProps>(
 );
 
 export default function AdminMediaPage(props) {
+  const {} = useLoggedUser(props);
   const dispatch = useDispatch();
 
   useEffect(() => {
