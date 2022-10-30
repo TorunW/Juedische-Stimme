@@ -48,7 +48,8 @@ export const createServerSideProps = <T extends PageProps>(
       // PAGEVIEW
       const { req } = context;
       let url = req.headers.referer;
-      if (url.indexOf("localhost") === -1) {
+      if (url && url.indexOf("localhost") === -1) {
+        console.log(url);
         const forwarded = req.headers["x-forwarded-for"];
         const detectedId = forwarded
           ? forwarded.toString().split(/, /)[0]
