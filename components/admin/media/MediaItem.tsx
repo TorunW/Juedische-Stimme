@@ -15,10 +15,10 @@ import { generateImageUrl } from "helpers/imageUrlHelper";
 
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-import { generateFileName } from "helpers/generateFileName";
 
 export const MediaItem = ({ mediaItem }) => {
-  const [open, setOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [imageDialogOpen, setImageDialogOpen] = useState(false);
 
   console.log(mediaItem);
   function deleteMediaItem(mediaItem) {
@@ -64,12 +64,28 @@ export const MediaItem = ({ mediaItem }) => {
           layout="fill"
           objectFit="cover"
           src={generateImageUrl(mediaItem.meta_value)}
+          onClick={() => setImageDialogOpen(true)}
         />
+
+        <Dialog
+          open={imageDialogOpen}
+          onClose={() => setImageDialogOpen(false)}
+        >
+          <DialogContent>
+            <Box sx={{ width: "600px", height: "600px", display: "flex" }}>
+              <img
+                style={{ maxWidth: "100%", maxHeight: "100", margin: "0 auto" }}
+                src={generateImageUrl(mediaItem.meta_value)}
+              />
+            </Box>
+          </DialogContent>
+        </Dialog>
+
         <Box sx={{ position: "absolute", top: "8px", right: "8px" }}>
           <Button
             variant="contained"
             size="small"
-            onClick={() => setOpen(true)}
+            onClick={() => setDeleteDialogOpen(true)}
             sx={{
               marginRight: 1,
               backgroundColor: "red",
@@ -79,8 +95,8 @@ export const MediaItem = ({ mediaItem }) => {
           </Button>
 
           <Dialog
-            open={open}
-            onClose={() => setOpen(false)}
+            open={deleteDialogOpen}
+            onClose={() => setDeleteDialogOpen(false)}
           >
             <DialogTitle>{"Delete Media Item?"}</DialogTitle>
             <DialogContent>
@@ -98,13 +114,12 @@ export const MediaItem = ({ mediaItem }) => {
               </Button>
               <Button
                 variant="outlined"
-                onClick={() => setOpen(false)}
+                onClick={() => setDeleteDialogOpen(false)}
               >
                 Cancel
               </Button>
             </DialogActions>
           </Dialog>
-
           <Button
             variant="contained"
             size="small"
