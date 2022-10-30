@@ -3,9 +3,6 @@ import { getLabels } from "lib/queries/labels";
 import { selectMenuItems } from "lib/queries/menuItems";
 import { GetServerSideProps } from "next";
 import { PageProps } from "./page";
-import requestIp from "request-ip";
-import { useRouter } from "next/router";
-
 // this is the data that is passed into the serverSideProps of each particular page
 // useful in case when the amount is huge or contains sensitive data and cannot be sent to the client in PageProps
 export interface ServerSideData {
@@ -52,7 +49,10 @@ export const createServerSideProps = <T extends PageProps>(
       const { req } = context;
       let url = req.headers.referer;
       if (url.indexOf("localhost") === -1) {
-        const detectedId = requestIp.getClientIp(req);
+        const forwarded = req.headers["x-forwarded-for"];
+        const detectedId = forwarded
+          ? forwarded.toString().split(/, /)[0]
+          : req.connection.remoteAddress;
         const pageViewResponse = await excuteQuery({
           query: `SELECT * FROM js_pageviews WHERE js_pageviews.ip='${detectedId}' AND js_pageviews.url='${url}'`,
         });
