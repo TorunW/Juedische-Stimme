@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, Select, Box, MenuItem } from '@mui/material';
+import { TextField } from '@mui/material';
 import React, { ReactElement, useEffect, useState } from 'react';
 import { useSelector } from 'store/hooks';
 import { Category } from 'types/Category.type';
@@ -10,9 +10,6 @@ type SearchFilterProps = {
 
 const SearchFilter = ({ phrase }: SearchFilterProps) => {
   const { categories, categoryName } = useSelector((state) => state.categories);
-
-  console.log(categoryName);
-
   const [searchPhrase, setSearchPhrase] = useState(phrase ? phrase : '');
   const [dropDownIsVisible, setDropDownIsVisible] = useState(false);
 
@@ -23,9 +20,9 @@ const SearchFilter = ({ phrase }: SearchFilterProps) => {
       setDropDownIsVisible(false);
     }
   }
-  function onCategorySelectChange(val: string) {
-    window.location.href = `/category/${val}`;
-  }
+  // function onCategorySelectChange(val: string) {
+  //   window.location.href = `/category/${val}`;
+  // }
   let categoryOptionsDisplay: ReactElement[];
   if (categories) {
     categoryOptionsDisplay = categories.map((cat, index) => (
@@ -39,41 +36,39 @@ const SearchFilter = ({ phrase }: SearchFilterProps) => {
     <div className={styles.filterContainer}>
       <h4>Filter by:</h4>
       <div className={styles.searchContainer}>
-        {/* <Box sx={{ minWidth: 120 }}>
-          <FormControl fullWidth>
-            <InputLabel id='Choose-Category'>Choose Category</InputLabel>
-            <Select
-              labelId='demo-simple-select-label'
-              id='demo-simple-select'
-              color='secondary'
-              value={categoryName}
-              label='Choose Category'
-              sx={{ color: 'white' }}
-              // onChange={() => ` ${window.location}`}
+        <div className={styles.dropDown}>
+          <button onClick={handleClick}>
+            Choose category
+            <svg
+              width='24'
+              height='24'
+              viewBox='0 0 24 24'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
             >
-              {categories
-                ? categories.map((cat, index) => (
-                    <a href={`/category/${cat.name}`}>
-                      <MenuItem
-                        sx={{ backgroundColor: '#2e2e2e', color: 'white' }}
-                        key={index}
-                        value={cat}
-                      >
-                        {cat.name}
-                      </MenuItem>
-                    </a>
-                  ))
-                : ''}
-            </Select>
-          </FormControl>
-        </Box> */}
+              <path d='M16.9999 9.17019C16.8126 8.98394 16.5591 8.87939 16.2949 8.87939C16.0308 8.87939 15.7773 8.98394 15.5899 9.17019L11.9999 12.7102L8.45995 9.17019C8.27259 8.98394 8.01913 8.87939 7.75495 8.87939C7.49076 8.87939 7.23731 8.98394 7.04995 9.17019C6.95622 9.26315 6.88183 9.37375 6.83106 9.49561C6.78029 9.61747 6.75415 9.74818 6.75415 9.88019C6.75415 10.0122 6.78029 10.1429 6.83106 10.2648C6.88183 10.3866 6.95622 10.4972 7.04995 10.5902L11.2899 14.8302C11.3829 14.9239 11.4935 14.9983 11.6154 15.0491C11.7372 15.0998 11.8679 15.126 11.9999 15.126C12.132 15.126 12.2627 15.0998 12.3845 15.0491C12.5064 14.9983 12.617 14.9239 12.7099 14.8302L16.9999 10.5902C17.0937 10.4972 17.1681 10.3866 17.2188 10.2648C17.2696 10.1429 17.2957 10.0122 17.2957 9.88019C17.2957 9.74818 17.2696 9.61747 17.2188 9.49561C17.1681 9.37375 17.0937 9.26315 16.9999 9.17019Z' />
+            </svg>
+          </button>
+          <div
+            className={
+              dropDownIsVisible === false
+                ? styles.dropDownMenu
+                : styles.dropDownMenu + ' ' + styles.active
+            }
+          >
+            {categoryOptionsDisplay}
+          </div>
+        </div>
 
         <div className={styles.inputSearch}>
-          <input
+          <TextField
             type={'text'}
             placeholder='search'
             value={searchPhrase}
             onChange={(e) => setSearchPhrase(e.target.value)}
+            variant='standard'
+            focused
+            sx={{ width: '100%', marginTop: 1, paddingLeft: 2 }}
           />
           <button
             onClick={() => (window.location.href = `/search/${searchPhrase}`)}
