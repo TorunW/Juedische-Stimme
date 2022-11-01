@@ -77,19 +77,6 @@
   padding: 5px 10px;
   width: auto;
 }
-.membershipForm h3 {
-  color: white;
-  margin-bottom: 16px;
-  text-transform: capitalize;
-}
-.membershipForm span {
-  color: white;
-}
-.donationsForm,
-.membershipForm {
-  width: 100%;
-  height: 100%;
-}
 .contactForm {
   max-width: 769px;
 }

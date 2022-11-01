@@ -5,10 +5,15 @@ import styles from './Styles.module.css';
 import * as Yup from 'yup';
 import { useSelector } from 'store/hooks';
 import { getLabel } from 'helpers/getLabelHelper';
+import { TextField, Button, useMediaQuery } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import theme from 'config/theme';
 
 const MembershipForm = () => {
   const { labels } = useSelector((state) => state.labels);
   const { locale } = useSelector((state) => state.languages);
+
+  const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
   const formik = useFormik({
     initialValues: {
@@ -76,71 +81,105 @@ const MembershipForm = () => {
   return (
     <div id='membership' className={styles.membershipForm}>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
-        <h4>Dein Info Ausfüllen</h4>
-        <div className={styles.formRow}>
-          <input
-            id='firstname'
-            name='firstname'
-            type='text'
-            onChange={formik.handleChange}
-            value={formik.values.firstname}
-            placeholder={getLabel(labels, locale, 'firstname', 'Vorname')}
-          />
-          {formik.errors.firstname && formik.touched.firstname ? (
-            <span style={{ color: 'white' }}>{formik.errors.firstname}</span>
-          ) : (
-            ''
-          )}
-        </div>
-        <div className={styles.formRow}>
-          <input
-            id='lastname'
-            name='lastname'
-            type='text'
-            onChange={formik.handleChange}
-            value={formik.values.lastname}
-            placeholder={getLabel(labels, locale, 'lastname', 'Nachname')}
-          />
-          {formik.errors.lastname && formik.touched.lastname ? (
-            <span style={{ color: 'white' }}>{formik.errors.lastname}</span>
-          ) : (
-            ''
-          )}
-        </div>
-
-        <div className={styles.formRow}>
-          <div className={styles.formColumn}>
-            <input
+        <Grid container spacing={2}>
+          <h4>Dein Info Ausfüllen</h4>
+          <Grid item xs={12}>
+            <TextField
+              id='firstname'
+              name='firstname'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.firstname}
+              placeholder={getLabel(labels, locale, 'firstname', 'Vorname')}
+              variant='standard'
+              color='secondary'
+              fullWidth
+              focused
+              sx={{
+                input: { color: 'white', fontWeight: 500 },
+              }}
+            />
+            {formik.errors.firstname && formik.touched.firstname ? (
+              <span style={{ color: 'white' }}>{formik.errors.firstname}</span>
+            ) : (
+              ''
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id='lastname'
+              name='lastname'
+              type='text'
+              onChange={formik.handleChange}
+              value={formik.values.lastname}
+              placeholder={getLabel(labels, locale, 'lastname', 'Nachname')}
+              variant='standard'
+              color='secondary'
+              fullWidth
+              focused
+              sx={{
+                input: { color: 'white', fontWeight: 500 },
+              }}
+            />
+            {formik.errors.lastname && formik.touched.lastname ? (
+              <span style={{ color: 'white' }}>{formik.errors.lastname}</span>
+            ) : (
+              ''
+            )}
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
               id='birthdateDay'
               name='birthdateDay'
               type='text'
               onChange={formik.handleChange}
               value={formik.values.birthdateDay}
               placeholder='TT'
+              variant='standard'
+              color='secondary'
+              fullWidth
+              focused
+              sx={{
+                input: { color: 'white', fontWeight: 500 },
+              }}
             />
-          </div>
-          <span>/</span>
-          <div className={styles.formColumn}>
-            <input
+            <span>/</span>
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
               id='birthdateMonth'
               name='birthdateMonth'
               type='text'
               onChange={formik.handleChange}
               value={formik.values.birthdateMonth}
               placeholder='MM'
-            />{' '}
-          </div>
-          <span>/</span>
-          <div className={styles.formColumn}>
-            <input
+              variant='standard'
+              color='secondary'
+              fullWidth
+              focused
+              sx={{
+                input: { color: 'white', fontWeight: 500 },
+              }}
+            />
+            <span>/</span>
+          </Grid>
+          <Grid item xs={4}>
+            <TextField
               id='birthdateYear'
               name='birthdateYear'
               type='text'
               onChange={formik.handleChange}
               value={formik.values.birthdateYear}
               placeholder='YYYY'
+              variant='standard'
+              color='secondary'
+              fullWidth
+              focused
+              sx={{
+                input: { color: 'white', fontWeight: 500 },
+              }}
             />{' '}
-          </div>
+          </Grid>
           {formik.errors.birthdateDay && formik.touched.birthdateDay ? (
             <span style={{ color: 'white' }}>{formik.errors.birthdateDay}</span>
           ) : (
@@ -160,110 +199,138 @@ const MembershipForm = () => {
           ) : (
             ''
           )}
-        </div>
-
-        <div className={styles.formRow}>
-          <div className={styles.formColumn}>
-            <input
+          <Grid item xs={10}>
+            <TextField
               id='street'
               name='street'
               type='text'
               onChange={formik.handleChange}
               value={formik.values.street}
               placeholder='Straße'
+              variant='standard'
+              color='secondary'
+              fullWidth
+              focused
+              sx={{
+                input: { color: 'white', fontWeight: 500 },
+              }}
             />
             {formik.errors.street && formik.touched.street ? (
               <span style={{ color: 'white' }}>{formik.errors.street}</span>
             ) : (
               ''
             )}
-          </div>
-
-          <div className={styles.formColumn}>
-            <input
+          </Grid>
+          <Grid item xs={2}>
+            <TextField
               id='streetNr'
               name='streetNr'
               type='text'
               onChange={formik.handleChange}
               value={formik.values.streetNr}
               placeholder='Nr'
+              variant='standard'
+              color='secondary'
+              fullWidth
+              focused
+              sx={{
+                input: { color: 'white', fontWeight: 500 },
+              }}
             />
             {formik.errors.streetNr && formik.touched.streetNr ? (
               <span style={{ color: 'white' }}>{formik.errors.streetNr}</span>
             ) : (
               ''
             )}
-          </div>
-        </div>
+          </Grid>
 
-        <div className={styles.formRow}>
-          <div className={styles.formColumn}>
-            <input
-              id='zipcode'
-              name='zipcode'
-              type='text'
-              onChange={formik.handleChange}
-              value={formik.values.zipcode}
-              placeholder='PLZ'
-            />
-            {formik.errors.zipcode && formik.touched.zipcode ? (
-              <span style={{ color: 'white' }}>{formik.errors.zipcode}</span>
-            ) : (
-              ''
-            )}
-          </div>
-          <div className={styles.formColumn}>
-            <input
-              id='city'
-              name='city'
-              type='text'
-              onChange={formik.handleChange}
-              value={formik.values.city}
-              placeholder='City'
-            />
-            {formik.errors.city && formik.touched.city ? (
-              <span style={{ color: 'white' }}>{formik.errors.city}</span>
-            ) : (
-              ''
-            )}
-          </div>
-        </div>
+          <TextField
+            id='zipcode'
+            name='zipcode'
+            type='text'
+            onChange={formik.handleChange}
+            value={formik.values.zipcode}
+            placeholder='PLZ'
+            variant='standard'
+            color='secondary'
+            fullWidth
+            focused
+            sx={{
+              input: { color: 'white', fontWeight: 500 },
+            }}
+          />
+          {formik.errors.zipcode && formik.touched.zipcode ? (
+            <span style={{ color: 'white' }}>{formik.errors.zipcode}</span>
+          ) : (
+            ''
+          )}
 
-        <div className={styles.formRow}>
-          <input
+          <TextField
+            id='city'
+            name='city'
+            type='text'
+            onChange={formik.handleChange}
+            value={formik.values.city}
+            placeholder='City'
+            variant='standard'
+            color='secondary'
+            fullWidth
+            focused
+            sx={{
+              input: { color: 'white', fontWeight: 500 },
+            }}
+          />
+          {formik.errors.city && formik.touched.city ? (
+            <span style={{ color: 'white' }}>{formik.errors.city}</span>
+          ) : (
+            ''
+          )}
+
+          <TextField
             id='tel'
             name='tel'
             type='text'
             onChange={formik.handleChange}
             value={formik.values.tel}
             placeholder='Tel'
+            variant='standard'
+            color='secondary'
+            fullWidth
+            focused
+            sx={{
+              input: { color: 'white', fontWeight: 500 },
+            }}
           />
           {formik.errors.tel && formik.touched.tel ? (
             <span style={{ color: 'white' }}>{formik.errors.tel}</span>
           ) : (
             ''
           )}
-        </div>
 
-        <div className={styles.formRow}>
-          <input
+          <TextField
             id='email'
             name='email'
             type='email'
             onChange={formik.handleChange}
             value={formik.values.email}
             placeholder='Email'
+            variant='standard'
+            color='secondary'
+            fullWidth
+            focused
+            sx={{
+              input: { color: 'white', fontWeight: 500 },
+            }}
           />
           {formik.errors.email && formik.touched.email ? (
             <span style={{ color: 'white' }}>{formik.errors.email}</span>
           ) : (
             ''
           )}
-        </div>
-
-        <div className='button blackBg submitBtn'>
-          <button type='submit'>Senden</button>
-        </div>
+          <div className='button blackBg submitBtn'>
+            <button type='submit'>Senden</button>
+          </div>
+        </Grid>
       </form>
     </div>
   );
