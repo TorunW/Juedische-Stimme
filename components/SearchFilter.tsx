@@ -68,7 +68,7 @@ const SearchFilter = ({ phrase }: SearchFilterProps) => {
             onChange={(e) => setSearchPhrase(e.target.value)}
             variant='standard'
             focused
-            sx={{ width: '100%', marginTop: 1, paddingLeft: 2 }}
+            sx={{ width: '100%', marginTop: '6px', paddingLeft: 2 }}
           />
           <button
             onClick={() => (window.location.href = `/search/${searchPhrase}`)}

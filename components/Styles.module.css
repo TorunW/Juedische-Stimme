@@ -8,8 +8,8 @@
   display: flex;
   flex-direction: column;
 }
-.filterContainer h3 {
-  color: white;
+.filterContainer h4 {
+  color: white !important;
   text-align: center;
   text-transform: capitalize;
 }
