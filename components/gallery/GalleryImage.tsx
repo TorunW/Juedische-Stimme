@@ -1,9 +1,13 @@
-import React from 'react';
-import { generateImageUrl } from 'helpers/imageUrlHelper';
-import Image from 'next/image';
-import styles from './Styles.module.css';
+import React from "react";
+import { generateImageUrl } from "helpers/imageUrlHelper";
+import Image from "next/image";
+import styles from "./Styles.module.css";
+import { useSelector } from "store/hooks";
+import { getLabel } from "helpers/getLabelHelper";
 
 const GalleryImage = ({ image }) => {
+  const { locale } = useSelector((state) => state.languages);
+  const { labels } = useSelector((state) => state.labels);
   const [open, setOpen] = React.useState(false);
 
   function handleClick() {
@@ -17,9 +21,9 @@ const GalleryImage = ({ image }) => {
           src={generateImageUrl(image.image_src)}
           alt={image.image_title}
           title={image.image_title}
-          objectFit='cover'
-          height='160'
-          width='150'
+          objectFit="cover"
+          height="160"
+          width="150"
         />
         <h3>{image.image_title}</h3>
       </div>
@@ -32,10 +36,12 @@ const GalleryImage = ({ image }) => {
       <a
         onClick={handleClick}
         className={
-          open === false ? styles.more : styles.more + ' ' + styles.active
+          open === false ? styles.more : styles.more + " " + styles.active
         }
       >
-        {open === false ? 'Read more...' : 'Read Less...'}
+        {open === false
+          ? getLabel(labels, locale, "read_more", "weiter lesen")
+          : getLabel(labels, locale, "read_less", "weniger lesen")}
       </a>
     </>
   );

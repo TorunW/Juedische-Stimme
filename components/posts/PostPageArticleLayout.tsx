@@ -1,29 +1,30 @@
-import React, { ReactElement } from 'react';
-import styles from '../posts/ListStyles.module.css';
-import formateDate from 'helpers/formateDate';
-import { generateImageUrl } from 'helpers/imageUrlHelper';
-import Image from 'next/image';
-import { getPostContentFields } from 'helpers/getPostContentFields';
-import Share from 'helpers/shareToSocialMedia';
-import trimStringToLastSpace from 'helpers/trimStringToLastSpace';
+import React, { ReactElement } from "react";
+import styles from "../posts/ListStyles.module.css";
+import formateDate from "helpers/formateDate";
+import { generateImageUrl } from "helpers/imageUrlHelper";
+import Image from "next/image";
+import { getPostContentFields } from "helpers/getPostContentFields";
+import Share from "helpers/shareToSocialMedia";
+import trimStringToLastSpace from "helpers/trimStringToLastSpace";
 
 const PostPageArticleLayout = ({ post, locale }) => {
   const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } =
     getPostContentFields(post, locale);
 
-  console.log(post);
-
   function onSecondImageErrorCapture(arrgs) {
-    console.log(arrgs, ' ERROR ');
+    console.log(arrgs, " ERROR ");
   }
 
   let tagsDisplay: ReactElement[];
   if (post.tagNames && post.tagNames.length > 0) {
     let tagsArray = [post.tagNames];
-    if (post.tagNames.indexOf(',') > -1) tagsArray = post.tagNames.split(',');
+    if (post.tagNames.indexOf(",") > -1) tagsArray = post.tagNames.split(",");
     tagsDisplay = tagsArray.map((tag, index) => (
-      <a key={index} href={'/tag/' + tag}>
-        {' #' + tag}
+      <a
+        key={index}
+        href={"/tag/" + tag}
+      >
+        {" #" + tag}
       </a>
     ));
   }
@@ -39,14 +40,14 @@ const PostPageArticleLayout = ({ post, locale }) => {
                 src={generateImageUrl(post.post_image)}
                 alt={post.post_title}
                 title={post.post_title}
-                layout='fill'
-                objectFit='cover'
+                layout="fill"
+                objectFit="cover"
               />
             </div>
           </div>
         </div>
         <div className={styles.linksContainer}>
-          <p>Published {post.post_date ? formateDate(post.post_date) : ''}</p>
+          <p>Published {post.post_date ? formateDate(post.post_date) : ""}</p>
 
           <p>
             <a href={`/category/${post.categoryName}`}>#{post.categoryName}</a>
@@ -57,15 +58,15 @@ const PostPageArticleLayout = ({ post, locale }) => {
         <div className={styles.contentContainer}>
           <div className={styles.topWrapper}>
             <div
-              className={styles.topExcerpt + ' ' + styles.excerpt}
+              className={styles.topExcerpt + " " + styles.excerpt}
               dangerouslySetInnerHTML={{
-                __html: postExcerpt.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+                __html: postExcerpt.replace(/(?:\r\n|\r|\n)/g, "<br>"),
               }}
             ></div>
             <div
-              className={styles.topContent + ' ' + styles.content}
+              className={styles.topContent + " " + styles.content}
               dangerouslySetInnerHTML={{
-                __html: postContent.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+                __html: postContent.replace(/(?:\r\n|\r|\n)/g, "<br>"),
               }}
             ></div>
           </div>
@@ -76,13 +77,13 @@ const PostPageArticleLayout = ({ post, locale }) => {
                   src={generateImageUrl(post.post_image_2)}
                   alt={post.post_title}
                   title={post.post_title}
-                  layout='fill'
-                  objectFit='cover'
+                  layout="fill"
+                  objectFit="cover"
                   onErrorCapture={onSecondImageErrorCapture}
                 />
               </div>
               <div
-                className={styles.bottomExcerpt + ' ' + styles.excerpt}
+                className={styles.bottomExcerpt + " " + styles.excerpt}
                 dangerouslySetInnerHTML={{
                   __html: postExcerpt2,
                 }}
@@ -91,7 +92,7 @@ const PostPageArticleLayout = ({ post, locale }) => {
           ) : (
             <div className={styles.middleWrapper}>
               <div
-                className={styles.bottomExcerpt + ' ' + styles.excerpt}
+                className={styles.bottomExcerpt + " " + styles.excerpt}
                 dangerouslySetInnerHTML={{
                   __html: postExcerpt2,
                 }}
@@ -101,7 +102,7 @@ const PostPageArticleLayout = ({ post, locale }) => {
 
           <div className={styles.bottomWrapper}>
             <div
-              className={styles.bottomContent + ' ' + styles.content}
+              className={styles.bottomContent + " " + styles.content}
               dangerouslySetInnerHTML={{
                 __html: postContent2,
               }}

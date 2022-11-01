@@ -121,79 +121,95 @@ function GalleryImageForm({
           >
             <Grid
               item
-              xs={6}
+              xs={4}
             >
-              <Box>{imageDisplay}</Box>
+              <Box>
+                {imageDisplay}
+                <FormControl
+                  margin="normal"
+                  fullWidth
+                >
+                  <Button
+                    variant="outlined"
+                    onClick={onUpladImageClick}
+                  >
+                    change image
+                    <input
+                      accept={".*"}
+                      multiple={false}
+                      name={"theFiles"}
+                      onChange={onImageInputChangeHanlder}
+                      ref={fileInputRef}
+                      style={{ display: "none" }}
+                      type="file"
+                    />
+                  </Button>
+                </FormControl>
+              </Box>
             </Grid>
-
             <Grid
               item
-              xs={6}
+              xs={8}
             >
-              {galleryType === "list" ? (
-                <TextField
-                  id="image_title"
-                  label="Board member name"
-                  type="text"
-                  fullWidth
-                  margin="normal"
-                  onChange={formik.handleChange}
-                  value={formik.values.image_title}
-                />
-              ) : null}
-              <TextField
-                id="image_order"
-                label={
-                  (pathname === "/admin/about" ? "Board member" : "Image ") +
-                  " order"
-                }
-                type="text"
-                fullWidth
-                margin="normal"
-                onChange={formik.handleChange}
-                value={formik.values.image_order}
-              />
-              <FormControl
-                margin="normal"
-                fullWidth
-              >
-                <Button
-                  variant="outlined"
-                  onClick={onUpladImageClick}
-                >
-                  change image
-                  <input
-                    accept={".*"}
-                    multiple={false}
-                    name={"theFiles"}
-                    onChange={onImageInputChangeHanlder}
-                    ref={fileInputRef}
-                    style={{ display: "none" }}
-                    type="file"
-                  />
-                </Button>
-              </FormControl>
-            </Grid>
-
-            {galleryType === "list" ? (
               <Grid
-                item
+                container
                 xs={12}
-                margin="0 auto"
               >
-                <TiptapEditor
-                  onChange={(val) =>
-                    formik.setFieldValue("image_description", val, true)
-                  }
-                  value={formik.values.image_description}
-                  showMenu={false}
-                  height={200}
-                  title="Board member about"
-                />
+                {galleryType === "list" && (
+                  <Grid
+                    item
+                    xs={6}
+                  >
+                    <TextField
+                      id="image_title"
+                      label="Board member name"
+                      type="text"
+                      fullWidth
+                      margin="normal"
+                      onChange={formik.handleChange}
+                      value={formik.values.image_title}
+                    />
+                  </Grid>
+                )}
+                <Grid
+                  item
+                  xs={galleryType === "list" ? 6 : 12}
+                >
+                  <TextField
+                    id="image_order"
+                    label={
+                      (pathname === "/admin/about"
+                        ? "Board member"
+                        : "Image ") + " order"
+                    }
+                    type="text"
+                    fullWidth
+                    margin="normal"
+                    onChange={formik.handleChange}
+                    value={formik.values.image_order}
+                  />
+                </Grid>
               </Grid>
-            ) : (
-              ""
-            )}
+              {galleryType === "list" ? (
+                <Grid
+                  item
+                  xs={12}
+                  margin="0 auto"
+                >
+                  <TiptapEditor
+                    onChange={(val) =>
+                      formik.setFieldValue("image_description", val, true)
+                    }
+                    value={formik.values.image_description}
+                    showMenu={false}
+                    height={200}
+                    title="Board member about"
+                  />
+                </Grid>
+              ) : (
+                ""
+              )}
+            </Grid>
             <Grid
               item
               xs={6}

@@ -1,9 +1,10 @@
-import React, { ReactElement, useState, useEffect } from 'react';
-import { useEditor, EditorContent } from '@tiptap/react';
-import Link from '@tiptap/extension-link';
-import StarterKit from '@tiptap/starter-kit';
-import Image from '@tiptap/extension-image';
-import MenuBar from './MenuBar';
+import React, { ReactElement, useState, useEffect } from "react";
+import { useEditor, EditorContent } from "@tiptap/react";
+import Link from "@tiptap/extension-link";
+import TextAlign from "@tiptap/extension-text-align";
+import StarterKit from "@tiptap/starter-kit";
+import Image from "@tiptap/extension-image";
+import MenuBar from "./MenuBar";
 import {
   TextField,
   Box,
@@ -12,9 +13,9 @@ import {
   Switch,
   Typography,
   Chip,
-} from '@mui/material';
-import Grid from '@mui/material/Grid'; // Grid version 1
-import FormHelp from '../atoms/FormHelp';
+} from "@mui/material";
+import Grid from "@mui/material/Grid"; // Grid version 1
+import FormHelp from "../atoms/FormHelp";
 
 interface TipTapEditorProps {
   value: string;
@@ -39,8 +40,11 @@ const TipTapEditor = (props: TipTapEditorProps) => {
       Image,
       Link.configure({
         HTMLAttributes: {
-          class: 'tiptap-link',
+          class: "tiptap-link",
         },
+      }),
+      TextAlign.configure({
+        types: ["heading", "paragraph"],
       }),
     ],
     content: value,
@@ -50,7 +54,7 @@ const TipTapEditor = (props: TipTapEditorProps) => {
     onBlur: ({ editor }) => {
       let rawHtml = editor.getHTML();
       if (editor.getText().length > 0) onChange(rawHtml);
-      else onChange('');
+      else onChange("");
     },
   });
 
@@ -68,23 +72,23 @@ const TipTapEditor = (props: TipTapEditorProps) => {
         sx={{
           border: 2,
           borderRadius: 1,
-          borderColor: 'black',
+          borderColor: "black",
         }}
       >
         {menuDispaly}
         <Divider />
         <Box
           sx={{
-            height: height ? height : 'auto',
-            overflowY: 'scroll',
+            height: height ? height : "auto",
+            overflowY: "scroll",
             marginY: 1,
             marginX: 1,
-            '> div': {
-              height: '100%',
-              '> div': {
-                height: '100%',
-                '&:focus': {
-                  outline: 'none',
+            "> div": {
+              height: "100%",
+              "> div": {
+                height: "100%",
+                "&:focus": {
+                  outline: "none",
                 },
               },
             },
@@ -95,9 +99,9 @@ const TipTapEditor = (props: TipTapEditorProps) => {
       </Box>
       <Chip
         sx={{
-          fontSize: '16px',
-          marginTop: '8px',
-          borderRadius: '4px',
+          fontSize: "16px",
+          marginTop: "8px",
+          borderRadius: "4px",
         }}
         label={
           <>
@@ -118,12 +122,12 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
   } else {
     editorDisplay = (
       <TextField
-        margin='normal'
-        variant='outlined'
+        margin="normal"
+        variant="outlined"
         focused
         multiline
         sx={{
-          width: '100%',
+          width: "100%",
         }}
         value={props.value}
         onChange={(e) => props.onChange(e.target.value)}
@@ -131,26 +135,43 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
     );
   }
   return (
-    <Grid item xs={12}>
-      <Grid container sx={{ marginBottom: 2 }}>
-        <Grid item xs={7}>
-          <Box flexDirection='row' display='flex' alignItems='center'>
-            {props.title && <Typography variant='h6'>{props.title}</Typography>}
+    <Grid
+      item
+      xs={12}
+    >
+      <Grid
+        container
+        sx={{ marginBottom: 2 }}
+      >
+        <Grid
+          item
+          xs={7}
+        >
+          <Box
+            flexDirection="row"
+            display="flex"
+            alignItems="center"
+          >
+            {props.title && <Typography variant="h6">{props.title}</Typography>}
             {props.help && <FormHelp text={props.help}></FormHelp>}
           </Box>
         </Grid>
-        <Grid item xs={5} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Grid
+          item
+          xs={5}
+          sx={{ display: "flex", justifyContent: "flex-end" }}
+        >
           <FormControlLabel
             control={
               <Switch
                 defaultChecked
-                color='secondary'
+                color="secondary"
                 onClick={() =>
                   setShowEditor(showEditor === true ? false : true)
                 }
               />
             }
-            label={showEditor === true ? 'Show html' : 'Show editor'}
+            label={showEditor === true ? "Show html" : "Show editor"}
           />
         </Grid>
       </Grid>

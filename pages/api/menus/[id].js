@@ -7,6 +7,7 @@ import {
   deleteTermTaxonomy,
   deleteTermMeta,
   insertTermMeta,
+  updateTermRelationShipOrder,
 } from "lib/queries";
 
 export default async (req, res) => {
@@ -23,8 +24,11 @@ export default async (req, res) => {
         link: req.body.link,
         has_translation: req.body.has_translation,
         title_en_US: req.body.title_en_US,
+        term_order: req.body.term_order,
       };
-      console.log(body);
+
+      console.log(termId, body);
+
       // update term taxonomy
       const updateTermTaxonomyResult = await excuteQuery({
         query: updateTermTaxonomy(body),
@@ -44,6 +48,12 @@ export default async (req, res) => {
           meta_value: body.term_image,
         }),
       });
+
+      const updateTermRelationshipResult = await excuteQuery({
+        query: updateTermRelationShipOrder(termId, req.body.term_order),
+      });
+
+      console.log(updateTermRelationshipResult, "");
 
       if (body.has_translation) {
         const updateTermMetaTranslationResult = await excuteQuery({

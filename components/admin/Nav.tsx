@@ -29,6 +29,8 @@ import GroupIcon from "@mui/icons-material/Group";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import ListIcon from "@mui/icons-material/List";
+import LabelIcon from "@mui/icons-material/Label";
+import ImageSearchIcon from "@mui/icons-material/ImageSearch";
 
 function AdminNav(props) {
   const router = useRouter();
@@ -193,7 +195,6 @@ function AdminNav(props) {
           </Box>
         </AccordionDetails>
       </Accordion>
-
       <Accordion
         disableGutters
         elevation={0}
@@ -224,12 +225,36 @@ function AdminNav(props) {
                 sx={{ cursor: "pointer" }}
               >
                 <PeopleOutlineIcon sx={{ marginRight: 1 }} />
-                <Typography>Register User</Typography>
+                <Typography>Edit Users</Typography>
               </Box>
             </Link>
           </Box>
         </AccordionDetails>
       </Accordion>
+      <Divider />
+      <Box sx={{ marginY: 1, marginLeft: 1, paddingLeft: 1 }}>
+        <Link href={`/admin/labels`}>
+          <Box
+            display="flex"
+            sx={{ cursor: "pointer" }}
+          >
+            <LabelIcon sx={{ marginRight: 1 }} />
+            <Typography>Labels</Typography>
+          </Box>
+        </Link>
+      </Box>
+      <Divider />
+      <Box sx={{ marginY: 1, marginLeft: 1, paddingLeft: 1 }}>
+        <Link href={`/admin/media`}>
+          <Box
+            display="flex"
+            sx={{ cursor: "pointer" }}
+          >
+            <ImageSearchIcon sx={{ marginRight: 1 }} />
+            <Typography>Media Items</Typography>
+          </Box>
+        </Link>
+      </Box>
       <Divider />
       <Box sx={{ textAlign: "center", marginTop: 2 }}>
         <Box

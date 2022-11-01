@@ -24,6 +24,7 @@ export default async (req, res) => {
         count: "0",
         term_image: req.body.term_image,
       };
+
       const insertTermTaxonomyResult = await excuteQuery({
         query: insertTermTaxonomy(body),
       });
@@ -52,10 +53,13 @@ export default async (req, res) => {
         }),
       });
 
-      // const insertTermRelationshipResult = await excuteQuery({
-      //     query: insertTermRelationship(termId,req.body.post_id,req.body.term_order)
-      // })
-      // console.log(insertTermRelationshipResult, " INSERT TERM RELATIONSHIP RESULT")
+      const insertTermRelationshipResult = await excuteQuery({
+        query: insertTermRelationship(
+          termId,
+          req.body.post_id,
+          req.body.term_order
+        ),
+      });
 
       // console.log(result,"result")
       res.json({ insertId: termId });

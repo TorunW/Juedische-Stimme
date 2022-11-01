@@ -13,6 +13,10 @@ import AddLinkIcon from "@mui/icons-material/AddLink";
 import LinkOffIcon from "@mui/icons-material/LinkOff";
 import { Link, Box } from "@mui/material";
 
+import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
+import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
+import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
+
 const MenuBar = ({ editor }) => {
   if (!editor) {
     return null;
@@ -78,6 +82,43 @@ const MenuBar = ({ editor }) => {
       >
         <FormatClearIcon />
       </Link>
+
+      <Link
+        title="align left"
+        sx={{
+          color: editor.isActive({ textAlign: "left" }) ? "#8179A6" : "black",
+          cursor: "pointer",
+          "&:hover": { color: "#8179A6" },
+        }}
+        onClick={() => editor.commands.setTextAlign("left")}
+      >
+        <FormatAlignLeftIcon />
+      </Link>
+
+      <Link
+        title="align center"
+        sx={{
+          color: editor.isActive({ textAlign: "center" }) ? "#8179A6" : "black",
+          cursor: "pointer",
+          "&:hover": { color: "#8179A6" },
+        }}
+        onClick={() => editor.commands.setTextAlign("center")}
+      >
+        <FormatAlignCenterIcon />
+      </Link>
+
+      <Link
+        title="align right"
+        sx={{
+          color: editor.isActive({ textAlign: "right" }) ? "#8179A6" : "black",
+          cursor: "pointer",
+          "&:hover": { color: "#8179A6" },
+        }}
+        onClick={() => editor.commands.setTextAlign("right")}
+      >
+        <FormatAlignRightIcon />
+      </Link>
+
       <Link
         onClick={() => editor.chain().focus().setParagraph().run()}
         title="paragraph"

@@ -3,7 +3,6 @@ import { getLabels } from "lib/queries/labels";
 import { selectMenuItems } from "lib/queries/menuItems";
 import { GetServerSideProps } from "next";
 import { PageProps } from "./page";
-
 // this is the data that is passed into the serverSideProps of each particular page
 // useful in case when the amount is huge or contains sensitive data and cannot be sent to the client in PageProps
 export interface ServerSideData {
@@ -40,11 +39,30 @@ export const createServerSideProps = <T extends PageProps>(
       });
       const navItems = JSON.stringify(navItemsResponse);
 
+      // LABELS
       const labelsResponse = await excuteQuery({
-        query: getLabels()
-      })
+        query: getLabels(),
+      });
+      const labels = JSON.stringify(labelsResponse);
 
-      const labels = JSON.stringify(labelsResponse)
+      // PAGEVIEW
+      const { req } = context;
+      let url = req.headers.referer;
+      if (url && url.indexOf("localhost") === -1) {
+        console.log(url);
+        const forwarded = req.headers["x-forwarded-for"];
+        const detectedId = forwarded
+          ? forwarded.toString().split(/, /)[0]
+          : req.connection.remoteAddress;
+        const pageViewResponse = await excuteQuery({
+          query: `SELECT * FROM js_pageviews WHERE js_pageviews.ip='${detectedId}' AND js_pageviews.url='${url}'`,
+        });
+        if (pageViewResponse.length === 0) {
+          const insertPageViewResponse = await excuteQuery({
+            query: `INSERT INTO js_pageviews ( ip, url) VALUES ('${detectedId}','${url}')`,
+          });
+        }
+      }
 
       const props = {
         page: {
@@ -61,7 +79,7 @@ export const createServerSideProps = <T extends PageProps>(
           data: {
             dataForSSR: "data for custom serverSideProps",
             navItems,
-            labels
+            labels,
           },
           context,
         });
