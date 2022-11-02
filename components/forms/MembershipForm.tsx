@@ -191,7 +191,7 @@ const MembershipForm = () => {
           <Grid item xs={1}>
             <Typography sx={{ color: 'white', marginTop: 1 }}>/</Typography>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <TextField
               id='birthdateYear'
               name='birthdateYear'

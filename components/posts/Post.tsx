@@ -22,12 +22,6 @@ const Post: React.FC<Props> = ({ post, phrase, imageDimensions }) => {
     locale
   );
 
-  /* 
-    TO DO - when there is a phrase props, it means were on a "search" page
-    which means we need to HIGHLIGHT or make BOLD the WORD THAT MATCHES THE PHRASE in the text
-    AND we need to trim AROUND that word.
-  */
-
   return (
     <article
       className={styles.post}

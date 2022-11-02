@@ -1,108 +1,336 @@
-.filterContainer {
-  background-color: #2e2e2e;
-  position: absolute;
-  top: 336px;
-  left: 0;
-  width: 100%;
-  padding: 32px 0;
-  display: flex;
-  flex-direction: column;
+@media (min-width: 845px) {
+  .filterContainer {
+    background-color: #2e2e2e;
+    position: absolute;
+    top: 336px;
+    left: 0;
+    width: 100%;
+    padding: 32px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .filterContainer h4 {
+    color: white !important;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .filterContainer .searchContainer {
+    display: flex;
+    max-width: 1067px;
+    margin: 16px 0;
+    gap: 48px;
+  }
+  .filterContainer .searchContainer .dropDown {
+    position: relative;
+    width: 360px;
+    border: solid #8179a6 2px;
+    height: 45px;
+    padding: 0 16px;
+    display: flex;
+    z-index: 30;
+  }
+  .filterContainer .searchContainer .dropDown button {
+    width: 100%;
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: #8e8e8e;
+    font-family: 'Raleway';
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    text-align: left;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .filterContainer .searchContainer .dropDown button svg {
+    fill: #8179a6;
+  }
+  .filterContainer .searchContainer .dropDown .dropDownMenu {
+    position: absolute;
+    left: -2px;
+    top: 102%;
+    background-color: #2e2e2e;
+    color: white;
+    border-top: none;
+    border-left: solid 2px #8179a6;
+    border-right: solid 2px #8179a6;
+    border-bottom: solid 2px #8179a6;
+    width: 360px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .filterContainer .searchContainer .dropDown .dropDownMenu a {
+    padding: 16px;
+  }
+  .filterContainer .searchContainer .dropDown .dropDownMenu a:hover {
+    background-color: #353535;
+  }
+  .filterContainer .searchContainer .dropDown .active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .filterContainer .searchContainer .inputSearch {
+    width: 360px;
+    border: solid #8179a6 2px;
+    background-color: #2e2e2e;
+    color: white;
+    font-family: 'raleway';
+    text-transform: uppercase;
+    height: 45px;
+    padding: 0 16px 0 0;
+    display: flex;
+  }
+  .filterContainer .searchContainer .inputSearch input {
+    background: none;
+    color: white;
+    height: 100%;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+  .filterContainer .searchContainer .inputSearch button {
+    background: none;
+    border: none;
+  }
+  .filterContainer .searchContainer .inputSearch button svg {
+    fill: #8179a6;
+  }
+  .filterContainer .searchContainer .inputSearch button:hover {
+    cursor: pointer;
+  }
 }
-.filterContainer h4 {
-  color: white !important;
-  text-align: center;
-  text-transform: capitalize;
+@media (max-width: 844px) and (min-width: 770px) {
+  .filterContainer {
+    background-color: #2e2e2e;
+    position: absolute;
+    top: 284px;
+    left: 0;
+    width: 100%;
+    padding: 32px 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .filterContainer h4 {
+    color: white !important;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .filterContainer .searchContainer {
+    display: flex;
+    gap: 32px;
+    width: 100%;
+    margin: 16px auto;
+    justify-content: center;
+    padding: 0 20px;
+  }
+  .filterContainer .searchContainer .dropDown {
+    position: relative;
+    width: 250px;
+    border: solid #8179a6 2px;
+    height: 45px;
+    padding: 0 16px;
+    display: flex;
+    z-index: 30;
+  }
+  .filterContainer .searchContainer .dropDown button {
+    width: 100%;
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: #8e8e8e;
+    font-family: 'Raleway';
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    text-align: left;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .filterContainer .searchContainer .dropDown button svg {
+    fill: #8179a6;
+  }
+  .filterContainer .searchContainer .dropDown .dropDownMenu {
+    position: absolute;
+    left: -2px;
+    top: 102%;
+    background-color: #2e2e2e;
+    color: white;
+    border-top: none;
+    border-left: solid 2px #8179a6;
+    border-right: solid 2px #8179a6;
+    border-bottom: solid 2px #8179a6;
+    width: 250px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .filterContainer .searchContainer .dropDown .dropDownMenu a {
+    padding: 16px;
+  }
+  .filterContainer .searchContainer .dropDown .dropDownMenu a:hover {
+    background-color: #353535;
+  }
+  .filterContainer .searchContainer .dropDown .active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .filterContainer .searchContainer .inputSearch {
+    width: 250px;
+    border: solid #8179a6 2px;
+    background-color: #2e2e2e;
+    color: white;
+    font-family: 'raleway';
+    text-transform: uppercase;
+    height: 45px;
+    padding: 0 16px 0 0;
+    display: flex;
+  }
+  .filterContainer .searchContainer .inputSearch input {
+    background: none;
+    color: white;
+    height: 100%;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+  .filterContainer .searchContainer .inputSearch button {
+    background: none;
+    border: none;
+  }
+  .filterContainer .searchContainer .inputSearch button svg {
+    fill: #8179a6;
+  }
+  .filterContainer .searchContainer .inputSearch button:hover {
+    cursor: pointer;
+  }
 }
-.filterContainer .searchContainer {
-  display: flex;
-  gap: 32px;
-  width: 80%;
-  margin: 16px auto;
-}
-.filterContainer .searchContainer .dropDown {
-  position: relative;
-  width: 50%;
-  border: solid #8179a6 2px;
-  height: 45px;
-  padding: 0 16px;
-  display: flex;
-}
-.filterContainer .searchContainer .dropDown button {
-  width: 100%;
-  background: none;
-  border: none;
-  text-decoration: none;
-  color: #8e8e8e;
-  font-family: 'Raleway';
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-transform: capitalize;
-  text-align: left;
-  cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.filterContainer .searchContainer .dropDown button svg {
-  fill: #8179a6;
-}
-.filterContainer .searchContainer .dropDown .dropDownMenu {
-  position: absolute;
-  left: -2px;
-  top: 102%;
-  background-color: #2e2e2e;
-  color: white;
-  border-top: none;
-  border-left: solid 2px #8179a6;
-  border-right: solid 2px #8179a6;
-  border-bottom: solid 2px #8179a6;
-  width: 101%;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.2s ease-in-out;
-  pointer-events: none;
-  display: flex;
-  flex-direction: column;
-}
-.filterContainer .searchContainer .dropDown .dropDownMenu a {
-  padding: 16px;
-}
-.filterContainer .searchContainer .dropDown .dropDownMenu a:hover {
-  background-color: #353535;
-}
-.filterContainer .searchContainer .dropDown .active {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-.filterContainer .searchContainer .inputSearch {
-  width: 50%;
-  border: solid #8179a6 2px;
-  background-color: #2e2e2e;
-  color: white;
-  font-family: 'raleway';
-  text-transform: uppercase;
-  height: 45px;
-  padding: 0 16px 0 0;
-  display: flex;
-}
-.filterContainer .searchContainer .inputSearch input {
-  background: none;
-  color: white;
-  height: 100%;
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-.filterContainer .searchContainer .inputSearch button {
-  background: none;
-  border: none;
-}
-.filterContainer .searchContainer .inputSearch button svg {
-  fill: #8179a6;
-}
-.filterContainer .searchContainer .inputSearch button:hover {
-  cursor: pointer;
+@media (max-width: 769px) {
+  .filterContainer {
+    background-color: #2e2e2e;
+    position: absolute;
+    top: 216px;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .filterContainer h4 {
+    color: white !important;
+  }
+  .filterContainer .searchContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .filterContainer .searchContainer .dropDown {
+    position: relative;
+    width: 350px;
+    border: solid #8179a6 2px;
+    height: 40px;
+    padding: 0 16px;
+    display: flex;
+    z-index: 30;
+  }
+  .filterContainer .searchContainer .dropDown button {
+    width: 100%;
+    background: none;
+    border: none;
+    text-decoration: none;
+    color: #8e8e8e;
+    font-family: 'Raleway';
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    text-align: left;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .filterContainer .searchContainer .dropDown button svg {
+    fill: #8179a6;
+  }
+  .filterContainer .searchContainer .dropDown .dropDownMenu {
+    position: absolute;
+    left: -2px;
+    top: 106%;
+    background-color: #2e2e2e;
+    color: white;
+    border-top: none;
+    border-left: solid 2px #8179a6;
+    border-right: solid 2px #8179a6;
+    border-bottom: solid 2px #8179a6;
+    width: 350px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.2s ease-in-out;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+  }
+  .filterContainer .searchContainer .dropDown .dropDownMenu a {
+    padding: 8px 16px;
+  }
+  .filterContainer .searchContainer .dropDown .dropDownMenu a:hover {
+    background-color: #353535;
+  }
+  .filterContainer .searchContainer .dropDown .active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .filterContainer .searchContainer .inputSearch {
+    width: 350px;
+    border: solid #8179a6 2px;
+    background-color: #2e2e2e;
+    color: white;
+    font-family: 'raleway';
+    text-transform: uppercase;
+    height: 40px;
+    padding: 0 16px 0 0;
+    display: flex;
+  }
+  .filterContainer .searchContainer .inputSearch input {
+    background: none;
+    color: white;
+    height: 100%;
+    font-size: 1.1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+  }
+  .filterContainer .searchContainer .inputSearch button {
+    background: none;
+    border: none;
+  }
+  .filterContainer .searchContainer .inputSearch button svg {
+    fill: #8179a6;
+  }
+  .filterContainer .searchContainer .inputSearch button:hover {
+    cursor: pointer;
+  }
 }
