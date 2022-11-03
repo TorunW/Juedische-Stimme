@@ -3,7 +3,7 @@ import getPaginationRange from 'helpers/getPaginationRange';
 import styles from './Styles.module.css';
 
 const Pagination = ({ pageNum, itemsCount, itemsPerPage, type, title }) => {
-  const totalPages = Math.ceil(itemsCount / itemsPerPage);
+  const totalPages = Math.ceil(itemsCount / itemsPerPage) - 1;
 
   const { minNumber, maxNumber } = getPaginationRange(pageNum, totalPages);
   const [isClickableRight, setIsClickableRight] = React.useState(false);

@@ -3,6 +3,6 @@
   flex: 1;
 }
 
-.postsContainer {
-  padding-top: 150px;
+.postPage {
+  padding: 0 !important;
 }

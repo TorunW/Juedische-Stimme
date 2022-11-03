@@ -102,6 +102,7 @@ function Posts({
       );
     }
   }
+  let pathname;
 
   return (
     <section
@@ -109,15 +110,17 @@ function Posts({
         'posts-sections ' +
         (title === 'Newsletter' ? styles.threeColPage : styles.twoColPage)
       }
+      style={{
+        marginTop:
+          pathname === '/' ? '120px' : windowWidth > 844 ? '109px' : '80px',
+      }}
     >
-      <Container>
-        <>
-          {headerDisplay}
-          {searchDisplay}
-          {postsTemplateDisplay}
-          {paginationDisplay}
-        </>
-      </Container>
+      <>
+        {headerDisplay}
+        {searchDisplay}
+        {postsTemplateDisplay}
+        {paginationDisplay}
+      </>
     </section>
   );
 }

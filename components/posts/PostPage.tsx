@@ -1,21 +1,17 @@
-import React, { ReactElement } from "react";
-import { useSelector } from "store/hooks";
-import styles from "components/posts/ListStyles.module.css";
-import PostPageNavigation from "./PostPageNavigation";
-import PostPageNewsletterLayout from "./PostPageNewsletterLayout";
-import PostPageArticleLayout from "./PostPageArticleLayout";
-import { getPostLaoyut } from "helpers/getPostLayout";
-import PostPageMemberFormLayout from "./PostPageMemberFormLayout";
-import PostPageDonationFormLayout from "./PostPageDonationFormLayout";
-import { getPostContentFields } from "helpers/getPostContentFields";
-import PostPageLegacyLayout from "./PostPageLegacyLayout";
+import React, { ReactElement } from 'react';
+import { useSelector } from 'store/hooks';
+import styles from 'components/posts/ListStyles.module.css';
+import PostPageNavigation from './PostPageNavigation';
+import PostPageNewsletterLayout from './PostPageNewsletterLayout';
+import PostPageArticleLayout from './PostPageArticleLayout';
+import { getPostLaoyut } from 'helpers/getPostLayout';
+import PostPageMemberFormLayout from './PostPageMemberFormLayout';
+import PostPageDonationFormLayout from './PostPageDonationFormLayout';
+import { getPostContentFields } from 'helpers/getPostContentFields';
+import PostPageLegacyLayout from './PostPageLegacyLayout';
 
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
-
-  /* TO DO'S
-     - MAKE A BETTER NO POST FOUND PAGE! maybe even split to a different compoent -> show suggested posts? show helpful links?
-    */
 
   function isEmpty(val) {
     let isEmpty = false;
@@ -30,62 +26,37 @@ function Post({ post }) {
     const postLayout = getPostLaoyut(post);
 
     let postLayoutDisplay: ReactElement, postNavigationDisplay: ReactElement;
-    if (postLayout === "member_form") {
+    if (postLayout === 'member_form') {
       postLayoutDisplay = (
-        <PostPageMemberFormLayout
-          post={post}
-          locale={locale}
-        />
+        <PostPageMemberFormLayout post={post} locale={locale} />
       );
-    } else if (postLayout === "donation") {
+    } else if (postLayout === 'donation') {
       postLayoutDisplay = (
-        <PostPageDonationFormLayout
-          post={post}
-          locale={locale}
-        />
+        <PostPageDonationFormLayout post={post} locale={locale} />
       );
-    } else if (postLayout === "newsletter") {
+    } else if (postLayout === 'newsletter') {
       postLayoutDisplay = (
-        <PostPageNewsletterLayout
-          post={post}
-          locale={locale}
-        />
+        <PostPageNewsletterLayout post={post} locale={locale} />
       );
       postNavigationDisplay = (
-        <PostPageNavigation
-          postId={post.postId}
-          categoryId={post.categoryId}
-        />
+        <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
       );
     } else if (
       post.post_image == null ||
       isEmpty(postContent) ||
       isEmpty(postExcerpt)
     ) {
-      postLayoutDisplay = (
-        <PostPageLegacyLayout
-          post={post}
-          locale={locale}
-        />
-      );
+      postLayoutDisplay = <PostPageLegacyLayout post={post} locale={locale} />;
     } else {
-      postLayoutDisplay = (
-        <PostPageArticleLayout
-          post={post}
-          locale={locale}
-        />
-      );
+      postLayoutDisplay = <PostPageArticleLayout post={post} locale={locale} />;
       postNavigationDisplay = (
-        <PostPageNavigation
-          postId={post.postId}
-          categoryId={post.categoryId}
-        />
+        <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
       );
     }
     postDisplay = (
       <React.Fragment>
         {postLayoutDisplay}
-        {postLayout !== "donation" && postLayout !== "member_form" ? (
+        {postLayout !== 'donation' && postLayout !== 'member_form' ? (
           <PostPageNavigation
             postId={post.postId}
             categoryId={post.categoryId}
@@ -105,10 +76,7 @@ function Post({ post }) {
   }
 
   return (
-    <div
-      id="post-view"
-      className={styles.postPage}
-    >
+    <div id='post-view' className={styles.postPage}>
       {postDisplay}
     </div>
   );

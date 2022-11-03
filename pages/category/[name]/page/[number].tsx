@@ -1,25 +1,24 @@
-import { useEffect } from "react";
-import excuteQuery from "lib/db";
-import { countPostsByTag, selectPosts } from "lib/queries/posts";
-import { selectCategories, selectCategory } from "lib/queries";
-import { selectMenuItems } from "lib/queries/menuItems";
-import Posts from "@/components/posts/Posts";
-import styles from "styles/Home.module.css";
+import { useEffect } from 'react';
+import excuteQuery from 'lib/db';
+import { selectPosts } from 'lib/queries/posts';
+import { selectCategories, selectCategory } from 'lib/queries';
+import Posts from '@/components/posts/Posts';
+import styles from 'styles/Home.module.css';
 
-import { useDispatch, useSelector } from "store/hooks";
-import { setPosts, setPostsPagination } from "store/posts/postsSlice";
+import { useDispatch, useSelector } from 'store/hooks';
+import { setPosts, setPostsPagination } from 'store/posts/postsSlice';
 import {
   setCatgories,
   setCategoryName,
   setCategory,
-} from "store/categories/categoriesSlice";
-import { setMenuItems } from "store/nav/navSlice";
-import { LayoutPage } from "types/LayoutPage.type";
-import { LayoutPageProps } from "types/LayoutPageProps.type";
-import { setLanguages } from "store/languages/languagesSlice";
-import { createServerSideProps } from "page/server-side-props";
-import { HomePageProps } from "pages";
-import { setLabels } from "store/labels/labelsSlice";
+} from 'store/categories/categoriesSlice';
+import { setMenuItems } from 'store/nav/navSlice';
+import { LayoutPage } from 'types/LayoutPage.type';
+import { LayoutPageProps } from 'types/LayoutPageProps.type';
+import { setLanguages } from 'store/languages/languagesSlice';
+import { createServerSideProps } from 'page/server-side-props';
+import { HomePageProps } from 'pages';
+import { setLabels } from 'store/labels/labelsSlice';
 
 export const getServerSideProps = createServerSideProps<HomePageProps>(
   async ({ context, data: { navItems, labels } }) => {
@@ -30,11 +29,11 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
 
     const postsResponse = await excuteQuery({
       query: selectPosts({
-        slug: context.query.name.toString().split(" ").join("-").toLowerCase(),
+        slug: context.query.name.toString().split(' ').join('-').toLowerCase(),
         numberOfPosts: 10,
         pageNum: context.query.number,
         isCategory: true,
-        locale: context.locale !== context.defaultLocale ? context.locale : "",
+        locale: context.locale !== context.defaultLocale ? context.locale : '',
       }),
     });
     const posts = JSON.stringify(postsResponse);
@@ -93,11 +92,11 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
   }, [props.posts]);
 
   return (
-    <main id="category-posts-page">
-      <section className={styles.container + " " + styles.postsContainer}>
+    <main id='category-posts-page' className={styles.postPage}>
+      <section className={styles.container + ' ' + styles.postsContainer}>
         <Posts
           posts={posts}
-          type={"category"}
+          type={'category'}
           title={props.categoryName}
           pageNum={pageNum}
           postsCount={postsCount}
@@ -108,6 +107,6 @@ const CategoryPostsPage: LayoutPage = (props: LayoutPageProps) => {
   );
 };
 
-CategoryPostsPage.layout = "main";
+CategoryPostsPage.layout = 'main';
 
 export default CategoryPostsPage;

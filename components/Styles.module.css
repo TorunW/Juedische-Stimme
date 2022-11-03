@@ -1,14 +1,13 @@
 @media (min-width: 845px) {
   .filterContainer {
     background-color: #2e2e2e;
-    position: absolute;
-    top: 336px;
-    left: 0;
+    position: relative;
     width: 100%;
     padding: 32px 0;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 120px;
   }
   .filterContainer h4 {
     color: white !important;
@@ -113,9 +112,7 @@
 @media (max-width: 844px) and (min-width: 770px) {
   .filterContainer {
     background-color: #2e2e2e;
-    position: absolute;
-    top: 284px;
-    left: 0;
+    position: relative;
     width: 100%;
     padding: 32px 0;
     display: flex;
@@ -226,9 +223,7 @@
 @media (max-width: 769px) {
   .filterContainer {
     background-color: #2e2e2e;
-    position: absolute;
-    top: 216px;
-    left: 0;
+    position: relative;
     width: 100%;
     padding: 20px;
     display: flex;
