@@ -124,7 +124,7 @@
     min-width: 100%;
     z-index: 1;
     position: relative;
-    height: 200px;
+    height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -133,7 +133,7 @@
     width: 100%;
     position: absolute;
     top: 0;
-    height: 200px;
+    height: 250px;
   }
   .header .imageWrapper img {
     filter: brightness(70%);
@@ -195,7 +195,6 @@
   .header h1 {
     z-index: 10;
     position: relative;
-    margin: 32px 0;
     color: white !important;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
