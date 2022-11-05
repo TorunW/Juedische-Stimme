@@ -1,11 +1,8 @@
 import React from 'react';
-import { GeneratePostUrl } from 'helpers/generatePostUrl';
-import { generateImageUrl } from 'helpers/imageUrlHelper';
-import Image from 'next/image';
+import Link from 'next/link';
 import {
   TableRow,
   TableCell,
-  Link,
   IconButton,
   Button,
   Dialog,
@@ -13,10 +10,13 @@ import {
   DialogContentText,
   DialogTitle,
   DialogActions,
+  Typography,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import SubdirectoryArrowRightIcon from '@mui/icons-material/SubdirectoryArrowRight';
 
-function PostTableItem({ post, deletePost }) {
+function TagItem({ tag, onDeleteTag }) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -28,43 +28,42 @@ function PostTableItem({ post, deletePost }) {
   };
 
   return (
-    <TableRow
-      hover
-      role='checkbox'
-      tabIndex={-1}
-      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-    >
+    <TableRow hover tabIndex={-1}>
       <TableCell>
-        <Link href={'/admin/posts/' + GeneratePostUrl(post.post_name)}>
-          {post.post_title}
+        <Typography>{tag.name}</Typography>
+      </TableCell>
+      <TableCell align='right'>{tag.count}</TableCell>
+      <TableCell align='right'>
+        <Link href={`/admin/tags/${tag.term_id}`}>
+          <IconButton>
+            <EditIcon />
+          </IconButton>
         </Link>
       </TableCell>
-      <TableCell align='right'>{post.username}</TableCell>
       <TableCell align='right'>
-        {new Date(post.post_date).toLocaleString('de')}
+        <a href={`/tag/${tag.slug}/page/1`} target='_blank' rel='noreferrer'>
+          <IconButton>
+            <SubdirectoryArrowRightIcon />
+          </IconButton>
+        </a>
       </TableCell>
-      <TableCell align='right'>
-        <Image
-          height='100'
-          width='100'
-          src={generateImageUrl(post.post_image)}
-        />
-      </TableCell>
+
       <TableCell align='right'>
         <IconButton onClick={handleClickOpen}>
           <DeleteIcon />
         </IconButton>
+
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>{`Delete ${post.post_title}`}</DialogTitle>
+          <DialogTitle>{`Delete ${tag.name}?`}</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              {`Once the post is delete it can't be retrived again`}
+              {`Once the tag is delete it can't be retrived again`}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button
               variant='outlined'
-              onClick={() => deletePost(post)}
+              onClick={() => onDeleteTag(tag)}
               autoFocus
             >
               Delete
@@ -79,4 +78,4 @@ function PostTableItem({ post, deletePost }) {
   );
 }
 
-export default PostTableItem;
+export default TagItem;
