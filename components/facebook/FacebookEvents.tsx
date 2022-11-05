@@ -95,7 +95,6 @@ const FacebookEvents = ({ fbt }) => {
           </a>
         </div>
       );
-      // }
     });
   }
 

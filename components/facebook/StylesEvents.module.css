@@ -1,5 +1,5 @@
 .eventsPage {
-  margin: 0 auto;
+  margin: 120px auto 0;
 }
 .eventsPage .contentContainer .eventContainer {
   border: 1px solid #dddddd;
@@ -10,8 +10,8 @@
   background-size: 200% 200%;
   background-position: top;
   transition: all 0.3s;
-  fill: #8179a6;
   color: #2e2e2e;
+  fill: #8179a6;
 }
 .eventsPage .contentContainer .eventContainer svg {
   margin-bottom: 16px;
