@@ -9,6 +9,7 @@ import PostPageMemberFormLayout from './PostPageMemberFormLayout';
 import PostPageDonationFormLayout from './PostPageDonationFormLayout';
 import { getPostContentFields } from 'helpers/getPostContentFields';
 import PostPageLegacyLayout from './PostPageLegacyLayout';
+import PostPageInfoLayout from './PostPageInfoLayout';
 
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
@@ -41,6 +42,8 @@ function Post({ post }) {
       postNavigationDisplay = (
         <PostPageNavigation postId={post.postId} categoryId={post.categoryId} />
       );
+    } else if (postLayout === 'info') {
+      postLayoutDisplay = <PostPageInfoLayout post={post} locale={locale} />;
     } else if (
       post.post_image == null ||
       isEmpty(postContent) ||

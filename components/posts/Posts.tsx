@@ -7,7 +7,6 @@ import styles from './Styles.module.css';
 import Placeholder from '../placeholder/Placeholder';
 import PostsHeader from './PostsHeader';
 import getImageDimensions from 'helpers/getImageDimensions';
-import { Container } from '../atoms/Container';
 import { useSelector } from 'store/hooks';
 import { getLabel } from 'helpers/getLabelHelper';
 
