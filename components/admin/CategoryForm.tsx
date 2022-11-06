@@ -277,36 +277,6 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
 
             <Grid
               item
-              xs={12}
-              sx={{ marginY: 2 }}
-            >
-              <TipTapEditor
-                onChange={(val) =>
-                  formik.setFieldValue("description", val, true)
-                }
-                value={formik.values.description}
-                height={150}
-                title={"Category Description"}
-              />
-            </Grid>
-
-            <Grid
-              item
-              xs={12}
-              sx={{ marginY: 2 }}
-            >
-              <TipTapEditor
-                onChange={(val) =>
-                  formik.setFieldValue("description_en_US", val, true)
-                }
-                value={formik.values.description_en_US}
-                height={150}
-                title={"Category Description (English)"}
-              />
-            </Grid>
-
-            <Grid
-              item
               sx={{ marginY: 2 }}
               xs={10}
             >

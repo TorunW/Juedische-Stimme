@@ -9,6 +9,7 @@ import excuteQuery from "lib/db";
 import { selectGalleryImagesByGalleryId } from "lib/queries";
 import { useDispatch } from "store/hooks";
 import { setLanguages } from "store/languages/languagesSlice";
+import { setMenuItems } from "store/nav/navSlice";
 
 export const getServerSideProps = createServerSideProps<HomePageProps>(
   async ({ context, data: { navItems, labels } }) => {
@@ -40,6 +41,7 @@ const Board: LayoutPage = (props: LayoutPageProps) => {
   const galleryImages = JSON.parse(props.galleryImages);
 
   useEffect(() => {
+    dispatch(setMenuItems(JSON.parse(props.navItems)));
     dispatch(
       setLanguages({
         locales: props.locales,
