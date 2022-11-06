@@ -203,10 +203,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
         title={"Aktuelles"}
       />
       <FacebookEvents fbt={fbt} />
-      <AboutInfo
-        gallery={gallery}
-        aboutInfo={aboutInfo}
-      />
+      <AboutInfo aboutInfo={aboutInfo} />
       <Posts
         posts={newsletter}
         title={"Newsletter"}
