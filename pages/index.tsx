@@ -74,6 +74,7 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
       query: selectGalleryById(galleryId),
     });
     const gallery = JSON.stringify(galleryResponse);
+    
     const headerGalleryResponse = await excuteQuery({
       query: selectGalleryById(6),
     });
