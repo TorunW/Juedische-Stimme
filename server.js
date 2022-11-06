@@ -3,7 +3,7 @@ const next = require("next");
 
 const port = parseInt(process.env.PORT, 10) || 8080;
 const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
+const app = next({});
 const handle = app.getRequestHandler();
 
 var cors = require("cors");
