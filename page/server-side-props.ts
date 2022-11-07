@@ -47,9 +47,14 @@ export const createServerSideProps = <T extends PageProps>(
 
       // PAGEVIEW
       const { req } = context;
-      let url = req.headers.referer;
-      if (url && url.indexOf("localhost") === -1) {
-        console.log(url);
+      let url = context.resolvedUrl;
+      if (url && req.headers.host.indexOf("juedische-stimme") > -1) {
+        const fullUrl = `https://${
+          req.headers.host +
+          (url.indexOf("?") > -1
+            ? url.split("?")[url.split("?").length - 2]
+            : url)
+        }`;
         const forwarded = req.headers["x-forwarded-for"];
         const detectedId = forwarded
           ? forwarded.toString().split(/, /)[0]
@@ -59,7 +64,7 @@ export const createServerSideProps = <T extends PageProps>(
         });
         if (pageViewResponse.length === 0) {
           const insertPageViewResponse = await excuteQuery({
-            query: `INSERT INTO js_pageviews ( ip, url) VALUES ('${detectedId}','${url}')`,
+            query: `INSERT INTO js_pageviews ( ip, url) VALUES ('${detectedId}','${fullUrl}')`,
           });
         }
       }
