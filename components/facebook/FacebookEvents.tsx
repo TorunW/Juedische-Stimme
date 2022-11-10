@@ -60,7 +60,6 @@ const FacebookEvents = ({ fbt }) => {
         data,
       }).then(
         (response) => {
-          console.log(response);
           dispatch(setEvents(data));
         },
         (error) => {
@@ -105,9 +104,6 @@ const FacebookEvents = ({ fbt }) => {
       );
     });
   }
-
-  console.log(events);
-
   return (
     <>
       {!!events && JSON.parse(events?.content).length > 0 && (
