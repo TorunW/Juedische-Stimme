@@ -48,7 +48,10 @@ export const createServerSideProps = <T extends PageProps>(
       // PAGEVIEW
       const { req } = context;
       let url = context.resolvedUrl;
-      if (url && req.headers.host.indexOf("juedische-stimme") > -1) {
+      if (
+        url?.indexOf("juedische-stimme") > -1 &&
+        req.headers.host.indexOf("juedische-stimme") > -1
+      ) {
         const fullUrl = `https://${
           req.headers.host +
           (url.indexOf("?") > -1

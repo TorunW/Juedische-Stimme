@@ -5,7 +5,7 @@ import { Button, Card, Box, Tabs, Tab } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
 import GalleryForm from "./galleries/GalleryForm";
-import TipTapEditor from "../tiptap/TipTapEditor";
+import TipTapEditor, { EditorHeight } from "../tiptap/TipTapEditor";
 import { Container } from "../atoms/Container";
 
 const AboutInfoForm = ({ aboutInfo, gallery }) => {
@@ -96,7 +96,7 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
                             formik.setFieldValue("text_top", val, true)
                           }
                           value={formik.values.text_top}
-                          height={150}
+                          height={EditorHeight.medium}
                           title={"About Us Text"}
                         />
                       </Grid>
@@ -112,7 +112,7 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
                           formik.setFieldValue("text_top_en_US", val, true)
                         }
                         value={formik.values.text_top_en_US}
-                        height={150}
+                        height={EditorHeight.medium}
                         title={"About Us Text ( English )"}
                       />
                     </Grid>

@@ -17,13 +17,19 @@ import {
 import Grid from "@mui/material/Grid"; // Grid version 1
 import FormHelp from "../atoms/FormHelp";
 
+export enum EditorHeight {
+  small = "300px",
+  medium = "500px",
+  large = "100vh",
+}
+
 interface TipTapEditorProps {
   value: string;
   onChange: Function;
   itemId?: string | number;
   itemType?: string;
   showMenu?: boolean;
-  height?: number;
+  height?: EditorHeight;
   title?: string;
   help?: string;
   min?: number;
@@ -33,6 +39,7 @@ interface TipTapEditorProps {
 const TipTapEditor = (props: TipTapEditorProps) => {
   const { value, onChange, showMenu, height, title } = props;
   const [charLength, setCharLength] = useState(0);
+  const [adjustedHeight, setAdjustedHeight] = useState(height);
 
   const editor = useEditor({
     extensions: [
@@ -62,10 +69,6 @@ const TipTapEditor = (props: TipTapEditorProps) => {
     if (editor) setCharLength(editor.getText().length);
   }, [editor]);
 
-  let menuDispaly: ReactElement;
-  if (showMenu !== false) {
-    menuDispaly = <MenuBar editor={editor} />;
-  }
   return (
     <>
       <Box
@@ -75,11 +78,11 @@ const TipTapEditor = (props: TipTapEditorProps) => {
           borderColor: "black",
         }}
       >
-        {menuDispaly}
+        {showMenu !== false && <MenuBar editor={editor} />}
         <Divider />
         <Box
           sx={{
-            height: height ? height : "auto",
+            height: height ?? "auto",
             overflowY: "scroll",
             marginY: 1,
             marginX: 1,
