@@ -7,7 +7,6 @@ import logo1 from "styles/images/Logo-img.png";
 import logo2 from "styles/images/Logo-text.png";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import formateDate from "helpers/formateDate";
 
 function Nav() {
   const router = useRouter();
@@ -31,7 +30,9 @@ function Nav() {
   const [isMobileView, setIsMobileView] = useState(false);
   const [mobileDropDownIsVisibile, setMobileDropDownIsVisibile] =
     useState(false);
-  const [upcomingEvents, setUpcomingEvents] = React.useState(false);
+  const [upcomingEvents, setUpcomingEvents] = React.useState(
+    !!events && JSON.parse(events?.content).length > 0
+  );
 
   useEffect(() => {
     if (locale !== null) {
@@ -85,42 +86,29 @@ function Nav() {
       : setMobileDropDownIsVisibile(false);
   }
 
-  // if (events !== null && events.content && events.content.length > 0) {
-  //   const eventsArray = JSON.parse(events.content);
-  //   eventsArray.map((event, index) => {
-  //     let eventDate = formateDate(event.start_time);
-  //     let currentDate = formateDate(new Date(Date.now()));
+  const filteredMenu = !upcomingEvents
+    ? mainMenu.filter((item) => item.term_id !== 86)
+    : mainMenu;
 
-  //     eventDate === currentDate
-  //       ? setUpcomingEvents(true)
-  //       : setUpcomingEvents(false);
-  //   });
-  // }
-
-  let mainMenuDisplay = mainMenu
-    // .filter((item) =>
-    //   upcomingEvents === false ? item !== 'aktivitäten' : item === 'aktivitäten'
-    // )
-    .map((item, index) => {
-      return (
-        <li
-          key={Date.now() + index}
-          onClick={handleClick}
-          className={styles.navItem}
+  let mainMenuDisplay = filteredMenu.map((item, index) => {
+    return (
+      <li
+        key={Date.now() + index}
+        onClick={handleClick}
+        className={styles.navItem}
+      >
+        <Link
+          href={
+            "/" + (item.link && item.link !== null ? item.link : item.post_name)
+          }
         >
-          <Link
-            href={
-              "/" +
-              (item.link && item.link !== null ? item.link : item.post_name)
-            }
-          >
-            {locale === "en_US" && item.title_en_US
-              ? item.title_en_US
-              : item.title}
-          </Link>
-        </li>
-      );
-    });
+          {locale === "en_US" && item.title_en_US
+            ? item.title_en_US
+            : item.title}
+        </Link>
+      </li>
+    );
+  });
 
   let callToActionMenuDisplay = callToActionMenu.map((item, index) => (
     <li

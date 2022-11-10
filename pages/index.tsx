@@ -74,7 +74,7 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
       query: selectGalleryById(galleryId),
     });
     const gallery = JSON.stringify(galleryResponse);
-    
+
     const headerGalleryResponse = await excuteQuery({
       query: selectGalleryById(6),
     });
@@ -114,9 +114,7 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
-  const { gallery, aboutInfo, headerImage } = useSelector(
-    (state) => state.aboutinfo
-  );
+  const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
 
   useEffect(() => {
     initHomePage();
