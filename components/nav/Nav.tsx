@@ -11,6 +11,7 @@ import formateDate from "helpers/formateDate";
 
 function Nav() {
   const router = useRouter();
+
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
   const { locale } = useSelector((state) => state.languages);
   const { headerGallery } = useSelector((state) => state.galleries);
@@ -220,13 +221,14 @@ function Nav() {
               />
             </div>
           </Link>
+
           <div className={styles.rightCol}>
             {socialmediaMenuDisplay}
             <div className={styles.languageMenu}>
-              <a href={`${pathName}`}>DE</a>
+              <a href={`https://www.juedische-stimme.de${router.asPath}`}>DE</a>
               <span> | </span>
               <a
-                href={`/en_US${pathName}`}
+                href={`https://www.juedische-stimme.com${router.asPath}`}
                 data-testid="english-button"
               >
                 EN
