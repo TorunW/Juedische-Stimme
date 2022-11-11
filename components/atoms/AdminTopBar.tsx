@@ -1,7 +1,8 @@
-import { Box, Tab, Tabs, Typography } from "@mui/material";
+import { Box, Tab, Tabs, Typography, Button } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { Container } from "./Container";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 interface Props {
   title: string;
@@ -59,7 +60,16 @@ const AdminTopBar = ({
         }}
       >
         <>
-          <Box sx={{ paddingBottom: 1 }}>
+          <Box sx={{ paddingBottom: 1, flexDirection: "row", display: "flex" }}>
+            <Box>
+              <Button
+                sx={{ color: "white", marginTop: 0.5, marginRight: 1 }}
+                onClick={() => router.back()}
+                size="small"
+              >
+                <ArrowBackIcon />
+              </Button>
+            </Box>
             <Typography variant="h4">{title}</Typography>
           </Box>
           {tabs?.length > 0 && (
