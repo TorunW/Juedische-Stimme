@@ -9,7 +9,6 @@ import { uuidv4 } from "@firebase/util";
 import FormError from "../atoms/FormError";
 import { Button, Card, FormControl, Grid, TextField, Box } from "@mui/material";
 import { Category } from "types/Category.type";
-import TipTapEditor from "../tiptap/TipTapEditor";
 
 interface TypeProps {
   category?: Category;

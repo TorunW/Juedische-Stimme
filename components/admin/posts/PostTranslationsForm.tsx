@@ -6,7 +6,7 @@ import FormError from "@/components/atoms/FormError";
 import { Button, FormControl, TextField, Card } from "@mui/material";
 import Grid from "@mui/material/Grid";
 
-import TipTapEditor from "components/tiptap/TipTapEditor";
+import TipTapEditor, { EditorHeight } from "components/tiptap/TipTapEditor";
 
 const PostTranslationsForm = ({ post, language }) => {
   const formik = useFormik({
@@ -92,7 +92,7 @@ const PostTranslationsForm = ({ post, language }) => {
           itemType={"post"}
           itemId={post.postId}
           title={`Post Content ( English )`}
-          height={300}
+          height={EditorHeight.large}
         />
         {errors?.content ? <FormError message={errors.content} /> : ""}
 
@@ -112,7 +112,7 @@ const PostTranslationsForm = ({ post, language }) => {
                     value={formik.values.excerpt}
                     itemType={"post"}
                     itemId={post.postId}
-                    height={150}
+                    height={EditorHeight.small}
                     title={`Post Summary ( English )`}
                     error={
                       errors && errors.excerpt ? (
@@ -134,7 +134,7 @@ const PostTranslationsForm = ({ post, language }) => {
                     value={formik.values.excerpt_2}
                     itemType={"post"}
                     itemId={post.postId}
-                    height={150}
+                    height={EditorHeight.small}
                     title={`Second Summary ( English )`}
                     error={
                       errors && errors.excerpt_2 ? (
@@ -153,6 +153,7 @@ const PostTranslationsForm = ({ post, language }) => {
                     onChange={(val) =>
                       formik.setFieldValue("content_2", val, true)
                     }
+                    height={EditorHeight.large}
                     value={formik.values.content_2}
                     itemType={"post"}
                     itemId={post.postId}

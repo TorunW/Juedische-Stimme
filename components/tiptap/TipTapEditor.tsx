@@ -10,15 +10,17 @@ import {
   Box,
   Divider,
   FormControlLabel,
+  Button,
   Switch,
   Typography,
   Chip,
 } from "@mui/material";
-import Grid from "@mui/material/Grid"; // Grid version 1
 import FormHelp from "../atoms/FormHelp";
+import { Stack } from "@mui/system";
+import AspectRatioIcon from "@mui/icons-material/AspectRatio";
 
 export enum EditorHeight {
-  small = "300px",
+  small = "250px",
   medium = "500px",
   large = "100vh",
 }
@@ -38,8 +40,14 @@ interface TipTapEditorProps {
 
 const TipTapEditor = (props: TipTapEditorProps) => {
   const { value, onChange, showMenu, height, title } = props;
+  const [isResizable, setIsResizable] = useState(false);
+
+  const [editorId, setEditorId] = useState("");
+
   const [charLength, setCharLength] = useState(0);
-  const [adjustedHeight, setAdjustedHeight] = useState(height);
+  const [adjustedHeight, setAdjustedHeight] = useState<EditorHeight | number>(
+    height
+  );
 
   const editor = useEditor({
     extensions: [
@@ -56,18 +64,50 @@ const TipTapEditor = (props: TipTapEditorProps) => {
     ],
     content: value,
     onUpdate: ({ editor }) => {
+      let rawHtml = editor.getHTML();
+      onChange(rawHtml);
       setCharLength(editor.getText().length);
     },
-    onBlur: ({ editor }) => {
-      let rawHtml = editor.getHTML();
-      if (editor.getText().length > 0) onChange(rawHtml);
-      else onChange("");
-    },
   });
+
+  function handleResize() {
+    setIsResizable(true);
+  }
+
+  function handleMouseMove(event) {
+    if (isResizable === true) {
+      const editorTopPosition = document
+        .getElementById(editorId)
+        ?.getBoundingClientRect().top;
+      const mousePosition = event.clientY;
+      if (!!editorTopPosition) {
+        const newEditorHeight = mousePosition - editorTopPosition + 40;
+        setAdjustedHeight(newEditorHeight);
+      }
+    }
+  }
+
+  function handleMouseUp() {
+    setIsResizable(false);
+  }
 
   useEffect(() => {
     if (editor) setCharLength(editor.getText().length);
   }, [editor]);
+
+  useEffect(() => {
+    setEditorId(`editor-${Date.now()}`);
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isResizable]);
 
   return (
     <>
@@ -76,16 +116,19 @@ const TipTapEditor = (props: TipTapEditorProps) => {
           border: 2,
           borderRadius: 1,
           borderColor: "black",
+          height: adjustedHeight ?? "auto",
         }}
       >
         {showMenu !== false && <MenuBar editor={editor} />}
         <Divider />
         <Box
+          id={editorId}
           sx={{
-            height: height ?? "auto",
-            overflowY: "scroll",
+            overflowY: "auto",
+            maxHeight: "calc(100% - 60px)",
             marginY: 1,
             marginX: 1,
+            height: "100%",
             "> div": {
               height: "100%",
               "> div": {
@@ -100,18 +143,26 @@ const TipTapEditor = (props: TipTapEditorProps) => {
           <EditorContent editor={editor} />
         </Box>
       </Box>
-      <Chip
-        sx={{
-          fontSize: "16px",
-          marginTop: "8px",
-          borderRadius: "4px",
-        }}
-        label={
-          <>
-            {charLength} {props.min && `/ ${props.min}`}
-          </>
-        }
-      ></Chip>
+      <Stack
+        justifyContent="space-between"
+        flexDirection="row"
+      >
+        <Chip
+          sx={{
+            fontSize: "16px",
+            marginTop: "8px",
+            borderRadius: "4px",
+          }}
+          label={charLength}
+        ></Chip>
+        <AspectRatioIcon
+          onMouseDown={handleResize}
+          sx={{
+            cursor: "pointer",
+            marginY: 1,
+          }}
+        />
+      </Stack>
     </>
   );
 };
@@ -138,48 +189,33 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
     );
   }
   return (
-    <Grid
-      item
-      xs={12}
-    >
-      <Grid
-        container
-        sx={{ marginBottom: 2 }}
+    <Stack sx={{ minWidth: "100%" }}>
+      <Stack
+        flexDirection="row"
+        paddingY={2}
+        justifyContent="space-between"
       >
-        <Grid
-          item
-          xs={7}
+        <Box
+          flexDirection="row"
+          display="flex"
+          alignItems="center"
         >
-          <Box
-            flexDirection="row"
-            display="flex"
-            alignItems="center"
-          >
-            {props.title && <Typography variant="h6">{props.title}</Typography>}
-            {props.help && <FormHelp text={props.help}></FormHelp>}
-          </Box>
-        </Grid>
-        <Grid
-          item
-          xs={5}
-          sx={{ display: "flex", justifyContent: "flex-end" }}
-        >
-          <FormControlLabel
-            control={
-              <Switch
-                defaultChecked
-                color="secondary"
-                onClick={() =>
-                  setShowEditor(showEditor === true ? false : true)
-                }
-              />
-            }
-            label={showEditor === true ? "Show html" : "Show editor"}
-          />
-        </Grid>
-      </Grid>
+          {props.title && <Typography variant="h6">{props.title}</Typography>}
+          {props.help && <FormHelp text={props.help}></FormHelp>}
+        </Box>
+        <FormControlLabel
+          control={
+            <Switch
+              defaultChecked
+              color="secondary"
+              onClick={() => setShowEditor(showEditor === true ? false : true)}
+            />
+          }
+          label={showEditor === true ? "Show html" : "Show editor"}
+        />
+      </Stack>
       {editorDisplay}
-    </Grid>
+    </Stack>
   );
 };
 

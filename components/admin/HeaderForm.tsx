@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 import axios from "axios";
 import GalleryForm from "./galleries/GalleryForm";
 import AdminTopBar from "../atoms/AdminTopBar";
-import TipTapEditor from "../tiptap/TipTapEditor";
+import TipTapEditor, { EditorHeight } from "../tiptap/TipTapEditor";
 import { Container } from "../atoms/Container";
 
 type HeaderProps = {
@@ -19,8 +19,8 @@ const HeaderForm = ({ aboutInfo, gallery }) => {
   const [currentTab, setCurrentTab] = useState("Gallery");
 
   const initialValues = {
-    header_slogan,
-    header_slogan_en_US,
+    header_slogan: header_slogan,
+    header_slogan_en_US: header_slogan_en_US,
   };
 
   const onSubmit = (values) => {
@@ -32,7 +32,7 @@ const HeaderForm = ({ aboutInfo, gallery }) => {
       },
     }).then(
       (response) => {
-        console.log(response, "response on header (put)");
+        window.location.reload();
       },
       (error) => {
         console.log(error, "ERROR on put header");
@@ -99,16 +99,18 @@ const HeaderForm = ({ aboutInfo, gallery }) => {
                       item
                       xs={12}
                     >
-                      {currentTab === "Header Text" ? (
+                      {currentTab === "Header Text" && (
                         <TipTapEditor
                           onChange={(val: string) =>
                             props.setFieldValue("header_slogan", val, true)
                           }
                           value={props.values.header_slogan}
-                          height={150}
+                          height={EditorHeight.small}
                           title="Header Slogan"
                         />
-                      ) : (
+                      )}
+
+                      {currentTab !== "Header Text" && (
                         <TipTapEditor
                           onChange={(val: string) =>
                             props.setFieldValue(
@@ -118,7 +120,7 @@ const HeaderForm = ({ aboutInfo, gallery }) => {
                             )
                           }
                           value={props.values.header_slogan_en_US}
-                          height={150}
+                          height={EditorHeight.small}
                           title="Header Slogan ( English )"
                         />
                       )}

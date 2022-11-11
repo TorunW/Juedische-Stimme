@@ -6,7 +6,7 @@ import { Box, Button, FormControl, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import ImageIcon from "@mui/icons-material/Image";
 
-import TiptapEditor from "components/tiptap/TipTapEditor";
+import TiptapEditor, { EditorHeight } from "components/tiptap/TipTapEditor";
 
 interface GalleryImageFormProps {
   galleryId: number | string;
@@ -202,7 +202,7 @@ function GalleryImageForm({
                     }
                     value={formik.values.image_description}
                     showMenu={false}
-                    height={200}
+                    height={EditorHeight.small}
                     title="Board member about"
                   />
                 </Grid>
@@ -346,7 +346,7 @@ function GalleryImageForm({
                     }
                     value={formik.values.image_description}
                     showMenu={false}
-                    height={200}
+                    height={EditorHeight.small}
                     title="Board member about"
                   />
                 </FormControl>
