@@ -1,10 +1,12 @@
-import React, { ReactElement } from 'react';
-import Share from 'helpers/shareToSocialMedia';
-import styles from '../posts/ListStyles.module.css';
-import formateDate from 'helpers/formateDate';
-import { generateImageUrl } from 'helpers/imageUrlHelper';
-import Image from 'next/image';
-import { getPostContentFields } from 'helpers/getPostContentFields';
+import React, { ReactElement } from "react";
+import Share from "helpers/shareToSocialMedia";
+import styles from "../posts/ListStyles.module.css";
+import formateDate from "helpers/formateDate";
+import { generateImageUrl } from "helpers/imageUrlHelper";
+import Image from "next/image";
+import { getPostContentFields } from "helpers/getPostContentFields";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import { ImageWithFallback } from "../atoms/ImageWithFallback";
 
 const PostPageNewsletterLayout = ({ post, locale }) => {
   const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } =
@@ -13,10 +15,13 @@ const PostPageNewsletterLayout = ({ post, locale }) => {
   let tagsDisplay: ReactElement[];
   if (post.tagNames && post.tagNames.length > 0) {
     let tagsArray = [post.tagNames];
-    if (post.tagNames.indexOf(',') > -1) tagsArray = post.tagNames.split(',');
+    if (post.tagNames.indexOf(",") > -1) tagsArray = post.tagNames.split(",");
     tagsDisplay = tagsArray.map((tag, index) => (
-      <a key={index} href={'/tag/' + tag}>
-        {' #' + tag}
+      <a
+        key={index}
+        href={"/tag/" + tag}
+      >
+        {" #" + tag}
       </a>
     ));
   }
@@ -25,7 +30,7 @@ const PostPageNewsletterLayout = ({ post, locale }) => {
     <React.Fragment>
       <div className={styles.newsletterLayout}>
         <div className={styles.header}>
-          <p>Published {post.post_date ? formateDate(post.post_date) : ''}</p>
+          <p>Published {post.post_date ? formateDate(post.post_date) : ""}</p>
           <h2>{postTitle}</h2>
           <div className={styles.linksContainer}>
             <div className={styles.socialMediaLinks}>
@@ -38,47 +43,47 @@ const PostPageNewsletterLayout = ({ post, locale }) => {
               {tagsDisplay}
             </p>
           </div>
-          <div className={styles.imageWrapper}>
-            <Image
-              src={generateImageUrl(post.post_image)}
-              alt={post.post_title}
-              title={post.post_title}
-              layout='fill'
-              objectFit='cover'
-            />
-          </div>
+          {post?.post_image?.indexOf("null") === -1 && (
+            <div className={styles.imageWrapper}>
+              <ImageWithFallback
+                src={generateFileServerSrc(post.post_image)}
+                alt={post.post_title}
+                title={post.post_title}
+                width={100}
+                height={100}
+              />
+            </div>
+          )}
         </div>
         <div className={styles.contentContainer}>
           <div
-            className={styles.topExcerpt + ' ' + styles.excerpt}
+            className={styles.topExcerpt + " " + styles.excerpt}
             dangerouslySetInnerHTML={{
-              __html: postExcerpt.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+              __html: postExcerpt.replace(/(?:\r\n|\r|\n)/g, "<br>"),
             }}
           ></div>
           <div
-            className={styles.bottomExcerpt + ' ' + styles.excerpt}
+            className={styles.bottomExcerpt + " " + styles.excerpt}
             dangerouslySetInnerHTML={{
               __html: postExcerpt2,
             }}
           ></div>
           <div
-            className={styles.topContent + ' ' + styles.content}
+            className={styles.topContent + " " + styles.content}
             dangerouslySetInnerHTML={{
-              __html: postContent.replace(/(?:\r\n|\r|\n)/g, '<br>'),
+              __html: postContent.replace(/(?:\r\n|\r|\n)/g, "<br>"),
             }}
           ></div>
           <div className={styles.image}>
-            <Image
-              src={generateImageUrl(post.post_image_2)}
+            <img
+              src={generateFileServerSrc(post.post_image_2)}
               alt={post.post_title}
               title={post.post_title}
-              layout='fill'
-              objectFit='cover'
             />
           </div>
 
           <div
-            className={styles.bottomContent + ' ' + styles.content}
+            className={styles.bottomContent + " " + styles.content}
             dangerouslySetInnerHTML={{
               __html: postContent2,
             }}

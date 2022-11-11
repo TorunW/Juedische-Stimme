@@ -1,9 +1,9 @@
-import Image from 'next/image';
-import React from 'react';
-import styles from './Styles.module.css';
-import postHeader from 'public/post-header.jpg';
-import { useSelector } from 'store/hooks';
-import { generateImageUrl } from 'helpers/imageUrlHelper';
+import Image from "next/image";
+import React from "react";
+import styles from "./Styles.module.css";
+import postHeader from "public/post-header.jpg";
+import { useSelector } from "store/hooks";
+import { generateImageUrl } from "helpers/imageUrlHelper";
 
 const PostsHeader = () => {
   const { category } = useSelector((state) => state.categories);
@@ -13,9 +13,9 @@ const PostsHeader = () => {
   let title: string, description: string;
 
   if (category) {
-    title = locale === 'en_US' ? category.name_en_US : category.name;
+    title = locale === "en_US" ? category.name_en_US : category.name;
     description =
-      locale === 'en_US' ? category.description_en_US : category.description;
+      locale === "en_US" ? category.description_en_US : category.description;
   } else if (tag) {
     title = tag.name;
     description = tag.description;
@@ -30,13 +30,13 @@ const PostsHeader = () => {
             category &&
             category.category_image &&
             category.category_image !== null &&
-            category.category_image.indexOf('null') === -1
+            category.category_image.indexOf("null") === -1
               ? generateImageUrl(category.category_image)
               : postHeader
           }
           className={styles.headerImage}
-          layout='fill'
-          objectFit='cover'
+          layout="fill"
+          objectFit="cover"
         />
       </div>
       <h1>{title}</h1>
