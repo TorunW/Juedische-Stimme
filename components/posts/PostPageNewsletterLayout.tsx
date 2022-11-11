@@ -49,8 +49,6 @@ const PostPageNewsletterLayout = ({ post, locale }) => {
                 src={generateFileServerSrc(post.post_image)}
                 alt={post.post_title}
                 title={post.post_title}
-                width={100}
-                height={100}
               />
             </div>
           )}
