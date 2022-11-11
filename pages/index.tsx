@@ -116,6 +116,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   const { posts, newsletter } = useSelector((state) => state.posts);
   const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
 
+  const { locale } = useSelector((state) => state.languages);
+  console.log(locale, " LOCALE ");
   useEffect(() => {
     initHomePage();
   }, []);
