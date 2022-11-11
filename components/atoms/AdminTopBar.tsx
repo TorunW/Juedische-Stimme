@@ -22,8 +22,10 @@ const AdminTopBar = ({
   const router = useRouter();
 
   useEffect(() => {
-    if (router.asPath.indexOf("#") > -1 && setCurrentTab) {
-      setCurrentTab(router.asPath.split("#")[1]);
+    if (setCurrentTab) {
+      if (router.asPath.indexOf("#") > -1) {
+        setCurrentTab(router.asPath.split("#")[1]);
+      } else setCurrentTab(tabs[0]);
     }
   }, []);
 

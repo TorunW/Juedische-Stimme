@@ -49,7 +49,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
 
   const { locales, defaultLocale } = useSelector((state) => state.languages);
 
-  const [currentTab, setCurrentTab] = useState("post");
+  const [currentTab, setCurrentTab] = useState();
   const [previewImage, setPreviewImage] = useState(null);
   const [previewImageFile, setPreviewImageFile] = useState(null);
 
