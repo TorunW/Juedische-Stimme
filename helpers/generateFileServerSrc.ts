@@ -1,5 +1,5 @@
 import { generateImageUrl } from "./imageUrlHelper";
 
 export const generateFileServerSrc = (src) => {
-  return `https://juedische-stimme.com:8080${generateImageUrl(src)}`;
+  return `https://juedische-stimme.com${generateImageUrl(src)}`;
 };
