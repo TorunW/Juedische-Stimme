@@ -10,10 +10,12 @@ const nextConfig = {
     {
       domain: "juedische-stimme.com",
       defaultLocale: "en_US",
+      locales: ["en_US"],
     },
     {
       domain: "www.juedische-stimme.com",
       defaultLocale: "en_US",
+      locales: ["en_US"],
     },
   ],
   images: {
