@@ -202,6 +202,8 @@ a {
     font-weight: 900;
     margin-bottom: 32px;
     text-align: center;
+    word-break:break-word;
+
   }
   #main-layout h3 {
     font-size: 1.2rem;
