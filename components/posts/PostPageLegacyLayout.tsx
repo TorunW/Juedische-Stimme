@@ -54,7 +54,7 @@ export default function PostPageLegacyLayout({ post, locale }) {
                 src={generateFileServerSrc(post.post_image)}
                 alt={post.post_title}
                 title={post.post_title}
-                style={{ margin: "20px auto" }}
+                style={{ margin: "20px auto", maxWidth: "85vw" }}
               />
             </div>
           </Container>

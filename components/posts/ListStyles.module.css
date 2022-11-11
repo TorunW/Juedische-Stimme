@@ -836,8 +836,6 @@
   }
   .navigationContainer a div {
     display: flex;
-    justify-content: flex-end;
-    width: 110px;
   }
   .navigationContainer a svg {
     width: 45px;

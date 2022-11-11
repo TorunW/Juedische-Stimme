@@ -1,16 +1,25 @@
-import React, { FC } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { Box, Button, Card, FormControl, TextField } from "@mui/material";
+import { Container } from "@/components/atoms/Container";
+import {
+  Button,
+  Card,
+  FormControl,
+  TextField,
+  Select,
+  MenuItem,
+  InputLabel,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
-import { Container } from "@/components/atoms/Container";
+import { useFormik } from "formik";
+import { Label, LabelType, LabelTypes } from "types/Label.type";
+import * as Yup from "yup";
 
 interface Props {
-  label?: any;
+  label?: Label;
 }
 
-const LabelForm: FC<Props> = ({ label }) => {
+const LabelForm = ({ label }: Props) => {
+  const labelTypes: LabelType[] = ["button", "form_field", "title"];
   const formik = useFormik({
     initialValues: {
       label_id: label ? label.label_id : "",
@@ -83,16 +92,23 @@ const LabelForm: FC<Props> = ({ label }) => {
                 fullWidth
                 margin="normal"
               >
-                <TextField
+                <InputLabel>Label Type</InputLabel>
+                <Select
                   id="label_type"
-                  label="Label Type"
-                  focused
                   name="label_type"
-                  type="text"
-                  placeholder="Add a type for the label..."
-                  onChange={formik.handleChange}
+                  label="Choose Menu"
                   value={formik.values.label_type}
-                />
+                  onChange={formik.handleChange}
+                >
+                  {labelTypes.map((lt, index) => (
+                    <MenuItem
+                      key={lt}
+                      value={lt}
+                    >
+                      {LabelTypes[lt]}
+                    </MenuItem>
+                  ))}
+                </Select>
               </FormControl>
             </Grid>
             <Grid
