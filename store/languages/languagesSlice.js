@@ -1,24 +1,25 @@
-import {createSlice} from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
-    locales:[],
-    locale:null,
-    defaultLocale:null
-}
+  locales: [],
+  locale: null,
+  defaultLocale: null,
+};
 
 const languagesSlice = createSlice({
-  name: 'mediaItems',
+  name: "mediaItems",
   initialState,
   reducers: {
     setLanguages: (state, action) => {
-        // console.log(action.payload, " ACTION PAYLOAD ")
-        state.locales = action.payload.locales;
-        state.locale = action.payload.locale;
-        state.defaultLocale = action.payload.defaultLocale;
-    }
-  }
-})
+      state.locales = action.payload.locales;
+      state.locale = window.location.hostname.endsWith("com")
+        ? "en_US"
+        : "de_DE";
+      state.defaultLocale = action.payload.defaultLocale;
+    },
+  },
+});
 
-export const { setLanguages } = languagesSlice.actions
+export const { setLanguages } = languagesSlice.actions;
 
-export default languagesSlice.reducer
+export default languagesSlice.reducer;

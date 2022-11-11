@@ -119,7 +119,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   const { locale, locales, defaultLocale } = useSelector(
     (state) => state.languages
   );
-  console.log(locale, locales, defaultLocale, " LOCALE ");
   useEffect(() => {
     initHomePage();
   }, []);
