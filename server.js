@@ -13,7 +13,7 @@ const path = require("path");
 app.prepare().then(() => {
   const server = express();
   server.use(cors());
-  server.use("/public/uploads", express.static(__dirname + "/public/uploads"));
+  server.use("/public", express.static(__dirname + "/public"));
 
   // delete file
   server.delete("/media/:filename", (req, res) => {

@@ -4,6 +4,7 @@ import Image from "next/image";
 import axios from "axios";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { generateImageUrl } from "helpers/imageUrlHelper";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
 
 type Props = {
   previewImage: string;
@@ -76,6 +77,8 @@ export const ImageUploadField: FC<Props> = ({
     }
   };
 
+  console.log(generateImageUrl(image));
+
   return (
     <>
       <Grid
@@ -97,17 +100,7 @@ export const ImageUploadField: FC<Props> = ({
             width: "100%",
           }}
         />
-        <Button
-          sx={{
-            width: "200px",
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%,-50%)",
-          }}
-        >
-          Upload an image
-        </Button>
+
         {previewImage !== null ? (
           <Grid
             xs={12}
@@ -125,15 +118,24 @@ export const ImageUploadField: FC<Props> = ({
             xs={12}
             sx={{ marginTop: 2, textAlign: "center" }}
           >
-            <Image
-              layout="fixed"
+            <img
               width={320}
               height={180}
-              src={generateImageUrl(image)}
+              src={generateFileServerSrc(image)}
             />
           </Grid>
         ) : (
-          ""
+          <Button
+            sx={{
+              width: "200px",
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%,-50%)",
+            }}
+          >
+            Upload an image
+          </Button>
         )}
 
         {image ? (

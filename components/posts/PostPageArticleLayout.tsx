@@ -6,6 +6,7 @@ import Image from "next/image";
 import { getPostContentFields } from "helpers/getPostContentFields";
 import Share from "helpers/shareToSocialMedia";
 import trimStringToLastSpace from "helpers/trimStringToLastSpace";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
 
 const PostPageArticleLayout = ({ post, locale }) => {
   const { postTitle, postExcerpt, postExcerpt2, postContent, postContent2 } =
@@ -36,12 +37,10 @@ const PostPageArticleLayout = ({ post, locale }) => {
           <div className={styles.contentWrapper}>
             <h2>{postTitle}</h2>
             <div className={styles.imageWrapper}>
-              <Image
-                src={generateImageUrl(post.post_image)}
+              <img
+                src={generateFileServerSrc(post.post_image)}
                 alt={post.post_title}
                 title={post.post_title}
-                layout="fill"
-                objectFit="cover"
               />
             </div>
           </div>
@@ -73,12 +72,10 @@ const PostPageArticleLayout = ({ post, locale }) => {
           {post.post_image_2 !== null ? (
             <div className={styles.middleWrapper}>
               <div className={styles.image}>
-                <Image
-                  src={generateImageUrl(post.post_image_2)}
+                <img
+                  src={generateFileServerSrc(post.post_image_2)}
                   alt={post.post_title}
                   title={post.post_title}
-                  layout="fill"
-                  objectFit="cover"
                   onErrorCapture={onSecondImageErrorCapture}
                 />
               </div>
