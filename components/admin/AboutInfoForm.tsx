@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import { useFormik } from "formik";
-import axios from "axios";
-import { Button, Card, Box, Tabs, Tab } from "@mui/material";
-import Grid from "@mui/material/Grid";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
-import GalleryForm from "./galleries/GalleryForm";
-import TipTapEditor, { EditorHeight } from "../tiptap/TipTapEditor";
-import { Container } from "../atoms/Container";
+import { Box, Button, Card } from "@mui/material";
 import { Stack } from "@mui/system";
+import axios from "axios";
+import { useFormik } from "formik";
+import { useState } from "react";
+import { Container } from "../atoms/Container";
+import TipTapEditor, { EditorHeight } from "../tiptap/TipTapEditor";
+import GalleryForm from "./galleries/GalleryForm";
 
 const AboutInfoForm = ({ aboutInfo, gallery }) => {
-  const tabs = ["About", "Gallery", "Translations"];
-  const [currentTab, setCurrentTab] = useState("About");
+  const tabs = ["German", "English", "Gallery"];
+  const [currentTab, setCurrentTab] = useState(tabs[0]);
   const formik = useFormik({
     initialValues: {
       ...aboutInfo,
@@ -32,43 +31,16 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
     },
   });
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setCurrentTab(newValue);
-  };
-
   return (
     <Box>
       <AdminTopBar
         title="Edit About Us Section"
-        tabs={
-          <Tabs
-            value={currentTab}
-            onChange={handleChange}
-            indicatorColor="secondary"
-            TabIndicatorProps={{
-              style: {
-                height: "4px",
-              },
-            }}
-          >
-            {tabs.map((tab, index) => (
-              <Tab
-                key={Date.now() + index}
-                value={tab}
-                label={tab}
-                sx={{
-                  color: "white !important",
-                  "&[aria-selected=false]": {
-                    color: "gray !important",
-                  },
-                }}
-              />
-            ))}
-          </Tabs>
-        }
+        tabs={tabs}
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
       />
 
-      {currentTab === "About" || currentTab === "Translations" ? (
+      {currentTab !== "Gallery" && (
         <form onSubmit={formik.handleSubmit}>
           <Container>
             <Card
@@ -84,7 +56,7 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
                 display="flex"
                 alignItems={"center"}
               >
-                {currentTab === "About" ? (
+                {currentTab === tabs[0] && (
                   <TipTapEditor
                     onChange={(val) =>
                       formik.setFieldValue("text_top", val, true)
@@ -93,18 +65,19 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
                     height={EditorHeight.medium}
                     title={"About Us Text"}
                   />
-                ) : currentTab === "Translations" ? (
+                )}
+
+                {currentTab === tabs[1] && (
                   <TipTapEditor
                     onChange={(val) =>
                       formik.setFieldValue("text_top_en_US", val, true)
                     }
                     value={formik.values.text_top_en_US}
                     height={EditorHeight.medium}
-                    title={"About Us Text ( English )"}
+                    title={"About Us Text "}
                   />
-                ) : (
-                  ""
                 )}
+
                 <Box
                   width="100%"
                   display="flex"
@@ -122,11 +95,9 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
             </Card>
           </Container>
         </form>
-      ) : currentTab === "Gallery" ? (
-        <GalleryForm gallery={gallery} />
-      ) : (
-        ""
       )}
+
+      {currentTab === "Gallery" && <GalleryForm gallery={gallery} />}
     </Box>
   );
 };

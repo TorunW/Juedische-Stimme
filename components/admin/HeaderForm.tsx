@@ -15,8 +15,8 @@ type HeaderProps = {
 
 const HeaderForm = ({ aboutInfo, gallery }) => {
   const { header_slogan, header_slogan_en_US } = aboutInfo;
-  const tabs = ["Header Text", "Gallery", "Translation"];
-  const [currentTab, setCurrentTab] = useState("Gallery");
+  const tabs = ["German", "English", "Gallery"];
+  const [currentTab, setCurrentTab] = useState(tabs[0]);
 
   const initialValues = {
     header_slogan: header_slogan,
@@ -40,43 +40,16 @@ const HeaderForm = ({ aboutInfo, gallery }) => {
     );
   };
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setCurrentTab(newValue);
-  };
-
   return (
     <>
       <AdminTopBar
         title="Edit Header Section"
-        tabs={
-          <Tabs
-            value={currentTab}
-            onChange={handleChange}
-            indicatorColor="secondary"
-            TabIndicatorProps={{
-              style: {
-                height: "4px",
-              },
-            }}
-          >
-            {tabs.map((tab, index) => (
-              <Tab
-                key={Date.now() + index}
-                value={tab}
-                label={tab}
-                sx={{
-                  color: "white !important",
-                  "&[aria-selected=false]": {
-                    color: "gray !important",
-                  },
-                }}
-              />
-            ))}
-          </Tabs>
-        }
+        tabs={tabs}
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
       />
       <Container>
-        {(currentTab === "Header Text" || currentTab === "Translation") && (
+        {(currentTab === tabs[0] || currentTab === tabs[1]) && (
           <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
@@ -99,7 +72,7 @@ const HeaderForm = ({ aboutInfo, gallery }) => {
                       item
                       xs={12}
                     >
-                      {currentTab === "Header Text" && (
+                      {currentTab === tabs[0] && (
                         <TipTapEditor
                           onChange={(val: string) =>
                             props.setFieldValue("header_slogan", val, true)
@@ -110,7 +83,7 @@ const HeaderForm = ({ aboutInfo, gallery }) => {
                         />
                       )}
 
-                      {currentTab !== "Header Text" && (
+                      {currentTab === tabs[1] && (
                         <TipTapEditor
                           onChange={(val: string) =>
                             props.setFieldValue(
@@ -121,7 +94,7 @@ const HeaderForm = ({ aboutInfo, gallery }) => {
                           }
                           value={props.values.header_slogan_en_US}
                           height={EditorHeight.small}
-                          title="Header Slogan ( English )"
+                          title="Header Slogan"
                         />
                       )}
                     </Grid>

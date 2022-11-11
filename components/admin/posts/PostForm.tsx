@@ -1,48 +1,48 @@
-import React, { useState, ReactElement } from "react";
-import { Form, Formik, FormikProps } from "formik";
-import * as Yup from "yup";
-import axios from "axios";
-import { useSelector } from "store/hooks";
-import { v4 as uuidv4 } from "uuid";
-import { generateFileName } from "helpers/generateFileName";
-import { generateImageUrl } from "helpers/imageUrlHelper";
-import { GeneratePostUrl } from "helpers/generatePostUrl";
-import dateTimeHelper from "helpers/dateTimeHelper";
-import PostTagForm from "./PostTagForm";
-import PostTranslations from "./PostTranslations";
+import AdminTopBar from "@/components/atoms/AdminTopBar";
+import FormError from "@/components/atoms/FormError";
+import { PerformantTextField } from "@/components/atoms/PerformantTextField";
 import {
   Box,
   Button,
   Card,
-  InputLabel,
-  Select,
-  MenuItem,
   FormControl,
-  Tab,
-  Tabs,
-  TextField,
-  Link,
+  InputLabel,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import FormError from "@/components/atoms/FormError";
-import AdminTopBar from "@/components/atoms/AdminTopBar";
-import { PerformantTextField } from "@/components/atoms/PerformantTextField";
+import axios from "axios";
+import { Form, Formik, FormikProps } from "formik";
+import dateTimeHelper from "helpers/dateTimeHelper";
+import { generateFileName } from "helpers/generateFileName";
+import { GeneratePostUrl } from "helpers/generatePostUrl";
+import { ReactElement, useState } from "react";
+import { useSelector } from "store/hooks";
 import { Post } from "types/Post.type";
+import { v4 as uuidv4 } from "uuid";
+import * as Yup from "yup";
+import PostTagForm from "./PostTagForm";
+import PostTranslations from "./PostTranslations";
 
-import TipTapEditor, { EditorHeight } from "components/tiptap/TipTapEditor";
-import { ImageUploadField } from "../ImageUploadField";
 import { Container } from "@/components/atoms/Container";
-import { generatePostImgRequests } from "helpers/generatePostImgRequests";
 import FormHelp from "@/components/atoms/FormHelp";
+import TipTapEditor, { EditorHeight } from "components/tiptap/TipTapEditor";
+import { Category } from "types/Category.type";
+import { ImageUploadField } from "../ImageUploadField";
 
 interface PostFormProps {
   post?: any;
   nextPostId?: string | number;
-  categories?: any[];
+  categories?: Category[];
 }
 
 const PostForm = ({ post, nextPostId }: PostFormProps) => {
-  const tabs = ["post", "translations"];
+  const pathname = typeof window !== undefined ? window.location.pathname : "";
+
+  console.log(pathname);
+
+  const tabs =
+    pathname.indexOf("create") > -1 ? ["post"] : ["post", "translations"];
 
   const { categories } = useSelector((state) => state.categories);
   const { loggedUser } = useSelector((state) => state.users);
@@ -82,10 +82,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
     post_type: post ? post.post_type : "post",
     post_layout: post ? post.post_layout : "",
   };
-  const imageValidation = Yup.string().required("Add an Image");
-  const postExcerptValidation = Yup.string()
-    .min(160)
-    .required("Add a summary sentence from the Post");
+
   const postContentValidation = Yup.string()
     .min(700, "Post content should be a least 700 characters")
     .required("Add some text to the post");
@@ -100,26 +97,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       is: "post",
       then: Yup.string().min(2).required("Choose a layout for the post"),
     }),
-    // post_image: Yup.string()
-    //   .nullable()
-    //   .when("post_layout", {
-    //     is: "article",
-    //     then: imageValidation,
-    //   })
-    //   .when("post_layout", {
-    //     is: "newsletter",
-    //     then: imageValidation,
-    //   }),
     post_content: postContentValidation,
-    // post_excerpt: Yup.string().when("post_layout", {
-    //   is: "article",
-    //   then: postExcerptValidation,
-    // }),
-    // post_excerpt_2: Yup.string().when(["post_layout", "post_content_2"], {
-    //   is: (post_layout, post_content_2) =>
-    //     post_layout === "article" && post_content_2?.length > 0,
-    //   then: postExcerptValidation,
-    // }),
   });
 
   const onSubmit = (values) => {
@@ -260,15 +238,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
     ));
   }
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setCurrentTab(newValue);
-  };
-
-  let pathname;
-  if (typeof window !== "undefined") {
-    pathname = window.location.pathname;
-  }
-
   const isMinimalLayout =
     (post && post.post_layout === "donation") ||
     (post && post.post_layout === "member_form") ||
@@ -280,37 +249,12 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
         title={
           pathname === "/admin/posts/create" ? "Create new Post" : "Edit Post"
         }
-        tabs={
-          pathname !== "/admin/posts/create" ? (
-            <Tabs
-              value={currentTab}
-              onChange={handleChange}
-              indicatorColor="secondary"
-              TabIndicatorProps={{
-                style: {
-                  height: "5px",
-                },
-              }}
-            >
-              {tabs.map((tab, index) => (
-                <Tab
-                  key={Date.now() + index}
-                  value={tab}
-                  label={tab}
-                  sx={{
-                    color: "white !important",
-                    "&[aria-selected=false]": {
-                      color: "gray !important",
-                    },
-                  }}
-                />
-              ))}
-            </Tabs>
-          ) : null
-        }
+        tabs={tabs}
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
       />
       <Container>
-        {currentTab === "post" ? (
+        {currentTab === "post" && (
           <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
@@ -687,15 +631,15 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
               </Form>
             )}
           </Formik>
-        ) : null}
+        )}
 
-        {currentTab === "translations" ? (
+        {currentTab === "translations" && (
           <PostTranslations
             post={post}
             locales={locales}
             defaultLocale={defaultLocale}
           />
-        ) : null}
+        )}
       </Container>
     </Box>
   );

@@ -78,8 +78,6 @@ export const ImageUploadField: FC<Props> = ({
     }
   };
 
-  console.log(generateImageUrl(image));
-
   return (
     <>
       <Grid

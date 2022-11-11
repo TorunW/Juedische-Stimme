@@ -63,6 +63,7 @@ export const createServerSideProps = <T extends PageProps>(
         const pageViewResponse = await excuteQuery({
           query: `SELECT * FROM js_pageviews WHERE js_pageviews.ip='${detectedId}' AND js_pageviews.url='${url}'`,
         });
+
         if (pageViewResponse.length === 0) {
           const insertPageViewResponse = await excuteQuery({
             query: `INSERT INTO js_pageviews ( ip, url) VALUES ('${detectedId}','${fullUrl}')`,

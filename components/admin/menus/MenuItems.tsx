@@ -1,32 +1,37 @@
-import React, { ReactElement, useState } from "react";
-import axios from "axios";
-import menuTypes from "lib/menuTypes.json";
+import AdminTopBar from "@/components/atoms/AdminTopBar";
+import { Container } from "@/components/atoms/Container";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import {
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  Paper,
-  Link,
-  IconButton,
   Button,
   Dialog,
+  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  DialogActions,
-  Tabs,
-  Tab,
+  IconButton,
+  Link,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
 } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import AdminTopBar from "@/components/atoms/AdminTopBar";
-import { Container } from "@/components/atoms/Container";
+import axios from "axios";
+import menuTypes from "lib/menuTypes.json";
+import { useRouter } from "next/router";
+import React, { ReactElement, useState } from "react";
 import MenuItemForm from "./MenuItemForm";
 
 const MenuItems = ({ menuItems }) => {
-  const [currentMenu, setCurrentMenu] = useState("main_menu");
+  const router = useRouter();
+  const tabs = menuTypes.filter(
+    (menu) => menu !== "call_to_action_menu" && menu !== "socials_menu"
+  );
+  const [currentTab, setCurrentTab] = useState(
+    router.asPath?.split("#")[1] ?? tabs[0] ?? "main_menu"
+  );
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -58,10 +63,10 @@ const MenuItems = ({ menuItems }) => {
   let menuItemsDisplay: ReactElement;
   if (menuItems) {
     const menuItemsArray = menuItems.filter(
-      (menuItem) => menuItem.taxonomy === currentMenu
+      (menuItem) => menuItem.taxonomy === currentTab
     );
     if (menuItemsArray.length === 0)
-      menuItemsDisplay = <p>no menu items for {currentMenu}</p>;
+      menuItemsDisplay = <p>no menu items for {currentTab}</p>;
     else {
       menuItemsDisplay = menuItemsArray.map((menuItem: any, index: number) => (
         <TableBody
@@ -132,39 +137,9 @@ const MenuItems = ({ menuItems }) => {
     <>
       <AdminTopBar
         title="Menu Items"
-        tabs={
-          <Tabs
-            value={currentMenu}
-            onChange={(value, newValue) => {
-              setCurrentMenu(newValue);
-            }}
-            indicatorColor="secondary"
-            TabIndicatorProps={{
-              style: {
-                height: "4px",
-              },
-            }}
-          >
-            {menuTypes
-              .filter(
-                (menu) =>
-                  menu !== "call_to_action_menu" && menu !== "socials_menu"
-              )
-              .map((menu, index) => (
-                <Tab
-                  key={menu}
-                  label={menu.split("_").join(" ")}
-                  value={menu}
-                  sx={{
-                    color: "white !important",
-                    "&[aria-selected=false]": {
-                      color: "gray !important",
-                    },
-                  }}
-                />
-              ))}
-          </Tabs>
-        }
+        tabs={tabs}
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
       />
       <Container>
         <Paper sx={{ width: "100%", overflow: "hidden" }}>

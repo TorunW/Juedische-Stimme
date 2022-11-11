@@ -159,7 +159,7 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
           >
             <Grid
               item
-              xs={11}
+              xs={9}
             >
               <FormControl
                 fullWidth
@@ -199,7 +199,7 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
 
             <Grid
               item
-              xs={1}
+              xs={3}
             >
               <FormControl
                 fullWidth
@@ -210,7 +210,7 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                   label="Order"
                   focused
                   name="term_order"
-                  type="text"
+                  type="number"
                   placeholder="Menu Item Order..."
                   onChange={formik.handleChange}
                   value={formik.values.term_order}
