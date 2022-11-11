@@ -567,7 +567,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                                     : null
                                 }
                                 postId={post ? post.postId : null}
-                                imageNumber={1}
+                                imageNumber={2}
                                 previewImage={previewImage2}
                                 setPreviewImage={setPreviewImage2}
                                 setPreviewImageFile={setPreviewImage2File}
