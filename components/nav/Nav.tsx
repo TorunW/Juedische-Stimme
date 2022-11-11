@@ -252,10 +252,10 @@ function Nav() {
           </Link>
           <div className={styles.rightCol}>
             <div className={styles.languageMenu}>
-              <a href={`${pathName}`}>DE</a>
-              <b> | </b>
+              <a href={`https://www.juedische-stimme.de${router.asPath}`}>DE</a>
+              <span> | </span>
               <a
-                href={`/en_US${pathName}`}
+                href={`https://www.juedische-stimme.com${router.asPath}`}
                 data-testid="english-button"
               >
                 EN
