@@ -72,7 +72,7 @@ const AdminTopBar = ({
             </Box>
             <Typography variant="h4">{title}</Typography>
           </Box>
-          {tabs?.length > 0 && (
+          {tabs?.length > 1 && (
             <Tabs
               value={currentTab}
               onChange={handleChange}

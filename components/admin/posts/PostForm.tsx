@@ -42,7 +42,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
   console.log(pathname);
 
   const tabs =
-    pathname.indexOf("create") > -1 ? ["post"] : ["post", "translations"];
+    pathname.indexOf("create") > -1 ? ["german"] : ["german", "english"];
 
   const { categories } = useSelector((state) => state.categories);
   const { loggedUser } = useSelector((state) => state.users);
@@ -254,7 +254,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
         setCurrentTab={setCurrentTab}
       />
       <Container>
-        {currentTab === "post" && (
+        {currentTab === tabs[0] && (
           <Formik
             initialValues={initialValues}
             onSubmit={onSubmit}
@@ -633,7 +633,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
           </Formik>
         )}
 
-        {currentTab === "translations" && (
+        {currentTab === tabs[1] && (
           <PostTranslations
             post={post}
             locales={locales}
