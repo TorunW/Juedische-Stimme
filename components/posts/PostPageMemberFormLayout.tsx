@@ -1,10 +1,8 @@
-import Image from "next/image";
-import React from "react";
-import styles from "./ListStyles.module.css";
-import MembershipForm from "../forms/MembershipForm";
-import { generateImageUrl } from "helpers/imageUrlHelper";
-import { getPostContentFields } from "helpers/getPostContentFields";
 import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import { getPostContentFields } from "helpers/getPostContentFields";
+import React from "react";
+import MembershipForm from "../forms/MembershipForm";
+import styles from "./ListStyles.module.css";
 
 const PostPageMemberFormLayout = ({ post, locale }) => {
   const { postTitle, postContent } = getPostContentFields(post, locale);
@@ -20,8 +18,9 @@ const PostPageMemberFormLayout = ({ post, locale }) => {
             position: "absolute",
             top: 0,
             left: 0,
-            width: "100vw",
-            maxHeight: "100%",
+            width: "auto",
+            height: "100%",
+            minWidth: "100vw",
           }}
         />
         <div className={styles.pageContainer}>

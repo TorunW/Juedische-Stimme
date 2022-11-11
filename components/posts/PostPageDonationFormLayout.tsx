@@ -21,8 +21,9 @@ const PostPageDonationFormLayout = ({ post, locale }) => {
             position: "absolute",
             top: 0,
             left: 0,
-            width: "100vw",
-            maxHeight: "100%",
+            width: "auto",
+            height: "100%",
+            minWidth: "100vw",
           }}
         />
         <div className={styles.pageContainer}>
