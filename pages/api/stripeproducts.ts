@@ -35,7 +35,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             name: products.data.find((pr) => pr.id === item.product)?.name,
           };
           group.push(price);
-          console.log(group);
           groups[item.product.toString()] = group.sort(sortByUnitAmount);
         }
         return groups;

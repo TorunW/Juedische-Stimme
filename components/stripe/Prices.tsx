@@ -1,6 +1,9 @@
-import React from 'react';
-import styles from './Styles.module.css';
-import { Field } from 'formik';
+import React from "react";
+import styles from "./Styles.module.css";
+import { Field } from "formik";
+
+import { getLabel } from "helpers/getLabelHelper";
+import { useSelector } from "store/hooks";
 
 function Prices({
   product,
@@ -9,6 +12,9 @@ function Prices({
   product: any;
   selectedPrice?: any;
 }) {
+  const { locale } = useSelector((state) => state.languages);
+  const { labels } = useSelector((state) => state.labels);
+
   let pricesDisplay = product.map((price) => {
     let priceFormattedDisplay;
     if (price.active === true) {
@@ -20,7 +26,12 @@ function Prices({
       } else if (price.unit_amount_decimal !== null) {
         priceFormattedDisplay = price.unit_amount_decimal.slice(0, -2);
       } else {
-        priceFormattedDisplay = '_ _';
+        priceFormattedDisplay = getLabel(
+          labels,
+          locale,
+          "choose_amount",
+          "__ "
+        );
       }
     }
     return (
@@ -28,17 +39,17 @@ function Prices({
         key={price.id}
         className={
           styles.box +
-          ' ' +
-          (selectedPrice === price.id ? styles.boxSelected : '')
+          " " +
+          (selectedPrice === price.id ? styles.boxSelected : "")
         }
-        title='500€'
+        title="500€"
       >
         <Field
           className={styles.radio}
-          type='radio'
+          type="radio"
           title={priceFormattedDisplay}
           value={price.id}
-          name='price'
+          name="price"
         />
         {`${priceFormattedDisplay}`}€<a></a>
       </label>
