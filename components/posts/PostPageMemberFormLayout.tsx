@@ -15,6 +15,14 @@ const PostPageMemberFormLayout = ({ post, locale }) => {
           src={generateFileServerSrc(post.post_image)}
           alt="membership-page-background"
           title="membership-page-background"
+          style={{
+            zIndex: 0,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            maxHeight: "100%",
+          }}
         />
         <div className={styles.pageContainer}>
           <div className={styles.contentContainer}>
