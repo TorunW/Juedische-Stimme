@@ -8,7 +8,11 @@ const nextConfig = {
   },
   domains: [
     {
-      domain: ["juedische-stimme.com", "www.juedische-stimme.com"],
+      domain: "juedische-stimme.com",
+      defaultLocale: "en_US",
+    },
+    {
+      domain: "www.juedische-stimme.com",
       defaultLocale: "en_US",
     },
   ],
