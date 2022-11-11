@@ -1,10 +1,10 @@
-import React from 'react';
-import styles from './Styles.module.css';
-import { Form, Formik } from 'formik';
-import { useEffect, useState } from 'react';
+import React from "react";
+import styles from "./Styles.module.css";
+import { Form, Formik } from "formik";
+import { useEffect, useState } from "react";
 
-import { loadStripe } from '@stripe/stripe-js';
-import Prices from './Prices';
+import { loadStripe } from "@stripe/stripe-js";
+import Prices from "./Prices";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
@@ -19,7 +19,7 @@ function PaymentForm() {
   }, []);
 
   async function getProducts() {
-    const res = await fetch('/api/stripeproducts');
+    const res = await fetch("/api/stripeproducts");
     const data = await res.json();
     setProducts(data);
   }
@@ -29,15 +29,15 @@ function PaymentForm() {
       (price) => price.id === values.price
     ).recurring;
 
-    const mode = recurring !== null ? 'subscription' : 'payment';
+    const mode = recurring !== null ? "subscription" : "payment";
 
     const payment_method_types =
-      mode === 'payment' ? ['card', 'klarna'] : ['card'];
+      mode === "payment" ? ["card", "giropay"] : ["card"];
 
-    const { sessionId } = await fetch('/api/checkout_sessions', {
-      method: 'POST',
+    const { sessionId } = await fetch("/api/checkout_sessions", {
+      method: "POST",
       headers: {
-        'content-type': 'application/json',
+        "content-type": "application/json",
       },
       body: JSON.stringify({
         price: values.price,
@@ -59,21 +59,24 @@ function PaymentForm() {
           <React.Fragment key={index}>
             <Formik
               initialValues={{
-                price: '',
+                price: "",
               }}
               onSubmit={handleSubmit}
             >
               {({ values }) => {
                 return (
                   <Form>
-                    <Prices product={product} selectedPrice={values.price} />
+                    <Prices
+                      product={product}
+                      selectedPrice={values.price}
+                    />
                     <div className={styles.btnWrapper}>
                       <button
-                        type='submit'
+                        type="submit"
                         className={
                           values.price.length > 1
-                            ? styles.btn + ' ' + styles.btnActive
-                            : styles.btn + ' ' + styles.btnInactive
+                            ? styles.btn + " " + styles.btnActive
+                            : styles.btn + " " + styles.btnInactive
                         }
                       >
                         Click here to donate
@@ -94,12 +97,15 @@ function PaymentForm() {
     productsDisplay = products.map((product, index) => {
       if (product[0].name) {
         return (
-          <div key={index} className={styles.wrapper}>
+          <div
+            key={index}
+            className={styles.wrapper}
+          >
             <button
               onClick={() => setProductIndex(index)}
               className={
                 productIndex === index
-                  ? styles.btn + ' ' + styles.active
+                  ? styles.btn + " " + styles.active
                   : styles.btn
               }
             >
@@ -111,8 +117,8 @@ function PaymentForm() {
     });
   } else {
     productsDisplay = (
-      <div className='lds-rings-container'>
-        <div className='lds-roller'>
+      <div className="lds-rings-container">
+        <div className="lds-roller">
           <div></div>
           <div></div>
           <div></div>

@@ -5,6 +5,16 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2022-08-01",
 });
 
+function sortByUnitAmount(a, b) {
+  if (a.unit_amount < b.unit_amount) {
+    return -1;
+  }
+  if (a.unit_amount > b.unit_amount) {
+    return 1;
+  }
+  return 0;
+}
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === "GET") {
@@ -25,7 +35,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             name: products.data.find((pr) => pr.id === item.product)?.name,
           };
           group.push(price);
-          groups[item.product.toString()] = group;
+          console.log(group);
+          groups[item.product.toString()] = group.sort(sortByUnitAmount);
         }
         return groups;
       }, {});
