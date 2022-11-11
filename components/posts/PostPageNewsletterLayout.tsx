@@ -72,14 +72,15 @@ const PostPageNewsletterLayout = ({ post, locale }) => {
               __html: postContent.replace(/(?:\r\n|\r|\n)/g, "<br>"),
             }}
           ></div>
-          <div className={styles.image}>
-            <img
-              src={generateFileServerSrc(post.post_image_2)}
-              alt={post.post_title}
-              title={post.post_title}
-            />
-          </div>
-
+          {post?.post_image_2 && (
+            <div className={styles.image}>
+              <ImageWithFallback
+                src={generateFileServerSrc(post.post_image_2)}
+                alt={post.post_title}
+                title={post.post_title}
+              />
+            </div>
+          )}
           <div
             className={styles.bottomContent + " " + styles.content}
             dangerouslySetInnerHTML={{

@@ -54,9 +54,10 @@ export const ImageUploadField: FC<Props> = ({
         )
         .catch((errors) => {
           console.log(errors, " ERRORS");
+          onDelete();
         });
     }
-    onDelete();
+    // onDelete();
   }
 
   const onImageChange = (event) => {
