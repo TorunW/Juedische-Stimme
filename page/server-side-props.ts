@@ -9,6 +9,7 @@ export interface ServerSideData {
   dataForSSR: string;
   navItems: string;
   labels: string;
+  locale: string;
 }
 
 // utility type
@@ -47,11 +48,8 @@ export const createServerSideProps = <T extends PageProps>(
 
       // PAGEVIEW
       const { req } = context;
-      let url = context.resolvedUrl;
-      if (
-        url?.indexOf("juedische-stimme") > -1 &&
-        req.headers.host.indexOf("juedische-stimme") > -1
-      ) {
+      if (req.headers.host.indexOf("juedische-stimme") > -1) {
+        let url = context.resolvedUrl;
         const fullUrl = `https://${
           req.headers.host +
           (url.indexOf("?") > -1
@@ -72,6 +70,8 @@ export const createServerSideProps = <T extends PageProps>(
         }
       }
 
+      // LOCALE
+
       const props = {
         page: {
           serverSideData:
@@ -88,6 +88,10 @@ export const createServerSideProps = <T extends PageProps>(
             dataForSSR: "data for custom serverSideProps",
             navItems,
             labels,
+            locale:
+              req.headers.host.indexOf("juedische-stimme.com") > -1
+                ? "en_US"
+                : "de_DE",
           },
           context,
         });

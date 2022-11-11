@@ -1,28 +1,29 @@
-import { useEffect } from 'react';
-import excuteQuery from 'lib/db';
-import { selectPostsBySearchPhrase } from 'lib/queries/posts';
-import { selectCategories } from 'lib/queries';
+import { useEffect } from "react";
+import excuteQuery from "lib/db";
+import { selectPostsBySearchPhrase } from "lib/queries/posts";
+import { selectCategories } from "lib/queries";
 
-import Posts from '@/components/posts/Posts';
-import styles from 'styles/Home.module.css';
-import { useDispatch, useSelector } from 'store/hooks';
-import { setPosts } from 'store/posts/postsSlice';
-import { setMenuItems } from 'store/nav/navSlice';
-import { setCatgories } from 'store/categories/categoriesSlice';
-import { LayoutPage } from 'types/LayoutPage.type';
-import { LayoutPageProps } from 'types/LayoutPageProps.type';
-import { setLanguages } from 'store/languages/languagesSlice';
-import { createServerSideProps } from 'page/server-side-props';
-import { HomePageProps } from 'pages';
+import Posts from "@/components/posts/Posts";
+import styles from "styles/Home.module.css";
+import { useDispatch, useSelector } from "store/hooks";
+import { setPosts } from "store/posts/postsSlice";
+import { setMenuItems } from "store/nav/navSlice";
+import { setCatgories } from "store/categories/categoriesSlice";
+import { LayoutPage } from "types/LayoutPage.type";
+import { LayoutPageProps } from "types/LayoutPageProps.type";
+import { setLanguages } from "store/languages/languagesSlice";
+import { createServerSideProps } from "page/server-side-props";
+import { HomePageProps } from "pages";
 
 export const getServerSideProps = createServerSideProps<HomePageProps>(
-  async ({ context, data: { navItems } }) => {
+  async ({ context, data: { navItems, locale } }) => {
     const postsResponse = await excuteQuery({
       query: selectPostsBySearchPhrase({
         phrase: context.query.phrase,
         numberOfPosts: 10,
         number: context.query.number,
-        locale: context.locale !== context.defaultLocale ? context.locale : '',
+        locales: context.locales,
+        locale: locale !== context.defaultLocale ? locale : "",
       }),
     });
     const posts = JSON.stringify(postsResponse);
@@ -39,6 +40,9 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
         pageNum: context.query.number,
         navItems,
         categories,
+        locales: context.locales,
+        locale,
+        defaultLocale: context.defaultLocale,
       },
     };
   }
@@ -63,11 +67,14 @@ const SearchPhrasePostsPage: LayoutPage = (props: LayoutPageProps) => {
   }, [props.posts]);
 
   return (
-    <main id='search-page' style={{ padding: '0px' }}>
+    <main
+      id="search-page"
+      style={{ padding: "0px" }}
+    >
       <section className={styles.container}>
         <Posts
           posts={posts}
-          title={'Search'}
+          title={"Search"}
           phrase={props.phrase}
           pageNum={props.pageNum}
         />
@@ -76,6 +83,6 @@ const SearchPhrasePostsPage: LayoutPage = (props: LayoutPageProps) => {
   );
 };
 
-SearchPhrasePostsPage.layout = 'main';
+SearchPhrasePostsPage.layout = "main";
 
 export default SearchPhrasePostsPage;

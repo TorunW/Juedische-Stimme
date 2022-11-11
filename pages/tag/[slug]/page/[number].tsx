@@ -17,6 +17,46 @@ import { setTag } from "store/tags/tagsSlice";
 import { createServerSideProps } from "page/server-side-props";
 import { HomePageProps } from "pages";
 
+export const getServerSideProps = createServerSideProps<HomePageProps>(
+  async ({ context, data: { navItems, locale } }) => {
+    const tagResponse = await excuteQuery({
+      query: selectTag({ slug: context.query.slug }),
+    });
+    const tag = JSON.stringify(tagResponse);
+
+    const categoriesResponse = await excuteQuery({
+      query: selectCategories(100),
+    });
+
+    const categories = JSON.stringify(categoriesResponse);
+
+    const postsResponse = await excuteQuery({
+      query: selectPosts({
+        slug: context.query.slug,
+        numberOfPosts: 10,
+        pageNum: context.query.number,
+        locale: locale !== context.defaultLocale ? locale : "",
+      }),
+    });
+    const posts = JSON.stringify(postsResponse);
+    return {
+      props: {
+        posts,
+        postsCount: tagResponse[0].count,
+        postsPerPage: 10,
+        slug: context.query.slug,
+        pageNum: parseInt(context.query.number.toString()),
+        navItems,
+        locales: context.locales,
+        locale,
+        defaultLocale: context.defaultLocale,
+        categories,
+        tag,
+      },
+    };
+  }
+);
+
 const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
   const dispatch = useDispatch();
   const { posts, postsCount, postsPerPage } = useSelector(
@@ -60,45 +100,5 @@ const TagPostsPage: LayoutPage = (props: LayoutPageProps) => {
 };
 
 TagPostsPage.layout = "main";
-
-export const getServerSideProps = createServerSideProps<HomePageProps>(
-  async ({ context, data: { navItems } }) => {
-    const tagResponse = await excuteQuery({
-      query: selectTag({ slug: context.query.slug }),
-    });
-    const tag = JSON.stringify(tagResponse);
-
-    const categoriesResponse = await excuteQuery({
-      query: selectCategories(100),
-    });
-
-    const categories = JSON.stringify(categoriesResponse);
-
-    const postsResponse = await excuteQuery({
-      query: selectPosts({
-        slug: context.query.slug,
-        numberOfPosts: 10,
-        pageNum: context.query.number,
-        locale: context.locale !== context.defaultLocale ? context.locale : "",
-      }),
-    });
-    const posts = JSON.stringify(postsResponse);
-    return {
-      props: {
-        posts,
-        postsCount: tagResponse[0].count,
-        postsPerPage: 10,
-        slug: context.query.slug,
-        pageNum: parseInt(context.query.number.toString()),
-        navItems,
-        locales: context.locales,
-        locale: context.locale,
-        defaultLocale: context.defaultLocale,
-        categories,
-        tag,
-      },
-    };
-  }
-);
 
 export default TagPostsPage;

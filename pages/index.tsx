@@ -36,7 +36,7 @@ export interface HomePageProps extends PageProps {
 }
 
 export const getServerSideProps = createServerSideProps<HomePageProps>(
-  async ({ context, data: { navItems, labels } }) => {
+  async ({ context, data: { navItems, labels, locale } }) => {
     // POSTS
     const postsResponse = await excuteQuery({
       query: selectPosts({
@@ -59,7 +59,7 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
         exclude: {
           category: 66,
         },
-        locale: context.locale !== context.defaultLocale ? context.locale : "",
+        locale: locale !== context.defaultLocale ? locale : "",
       }),
     });
     const posts = JSON.stringify(postsResponse);
@@ -99,7 +99,7 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
         aboutInfo,
         gallery,
         locales: context.locales,
-        locale: context.locale,
+        locale,
         defaultLocale: context.defaultLocale,
         headerGallery,
         headerImage,

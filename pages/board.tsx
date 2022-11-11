@@ -12,7 +12,7 @@ import { setLanguages } from "store/languages/languagesSlice";
 import { setMenuItems } from "store/nav/navSlice";
 
 export const getServerSideProps = createServerSideProps<HomePageProps>(
-  async ({ context, data: { navItems, labels } }) => {
+  async ({ context, data: { navItems, labels, locale } }) => {
     // ABOUT INFO ( texts & gallery)
     const aboutInfoResponse = await excuteQuery({
       query: `SELECT * FROM js_about_info LIMIT 1`,
@@ -27,7 +27,7 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
         navItems,
         galleryImages: JSON.stringify(galleryImages),
         locales: context.locales,
-        locale: context.locale,
+        locale,
         defaultLocale: context.defaultLocale,
         labels,
       },

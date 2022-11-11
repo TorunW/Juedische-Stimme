@@ -12,9 +12,7 @@ const languagesSlice = createSlice({
   reducers: {
     setLanguages: (state, action) => {
       state.locales = action.payload.locales;
-      state.locale = window.location.hostname.endsWith("com")
-        ? "en_US"
-        : "de_DE";
+      state.locale = action.payload.locale;
       state.defaultLocale = action.payload.defaultLocale;
     },
   },
