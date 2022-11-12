@@ -18,10 +18,11 @@ const GalleryImage = ({ image }) => {
   return (
     <>
       <div className={styles.imageWrapper}>
-        <img
+        <Image
           src={generateFileServerSrc(image.image_src)}
           alt={image.image_title}
           title={image.image_title}
+          objectFit="cover"
           height="160"
           width="150"
         />

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { generateImageUrl } from "helpers/imageUrlHelper";
 import HeaderGalleryControllers from "./HeaderGalleryControllers";
 import { usePrevious } from "helpers/usePreviousHelper";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
 
 const Header = () => {
   const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
@@ -53,7 +54,7 @@ const Header = () => {
                   >
                     <Image
                       layout="fill"
-                      src={generateImageUrl(imgSrc)}
+                      src={generateFileServerSrc(imgSrc)}
                     />
                   </div>
                 </React.Fragment>
