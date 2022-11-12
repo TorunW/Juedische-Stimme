@@ -417,7 +417,9 @@ const MembershipForm = () => {
             marginTop={2}
           >
             <div className="button blackBg submitBtn">
-              <button type="submit">Senden</button>
+              <button type="submit">
+                {getLabel(labels, locale, "send", "Senden")}
+              </button>
             </div>
           </Grid>
         </Grid>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./Styles.module.css";
 import { useSelector } from "store/hooks";
 import { getLabel } from "helpers/getLabelHelper";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
 
 const GalleryImage = ({ image }) => {
   const { locale } = useSelector((state) => state.languages);
@@ -17,11 +18,10 @@ const GalleryImage = ({ image }) => {
   return (
     <>
       <div className={styles.imageWrapper}>
-        <Image
-          src={generateImageUrl(image.image_src)}
+        <img
+          src={generateFileServerSrc(image.image_src)}
           alt={image.image_title}
           title={image.image_title}
-          objectFit="cover"
           height="160"
           width="150"
         />
