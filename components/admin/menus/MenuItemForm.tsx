@@ -1,26 +1,25 @@
-import React, { useState, useEffect, FC } from "react";
-import { useFormik } from "formik";
-import axios from "axios";
-import Image from "next/image";
-import { generateImageUrl } from "helpers/imageUrlHelper";
-import menuTypes from "lib/menuTypes.json";
-import { uuidv4 } from "@firebase/util";
-import { generateFileName } from "helpers/generateFileName";
-import * as Yup from "yup";
-import FormHelp from "../../atoms/FormHelp";
 import FormError from "@/components/atoms/FormError";
+import { uuidv4 } from "@firebase/util";
+import axios from "axios";
+import { useFormik } from "formik";
+import { generateFileName } from "helpers/generateFileName";
+import menuTypes from "lib/menuTypes.json";
+import Image from "next/image";
+import { FC, useState } from "react";
+import * as Yup from "yup";
 
 import {
   Box,
   Button,
   Card,
-  InputLabel,
-  Select,
-  MenuItem,
   FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
 
 interface MenuItemProps {
   menuItem?: any;
@@ -348,7 +347,7 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
                       layout="fixed"
                       width={320}
                       height={180}
-                      src={generateImageUrl(menuItem.term_image)}
+                      src={generateFileServerSrc(menuItem.term_image)}
                     />
                   </Grid>
                 ) : (

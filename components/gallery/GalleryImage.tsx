@@ -1,10 +1,9 @@
-import React from "react";
-import { generateImageUrl } from "helpers/imageUrlHelper";
-import Image from "next/image";
-import styles from "./Styles.module.css";
-import { useSelector } from "store/hooks";
-import { getLabel } from "helpers/getLabelHelper";
 import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import { getLabel } from "helpers/getLabelHelper";
+import Image from "next/image";
+import React from "react";
+import { useSelector } from "store/hooks";
+import styles from "./Styles.module.css";
 
 const GalleryImage = ({ image }) => {
   const { locale } = useSelector((state) => state.languages);

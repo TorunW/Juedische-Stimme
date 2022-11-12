@@ -1,11 +1,10 @@
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import { usePrevious } from "helpers/usePreviousHelper";
+import Image from "next/image";
 import React, { useState } from "react";
 import { useSelector } from "store/hooks";
-import styles from "./Styles.module.css";
-import Image from "next/image";
-import { generateImageUrl } from "helpers/imageUrlHelper";
 import HeaderGalleryControllers from "./HeaderGalleryControllers";
-import { usePrevious } from "helpers/usePreviousHelper";
-import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import styles from "./Styles.module.css";
 
 const Header = () => {
   const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);

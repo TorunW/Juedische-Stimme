@@ -1,21 +1,21 @@
-import React from 'react';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import Link from 'next/link';
-import Image from 'next/image';
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import {
-  TableRow,
-  TableCell,
-  IconButton,
   Button,
   Dialog,
+  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
-  DialogActions,
+  IconButton,
+  TableCell,
+  TableRow,
   Typography,
-} from '@mui/material';
-import { generateImageUrl } from 'helpers/imageUrlHelper';
+} from "@mui/material";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
 
 function CategoryItem({ category, deleteCategory }) {
   const [open, setOpen] = React.useState(false);
@@ -28,26 +28,30 @@ function CategoryItem({ category, deleteCategory }) {
     setOpen(false);
   };
   return (
-    <TableRow hover tabIndex={-1} key={category.term_id}>
+    <TableRow
+      hover
+      tabIndex={-1}
+      key={category.term_id}
+    >
       <TableCell>
         <Typography>{category.name}</Typography>
       </TableCell>
-      <TableCell align='right'>{category.count}</TableCell>
-      <TableCell align='right'>
+      <TableCell align="right">{category.count}</TableCell>
+      <TableCell align="right">
         <Image
-          src={generateImageUrl(category.category_image)}
+          src={generateFileServerSrc(category.category_image)}
           width={100}
           height={100}
         />
       </TableCell>
-      <TableCell align='right'>
+      <TableCell align="right">
         <Link href={`/admin/categories/${category.term_id}`}>
           <IconButton>
             <EditIcon />
           </IconButton>
         </Link>
       </TableCell>
-      <TableCell align='right'>
+      <TableCell align="right">
         {category.term_id !== 66 &&
         category.term_id !== 2 &&
         category.term_id !== 1 ? (
@@ -55,7 +59,10 @@ function CategoryItem({ category, deleteCategory }) {
             <IconButton onClick={handleClickOpen}>
               <DeleteIcon />
             </IconButton>
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog
+              open={open}
+              onClose={handleClose}
+            >
               <DialogTitle>{`Delete ${category.name}?`}</DialogTitle>
               <DialogContent>
                 <DialogContentText>
@@ -64,13 +71,16 @@ function CategoryItem({ category, deleteCategory }) {
               </DialogContent>
               <DialogActions>
                 <Button
-                  variant='outlined'
+                  variant="outlined"
                   onClick={() => deleteCategory(category)}
                   autoFocus
                 >
                   Delete
                 </Button>
-                <Button variant='outlined' onClick={handleClose}>
+                <Button
+                  variant="outlined"
+                  onClick={handleClose}
+                >
                   Cancel
                 </Button>
               </DialogActions>

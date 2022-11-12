@@ -1,14 +1,13 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import { generateImageUrl } from "helpers/imageUrlHelper";
-import { useSelector } from "store/hooks";
 import formateDate from "helpers/formateDate";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
 import { GeneratePostUrl } from "helpers/generatePostUrl";
-import styles from "./Styles.module.css";
+import { getPostContentFields } from "helpers/getPostContentFields";
 import trimStringToLastSpace from "helpers/trimStringToLastSpace";
 import Image from "next/image";
 import Link from "next/link";
-import { getPostContentFields } from "helpers/getPostContentFields";
-import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import React from "react";
+import { useSelector } from "store/hooks";
+import styles from "./Styles.module.css";
 
 type Props = {
   post: any;
@@ -36,7 +35,7 @@ const Post: React.FC<Props> = ({ post, phrase, imageDimensions }) => {
     >
       {post.post_image !== null ? (
         <div className={styles.imageWrapper}>
-          <img
+          <Image
             src={generateFileServerSrc(post.post_image)}
             alt={post.post_title}
             title={post.post_title}

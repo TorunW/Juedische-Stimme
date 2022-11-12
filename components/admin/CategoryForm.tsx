@@ -1,14 +1,14 @@
-import React, { useState, FC } from "react";
-import { useFormik } from "formik";
-import axios from "axios";
-import * as Yup from "yup";
-import Image from "next/image";
-import { generateImageUrl } from "helpers/imageUrlHelper";
-import { generateFileName } from "helpers/generateFileName";
 import { uuidv4 } from "@firebase/util";
-import FormError from "../atoms/FormError";
-import { Button, Card, FormControl, Grid, TextField, Box } from "@mui/material";
+import { Box, Button, Card, FormControl, Grid, TextField } from "@mui/material";
+import axios from "axios";
+import { useFormik } from "formik";
+import { generateFileName } from "helpers/generateFileName";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import Image from "next/image";
+import { FC, useState } from "react";
 import { Category } from "types/Category.type";
+import * as Yup from "yup";
+import FormError from "../atoms/FormError";
 
 interface TypeProps {
   category?: Category;
@@ -251,7 +251,7 @@ const CategoryForm: FC<TypeProps> = ({ category }) => {
                     layout="fixed"
                     width={320}
                     height={180}
-                    src={generateImageUrl(category.category_image)}
+                    src={generateFileServerSrc(category.category_image)}
                   />
                 </Grid>
               ) : (

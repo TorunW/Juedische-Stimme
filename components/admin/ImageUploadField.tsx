@@ -1,10 +1,9 @@
-import React, { ReactElement, FC, ChangeEventHandler } from "react";
-import { Button, TextField, Grid } from "@mui/material";
-import Image from "next/image";
-import axios from "axios";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { generateImageUrl } from "helpers/imageUrlHelper";
+import { Button, Grid, TextField } from "@mui/material";
+import axios from "axios";
 import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import Image from "next/image";
+import { FC, ReactElement } from "react";
 
 type Props = {
   previewImage: string;

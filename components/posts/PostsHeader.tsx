@@ -1,9 +1,8 @@
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
 import Image from "next/image";
-import React from "react";
-import styles from "./Styles.module.css";
 import postHeader from "public/post-header.jpg";
 import { useSelector } from "store/hooks";
-import { generateImageUrl } from "helpers/imageUrlHelper";
+import styles from "./Styles.module.css";
 
 const PostsHeader = () => {
   const { category } = useSelector((state) => state.categories);
@@ -31,7 +30,7 @@ const PostsHeader = () => {
             category.category_image &&
             category.category_image !== null &&
             category.category_image.indexOf("null") === -1
-              ? generateImageUrl(category.category_image)
+              ? generateFileServerSrc(category.category_image)
               : postHeader
           }
           className={styles.headerImage}

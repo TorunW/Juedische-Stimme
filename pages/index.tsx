@@ -4,30 +4,30 @@ import type { LayoutPage } from "types/LayoutPage.type";
 import { LayoutPageProps } from "types/LayoutPageProps.type";
 
 import excuteQuery from "lib/db";
-import { selectPosts } from "lib/queries/posts";
 import { selectGalleryById } from "lib/queries";
+import { selectPosts } from "lib/queries/posts";
 
-import { useDispatch, useSelector } from "store/hooks";
-import { setPosts, setNewsletter } from "store/posts/postsSlice";
-import { setMenuItems } from "store/nav/navSlice";
-import { setLanguages } from "store/languages/languagesSlice";
 import { setAboutInfo } from "store/aboutinfo/aboutinfoSlice";
+import { useDispatch, useSelector } from "store/hooks";
+import { setLanguages } from "store/languages/languagesSlice";
+import { setMenuItems } from "store/nav/navSlice";
+import { setNewsletter, setPosts } from "store/posts/postsSlice";
 
-import Posts from "@/components/posts/Posts";
-import FacebookFeed from "@/components/facebook/FacebookFeed";
-import FacebookEvents from "@/components/facebook/FacebookEvents";
-import Header from "@/components/header/Header";
 import AboutInfo from "@/components/about/AboutInfo";
+import FacebookEvents from "@/components/facebook/FacebookEvents";
+import FacebookFeed from "@/components/facebook/FacebookFeed";
+import Header from "@/components/header/Header";
+import Posts from "@/components/posts/Posts";
 
 import CallToAction from "@/components/callToAction/CallToAction";
 
-import { getPlaiceholder } from "plaiceholder";
 import axios from "axios";
-import { generateImageUrl } from "helpers/imageUrlHelper";
-import { setHeaderGallery } from "store/galleries/galleriesSlice";
 import { PageProps } from "page/page";
 import { createServerSideProps } from "page/server-side-props";
+import { getPlaiceholder } from "plaiceholder";
+import { setHeaderGallery } from "store/galleries/galleriesSlice";
 
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
 import Head from "next/head";
 import { setLabels } from "store/labels/labelsSlice";
 
@@ -81,9 +81,10 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
 
     const headerGallery = JSON.stringify(headerGalleryResponse);
 
-    const headerImageUri = `http://${
-      context.req.headers.host
-    }/${generateImageUrl(headerGalleryResponse[0].imageSrcs.split(",")[0])}`;
+    const headerImageUri = generateFileServerSrc(
+      headerGalleryResponse[0].imageSrcs.split(",")[0]
+    );
+
     let { img } = await getPlaiceholder(headerImageUri, {
       size: 32,
     });

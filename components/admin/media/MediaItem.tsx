@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-import axios from "axios";
-import Image from "next/image";
 import {
   Box,
   Button,
@@ -10,11 +7,13 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
+import axios from "axios";
+import Image from "next/image";
+import { useState } from "react";
 
-import { generateImageUrl } from "helpers/imageUrlHelper";
-
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
 
 export const MediaItem = ({ mediaItem }) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -63,7 +62,7 @@ export const MediaItem = ({ mediaItem }) => {
         <Image
           layout="fill"
           objectFit="cover"
-          src={generateImageUrl(mediaItem.meta_value)}
+          src={generateFileServerSrc(mediaItem.meta_value)}
           onClick={() => setImageDialogOpen(true)}
         />
 
@@ -75,7 +74,7 @@ export const MediaItem = ({ mediaItem }) => {
             <Box sx={{ width: "600px", height: "600px", display: "flex" }}>
               <img
                 style={{ maxWidth: "100%", maxHeight: "100", margin: "0 auto" }}
-                src={generateImageUrl(mediaItem.meta_value)}
+                src={generateFileServerSrc(mediaItem.meta_value)}
               />
             </Box>
           </DialogContent>
