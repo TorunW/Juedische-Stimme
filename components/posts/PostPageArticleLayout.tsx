@@ -37,10 +37,12 @@ const PostPageArticleLayout = ({ post, locale }) => {
           <div className={styles.contentWrapper}>
             <h2>{postTitle}</h2>
             <div className={styles.imageWrapper}>
-              <img
+              <Image
                 src={generateFileServerSrc(post.post_image)}
                 alt={post.post_title}
                 title={post.post_title}
+                objectFit="cover"
+                layout="fill"
               />
             </div>
           </div>
@@ -72,11 +74,13 @@ const PostPageArticleLayout = ({ post, locale }) => {
           {post.post_image_2 !== null ? (
             <div className={styles.middleWrapper}>
               <div className={styles.image}>
-                <img
+                <Image
                   src={generateFileServerSrc(post.post_image_2)}
                   alt={post.post_title}
                   title={post.post_title}
                   onErrorCapture={onSecondImageErrorCapture}
+                  objectFit="contain"
+                  layout="fill"
                 />
               </div>
               <div
