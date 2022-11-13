@@ -66,6 +66,9 @@ a {
   color: dodgerblue;
   text-decoration: underline;
 }
+div > p:empty {
+  height: 20px;
+}
 #main-layout ::-moz-selection {
   /* Code for Firefox */
   color: white;
@@ -202,8 +205,6 @@ a {
     font-weight: 900;
     margin-bottom: 32px;
     text-align: center;
-    word-break:break-word;
-
   }
   #main-layout h3 {
     font-size: 1.2rem;
