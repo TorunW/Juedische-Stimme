@@ -14,10 +14,14 @@ import {
   Switch,
   Typography,
   Chip,
+  ButtonGroup,
 } from "@mui/material";
 import FormHelp from "../atoms/FormHelp";
 import { Stack } from "@mui/system";
 import AspectRatioIcon from "@mui/icons-material/AspectRatio";
+
+import HtmlIcon from "@mui/icons-material/Html";
+import { type } from "@testing-library/user-event/dist/types/utility";
 
 export enum EditorHeight {
   small = "250px",
@@ -28,26 +32,29 @@ export enum EditorHeight {
 interface TipTapEditorProps {
   value: string;
   onChange: Function;
+  setCharLength?: Function;
+  editorId?: string;
   itemId?: string | number;
   itemType?: string;
   showMenu?: boolean;
-  height?: EditorHeight;
-  title?: string;
   help?: string;
-  min?: number;
   error?: string | ReactElement;
+  height?: EditorHeight | number;
+  title?: string;
+  min?: number;
 }
 
 const TipTapEditor = (props: TipTapEditorProps) => {
-  const { value, onChange, showMenu, height, title, itemId, itemType } = props;
-  const [isResizable, setIsResizable] = useState(false);
-
-  const [editorId, setEditorId] = useState("");
-
-  const [charLength, setCharLength] = useState(0);
-  const [adjustedHeight, setAdjustedHeight] = useState<EditorHeight | number>(
-    height
-  );
+  const {
+    value,
+    editorId,
+    setCharLength,
+    onChange,
+    showMenu,
+    height,
+    itemId,
+    itemType,
+  } = props;
 
   const editor = useEditor({
     extensions: [
@@ -70,44 +77,9 @@ const TipTapEditor = (props: TipTapEditorProps) => {
     },
   });
 
-  function handleResize() {
-    setIsResizable(true);
-  }
-
-  function handleMouseMove(event) {
-    if (isResizable === true) {
-      const editorTopPosition = document
-        .getElementById(editorId)
-        ?.getBoundingClientRect().top;
-      const mousePosition = event.clientY;
-      if (!!editorTopPosition) {
-        const newEditorHeight = mousePosition - editorTopPosition + 40;
-        setAdjustedHeight(newEditorHeight);
-      }
-    }
-  }
-
-  function handleMouseUp() {
-    setIsResizable(false);
-  }
-
   useEffect(() => {
     if (editor) setCharLength(editor.getText().length);
   }, [editor]);
-
-  useEffect(() => {
-    setEditorId(`editor-${Date.now()}`);
-  }, []);
-
-  useEffect(() => {
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
-
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [isResizable]);
 
   return (
     <>
@@ -116,7 +88,7 @@ const TipTapEditor = (props: TipTapEditorProps) => {
           border: 2,
           borderRadius: 1,
           borderColor: "black",
-          height: adjustedHeight ?? "auto",
+          height: height ?? "auto",
         }}
       >
         {showMenu !== false && (
@@ -149,36 +121,68 @@ const TipTapEditor = (props: TipTapEditorProps) => {
           <EditorContent editor={editor} />
         </Box>
       </Box>
-      <Stack
-        justifyContent="space-between"
-        flexDirection="row"
-      >
-        <Chip
-          sx={{
-            fontSize: "16px",
-            marginTop: "8px",
-            borderRadius: "4px",
-          }}
-          label={charLength}
-        ></Chip>
-        <AspectRatioIcon
-          onMouseDown={handleResize}
-          sx={{
-            cursor: "pointer",
-            marginY: 1,
-          }}
-        />
-      </Stack>
     </>
   );
 };
 
 const TipTapEditorWrapper = (props: TipTapEditorProps) => {
+  const { value, onChange, min, height, title, itemId, itemType } = props;
+
   const [showEditor, setShowEditor] = useState(true);
+  const [isResizable, setIsResizable] = useState(false);
+
+  const [charLength, setCharLength] = useState(0);
+  const [adjustedHeight, setAdjustedHeight] = useState<EditorHeight | number>(
+    height
+  );
+
+  const [editorId, setEditorId] = useState("");
+
+  function handleMouseMove(event) {
+    if (isResizable === true) {
+      const editorTopPosition = document
+        .getElementById(editorId)
+        ?.getBoundingClientRect().top;
+      const mousePosition = event.clientY;
+      if (!!editorTopPosition) {
+        const newEditorHeight = mousePosition - editorTopPosition + 40;
+        setAdjustedHeight(newEditorHeight);
+      }
+    }
+  }
+
+  function handleMouseUp() {
+    setIsResizable(false);
+  }
+
+  useEffect(() => {
+    setEditorId(`editor-${Date.now()}`);
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [isResizable]);
+
+  function handleResize() {
+    setIsResizable(true);
+  }
 
   let editorDisplay: ReactElement;
   if (showEditor === true) {
-    editorDisplay = <TipTapEditor {...props} />;
+    editorDisplay = (
+      <TipTapEditor
+        {...props}
+        setCharLength={setCharLength}
+        editorId={editorId}
+        height={adjustedHeight}
+      />
+    );
   } else {
     editorDisplay = (
       <TextField
@@ -194,34 +198,54 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
       />
     );
   }
+
+  const charDisplay = charLength + (!!min ? "/" + min : "");
+
   return (
-    <Stack sx={{ minWidth: "100%" }}>
+    <>
       <Stack
-        flexDirection="row"
-        paddingY={2}
-        justifyContent="space-between"
+        sx={{ minWidth: "100%" }}
+        marginBottom={1}
       >
-        <Box
+        <Stack
           flexDirection="row"
-          display="flex"
-          alignItems="center"
+          paddingY={2}
+          justifyContent="space-between"
         >
-          {props.title && <Typography variant="h6">{props.title}</Typography>}
-          {props.help && <FormHelp text={props.help}></FormHelp>}
-        </Box>
-        <FormControlLabel
-          control={
-            <Switch
-              defaultChecked
-              color="secondary"
-              onClick={() => setShowEditor(showEditor === true ? false : true)}
-            />
-          }
-          label={showEditor === true ? "Show html" : "Show editor"}
-        />
+          <Box
+            flexDirection="row"
+            display="flex"
+            alignItems="center"
+          >
+            {props.title && <Typography variant="h6">{props.title}</Typography>}
+            {props.help && <FormHelp text={props.help}></FormHelp>}
+          </Box>
+        </Stack>
+        {editorDisplay}
       </Stack>
-      {editorDisplay}
-    </Stack>
+      <Stack
+        sx={{ minWidth: "100%" }}
+        flexDirection="row-reverse"
+      >
+        <ButtonGroup variant="contained">
+          <Button sx={{ backgroundColor: "secondary.main", cursor: "default" }}>
+            {charDisplay}
+          </Button>
+          <Button
+            sx={{ backgroundColor: "secondary.main" }}
+            onClick={() => setShowEditor(!showEditor)}
+          >
+            <HtmlIcon />
+          </Button>
+          <Button
+            sx={{ backgroundColor: "secondary.main" }}
+            onMouseDown={handleResize}
+          >
+            <AspectRatioIcon />
+          </Button>
+        </ButtonGroup>
+      </Stack>
+    </>
   );
 };
 
