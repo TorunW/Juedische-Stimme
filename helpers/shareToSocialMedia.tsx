@@ -1,25 +1,26 @@
 import styles from "../components/posts/ListStyles.module.css";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { useSelector } from "store/hooks";
 
 interface ShareProps {
   description: string;
 }
 
 export default function Share({ description }: ShareProps) {
-  const [url, setUrl] = useState(
-    typeof window !== "undefined" ? window.location.href : ""
-  );
+  const router = useRouter();
+  const { locale } = useSelector((state) => state.languages);
+  const origin = `https://www.juedische-stimme.${
+    locale === "en_US" ? "com" : "de"
+  }`;
 
-  useEffect(() => {
-    setUrl(typeof window !== "undefined" ? window.location.href : "");
-  }, []);
-
+  const URL = `${origin}${router.asPath}`;
   return (
     <>
       <div className={styles.shareIconCollections}>
         {/* Facebook */}
         <a
-          href={`https://www.facebook.com/sharer/sharer.php?u=${url}`}
+          href={`https://www.facebook.com/sharer/sharer.php?u=${URL}`}
           target="_blank"
         >
           <svg
@@ -35,7 +36,7 @@ export default function Share({ description }: ShareProps) {
 
         {/* Twitter */}
         <a
-          href={`https://twitter.com/intent/tweet?url=${url}&text=${encodeURI(
+          href={`https://twitter.com/intent/tweet?url=${URL}&text=${encodeURI(
             description.replace(/<[^>]*>?/gm, "")
           )}`}
           target="_blank"
@@ -54,7 +55,7 @@ export default function Share({ description }: ShareProps) {
 
         {/* Email */}
         <a
-          href={`mailto:info@example.com?&subject=You+have+to+See+this!&cc=&bcc=&body=Check+out+this+site:${url}\n${encodeURI(
+          href={`mailto:info@example.com?&subject=You+have+to+See+this!&cc=&bcc=&body=Check+out+this+site:${URL}\n${encodeURI(
             description.replace(/<[^>]*>?/gm, "")
           )}`}
           target="_blank"

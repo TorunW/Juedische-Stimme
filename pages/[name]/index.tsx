@@ -64,7 +64,7 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
         <title>{page.post_title}</title>
         <meta
           property="og:title"
-          content={page.post_title}
+          content={`Juedische Stimme | ${page.post_title}`}
           key="title"
         />
         <meta
@@ -77,7 +77,9 @@ const ContentPage: LayoutPage = (props: LayoutPageProps) => {
           property="og:description"
           key="description"
           name="description"
-          content={page.post_content?.substring(0, 200)}
+          content={page.post_content
+            ?.substring(0, 200)
+            .replace(/<[^>]*>?/gm, "")}
         />
       </Head>
     );
