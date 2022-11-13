@@ -19,7 +19,6 @@ export const MediaItem = ({ mediaItem }) => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [imageDialogOpen, setImageDialogOpen] = useState(false);
 
-  console.log(mediaItem);
   function deleteMediaItem(mediaItem) {
     const deleteFileUrl = `http://${window.location.hostname}${
       window.location.port !== "80" ? ":" + window.location.port : ""
@@ -38,6 +37,7 @@ export const MediaItem = ({ mediaItem }) => {
       )
       .catch((errors) => {
         console.log(errors, " ERRORS");
+        window.location.reload();
         // react on errors.
       });
   }

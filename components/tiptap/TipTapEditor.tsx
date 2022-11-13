@@ -39,7 +39,7 @@ interface TipTapEditorProps {
 }
 
 const TipTapEditor = (props: TipTapEditorProps) => {
-  const { value, onChange, showMenu, height, title } = props;
+  const { value, onChange, showMenu, height, title, itemId, itemType } = props;
   const [isResizable, setIsResizable] = useState(false);
 
   const [editorId, setEditorId] = useState("");
@@ -119,7 +119,13 @@ const TipTapEditor = (props: TipTapEditorProps) => {
           height: adjustedHeight ?? "auto",
         }}
       >
-        {showMenu !== false && <MenuBar editor={editor} />}
+        {showMenu !== false && (
+          <MenuBar
+            editor={editor}
+            itemId={itemId}
+            itemType={itemType}
+          />
+        )}
         <Divider />
         <Box
           id={editorId}

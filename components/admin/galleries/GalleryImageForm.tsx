@@ -276,37 +276,39 @@ function GalleryImageForm({
                 width={"100%"}
                 height={"100%"}
               >
-                {formik.values.image_src === "" ? (
-                  <ImageIcon
-                    fontSize="large"
-                    sx={{ color: "gray" }}
-                  />
-                ) : (
-                  <>{imageDisplay}</>
-                )}
+                <>
+                  <a onClick={onUpladImageClick}>
+                    <Button
+                      variant="outlined"
+                      fullWidth
+                    >
+                      Upload Image
+                    </Button>
+                    <input
+                      accept={".*"}
+                      multiple={false}
+                      name={"theFiles"}
+                      onChange={onImageInputChangeHanlder}
+                      ref={fileInputRef}
+                      style={{ display: "none" }}
+                      type="file"
+                    />
+                  </a>
+                  {formik.values.image_src === "" ? (
+                    <ImageIcon
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  ) : (
+                    <>{imageDisplay}</>
+                  )}
+                </>
               </Box>
             </Grid>
             <Grid
               item
               xs={6}
             >
-              <a onClick={onUpladImageClick}>
-                <Button
-                  variant="outlined"
-                  fullWidth
-                >
-                  Upload Image
-                </Button>
-                <input
-                  accept={".*"}
-                  multiple={false}
-                  name={"theFiles"}
-                  onChange={onImageInputChangeHanlder}
-                  ref={fileInputRef}
-                  style={{ display: "none" }}
-                  type="file"
-                />
-              </a>
               {pathname === "/admin/about" ? (
                 <FormControl
                   fullWidth

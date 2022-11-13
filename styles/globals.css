@@ -69,6 +69,9 @@ a {
 div > p:empty {
   height: 20px;
 }
+.ProseMirror img {
+  max-width: 100% !important;
+}
 #main-layout ::-moz-selection {
   /* Code for Firefox */
   color: white;

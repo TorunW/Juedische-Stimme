@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatStrikethroughIcon from "@mui/icons-material/FormatStrikethrough";
@@ -18,10 +18,92 @@ import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
 import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
 import { Stack } from "@mui/system";
 
-const MenuBar = ({ editor }) => {
+import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
+
+import ImageIcon from "@mui/icons-material/Image";
+
+type Props = {
+  editor: any;
+  itemId?: number | string;
+  itemType?: string;
+};
+
+const MenuBar = ({ editor, itemId, itemType }: Props) => {
+  const fileInputRef = useRef(null);
+
   if (!editor) {
     return null;
   }
+
+  function onUpladImageClick() {
+    fileInputRef.current.click();
+  }
+
+  const onImageInputChangeHanlder = (event) => {
+    if (!event.target.files?.length) {
+      return;
+    }
+    const formData = new FormData();
+    const file = event.target.files[0];
+    let fileType = file.name.split(".")[file.name.split.length - 1];
+    let fileName =
+      file.name.split(`.${fileType}`)[0] + `__${uuidv4()}.${fileType}`;
+    console.log(fileName, " FILENAME ");
+    Array.from(event.target.files).forEach((file: string | Blob) => {
+      formData.append(event.target.name, file, fileName);
+    });
+    console.log(fileInputRef, " FILE INPUT RED");
+    fileInputRef.current.value = "";
+    uploadImage(formData, fileName);
+  };
+
+  const uploadImage = async (formData, fileName) => {
+    // UPLOAD THE FILE
+    const config = {
+      headers: { "content-type": "multipart/form-data" },
+      onUploadProgress: (event) => {
+        console.log(
+          `Current progress:`,
+          Math.round((event.loaded * 100) / event.total)
+        );
+      },
+    };
+
+    const response = await axios.post("/api/uploads", formData, config);
+
+    const today = new Date();
+    let month: string | number = today.getMonth();
+    month += 1;
+    month = month < 10 ? "0" + month : month;
+
+    const meta_value = `${today.getFullYear()}/${month}/${fileName}`;
+
+    // CREATE THE DB RECORD FOR wp_postmeta
+    axios({
+      method: "post",
+      url: `/api/media`,
+      data: {
+        post_id: itemId,
+        meta_key: "_wp_attached_file",
+        meta_value,
+      },
+    }).then(
+      (response) => {
+        console.log(response, "response on insert media item");
+        insertImage(`/wp-content/uploads/${meta_value}`);
+      },
+      (error) => {
+        console.log(error, "ERROR on insert media item");
+      }
+    );
+  };
+
+  const insertImage = (url) => {
+    if (url) {
+      editor.chain().focus().setImage({ src: url }).run();
+    }
+  };
 
   function setLinkHandler() {
     const href = prompt("Enter a Url to link:");
@@ -268,6 +350,28 @@ const MenuBar = ({ editor }) => {
         >
           <LinkOffIcon />
         </Link>
+        {itemType === "post" && (
+          <Link
+            title="upload image"
+            onClick={onUpladImageClick}
+            sx={{
+              color: "black",
+              cursor: "pointer",
+              "&:hover": { color: "#8179A6" },
+            }}
+          >
+            <ImageIcon />
+            <input
+              accept={".*"}
+              multiple={false}
+              name={"theFiles"}
+              onChange={onImageInputChangeHanlder}
+              ref={fileInputRef}
+              style={{ display: "none" }}
+              type="file"
+            />
+          </Link>
+        )}
       </Stack>
 
       <Stack
