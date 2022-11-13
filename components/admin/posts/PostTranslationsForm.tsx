@@ -86,6 +86,33 @@ const PostTranslationsForm = ({ post, language }) => {
             ""
           )}
         </FormControl>
+
+        {(post.post_layout === "article" ||
+          post.post_layout === "newsletter") && (
+          <FormControl
+            fullWidth
+            margin="normal"
+          >
+            <TipTapEditor
+              onChange={(val: string) =>
+                formik.setFieldValue("excerpt", val, true)
+              }
+              value={formik.values.excerpt}
+              itemType={"post"}
+              itemId={post.postId}
+              height={EditorHeight.small}
+              title={`Post Summary ( English )`}
+              error={
+                errors && errors.excerpt ? (
+                  <FormError message={errors.excerpt} />
+                ) : (
+                  ""
+                )
+              }
+            />
+          </FormControl>
+        )}
+
         <TipTapEditor
           onChange={(val) => formik.setFieldValue("content", val, true)}
           value={formik.values.content}
@@ -101,28 +128,6 @@ const PostTranslationsForm = ({ post, language }) => {
             {(post.post_layout === "article" ||
               post.post_layout === "newsletter") && (
               <>
-                <FormControl
-                  fullWidth
-                  margin="normal"
-                >
-                  <TipTapEditor
-                    onChange={(val: string) =>
-                      formik.setFieldValue("excerpt", val, true)
-                    }
-                    value={formik.values.excerpt}
-                    itemType={"post"}
-                    itemId={post.postId}
-                    height={EditorHeight.small}
-                    title={`Post Summary ( English )`}
-                    error={
-                      errors && errors.excerpt ? (
-                        <FormError message={errors.excerpt} />
-                      ) : (
-                        ""
-                      )
-                    }
-                  />
-                </FormControl>
                 <FormControl
                   fullWidth
                   margin="normal"

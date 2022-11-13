@@ -36,15 +36,17 @@ const PostPageArticleLayout = ({ post, locale }) => {
         <div className={styles.header}>
           <div className={styles.contentWrapper}>
             <h2>{postTitle}</h2>
-            <div className={styles.imageWrapper}>
-              <Image
-                src={generateFileServerSrc(post.post_image)}
-                alt={post.post_title}
-                title={post.post_title}
-                objectFit="cover"
-                layout="fill"
-              />
-            </div>
+            {!!post.post_image && (
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={generateFileServerSrc(post.post_image)}
+                  alt={post.post_title}
+                  title={post.post_title}
+                  objectFit="cover"
+                  layout="fill"
+                />
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.linksContainer}>
