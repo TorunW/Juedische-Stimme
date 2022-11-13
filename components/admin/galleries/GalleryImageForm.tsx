@@ -1,12 +1,14 @@
-import React, { useRef } from "react";
-import { useFormik } from "formik";
-import axios from "axios";
-import { generateFileName } from "helpers/generateFileName";
+import ImageIcon from "@mui/icons-material/Image";
 import { Box, Button, FormControl, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import ImageIcon from "@mui/icons-material/Image";
+import axios from "axios";
+import { useFormik } from "formik";
+import { generateFileName } from "helpers/generateFileName";
+import { useRef } from "react";
 
 import TiptapEditor, { EditorHeight } from "components/tiptap/TipTapEditor";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import Image from "next/image";
 
 interface GalleryImageFormProps {
   galleryId: number | string;
@@ -96,15 +98,21 @@ function GalleryImageForm({
 
   let pathname = typeof window !== "undefined" ? window.location.pathname : "";
 
-  let imageDisplay;
-  if (formik.values.image_src) {
-    imageDisplay = (
-      <img
-        style={{ width: 250 }}
-        src={`/wp-content/uploads/${formik.values.image_src}`}
+  const imageDisplay = formik.values.image_src && (
+    <Box
+      sx={{
+        width: "250px",
+        height: "250px",
+        position: "relative",
+      }}
+    >
+      <Image
+        src={generateFileServerSrc(formik.values.image_src)}
+        objectFit="contain"
+        layout="fill"
       />
-    );
-  }
+    </Box>
+  );
 
   let galleryFormDisplay;
   if (galleryImage !== undefined) {
@@ -154,11 +162,12 @@ function GalleryImageForm({
               <Grid
                 container
                 xs={12}
+                spacing={2}
               >
                 {galleryType === "list" && (
                   <Grid
                     item
-                    xs={6}
+                    xs={8}
                   >
                     <TextField
                       id="image_title"
@@ -173,7 +182,7 @@ function GalleryImageForm({
                 )}
                 <Grid
                   item
-                  xs={galleryType === "list" ? 6 : 12}
+                  xs={galleryType === "list" ? 4 : 12}
                 >
                   <TextField
                     id="image_order"
@@ -190,7 +199,7 @@ function GalleryImageForm({
                   />
                 </Grid>
               </Grid>
-              {galleryType === "list" ? (
+              {galleryType === "list" && (
                 <Grid
                   item
                   xs={12}
@@ -206,8 +215,6 @@ function GalleryImageForm({
                     title="Board member about"
                   />
                 </Grid>
-              ) : (
-                ""
               )}
             </Grid>
             <Grid

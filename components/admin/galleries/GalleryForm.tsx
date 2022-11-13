@@ -10,6 +10,16 @@ interface GalleryFromProps {
   gallery?: Gallery;
 }
 
+function sortGalleryByOrder(a, b) {
+  if (parseInt(a.image_order) < parseInt(b.image_order)) {
+    return -1;
+  }
+  if (parseInt(a.image_order) > parseInt(b.image_order)) {
+    return 1;
+  }
+  return 0;
+}
+
 function GalleryForm({ gallery }: GalleryFromProps) {
   const [selectedImages, setSelectedImages] = useState<Image[]>([]);
 
@@ -26,6 +36,8 @@ function GalleryForm({ gallery }: GalleryFromProps) {
     }
     setSelectedImages(newSelectedImages);
   }
+
+  console.log(gallery.images);
 
   function deleteSelectedImages() {
     let deleteRequests = [];
@@ -82,20 +94,22 @@ function GalleryForm({ gallery }: GalleryFromProps) {
         }}
       >
         {gallery.images
-          ? gallery.images.map((galleryImage: Image) => (
-              <GalleryImageForm
-                key={galleryImage.image_id}
-                galleryImage={galleryImage}
-                galleryId={gallery.gallery_id}
-                galleryType={gallery.gallery_type}
-                handleSelectImage={() => handleSelectImage(galleryImage)}
-                isSelected={
-                  selectedImages.findIndex(
-                    (sImg) => sImg.image_src === galleryImage.image_src
-                  ) > -1
-                }
-              />
-            ))
+          ? gallery.images
+              .sort(sortGalleryByOrder)
+              .map((galleryImage: Image) => (
+                <GalleryImageForm
+                  key={galleryImage.image_id}
+                  galleryImage={galleryImage}
+                  galleryId={gallery.gallery_id}
+                  galleryType={gallery.gallery_type}
+                  handleSelectImage={() => handleSelectImage(galleryImage)}
+                  isSelected={
+                    selectedImages.findIndex(
+                      (sImg) => sImg.image_src === galleryImage.image_src
+                    ) > -1
+                  }
+                />
+              ))
           : ""}
         <Box
           sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}

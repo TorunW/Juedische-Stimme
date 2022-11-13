@@ -270,11 +270,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   }}
                 >
                   <>
-                    <Grid
-                      container
-                      item
-                      xs={12}
-                    >
+                    <Grid container>
                       <Grid
                         container
                         md={post ? 9 : 12}
