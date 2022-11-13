@@ -86,7 +86,7 @@ const TipTapEditor = (props: TipTapEditorProps) => {
         height: height ?? "auto",
       }}
     >
-      {!!showMenu && (
+      {showMenu !== false && (
         <MenuBar
           editor={editor}
           itemId={itemId}
