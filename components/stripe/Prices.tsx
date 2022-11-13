@@ -42,7 +42,7 @@ function Prices({
           " " +
           (selectedPrice === price.id ? styles.boxSelected : "")
         }
-        title="500€"
+        title={`${price?.unit_amount_decimal?.slice(0, -2)}€`}
       >
         <Field
           className={styles.radio}
