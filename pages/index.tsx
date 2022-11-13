@@ -75,23 +75,11 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
     });
     const gallery = JSON.stringify(galleryResponse);
 
+    // HEADER
     const headerGalleryResponse = await excuteQuery({
       query: selectGalleryById(6),
     });
-
     const headerGallery = JSON.stringify(headerGalleryResponse);
-
-    const headerImageUri = generateFileServerSrc(
-      headerGalleryResponse[0].imageSrcs.split(",")[0]
-    );
-
-    let { img } = await getPlaiceholder(headerImageUri, {
-      size: 32,
-    });
-    const headerImage = JSON.stringify({
-      uri: headerImageUri,
-      img,
-    });
 
     return {
       props: {
@@ -103,7 +91,6 @@ export const getServerSideProps = createServerSideProps<HomePageProps>(
         locale,
         defaultLocale: context.defaultLocale,
         headerGallery,
-        headerImage,
         labels,
       },
     };
@@ -115,21 +102,16 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
 
   const dispatch = useDispatch();
   const { posts, newsletter } = useSelector((state) => state.posts);
-  const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
+  const { aboutInfo } = useSelector((state) => state.aboutinfo);
 
-  const { locale, locales, defaultLocale } = useSelector(
-    (state) => state.languages
-  );
   useEffect(() => {
     initHomePage();
   }, []);
 
   useEffect(() => {
     // if (headerImage.isLoaded === true) {
-    getFbToken();
-    getNewsletterPosts();
     // }
-  }, [headerImage.isLoaded]);
+  }, []);
 
   function initHomePage() {
     dispatch(setMenuItems(JSON.parse(props.navItems)));
@@ -139,7 +121,6 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       setAboutInfo({
         aboutInfo: JSON.parse(props.aboutInfo)[0],
         gallery: JSON.parse(props.gallery)[0],
-        headerImage: JSON.parse(props.headerImage),
       })
     );
     dispatch(
@@ -150,6 +131,8 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
       })
     );
     dispatch(setLabels(JSON.parse(props.labels)));
+    getFbToken();
+    getNewsletterPosts();
   }
 
   async function getFbToken() {

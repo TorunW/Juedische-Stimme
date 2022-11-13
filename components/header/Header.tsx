@@ -7,7 +7,7 @@ import HeaderGalleryControllers from "./HeaderGalleryControllers";
 import styles from "./Styles.module.css";
 
 const Header = () => {
-  const { aboutInfo, headerImage } = useSelector((state) => state.aboutinfo);
+  const { aboutInfo } = useSelector((state) => state.aboutinfo);
   const { locale, defaultLocale } = useSelector((state) => state.languages);
 
   const headerSlogan =
@@ -16,7 +16,6 @@ const Header = () => {
       : aboutInfo?.header_slogan;
 
   const { headerGallery } = useSelector((state) => state.galleries);
-  const { img } = headerImage;
   const [slideIndex, setSlideIndex] = useState(0);
   const prevSlideIndex = usePrevious(slideIndex);
 
@@ -36,7 +35,7 @@ const Header = () => {
         isSlideShow === true ? styles.headerSlideShow : styles.headerStill
       }
     >
-      {headerGallery !== null && img !== null && (
+      {headerGallery !== null && (
         <>
           <div className={styles.sliderWrapper}>
             {imageSrcs.map((imgSrc, index) => {
