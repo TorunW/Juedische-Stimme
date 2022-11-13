@@ -62,12 +62,14 @@ const PostPageArticleLayout = ({ post, locale }) => {
         </div>
         <div className={styles.contentContainer}>
           <div className={styles.topWrapper}>
-            <div
-              className={styles.topExcerpt + " " + styles.excerpt}
-              dangerouslySetInnerHTML={{
-                __html: postExcerpt.replace(/(?:\r\n|\r|\n)/g, "<br>"),
-              }}
-            ></div>
+            {!!postExcerpt && (
+              <div
+                className={styles.topExcerpt + " " + styles.excerpt}
+                dangerouslySetInnerHTML={{
+                  __html: postExcerpt.replace(/(?:\r\n|\r|\n)/g, "<br>"),
+                }}
+              ></div>
+            )}
             <div
               className={styles.topContent + " " + styles.content}
               dangerouslySetInnerHTML={{

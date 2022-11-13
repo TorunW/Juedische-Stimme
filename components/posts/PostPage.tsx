@@ -25,7 +25,7 @@ function Post({ post }) {
     const { postExcerpt, postContent } = getPostContentFields(post, locale);
 
     const postLayout = getPostLaoyut(post);
-
+    console.log(postLayout);
     let postLayoutDisplay: ReactElement;
     if (postLayout === "member_form") {
       postLayoutDisplay = (
@@ -55,16 +55,16 @@ function Post({ post }) {
           locale={locale}
         />
       );
-    } else if (isEmpty(postContent) || isEmpty(postExcerpt)) {
+    } else if (postLayout === "article") {
       postLayoutDisplay = (
-        <PostPageLegacyLayout
+        <PostPageArticleLayout
           post={post}
           locale={locale}
         />
       );
     } else {
       postLayoutDisplay = (
-        <PostPageArticleLayout
+        <PostPageLegacyLayout
           post={post}
           locale={locale}
         />
