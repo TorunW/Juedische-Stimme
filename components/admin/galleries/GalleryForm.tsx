@@ -5,19 +5,10 @@ import { Image } from "types/Image.type";
 import { Gallery } from "types/Gallery.type";
 import { Button, Card, FormControl, Box } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import { sortGalleryByOrder } from "helpers/sortGalleryByOrder";
 
 interface GalleryFromProps {
   gallery?: Gallery;
-}
-
-function sortGalleryByOrder(a, b) {
-  if (parseInt(a.image_order) < parseInt(b.image_order)) {
-    return -1;
-  }
-  if (parseInt(a.image_order) > parseInt(b.image_order)) {
-    return 1;
-  }
-  return 0;
 }
 
 function GalleryForm({ gallery }: GalleryFromProps) {
