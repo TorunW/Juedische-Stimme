@@ -30,8 +30,6 @@ const PostPageArticleLayout = ({ post, locale }) => {
     ));
   }
 
-  console.log(postExcerpt2 == "null");
-
   return (
     <React.Fragment>
       <div className={styles.articleLayout}>
