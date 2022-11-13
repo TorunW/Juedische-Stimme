@@ -36,7 +36,7 @@ export default function Share({ description }: ShareProps) {
         {/* Twitter */}
         <a
           href={`https://twitter.com/intent/tweet?url=${url}&text=${encodeURI(
-            description
+            description.replace(/<[^>]*>?/gm, "")
           )}`}
           target="_blank"
         >
@@ -55,7 +55,7 @@ export default function Share({ description }: ShareProps) {
         {/* Email */}
         <a
           href={`mailto:info@example.com?&subject=You+have+to+See+this!&cc=&bcc=&body=Check+out+this+site:${url}\n${encodeURI(
-            description
+            description.replace(/<[^>]*>?/gm, "")
           )}`}
           target="_blank"
         >

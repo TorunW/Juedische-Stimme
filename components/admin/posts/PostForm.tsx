@@ -39,8 +39,6 @@ interface PostFormProps {
 const PostForm = ({ post, nextPostId }: PostFormProps) => {
   const pathname = typeof window !== undefined ? window.location.pathname : "";
 
-  console.log(pathname);
-
   const tabs =
     pathname.indexOf("create") > -1 ? ["german"] : ["german", "english"];
 
