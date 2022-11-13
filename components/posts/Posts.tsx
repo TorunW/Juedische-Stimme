@@ -1,15 +1,14 @@
-import React, { ReactElement, useEffect, useState } from "react";
-import Link from "next/link";
-import Post from "./Post";
 import Pagination from "components/pagination/Pagination";
 import SearchFilter from "components/SearchFilter";
-import styles from "./Styles.module.css";
-import Placeholder from "../placeholder/Placeholder";
-import PostsHeader from "./PostsHeader";
 import getImageDimensions from "helpers/getImageDimensions";
-import { useSelector } from "store/hooks";
 import { getLabel } from "helpers/getLabelHelper";
-import { Box } from "@mui/material";
+import Link from "next/link";
+import { ReactElement, useEffect, useState } from "react";
+import { useSelector } from "store/hooks";
+import Placeholder from "../placeholder/Placeholder";
+import Post from "./Post";
+import PostsHeader from "./PostsHeader";
+import styles from "./Styles.module.css";
 
 interface PostsProps {
   posts: any[];
@@ -44,65 +43,25 @@ function Posts({
 
   /* POSTS */
 
-  const imageDimensions = getImageDimensions(
-    windowWidth,
-    title === "Newsletter" ? "newsletter list item" : "post list item"
-  );
   const postsDisplay: ReactElement = (
     <div className={styles.postsContainer}>
-      {posts && posts !== null
+      {!!posts
         ? posts.map((post: any, index: number) => (
             <Post
               key={index}
               post={post}
               phrase={phrase}
-              imageDimensions={imageDimensions}
+              imageDimensions={getImageDimensions(
+                windowWidth,
+                title === "Newsletter"
+                  ? "newsletter list item"
+                  : "post list item"
+              )}
             />
           ))
         : [0, 1, 2, 3, 4, 5].map((ph, index) => <Placeholder key={index} />)}
     </div>
   );
-
-  /* TEMPLATE */
-
-  let headerDisplay: ReactElement = <h1>{title}</h1>;
-  let searchDisplay: ReactElement;
-
-  let postsTemplateDisplay = postsDisplay;
-
-  let paginationDisplay: ReactElement = (
-    <div className="link whiteBg">
-      <Link href={`/category/${title}`}>
-        <a className="link-button">
-          {getLabel(labels, locale, "read_more", "Weiter Lesen")}
-        </a>
-      </Link>
-    </div>
-  );
-
-  if (pageNum && pageNum !== null) {
-    headerDisplay = <PostsHeader />;
-
-    searchDisplay = <SearchFilter phrase={phrase} />;
-
-    postsTemplateDisplay = (
-      <div className={styles.postPage}>{postsDisplay}</div>
-    );
-
-    paginationDisplay = <React.Fragment>{""}</React.Fragment>;
-    if (postsCount > postsPerPage) {
-      paginationDisplay = (
-        <Pagination
-          pageNum={pageNum}
-          itemsCount={postsCount}
-          itemsPerPage={postsPerPage}
-          type={type}
-          title={title}
-        />
-      );
-    }
-  }
-  let pathname;
 
   return (
     <section
@@ -111,16 +70,38 @@ function Posts({
         (title === "Newsletter" ? styles.threeColPage : styles.twoColPage)
       }
       style={{
-        marginTop:
-          pathname === "/" ? "120px" : windowWidth > 844 ? "109px" : "80px",
+        marginTop: windowWidth > 844 ? "109px" : "80px",
       }}
     >
-      <>
-        {headerDisplay}
-        {searchDisplay}
-        {postsTemplateDisplay}
-        <Box marginY={5}>{paginationDisplay}</Box>
-      </>
+      {/* pageNum means were on a category page */}
+      {pageNum && pageNum !== null ? (
+        <>
+          <PostsHeader />
+          <SearchFilter phrase={phrase} />
+          <div className={styles.postPage}>{postsDisplay}</div>
+          {postsCount - 1 > postsPerPage && (
+            <Pagination
+              pageNum={pageNum}
+              itemsCount={postsCount}
+              itemsPerPage={postsPerPage}
+              type={type}
+              title={title}
+            />
+          )}
+        </>
+      ) : (
+        <>
+          <h1>{title}</h1>
+          <div className={styles.postPage}>{postsDisplay}</div>
+          <div className="link whiteBg">
+            <Link href={`/category/${title}`}>
+              <a className="link-button">
+                {getLabel(labels, locale, "read_more", "Weiter Lesen")}
+              </a>
+            </Link>
+          </div>
+        </>
+      )}
     </section>
   );
 }
