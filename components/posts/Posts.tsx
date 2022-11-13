@@ -1,14 +1,15 @@
-import React, { ReactElement, useEffect, useState } from 'react';
-import Link from 'next/link';
-import Post from './Post';
-import Pagination from 'components/pagination/Pagination';
-import SearchFilter from 'components/SearchFilter';
-import styles from './Styles.module.css';
-import Placeholder from '../placeholder/Placeholder';
-import PostsHeader from './PostsHeader';
-import getImageDimensions from 'helpers/getImageDimensions';
-import { useSelector } from 'store/hooks';
-import { getLabel } from 'helpers/getLabelHelper';
+import React, { ReactElement, useEffect, useState } from "react";
+import Link from "next/link";
+import Post from "./Post";
+import Pagination from "components/pagination/Pagination";
+import SearchFilter from "components/SearchFilter";
+import styles from "./Styles.module.css";
+import Placeholder from "../placeholder/Placeholder";
+import PostsHeader from "./PostsHeader";
+import getImageDimensions from "helpers/getImageDimensions";
+import { useSelector } from "store/hooks";
+import { getLabel } from "helpers/getLabelHelper";
+import { Box } from "@mui/material";
 
 interface PostsProps {
   posts: any[];
@@ -30,13 +31,13 @@ function Posts({
   type,
 }: PostsProps) {
   const [windowWidth, setWindowWidth] = useState(
-    typeof window !== 'undefined' ? window.innerWidth : null
+    typeof window !== "undefined" ? window.innerWidth : null
   );
 
   const { labels } = useSelector((state) => state.labels);
   const { locale } = useSelector((state) => state.languages);
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", () => {
       setWindowWidth(window.innerWidth);
     });
   }, []);
@@ -45,7 +46,7 @@ function Posts({
 
   const imageDimensions = getImageDimensions(
     windowWidth,
-    title === 'Newsletter' ? 'newsletter list item' : 'post list item'
+    title === "Newsletter" ? "newsletter list item" : "post list item"
   );
   const postsDisplay: ReactElement = (
     <div className={styles.postsContainer}>
@@ -70,10 +71,10 @@ function Posts({
   let postsTemplateDisplay = postsDisplay;
 
   let paginationDisplay: ReactElement = (
-    <div className='link whiteBg'>
+    <div className="link whiteBg">
       <Link href={`/category/${title}`}>
-        <a className='link-button'>
-          {getLabel(labels, locale, 'read_more', 'Weiter Lesen')}
+        <a className="link-button">
+          {getLabel(labels, locale, "read_more", "Weiter Lesen")}
         </a>
       </Link>
     </div>
@@ -88,7 +89,7 @@ function Posts({
       <div className={styles.postPage}>{postsDisplay}</div>
     );
 
-    paginationDisplay = <React.Fragment>{''}</React.Fragment>;
+    paginationDisplay = <React.Fragment>{""}</React.Fragment>;
     if (postsCount > postsPerPage) {
       paginationDisplay = (
         <Pagination
@@ -106,19 +107,19 @@ function Posts({
   return (
     <section
       className={
-        'posts-sections ' +
-        (title === 'Newsletter' ? styles.threeColPage : styles.twoColPage)
+        "posts-sections " +
+        (title === "Newsletter" ? styles.threeColPage : styles.twoColPage)
       }
       style={{
         marginTop:
-          pathname === '/' ? '120px' : windowWidth > 844 ? '109px' : '80px',
+          pathname === "/" ? "120px" : windowWidth > 844 ? "109px" : "80px",
       }}
     >
       <>
         {headerDisplay}
         {searchDisplay}
         {postsTemplateDisplay}
-        {paginationDisplay}
+        <Box marginY={5}>{paginationDisplay}</Box>
       </>
     </section>
   );

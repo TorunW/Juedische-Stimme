@@ -21,12 +21,10 @@ function Post({ post }) {
       className={styles.postPage}
     >
       {!post ? (
-        <>
-          <div className={styles.newsletterLayout}>
-            <h1>No Post Found!</h1>
-            <article></article>
-          </div>
-        </>
+        <div className={styles.newsletterLayout}>
+          <h1>No Post Found!</h1>
+          <article></article>
+        </div>
       ) : (
         <>
           {$switch(
