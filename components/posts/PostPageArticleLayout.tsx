@@ -30,6 +30,8 @@ const PostPageArticleLayout = ({ post, locale }) => {
     ));
   }
 
+  console.log(postExcerpt2 == "null");
+
   return (
     <React.Fragment>
       <div className={styles.articleLayout}>
@@ -85,12 +87,14 @@ const PostPageArticleLayout = ({ post, locale }) => {
                   layout="fill"
                 />
               </div>
-              <div
-                className={styles.bottomExcerpt + " " + styles.excerpt}
-                dangerouslySetInnerHTML={{
-                  __html: postExcerpt2,
-                }}
-              ></div>
+              {!!postExcerpt2 && (
+                <div
+                  className={styles.bottomExcerpt + " " + styles.excerpt}
+                  dangerouslySetInnerHTML={{
+                    __html: postExcerpt2,
+                  }}
+                ></div>
+              )}
             </div>
           ) : (
             <div className={styles.middleWrapper}>

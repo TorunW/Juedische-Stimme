@@ -1,27 +1,23 @@
-import React, { ReactElement, useState, useEffect } from "react";
-import { useEditor, EditorContent } from "@tiptap/react";
+import AspectRatioIcon from "@mui/icons-material/AspectRatio";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Divider,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { Stack } from "@mui/system";
+import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import TextAlign from "@tiptap/extension-text-align";
+import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Image from "@tiptap/extension-image";
-import MenuBar from "./MenuBar";
-import {
-  TextField,
-  Box,
-  Divider,
-  FormControlLabel,
-  Button,
-  Switch,
-  Typography,
-  Chip,
-  ButtonGroup,
-} from "@mui/material";
+import { ReactElement, useEffect, useState } from "react";
 import FormHelp from "../atoms/FormHelp";
-import { Stack } from "@mui/system";
-import AspectRatioIcon from "@mui/icons-material/AspectRatio";
+import MenuBar from "./MenuBar";
 
 import HtmlIcon from "@mui/icons-material/Html";
-import { type } from "@testing-library/user-event/dist/types/utility";
 
 export enum EditorHeight {
   small = "250px",
@@ -82,46 +78,44 @@ const TipTapEditor = (props: TipTapEditorProps) => {
   }, [editor]);
 
   return (
-    <>
+    <Box
+      sx={{
+        border: 2,
+        borderRadius: 1,
+        borderColor: "black",
+        height: height ?? "auto",
+      }}
+    >
+      {!!showMenu && (
+        <MenuBar
+          editor={editor}
+          itemId={itemId}
+          itemType={itemType}
+        />
+      )}
+      <Divider />
       <Box
+        id={editorId}
         sx={{
-          border: 2,
-          borderRadius: 1,
-          borderColor: "black",
-          height: height ?? "auto",
-        }}
-      >
-        {showMenu !== false && (
-          <MenuBar
-            editor={editor}
-            itemId={itemId}
-            itemType={itemType}
-          />
-        )}
-        <Divider />
-        <Box
-          id={editorId}
-          sx={{
-            overflowY: "auto",
-            maxHeight: "calc(100% - 60px)",
-            marginY: 1,
-            marginX: 1,
+          overflowY: "auto",
+          maxHeight: "calc(100% - 60px)",
+          marginY: 1,
+          marginX: 1,
+          height: "100%",
+          "> div": {
             height: "100%",
             "> div": {
               height: "100%",
-              "> div": {
-                height: "100%",
-                "&:focus": {
-                  outline: "none",
-                },
+              "&:focus": {
+                outline: "none",
               },
             },
-          }}
-        >
-          <EditorContent editor={editor} />
-        </Box>
+          },
+        }}
+      >
+        <EditorContent editor={editor} />
       </Box>
-    </>
+    </Box>
   );
 };
 
@@ -173,32 +167,6 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
     setIsResizable(true);
   }
 
-  let editorDisplay: ReactElement;
-  if (showEditor === true) {
-    editorDisplay = (
-      <TipTapEditor
-        {...props}
-        setCharLength={setCharLength}
-        editorId={editorId}
-        height={adjustedHeight}
-      />
-    );
-  } else {
-    editorDisplay = (
-      <TextField
-        margin="normal"
-        variant="outlined"
-        focused
-        multiline
-        sx={{
-          width: "100%",
-        }}
-        value={props.value}
-        onChange={(e) => props.onChange(e.target.value)}
-      />
-    );
-  }
-
   const charDisplay = charLength + (!!min ? "/" + min : "");
 
   return (
@@ -221,7 +189,26 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
             {props.help && <FormHelp text={props.help}></FormHelp>}
           </Box>
         </Stack>
-        {editorDisplay}
+        {!!showEditor ? (
+          <TipTapEditor
+            {...props}
+            setCharLength={setCharLength}
+            editorId={editorId}
+            height={adjustedHeight}
+          />
+        ) : (
+          <TextField
+            margin="normal"
+            variant="outlined"
+            focused
+            multiline
+            sx={{
+              width: "100%",
+            }}
+            value={props.value}
+            onChange={(e) => props.onChange(e.target.value)}
+          />
+        )}
       </Stack>
       <Stack
         sx={{ minWidth: "100%" }}
