@@ -9,9 +9,10 @@ import { sortGalleryByOrder } from "helpers/sortGalleryByOrder";
 
 interface GalleryFromProps {
   gallery?: Gallery;
+  galleryType: "list" | "header";
 }
 
-function GalleryForm({ gallery }: GalleryFromProps) {
+function GalleryForm({ gallery, galleryType }: GalleryFromProps) {
   const [selectedImages, setSelectedImages] = useState<Image[]>([]);
 
   function handleSelectImage(galleryImage: Image) {
@@ -27,8 +28,6 @@ function GalleryForm({ gallery }: GalleryFromProps) {
     }
     setSelectedImages(newSelectedImages);
   }
-
-  console.log(gallery.images);
 
   function deleteSelectedImages() {
     let deleteRequests = [];
@@ -74,7 +73,10 @@ function GalleryForm({ gallery }: GalleryFromProps) {
           display="flex"
           alignItems={"center"}
         >
-          <GalleryImageForm galleryId={gallery.gallery_id} />
+          <GalleryImageForm
+            galleryId={gallery.gallery_id}
+            galleryType={gallery.gallery_type}
+          />
         </Grid>
       </Card>
       <Card
@@ -84,38 +86,21 @@ function GalleryForm({ gallery }: GalleryFromProps) {
           margin: 2,
         }}
       >
-        {gallery.images
-          ? gallery.images
-              .sort(sortGalleryByOrder)
-              .map((galleryImage: Image) => (
-                <GalleryImageForm
-                  key={galleryImage.image_id}
-                  galleryImage={galleryImage}
-                  galleryId={gallery.gallery_id}
-                  galleryType={gallery.gallery_type}
-                  handleSelectImage={() => handleSelectImage(galleryImage)}
-                  isSelected={
-                    selectedImages.findIndex(
-                      (sImg) => sImg.image_src === galleryImage.image_src
-                    ) > -1
-                  }
-                />
-              ))
-          : ""}
-        <Box
-          sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
-        >
-          {" "}
-          <FormControl margin="normal">
-            <Button
-              onClick={() => deleteSelectedImages()}
-              variant="contained"
-              color="secondary"
-            >
-              DELETE SELECTED IMAGES
-            </Button>
-          </FormControl>
-        </Box>
+        {gallery.images &&
+          gallery.images.sort(sortGalleryByOrder).map((galleryImage: Image) => (
+            <GalleryImageForm
+              key={galleryImage.image_id}
+              galleryImage={galleryImage}
+              galleryId={gallery.gallery_id}
+              galleryType={gallery.gallery_type}
+              handleSelectImage={() => handleSelectImage(galleryImage)}
+              isSelected={
+                selectedImages.findIndex(
+                  (sImg) => sImg.image_src === galleryImage.image_src
+                ) > -1
+              }
+            />
+          ))}
       </Card>
     </Box>
   );

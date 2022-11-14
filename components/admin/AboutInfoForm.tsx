@@ -97,7 +97,12 @@ const AboutInfoForm = ({ aboutInfo, gallery }) => {
         </form>
       )}
 
-      {currentTab === "Gallery" && <GalleryForm gallery={gallery} />}
+      {currentTab === "Gallery" && (
+        <GalleryForm
+          gallery={gallery}
+          galleryType={"list"}
+        />
+      )}
     </Box>
   );
 };
