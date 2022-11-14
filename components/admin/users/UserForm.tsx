@@ -1,58 +1,69 @@
-import { useFormik } from "formik";
-import React, { FC } from "react";
-import * as Yup from "yup";
-import { User } from "types/User.type";
 import axios from "axios";
+import { useFormik } from "formik";
+import { User } from "types/User.type";
+import * as Yup from "yup";
 
-import { app } from "firebaseConfig";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
+  getAuth,
   updatePassword,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
 } from "firebase/auth";
+import { app } from "firebaseConfig";
 import { useRouter } from "next/router";
 
+import FormError from "@/components/atoms/FormError";
 import { Box, Button, Card, FormControl, TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import FormError from "@/components/atoms/FormError";
 
 interface UserFormProps {
   user?: User;
 }
 
-const UserForm: FC<UserFormProps> = ({ user }) => {
+const UserForm = ({ user }: UserFormProps) => {
   const auth = getAuth(app);
   const router = useRouter();
 
-  console.log(auth);
-
   const formik = useFormik({
     initialValues: {
+      user_login: user ? user.user_login : "",
+      user_nicename: user ? user.user_nicename : "",
       display_name: user ? user.display_name : "",
       user_email: user ? user.user_email : "",
       user_registered: user ? user.user_registered : Date.now(),
       user_status: user ? user.user_status : 1,
-      user_pass: user ? user.user_pass : "",
+      current_password: "",
+      user_pass: "",
     },
     validationSchema: Yup.object().shape({
       display_name: Yup.string().required("Name is required"),
       user_email: Yup.string().email().required("Email is required!"),
       user_pass: Yup.string().min(7).required("Password is required"),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       if (!user) {
         createUserWithEmailAndPassword(
           auth,
           values.user_email,
           values.user_pass
         ).then((response: any) => {
-          console.log(response.user);
           if (response.user) {
             updateUser(values);
           }
         });
       } else {
-        //updatePassword(auth.currentUser);
+        const user = auth.currentUser;
+        const credential = EmailAuthProvider.credential(
+          user.email,
+          values.current_password
+        );
+
+        const result = await reauthenticateWithCredential(
+          auth.currentUser,
+          credential
+        );
+        updatePassword(user, values.user_pass);
         updateUser(values);
       }
     },
@@ -67,7 +78,9 @@ const UserForm: FC<UserFormProps> = ({ user }) => {
       },
     }).then(
       (response) => {
-        if (response.data) router.push("/admin/users/");
+        if (response.data) {
+          router.reload();
+        }
       },
       (error) => {
         console.log(error, "ERROR on post / put user");
@@ -141,10 +154,30 @@ const UserForm: FC<UserFormProps> = ({ user }) => {
               margin="normal"
             >
               <TextField
+                id="current_password"
+                name="current_password"
+                type="password"
+                label="Current Password"
+                placeholder="********"
+                onChange={formik.handleChange}
+                value={formik.values.current_password}
+              />
+              {formik.errors.current_password ? (
+                <FormError message={formik.errors.current_password} />
+              ) : (
+                ""
+              )}
+            </FormControl>
+            <FormControl
+              fullWidth
+              margin="normal"
+            >
+              <TextField
                 id="user_pass"
                 name="user_pass"
                 type="password"
-                label="Password"
+                label="New Password"
+                placeholder="********"
                 onChange={formik.handleChange}
                 value={formik.values.user_pass}
               />

@@ -10,6 +10,7 @@ import {
   AccordionDetails,
   Typography,
   Button,
+  ButtonGroup,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -31,8 +32,9 @@ import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import ListIcon from "@mui/icons-material/List";
 import LabelIcon from "@mui/icons-material/Label";
 import ImageSearchIcon from "@mui/icons-material/ImageSearch";
+import LogoutIcon from "@mui/icons-material/Logout";
 
-function AdminNav(props) {
+function AdminNav() {
   const router = useRouter();
   const { loggedUser } = useSelector((state) => state.users);
 
@@ -257,31 +259,39 @@ function AdminNav(props) {
       </Box>
       <Divider />
       <Box sx={{ textAlign: "center", marginTop: 2 }}>
-        <Box
+        <ButtonGroup
+          variant="contained"
+          color="secondary"
+          size="small"
           sx={{
-            display: "flex",
-            justifyContent: "center",
-            gap: 2,
-            alignItems: "center",
+            borderRadius: "12px",
           }}
         >
-          <AccountCircleIcon />
-          <Typography variant="h6">
-            {loggedUser !== null
-              ? loggedUser.display_name.length > 0
+          <Button
+            sx={{
+              borderRadius: "12px 0 0 12px",
+              paddingLeft: 0.5,
+            }}
+            onClick={() => router.push(`/admin/users/${loggedUser?.ID}`)}
+          >
+            <AccountCircleIcon sx={{ marginRight: 1 }} />
+            {!!loggedUser
+              ? loggedUser.display_name?.length > 0
                 ? " " + loggedUser.display_name
                 : " " + loggedUser.user_email
               : ""}
-          </Typography>
-        </Box>
-        <Button
-          variant="contained"
-          onClick={logout}
-          color="secondary"
-          sx={{ marginTop: 3 }}
-        >
-          Logout
-        </Button>
+          </Button>
+          <Button
+            onClick={logout}
+            sx={{
+              borderRadius: "0 12px 12px 0",
+              paddingRight: 0.5,
+              paddingLeft: "0",
+            }}
+          >
+            <LogoutIcon />
+          </Button>
+        </ButtonGroup>
       </Box>
     </Box>
   );
