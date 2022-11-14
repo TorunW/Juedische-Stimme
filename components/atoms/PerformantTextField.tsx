@@ -20,6 +20,7 @@ export const PerformantTextField: React.FC<PerformantTextFieldProps> = memo(
   (props) => {
     const [field, meta] = useField(props.name);
     const error = !!meta.error && meta.touched;
+    const disabled = props.disabled;
     /**
      * For performance reasons (possible due to CSS in JS issues), heavy views
      * affect re-renders (Formik changes state in every re-render), bringing keyboard
@@ -87,6 +88,7 @@ export const PerformantTextField: React.FC<PerformantTextFieldProps> = memo(
           }}
           error={error}
           helperText={meta.touched && meta.error}
+          disabled={disabled}
           {...performanceProps}
         />
       </>

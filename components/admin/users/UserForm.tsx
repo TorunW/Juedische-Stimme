@@ -100,8 +100,7 @@ const UserForm = ({ user }: UserFormProps) => {
         <Card
           sx={{
             margin: 4,
-            paddingLeft: 4,
-            paddingRight: 2,
+            paddingX: 2,
             paddingY: 4,
             maxWidth: "900px",
             minWidth: "450px",
@@ -114,91 +113,105 @@ const UserForm = ({ user }: UserFormProps) => {
             container
             spacing={2}
           >
-            <FormControl
-              fullWidth
-              margin="normal"
+            <Grid
+              item
+              xs={6}
             >
-              <TextField
-                id="display_name"
-                name="display_name"
-                label="Name"
-                onChange={formik.handleChange}
-                value={formik.values.display_name}
-              />
-              {formik.errors && formik.errors.display_name ? (
-                <FormError message={formik.errors.display_name} />
-              ) : (
-                ""
-              )}
-            </FormControl>
-            <FormControl
-              fullWidth
-              margin="normal"
-            >
-              <TextField
-                id="user_email"
-                name="user_email"
-                type="email"
-                label="Email"
-                onChange={formik.handleChange}
-                value={formik.values.user_email}
-              />
-              {formik.errors.user_email ? (
-                <FormError message={formik.errors.user_email} />
-              ) : (
-                ""
-              )}
-            </FormControl>
-            <FormControl
-              fullWidth
-              margin="normal"
-            >
-              <TextField
-                id="current_password"
-                name="current_password"
-                type="password"
-                label="Current Password"
-                placeholder="********"
-                onChange={formik.handleChange}
-                value={formik.values.current_password}
-              />
-              {formik.errors.current_password ? (
-                <FormError message={formik.errors.current_password} />
-              ) : (
-                ""
-              )}
-            </FormControl>
-            <FormControl
-              fullWidth
-              margin="normal"
-            >
-              <TextField
-                id="user_pass"
-                name="user_pass"
-                type="password"
-                label="New Password"
-                placeholder="********"
-                onChange={formik.handleChange}
-                value={formik.values.user_pass}
-              />
-              {formik.errors.user_pass ? (
-                <FormError message={formik.errors.user_pass} />
-              ) : (
-                ""
-              )}
-            </FormControl>
-            <FormControl
-              fullWidth
-              margin="normal"
-            >
-              <Button
-                variant="contained"
-                color="secondary"
-                type="submit"
+              <FormControl
+                fullWidth
+                margin="normal"
               >
-                {user ? "update user" : "register user"}
-              </Button>
-            </FormControl>
+                <TextField
+                  id="display_name"
+                  name="display_name"
+                  label="Name"
+                  onChange={formik.handleChange}
+                  value={formik.values.display_name}
+                />
+                {formik.errors && formik.errors.display_name ? (
+                  <FormError message={formik.errors.display_name} />
+                ) : (
+                  ""
+                )}
+              </FormControl>
+            </Grid>
+            <Grid
+              item
+              xs={6}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <TextField
+                  id="user_email"
+                  name="user_email"
+                  type="email"
+                  label="Email"
+                  disabled={!!user}
+                  onChange={formik.handleChange}
+                  value={formik.values.user_email}
+                />
+                {formik.errors.user_email ? (
+                  <FormError message={formik.errors.user_email} />
+                ) : (
+                  ""
+                )}
+              </FormControl>
+            </Grid>
+            <Grid
+              item
+              xs={12}
+            >
+              {user && (
+                <FormControl
+                  fullWidth
+                  margin="normal"
+                >
+                  <TextField
+                    id="current_password"
+                    name="current_password"
+                    type="password"
+                    label="Current Password"
+                    placeholder="********"
+                    onChange={formik.handleChange}
+                    value={formik.values.current_password}
+                  />
+                  {formik?.errors?.current_password && (
+                    <FormError message={formik.errors.current_password} />
+                  )}
+                </FormControl>
+              )}
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <TextField
+                  id="user_pass"
+                  name="user_pass"
+                  type="password"
+                  label="New Password"
+                  placeholder="********"
+                  onChange={formik.handleChange}
+                  value={formik.values.user_pass}
+                />
+                {formik?.errors?.user_pass && (
+                  <FormError message={formik.errors.user_pass} />
+                )}
+              </FormControl>
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  type="submit"
+                >
+                  {user ? "update user" : "register user"}
+                </Button>
+              </FormControl>
+            </Grid>
           </Grid>
         </Card>
       </form>

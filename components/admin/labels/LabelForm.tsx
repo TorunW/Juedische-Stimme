@@ -11,6 +11,7 @@ import {
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import { useFormik } from "formik";
+import { useState } from "react";
 import { Label, LabelType, LabelTypes } from "types/Label.type";
 import * as Yup from "yup";
 
@@ -33,7 +34,6 @@ const LabelForm = ({ label }: Props) => {
       label_title: Yup.string().required("Add a title"),
     }),
     onSubmit: (values) => {
-      console.log(values);
       axios({
         method: label ? "put" : "post",
         url: `/api/labels${label ? "/" + label.label_id : ""}`,
@@ -73,12 +73,53 @@ const LabelForm = ({ label }: Props) => {
                 margin="normal"
               >
                 <TextField
+                  id="label_title"
+                  label="German"
+                  focused
+                  name="label_title"
+                  type="text"
+                  placeholder="Add german text for the label..."
+                  onChange={formik.handleChange}
+                  value={formik.values.label_title}
+                />
+              </FormControl>
+            </Grid>
+            <Grid
+              item
+              xs={6}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <TextField
+                  id="label_title_en_US"
+                  label="English"
+                  focused
+                  name="label_title_en_US"
+                  type="text"
+                  placeholder="Add english text for the label..."
+                  onChange={formik.handleChange}
+                  value={formik.values.label_title_en_US}
+                />
+              </FormControl>
+            </Grid>
+
+            <Grid
+              item
+              xs={6}
+            >
+              <FormControl
+                fullWidth
+                margin="normal"
+              >
+                <TextField
                   id="label_name"
-                  label="Label Name"
+                  label="System name"
                   focused
                   name="label_name"
                   type="text"
-                  placeholder="Add a name for the label..."
+                  placeholder="Add a system name for the label..."
                   onChange={formik.handleChange}
                   value={formik.values.label_name}
                 />
@@ -111,46 +152,7 @@ const LabelForm = ({ label }: Props) => {
                 </Select>
               </FormControl>
             </Grid>
-            <Grid
-              item
-              xs={6}
-            >
-              <FormControl
-                fullWidth
-                margin="normal"
-              >
-                <TextField
-                  id="label_title"
-                  label="Label Title"
-                  focused
-                  name="label_title"
-                  type="text"
-                  placeholder="Add a title for the label..."
-                  onChange={formik.handleChange}
-                  value={formik.values.label_title}
-                />
-              </FormControl>
-            </Grid>
-            <Grid
-              item
-              xs={6}
-            >
-              <FormControl
-                fullWidth
-                margin="normal"
-              >
-                <TextField
-                  id="label_title_en_US"
-                  label="Label Title ( English )"
-                  focused
-                  name="label_title_en_US"
-                  type="text"
-                  placeholder="Add a an english title..."
-                  onChange={formik.handleChange}
-                  value={formik.values.label_title_en_US}
-                />
-              </FormControl>
-            </Grid>
+
             <Grid
               item
               xs={12}

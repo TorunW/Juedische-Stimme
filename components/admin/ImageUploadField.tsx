@@ -89,7 +89,7 @@ export const ImageUploadField: FC<Props> = ({
         }}
       >
         <TextField
-          label="Post Header Image"
+          label={imageNumber === 1 ? "Post Header Image" : "Post Body Image"}
           focused
           multiline
           minRows={8}

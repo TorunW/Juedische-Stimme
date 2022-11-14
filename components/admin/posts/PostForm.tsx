@@ -225,18 +225,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       });
   };
 
-  let selectCategoriesDisplay: ReactElement[];
-  if (categories) {
-    selectCategoriesDisplay = categories.map((category, index) => (
-      <MenuItem
-        key={Date.now() + index}
-        value={category.term_id}
-      >
-        {category.name}
-      </MenuItem>
-    ));
-  }
-
   const isMinimalLayout =
     (post && post.post_layout === "donation") ||
     (post && post.post_layout === "member_form") ||
@@ -271,71 +259,15 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                   }}
                 >
                   <>
-                    <Grid container>
+                    <Grid
+                      container
+                      sx={{ marginBottom: 2 }}
+                    >
                       <Grid
                         container
                         md={post ? 9 : 12}
                         xs={12}
-                        spacing={2}
                       >
-                        <Grid
-                          item
-                          md={6}
-                          xs={12}
-                        >
-                          <FormControl
-                            fullWidth
-                            margin="normal"
-                          >
-                            <InputLabel>Category</InputLabel>
-                            <Select
-                              id="categoryId"
-                              name="categoryId"
-                              value={props.values.categoryId}
-                              onChange={props.handleChange}
-                              label="Category"
-                            >
-                              {selectCategoriesDisplay}
-                            </Select>
-                            {props?.errors?.categoryId ? (
-                              <FormError message={props.errors.categoryId} />
-                            ) : (
-                              ""
-                            )}
-                          </FormControl>
-                        </Grid>
-                        <Grid
-                          item
-                          md={6}
-                          xs={12}
-                        >
-                          <FormControl
-                            fullWidth
-                            margin="normal"
-                          >
-                            <InputLabel>Layout</InputLabel>
-                            <Select
-                              id="post_layout"
-                              name="post_layout"
-                              label="Layout"
-                              value={props.values.post_layout}
-                              onChange={props.handleChange}
-                              placeholder="Layout"
-                            >
-                              <MenuItem value={"article"}>Article</MenuItem>
-                              <MenuItem value={"newsletter"}>
-                                Newsletter
-                              </MenuItem>
-                              <MenuItem value={"legacy"}>Legacy</MenuItem>
-                              <MenuItem value={"info"}>Info</MenuItem>
-                            </Select>
-                            {props?.errors?.post_layout ? (
-                              <FormError message={props.errors.post_layout} />
-                            ) : (
-                              ""
-                            )}
-                          </FormControl>
-                        </Grid>
                         <Grid
                           item
                           container
@@ -343,7 +275,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                         >
                           <FormControl
                             fullWidth
-                            sx={{ marginBottom: 4 }}
+                            sx={{ marginTop: 2, marginBottom: 0 }}
                           >
                             <PerformantTextField
                               id="post_title"
@@ -351,6 +283,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                               label="Title"
                               margin="normal"
                               placeholder="Title"
+                              disabled={isMinimalLayout}
                               onChange={props.handleChange}
                               value={props.values.post_title}
                             />
@@ -361,6 +294,80 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             )}
                           </FormControl>
                         </Grid>
+                        {!isMinimalLayout && (
+                          <>
+                            <Grid
+                              md={6}
+                              xs={12}
+                              sx={{
+                                paddingRight: 2,
+                              }}
+                            >
+                              <FormControl
+                                fullWidth
+                                margin="normal"
+                              >
+                                <InputLabel>Category</InputLabel>
+                                <Select
+                                  id="categoryId"
+                                  name="categoryId"
+                                  value={props.values.categoryId}
+                                  onChange={props.handleChange}
+                                  label="Category"
+                                >
+                                  {categories?.map((category, index) => (
+                                    <MenuItem
+                                      key={Date.now() + index}
+                                      value={category.term_id}
+                                    >
+                                      {category.name}
+                                    </MenuItem>
+                                  ))}
+                                </Select>
+                                {props?.errors?.categoryId ? (
+                                  <FormError
+                                    message={props.errors.categoryId}
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                              </FormControl>
+                            </Grid>
+                            <Grid
+                              md={6}
+                              xs={12}
+                            >
+                              <FormControl
+                                fullWidth
+                                margin="normal"
+                              >
+                                <InputLabel>Layout</InputLabel>
+                                <Select
+                                  id="post_layout"
+                                  name="post_layout"
+                                  label="Layout"
+                                  value={props.values.post_layout}
+                                  onChange={props.handleChange}
+                                  placeholder="Layout"
+                                >
+                                  <MenuItem value={"article"}>Article</MenuItem>
+                                  <MenuItem value={"newsletter"}>
+                                    Newsletter
+                                  </MenuItem>
+                                  <MenuItem value={"legacy"}>Legacy</MenuItem>
+                                  <MenuItem value={"info"}>Info</MenuItem>
+                                </Select>
+                                {props?.errors?.post_layout ? (
+                                  <FormError
+                                    message={props.errors.post_layout}
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                              </FormControl>
+                            </Grid>
+                          </>
+                        )}
                       </Grid>
                       {post && (
                         <Grid
@@ -373,9 +380,11 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             fullWidth
                             margin="normal"
                             sx={{
-                              padding: 2,
-                              paddingTop: 0,
-                              height: "calc(100% - 32px)",
+                              p: 0,
+                              m: 0,
+                              paddingLeft: 2,
+                              paddingTop: 2,
+                              height: "calc(100% - 8px)",
                             }}
                           >
                             <a
@@ -386,6 +395,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             >
                               <Button
                                 variant="contained"
+                                color="secondary"
                                 sx={{ height: "100%", width: "100%" }}
                               >
                                 View Post in Livemode

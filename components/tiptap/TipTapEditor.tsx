@@ -210,28 +210,31 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
           />
         )}
       </Stack>
-      <Stack
-        sx={{ minWidth: "100%" }}
-        flexDirection="row-reverse"
-      >
-        <ButtonGroup variant="contained">
-          <Button sx={{ backgroundColor: "secondary.main", cursor: "default" }}>
-            {charDisplay}
-          </Button>
-          <Button
-            sx={{ backgroundColor: "secondary.main" }}
-            onClick={() => setShowEditor(!showEditor)}
+      {!!props.showMenu && (
+        <Stack
+          sx={{ minWidth: "100%" }}
+          flexDirection="row-reverse"
+        >
+          <ButtonGroup
+            variant="contained"
+            color="secondary"
           >
-            <HtmlIcon />
-          </Button>
-          <Button
-            sx={{ backgroundColor: "secondary.main" }}
-            onMouseDown={handleResize}
-          >
-            <AspectRatioIcon />
-          </Button>
-        </ButtonGroup>
-      </Stack>
+            <Button sx={{ cursor: "default" }}>{charDisplay}</Button>
+            <Button
+              sx={{ backgroundColor: "secondary.main" }}
+              onClick={() => setShowEditor(!showEditor)}
+            >
+              <HtmlIcon />
+            </Button>
+            <Button
+              sx={{ cursor: "row-resize" }}
+              onMouseDown={handleResize}
+            >
+              <AspectRatioIcon />
+            </Button>
+          </ButtonGroup>
+        </Stack>
+      )}
     </>
   );
 };
