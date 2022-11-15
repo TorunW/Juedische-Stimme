@@ -210,7 +210,7 @@ const TipTapEditorWrapper = (props: TipTapEditorProps) => {
           />
         )}
       </Stack>
-      {!!props.showMenu && (
+      {props.showMenu !== false && (
         <Stack
           sx={{ minWidth: "100%" }}
           flexDirection="row-reverse"
