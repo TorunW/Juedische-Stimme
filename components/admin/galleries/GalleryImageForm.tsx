@@ -40,85 +40,41 @@ function GalleryImageForm({
   // be called when the form is submitted
   const formik = useFormik({
     initialValues: {
-      image_src: galleryImage ? galleryImage.image_src : "",
-      image_title: galleryImage ? galleryImage.image_title : "",
-      image_description: galleryImage ? galleryImage.image_description : "",
-      image_gallery: galleryImage ? galleryImage.image_gallery : galleryId,
-      image_order: galleryImage ? galleryImage.image_order : galleryImage,
+      image_src: galleryImage?.image_src ?? "",
+      image_title: galleryImage?.image_title ?? "",
+      image_description: galleryImage?.image_description ?? "",
+      image_gallery: galleryImage?.image_gallery ?? galleryId,
+      image_order: galleryImage?.image_order ?? galleryImage,
     },
-    onSubmit: (values) => {
-      // console.log(values, " VALJUES ON SUBMIT");
-      // const requestsArray = [];
-      // // POST IMAGE FILE ( FILE UPLOAD )
-      // const config = {
-      //   headers: { "content-type": "multipart/form-data" },
-      //   onUploadProgress: (event) => {
-      //     console.log(
-      //       `Current progress:`,
-      //       Math.round((event.loaded * 100) / event.total)
-      //     );
-      //   },
-      // };
-      // let galleryImageFileName = null;
-      // if (previewImageFile !== null) {
-      //   if (galleryImage) {
-      //     if (!!galleryImage.image_src) {
-      //       const deleteFileUrl = `http://${window.location.hostname}${
-      //         window.location.port !== "80" ? ":" + window.location.port : ""
-      //       }/media/${category.category_image.split("/").join("+++")}`;
-      //       const deleteFileRequest = axios.delete(deleteFileUrl);
-      //       requestsArray.push(deleteFileRequest);
-      //     }
-      //   }
-      //   let fileType =
-      //     previewImageFile.name.split(".")[
-      //       previewImageFile.name.split.length - 1
-      //     ];
-      //   galleryImageFileName =
-      //     previewImageFile.name.split(`.${fileType}`)[0] +
-      //     `__${uuidv4()}.${fileType}`;
-      //   const formData = new FormData();
-      //   formData.append("theFiles", previewImageFile, galleryImageFileName);
-      //   const categoryImageFileRequest = axios.post(
-      //     "/api/uploads",
-      //     formData,
-      //     config
-      //   );
-      //   requestsArray.push(categoryImageFileRequest);
-      // }
-      // const galleryImageRequest = axios({
-      //   method: galleryImage ? "put" : "post",
-      //   url: `/api/galleryimage${
-      //     galleryImage ? "/" + galleryImage.image_id : ""
-      //   }`,
-      //   data: {
-      //     ...values,
-      //   },
-      // });
-      // requestsArray.push(galleryImageRequest);
-      // axios({
-      //   method: galleryImage ? "put" : "post",
-      //   url: `/api/galleryimage${
-      //     galleryImage ? "/" + galleryImage.image_id : ""
-      //   }`,
-      //   data: {
-      //     ...values,
-      //   },
-      // }).then(
-      //   (response) => {
-      //     console.log(response, "response on gallery image (put or post)");
-      //     if (response.data) {
-      //       window.location.reload(); // BETTER FETCH THE POSTS THEN REFRESH PAGE
-      //     }
-      //   },
-      //   (error) => {
-      //     console.log(error, "ERROR on gallery image");
-      //   }
-      // );
+    onSubmit: async (values) => {
+      const isUploaded = previewImageFile ? await uploadImage() : true;
+      if (!!isUploaded) {
+        axios({
+          method: galleryImage ? "put" : "post",
+          url: `/api/galleryimage${
+            galleryImage ? "/" + galleryImage.image_id : ""
+          }`,
+          data: {
+            ...values,
+          },
+        }).then(
+          (response) => {
+            console.log(response, "response on gallery image (put or post)");
+            if (response.data) {
+              window.location.reload(); // BETTER FETCH THE POSTS THEN REFRESH PAGE
+            }
+          },
+          (error) => {
+            console.log(error, "ERROR on gallery image");
+          }
+        );
+      } else {
+        console.log("Error uploading the file");
+      }
     },
   });
 
-  function onUpladImageClick() {
+  function onUpdateImageClick() {
     fileInputRef.current.click();
   }
 
@@ -143,18 +99,9 @@ function GalleryImageForm({
     }
   };
 
-  // const onImageInputChangeHanlder = (event) => {
-
-  // };
-
   const uploadImage = async () => {
-    if (!previewImageFile) {
-      return;
-    }
     const formData = new FormData();
-    let fileName = previewImageFile.name;
     formData.append("theFiles", previewImageFile);
-    //   fileInputRef.current?.reset();
     // UPLOAD THE FILE
     const config = {
       headers: { "content-type": "multipart/form-data" },
@@ -166,14 +113,20 @@ function GalleryImageForm({
       },
     };
     const response = await axios.post("/api/uploads", formData, config);
-    console.log(response, " RESPONSE OF UPLOAD");
-    formik.setFieldValue("image_src", generateFileName(fileName));
+
+    if (response.data?.data === "success") {
+      return true;
+    } else {
+      console.log("ERROR:");
+      console.log(response);
+      console.log("*******************");
+      return false;
+    }
   };
 
   const imageDisplay = previewImage ? (
     <img
       src={previewImage.toString()}
-      onClick={uploadImage}
       width="100%"
     />
   ) : (
@@ -224,7 +177,7 @@ function GalleryImageForm({
         <Button
           className="add-img-btn"
           variant="contained"
-          onClick={onUpladImageClick}
+          onClick={onUpdateImageClick}
           color="secondary"
           startIcon={
             formik.values.image_src ? (
