@@ -20,7 +20,8 @@ interface Props {
 }
 
 const LabelForm = ({ label }: Props) => {
-  const labelTypes: LabelType[] = ["button", "form_field", "title"];
+  const labelTypes: LabelType[] = ["button", "form_field", "title", "tab"];
+
   const formik = useFormik({
     initialValues: {
       label_id: label ? label.label_id : "",

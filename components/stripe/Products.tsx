@@ -116,7 +116,15 @@ function PaymentForm() {
                   : styles.btn
               }
             >
-              {product[0].name}
+              {getLabel(
+                labels,
+                locale,
+                `${product[0].name
+                  .split(" ")
+                  .join("_")
+                  .toLowerCase()}_donation_tab`,
+                product[0].name
+              )}
             </button>
           </div>
         );

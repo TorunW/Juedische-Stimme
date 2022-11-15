@@ -1,9 +1,10 @@
-export type LabelType = "button" | "form_field" | "title";
+export type LabelType = "button" | "form_field" | "title" | "tab";
 
 export enum LabelTypes {
   "button" = "Button",
   "form_field" = "Form field",
   "title" = "Title",
+  "tab" = "Tab",
 }
 
 export type Label = {
