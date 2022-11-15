@@ -59,7 +59,7 @@ const ContactForm = () => {
               item
               xs={10}
             >
-              <h2>Kontakt</h2>
+              <h2>{getLabel(labels, locale, "contact_us", "Kontakt")}</h2>
             </Grid>
 
             <Grid
@@ -188,7 +188,7 @@ const ContactForm = () => {
                   },
                 }}
               >
-                Senden
+                {getLabel(labels, locale, "send", "Senden")}
               </Button>
             </Grid>
           </Grid>
