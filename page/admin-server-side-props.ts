@@ -1,6 +1,6 @@
 import { getCookie, hasCookie } from "cookies-next";
 import excuteQuery from "lib/db";
-import { selectUserByEmail } from "lib/queries/users";
+import { insertUser, selectUserByEmail } from "lib/queries/users";
 import { GetServerSideProps } from "next";
 import { PageProps } from "./page";
 
@@ -46,8 +46,24 @@ export const createAdminServerSideProps = <T extends PageProps>(
       const userResponse = await excuteQuery({
         query: selectUserByEmail(userEmail),
       });
-      const loggedUser = JSON.stringify(userResponse);
 
+      let loggedUser;
+
+      if (userResponse.length === 0) {
+        loggedUser = {
+          user_login: userEmail.split("@")[0],
+          user_nicename: userEmail.split("@")[0],
+          user_email: userEmail,
+          user_registered: Date.now(),
+          display_name: userEmail.split("@")[0],
+          user_status: 0,
+          user_pass: "STORED ON FIREBASE",
+        };
+        const newUserResponse = await excuteQuery({
+          query: insertUser(loggedUser),
+        });
+      }
+      loggedUser = JSON.stringify(userResponse);
       const props = {
         page: {
           serverSideData:

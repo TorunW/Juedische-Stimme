@@ -7,11 +7,8 @@ import excuteQuery from "lib/db";
 import { selectGalleryById } from "lib/queries";
 import { selectPosts } from "lib/queries/posts";
 
-import { setAboutInfo } from "store/aboutinfo/aboutinfoSlice";
 import { useDispatch, useSelector } from "store/hooks";
-import { setLanguages } from "store/languages/languagesSlice";
-import { setMenuItems } from "store/nav/navSlice";
-import { setNewsletter, setPosts } from "store/posts/postsSlice";
+import { setNewsletter } from "store/posts/postsSlice";
 
 import AboutInfo from "@/components/about/AboutInfo";
 import FacebookEvents from "@/components/facebook/FacebookEvents";
@@ -24,12 +21,9 @@ import CallToAction from "@/components/callToAction/CallToAction";
 import axios from "axios";
 import { PageProps } from "page/page";
 import { createServerSideProps } from "page/server-side-props";
-import { getPlaiceholder } from "plaiceholder";
-import { setHeaderGallery } from "store/galleries/galleriesSlice";
 
-import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import { setPropsToStore } from "helpers/setPropsToStore";
 import Head from "next/head";
-import { setLabels } from "store/labels/labelsSlice";
 
 export interface HomePageProps extends PageProps {
   someCustomParameter: string;
@@ -105,35 +99,10 @@ const Home: LayoutPage = (props: LayoutPageProps) => {
   const { aboutInfo } = useSelector((state) => state.aboutinfo);
 
   useEffect(() => {
-    initHomePage();
-  }, []);
-
-  useEffect(() => {
-    // if (headerImage.isLoaded === true) {
-    // }
-  }, []);
-
-  function initHomePage() {
-    dispatch(setMenuItems(JSON.parse(props.navItems)));
-    dispatch(setHeaderGallery(JSON.parse(props.headerGallery)[0]));
-    dispatch(setPosts(JSON.parse(props.posts)));
-    dispatch(
-      setAboutInfo({
-        aboutInfo: JSON.parse(props.aboutInfo)[0],
-        gallery: JSON.parse(props.gallery)[0],
-      })
-    );
-    dispatch(
-      setLanguages({
-        locales: props.locales,
-        locale: props.locale,
-        defaultLocale: props.defaultLocale,
-      })
-    );
-    dispatch(setLabels(JSON.parse(props.labels)));
+    setPropsToStore(props, dispatch);
     getFbToken();
     getNewsletterPosts();
-  }
+  }, []);
 
   async function getFbToken() {
     const fbTokenResult = await fetch("/api/fbtoken");
