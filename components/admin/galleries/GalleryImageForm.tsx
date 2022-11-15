@@ -147,8 +147,7 @@ function GalleryImageForm({
       .all([...deleteRequests])
       .then(
         axios.spread((...responses) => {
-          console.log(responses);
-          // window.location.reload();
+          window.location.reload();
         })
       )
       .catch((errors) => {
