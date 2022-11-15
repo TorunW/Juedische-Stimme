@@ -9,10 +9,9 @@ import { sortGalleryByOrder } from "helpers/sortGalleryByOrder";
 
 interface GalleryFromProps {
   gallery?: Gallery;
-  galleryType: "list" | "header";
 }
 
-function GalleryForm({ gallery, galleryType }: GalleryFromProps) {
+function GalleryForm({ gallery }: GalleryFromProps) {
   const [selectedImages, setSelectedImages] = useState<Image[]>([]);
 
   function handleSelectImage(galleryImage: Image) {
