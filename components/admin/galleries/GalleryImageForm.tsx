@@ -202,6 +202,7 @@ function GalleryImageForm({
             formik.values.image_src || previewImage ? "absolute" : "relative",
           width: "auto",
           bottom: 5,
+          minHeight: "200px",
         }}
       >
         <Button
@@ -234,6 +235,19 @@ function GalleryImageForm({
     </Box>
   );
 
+  const imageOrderInput = (
+    <TextField
+      id="image_order"
+      label={"order"}
+      placeholder={"#"}
+      type="number"
+      fullWidth
+      margin="normal"
+      onChange={formik.handleChange}
+      value={formik.values.image_order}
+    />
+  );
+
   return (
     <form
       style={{ width: "100%" }}
@@ -251,7 +265,7 @@ function GalleryImageForm({
         >
           <Grid
             item
-            xs={4}
+            xs={galleryType === "list" ? 4 : 12}
           >
             <Stack
               justifyContent="space-between"
@@ -262,48 +276,39 @@ function GalleryImageForm({
               {imageInputDisplay}
             </Stack>
           </Grid>
-          <Grid
-            item
-            xs={8}
-          >
+          {galleryType === "list" && (
             <Grid
-              container
-              xs={12}
-              spacing={2}
+              item
+              xs={8}
             >
-              {galleryType === "list" && (
+              <Grid
+                container
+                xs={12}
+                spacing={2}
+              >
+                {galleryType === "list" && (
+                  <Grid
+                    item
+                    xs={9}
+                  >
+                    <TextField
+                      id="image_title"
+                      label="Board member name"
+                      type="text"
+                      fullWidth
+                      margin="normal"
+                      onChange={formik.handleChange}
+                      value={formik.values.image_title}
+                    />
+                  </Grid>
+                )}
                 <Grid
                   item
-                  xs={9}
+                  xs={3}
                 >
-                  <TextField
-                    id="image_title"
-                    label="Board member name"
-                    type="text"
-                    fullWidth
-                    margin="normal"
-                    onChange={formik.handleChange}
-                    value={formik.values.image_title}
-                  />
+                  {imageOrderInput}
                 </Grid>
-              )}
-              <Grid
-                item
-                xs={galleryType === "list" ? 3 : 12}
-              >
-                <TextField
-                  id="image_order"
-                  label={"order"}
-                  placeholder={"#"}
-                  type="number"
-                  fullWidth
-                  margin="normal"
-                  onChange={formik.handleChange}
-                  value={formik.values.image_order}
-                />
               </Grid>
-            </Grid>
-            {galleryType === "list" && (
               <Grid
                 item
                 xs={12}
@@ -319,8 +324,16 @@ function GalleryImageForm({
                   title="Board member about"
                 />
               </Grid>
-            )}
-          </Grid>
+            </Grid>
+          )}
+          {galleryType !== "list" && (
+            <Grid
+              item
+              xs={12}
+            >
+              {imageOrderInput}
+            </Grid>
+          )}
           <Grid
             xs={12}
             item
