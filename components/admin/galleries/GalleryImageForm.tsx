@@ -1,4 +1,6 @@
 import ImageIcon from "@mui/icons-material/Image";
+import { uuidv4 } from "@firebase/util";
+
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
@@ -32,7 +34,7 @@ function GalleryImageForm({
   const [previewImage, setPreviewImage] = useState<
     string | ArrayBuffer | undefined
   >();
-  const [previewImageFile, setPreviewImageFile] = useState();
+  const [previewImageFile, setPreviewImageFile] = useState<any>();
 
   // Pass the useFormik() hook initial form values and a submit function that will
   // be called when the form is submitted
@@ -47,25 +49,81 @@ function GalleryImageForm({
     onSubmit: (values) => {
       console.log(values, " VALJUES ON SUBMIT");
 
-      axios({
-        method: galleryImage ? "put" : "post",
-        url: `/api/galleryimage${
-          galleryImage ? "/" + galleryImage.image_id : ""
-        }`,
-        data: {
-          ...values,
+      const requestsArray = [];
+
+      // POST IMAGE FILE ( FILE UPLOAD )
+      const config = {
+        headers: { "content-type": "multipart/form-data" },
+        onUploadProgress: (event) => {
+          console.log(
+            `Current progress:`,
+            Math.round((event.loaded * 100) / event.total)
+          );
         },
-      }).then(
-        (response) => {
-          console.log(response, "response on gallery image (put or post)");
-          if (response.data) {
-            window.location.reload(); // BETTER FETCH THE POSTS THEN REFRESH PAGE
+      };
+
+      let galleryImageFileName = null;
+      if (previewImageFile !== null) {
+        if (galleryImage) {
+          if (!!galleryImage.image_src) {
+            const deleteFileUrl = `http://${window.location.hostname}${
+              window.location.port !== "80" ? ":" + window.location.port : ""
+            }/media/${category.category_image.split("/").join("+++")}`;
+            const deleteFileRequest = axios.delete(deleteFileUrl);
+            requestsArray.push(deleteFileRequest);
           }
-        },
-        (error) => {
-          console.log(error, "ERROR on gallery image");
         }
-      );
+        let fileType =
+          previewImageFile.name.split(".")[
+            previewImageFile.name.split.length - 1
+          ];
+
+        galleryImageFileName =
+          previewImageFile.name.split(`.${fileType}`)[0] +
+          `__${uuidv4()}.${fileType}`;
+
+        const formData = new FormData();
+
+        formData.append("theFiles", previewImageFile, galleryImageFileName);
+        const categoryImageFileRequest = axios.post(
+          "/api/uploads",
+          formData,
+          config
+        );
+        requestsArray.push(categoryImageFileRequest);
+      }
+
+      // const galleryImageRequest = axios({
+      //   method: galleryImage ? "put" : "post",
+      //   url: `/api/galleryimage${
+      //     galleryImage ? "/" + galleryImage.image_id : ""
+      //   }`,
+      //   data: {
+      //     ...values,
+      //   },
+      // });
+
+      // requestsArray.push(galleryImageRequest);
+
+      // axios({
+      //   method: galleryImage ? "put" : "post",
+      //   url: `/api/galleryimage${
+      //     galleryImage ? "/" + galleryImage.image_id : ""
+      //   }`,
+      //   data: {
+      //     ...values,
+      //   },
+      // }).then(
+      //   (response) => {
+      //     console.log(response, "response on gallery image (put or post)");
+      //     if (response.data) {
+      //       window.location.reload(); // BETTER FETCH THE POSTS THEN REFRESH PAGE
+      //     }
+      //   },
+      //   (error) => {
+      //     console.log(error, "ERROR on gallery image");
+      //   }
+      // );
     },
   });
 
@@ -94,36 +152,10 @@ function GalleryImageForm({
     }
   };
 
-  const uploadImage = async () => {
-    if (!previewImageFile) {
-      return;
-    }
-    const formData = new FormData();
-    formData.append(formik.values.image_src, previewImageFile);
-
-    console.log(formik.values.image_src);
-
-    // UPLOAD THE FILE
-    const config = {
-      headers: { "content-type": "multipart/form-data" },
-      onUploadProgress: (event) => {
-        console.log(
-          `Current progress:`,
-          Math.round((event.loaded * 100) / event.total)
-        );
-      },
-    };
-    const response = await axios.post("/api/uploads", formData, config);
-    console.log(response, " RESPONSE OF UPLOAD");
-  };
-
-  let pathname = typeof window !== "undefined" ? window.location.pathname : "";
-
   const imageDisplay = previewImage ? (
     <img
       src={previewImage.toString()}
       width="100%"
-      onClick={() => uploadImage()}
     />
   ) : (
     formik.values.image_src && (
