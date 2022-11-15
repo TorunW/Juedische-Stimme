@@ -1,4 +1,5 @@
 export const getPostContentFields = (post, locale) => {
+  console.log(post);
   let postTitle = post.post_title,
     postExcerpt = post.post_excerpt,
     postExcerpt2 = post.post_excerpt_2,
