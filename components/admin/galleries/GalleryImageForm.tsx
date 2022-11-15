@@ -47,52 +47,45 @@ function GalleryImageForm({
       image_order: galleryImage ? galleryImage.image_order : galleryImage,
     },
     onSubmit: (values) => {
-      console.log(values, " VALJUES ON SUBMIT");
-
-      const requestsArray = [];
-
-      // POST IMAGE FILE ( FILE UPLOAD )
-      const config = {
-        headers: { "content-type": "multipart/form-data" },
-        onUploadProgress: (event) => {
-          console.log(
-            `Current progress:`,
-            Math.round((event.loaded * 100) / event.total)
-          );
-        },
-      };
-
-      let galleryImageFileName = null;
-      if (previewImageFile !== null) {
-        if (galleryImage) {
-          if (!!galleryImage.image_src) {
-            const deleteFileUrl = `http://${window.location.hostname}${
-              window.location.port !== "80" ? ":" + window.location.port : ""
-            }/media/${category.category_image.split("/").join("+++")}`;
-            const deleteFileRequest = axios.delete(deleteFileUrl);
-            requestsArray.push(deleteFileRequest);
-          }
-        }
-        let fileType =
-          previewImageFile.name.split(".")[
-            previewImageFile.name.split.length - 1
-          ];
-
-        galleryImageFileName =
-          previewImageFile.name.split(`.${fileType}`)[0] +
-          `__${uuidv4()}.${fileType}`;
-
-        const formData = new FormData();
-
-        formData.append("theFiles", previewImageFile, galleryImageFileName);
-        const categoryImageFileRequest = axios.post(
-          "/api/uploads",
-          formData,
-          config
-        );
-        requestsArray.push(categoryImageFileRequest);
-      }
-
+      // console.log(values, " VALJUES ON SUBMIT");
+      // const requestsArray = [];
+      // // POST IMAGE FILE ( FILE UPLOAD )
+      // const config = {
+      //   headers: { "content-type": "multipart/form-data" },
+      //   onUploadProgress: (event) => {
+      //     console.log(
+      //       `Current progress:`,
+      //       Math.round((event.loaded * 100) / event.total)
+      //     );
+      //   },
+      // };
+      // let galleryImageFileName = null;
+      // if (previewImageFile !== null) {
+      //   if (galleryImage) {
+      //     if (!!galleryImage.image_src) {
+      //       const deleteFileUrl = `http://${window.location.hostname}${
+      //         window.location.port !== "80" ? ":" + window.location.port : ""
+      //       }/media/${category.category_image.split("/").join("+++")}`;
+      //       const deleteFileRequest = axios.delete(deleteFileUrl);
+      //       requestsArray.push(deleteFileRequest);
+      //     }
+      //   }
+      //   let fileType =
+      //     previewImageFile.name.split(".")[
+      //       previewImageFile.name.split.length - 1
+      //     ];
+      //   galleryImageFileName =
+      //     previewImageFile.name.split(`.${fileType}`)[0] +
+      //     `__${uuidv4()}.${fileType}`;
+      //   const formData = new FormData();
+      //   formData.append("theFiles", previewImageFile, galleryImageFileName);
+      //   const categoryImageFileRequest = axios.post(
+      //     "/api/uploads",
+      //     formData,
+      //     config
+      //   );
+      //   requestsArray.push(categoryImageFileRequest);
+      // }
       // const galleryImageRequest = axios({
       //   method: galleryImage ? "put" : "post",
       //   url: `/api/galleryimage${
@@ -102,9 +95,7 @@ function GalleryImageForm({
       //     ...values,
       //   },
       // });
-
       // requestsArray.push(galleryImageRequest);
-
       // axios({
       //   method: galleryImage ? "put" : "post",
       //   url: `/api/galleryimage${
