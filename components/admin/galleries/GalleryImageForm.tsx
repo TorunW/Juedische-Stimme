@@ -168,6 +168,7 @@ function GalleryImageForm({
         alignItems: "center",
         justifyContent: "center",
         position: "relative",
+        minHeight: "200px",
       }}
     >
       {previewImage ? (
@@ -199,8 +200,7 @@ function GalleryImageForm({
           position:
             formik.values.image_src || previewImage ? "absolute" : "relative",
           width: "auto",
-          bottom: 5,
-          minHeight: "200px",
+          bottom: "5px",
         }}
       >
         <Button
