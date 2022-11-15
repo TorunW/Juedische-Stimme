@@ -143,9 +143,37 @@ function GalleryImageForm({
     }
   };
 
+  // const onImageInputChangeHanlder = (event) => {
+
+  // };
+
+  const uploadImage = async () => {
+    if (!previewImageFile) {
+      return;
+    }
+    const formData = new FormData();
+    let fileName = previewImageFile.name;
+    formData.append("theFiles", previewImageFile);
+    //   fileInputRef.current?.reset();
+    // UPLOAD THE FILE
+    const config = {
+      headers: { "content-type": "multipart/form-data" },
+      onUploadProgress: (event) => {
+        console.log(
+          `Current progress:`,
+          Math.round((event.loaded * 100) / event.total)
+        );
+      },
+    };
+    const response = await axios.post("/api/uploads", formData, config);
+    console.log(response, " RESPONSE OF UPLOAD");
+    formik.setFieldValue("image_src", generateFileName(fileName));
+  };
+
   const imageDisplay = previewImage ? (
     <img
       src={previewImage.toString()}
+      onClick={uploadImage}
       width="100%"
     />
   ) : (
