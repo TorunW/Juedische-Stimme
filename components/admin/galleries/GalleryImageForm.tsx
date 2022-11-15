@@ -1,10 +1,14 @@
-import ImageIcon from "@mui/icons-material/Image";
-import { uuidv4 } from "@firebase/util";
-
 import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import ChangeCircleIcon from "@mui/icons-material/ChangeCircle";
 
-import { Box, Button, FormControl, TextField, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  FormControl,
+  Stack,
+  TextField,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import { useFormik } from "formik";
@@ -124,28 +128,34 @@ function GalleryImageForm({
     }
   };
 
-  const imageDisplay = previewImage ? (
-    <img
-      src={previewImage.toString()}
-      width="100%"
-    />
-  ) : (
-    formik.values.image_src && (
-      <Box
-        sx={{
-          width: "250px",
-          height: "250px",
-          position: "relative",
-        }}
-      >
-        <Image
-          src={generateFileServerSrc(formik.values.image_src)}
-          objectFit="contain"
-          layout="fill"
-        />
-      </Box>
-    )
-  );
+  const deleteImage = async () => {
+    if (
+      !window.confirm(
+        "Are you sure you want to delete this image? this action is irreversible!"
+      )
+    ) {
+      return;
+    }
+    const deleteFileUrl = `http://${window.location.hostname}${
+      window.location.port !== "80" ? ":" + window.location.port : ""
+    }/media/${galleryImage.image_src.split("/").join("+++")}`;
+    const deleteFileRequest = axios.delete(deleteFileUrl);
+    const deleteGalleryImageUrl = `/api/galleryimage/${galleryImage.image_id}`;
+    const deleteGalleryImageRequest = axios.delete(deleteGalleryImageUrl);
+    const deleteRequests = [deleteGalleryImageRequest, deleteFileRequest];
+    axios
+      .all([...deleteRequests])
+      .then(
+        axios.spread((...responses) => {
+          console.log(responses);
+          // window.location.reload();
+        })
+      )
+      .catch((errors) => {
+        console.log(errors, " ERRORS");
+        // react on errors.
+      });
+  };
 
   const imageInputDisplay = (
     <Box
@@ -163,7 +173,28 @@ function GalleryImageForm({
         position: "relative",
       }}
     >
-      {imageDisplay}
+      {previewImage ? (
+        <img
+          src={previewImage.toString()}
+          width="100%"
+        />
+      ) : (
+        formik.values.image_src && (
+          <Box
+            sx={{
+              width: "250px",
+              height: "250px",
+              position: "relative",
+            }}
+          >
+            <Image
+              src={generateFileServerSrc(formik.values.image_src)}
+              objectFit="contain"
+              layout="fill"
+            />
+          </Box>
+        )
+      )}
       <FormControl
         margin="normal"
         fullWidth
@@ -290,21 +321,30 @@ function GalleryImageForm({
                 />
               </Grid>
             )}
-            <Grid
-              xs={12}
-              item
-              display="flex"
-              gap={1}
-              justifyContent={"flex-end"}
+          </Grid>
+          <Grid
+            xs={12}
+            item
+            display="flex"
+            gap={1}
+            justifyContent={"flex-end"}
+          >
+            <ButtonGroup
+              variant="contained"
+              color="secondary"
             >
-              <Button
-                variant="contained"
-                color="secondary"
-                type="submit"
-              >
-                Save changes
+              {galleryImage && (
+                <Button
+                  onClick={deleteImage}
+                  color="warning"
+                >
+                  Delete
+                </Button>
+              )}
+              <Button type="submit">
+                {galleryImage ? "Update" : "Create"}
               </Button>
-            </Grid>
+            </ButtonGroup>
           </Grid>
         </Grid>
       </Box>
