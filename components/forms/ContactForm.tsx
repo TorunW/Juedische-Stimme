@@ -1,145 +1,190 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import axios from 'axios';
-import styles from './Styles.module.css';
-import * as Yup from 'yup';
-import { TextField, Button } from '@mui/material';
-import Grid from '@mui/material/Grid';
-import { Container } from '../atoms/Container';
+import React from "react";
+import { useFormik } from "formik";
+import axios from "axios";
+import styles from "./Styles.module.css";
+import * as Yup from "yup";
+import { TextField, Button } from "@mui/material";
+import Grid from "@mui/material/Grid";
+import { Container } from "../atoms/Container";
+import { useSelector } from "store/hooks";
+import { getLabel } from "helpers/getLabelHelper";
 
 const ContactForm = () => {
+  const { locale } = useSelector((state) => state.languages);
+  const { labels } = useSelector((state) => state.labels);
+
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      message: '',
+      name: "",
+      email: "",
+      message: "",
     },
     validationSchema: Yup.object().shape({
-      name: Yup.string().min(3, '* too short!').required('* required!'),
-      email: Yup.string().email().required('* required!'),
-      message: Yup.string().required('* required!'),
+      name: Yup.string().min(3, "* too short!").required("* required!"),
+      email: Yup.string().email().required("* required!"),
+      message: Yup.string().required("* required!"),
     }),
     onSubmit: (values) => {
       axios({
-        method: 'post',
+        method: "post",
         url: `/api/contact`,
         data: {
           ...values,
         },
       }).then(
         (response) => {
-          console.log(response, 'response on send newsletter');
+          console.log(response, "response on send newsletter");
         },
         (error) => {
-          console.log(error, 'ERROR on send newsletter');
+          console.log(error, "ERROR on send newsletter");
         }
       );
     },
   });
 
   return (
-    <div id='contact'>
+    <div id="contact">
       <Container>
-        <form onSubmit={formik.handleSubmit} className={styles.contactForm}>
-          <Grid container spacing={4} display='flex' justifyContent={'center'}>
-            <Grid item xs={10}>
+        <form
+          onSubmit={formik.handleSubmit}
+          className={styles.contactForm}
+        >
+          <Grid
+            container
+            spacing={4}
+            display="flex"
+            justifyContent={"center"}
+          >
+            <Grid
+              item
+              xs={10}
+            >
               <h2>Kontakt</h2>
             </Grid>
 
-            <Grid item md={5} xs={10}>
+            <Grid
+              item
+              md={5}
+              xs={10}
+            >
               <TextField
-                id='name'
-                type='name'
+                id="name"
+                type="name"
                 onChange={formik.handleChange}
                 value={formik.values.name}
-                placeholder='Name'
-                data-testid='name-input'
+                placeholder={getLabel(labels, locale, "fullname", "Name")}
+                data-testid="name-input"
                 fullWidth
-                color='secondary'
+                color="secondary"
                 sx={{
-                  background: 'white',
+                  background: "white",
                   [`& fieldset`]: {
                     borderRadius: 0,
                   },
                 }}
               />
               {formik.errors && formik.errors.name ? (
-                <div data-testid='name-error' className={styles.error}>
+                <div
+                  data-testid="name-error"
+                  className={styles.error}
+                >
                   {formik.errors.name}
                 </div>
               ) : (
-                ''
+                ""
               )}
             </Grid>
-            <Grid item md={5} xs={10}>
+            <Grid
+              item
+              md={5}
+              xs={10}
+            >
               <TextField
-                id='email'
-                type='email'
-                data-testid='email-input'
+                id="email"
+                type="email"
+                data-testid="email-input"
                 onChange={formik.handleChange}
                 value={formik.values.email}
-                placeholder='Email'
+                placeholder={getLabel(labels, locale, "email", "E-mail")}
                 fullWidth
-                color='secondary'
+                color="secondary"
                 sx={{
-                  background: 'white',
+                  background: "white",
                   [`& fieldset`]: {
                     borderRadius: 0,
                   },
                 }}
               />
               {formik.errors && formik.errors.email ? (
-                <div data-testid='email-error' className={styles.error}>
+                <div
+                  data-testid="email-error"
+                  className={styles.error}
+                >
                   {formik.errors.email}
                 </div>
               ) : (
-                ''
+                ""
               )}
             </Grid>
-            <Grid item md={10} xs={10}>
+            <Grid
+              item
+              md={10}
+              xs={10}
+            >
               <TextField
-                id='message'
-                name='message'
+                id="message"
+                name="message"
                 onChange={formik.handleChange}
                 value={formik.values.message}
-                data-testid='message-input'
+                data-testid="message-input"
                 multiline
                 rows={3}
                 fullWidth
-                placeholder='Your messsage...'
-                color='secondary'
+                placeholder={getLabel(
+                  labels,
+                  locale,
+                  "your_message",
+                  "Ihre Nachricht"
+                )}
+                color="secondary"
                 sx={{
-                  background: 'white',
+                  background: "white",
                   [`& fieldset`]: {
                     borderRadius: 0,
                   },
                 }}
               />
               {formik.errors.message && formik.touched.message ? (
-                <div data-testid='message-error' className={styles.error}>
+                <div
+                  data-testid="message-error"
+                  className={styles.error}
+                >
                   {formik.errors.message}
                 </div>
               ) : (
-                ''
+                ""
               )}
             </Grid>
 
-            <Grid item xs={10}>
+            <Grid
+              item
+              xs={10}
+            >
               <Button
-                type='submit'
+                type="submit"
                 fullWidth
                 sx={{
                   border: 5,
                   borderRadius: 0,
-                  borderColor: '#8179a6',
-                  fontSize: '1.6rem',
+                  borderColor: "#8179a6",
+                  fontSize: "1.6rem",
                   fontWeight: 700,
-                  height: '55px',
-                  color: 'white',
-                  '&:hover': {
-                    background: '#8179a6',
-                    color: 'white',
-                    transition: 'all .5s ease-in-out',
+                  height: "55px",
+                  color: "white",
+                  "&:hover": {
+                    background: "#8179a6",
+                    color: "white",
+                    transition: "all .5s ease-in-out",
                   },
                 }}
               >
