@@ -92,12 +92,7 @@ function GalleryForm({ gallery }: GalleryFromProps) {
               galleryImage={galleryImage}
               galleryId={gallery.gallery_id}
               galleryType={gallery.gallery_type}
-              handleSelectImage={() => handleSelectImage(galleryImage)}
-              isSelected={
-                selectedImages.findIndex(
-                  (sImg) => sImg.image_src === galleryImage.image_src
-                ) > -1
-              }
+              hideDelete={gallery.images.length === 1 ? true : false}
             />
           ))}
       </Card>

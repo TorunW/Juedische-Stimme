@@ -22,17 +22,15 @@ import Image from "next/image";
 interface GalleryImageFormProps {
   galleryId: number | string;
   galleryImage?: any;
-  handleSelectImage?: Function;
-  isSelected?: boolean;
+  hideDelete?: boolean;
   galleryType?: string;
 }
 
 function GalleryImageForm({
   galleryId,
   galleryImage,
-  handleSelectImage,
-  isSelected,
   galleryType,
+  hideDelete,
 }: GalleryImageFormProps) {
   const fileInputRef: any = useRef();
   const [previewImage, setPreviewImage] = useState<
@@ -345,7 +343,7 @@ function GalleryImageForm({
               variant="contained"
               color="secondary"
             >
-              {galleryImage && (
+              {galleryImage && !hideDelete && (
                 <Button
                   onClick={deleteImage}
                   color="warning"
