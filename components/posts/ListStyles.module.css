@@ -90,7 +90,7 @@
     min-width: 50%;
     position: relative;
     overflow: hidden;
-    aspect-ratio: auto 559 / 300;
+    aspect-ratio: auto 1.86333333;
   }
   .articleLayout .contentContainer .middleWrapper .image img {
     height: 100%;
@@ -111,7 +111,7 @@
     margin: 16px 0 !;
   }
 }
-@media (max-width: 1024px) {
+@media (max-width: 1024px) and (min-width: 770px) {
   .articleLayout {
     height: 100%;
   }
@@ -199,7 +199,7 @@
     min-width: 50%;
     position: relative;
     overflow: hidden;
-    aspect-ratio: auto 559 / 300;
+    aspect-ratio: auto 1.86333333;
   }
   .articleLayout .contentContainer .middleWrapper .image img {
     height: 100%;
@@ -228,32 +228,33 @@
     height: 100%;
   }
   .articleLayout .header {
-    height: 200px;
+    height: 100%;
+    min-height: 200px;
     background: #696388;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
   }
   .articleLayout .header .contentWrapper {
     width: 100%;
     display: flex;
     margin-top: 32px;
+    padding: 0 20px;
+    height: 100%;
   }
   .articleLayout .header .contentWrapper h2 {
-    display: flex;
-    align-items: center;
     position: relative;
-    margin: 0 auto;
-    padding: 0 32px;
     color: white !important;
+    margin-top: 32px;
     z-index: 5;
     text-align: left !important;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     text-transform: capitalize !important;
   }
   .articleLayout .header .contentWrapper .imageWrapper {
-    width: 60%;
+    width: 55%;
     height: 200px;
+    overflow: hidden;
     position: absolute;
     z-index: 1;
     right: 0;
@@ -308,7 +309,7 @@
     width: 100%;
     position: relative;
     overflow: hidden;
-    aspect-ratio: auto 559 / 300;
+    aspect-ratio: auto 1.86333333;
   }
   .articleLayout .contentContainer .middleWrapper .image img {
     height: 100%;
@@ -364,7 +365,7 @@
   }
   .newsletterLayout .header .imageWrapper {
     width: 80%;
-    aspect-ratio: auto 994 / 337;
+    aspect-ratio: auto 2.9495549;
     margin: 32px auto;
     overflow: hidden;
     cursor: pointer;
@@ -384,7 +385,7 @@
   .newsletterLayout .contentContainer .image {
     margin: 48px auto;
     max-width: 749px;
-    aspect-ratio: auto 794 / 326;
+    aspect-ratio: auto 2.43558282;
     overflow: hidden;
     position: relative;
   }
@@ -425,7 +426,7 @@
     margin: 0 8px;
   }
   .newsletterLayout .header .imageWrapper {
-    aspect-ratio: auto 994 / 337;
+    aspect-ratio: auto 2.9495549;
     margin: 32px auto;
     overflow: hidden;
     cursor: pointer;
@@ -445,7 +446,7 @@
   .newsletterLayout .contentContainer .image {
     margin: 48px auto;
     min-width: 100%;
-    aspect-ratio: auto 794 / 326;
+    aspect-ratio: auto 2.43558282;
     overflow: hidden;
     position: relative;
   }
@@ -489,7 +490,7 @@
   .newsletterLayout .header .imageWrapper {
     max-width: 100%;
     min-height: 200px;
-    aspect-ratio: auto 994 / 337;
+    aspect-ratio: auto 2.9495549;
     margin: 16px auto;
     overflow: hidden;
     position: relative;
@@ -508,7 +509,7 @@
   .newsletterLayout .contentContainer .image {
     max-width: 100%;
     min-height: 200px;
-    aspect-ratio: auto 994 / 337;
+    aspect-ratio: auto 2.9495549;
     margin: 16px auto;
     overflow: hidden;
     position: relative;

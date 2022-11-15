@@ -131,7 +131,10 @@ function PaymentForm() {
   return (
     <div className={styles.formContainer}>
       <div className={styles.topRow}> {productsDisplay}</div>
-      <div className={styles.bottomRow}>{priceDisplay}</div>
+      <div className={styles.bottomRow}>
+        <p>Choose an amount you want to donate</p>
+        {priceDisplay}
+      </div>
     </div>
   );
 }

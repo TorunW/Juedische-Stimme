@@ -1,9 +1,9 @@
-import React from "react";
-import styles from "./Styles.module.css";
-import { Field } from "formik";
+import React from 'react';
+import styles from './Styles.module.css';
+import { Field } from 'formik';
 
-import { getLabel } from "helpers/getLabelHelper";
-import { useSelector } from "store/hooks";
+import { getLabel } from 'helpers/getLabelHelper';
+import { useSelector } from 'store/hooks';
 
 function Prices({
   product,
@@ -29,8 +29,8 @@ function Prices({
         priceFormattedDisplay = getLabel(
           labels,
           locale,
-          "choose_amount",
-          "__ "
+          'choose_amount',
+          '__ '
         );
       }
     }
@@ -39,17 +39,17 @@ function Prices({
         key={price.id}
         className={
           styles.box +
-          " " +
-          (selectedPrice === price.id ? styles.boxSelected : "")
+          ' ' +
+          (selectedPrice === price.id ? styles.boxSelected : '')
         }
         title={`${price?.unit_amount_decimal?.slice(0, -2)}€`}
       >
         <Field
           className={styles.radio}
-          type="radio"
+          type='radio'
           title={priceFormattedDisplay}
           value={price.id}
-          name="price"
+          name='price'
         />
         {`${priceFormattedDisplay}`}€<a></a>
       </label>
