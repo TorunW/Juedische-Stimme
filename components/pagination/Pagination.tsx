@@ -96,7 +96,11 @@ const Pagination = ({ pageNum, itemsCount, itemsPerPage, type, title }) => {
             >
               <a
                 href={`/${type}/${title}/page/${number}`}
-                className={number === pageNum ? styles.active : styles.pageLink}
+                className={
+                  parseInt(number) === parseInt(pageNum)
+                    ? styles.active
+                    : styles.pageLink
+                }
               >
                 {number}
               </a>

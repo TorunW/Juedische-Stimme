@@ -37,6 +37,10 @@ interface PostFormProps {
 }
 
 const PostForm = ({ post, nextPostId }: PostFormProps) => {
+  const isFormLayout =
+    post?.post_layout === "donation" || post?.post_layout === "member_form";
+  const isMinimalLayout = isFormLayout || (post && post.post_layout === "info");
+
   const pathname =
     typeof window !== "undefined" ? window.location.pathname : "";
 
@@ -82,21 +86,23 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
     post_layout: post ? post.post_layout : "",
   };
 
-  const postContentValidation = Yup.string()
-    .min(700, "Post content should be a least 700 characters")
-    .required("Add some text to the post");
-
   const validationSchema = Yup.object().shape({
     post_title: Yup.string().min(3).required("Add a title to the post"),
-    categoryId: Yup.number().when("post_type", {
-      is: "post",
-      then: Yup.number().required("Choose a category"),
-    }),
+    categoryId:
+      !isFormLayout &&
+      Yup.number().when("post_type", {
+        is: "post",
+        then: Yup.number().required("Choose a category"),
+      }),
     post_layout: Yup.string().when("post_type", {
       is: "post",
       then: Yup.string().min(2).required("Choose a layout for the post"),
     }),
-    post_content: postContentValidation,
+    post_content:
+      !isMinimalLayout &&
+      Yup.string()
+        .min(700, "Post content should be a least 700 characters")
+        .required("Add some text to the post"),
   });
 
   const onSubmit = (values) => {
@@ -225,11 +231,6 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
       });
   };
 
-  const isMinimalLayout =
-    (post && post.post_layout === "donation") ||
-    (post && post.post_layout === "member_form") ||
-    (post && post.post_layout === "info");
-
   return (
     <Box sx={{ width: "100%" }}>
       <AdminTopBar
@@ -294,7 +295,8 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                             )}
                           </FormControl>
                         </Grid>
-                        {!isMinimalLayout && (
+
+                        {!isFormLayout && (
                           <>
                             <Grid
                               md={6}
@@ -324,12 +326,10 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                                     </MenuItem>
                                   ))}
                                 </Select>
-                                {props?.errors?.categoryId ? (
+                                {props?.errors?.categoryId && (
                                   <FormError
                                     message={props.errors.categoryId}
                                   />
-                                ) : (
-                                  ""
                                 )}
                               </FormControl>
                             </Grid>
@@ -357,12 +357,10 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
                                   <MenuItem value={"legacy"}>Legacy</MenuItem>
                                   <MenuItem value={"info"}>Info</MenuItem>
                                 </Select>
-                                {props?.errors?.post_layout ? (
+                                {props?.errors?.post_layout && (
                                   <FormError
                                     message={props.errors.post_layout}
                                   />
-                                ) : (
-                                  ""
                                 )}
                               </FormControl>
                             </Grid>
@@ -638,7 +636,7 @@ const PostForm = ({ post, nextPostId }: PostFormProps) => {
           </Formik>
         )}
 
-        {currentTab === tabs[1] && (
+        {!!post && currentTab === tabs[1] && (
           <PostTranslations
             post={post}
             locales={locales}

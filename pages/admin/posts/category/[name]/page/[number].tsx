@@ -27,7 +27,6 @@ export const getServerSideProps = createAdminServerSideProps<HomePageProps>(
         isCategory: true,
         pageNum: context.query.number,
         showUnpublished: true,
-        postType: "post",
         locale: context.locale !== context.defaultLocale ? context.locale : "",
       }),
     });

@@ -1,7 +1,7 @@
 import { generateFileServerSrc } from "helpers/generateFileServerSrc";
 import { usePrevious } from "helpers/usePreviousHelper";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "store/hooks";
 import HeaderGalleryControllers from "./HeaderGalleryControllers";
 import styles from "./Styles.module.css";
@@ -26,6 +26,16 @@ const Header = () => {
   const [isSlideShow, setIsSlideShow] = useState(
     imageSrcs.length > 1 ? true : false
   );
+
+  useEffect(() => {
+    const imageSrcs =
+      headerGallery?.imageSrcs.indexOf(",") > -1
+        ? headerGallery.imageSrcs.split(",")
+        : [headerGallery?.imageSrcs];
+    setIsSlideShow(imageSrcs.length > 1 ? true : false);
+  }, [headerGallery]);
+
+  console.log(isSlideShow);
 
   return (
     <header

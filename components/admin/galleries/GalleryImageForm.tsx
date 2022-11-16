@@ -150,7 +150,7 @@ function GalleryImageForm({
       )
       .catch((errors) => {
         console.log(errors, " ERRORS");
-        // react on errors.
+        window.location.reload();
       });
   };
 
