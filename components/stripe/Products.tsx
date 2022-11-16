@@ -77,23 +77,21 @@ function PaymentForm() {
                       product={product}
                       selectedPrice={values.price}
                     />
-                    <div className={styles.btnWrapper}>
-                      <button
-                        type="submit"
-                        className={
-                          values.price.length > 1
-                            ? styles.btn + " " + styles.btnActive
-                            : styles.btn + " " + styles.btnInactive
-                        }
-                      >
-                        {getLabel(
-                          labels,
-                          locale,
-                          "donate",
-                          "Click here to donate"
-                        )}
-                      </button>
-                    </div>
+                    {values.price.length > 1 && (
+                      <div className={styles.btnWrapper}>
+                        <button
+                          type="submit"
+                          className={styles.btn + " " + styles.btnActive}
+                        >
+                          {getLabel(
+                            labels,
+                            locale,
+                            "donate",
+                            "Click here to donate"
+                          )}
+                        </button>
+                      </div>
+                    )}
                   </Form>
                 );
               }}
