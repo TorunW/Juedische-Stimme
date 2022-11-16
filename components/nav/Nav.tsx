@@ -25,6 +25,18 @@ function Nav() {
     imageSrcs.length > 1 ? true : false
   );
 
+  useEffect(() => {
+    const imageSrcs =
+      headerGallery?.imageSrcs.indexOf(",") > -1
+        ? headerGallery.imageSrcs.split(",")
+        : [headerGallery?.imageSrcs];
+    setIsSlideShowGallery(imageSrcs.length > 1 ? true : false);
+  }, [headerGallery]);
+
+  useEffect(() => {
+    setBgVisible(!!isSlideShowGallery);
+  }, [isSlideShowGallery]);
+
   const [pathName, setPathName] = useState("");
   const [bgVisible, setBgVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
@@ -293,7 +305,7 @@ function Nav() {
   return (
     <nav
       data-testid="nav"
-      className={bgVisible === true ? styles.navActive : styles.nav}
+      className={!!bgVisible ? styles.navActive : styles.nav}
     >
       <Head>
         <div>

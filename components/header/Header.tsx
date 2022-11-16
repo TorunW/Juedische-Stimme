@@ -35,10 +35,9 @@ const Header = () => {
     setIsSlideShow(imageSrcs.length > 1 ? true : false);
   }, [headerGallery]);
 
-  console.log(isSlideShow);
-
   return (
     <header
+      style={{ overflow: "hidden" }}
       id="main-header"
       role="main-header"
       className={
@@ -69,7 +68,11 @@ const Header = () => {
               );
             })}
           </div>
-          {imageSrcs.length > 1 ? (
+          <div
+            className={styles.container}
+            dangerouslySetInnerHTML={{ __html: headerSlogan }}
+          ></div>
+          {imageSrcs.length > 1 && (
             <div className={styles.controllersWrapper}>
               <HeaderGalleryControllers
                 slideIndex={slideIndex}
@@ -77,11 +80,6 @@ const Header = () => {
                 slideshowLength={headerGallery.imageSrcs.split(",").length - 1}
               />
             </div>
-          ) : (
-            <div
-              className={styles.container}
-              dangerouslySetInnerHTML={{ __html: headerSlogan }}
-            ></div>
           )}
         </>
       )}
