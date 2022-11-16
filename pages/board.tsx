@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import Gallery from "@/components/gallery/Gallery";
-import { LayoutPage } from "types/LayoutPage.type";
-import { LayoutPageProps } from "types/LayoutPageProps.type";
-import { HomePageProps } from "pages";
-import { createServerSideProps } from "page/server-side-props";
+import { setPropsToStore } from "helpers/setPropsToStore";
 import excuteQuery from "lib/db";
 import { selectGalleryImagesByGalleryId } from "lib/queries";
+import { createServerSideProps } from "page/server-side-props";
+import { HomePageProps } from "pages";
 import { useDispatch } from "store/hooks";
-import { setLanguages } from "store/languages/languagesSlice";
-import { setMenuItems } from "store/nav/navSlice";
+import { LayoutPage } from "types/LayoutPage.type";
+import { LayoutPageProps } from "types/LayoutPageProps.type";
 
 export const getServerSideProps = createServerSideProps<HomePageProps>(
   async ({ context, data: { navItems, labels, locale } }) => {
@@ -41,14 +40,7 @@ const Board: LayoutPage = (props: LayoutPageProps) => {
   const galleryImages = JSON.parse(props.galleryImages);
 
   useEffect(() => {
-    dispatch(setMenuItems(JSON.parse(props.navItems)));
-    dispatch(
-      setLanguages({
-        locales: props.locales,
-        locale: props.locale,
-        defaultLocale: props.defaultLocale,
-      })
-    );
+    setPropsToStore(props, dispatch);
   }, []);
 
   return (
