@@ -3,15 +3,14 @@ import {
   Button,
   Card,
   FormControl,
-  TextField,
-  Select,
-  MenuItem,
   InputLabel,
+  MenuItem,
+  Select,
+  TextField,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 import { useFormik } from "formik";
-import { useState } from "react";
 import { Label, LabelType, LabelTypes } from "types/Label.type";
 import * as Yup from "yup";
 
@@ -20,7 +19,13 @@ interface Props {
 }
 
 const LabelForm = ({ label }: Props) => {
-  const labelTypes: LabelType[] = ["button", "form_field", "title", "tab"];
+  const labelTypes: LabelType[] = [
+    "button",
+    "form_field",
+    "title",
+    "tab",
+    "text",
+  ];
 
   const formik = useFormik({
     initialValues: {

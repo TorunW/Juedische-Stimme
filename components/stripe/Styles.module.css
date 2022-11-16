@@ -76,7 +76,7 @@
   font-weight: 600;
   border-radius: 2px;
   text-transform: capitalize;
-  height: 56px;
+  min-height: 56px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0);
   cursor: pointer;

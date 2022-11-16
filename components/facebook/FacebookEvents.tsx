@@ -1,18 +1,21 @@
-import React, { ReactElement, useEffect } from "react";
+import axios from "axios";
 import dateTimeHelper from "helpers/dateTimeHelper";
 import formateDate from "helpers/formateDate";
-import axios from "axios";
 import renderToString from "helpers/renderToString";
+import { ReactElement, useEffect } from "react";
 
+import { getLabel } from "helpers/getLabelHelper";
 import { setEvents } from "store/fbdata/fbDataSlice";
 import { useDispatch, useSelector } from "store/hooks";
-import styles from "./StylesEvents.module.css";
-import { isUpdatedToday } from "helpers/checkIfUpdatedToday";
 import { Container } from "../atoms/Container";
+import styles from "./StylesEvents.module.css";
 
 const FacebookEvents = ({ fbt }) => {
   const dispatch = useDispatch();
   const events = useSelector((state) => state.fbData.events);
+
+  const { locale } = useSelector((state) => state.languages);
+  const { labels } = useSelector((state) => state.labels);
 
   useEffect(() => {
     fetchFacebookEventsFromDb();
@@ -111,7 +114,7 @@ const FacebookEvents = ({ fbt }) => {
           id="events"
           className={styles.eventsPage}
         >
-          <h2>Aktivitäten</h2>
+          <h2>{getLabel(labels, locale, "activities_title", "Aktivitäten")}</h2>
           <Container>
             <div className={styles.contentContainer}>{eventsDisplay}</div>
           </Container>

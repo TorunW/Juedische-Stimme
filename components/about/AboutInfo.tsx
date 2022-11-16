@@ -17,7 +17,7 @@ const AboutInfo = ({ aboutInfo }) => {
       id="about-info"
       className={styles.aboutPage}
     >
-      <h1>Über Uns</h1>
+      <h1>{getLabel(labels, locale, "about_us_title", "Über uns")}</h1>
       <Container>
         {aboutInfo && aboutInfo !== null && (
           <div

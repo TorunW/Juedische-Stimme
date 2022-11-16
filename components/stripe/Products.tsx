@@ -86,7 +86,12 @@ function PaymentForm() {
                             : styles.btn + " " + styles.btnInactive
                         }
                       >
-                        Click here to donate
+                        {getLabel(
+                          labels,
+                          locale,
+                          "donate",
+                          "Click here to donate"
+                        )}
                       </button>
                     </div>
                   </Form>
