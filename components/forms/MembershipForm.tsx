@@ -1,17 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
 import styles from "./Styles.module.css";
 import * as Yup from "yup";
 import { useSelector } from "store/hooks";
 import { getLabel } from "helpers/getLabelHelper";
-import { TextField, Typography, useMediaQuery } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import theme from "config/theme";
 import Grid from "@mui/material/Grid";
+import { Stack } from "@mui/system";
 
 const MembershipForm = () => {
   const { labels } = useSelector((state) => state.labels);
   const { locale } = useSelector((state) => state.languages);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -61,6 +71,7 @@ const MembershipForm = () => {
       email: Yup.string().email().required("* required!"),
     }),
     onSubmit: (values) => {
+      setIsSubmitting(true);
       axios({
         method: "post",
         url: `/api/membership`,
@@ -69,9 +80,13 @@ const MembershipForm = () => {
         },
       }).then(
         (response) => {
+          setIsSubmitting(false);
+          setIsSubmitted(true);
           console.log(response, "did send form");
         },
         (error) => {
+          setIsSubmitting(false);
+          setIsSubmitted(true);
           console.log(error, "error");
         }
       );
@@ -417,9 +432,22 @@ const MembershipForm = () => {
             marginTop={2}
           >
             <div className="button blackBg submitBtn">
-              <button type="submit">
-                {getLabel(labels, locale, "send", "Senden")}
-              </button>
+              <Button
+                type="submit"
+                disabled={isSubmitting || formik.submitCount > 0}
+              >
+                <Stack flexDirection="row">
+                  {isSubmitting && (
+                    <CircularProgress
+                      sx={{ color: "common.white", mt: "11px", mr: 1 }}
+                      size={22}
+                    />
+                  )}
+                  {formik.submitCount === 0
+                    ? getLabel(labels, locale, "send", "Senden")
+                    : getLabel(labels, locale, "sent", "Gesendet")}
+                </Stack>
+              </Button>
             </div>
           </Grid>
         </Grid>
