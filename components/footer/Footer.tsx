@@ -31,7 +31,7 @@ export const Footer = () => {
           </Box>
           <p>
             {footerMenu.map((mi, index) => (
-              <React.Fragment>
+              <React.Fragment key={mi.link}>
                 <Link
                   key={mi.title}
                   href={

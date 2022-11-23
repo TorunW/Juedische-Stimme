@@ -1,9 +1,9 @@
 import { generateFileServerSrc } from "helpers/generateFileServerSrc";
 import { getPostContentFields } from "helpers/getPostContentFields";
+import Image from "next/image";
 import React from "react";
 import MembershipForm from "../forms/MembershipForm";
 import styles from "./ListStyles.module.css";
-import Image from "next/image";
 
 const PostPageMemberFormLayout = ({ post, locale }) => {
   const { postTitle, postContent } = getPostContentFields(post, locale);

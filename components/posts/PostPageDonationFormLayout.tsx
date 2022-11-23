@@ -1,10 +1,9 @@
-import React from "react";
 import DonationsForm from "components/forms/DonationsForm";
-import Image from "next/image";
-import styles from "./ListStyles.module.css";
-import { generateImageUrl } from "helpers/imageUrlHelper";
-import { getPostContentFields } from "helpers/getPostContentFields";
 import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+import { getPostContentFields } from "helpers/getPostContentFields";
+import Image from "next/image";
+import React from "react";
+import styles from "./ListStyles.module.css";
 
 const PostPageDonationFormLayout = ({ post, locale }) => {
   const { postTitle, postContent } = getPostContentFields(post, locale);
