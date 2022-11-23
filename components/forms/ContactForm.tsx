@@ -40,6 +40,7 @@ const ContactForm = () => {
         (response) => {
           setIsSubmitted(true);
           setIsSubmitting(false);
+          formik.resetForm();
           console.log(response, "response on send newsletter");
         },
         (error) => {

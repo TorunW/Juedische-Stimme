@@ -13,7 +13,7 @@ import $switch from "dolla-switch";
 
 function Post({ post }) {
   const { locale } = useSelector((state) => state.languages);
-  const postLayout = getPostLaoyut(post);
+  const postLayout = post ? getPostLaoyut(post) : null;
 
   return (
     <div
