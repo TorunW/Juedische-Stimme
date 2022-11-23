@@ -5,6 +5,7 @@ import { useSelector } from "store/hooks";
 import { Container } from "../atoms/Container";
 import { Box } from "@mui/system";
 import { getLabel } from "helpers/getLabelHelper";
+import Link from "next/link";
 
 export const Footer = () => {
   const { footerMenu } = useSelector((state) => state.nav);
@@ -30,8 +31,18 @@ export const Footer = () => {
           </Box>
           <p>
             {footerMenu.map((mi, index) => (
-              <React.Fragment key={mi.title}>
-                <a href={mi.link}>{mi.title}</a>
+              <React.Fragment>
+                <Link
+                  key={mi.title}
+                  href={
+                    "/" + (mi.link && mi.link !== null ? mi.link : mi.post_name)
+                  }
+                >
+                  {locale === "en_US" && mi.title_en_US
+                    ? mi.title_en_US
+                    : mi.title}
+                </Link>
+
                 {index + 1 < footerMenu.length && (
                   <span style={{ margin: "0 5px" }}>●</span>
                 )}

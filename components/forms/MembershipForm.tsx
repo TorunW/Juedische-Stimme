@@ -434,10 +434,12 @@ const MembershipForm = () => {
             <div className="button blackBg submitBtn">
               <Button
                 type="submit"
-                disabled={isSubmitting || formik.submitCount > 0}
+                disabled={
+                  !formik.isValid || isSubmitting || formik.submitCount > 0
+                }
               >
                 <Stack flexDirection="row">
-                  {isSubmitting && (
+                  {isSubmitting && formik.submitCount === 0 && (
                     <CircularProgress
                       sx={{ color: "common.white", mt: "11px", mr: 1 }}
                       size={22}
