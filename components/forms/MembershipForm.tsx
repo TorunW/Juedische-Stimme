@@ -102,7 +102,9 @@ const MembershipForm = () => {
         onSubmit={formik.handleSubmit}
         className={styles.form}
       >
-        <h3>Dein Info Ausfüllen</h3>
+        <h3>
+          {getLabel(labels, locale, "fill_in_your_info", "Dein Info Ausfüllen")}
+        </h3>
         <Grid
           container
           spacing={isSmall ? 1 : 3}

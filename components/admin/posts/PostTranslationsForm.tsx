@@ -39,7 +39,7 @@ const PostTranslationsForm = ({ post, language }) => {
       }).then(
         (response) => {
           console.log(response, "response on translation (put or post)");
-          window.location.reload();
+          // window.location.reload();
         },
         (error) => {
           console.log(error, "ERROR on post / put translation");
@@ -49,6 +49,8 @@ const PostTranslationsForm = ({ post, language }) => {
   });
 
   const { errors } = formik;
+
+  console.log(formik.values, "formik.values");
 
   const isMinimalLayout =
     (post && post.post_layout === "donation") ||
