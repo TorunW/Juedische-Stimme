@@ -1,17 +1,21 @@
-import React from "react";
-import { useFormik } from "formik";
-import axios from "axios";
-import styles from "./Styles.module.css";
-import * as Yup from "yup";
-import { TextField, Button } from "@mui/material";
+import { TextField } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { Container } from "../atoms/Container";
-import { useSelector } from "store/hooks";
+import axios from "axios";
+import { useFormik } from "formik";
 import { getLabel } from "helpers/getLabelHelper";
+import { useState } from "react";
+import { useSelector } from "store/hooks";
+import * as Yup from "yup";
+import { ButtonWithLoading } from "../atoms/ButtonWithLoading";
+import { Container } from "../atoms/Container";
+import styles from "./Styles.module.css";
 
 const ContactForm = () => {
   const { locale } = useSelector((state) => state.languages);
   const { labels } = useSelector((state) => state.labels);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -25,6 +29,7 @@ const ContactForm = () => {
       message: Yup.string().required("* required!"),
     }),
     onSubmit: (values) => {
+      setIsSubmitting(true);
       axios({
         method: "post",
         url: `/api/contact`,
@@ -33,9 +38,12 @@ const ContactForm = () => {
         },
       }).then(
         (response) => {
+          setIsSubmitted(true);
+          setIsSubmitting(false);
           console.log(response, "response on send newsletter");
         },
         (error) => {
+          setIsSubmitting(false);
           console.log(error, "ERROR on send newsletter");
         }
       );
@@ -170,9 +178,13 @@ const ContactForm = () => {
               item
               xs={10}
             >
-              <Button
-                type="submit"
-                fullWidth
+              <ButtonWithLoading
+                disabled={
+                  !formik.isValid ||
+                  !formik.dirty ||
+                  isSubmitting ||
+                  isSubmitted
+                }
                 sx={{
                   border: 5,
                   borderRadius: 0,
@@ -180,16 +192,18 @@ const ContactForm = () => {
                   fontSize: "1.6rem",
                   fontWeight: 700,
                   height: "55px",
-                  color: "white",
+                  color: "common.white",
                   "&:hover": {
                     background: "#8179a6",
                     color: "white",
                     transition: "all .5s ease-in-out",
                   },
                 }}
-              >
-                {getLabel(labels, locale, "send", "Senden")}
-              </Button>
+                loading={isSubmitting && !isSubmitted}
+                isFinished={isSubmitted}
+                text={getLabel(labels, locale, "send", "Senden")}
+                textAfterLoading={getLabel(labels, locale, "sent", "Gesendet")}
+              />
             </Grid>
           </Grid>
         </form>

@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import theme from "config/theme";
 import Grid from "@mui/material/Grid";
-import { Stack } from "@mui/system";
+import { ButtonWithLoading } from "../atoms/ButtonWithLoading";
 
 const MembershipForm = () => {
   const { labels } = useSelector((state) => state.labels);
@@ -432,24 +432,18 @@ const MembershipForm = () => {
             marginTop={2}
           >
             <div className="button blackBg submitBtn">
-              <Button
-                type="submit"
+              <ButtonWithLoading
                 disabled={
-                  !formik.isValid || isSubmitting || formik.submitCount > 0
+                  !formik.isValid ||
+                  !formik.dirty ||
+                  isSubmitting ||
+                  isSubmitted
                 }
-              >
-                <Stack flexDirection="row">
-                  {isSubmitting && formik.submitCount === 0 && (
-                    <CircularProgress
-                      sx={{ color: "common.white", mt: "11px", mr: 1 }}
-                      size={22}
-                    />
-                  )}
-                  {formik.submitCount === 0
-                    ? getLabel(labels, locale, "send", "Senden")
-                    : getLabel(labels, locale, "sent", "Gesendet")}
-                </Stack>
-              </Button>
+                loading={isSubmitting && !isSubmitted}
+                isFinished={isSubmitted}
+                text={getLabel(labels, locale, "send", "Senden")}
+                textAfterLoading={getLabel(labels, locale, "sent", "Gesendet")}
+              />
             </div>
           </Grid>
         </Grid>
