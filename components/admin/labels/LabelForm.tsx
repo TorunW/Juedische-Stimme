@@ -123,7 +123,7 @@ const LabelForm = ({ label }: Props) => {
                   id="label_name"
                   label="System name"
                   focused
-                  disabled={!!label}
+                  disabled={false}
                   name="label_name"
                   type="text"
                   placeholder="Add a system name for the label..."

@@ -19,10 +19,10 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
       const mailData = {
         from: {
-          address: "info@juedische-stimme.com",
+          address: "mail@juedische-stimme.de",
         },
         replyTo: req.body.email,
-        to: ["info@juedische-stimme.com", "mail@juedische-stimme.de"],
+        to: ["mail@juedische-stimme.de"],
         subject: `Contact Message From ${req.body.name}`,
         text: req.body.message,
         html: `<div>${req.body.message}</div>`,
