@@ -1,12 +1,13 @@
 import React from "react";
 import excuteQuery from "lib/db";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
-import { Typography, Card, Box } from "@mui/material";
-import FacebookTokenForm from "@/components/admin/FacebookTokenForm";
+import { Typography, Card, Box, Stack } from "@mui/material";
 import { createAdminServerSideProps } from "page/admin-server-side-props";
 import { HomePageProps } from "pages";
 import { useLoggedUser } from "hooks/useLoggedUser";
 import ConstructionIcon from "@mui/icons-material/Construction";
+import { Container } from "@mui/system";
+import { PageViews } from "./dashboard/PageViews";
 
 function AdminDashboard(props) {
   const { loggedUser } = useLoggedUser(props);
@@ -14,16 +15,7 @@ function AdminDashboard(props) {
   return (
     <Box>
       <AdminTopBar title="Dashboard" />
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center",
-          marginTop: 4,
-          minHeight: "50vh",
-        }}
-      >
+      <Container>
         <Card sx={{ marginTop: 2, padding: 4 }}>
           <Box textAlign="center">
             <ConstructionIcon sx={{ fontSize: "159px" }} />
@@ -40,8 +32,11 @@ function AdminDashboard(props) {
           <Typography textAlign="center">
             Dashboard is under construction....
           </Typography>
+          <Stack>
+            <PageViews />
+          </Stack>
         </Card>
-      </Box>
+      </Container>
     </Box>
   );
 }
