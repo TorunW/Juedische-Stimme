@@ -32,6 +32,7 @@
 }
 @media (min-width: 1135px) {
   .eventsPage {
+    padding-top: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,6 +49,7 @@
 }
 @media (max-width: 1134px) {
   .eventsPage {
+    padding-top: 120px;
     display: flex;
     justify-content: center;
     align-items: center;

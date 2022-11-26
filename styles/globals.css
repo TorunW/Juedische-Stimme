@@ -219,6 +219,9 @@ div > p:empty {
   }
 }
 @media (max-width: 844px) {
+  #tag-posts-page {
+    padding-top: 0;
+  }
   main {
     padding-top: 79px;
     min-height: 400px;
@@ -228,6 +231,9 @@ div > p:empty {
   }
 }
 @media (min-width: 845px) {
+  #tag-posts-page {
+    padding-top: 0;
+  }
   main {
     padding-top: 109px;
     min-height: 400px;
