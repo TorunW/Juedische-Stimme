@@ -134,3 +134,5 @@ export function PageViews() {
     </Stack>
   );
 }
+
+export default PageViews;
