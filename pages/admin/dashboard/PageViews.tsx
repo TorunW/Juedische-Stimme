@@ -1,8 +1,8 @@
 import { Box, Stack, Typography, CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
-
+import VisibilityIcon from "@mui/icons-material/Visibility";
 enum MonthNames {
-  "Jan",
+  "January",
   "Jan",
   "Feb",
   "Mar",
@@ -35,10 +35,10 @@ const getHeighestPageViews = (monthsArray) => {
 export function PageViews() {
   const [loading, setLoading] = useState(true);
   const [months, setMonths] = useState(null);
-  console.log(months);
-  if (!!months) console.log(Object.values(months), " MONTHS ARRAY ");
   const monthsArray = !!months ? Object.values(months) : [];
   const heighestPageViews = getHeighestPageViews(monthsArray);
+
+  const [selectedMonth, setSelectedMonth] = useState(null);
 
   useEffect(() => {
     fetch("/api/pageviews/count")
@@ -49,15 +49,28 @@ export function PageViews() {
       });
   }, []);
 
+  useEffect(() => {
+    if (selectedMonth) {
+      fetch(`/api/pageviews/${selectedMonth.year}/${selectedMonth.month}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data, " DATA ");
+        });
+    }
+  }, [selectedMonth]);
+
   return (
     <Stack>
-      <Typography
-        variant="h4"
-        fontWeight={800}
-        mb={2}
-      >
-        Page Views
-      </Typography>
+      <Stack flexDirection="row">
+        <VisibilityIcon sx={{ fontSize: 40, mr: 1 }} />
+        <Typography
+          variant="h4"
+          fontWeight={800}
+          mb={2}
+        >
+          Page Views
+        </Typography>
+      </Stack>
       <Stack
         flexDirection="row-reverse"
         p={1}
@@ -86,7 +99,6 @@ export function PageViews() {
           monthsArray.map((month: MonthProps, index: number) => {
             // calculate the height of the box based on the heighest page view
             const height = (month.pageViews / heighestPageViews) * 100;
-            console.log(month, " MONTH ");
             return (
               <Stack
                 key={`${month.month}-${month.year}`}
@@ -95,6 +107,7 @@ export function PageViews() {
                 maxWidth={"100%"}
               >
                 <Box
+                  onClick={() => setSelectedMonth(month)}
                   height={height}
                   minHeight={5}
                   title={`${month.month} ${month.year} - ${month.pageViews} page views`}
