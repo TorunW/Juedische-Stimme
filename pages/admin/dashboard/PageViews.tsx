@@ -1,61 +1,122 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-const getHeighestPageViews = (pageViewsArray) => {
+enum MonthNames {
+  "Jan",
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+}
+type MonthProps = {
+  month: string;
+  year: string;
+  pageViews: number;
+};
+
+const getHeighestPageViews = (monthsArray) => {
   let heighestPageViews = 0;
-  pageViewsArray.forEach((pageViews) => {
-    if (pageViews > heighestPageViews) {
-      heighestPageViews = pageViews;
+  monthsArray.forEach((month: MonthProps) => {
+    if (month.pageViews > heighestPageViews) {
+      heighestPageViews = month.pageViews;
     }
   });
   return heighestPageViews;
 };
 
 export function PageViews() {
-  const [pageViews, setPageViews] = useState(null);
-  if (!!pageViews) console.log(Object.values(pageViews), " PAGE VIEWS ARRAY ");
-  const pageViewsArray = !!pageViews ? Object.values(pageViews) : [];
-  const heighestPageViews = getHeighestPageViews(pageViewsArray);
-  console.log(heighestPageViews, " PAGE VIEWS ARRAY ");
+  const [loading, setLoading] = useState(true);
+  const [months, setMonths] = useState(null);
+  console.log(months);
+  if (!!months) console.log(Object.values(months), " MONTHS ARRAY ");
+  const monthsArray = !!months ? Object.values(months) : [];
+  const heighestPageViews = getHeighestPageViews(monthsArray);
 
   useEffect(() => {
     fetch("/api/pageviews/count")
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setPageViews(data);
+        setLoading(false);
+        setMonths(data);
       });
   }, []);
+
   return (
     <Stack>
-      <h1>Page Views</h1>
-      <Stack
-        flexDirection="row"
-        gap={1}
-        height={150}
-        sx={{ backgroundColor: "common.gray", alignItems: "baseline" }}
+      <Typography
+        variant="h4"
+        fontWeight={800}
+        mb={2}
       >
-        {pageViewsArray.map((pageView: number, index: number) => {
-          // calculate the height of the box based on the heighest page view
-          const height = (pageView / heighestPageViews) * 100;
-
-          return (
-            <Stack
-              key={pageView}
-              height={150}
-              flex="1"
-            >
-              <Box
-                height={height}
-                minHeight={5}
-                sx={{
-                  backgroundColor: "secondary.main",
-                }}
-              ></Box>
-              <Typography>{index + 1}</Typography>
-            </Stack>
-          );
-        })}
+        Page Views
+      </Typography>
+      <Stack
+        flexDirection="row-reverse"
+        p={1}
+        gap={1}
+        height={160}
+        sx={{
+          backgroundColor: "lightgray",
+          alignItems: "baseline",
+        }}
+      >
+        {!!loading ? (
+          <Stack
+            flex="1"
+            height={150}
+            alignItems="center"
+            justifyContent="center"
+          >
+            <CircularProgress
+              size={80}
+              sx={{
+                color: "secondary.main",
+              }}
+            />
+          </Stack>
+        ) : (
+          monthsArray.map((month: MonthProps, index: number) => {
+            // calculate the height of the box based on the heighest page view
+            const height = (month.pageViews / heighestPageViews) * 100;
+            console.log(month, " MONTH ");
+            return (
+              <Stack
+                key={`${month.month}-${month.year}`}
+                height={160}
+                flex="1"
+                maxWidth={"100%"}
+              >
+                <Box
+                  height={height}
+                  minHeight={5}
+                  title={`${month.month} ${month.year} - ${month.pageViews} page views`}
+                  sx={{
+                    backgroundColor: "secondary.main",
+                  }}
+                ></Box>
+                <Typography
+                  sx={{
+                    breakWord: "break-all",
+                    fontSize: "1rem",
+                    textAlign: "center",
+                  }}
+                >
+                  {month.pageViews}
+                  <br />
+                  {MonthNames[month.month]}
+                </Typography>
+              </Stack>
+            );
+          })
+        )}
       </Stack>
     </Stack>
   );

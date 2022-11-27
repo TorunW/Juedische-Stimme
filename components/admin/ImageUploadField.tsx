@@ -63,6 +63,10 @@ export const ImageUploadField: FC<Props> = ({
     onChange(event.target.files[0]);
     // read file as data uri for preview, upload it on onSubmit
     const file = event.target.files[0];
+    if (file?.size / 1024 / 1024 > 1) {
+      alert("File is too big!");
+      return;
+    }
     const reader = new FileReader();
     reader.addEventListener(
       "load",

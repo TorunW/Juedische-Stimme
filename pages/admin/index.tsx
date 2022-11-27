@@ -1,7 +1,7 @@
 import React from "react";
 import excuteQuery from "lib/db";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
-import { Typography, Card, Box, Stack } from "@mui/material";
+import { Typography, Card, Box, Grid } from "@mui/material";
 import { createAdminServerSideProps } from "page/admin-server-side-props";
 import { HomePageProps } from "pages";
 import { useLoggedUser } from "hooks/useLoggedUser";
@@ -32,9 +32,26 @@ function AdminDashboard(props) {
           <Typography textAlign="center">
             Dashboard is under construction....
           </Typography>
-          <Stack>
-            <PageViews />
-          </Stack>
+
+          <Grid
+            container
+            spacing={2}
+          >
+            <Grid
+              item
+              xs={12}
+              md={6}
+            >
+              <PageViews />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={6}
+            >
+              CREATE NEW POST / CATEGORY / TAG
+            </Grid>
+          </Grid>
         </Card>
       </Container>
     </Box>
