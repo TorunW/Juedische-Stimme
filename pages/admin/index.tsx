@@ -7,7 +7,7 @@ import { HomePageProps } from "pages";
 import { useLoggedUser } from "hooks/useLoggedUser";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import { Container } from "@mui/system";
-import PageViews from "./dashboard/PageViews";
+import PageViews from "components/admin/dashboard/PageViews";
 function AdminDashboard(props) {
   const { loggedUser } = useLoggedUser(props);
 
