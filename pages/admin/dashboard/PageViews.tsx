@@ -32,7 +32,7 @@ const getHeighestPageViews = (monthsArray) => {
   return heighestPageViews;
 };
 
-export function PageViews() {
+export default function PageViews() {
   const [loading, setLoading] = useState(true);
   const [months, setMonths] = useState(null);
   const monthsArray = !!months ? Object.values(months) : [];
@@ -134,5 +134,3 @@ export function PageViews() {
     </Stack>
   );
 }
-
-export default PageViews;
