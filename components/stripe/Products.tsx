@@ -100,6 +100,7 @@ function PaymentForm() {
     });
   }
 
+  console.log(products, 'ellu govenor');
   return (
     <div className={styles.formContainer}>
       <div className={styles.topRow}>
@@ -132,7 +133,7 @@ function PaymentForm() {
               labels,
               locale,
               `${products[productIndex][0].name
-                .split(' ')
+                ?.split(' ')
                 .join('_')
                 .toLowerCase()}_donation_tab_title`,
               'Choose amount'
