@@ -3,15 +3,17 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 32px;
+}
+.formContainer .topRow {
+  height: 30%;
 }
 .formContainer .bottomRow {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: 0 auto;
-  height: 60%;
+  height: 70%;
 }
 .formContainer .bottomRow p {
   color: white;
@@ -97,27 +99,4 @@
 .formContainer .bottomRow .btnWrapper .btnInactive {
   color: gray;
   border-color: gray;
-}
-.formContainer .topRow {
-  display: flex;
-  justify-content: space-evenly;
-}
-.formContainer .topRow .wrapper {
-  margin-bottom: 8px;
-}
-.formContainer .topRow .wrapper .active {
-  color: white;
-  border-bottom: solid 3px #8179a6 !important;
-}
-.formContainer .topRow .wrapper .btn {
-  border: none;
-}
-.formContainer .topRow .wrapper .btn,
-.formContainer .topRow .wrapper .active {
-  font-family: inherit;
-  text-transform: capitalize;
-  font-size: 1.1rem;
-  color: white;
-  background: none;
-  cursor: pointer;
 }

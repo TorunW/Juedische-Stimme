@@ -3,15 +3,16 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 32px;
-
+  .topRow {
+    height: 30%;
+  }
   .bottomRow {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin: 0 auto;
-    height: 60%;
+    height: 70%;
     p {
       color: white;
       margin-bottom: 32px;
@@ -104,32 +105,6 @@
       .btnInactive {
         color: gray;
         border-color: gray;
-      }
-    }
-  }
-
-  .topRow {
-    display: flex;
-    justify-content: space-evenly;
-    .wrapper {
-      margin-bottom: 8px;
-      .active {
-        color: white;
-        border-bottom: solid 3px #8179a6 !important;
-      }
-
-      .btn {
-        border: none;
-      }
-
-      .btn,
-      .active {
-        font-family: inherit;
-        text-transform: capitalize;
-        font-size: 1.1rem;
-        color: white;
-        background: none;
-        cursor: pointer;
       }
     }
   }
