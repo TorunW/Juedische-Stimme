@@ -1,41 +1,26 @@
-import React from 'react';
-import axios from 'axios';
-import Link from 'next/link';
-import { Gallery } from 'types/Gallery.type';
+import DeleteIcon from "@mui/icons-material/Delete";
 import {
-  Box,
-  Button,
-  Card,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormControl,
-  Tab,
-  Tabs,
-  TextField,
-  Typography,
-  CircularProgress,
-  ListItemText,
-  List,
-  ListItem,
   IconButton,
+  ListItem,
   ListItemButton,
   ListItemIcon,
-  Divider,
-} from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
+  ListItemText,
+} from "@mui/material";
+import axios from "axios";
+import Link from "next/link";
+import { Gallery } from "types/Gallery.type";
 
 const Galleries = (props) => {
   function deleteGallery(gallery: Gallery) {
-    console.log(gallery, ' GALLERY ON DELETE');
+    console.log(gallery, " GALLERY ON DELETE");
     let deleteRequests = [];
     if (gallery.imageIds !== null) {
-      let imageSrcs = gallery.imageSrcs.split(',');
-      let imageIds = gallery.imageIds.split(',');
+      let imageSrcs = gallery.imageSrcs.split(",");
+      let imageIds = gallery.imageIds.split(",");
       imageSrcs.forEach(function (imageSrc: string, index: number) {
         const deleteFileUrl = `http://${window.location.hostname}${
-          window.location.port !== '80' ? ':' + window.location.port : ''
-        }/media/${imageSrc.split('/').join('+++')}`;
+          window.location.port !== "80" ? ":" + window.location.port : ""
+        }/media/${imageSrc.split("/").join("+++")}`;
         const deleteFileRequest = axios.delete(deleteFileUrl);
         deleteRequests.push(deleteFileRequest);
         const deleteGalleryImageUrl = `/api/galleryimage/${imageIds[index]}`;
@@ -57,7 +42,7 @@ const Galleries = (props) => {
         })
       )
       .catch((errors) => {
-        console.log(errors, ' ERRORS');
+        console.log(errors, " ERRORS");
         // react on errors.
       });
   }

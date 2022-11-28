@@ -106,8 +106,11 @@ const MenuItemForm: FC<MenuItemProps> = ({ menuItem }) => {
 
   function onTermImageChange(event) {
     // read file as data uri for preview, upload it on onSubmit
-
     const file = event.target.files[0];
+    if (file.size / 1024 / 1024 > 1) {
+      alert("File size is too big!");
+      return;
+    }
     const reader = new FileReader();
 
     reader.addEventListener(

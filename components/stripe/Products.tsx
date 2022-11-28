@@ -19,6 +19,8 @@ function PaymentForm() {
   const [products, setProducts] = useState(null);
   const [productIndex, setProductIndex] = useState(0);
 
+  console.log(products, " PRODUCTS ");
+
   useEffect(() => {
     getProducts();
   }, []);
