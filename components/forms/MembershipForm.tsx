@@ -99,6 +99,7 @@ const MembershipForm = () => {
     },
     ', & .MuiInput-underline:hover::before': {
       borderColor: '#8179a6',
+      borderBottomColor: '#8179a6',
     },
   };
 
@@ -373,6 +374,3 @@ const MembershipForm = () => {
 };
 
 export default MembershipForm;
-
-// fax and telephone??? is it really necessary???
-// Do we need to check if person is over 18?
