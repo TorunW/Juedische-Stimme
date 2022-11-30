@@ -1,3 +1,4 @@
+import { Events } from "@/components/admin/events/Events";
 import AdminTopBar from "@/components/atoms/AdminTopBar";
 import { useLoggedUser } from "hooks/useLoggedUser";
 import excuteQuery from "lib/db";
@@ -7,13 +8,14 @@ import { HomePageProps } from "pages";
 
 export const getServerSideProps = createAdminServerSideProps<HomePageProps>(
   async ({ context, data: { loggedUser } }) => {
-    const labelsResponse = await excuteQuery({
+    const eventsResponse = await excuteQuery({
       query: getEvents(),
     });
+
     return {
       props: {
         loggedUser,
-        labels: JSON.stringify(labelsResponse),
+        events: JSON.stringify(eventsResponse),
       },
     };
   }
