@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs, Tab } from '@mui/material';
+import { Tabs, Tab, Box } from '@mui/material';
 import { getLabel } from 'helpers/getLabelHelper';
 import { useSelector } from 'store/hooks';
 
@@ -23,28 +23,27 @@ function ProductTabs({ productIndex, setProductIndex, products, setProducts }) {
       }}
     >
       {products !== null
-        ? products.map((product, index) => {
-            return (
-              <Tab
-                key={index}
-                label={getLabel(
-                  labels,
-                  locale,
-                  `${product[0].name
-                    ?.split(' ')
-                    .join('_')
-                    .toLowerCase()}_donation_tab`,
-                  product[0].name
-                )}
-                sx={{
-                  color: 'white !important',
-                  '&[aria-selected=false]': {
-                    color: '#fff !important',
-                  },
-                }}
-              />
-            );
-          })
+        ? products.map((product, index) => (
+            <Tab
+              key={index}
+              label={getLabel(
+                labels,
+                locale,
+                `${product[0].name
+                  ?.split(' ')
+                  .join('_')
+                  .toLowerCase()}_donation_tab`,
+                product[0].name
+              )}
+              wrapped
+              sx={{
+                color: 'white !important',
+                '&[aria-selected=false]': {
+                  color: '#fff !important',
+                },
+              }}
+            />
+          ))
         : ''}
     </Tabs>
   );
