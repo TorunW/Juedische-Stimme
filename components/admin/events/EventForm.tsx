@@ -94,7 +94,7 @@ const EventForm = ({ event }: Props) => {
                 fullWidth
                 margin="normal"
               >
-                <TextField
+                {/* <TextField
                   id="label_title_en_US"
                   label="English"
                   focused
@@ -103,7 +103,7 @@ const EventForm = ({ event }: Props) => {
                   placeholder="Add english text for the label..."
                   onChange={formik.handleChange}
                   value={formik.values.label_title_en_US}
-                />
+                /> */}
               </FormControl>
             </Grid>
 
@@ -115,7 +115,7 @@ const EventForm = ({ event }: Props) => {
                 fullWidth
                 margin="normal"
               >
-                <TextField
+                {/* <TextField
                   id="label_name"
                   label="System name"
                   focused
@@ -125,7 +125,7 @@ const EventForm = ({ event }: Props) => {
                   placeholder="Add a system name for the label..."
                   onChange={formik.handleChange}
                   value={formik.values.label_name}
-                />
+                /> */}
               </FormControl>
             </Grid>
             <Grid
