@@ -68,9 +68,7 @@ const ContactForm = () => {
                 value={formik.values.name}
                 label={getLabel(labels, locale, 'fullname', 'Name')}
                 data-testid='name-input'
-                fullWidth
                 variant='filled'
-                color='secondary'
                 sx={{
                   background: 'white',
                   [`& fieldset`]: {
@@ -94,8 +92,6 @@ const ContactForm = () => {
                 onChange={formik.handleChange}
                 value={formik.values.email}
                 label={getLabel(labels, locale, 'email', 'E-mail')}
-                fullWidth
-                color='secondary'
                 variant='filled'
                 sx={{
                   background: 'white',
@@ -121,7 +117,6 @@ const ContactForm = () => {
                 data-testid='message-input'
                 multiline
                 rows={3}
-                fullWidth
                 label={getLabel(
                   labels,
                   locale,
@@ -129,7 +124,6 @@ const ContactForm = () => {
                   'Ihre Nachricht'
                 )}
                 variant='filled'
-                color='secondary'
                 sx={{
                   background: 'white',
                   [`& fieldset`]: {

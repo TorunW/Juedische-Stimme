@@ -78,7 +78,7 @@
   }
   .membershipForm h3 {
     color: white;
-    padding: 16px 0 32px;
+    padding: 0px 0 32px;
   }
 }
 @media (max-width: 1024px) {
@@ -87,7 +87,7 @@
   }
   .membershipForm h3 {
     color: white;
-    padding: 16px 0 32px;
+    padding: 0px 0 32px;
   }
 }
 @media (max-width: 769px) {
@@ -98,11 +98,6 @@
     color: white;
     padding: 16px 0 32px;
   }
-}
-.form .error {
-  color: red;
-  padding: 5px 10px;
-  width: auto;
 }
 .contactForm {
   max-width: 769px;

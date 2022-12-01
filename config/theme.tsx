@@ -1,6 +1,15 @@
 import { createTheme, withTheme } from '@mui/material/styles';
 
 const theme = createTheme({
+  components: {
+    MuiTextField: {
+      defaultProps: {
+        variant: 'standard',
+        color: 'secondary',
+        fullWidth: true,
+      },
+    },
+  },
   palette: {
     primary: {
       main: '#2e2e2e',

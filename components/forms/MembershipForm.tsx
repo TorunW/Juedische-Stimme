@@ -1,4 +1,9 @@
-import { TextField, Typography, useMediaQuery } from '@mui/material';
+import {
+  FormHelperText,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from '@mui/material';
 import Grid from '@mui/material/Grid';
 import axios from 'axios';
 import theme from 'config/theme';
@@ -8,6 +13,7 @@ import { useState } from 'react';
 import { useSelector } from 'store/hooks';
 import * as Yup from 'yup';
 import { ButtonWithLoading } from '../atoms/ButtonWithLoading';
+import FormTextField from './FormTextField';
 import styles from './Styles.module.css';
 
 const MembershipForm = () => {
@@ -18,6 +24,7 @@ const MembershipForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const isSmall = useMediaQuery(theme.breakpoints.down('sm'));
+  console.log(isSmall);
 
   const formik = useFormik({
     initialValues: {
@@ -41,17 +48,17 @@ const MembershipForm = () => {
       lastname: Yup.string().min(2, '* too short!').required('* required!'),
 
       birthdateDay: Yup.string()
-        .required()
+        .required('*required')
         .matches(/^[0-9]+$/, 'Must be only digits')
         .min(2, 'too short')
         .max(2, 'too long'),
       birthdateMonth: Yup.string()
-        .required()
+        .required('*required')
         .matches(/^[0-9]+$/, 'Must be only digits')
         .min(2, 'too short')
         .max(2, 'too long'),
       birthdateYear: Yup.string()
-        .required()
+        .required('*required')
         .matches(/^[0-9]+$/, 'Must be only digits')
         .min(4, 'too short')
         .max(4, 'too long'),
@@ -87,270 +94,143 @@ const MembershipForm = () => {
     },
   });
 
-  const inputStyle = {
-    '& .MuiFormLabel-root': {
-      color: 'white !important',
-    },
-    '& .MuiInputBase-root': {
-      color: 'white',
-    },
-    '& .MuiInput-underline:before': {
-      borderBottomColor: '#8179a6',
-    },
-    ' && .MuiInput-root:hover::before ': {
-      borderColor: '#8179a6',
-    },
-  };
-
   return (
     <div id='membership' className={styles.membershipForm}>
       <form onSubmit={formik.handleSubmit} className={styles.form}>
         <h3>
           {getLabel(labels, locale, 'fill_in_your_info', 'Dein Info Ausfüllen')}
         </h3>
-        <Grid container spacing={isSmall ? 1 : 3}>
-          <Grid item xs={12} sx={{ paddingTop: '0px !important' }}>
-            <TextField
-              id='firstname'
-              name='firstname'
-              type='text'
+        <Grid container spacing={isSmall ? 2 : 3}>
+          <Grid item xs={11} sx={{ paddingTop: '0px !important' }}>
+            <FormTextField
+              id={'firstname'}
+              name={'firstname'}
               onChange={formik.handleChange}
               value={formik.values.firstname}
               label={getLabel(labels, locale, 'firstname', 'Vorname')}
-              variant='standard'
-              color='secondary'
-              sx={inputStyle}
-              fullWidth
+              error={formik.errors.firstname}
+              touched={formik.touched.firstname}
             />
-            {formik.errors.firstname && formik.touched.firstname ? (
-              <span style={{ color: 'white' }}>{formik.errors.firstname}</span>
-            ) : (
-              ''
-            )}
           </Grid>
-
-          <Grid item xs={12} sx={{ paddingTop: '16px !important' }}>
-            <TextField
-              id='lastname'
-              name='lastname'
-              type='text'
+          <Grid item xs={11}>
+            <FormTextField
+              id={'lastname'}
+              name={'lastname'}
               onChange={formik.handleChange}
               value={formik.values.lastname}
               label={getLabel(labels, locale, 'lastname', 'Nachname')}
-              variant='standard'
-              color='secondary'
-              sx={inputStyle}
-              fullWidth
+              error={formik.errors.lastname}
+              touched={formik.touched.lastname}
             />
-            {formik.errors.lastname && formik.touched.lastname ? (
-              <span style={{ color: 'white' }}>{formik.errors.lastname}</span>
-            ) : (
-              ''
-            )}
           </Grid>
-
-          <Grid item xs={3} sx={{ paddingTop: '16px !important' }}>
-            <TextField
+          <Grid item xs={3}>
+            <FormTextField
               id='birthdateDay'
               name='birthdateDay'
-              type='text'
               onChange={formik.handleChange}
               value={formik.values.birthdateDay}
               label={getLabel(labels, locale, 'TT', 'TT')}
-              variant='standard'
-              color='secondary'
-              sx={inputStyle}
-              fullWidth
+              error={formik.errors.birthdateDay}
+              touched={formik.touched.birthdateDay}
             />
-            {formik.errors.birthdateDay && formik.touched.birthdateDay ? (
-              <span style={{ color: 'white' }}>
-                {formik.errors.birthdateDay}
-              </span>
-            ) : (
-              ''
-            )}
           </Grid>
-          <Grid
-            item
-            xs={1}
-            sx={{ paddingX: '15px !important', paddingTop: '16px !important' }}
-          >
+          <Grid item xs={1} sx={{ paddingX: '10px !important' }}>
             <Typography sx={{ color: 'white', marginTop: 2.7 }}>/</Typography>
           </Grid>
-          <Grid
-            item
-            xs={3}
-            sx={{ paddingX: '0px !important', paddingTop: '16px !important' }}
-          >
-            <TextField
+          <Grid item xs={3} sx={{ paddingX: '0px !important' }}>
+            <FormTextField
               id='birthdateMonth'
               name='birthdateMonth'
-              type='text'
               onChange={formik.handleChange}
               value={formik.values.birthdateMonth}
               label={getLabel(labels, locale, 'MM', 'MM')}
-              variant='standard'
-              color='secondary'
-              sx={inputStyle}
-              fullWidth
+              error={formik.errors.birthdateMonth}
+              touched={formik.touched.birthdateMonth}
             />
-            {formik.errors.birthdateMonth && formik.touched.birthdateMonth ? (
-              <span style={{ color: 'white' }}>
-                {formik.errors.birthdateMonth}
-              </span>
-            ) : (
-              ''
-            )}{' '}
           </Grid>
-          <Grid
-            item
-            xs={1}
-            sx={{ paddingX: '15px !important', paddingTop: '16px !important' }}
-          >
+          <Grid item xs={1} sx={{ paddingX: '10px !important' }}>
             <Typography sx={{ color: 'white', marginTop: 2.7 }}>/</Typography>
           </Grid>
-          <Grid
-            item
-            xs={4}
-            sx={{ paddingX: '0px !important', paddingTop: '16px !important' }}
-          >
-            <TextField
+          <Grid item xs={3} sx={{ paddingX: '0px !important' }}>
+            <FormTextField
               id='birthdateYear'
               name='birthdateYear'
-              type='text'
               onChange={formik.handleChange}
               value={formik.values.birthdateYear}
               label={getLabel(labels, locale, 'YYYY', 'YYYY')}
-              variant='standard'
-              color='secondary'
-              sx={inputStyle}
-              fullWidth
+              error={formik.errors.birthdateYear}
+              touched={formik.touched.birthdateYear}
             />
-            {formik.errors.birthdateYear && formik.touched.birthdateYear ? (
-              <span style={{ color: 'white' }}>
-                {formik.errors.birthdateYear}
-              </span>
-            ) : (
-              ''
-            )}
           </Grid>
 
-          <Grid item xs={9} sx={{ paddingTop: '16px !important' }}>
-            <TextField
+          <Grid item xs={8}>
+            <FormTextField
               id='street'
               name='street'
-              type='text'
               onChange={formik.handleChange}
               value={formik.values.street}
               label={getLabel(labels, locale, 'street', 'Straße')}
-              variant='standard'
-              color='secondary'
-              sx={inputStyle}
-              fullWidth
+              error={formik.errors.street}
+              touched={formik.touched.street}
             />
-            {formik.errors.street && formik.touched.street ? (
-              <span style={{ color: 'white' }}>{formik.errors.street}</span>
-            ) : (
-              ''
-            )}
           </Grid>
-          <Grid item xs={3} sx={{ paddingTop: '16px !important' }}>
-            <TextField
+          <Grid item xs={3}>
+            <FormTextField
               id='streetNr'
               name='streetNr'
-              type='text'
               onChange={formik.handleChange}
               value={formik.values.streetNr}
               label={getLabel(labels, locale, 'street_number', 'Nr')}
-              variant='standard'
-              color='secondary'
-              sx={inputStyle}
-              fullWidth
+              error={formik.errors.streetNr}
+              touched={formik.touched.streetNr}
             />
-            {formik.errors.streetNr && formik.touched.streetNr ? (
-              <span style={{ color: 'white' }}>{formik.errors.streetNr}</span>
-            ) : (
-              ''
-            )}
           </Grid>
 
-          <Grid item xs={5} sx={{ paddingTop: '16px !important' }}>
-            <TextField
+          <Grid item xs={4}>
+            <FormTextField
               id='zipcode'
               name='zipcode'
-              type='text'
               onChange={formik.handleChange}
               value={formik.values.zipcode}
               label={getLabel(labels, locale, 'PLZ', 'Zip')}
-              variant='standard'
-              color='secondary'
-              sx={inputStyle}
-              fullWidth
+              error={formik.errors.zipcode}
+              touched={formik.touched.zipcode}
             />
-            {formik.errors.zipcode && formik.touched.zipcode ? (
-              <span style={{ color: 'white' }}>{formik.errors.zipcode}</span>
-            ) : (
-              ''
-            )}
           </Grid>
-          <Grid item xs={7} sx={{ paddingTop: '16px !important' }}>
-            <TextField
+          <Grid item xs={7}>
+            <FormTextField
               id='city'
               name='city'
-              type='text'
               onChange={formik.handleChange}
               value={formik.values.city}
               label={getLabel(labels, locale, 'city', 'Stadt')}
-              variant='standard'
-              color='secondary'
-              sx={inputStyle}
-              fullWidth
+              error={formik.errors.city}
+              touched={formik.touched.city}
             />
-            {formik.errors.city && formik.touched.city ? (
-              <span style={{ color: 'white' }}>{formik.errors.city}</span>
-            ) : (
-              ''
-            )}
           </Grid>
-          <Grid item xs={12} sx={{ paddingTop: '16px !important' }}>
-            <TextField
+          <Grid item xs={11}>
+            <FormTextField
               id='tel'
               name='tel'
-              type='text'
               onChange={formik.handleChange}
               value={formik.values.tel}
               label={getLabel(labels, locale, 'telephone', 'Tel')}
-              variant='standard'
-              color='secondary'
-              sx={inputStyle}
-              fullWidth
+              error={formik.errors.tel}
+              touched={formik.touched.tel}
             />
-            {formik.errors.tel && formik.touched.tel ? (
-              <span style={{ color: 'white' }}>{formik.errors.tel}</span>
-            ) : (
-              ''
-            )}
           </Grid>
-          <Grid item xs={12} sx={{ paddingTop: '16px !important' }}>
-            <TextField
+          <Grid item xs={11}>
+            <FormTextField
               id='email'
               name='email'
-              type='email'
               onChange={formik.handleChange}
               value={formik.values.email}
               label={getLabel(labels, locale, 'email', 'Email')}
-              variant='standard'
-              color='secondary'
-              sx={inputStyle}
-              fullWidth
+              error={formik.errors.email}
+              touched={formik.touched.email}
             />
-            {formik.errors.email && formik.touched.email ? (
-              <span style={{ color: 'white' }}>{formik.errors.email}</span>
-            ) : (
-              ''
-            )}
           </Grid>
-          <Grid item xs={12} marginTop={2}>
+          <Grid item xs={11}>
             <div className='button blackBg submitBtn'>
               <ButtonWithLoading
                 disabled={
