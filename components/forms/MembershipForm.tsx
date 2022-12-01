@@ -97,9 +97,8 @@ const MembershipForm = () => {
     '& .MuiInput-underline:before': {
       borderBottomColor: '#8179a6',
     },
-    ', & .MuiInput-underline:hover::before': {
+    ' && .MuiInput-root:hover::before ': {
       borderColor: '#8179a6',
-      borderBottomColor: '#8179a6',
     },
   };
 

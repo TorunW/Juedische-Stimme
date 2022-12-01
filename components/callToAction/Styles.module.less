@@ -72,7 +72,7 @@
           a {
             position: fixed;
             height: 338px;
-            width: 404px;
+            width: 324px;
           }
         }
       }
@@ -174,8 +174,8 @@
 
           a {
             position: fixed;
-            height: 338px;
-            width: 404px;
+            height: 330px;
+            width: 280px;
           }
         }
       }
@@ -234,12 +234,13 @@
 
         .cta {
           color: white;
+          position: relative;
+          z-index: 0;
           height: 160px;
           width: 95%;
           display: flex;
           flex-direction: row;
           align-items: center;
-          justify-content: center;
           gap: 16px;
           padding: 20px;
           text-align: center;
@@ -276,9 +277,10 @@
           }
 
           a {
-            position: fixed;
+            position: absolute;
             height: 160px;
-            width: 95%;
+            width: 100%;
+            z-index: 3000;
           }
         }
       }
