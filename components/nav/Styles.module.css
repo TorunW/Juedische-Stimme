@@ -1,11 +1,8 @@
 @media (min-width: 845px) {
   .nav,
   .navActive {
-    position: fixed;
-    width: 100%;
     padding: 0 32px;
-    z-index: 99;
-    font-size: 18px;
+    font-size: 1.1rem;
     font-weight: 500;
     transition: all 0.4s ease-in-out;
     height: 109px;
@@ -77,24 +74,6 @@
     display: flex;
     gap: 8px;
   }
-  .nav .topRow .rightCol .socialmediaMenu svg,
-  .navActive .topRow .rightCol .socialmediaMenu svg {
-    cursor: pointer;
-  }
-  .nav .topRow .rightCol .socialmediaMenu svg:hover,
-  .navActive .topRow .rightCol .socialmediaMenu svg:hover {
-    filter: brightness(20%);
-    transition: all 0.8s ease-in-out;
-  }
-  .nav .topRow .rightCol .languageMenu,
-  .navActive .topRow .rightCol .languageMenu {
-    cursor: pointer;
-  }
-  .nav .topRow .rightCol .languageMenu a:hover,
-  .navActive .topRow .rightCol .languageMenu a:hover {
-    filter: brightness(20%);
-    transition: all 0.8s ease-in-out;
-  }
   .nav .bottomRow,
   .navActive .bottomRow {
     display: flex;
@@ -114,6 +93,15 @@
     filter: brightness(20%);
     transition: all 0.8s ease-in-out;
   }
+  .nav .bottomRow .languageMenu,
+  .navActive .bottomRow .languageMenu {
+    cursor: pointer;
+    position: absolute;
+    bottom: 2px;
+    right: 48px;
+    display: flex;
+    align-items: baseline;
+  }
   .nav {
     background: rgba(0, 0, 0, 0);
     position: fixed;
@@ -128,13 +116,6 @@
   .nav .rightCol .languageMenu a:hover {
     color: #d1cedf;
   }
-  .nav svg {
-    fill: white;
-    transition: fill 0.3s ease-in-out;
-  }
-  .nav svg:hover {
-    fill: #d1cedf;
-  }
   .nav .bottomRow li a {
     color: white;
     transition: color 0.3s ease-in-out;
@@ -142,26 +123,16 @@
   .nav .bottomRow li a:hover {
     color: #d1cedf;
   }
+  .nav .bottomRow .languageMenu {
+    color: white;
+  }
+  .nav .bottomRow .languageMenu a {
+    color: white;
+    transition: color 0.3s ease-in-out;
+  }
   .navActive {
     background: #d1cedf;
     transition: all 0.4s ease-in-out;
-  }
-  .navActive svg {
-    fill: #2e2e2e;
-    transition: fill 0.3s ease-in-out;
-  }
-  .navActive svg:hover {
-    fill: #454060;
-  }
-  .navActive .rightCol .languageMenu {
-    color: #2e2e2e;
-    transition: color 0.3s ease-in-out;
-  }
-  .navActive .rightCol .languageMenu a {
-    transition: color 0.3s ease-in-out;
-  }
-  .navActive .rightCol .languageMenu a:hover {
-    color: #454060;
   }
   .navActive li a {
     color: #2e2e2e;
@@ -174,9 +145,6 @@
 @media (max-width: 844px) {
   .nav,
   .navActive {
-    position: fixed;
-    width: 100%;
-    z-index: 100;
     font-size: 1.3rem;
     background: #d1cedf;
     transition: all 0.4s ease-in-out;
@@ -205,10 +173,6 @@
   .nav .mobileNav .rightCol .languageMenu,
   .navActive .mobileNav .rightCol .languageMenu {
     font-weight: 500;
-    cursor: pointer;
-  }
-  .nav .mobileNav .rightCol svg,
-  .navActive .mobileNav .rightCol svg {
     cursor: pointer;
   }
   .nav .mobileMenu,
@@ -255,18 +219,6 @@
     gap: 8px;
     margin-top: 16px;
   }
-  .nav .mobileMenu .socialmediaMenu svg,
-  .navActive .mobileMenu .socialmediaMenu svg {
-    cursor: pointer;
-    fill: #2e2e2e;
-    transition: fill 0.3s ease-in-out;
-    height: 40px;
-    width: 40px;
-  }
-  .nav .mobileMenu .socialmediaMenu svg:hover,
-  .navActive .mobileMenu .socialmediaMenu svg:hover {
-    fill: #635d80;
-  }
   .nav .mobileMenuClose,
   .navActive .mobileMenuClose {
     opacity: 0;
@@ -289,4 +241,14 @@
 }
 .rightCol .languageMenu a:hover {
   color: #635d80;
+}
+.nav,
+.navActive {
+  position: fixed;
+  width: 100%;
+  z-index: 100;
+}
+.nav svg,
+.navActive svg {
+  cursor: pointer;
 }
