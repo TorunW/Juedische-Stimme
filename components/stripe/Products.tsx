@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Styles.module.css";
 import { Form, Formik } from "formik";
 import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
 
 import { loadStripe } from "@stripe/stripe-js";
 import Prices from "./Prices";
@@ -19,8 +20,6 @@ function PaymentForm() {
 
   const [products, setProducts] = useState(null);
   const [productIndex, setProductIndex] = useState(0);
-
-  console.log(products, "products");
 
   useEffect(() => {
     getProducts();
@@ -105,10 +104,9 @@ function PaymentForm() {
     });
   }
 
-  console.log(products, "ellu govenor");
   return (
     <div className={styles.formContainer}>
-      <div className={styles.topRow}>
+      <Box sx={{ width: "100%", height: "30%" }}>
         {products !== null ? (
           <ProductTabs
             productIndex={productIndex}
@@ -130,7 +128,7 @@ function PaymentForm() {
             </div>
           </div>
         )}
-      </div>
+      </Box>
       <div className={styles.bottomRow}>
         <p>
           {!!products &&
