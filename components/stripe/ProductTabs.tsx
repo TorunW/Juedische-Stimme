@@ -31,30 +31,28 @@ function ProductTabs({ productIndex, setProductIndex, products, setProducts }) {
         },
       }}
     >
-      {products !== null
-        ? products.map((product, index) => (
-            <Tab
-              key={index}
-              label={getLabel(
-                labels,
-                locale,
-                `${product[0].name
-                  ?.split(" ")
-                  .join("_")
-                  .toLowerCase()}_donation_tab`,
-                product[0].name
-              )}
-              wrapped={isSmall ? true : false}
-              sx={{
-                color: "white !important",
-                padding: "8px",
-                "&[aria-selected=false]": {
-                  color: "#fff !important",
-                },
-              }}
-            />
-          ))
-        : ""}
+      {products?.map((product, index) => (
+        <Tab
+          key={index}
+          label={getLabel(
+            labels,
+            locale,
+            `${product[0].name
+              ?.split(" ")
+              .join("_")
+              .toLowerCase()}_donation_tab`,
+            product[0].name
+          )}
+          wrapped={isSmall ? true : false}
+          sx={{
+            color: "white !important",
+            padding: "8px",
+            "&[aria-selected=false]": {
+              color: "#fff !important",
+            },
+          }}
+        />
+      ))}
     </Tabs>
   );
 }
