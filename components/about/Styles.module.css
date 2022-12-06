@@ -7,7 +7,7 @@
     padding: 0 40px;
   }
   .aboutPage .aboutContainer .menuContainer {
-    margin: 32px 0;
+    margin: 0 0 48px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -242,4 +242,7 @@
     background-color: #454060;
     border: 5px solid #454060;
   }
+}
+.aboutPage a {
+  color: #8179a6;
 }
