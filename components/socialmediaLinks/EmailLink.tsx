@@ -1,10 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import { useSelector } from 'store/hooks';
-import FacebookIcon from '@mui/icons-material/Facebook';
+import EmailIcon from '@mui/icons-material/Email';
 import { IconButton } from '@mui/material';
 
-export default function FacebookLink({ color, type }) {
+export default function EmailLink({ color, description }) {
   const router = useRouter();
   const { locale } = useSelector((state) => state.languages);
   const origin = `https://www.juedische-stimme.${
@@ -12,17 +12,16 @@ export default function FacebookLink({ color, type }) {
   }`;
 
   const URL = `${origin}${router.asPath}`;
+
   return (
     <IconButton
-      href={
-        type === 'share'
-          ? `https://www.facebook.com/sharer/sharer.php?u=${URL}`
-          : 'https://www.facebook.com/12juedischestimme'
-      }
+      href={`mailto:info@example.com?&subject=You+have+to+See+this!&cc=&bcc=&body=Check+out+this+site:${URL}\n${encodeURI(
+        description.replace(/<[^>]*>?/gm, '')
+      )}`}
       target='_blank'
       rel='noopener noreferrer'
     >
-      <FacebookIcon sx={{ color: color }} />
+      <EmailIcon sx={{ color: color }} />
     </IconButton>
   );
 }

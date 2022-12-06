@@ -142,9 +142,15 @@ function Nav() {
   let socialmediaMenuDisplay = (
     <div className={styles.socialmediaMenu}>
       <YoutubeLink color={bgVisible || isMobileView ? 'primary' : '#fff'} />
-      <FacebookLink color={bgVisible || isMobileView ? 'primary' : '#fff'} />
+      <FacebookLink
+        color={bgVisible || isMobileView ? 'primary' : '#fff'}
+        type={'link'}
+      />
       <InstagramLink color={bgVisible || isMobileView ? 'primary' : '#fff'} />
-      <TwitterLink color={bgVisible || isMobileView ? 'primary' : '#fff'} />
+      <TwitterLink
+        color={bgVisible || isMobileView ? 'primary' : '#fff'}
+        type={'link'}
+      />
     </div>
   );
 
