@@ -74,7 +74,7 @@ function Nav() {
   }, [router]);
 
   function handleScroll() {
-    if (typeof window !== 'undefined' && isSlideShowGallery === false) {
+    if (typeof window !== 'undefined') {
       if (window.scrollY >= 180) {
         setBgVisible(true);
       } else {
@@ -141,14 +141,34 @@ function Nav() {
 
   let socialmediaMenuDisplay = (
     <div className={styles.socialmediaMenu}>
-      <YoutubeLink color={bgVisible || isMobileView ? 'primary' : '#fff'} />
+      <YoutubeLink
+        color={
+          bgVisible || isMobileView || isSlideShowGallery === true
+            ? 'primary'
+            : '#fff'
+        }
+      />
       <FacebookLink
-        color={bgVisible || isMobileView ? 'primary' : '#fff'}
+        color={
+          bgVisible || isMobileView || isSlideShowGallery === true
+            ? 'primary'
+            : '#fff'
+        }
         type={'link'}
       />
-      <InstagramLink color={bgVisible || isMobileView ? 'primary' : '#fff'} />
+      <InstagramLink
+        color={
+          bgVisible || isMobileView || isSlideShowGallery === true
+            ? 'primary'
+            : '#fff'
+        }
+      />
       <TwitterLink
-        color={bgVisible || isMobileView ? 'primary' : '#fff'}
+        color={
+          bgVisible || isMobileView || isSlideShowGallery === true
+            ? 'primary'
+            : '#fff'
+        }
         type={'link'}
       />
     </div>
@@ -268,7 +288,11 @@ function Nav() {
   return (
     <nav
       data-testid='nav'
-      className={!!bgVisible ? styles.navActive : styles.nav}
+      className={
+        !!bgVisible || isSlideShowGallery === true
+          ? styles.navActive
+          : styles.nav
+      }
     >
       <Head>
         <div>
