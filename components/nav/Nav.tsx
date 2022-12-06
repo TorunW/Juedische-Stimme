@@ -7,8 +7,8 @@ import logo1 from 'styles/images/Logo-img.png';
 import logo2 from 'styles/images/Logo-text.png';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import YoutubeLink from '../socialmediaLinks/youtubeLink';
-import InstagramLink from '../socialmediaLinks/instagramLink';
+import YoutubeLink from '../socialmediaLinks/YoutubeLink';
+import InstagramLink from '../socialmediaLinks/InstagramLink';
 import TwitterLink from '../socialmediaLinks/TwitterLink';
 import FacebookLink from '../socialmediaLinks/FacebookLink';
 import { IconButton, Typography } from '@mui/material';
@@ -141,10 +141,10 @@ function Nav() {
 
   let socialmediaMenuDisplay = (
     <div className={styles.socialmediaMenu}>
-      <YoutubeLink color={bgVisible ? 'primary' : '#fff'} />
-      <FacebookLink color={bgVisible ? 'primary' : '#fff'} />
-      <InstagramLink color={bgVisible ? 'primary' : '#fff'} />
-      <TwitterLink color={bgVisible ? 'primary' : '#fff'} />
+      <YoutubeLink color={bgVisible || isMobileView ? 'primary' : '#fff'} />
+      <FacebookLink color={bgVisible || isMobileView ? 'primary' : '#fff'} />
+      <InstagramLink color={bgVisible || isMobileView ? 'primary' : '#fff'} />
+      <TwitterLink color={bgVisible || isMobileView ? 'primary' : '#fff'} />
     </div>
   );
 

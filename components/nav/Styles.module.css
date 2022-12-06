@@ -43,8 +43,8 @@
   }
   .nav .topRow .leftCol ul a:hover,
   .navActive .topRow .leftCol ul a:hover {
-    filter: brightness(80%);
-    transition: all 0.4s ease-in-out;
+    filter: brightness(110%);
+    transition: all 0.2s ease-in-out;
   }
   .nav .topRow .middleCol,
   .navActive .topRow .middleCol {
@@ -88,17 +88,12 @@
     gap: 16px;
     padding: 0;
   }
-  .nav .bottomRow ul .navItem:hover,
-  .navActive .bottomRow ul .navItem:hover {
-    filter: brightness(20%);
-    transition: all 0.8s ease-in-out;
-  }
   .nav .bottomRow .languageMenu,
   .navActive .bottomRow .languageMenu {
     cursor: pointer;
     position: absolute;
     bottom: 2px;
-    right: 48px;
+    right: 32px;
     display: flex;
     align-items: baseline;
   }
@@ -117,11 +112,13 @@
     color: #d1cedf;
   }
   .nav .bottomRow li a {
-    color: white;
-    transition: color 0.3s ease-in-out;
+    letter-spacing: 0.1rem;
+    color: #eeeeee;
+    transition: color 0.2s ease-in-out;
   }
   .nav .bottomRow li a:hover {
-    color: #d1cedf;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   }
   .nav .bottomRow .languageMenu {
     color: white;
@@ -136,10 +133,10 @@
   }
   .navActive li a {
     color: #2e2e2e;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
   }
   .navActive li a:hover {
-    color: #454060;
+    color: #000000;
   }
 }
 @media (max-width: 844px) {
