@@ -136,7 +136,8 @@
     transition: all 0.2s ease-in-out;
   }
   .navActive li a:hover {
-    color: #000000;
+    color: #464646;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   }
 }
 @media (max-width: 844px) {
