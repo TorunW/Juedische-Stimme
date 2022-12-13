@@ -1,35 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useSelector } from 'store/hooks';
-import styles from './Styles.module.css';
-import logo1 from 'styles/images/Logo-img.png';
-import logo2 from 'styles/images/Logo-text.png';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import YoutubeLink from '../socialmediaLinks/YoutubeLink';
-import InstagramLink from '../socialmediaLinks/InstagramLink';
-import TwitterLink from '../socialmediaLinks/TwitterLink';
-import FacebookLink from '../socialmediaLinks/FacebookLink';
-import { IconButton, Typography } from '@mui/material';
-
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useSelector } from "store/hooks";
+import styles from "./Styles.module.css";
+import logo1 from "styles/images/Logo-img.png";
+import logo2 from "styles/images/Logo-text.png";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import YoutubeLink from "../socialmediaLinks/YoutubeLink";
+import InstagramLink from "../socialmediaLinks/InstagramLink";
+import TwitterLink from "../socialmediaLinks/TwitterLink";
+import FacebookLink from "../socialmediaLinks/FacebookLink";
+import { IconButton, Typography } from "@mui/material";
 function Nav() {
   const router = useRouter();
-
   const { mainMenu, callToActionMenu } = useSelector((state) => state.nav);
   const { locale } = useSelector((state) => state.languages);
   const { headerGallery } = useSelector((state) => state.galleries);
   const events = useSelector((state) => state.fbData.events);
-
   const imageSrcs =
     headerGallery?.imageSrcs.indexOf(",") > -1
       ? headerGallery.imageSrcs.split(",")
       : [headerGallery?.imageSrcs];
-
   const [isSlideShowGallery, setIsSlideShowGallery] = useState(
     imageSrcs.length > 1 ? true : false
   );
-
   useEffect(() => {
     const imageSrcs =
       headerGallery?.imageSrcs.indexOf(",") > -1
@@ -37,11 +32,9 @@ function Nav() {
         : [headerGallery?.imageSrcs];
     setIsSlideShowGallery(imageSrcs.length > 1 ? true : false);
   }, [headerGallery]);
-
   useEffect(() => {
     setBgVisible(!!isSlideShowGallery);
   }, [isSlideShowGallery]);
-
   const [pathName, setPathName] = useState("");
   const [bgVisible, setBgVisible] = useState(false);
   const [isMobileView, setIsMobileView] = useState(false);
@@ -50,7 +43,6 @@ function Nav() {
   const [upcomingEvents, setUpcomingEvents] = React.useState(
     !!events && JSON.parse(events?.content).length > 0
   );
-
   useEffect(() => {
     if (locale !== null) {
       let newPathName = window.location.pathname;
@@ -59,7 +51,6 @@ function Nav() {
       setPathName(newPathName);
     }
   }, [locale]);
-
   useEffect(() => {
     handleScroll();
     handleResize();
@@ -67,15 +58,13 @@ function Nav() {
       handleScroll();
       // setNavbar(window.location.pathname.length <= 1 ? false : true)
       window.addEventListener("scroll", handleScroll);
-
       handleResize();
       window.addEventListener("resize", handleResize);
     }
   }, [router]);
 
   function handleScroll() {
-    if (typeof window !== "undefined" && isSlideShowGallery === false) {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       if (window.scrollY >= 180) {
         setBgVisible(true);
       } else {
@@ -87,7 +76,6 @@ function Nav() {
       setBgVisible(true);
     }
   }
-
   function handleResize() {
     if (typeof window !== "undefined") {
       if (window.innerWidth >= 844) {
@@ -97,17 +85,14 @@ function Nav() {
       }
     }
   }
-
   function handleClick() {
     mobileDropDownIsVisibile === false
       ? setMobileDropDownIsVisibile(true)
       : setMobileDropDownIsVisibile(false);
   }
-
   const filteredMenu = !upcomingEvents
     ? mainMenu.filter((item) => item.term_id !== 86)
     : mainMenu;
-
   let mainMenuDisplay = filteredMenu.map((item, index) => {
     return (
       <li
@@ -127,7 +112,6 @@ function Nav() {
       </li>
     );
   });
-
   let callToActionMenuDisplay = callToActionMenu.map((item, index) => (
     <li
       key={Date.now() + index}
@@ -145,43 +129,38 @@ function Nav() {
 
   let socialmediaMenuDisplay = (
     <div className={styles.socialmediaMenu}>
-      <YoutubeLink color={bgVisible ? "primary" : "#fff"} />
-      <FacebookLink color={bgVisible ? "primary" : "#fff"} />
-      <InstagramLink color={bgVisible ? "primary" : "#fff"} />
-      <TwitterLink color={bgVisible ? "primary" : "#fff"} />
       <YoutubeLink
         color={
           bgVisible || isMobileView || isSlideShowGallery === true
-            ? 'primary'
-            : '#fff'
+            ? "primary"
+            : "#fff"
         }
       />
       <FacebookLink
         color={
           bgVisible || isMobileView || isSlideShowGallery === true
-            ? 'primary'
-            : '#fff'
+            ? "primary"
+            : "#fff"
         }
-        type={'link'}
-      />
+        type={"link"}
+      />{" "}
       <InstagramLink
         color={
           bgVisible || isMobileView || isSlideShowGallery === true
-            ? 'primary'
-            : '#fff'
+            ? "primary"
+            : "#fff"
         }
       />
       <TwitterLink
         color={
           bgVisible || isMobileView || isSlideShowGallery === true
-            ? 'primary'
-            : '#fff'
+            ? "primary"
+            : "#fff"
         }
-        type={'link'}
+        type={"link"}
       />
     </div>
   );
-
   let mobileMenuDisplay;
   if (mobileDropDownIsVisibile === true) {
     mobileMenuDisplay = (
@@ -192,7 +171,6 @@ function Nav() {
       </>
     );
   }
-
   let menuDisplay;
   if (isMobileView === false) {
     menuDisplay = (
@@ -215,7 +193,6 @@ function Nav() {
               />
             </div>
           </Link>
-
           <div className={styles.rightCol}>{socialmediaMenuDisplay}</div>
         </div>
         <div className={styles.bottomRow}>
@@ -280,7 +257,6 @@ function Nav() {
                 EN
               </a>
             </div>
-
             <svg
               width="30"
               height="30"
@@ -308,12 +284,9 @@ function Nav() {
       </React.Fragment>
     );
   }
-
   return (
     <nav
       data-testid="nav"
-      className={!!bgVisible ? styles.navActive : styles.nav}
-      data-testid='nav'
       className={
         !!bgVisible || isSlideShowGallery === true
           ? styles.navActive
@@ -349,5 +322,4 @@ function Nav() {
     </nav>
   );
 }
-
 export default Nav;
