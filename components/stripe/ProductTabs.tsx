@@ -13,18 +13,19 @@ function ProductTabs({ productIndex, setProductIndex, products, setProducts }) {
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setProductIndex(newValue);
   };
+
+  function getLabelWidth(label: string) {
+    console.log(!!label.includes(" "), "includes");
+    if (!!label.includes(" ")) {
+      return label.length * 8;
+    }
+  }
+
   return (
     <Tabs
       value={productIndex}
       onChange={handleChange}
       indicatorColor="secondary"
-      variant="scrollable"
-      allowScrollButtonsMobile
-      sx={{
-        "& .MuiTabScrollButton-root": {
-          color: "white",
-        },
-      }}
       TabIndicatorProps={{
         style: {
           height: "4px",
@@ -43,10 +44,19 @@ function ProductTabs({ productIndex, setProductIndex, products, setProducts }) {
               .toLowerCase()}_donation_tab`,
             product[0].name
           )}
-          wrapped={isSmall ? true : false}
           sx={{
+            width: getLabelWidth(
+              getLabel(
+                labels,
+                locale,
+                `${product[0].name
+                  ?.split(" ")
+                  .join("_")
+                  .toLowerCase()}_donation_tab`,
+                product[0].name
+              )
+            ),
             color: "white !important",
-            padding: "8px",
             "&[aria-selected=false]": {
               color: "#fff !important",
             },

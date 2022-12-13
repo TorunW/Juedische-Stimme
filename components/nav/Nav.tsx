@@ -205,6 +205,7 @@ function Nav() {
                 sx={{
                   fontSize: "18px !important",
                   fontWeight: locale === "de_DE" ? 600 : 400,
+                  textDecoration: "none",
                 }}
               >
                 DE
