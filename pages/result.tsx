@@ -1,18 +1,70 @@
-import { useRouter } from 'next/router';
-import { LayoutPage } from 'types/LayoutPage.type';
-import { LayoutPageProps } from 'types/LayoutPageProps.type';
-import useSWR from 'swr';
-import axios from 'axios';
-import Image from 'next/image';
-import Link from 'next/link';
-import styles from '../styles/Result.module.css';
-import { useState } from 'react';
-import FacebookLink from '@/components/socialmediaLinks/FacebookLink';
-import TwitterLink from '@/components/socialmediaLinks/TwitterLink';
-import InstagramLink from '@/components/socialmediaLinks/InstagramLink';
-import YoutubeLink from '@/components/socialmediaLinks/YoutubeLink';
+import { useRouter } from "next/router";
+import { LayoutPage } from "types/LayoutPage.type";
+import { LayoutPageProps } from "types/LayoutPageProps.type";
+import useSWR from "swr";
+import axios from "axios";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "../styles/Result.module.css";
+import { useEffect, useState } from "react";
+import FacebookLink from "@/components/socialmediaLinks/FacebookLink";
+import TwitterLink from "@/components/socialmediaLinks/TwitterLink";
+import InstagramLink from "@/components/socialmediaLinks/InstagramLink";
+import YoutubeLink from "@/components/socialmediaLinks/YoutubeLink";
+import { createServerSideProps } from "page/server-side-props";
+import excuteQuery from "lib/db";
+import { selectPostByName } from "lib/queries/posts";
+import { postNameToString } from "helpers/postNameToString";
+import { HomePageProps } from "pages";
+import { useDispatch } from "react-redux";
+import { setMenuItems } from "store/nav/navSlice";
+import { setLanguages } from "store/languages/languagesSlice";
+import { setLabels } from "store/labels/labelsSlice";
+import { setPost } from "store/posts/postsSlice";
+import { generateFileServerSrc } from "helpers/generateFileServerSrc";
+
+export const getServerSideProps = createServerSideProps<HomePageProps>(
+  async ({ context, data: { navItems, labels, locale } }) => {
+    const pageResponse = await excuteQuery({
+      query: selectPostByName({
+        name: "spenden",
+        locale,
+        showUnpublished: true,
+      }),
+    });
+    const page = JSON.stringify(pageResponse);
+    return {
+      props: {
+        page,
+        navItems,
+        locale,
+        defaultLocale: context.defaultLocale,
+        labels,
+      },
+    };
+  }
+);
 
 const Result: LayoutPage = (props: LayoutPageProps) => {
+  let page = null;
+  if (JSON.parse(props.page)[0]) page = JSON.parse(props.page)[0];
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setMenuItems(JSON.parse(props.navItems)));
+    dispatch(
+      setLanguages({
+        locales: props.locales,
+        locale: props.locale,
+        defaultLocale: props.defaultLocale,
+      })
+    );
+    dispatch(setLabels(JSON.parse(props.labels)));
+
+    if (page) {
+      dispatch(setPost(JSON.parse(props.page)[0]));
+    }
+  }, [props.page]);
+
   const [loading, setLoading] = useState(false);
 
   const {
@@ -30,24 +82,32 @@ const Result: LayoutPage = (props: LayoutPageProps) => {
     }, 10000);
   }
 
+  const post = page;
+
   let socialMediaDisplay = (
     <div className={styles.socialmediaMenu}>
       <p>{`Don't forget to follow us on socialmedia`}</p>
-      <FacebookLink color={'white'} type={'link'} />
-      <TwitterLink color={'white'} type={'link'} />
-      <InstagramLink color={'white'} />
-      <YoutubeLink color={'white'} />
+      <FacebookLink
+        color={"white"}
+        type={"link"}
+      />
+      <TwitterLink
+        color={"white"}
+        type={"link"}
+      />
+      <InstagramLink color={"white"} />
+      <YoutubeLink color={"white"} />
     </div>
   );
 
   return (
     <main className={styles.resultsPage}>
       <Image
-        src='/spenden.jpg'
-        alt='donations-page-background'
-        title='donations-page-background'
-        layout='fill'
-        objectFit='cover'
+        src={generateFileServerSrc(post.post_image)}
+        alt="donations-page-background"
+        title="donations-page-background"
+        layout="fill"
+        objectFit="cover"
       />
 
       <div className={styles.container}>
@@ -86,9 +146,9 @@ const Result: LayoutPage = (props: LayoutPageProps) => {
               </div>
             </div>
           ) : (
-            <Link href='/'>
+            <Link href="/">
               <button
-                className={styles.loginButton + ' ' + styles.button}
+                className={styles.loginButton + " " + styles.button}
                 onClick={() => setLoading(true)}
               >
                 Take me back to the main page
@@ -103,6 +163,6 @@ const Result: LayoutPage = (props: LayoutPageProps) => {
   );
 };
 
-Result.layout = 'result';
+Result.layout = "result";
 
 export default Result;
