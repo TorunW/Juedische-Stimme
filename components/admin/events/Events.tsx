@@ -1,7 +1,7 @@
+import { Container } from "@/components/atoms/Container";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {
   Box,
-  Container,
   Paper,
   Table,
   TableBody,
@@ -15,10 +15,10 @@ import { useState } from "react";
 import { Event, EventPropNames } from "types/Event.type";
 import EventForm from "./EventForm";
 
-const eventItemProps = ["title", "description", "date", "time", "location"];
+const eventItemProps = ["title", "description", "date", "link", "location"];
 export const Events = ({ events }: { events: Event[] }) => {
   const router = useRouter();
-  const [sortBy, setSortBy] = useState("title");
+  const [sortBy, setSortBy] = useState("date");
 
   const sortEventsBy = (a: Event, b: Event) => {
     if (a[sortBy] < b[sortBy]) {
@@ -75,7 +75,7 @@ export const Events = ({ events }: { events: Event[] }) => {
                   <TableCell>{event.title}</TableCell>
                   <TableCell>{event.description}</TableCell>
                   <TableCell>{event.date}</TableCell>
-                  <TableCell>{event.time}</TableCell>
+                  <TableCell>{event.link}</TableCell>
                   <TableCell>{event.location}</TableCell>
                 </TableRow>
               ))}

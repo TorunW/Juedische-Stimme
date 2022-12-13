@@ -2,7 +2,7 @@ export enum EventPropNames {
   "title" = "Title",
   "description" = "Description",
   "date" = "Date",
-  "time" = "Time",
+  "link" = "Link",
   "location" = "Location",
 }
 
@@ -11,6 +11,6 @@ export type Event = {
   title: string;
   description: string;
   date: string;
-  time: string;
+  link: string;
   location: string;
 };
