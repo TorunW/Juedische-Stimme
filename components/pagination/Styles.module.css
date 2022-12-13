@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   gap: 16px;
+  font-family: sans-serif;
 }
 .pagination .active {
   color: white;

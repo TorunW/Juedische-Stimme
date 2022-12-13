@@ -5,6 +5,7 @@
   transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   gap: 32px;
   height: auto;
@@ -65,17 +66,10 @@
 .resultsPage .container .bottomRow {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 32px;
 }
 .resultsPage .container .bottomRow .socialmediaMenu p {
   font-weight: 500;
-}
-.resultsPage .container .bottomRow .socialmediaMenu svg {
-  margin: 16px 8px 0;
-  fill: white;
-}
-.resultsPage .container .bottomRow .socialmediaMenu svg:hover {
-  fill: #8179a6;
 }
 .resultsPage .container .bottomRow button {
   border: 5px solid #8179a6;

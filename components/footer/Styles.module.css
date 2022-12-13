@@ -9,9 +9,14 @@
 #footer .bottomRow {
   text-align: center;
   font-size: 1.1rem;
-  color: white;
+  color: #d4d4d4;
   padding: 32px 40px;
 }
+#footer .bottomRow a {
+  color: #d4d4d4;
+  transition: color 0.2s ease-in-out;
+}
 #footer .bottomRow a:hover {
-  color: #8179a6;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
