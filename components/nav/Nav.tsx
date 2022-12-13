@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { useSelector } from "store/hooks";
-import styles from "./Styles.module.css";
-import logo1 from "styles/images/Logo-img.png";
-import logo2 from "styles/images/Logo-text.png";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import YoutubeLink from "../socialmediaLinks/youtubeLink";
-import InstagramLink from "../socialmediaLinks/instagramLink";
-import TwitterLink from "../socialmediaLinks/TwitterLink";
-import FacebookLink from "../socialmediaLinks/FacebookLink";
-import { IconButton, Typography } from "@mui/material";
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { useSelector } from 'store/hooks';
+import styles from './Styles.module.css';
+import logo1 from 'styles/images/Logo-img.png';
+import logo2 from 'styles/images/Logo-text.png';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import YoutubeLink from '../socialmediaLinks/YoutubeLink';
+import InstagramLink from '../socialmediaLinks/InstagramLink';
+import TwitterLink from '../socialmediaLinks/TwitterLink';
+import FacebookLink from '../socialmediaLinks/FacebookLink';
+import { IconButton, Typography } from '@mui/material';
 
 function Nav() {
   const router = useRouter();
@@ -75,6 +75,7 @@ function Nav() {
 
   function handleScroll() {
     if (typeof window !== "undefined" && isSlideShowGallery === false) {
+    if (typeof window !== 'undefined') {
       if (window.scrollY >= 180) {
         setBgVisible(true);
       } else {
@@ -148,6 +149,36 @@ function Nav() {
       <FacebookLink color={bgVisible ? "primary" : "#fff"} />
       <InstagramLink color={bgVisible ? "primary" : "#fff"} />
       <TwitterLink color={bgVisible ? "primary" : "#fff"} />
+      <YoutubeLink
+        color={
+          bgVisible || isMobileView || isSlideShowGallery === true
+            ? 'primary'
+            : '#fff'
+        }
+      />
+      <FacebookLink
+        color={
+          bgVisible || isMobileView || isSlideShowGallery === true
+            ? 'primary'
+            : '#fff'
+        }
+        type={'link'}
+      />
+      <InstagramLink
+        color={
+          bgVisible || isMobileView || isSlideShowGallery === true
+            ? 'primary'
+            : '#fff'
+        }
+      />
+      <TwitterLink
+        color={
+          bgVisible || isMobileView || isSlideShowGallery === true
+            ? 'primary'
+            : '#fff'
+        }
+        type={'link'}
+      />
     </div>
   );
 
@@ -282,6 +313,12 @@ function Nav() {
     <nav
       data-testid="nav"
       className={!!bgVisible ? styles.navActive : styles.nav}
+      data-testid='nav'
+      className={
+        !!bgVisible || isSlideShowGallery === true
+          ? styles.navActive
+          : styles.nav
+      }
     >
       <Head>
         <div>
